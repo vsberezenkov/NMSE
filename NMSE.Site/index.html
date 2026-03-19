@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+  <title>NMSE (NO MAN'S SAVE EDITOR)</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Animated star‑field background -->
+  <canvas id="starfield"></canvas>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <h1 class="logo">NMS<span class="accent">E</span></h1>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <h2>NO MAN'S SAVE EDITOR</h2>
+      <p>
+        NMSE is <b>the</b> open-source save editor for the game
+        <em>No Man's Sky</em>.<br>Modify inventories, unlock items,
+        tweak discoveries, make backups and more in all 16 game languages&nbsp;&mdash; all from <b><i>the most feature complete editor out there!</i></b>
+      </p>
+    </section>
+
+    <!-- Download + Community -->
+    <div class="card-row">
+      <!-- Download -->
+      <section id="download" class="card">
+        <center>
+        <h3>Download Latest Build</h3>
+        <p>
+          Grab the most recent build directly.
+        </p>
+        <div id="build-info" class="build-info" hidden>
+          <span id="build-number" class="build-number"></span>
+          <span id="build-updated" class="build-updated"></span>
+        </div>
+        <a id="download-link" class="btn" href="#" target="_blank" rel="noopener">
+        </a>
+        <p class="note" id="download-note">Loading latest build info&hellip;</p>
+        </center>
+      </section>
+
+      <!-- Community -->
+      <section id="community" class="card">
+        <center>
+        <h3>Join the Community</h3>
+        <p>
+          Chat with fellow travellers and help shape NMSE.
+        </p>
+        <br><br>
+        <a id="discord-link" class="btn btn-secondary" href="#" target="_blank" rel="noopener">
+          <b>Join us on Discord</b>
+        </a>
+        <p>
+          Found a bug? <a id="dev-issue-link" class="btn btn-inline" href="#" target="_blank" rel="noopener"><b>Open an issue</b></a> on GitHub!
+        </p>
+        </center>
+      </section>
+    </div>
+
+    <!-- Docs -->
+    <section id="docs" class="card">
+      <center>
+      <h3>User Guide & Docs</h3>
+      <p>
+        User guides, FAQs and technical details are all available in the docs:
+      </p>
+      <div class="btn-row">
+        <a id="docs-user-link" class="btn btn-docs" href="#" target="_blank" rel="noopener">
+          <b>User Guide</b>
+        </a>
+        <a id="docs-dev-link" class="btn btn-docs" href="#" target="_blank" rel="noopener">
+          <b>Developer Docs</b>
+        </a>
+      </div>
+      </center>
+    </section>
+
+    <!-- Developer -->
+    <section id="developer" class="card">
+      <center>
+      <h3>Support the Developer</h3>
+      <p>
+        <b>
+        NMSE is created and maintained by
+        <a id="dev-github-link" href="#" target="_blank" rel="noopener">vectorcmdr</a>.
+        </b>
+      </p>
+      <p>
+        This app will always be free and ad-free. If you’ve found it useful, please consider supporting development by:
+      </p>
+      <a id="dev-like-link" class="btn btn-like" href="#" target="_blank" rel="noopener">
+        <b>⭐ Star on GitHub</b>
+      </a>
+      <br>
+      <a id="dev-sponsor-link" class="btn btn-sponsor" href="#" target="_blank" rel="noopener">
+        <b>☕ Donate</b>
+      </a>
+      <p>
+        <br>
+        Stars help users find the project and help developers gain free access to paid GitHub tools.<br>
+        Donations help me cover hosting costs, signing certificate goals and fund future improvements.<br>
+        Every bit of support is greatly appreciated!
+      </p>
+      </center>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      NMSE is a fan-made project by <a id="dev-github-link-footer" href="#" target="_blank" rel="noopener">vectorcmdr</a> provided under <a href="#" target="_blank" rel="noopener">GPL3.0</a> and is not affiliated with Hello Games.
+      <em>No Man's Sky</em> is a trademark of Hello Games Ltd.
+    </p>
+    <p>
+      NMS Geo Sans font made available by <a href="https://github.com/NMSCD/No-Mans-Sky-Universal-Font" target="_blank" rel="noopener">NMSCD</a>.
+    </p>
+  </footer>
+
+  <script src="js/site.js"></script>
+</body>
+</html>
