@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <!-- Redirect build output into Build\ subdirectories to keep each project root clean.
+         These properties MUST be set here (before Microsoft.Common.props is imported)
+         rather than in individual .csproj files, otherwise MSBuild will use the default
+         obj\ path first and then switch, causing duplicate assembly-info errors. -->
+    <BaseOutputPath>Build\bin\</BaseOutputPath>
+    <BaseIntermediateOutputPath>Build\obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+</Project>

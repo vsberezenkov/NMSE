@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=NMSE - No Man's Save Editor
+GenericName=Save Editor
+Comment=Open-source save editor for No Man's Sky
+Exec=nmse.sh
+Icon=nmse
+Terminal=false
+Categories=Game;Utility;
+Keywords=nms;no mans sky;save;editor;
+MimeType=application/json;
+StartupNotify=true
+StartupWMClass=nmse.exe

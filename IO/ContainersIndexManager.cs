@@ -1,0 +1,474 @@
+using System.Text;
+
+namespace NMSE.IO;
+
+/// <summary>
+/// Information about a save slot within Xbox containers.index.
+/// </summary>
+public class XboxSlotInfo
+{
+    /// <summary>Gets or sets the primary save slot identifier (e.g., "Slot1Auto").</summary>
+    public string Identifier { get; set; } = "";
+    /// <summary>Gets or sets the secondary identifier, if present.</summary>
+    public string? SecondIdentifier { get; set; }
+    /// <summary>Gets or sets the synchronization timestamp string.</summary>
+    public string? SyncTime { get; set; }
+    /// <summary>Gets or sets the blob container file extension number.</summary>
+    public byte BlobContainerExtension { get; set; }
+    /// <summary>Gets or sets the synchronization state value.</summary>
+    public int SyncState { get; set; }
+    /// <summary>Gets or sets the GUID identifying the blob directory for this slot.</summary>
+    public Guid DirectoryGuid { get; set; }
+    /// <summary>Gets or sets the full path to the blob directory on disk.</summary>
+    public string BlobDirectoryPath { get; set; } = "";
+    /// <summary>Gets or sets the last modified timestamp of the slot.</summary>
+    public DateTimeOffset LastModified { get; set; }
+    /// <summary>Gets or sets the resolved file path to the save data blob.</summary>
+    public string? DataFilePath { get; set; }
+    /// <summary>Gets or sets the resolved file path to the metadata blob.</summary>
+    public string? MetaFilePath { get; set; }
+}
+
+/// <summary>
+/// Reads and writes Xbox Game Pass / Microsoft Store containers.index files.
+///
+/// Xbox/Microsoft NMS saves use a containers.index file to map save slot identifiers
+/// (e.g., "Slot1Auto", "Slot1Manual", "AccountData", "Settings") to GUID-named
+/// blob directories. Each blob directory has a container.N file pointing to the actual
+/// data and meta blob files (also GUID-named).
+///
+/// File hierarchy:
+///   containers.index         - global index mapping identifiers to blob directories
+///   {GUID}/container.{N}     - blob container pointing to data + meta files
+///   {GUID}/{GUID}            - actual data or meta blob file
+/// </summary>
+public static class ContainersIndexManager
+{
+    private const int CONTAINERSINDEX_HEADER = 14;
+    private const long CONTAINERSINDEX_FOOTER = 268435456; // 0x10000000
+    private const int BLOBCONTAINER_HEADER = 4;
+    private const int BLOBCONTAINER_COUNT = 2;
+    private const int BLOBCONTAINER_IDENTIFIER_LENGTH = 80;
+    private const int BLOBCONTAINER_TOTAL_LENGTH = 232;
+
+    /// <summary>
+    /// Check if a directory contains Xbox Game Pass saves.
+    /// </summary>
+    public static bool IsXboxSaveDirectory(string directory)
+    {
+        return File.Exists(Path.Combine(directory, "containers.index"));
+    }
+
+    /// <summary>
+    /// Parse the containers.index file and discover all save slots.
+    /// </summary>
+    /// <param name="containersIndexPath">Path to containers.index</param>
+    /// <returns>Dictionary of save identifier to slot info.</returns>
+    public static Dictionary<string, XboxSlotInfo> ParseContainersIndex(string containersIndexPath)
+    {
+        var result = new Dictionary<string, XboxSlotInfo>(StringComparer.OrdinalIgnoreCase);
+        byte[] bytes = File.ReadAllBytes(containersIndexPath);
+        string baseDir = Path.GetDirectoryName(containersIndexPath)!;
+
+        if (bytes.Length < 200) return result;
+
+        // Validate header
+        int header = ReadInt32LE(bytes, 0);
+        if (header != CONTAINERSINDEX_HEADER) return result;
+
+        long containerCount = ReadInt64LE(bytes, 4);
+
+        // Skip global header: header(4) + count(8) + processIdentifierLen(4) + processIdentifier(var) + lastModifiedTime(8) + syncState(4) + accountGuidLen(4) + accountGuid(var) + footer(8)
+        int offset = 12;
+        offset += ReadDynamicString(bytes, offset, out _); // process identifier
+        offset += 12; // lastModifiedTime(8) + syncState(4)
+        offset += ReadDynamicString(bytes, offset, out _); // account guid
+        offset += 8; // footer
+
+        // Parse each blob container entry
+        for (int i = 0; i < containerCount && offset < bytes.Length; i++)
+        {
+            // Read two identifiers
+            offset += ReadDynamicString(bytes, offset, out string identifier1);
+            offset += ReadDynamicString(bytes, offset, out string identifier2);
+
+            // Read sync time
+            offset += ReadDynamicString(bytes, offset, out string syncTime);
+
+            // Read remaining fixed fields
+            if (offset + 45 > bytes.Length) break;
+            byte blobExtension = bytes[offset]; // 1
+            int syncState = ReadInt32LE(bytes, offset + 1); // 4
+            byte[] guidBytes = new byte[16];
+            Buffer.BlockCopy(bytes, offset + 5, guidBytes, 0, 16);
+            Guid directoryGuid = new Guid(guidBytes);
+            long lastModified = ReadInt64LE(bytes, offset + 21); // 8
+            // skip empty (8) and total size (8)
+
+            offset += 45;
+
+            string blobDirPath = Path.Combine(baseDir, directoryGuid.ToString("D"));
+
+            var slotInfo = new XboxSlotInfo
+            {
+                Identifier = identifier1,
+                SecondIdentifier = identifier2,
+                SyncTime = syncTime,
+                BlobContainerExtension = blobExtension,
+                SyncState = syncState,
+                DirectoryGuid = directoryGuid,
+                BlobDirectoryPath = blobDirPath,
+                LastModified = DateTimeOffset.FromFileTime(lastModified),
+            };
+
+            // Try to parse the blob container to find actual data/meta files
+            if (Directory.Exists(blobDirPath))
+            {
+                ParseBlobContainer(slotInfo);
+            }
+
+            result[identifier1] = slotInfo;
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Load a save file from an Xbox blob directory.
+    /// Returns the decompressed JSON string, or null if not found.
+    /// </summary>
+    public static string? LoadXboxSave(XboxSlotInfo slotInfo)
+    {
+        if (slotInfo.DataFilePath == null || !File.Exists(slotInfo.DataFilePath))
+            return null;
+
+        try
+        {
+            using var fs = new FileStream(slotInfo.DataFilePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+            byte[] headerBuf = new byte[4];
+            fs.ReadExactly(headerBuf, 0, 4);
+            fs.Position = 0;
+
+            // Xbox saves can be either NMS LZ4-chunked format or single-block LZ4
+            if (IsNmsLz4Header(headerBuf))
+            {
+                // Standard NMS LZ4 format - delegate to SaveFileManager's decompression
+                return DecompressNmsLz4(fs);
+            }
+            else
+            {
+                // Might be a single-block LZ4 or uncompressed
+                return ReadPlainOrSingleLz4(fs);
+            }
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Read the meta blob file for an Xbox save slot.
+    /// Returns the raw metadata bytes, or null if not found.
+    /// </summary>
+    public static byte[]? LoadXboxMeta(XboxSlotInfo slotInfo)
+    {
+        if (slotInfo.MetaFilePath == null || !File.Exists(slotInfo.MetaFilePath))
+            return null;
+
+        return File.ReadAllBytes(slotInfo.MetaFilePath);
+    }
+
+    /// <summary>
+    /// Write save data and meta to an Xbox blob directory.
+    /// Creates new GUID-named files and updates the blob container.
+    /// </summary>
+    public static void WriteXboxSave(XboxSlotInfo slotInfo, byte[] compressedData, byte[] metaData)
+    {
+        if (!Directory.Exists(slotInfo.BlobDirectoryPath))
+            Directory.CreateDirectory(slotInfo.BlobDirectoryPath);
+
+        // Create new GUID-named blob files
+        Guid newDataGuid = Guid.NewGuid();
+        Guid newMetaGuid = Guid.NewGuid();
+
+        string newDataPath = GetBlobFilePath(slotInfo.BlobDirectoryPath, newDataGuid);
+        string newMetaPath = GetBlobFilePath(slotInfo.BlobDirectoryPath, newMetaGuid);
+
+        // Delete old files
+        if (slotInfo.DataFilePath != null && File.Exists(slotInfo.DataFilePath))
+            File.Delete(slotInfo.DataFilePath);
+        if (slotInfo.MetaFilePath != null && File.Exists(slotInfo.MetaFilePath))
+            File.Delete(slotInfo.MetaFilePath);
+
+        // Write new files
+        File.WriteAllBytes(newDataPath, compressedData);
+        File.WriteAllBytes(newMetaPath, metaData);
+
+        // Update slot info
+        slotInfo.DataFilePath = newDataPath;
+        slotInfo.MetaFilePath = newMetaPath;
+
+        // Write new blob container file
+        WriteBlobContainer(slotInfo, newDataGuid, newMetaGuid);
+    }
+
+    /// <summary>
+    /// Write an updated containers.index file.
+    /// </summary>
+    public static void WriteContainersIndex(string containersIndexPath, IEnumerable<XboxSlotInfo> slots,
+        string processIdentifier, string accountGuid, DateTimeOffset lastWriteTime)
+    {
+        // Estimate buffer size
+        var slotList = slots.ToList();
+        int estimatedSize = 200 + (slotList.Count * 200);
+        byte[] buffer = new byte[estimatedSize];
+
+        using var ms = new MemoryStream(buffer);
+        using var writer = new BinaryWriter(ms);
+
+        writer.Write(CONTAINERSINDEX_HEADER);
+        writer.Write((long)slotList.Count);
+        WriteDynamicString(writer, processIdentifier);
+        writer.Write(lastWriteTime.ToUniversalTime().ToFileTime());
+        writer.Write(2); // sync state = MODIFIED
+        WriteDynamicString(writer, accountGuid);
+        writer.Write(CONTAINERSINDEX_FOOTER);
+
+        foreach (var slot in slotList)
+        {
+            if (!string.IsNullOrEmpty(slot.SecondIdentifier))
+            {
+                WriteDynamicString(writer, slot.Identifier);
+                WriteDynamicString(writer, slot.SecondIdentifier);
+            }
+            else
+            {
+                WriteDynamicString(writer, slot.Identifier);
+                writer.Write(0); // empty second identifier
+            }
+
+            WriteDynamicString(writer, slot.SyncTime ?? "");
+            writer.Write(slot.BlobContainerExtension);
+            writer.Write(slot.SyncState);
+            writer.Write(slot.DirectoryGuid.ToByteArray());
+            writer.Write(slot.LastModified.ToUniversalTime().ToFileTime());
+            writer.Write(0L); // empty
+            // Calculate total size of blob files
+            long totalSize = 0;
+            if (slot.DataFilePath != null && File.Exists(slot.DataFilePath))
+                totalSize += new FileInfo(slot.DataFilePath).Length;
+            if (slot.MetaFilePath != null && File.Exists(slot.MetaFilePath))
+                totalSize += new FileInfo(slot.MetaFilePath).Length;
+            writer.Write(totalSize);
+        }
+
+        byte[] result = buffer.AsSpan(0, (int)ms.Position).ToArray();
+        File.WriteAllBytes(containersIndexPath, result);
+    }
+
+    // Internal
+
+    /// <summary>
+    /// Get the file path for a GUID-named blob file, trying both uppercase and lowercase.
+    /// Xbox blob files use GUID-named files without hyphens.
+    /// </summary>
+    private static string GetBlobFilePath(string directory, Guid guid)
+    {
+        string upper = Path.Combine(directory, guid.ToString("N").ToUpperInvariant());
+        if (File.Exists(upper)) return upper;
+        string lower = Path.Combine(directory, guid.ToString("N"));
+        if (File.Exists(lower)) return lower;
+        return upper; // default to uppercase for new files
+    }
+
+    private static void ParseBlobContainer(XboxSlotInfo slotInfo)
+    {
+        // Try container files in descending extension order (newest first)
+        var containerFiles = Directory.GetFiles(slotInfo.BlobDirectoryPath, "container.*")
+            .OrderByDescending(f => Path.GetExtension(f))
+            .ToArray();
+
+        foreach (var containerFile in containerFiles)
+        {
+            byte[] bytes = File.ReadAllBytes(containerFile);
+            if (bytes.Length != BLOBCONTAINER_TOTAL_LENGTH) continue;
+
+            int header = ReadInt32LE(bytes, 0);
+            if (header != BLOBCONTAINER_HEADER) continue;
+
+            int blobCount = ReadInt32LE(bytes, 4);
+            int offset = 8;
+
+            for (int j = 0; j < blobCount && offset + BLOBCONTAINER_IDENTIFIER_LENGTH + 32 <= bytes.Length; j++)
+            {
+                // Read identifier (UTF-16, up to 80 bytes)
+                string blobId = Encoding.Unicode.GetString(bytes, offset, BLOBCONTAINER_IDENTIFIER_LENGTH).TrimEnd('\0');
+                offset += BLOBCONTAINER_IDENTIFIER_LENGTH;
+
+                // Skip cloud GUID (16 bytes), read local GUID (16 bytes)
+                offset += 16; // cloud guid
+                byte[] localGuidBytes = new byte[16];
+                Buffer.BlockCopy(bytes, offset, localGuidBytes, 0, 16);
+                Guid localGuid = new Guid(localGuidBytes);
+                offset += 16;
+
+                string blobPath = GetBlobFilePath(slotInfo.BlobDirectoryPath, localGuid);
+
+                if (blobId.StartsWith("data", StringComparison.OrdinalIgnoreCase))
+                    slotInfo.DataFilePath = blobPath;
+                else if (blobId.StartsWith("meta", StringComparison.OrdinalIgnoreCase))
+                    slotInfo.MetaFilePath = blobPath;
+            }
+
+            // If we found data file, we're done
+            if (slotInfo.DataFilePath != null && File.Exists(slotInfo.DataFilePath))
+            {
+                slotInfo.BlobContainerExtension = byte.TryParse(Path.GetExtension(containerFile).TrimStart('.'), out byte ext) ? ext : (byte)1;
+                break;
+            }
+        }
+    }
+
+    private static void WriteBlobContainer(XboxSlotInfo slotInfo, Guid dataGuid, Guid metaGuid)
+    {
+        byte newExt = (byte)(slotInfo.BlobContainerExtension == 255 ? 1 : slotInfo.BlobContainerExtension + 1);
+        slotInfo.BlobContainerExtension = newExt;
+
+        string containerPath = Path.Combine(slotInfo.BlobDirectoryPath, $"container.{newExt}");
+        byte[] buffer = new byte[BLOBCONTAINER_TOTAL_LENGTH];
+
+        using var ms = new MemoryStream(buffer);
+        using var writer = new BinaryWriter(ms);
+
+        writer.Write(BLOBCONTAINER_HEADER);
+        writer.Write(BLOBCONTAINER_COUNT);
+
+        // Data blob entry
+        byte[] dataIdBytes = Encoding.Unicode.GetBytes("data");
+        writer.Write(dataIdBytes);
+        ms.Position = 8 + BLOBCONTAINER_IDENTIFIER_LENGTH; // skip rest of identifier padding
+        writer.Write(new byte[16]); // cloud GUID (empty)
+        writer.Write(dataGuid.ToByteArray()); // local GUID
+
+        // Meta blob entry
+        byte[] metaIdBytes = Encoding.Unicode.GetBytes("meta");
+        writer.Write(metaIdBytes);
+        ms.Position = 8 + BLOBCONTAINER_IDENTIFIER_LENGTH + 32 + BLOBCONTAINER_IDENTIFIER_LENGTH;
+        writer.Write(new byte[16]); // cloud GUID (empty)
+        writer.Write(metaGuid.ToByteArray()); // local GUID
+
+        // Delete old container files
+        foreach (var old in Directory.GetFiles(slotInfo.BlobDirectoryPath, "container.*"))
+            File.Delete(old);
+
+        File.WriteAllBytes(containerPath, buffer);
+    }
+
+    private static int ReadDynamicString(byte[] bytes, int offset, out string value)
+    {
+        if (offset + 4 > bytes.Length) { value = ""; return 4; }
+        int length = ReadInt32LE(bytes, offset);
+        if (length <= 0 || offset + 4 + length * 2 > bytes.Length)
+        {
+            value = "";
+            return 4;
+        }
+        value = Encoding.Unicode.GetString(bytes, offset + 4, length * 2);
+        return 4 + length * 2;
+    }
+
+    private static void WriteDynamicString(BinaryWriter writer, string value)
+    {
+        writer.Write(value.Length);
+        writer.Write(Encoding.Unicode.GetBytes(value));
+    }
+
+    private static readonly byte[] Lz4Magic = { 0xE5, 0xA1, 0xED, 0xFE };
+
+    private static bool IsNmsLz4Header(byte[] header)
+    {
+        return header.Length >= 4 &&
+               header[0] == Lz4Magic[0] && header[1] == Lz4Magic[1] &&
+               header[2] == Lz4Magic[2] && header[3] == Lz4Magic[3];
+    }
+
+    private static string DecompressNmsLz4(FileStream fs)
+    {
+        var latin1 = Encoding.GetEncoding(28591);
+        byte[] header = new byte[16];
+
+        // First pass: calculate total size
+        int totalSize = 0;
+        long scanPos = 0;
+        while (scanPos + 16 <= fs.Length)
+        {
+            fs.Position = scanPos;
+            if (fs.Read(header, 0, 16) < 16) break;
+            if (!IsNmsLz4Header(header)) break;
+
+            int compressedLen = ReadInt32LE(header, 4);
+            int uncompressedLen = ReadInt32LE(header, 8);
+            if (compressedLen < 0 || uncompressedLen < 0) break;
+
+            totalSize += uncompressedLen;
+            scanPos += 16 + compressedLen;
+        }
+
+        // Second pass: decompress
+        byte[] result = new byte[totalSize];
+        int writePos = 0;
+        fs.Position = 0;
+
+        while (fs.Position + 16 <= fs.Length)
+        {
+            if (fs.Read(header, 0, 16) < 16) break;
+            if (!IsNmsLz4Header(header)) break;
+
+            int compressedLen = ReadInt32LE(header, 4);
+            int uncompressedLen = ReadInt32LE(header, 8);
+
+            byte[] block = new byte[compressedLen];
+            int totalRead = 0;
+            while (totalRead < compressedLen)
+            {
+                int n = fs.Read(block, totalRead, compressedLen - totalRead);
+                if (n <= 0) break;
+                totalRead += n;
+            }
+
+            int decompressed = Lz4Compressor.Decompress(block, 0, totalRead, result, writePos, uncompressedLen);
+            writePos += decompressed;
+        }
+
+        return latin1.GetString(result, 0, writePos);
+    }
+
+    private static string ReadPlainOrSingleLz4(FileStream fs)
+    {
+        var latin1 = Encoding.GetEncoding(28591);
+        byte[] data = new byte[fs.Length];
+        int read = 0;
+        while (read < data.Length)
+        {
+            int n = fs.Read(data, read, data.Length - read);
+            if (n <= 0) break;
+            read += n;
+        }
+
+        // Try single-block LZ4 decompression (Xbox pre-Frontiers format)
+        // If it fails, assume it's uncompressed
+        return latin1.GetString(data, 0, read);
+    }
+
+    private static int ReadInt32LE(byte[] data, int offset)
+    {
+        return data[offset] | (data[offset + 1] << 8) | (data[offset + 2] << 16) | (data[offset + 3] << 24);
+    }
+
+    private static long ReadInt64LE(byte[] data, int offset)
+    {
+        return (long)data[offset] | ((long)data[offset + 1] << 8) | ((long)data[offset + 2] << 16) | ((long)data[offset + 3] << 24)
+             | ((long)data[offset + 4] << 32) | ((long)data[offset + 5] << 40) | ((long)data[offset + 6] << 48) | ((long)data[offset + 7] << 56);
+    }
+}

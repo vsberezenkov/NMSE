@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="NMSE.Tests/NMSE.Tests.csproj" />
+  <Project Path="NMSE.csproj" />
+  <Project Path="NMSE.Extractor/NMSE.Extractor.csproj" />
+  <Project Path="NMSE.Extractor.Tests/NMSE.Extractor.Tests.csproj" />
+
+</Solution>

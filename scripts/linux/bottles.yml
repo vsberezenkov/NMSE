@@ -1,0 +1,40 @@
+# ──────────────────────────────────────────────────────────────
+# Bottles Configuration for NMSE — No Man's Save Editor
+#
+# This YAML file describes how to configure a Bottles "bottle"
+# for running NMSE. It can be used as a reference when setting
+# up NMSE in Bottles, or imported via Bottles' configuration
+# import feature.
+#
+# Bottles: https://usebottles.com
+# Install: flatpak install flathub com.usebottles.bottles
+#
+# See docs/bottles-linux-guide.md for step-by-step instructions.
+# ──────────────────────────────────────────────────────────────
+
+Name: NMSE
+Runner: wine-9-0         # or soda-9.0, caffe-9.0 — pick the latest stable
+Arch: win64
+Windows: win10
+
+# No special dependencies needed — NMSE is a self-contained
+# .NET WinForms app with no COM, DirectX, or VC++ requirements.
+Dependencies: []
+
+# Environment variables for best WinForms compatibility
+Environment:
+  WINEDLLOVERRIDES: "mscoree=d;mshtml=d"
+  FREETYPE_PROPERTIES: "truetype:interpreter-version=40"
+
+# Performance / compatibility
+Sync: wine                # esync or fsync if supported
+Discrete_GPU: false       # NMSE doesn't need GPU acceleration
+Virtual_Desktop: false    # Let WinForms use the real desktop
+
+# The executable path is relative to the bottle's drive_c
+# After importing NMSE into the bottle, point this at NMSE.exe
+Programs:
+  NMSE:
+    executable: "NMSE.exe"
+    arguments: ""
+    folder: "NMSE"        # Subfolder under drive_c where NMSE is installed

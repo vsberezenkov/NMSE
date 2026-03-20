@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# ──────────────────────────────────────────────────────────────
+# AppRun - AppImage entry point for NMSE
+#
+# This script is the standard AppImage entry point. When a user
+# runs the .AppImage file, this script is executed with $APPDIR
+# pointing to the mounted squashfs root.
+#
+# The AppImage bundles:
+#   $APPDIR/app/         NMSE Windows build (self-contained .NET)
+#   $APPDIR/wine/        Minimal Wine installation
+#   $APPDIR/nmse.sh      The standard NMSE Wine launcher
+#
+# This script simply delegates to nmse.sh with the correct
+# paths resolved.
+# ──────────────────────────────────────────────────────────────
+
+set -euo pipefail
+
+# $APPDIR is set by the AppImage runtime to the mount point
+APPDIR="${APPDIR:-"$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"}"
+
+# Use bundled Wine from the AppImage
+export PATH="$APPDIR/wine/bin:$PATH"
+export LD_LIBRARY_PATH="${APPDIR}/wine/lib:${APPDIR}/wine/lib64:${LD_LIBRARY_PATH:-}"
+
+# Wine prefix - stored in user's config directory (persists across AppImage updates)
+export WINEPREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/nmse/wineprefix"
+export WINEARCH=win64
+
+# Disable Wine install dialogs for Gecko/Mono (not needed)
+export WINEDLLOVERRIDES="mscoree=d;mshtml=d"
+
+# Suppress Wine debug noise
+export WINEDEBUG="-all"
+
+# Better font rendering
+export FREETYPE_PROPERTIES="truetype:interpreter-version=40"
+
+NMSE_EXE="$APPDIR/app/NMSE.exe"
+
+if [[ ! -f "$NMSE_EXE" ]]; then
+    echo "[NMSE] ERROR: NMSE.exe not found at $NMSE_EXE" >&2
+    exit 1
+fi
+
+# Create prefix if needed
+if [[ ! -d "$WINEPREFIX/drive_c" ]]; then
+    echo "[NMSE] First run - creating Wine prefix (this may take a moment) ..."
+    wine wineboot --init 2>/dev/null || true
+fi
+
+exec wine "$NMSE_EXE" "$@"

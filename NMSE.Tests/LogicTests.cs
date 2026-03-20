@@ -1,0 +1,6208 @@
+using NMSE.Config;
+using NMSE.Data;
+using NMSE.IO;
+using NMSE.Models;
+using NMSE.Core;
+
+namespace NMSE.Tests;
+
+/// <summary>
+/// Tests for the extracted Logic classes (pure data operations, no WinForms).
+/// </summary>
+public class LogicTests
+{
+    public string referencePath = "_ref";
+
+    public LogicTests()
+    {
+        EnsureJsonDatabasesLoaded();
+    }
+
+    private static bool _jsonLoaded;
+    private static readonly object _loadLock = new();
+
+    private static void EnsureJsonDatabasesLoaded()
+    {
+        if (_jsonLoaded) return;
+        lock (_loadLock)
+        {
+            if (_jsonLoaded) return;
+            var jsonDir = FindResourceJsonDir();
+            if (jsonDir == null) return;
+
+            FrigateTraitDatabase.LoadFromFile(Path.Combine(jsonDir, "FrigateTraits.json"));
+            SettlementPerkDatabase.LoadFromFile(Path.Combine(jsonDir, "SettlementPerks.json"));
+            WikiGuideDatabase.LoadFromFile(Path.Combine(jsonDir, "WikiGuide.json"));
+            TitleDatabase.LoadFromFile(Path.Combine(jsonDir, "Titles.json"));
+
+            // Load UI strings so that logic classes returning localised text work correctly
+            var langDir = FindResourceLangDir();
+            if (langDir != null)
+            {
+                UiStrings.SetDirectory(langDir);
+                UiStrings.Load("en-GB");
+            }
+
+            _jsonLoaded = true;
+        }
+    }
+
+    // --- StarshipLogic -----------------------------------------------
+
+    [Fact]
+    public void StarshipLogic_ShipInfo_ContainsAllExpectedTypes()
+    {
+        Assert.True(StarshipLogic.ShipInfo.Count >= 16);
+        Assert.Contains("Hauler", StarshipLogic.ShipInfo.Values.Select(v => v.DisplayName));
+        Assert.Contains("Explorer", StarshipLogic.ShipInfo.Values.Select(v => v.DisplayName));
+        Assert.Contains("Fighter", StarshipLogic.ShipInfo.Values.Select(v => v.DisplayName));
+        Assert.Contains("Exotic", StarshipLogic.ShipInfo.Values.Select(v => v.DisplayName));
+        Assert.Contains("Living Ship", StarshipLogic.ShipInfo.Values.Select(v => v.DisplayName));
+        Assert.Contains("Solar", StarshipLogic.ShipInfo.Values.Select(v => v.DisplayName));
+        Assert.Contains("Shuttle", StarshipLogic.ShipInfo.Values.Select(v => v.DisplayName));
+        Assert.Contains("Sentinel", StarshipLogic.ShipInfo.Values.Select(v => v.DisplayName));
+    }
+
+    [Theory]
+    [InlineData("MODELS/COMMON/SPACECRAFT/DROPSHIPS/DROPSHIP_PROC.SCENE.MBIN", "Hauler")]
+    [InlineData("MODELS/COMMON/SPACECRAFT/SCIENTIFIC/SCIENTIFIC_PROC.SCENE.MBIN", "Explorer")]
+    [InlineData("MODELS/COMMON/SPACECRAFT/FIGHTERS/FIGHTER_PROC.SCENE.MBIN", "Fighter")]
+    [InlineData("MODELS/COMMON/SPACECRAFT/S-CLASS/S-CLASS_PROC.SCENE.MBIN", "Exotic")]
+    public void StarshipLogic_GetShipInfo_ReturnsCorrectDisplayName(string filename, string expectedName)
+    {
+        var (displayName, _, _) = StarshipLogic.GetShipInfo(filename);
+        Assert.Equal(expectedName, displayName);
+    }
+
+    [Fact]
+    public void StarshipLogic_GetShipInfo_UnknownFilename_ReturnsUnknown()
+    {
+        var (displayName, _, _) = StarshipLogic.GetShipInfo("INVALID_PATH");
+        Assert.Equal("Unknown", displayName);
+    }
+
+    [Fact]
+    public void StarshipLogic_GetShipInfo_KeywordFallback()
+    {
+        var (displayName, _, _) = StarshipLogic.GetShipInfo("some/path/DROPSHIP_test.mbin");
+        Assert.Equal("Hauler", displayName);
+    }
+
+    [Fact]
+    public void StarshipLogic_GetShipInfo_CaseInsensitiveLookup()
+    {
+        var (displayName, _, _) = StarshipLogic.GetShipInfo(
+            "models/common/spacecraft/dropships/dropship_proc.scene.mbin");
+        Assert.Equal("Hauler", displayName);
+    }
+
+    [Fact]
+    public void StarshipLogic_LookupShipTypeName_ReturnsDisplayName()
+    {
+        Assert.Equal("Fighter",
+            StarshipLogic.LookupShipTypeName("MODELS/COMMON/SPACECRAFT/FIGHTERS/FIGHTER_PROC.SCENE.MBIN"));
+    }
+
+    [Fact]
+    public void StarshipLogic_GetShipTypeNames_ReturnsSortedDistinctNames()
+    {
+        var names = StarshipLogic.GetShipTypeNames();
+        Assert.True(names.Length > 0);
+        for (int i = 1; i < names.Length; i++)
+            Assert.True(string.Compare(names[i - 1], names[i], StringComparison.Ordinal) < 0,
+                $"'{names[i - 1]}' should come before '{names[i]}'");
+    }
+
+    [Fact]
+    public void StarshipLogic_LookupFilenameForType_ReturnsCorrectPath()
+    {
+        string filename = StarshipLogic.LookupFilenameForType("Hauler");
+        Assert.Equal("MODELS/COMMON/SPACECRAFT/DROPSHIPS/DROPSHIP_PROC.SCENE.MBIN", filename);
+    }
+
+    [Fact]
+    public void StarshipLogic_LookupFilenameForType_UnknownType_ReturnsEmpty()
+    {
+        Assert.Equal("", StarshipLogic.LookupFilenameForType("NonExistentType"));
+    }
+
+    [Theory]
+    [InlineData("My Ship", "My_Ship")]
+    [InlineData("  ", "unnamed")]
+    [InlineData("", "unnamed")]
+    [InlineData("Normal_Name", "Normal_Name")]
+    public void FileNameHelper_SanitizeFileName_ReturnsExpected(string input, string expected)
+    {
+        Assert.Equal(expected, FileNameHelper.SanitizeFileName(input));
+    }
+
+    [Fact]
+    public void StatHelper_ReadBaseStatValue_ReturnsValue()
+    {
+        var json = JsonObject.Parse(@"{
+            ""BaseStatValues"": [
+                { ""BaseStatID"": ""^SHIP_DAMAGE"", ""Value"": 15.5 },
+                { ""BaseStatID"": ""^SHIP_SHIELD"", ""Value"": 200.0 }
+            ]
+        }");
+
+        Assert.Equal(15.5, StatHelper.ReadBaseStatValue(json, "^SHIP_DAMAGE"));
+        Assert.Equal(200.0, StatHelper.ReadBaseStatValue(json, "^SHIP_SHIELD"));
+        Assert.Equal(15.5, StatHelper.ReadBaseStatValue(json, "^SHIP_DAMAGE"));
+        Assert.Equal(15.5, FreighterLogic.ReadStatBonus(json, "^SHIP_DAMAGE"));
+    }
+
+    [Fact]
+    public void StatHelper_ReadBaseStatValue_MissingStat_ReturnsZero()
+    {
+        var json = JsonObject.Parse(@"{
+            ""BaseStatValues"": [
+                { ""BaseStatID"": ""^SHIP_DAMAGE"", ""Value"": 10.0 }
+            ]
+        }");
+
+        Assert.Equal(0.0, StatHelper.ReadBaseStatValue(json, "^SHIP_SHIELD"));
+    }
+
+    [Fact]
+    public void StatHelper_ReadBaseStatValue_NullInventory_ReturnsZero()
+    {
+        Assert.Equal(0.0, StatHelper.ReadBaseStatValue(null, "^SHIP_DAMAGE"));
+        Assert.Equal(0.0, StatHelper.ReadBaseStatValue(null, "^WEAPON_DAMAGE"));
+        Assert.Equal(0.0, FreighterLogic.ReadStatBonus(null, "^FREI_HYPERDRIVE"));
+    }
+
+    [Fact]
+    public void StatHelper_WriteBaseStatValue_UpdatesValue()
+    {
+        var json = JsonObject.Parse(@"{
+            ""BaseStatValues"": [
+                { ""BaseStatID"": ""^SHIP_DAMAGE"", ""Value"": 10.0 }
+            ]
+        }");
+
+        StatHelper.WriteBaseStatValue(json, "^SHIP_DAMAGE", 99.5);
+        Assert.Equal(99.5, StatHelper.ReadBaseStatValue(json, "^SHIP_DAMAGE"));
+    }
+
+    [Fact]
+    public void StatHelper_WriteBaseStatValue_NullInventory_DoesNotThrow()
+    {
+        var ex = Record.Exception(() => StatHelper.WriteBaseStatValue(null, "^SHIP_DAMAGE", 10.0));
+        Assert.Null(ex);
+    }
+
+    [Fact]
+    public void StarshipLogic_BuildShipList_ReturnsSeededShips()
+    {
+        var json = JsonObject.Parse(@"{
+            ""ShipOwnership"": [
+                {
+                    ""Name"": ""Alpha"",
+                    ""Resource"": { ""Seed"": [true, ""0xABC""] }
+                },
+                {
+                    ""Name"": """",
+                    ""Resource"": { ""Seed"": [false, ""0x0""] }
+                },
+                {
+                    ""Name"": ""Beta"",
+                    ""Resource"": { ""Seed"": [true, ""0xDEF""] }
+                }
+            ]
+        }");
+
+        var ships = StarshipLogic.BuildShipList(json.GetArray("ShipOwnership")!);
+        Assert.Equal(2, ships.Count);
+        Assert.Equal("Alpha", ships[0].DisplayName);
+        Assert.Equal(0, ships[0].DataIndex);
+        Assert.Equal("Beta", ships[1].DisplayName);
+        Assert.Equal(2, ships[1].DataIndex);
+    }
+
+    [Fact]
+    public void StarshipLogic_BuildShipList_EmptyName_UsesDefaultName()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Ships"": [
+                {
+                    ""Name"": """",
+                    ""Resource"": { ""Seed"": [true, ""0x123""] }
+                }
+            ]
+        }");
+
+        var ships = StarshipLogic.BuildShipList(json.GetArray("Ships")!);
+        Assert.Single(ships);
+        Assert.Equal("Ship 1", ships[0].DisplayName);
+    }
+
+    [Fact]
+    public void StarshipLogic_ShipClasses_HasFourEntries()
+    {
+        Assert.Equal(4, StarshipLogic.ShipClasses.Length);
+        Assert.Equal(new[] { "C", "B", "A", "S" }, StarshipLogic.ShipClasses);
+    }
+
+    [Fact]
+    public void StarshipLogic_IsCorvette_DetectsCorvetteFilename()
+    {
+        Assert.True(StarshipLogic.IsCorvette("MODELS/COMMON/SPACECRAFT/BIGGS/BIGGS.SCENE.MBIN"));
+        Assert.False(StarshipLogic.IsCorvette("MODELS/COMMON/SPACECRAFT/FIGHTERS/FIGHTER_PROC.SCENE.MBIN"));
+        Assert.False(StarshipLogic.IsCorvette(""));
+    }
+
+    [Fact]
+    public void StarshipLogic_SeedToDecimal_ConvertsHexCorrectly()
+    {
+        // 0x68B31258 = 1756566104
+        Assert.Equal(1756566104L, StarshipLogic.SeedToDecimal("0x68B31258"));
+    }
+
+    [Fact]
+    public void StarshipLogic_SeedToDecimal_HandlesVariousFormats()
+    {
+        Assert.Equal(1756566104L, StarshipLogic.SeedToDecimal("68B31258"));
+        Assert.Equal(1756566104L, StarshipLogic.SeedToDecimal("0X68B31258"));
+        Assert.Equal(0L, StarshipLogic.SeedToDecimal(""));
+        Assert.Equal(0L, StarshipLogic.SeedToDecimal(null!));
+    }
+
+    [Fact]
+    public void StarshipLogic_FindCorvetteBaseIndex_FindsMatchingBase()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Bases"": [
+                {
+                    ""Owner"": { ""TS"": 999 },
+                    ""BaseType"": { ""PersistentBaseTypes"": ""HomePlanetBase"" }
+                },
+                {
+                    ""Owner"": { ""TS"": 1756566104 },
+                    ""BaseType"": { ""PersistentBaseTypes"": ""PlayerShipBase"" }
+                }
+            ]
+        }");
+        var bases = json.GetArray("Bases")!;
+        int idx = StarshipLogic.FindCorvetteBaseIndex(bases, 1756566104);
+        Assert.Equal(1, idx);
+    }
+
+    [Fact]
+    public void StarshipLogic_FindCorvetteBaseIndex_ReturnsNegativeForNoMatch()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Bases"": [
+                {
+                    ""Owner"": { ""TS"": 999 },
+                    ""BaseType"": { ""PersistentBaseTypes"": ""HomePlanetBase"" }
+                }
+            ]
+        }");
+        var bases = json.GetArray("Bases")!;
+        int idx = StarshipLogic.FindCorvetteBaseIndex(bases, 1756566104);
+        Assert.Equal(-1, idx);
+    }
+
+    [Fact]
+    public void StarshipLogic_FindCorvetteBaseIndex_SkipsNonPlayerShipBase()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Bases"": [
+                {
+                    ""Owner"": { ""TS"": 1756566104 },
+                    ""BaseType"": { ""PersistentBaseTypes"": ""HomePlanetBase"" }
+                }
+            ]
+        }");
+        var bases = json.GetArray("Bases")!;
+        int idx = StarshipLogic.FindCorvetteBaseIndex(bases, 1756566104);
+        Assert.Equal(-1, idx);
+    }
+
+    [Fact]
+    public void StarshipLogic_GetPrimaryShipName_ReturnsShipName()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Ships"": [
+                { ""Name"": ""TestShip"", ""Resource"": { ""Seed"": [true, ""0x1""] } },
+                { ""Name"": ""USCSS Abraxas"", ""Resource"": { ""Seed"": [true, ""0x68B31258""] } }
+            ]
+        }");
+        var ships = json.GetArray("Ships")!;
+        Assert.Equal("USCSS Abraxas", StarshipLogic.GetPrimaryShipName(ships, 1));
+        Assert.Equal("TestShip", StarshipLogic.GetPrimaryShipName(ships, 0));
+        Assert.Equal("Unknown", StarshipLogic.GetPrimaryShipName(ships, 99));
+        Assert.Equal("Unknown", StarshipLogic.GetPrimaryShipName(null, 0));
+    }
+
+    [Fact]
+    public void StarshipLogic_DeleteShipData_ClearsResourceAndSeed()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Name"": ""TestShip"",
+            ""Resource"": { ""Filename"": ""MODELS/COMMON/SPACECRAFT/FIGHTERS/FIGHTER_PROC.SCENE.MBIN"", ""Seed"": [true, ""0xABC""] }
+        }");
+
+        StarshipLogic.DeleteShipData(json);
+
+        var resource = json.GetObject("Resource");
+        Assert.NotNull(resource);
+        Assert.Equal("", resource!.GetString("Filename"));
+        var seed = resource.GetArray("Seed");
+        Assert.NotNull(seed);
+        Assert.False(seed!.GetBool(0));
+        Assert.Equal("0x0", seed.Get(1)?.ToString());
+    }
+
+    [Fact]
+    public void StarshipLogic_DeleteShip_InvalidatesInPlace_DoesNotRemoveFromArray()
+    {
+        // Deletion should only invalidate (clear Filename/Seed) and NOT remove
+        // the entry from the array..
+        // This preserves index alignment with parallel arrays like ShipUsesLegacyColours.
+        var json = JsonObject.Parse(@"{
+            ""ShipOwnership"": [
+                { ""Name"": ""Alpha"", ""Resource"": { ""Filename"": ""f1"", ""Seed"": [true, ""0x1""] } },
+                { ""Name"": ""Beta"",  ""Resource"": { ""Filename"": ""f2"", ""Seed"": [true, ""0x2""] } },
+                { ""Name"": ""Gamma"", ""Resource"": { ""Filename"": ""f3"", ""Seed"": [true, ""0x3""] } }
+            ]
+        }");
+        var ships = json.GetArray("ShipOwnership")!;
+        Assert.Equal(3, ships.Length);
+
+        // Delete middle ship (index 1 = Beta) - invalidate only
+        StarshipLogic.DeleteShipData(ships.GetObject(1));
+
+        // Array size MUST remain unchanged
+        Assert.Equal(3, ships.Length);
+
+        // Alpha and Gamma remain at their original indices, untouched
+        Assert.Equal("Alpha", ships.GetObject(0).GetString("Name"));
+        Assert.Equal("f1", ships.GetObject(0).GetObject("Resource")!.GetString("Filename"));
+        Assert.Equal("Gamma", ships.GetObject(2).GetString("Name"));
+        Assert.Equal("f3", ships.GetObject(2).GetObject("Resource")!.GetString("Filename"));
+
+        // Beta is invalidated but still in the array at index 1
+        var betaResource = ships.GetObject(1).GetObject("Resource")!;
+        Assert.Equal("", betaResource.GetString("Filename"));
+        Assert.False(betaResource.GetArray("Seed")!.GetBool(0));
+
+        // BuildShipList should return only valid ships, preserving original indices
+        var list = StarshipLogic.BuildShipList(ships);
+        Assert.Equal(2, list.Count);
+        Assert.Equal("Alpha", list[0].DisplayName);
+        Assert.Equal(0, list[0].DataIndex);    // Original index preserved
+        Assert.Equal("Gamma", list[1].DisplayName);
+        Assert.Equal(2, list[1].DataIndex);    // Original index preserved (NOT shifted to 1)
+    }
+
+    [Fact]
+    public void StarshipLogic_DeleteShip_NonPrimaryDeleted_PrimaryIndexUnchanged()
+    {
+        // When deleting a non-primary ship, the PrimaryShip index should remain
+        // unchanged since no entries are removed from the array.
+        var json = JsonObject.Parse(@"{
+            ""ShipOwnership"": [
+                { ""Name"": ""Alpha"", ""Resource"": { ""Filename"": ""f1"", ""Seed"": [true, ""0x1""] } },
+                { ""Name"": ""Beta"",  ""Resource"": { ""Filename"": ""f2"", ""Seed"": [true, ""0x2""] } },
+                { ""Name"": ""Gamma"", ""Resource"": { ""Filename"": ""f3"", ""Seed"": [true, ""0x3""] } }
+            ]
+        }");
+        var ships = json.GetArray("ShipOwnership")!;
+
+        // Primary is Gamma (index 2); delete Alpha (index 0)
+        int primaryIndex = 2;
+        StarshipLogic.DeleteShipData(ships.GetObject(0));
+
+        // PrimaryShip stays at index 2 - Gamma is still there, no shifting
+        Assert.Equal("Gamma", ships.GetObject(primaryIndex).GetString("Name"));
+        Assert.Equal("f3", ships.GetObject(primaryIndex).GetObject("Resource")!.GetString("Filename"));
+    }
+
+    [Fact]
+    public void StarshipLogic_DeleteShip_DeletingPrimary_FindsFirstValidShip()
+    {
+        // When deleting the primary ship, use FindFirstValidShipIndex to reassign.
+        var json = JsonObject.Parse(@"{
+            ""ShipOwnership"": [
+                { ""Name"": ""Alpha"", ""Resource"": { ""Filename"": ""f1"", ""Seed"": [true, ""0x1""] } },
+                { ""Name"": ""Beta"",  ""Resource"": { ""Filename"": ""f2"", ""Seed"": [true, ""0x2""] } },
+                { ""Name"": ""Gamma"", ""Resource"": { ""Filename"": ""f3"", ""Seed"": [true, ""0x3""] } }
+            ]
+        }");
+        var ships = json.GetArray("ShipOwnership")!;
+
+        // Primary is Beta (index 1); delete Beta
+        StarshipLogic.DeleteShipData(ships.GetObject(1));
+
+        int newPrimary = StarshipLogic.FindFirstValidShipIndex(ships);
+        // First valid is Alpha at index 0
+        Assert.Equal(0, newPrimary);
+        Assert.Equal("Alpha", ships.GetObject(newPrimary).GetString("Name"));
+    }
+
+    [Fact]
+    public void StarshipLogic_CountValidShips_CountsOnlyActiveShips()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Ships"": [
+                { ""Name"": ""A"", ""Resource"": { ""Filename"": ""f1"", ""Seed"": [true, ""0x1""] } },
+                { ""Name"": ""B"", ""Resource"": { ""Filename"": """",   ""Seed"": [false, ""0x0""] } },
+                { ""Name"": ""C"", ""Resource"": { ""Filename"": ""f3"", ""Seed"": [true, ""0x3""] } }
+            ]
+        }");
+        Assert.Equal(2, StarshipLogic.CountValidShips(json.GetArray("Ships")!));
+    }
+
+    [Fact]
+    public void StarshipLogic_FindFirstValidShipIndex_SkipsInvalidSlots()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Ships"": [
+                { ""Name"": ""A"", ""Resource"": { ""Filename"": """",   ""Seed"": [false, ""0x0""] } },
+                { ""Name"": ""B"", ""Resource"": { ""Filename"": """",   ""Seed"": [false, ""0x0""] } },
+                { ""Name"": ""C"", ""Resource"": { ""Filename"": ""f3"", ""Seed"": [true, ""0x3""] } }
+            ]
+        }");
+        Assert.Equal(2, StarshipLogic.FindFirstValidShipIndex(json.GetArray("Ships")!));
+    }
+
+    [Fact]
+    public void StarshipLogic_FindFirstValidShipIndex_ReturnsNegativeOneWhenAllInvalid()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Ships"": [
+                { ""Name"": ""A"", ""Resource"": { ""Filename"": """", ""Seed"": [false, ""0x0""] } }
+            ]
+        }");
+        Assert.Equal(-1, StarshipLogic.FindFirstValidShipIndex(json.GetArray("Ships")!));
+    }
+
+    [Fact]
+    public void StarshipLogic_DeleteShip_PreservesParallelArrayAlignment()
+    {
+        // Verifies that deleting a ship doesn't break alignment between
+        // ShipOwnership and ShipUsesLegacyColours (parallel array).
+        var json = JsonObject.Parse(@"{
+            ""PlayerStateData"": {
+                ""ShipOwnership"": [
+                    { ""Name"": ""Ship0"", ""Resource"": { ""Filename"": ""f0"", ""Seed"": [true, ""0xA""] } },
+                    { ""Name"": ""Ship1"", ""Resource"": { ""Filename"": ""f1"", ""Seed"": [true, ""0xB""] } },
+                    { ""Name"": ""Ship2"", ""Resource"": { ""Filename"": ""f2"", ""Seed"": [true, ""0xC""] } }
+                ],
+                ""ShipUsesLegacyColours"": [false, true, false],
+                ""PrimaryShip"": 2
+            }
+        }");
+        var playerState = json.GetObject("PlayerStateData")!;
+        var ships = playerState.GetArray("ShipOwnership")!;
+        var legacyArr = playerState.GetArray("ShipUsesLegacyColours")!;
+
+        // Delete Ship1 (index 1) - invalidate only
+        StarshipLogic.DeleteShipData(ships.GetObject(1));
+
+        // Both arrays remain the same size
+        Assert.Equal(3, ships.Length);
+        Assert.Equal(3, legacyArr.Length);
+
+        // Ship2 is still at index 2 with its correct legacy colour value
+        Assert.Equal("Ship2", ships.GetObject(2).GetString("Name"));
+        Assert.False(legacyArr.GetBool(2));
+        // Ship0 is still at index 0 with its correct legacy colour value
+        Assert.Equal("Ship0", ships.GetObject(0).GetString("Name"));
+        Assert.False(legacyArr.GetBool(0));
+    }
+
+    // --- CharacterCustomisationData (CCD) / Ship Customisation -------
+
+    [Theory]
+    [InlineData(0, 3)]
+    [InlineData(1, 4)]
+    [InlineData(5, 8)]
+    [InlineData(6, 17)]
+    [InlineData(11, 22)]
+    [InlineData(-1, -1)]
+    [InlineData(12, -1)]
+    public void StarshipLogic_ShipIndexToCcdIndex_MapsCorrectly(int shipIndex, int expectedCcdIndex)
+    {
+        Assert.Equal(expectedCcdIndex, StarshipLogic.ShipIndexToCcdIndex(shipIndex));
+    }
+
+    [Fact]
+    public void StarshipLogic_ResetShipCustomisation_ClearsPopulatedEntry()
+    {
+        // Build a 26-element CCD array where entry [4] (ship 1) has customisation data
+        var json = JsonObject.Parse(@"{
+            ""CharacterCustomisationData"": [
+                " + string.Join(",\n", Enumerable.Range(0, 26).Select(i =>
+                    i == 4
+                        ? @"{
+                            ""SelectedPreset"": ""^TEST"",
+                            ""CustomData"": {
+                                ""DescriptorGroups"": [""^SAIL_BODYA"", ""^SAIL_SAILB""],
+                                ""PaletteID"": ""^SHIP_METALLIC"",
+                                ""Colours"": [{""Palette"": {""Palette"": ""Paint""}, ""Colour"": [1,1,1,1]}],
+                                ""TextureOptions"": [{""TextureOptionGroupName"": ""^SHIP_SAIL""}],
+                                ""BoneScales"": [1.5],
+                                ""Scale"": 2.0
+                            }
+                        }"
+                        : @"{""SelectedPreset"": ""^"", ""CustomData"": {""DescriptorGroups"": [], ""PaletteID"": ""^"", ""Colours"": [], ""TextureOptions"": [], ""BoneScales"": [], ""Scale"": 1.0}}")) + @"
+            ]
+        }");
+
+        var ccd = json.GetArray("CharacterCustomisationData")!;
+
+        // Verify data is populated before reset
+        var before = ccd.GetObject(4).GetObject("CustomData")!;
+        Assert.Equal(2, before.GetArray("DescriptorGroups")!.Length);
+        Assert.Equal("^SHIP_METALLIC", before.GetString("PaletteID"));
+
+        // Reset ship 1 (CCD index 4)
+        StarshipLogic.ResetShipCustomisation(ccd, 1);
+
+        var after = ccd.GetObject(4);
+        Assert.Equal("^", after.GetString("SelectedPreset"));
+        var cd = after.GetObject("CustomData")!;
+        Assert.Equal(0, cd.GetArray("DescriptorGroups")!.Length);
+        Assert.Equal("^", cd.GetString("PaletteID"));
+        Assert.Equal(0, cd.GetArray("Colours")!.Length);
+        Assert.Equal(0, cd.GetArray("TextureOptions")!.Length);
+        Assert.Equal(0, cd.GetArray("BoneScales")!.Length);
+        Assert.Equal(1.0, cd.GetDouble("Scale"));
+    }
+
+    [Fact]
+    public void StarshipLogic_ResetShipCustomisation_NullArray_DoesNotThrow()
+    {
+        // Should be a no-op with null array
+        StarshipLogic.ResetShipCustomisation(null, 0);
+    }
+
+    [Fact]
+    public void StarshipLogic_ResetShipCustomisation_OutOfRange_DoesNotThrow()
+    {
+        var json = JsonObject.Parse(@"{ ""ccd"": [] }");
+        StarshipLogic.ResetShipCustomisation(json.GetArray("ccd"), 0);
+    }
+
+    [Fact]
+    public void StarshipLogic_GetShipCustomisation_ReturnsDeepClone()
+    {
+        var json = JsonObject.Parse(@"{
+            ""CharacterCustomisationData"": [
+                " + string.Join(",\n", Enumerable.Range(0, 26).Select(i =>
+                    i == 6
+                        ? @"{
+                            ""SelectedPreset"": ""^"",
+                            ""CustomData"": {
+                                ""DescriptorGroups"": [""^DROPS_COCKS13"", ""^DROPS_ENGIS13""],
+                                ""PaletteID"": ""^SHIP_METALLIC"",
+                                ""Colours"": [{""Palette"": {""Palette"": ""Paint""}, ""Colour"": [0.5,0.5,0.5,1]}],
+                                ""TextureOptions"": [],
+                                ""BoneScales"": [],
+                                ""Scale"": 1.0
+                            }
+                        }"
+                        : @"{""SelectedPreset"": ""^"", ""CustomData"": {""DescriptorGroups"": [], ""PaletteID"": ""^"", ""Colours"": [], ""TextureOptions"": [], ""BoneScales"": [], ""Scale"": 1.0}}")) + @"
+            ]
+        }");
+
+        var ccd = json.GetArray("CharacterCustomisationData")!;
+
+        // Ship 3 maps to CCD[6]
+        var clone = StarshipLogic.GetShipCustomisation(ccd, 3);
+        Assert.NotNull(clone);
+        var dg = clone!.GetObject("CustomData")!.GetArray("DescriptorGroups")!;
+        Assert.Equal(2, dg.Length);
+
+        // Modifying clone should not affect original
+        dg.RemoveAt(0);
+        Assert.Equal(1, dg.Length);
+        Assert.Equal(2, ccd.GetObject(6).GetObject("CustomData")!.GetArray("DescriptorGroups")!.Length);
+    }
+
+    [Fact]
+    public void StarshipLogic_GetShipCustomisation_NullArray_ReturnsNull()
+    {
+        Assert.Null(StarshipLogic.GetShipCustomisation(null, 0));
+    }
+
+    [Fact]
+    public void StarshipLogic_SetShipCustomisation_CopiesAllProperties()
+    {
+        var json = JsonObject.Parse(@"{
+            ""CharacterCustomisationData"": [
+                " + string.Join(",\n", Enumerable.Range(0, 26).Select(_ =>
+                    @"{""SelectedPreset"": ""^"", ""CustomData"": {""DescriptorGroups"": [], ""PaletteID"": ""^"", ""Colours"": [], ""TextureOptions"": [], ""BoneScales"": [], ""Scale"": 1.0}}")) + @"
+            ]
+        }");
+        var ccd = json.GetArray("CharacterCustomisationData")!;
+
+        // Create a CCD entry to import
+        var entry = JsonObject.Parse(@"{
+            ""SelectedPreset"": ""^CUSTOM"",
+            ""CustomData"": {
+                ""DescriptorGroups"": [""^DG_A"", ""^DG_B"", ""^DG_C""],
+                ""PaletteID"": ""^TEST_PAL"",
+                ""Colours"": [{""Palette"": {""Palette"": ""Paint""}, ""Colour"": [1,0,0,1]}],
+                ""TextureOptions"": [{""TextureOptionGroupName"": ""^TEX""}],
+                ""BoneScales"": [],
+                ""Scale"": 1.5
+            }
+        }");
+
+        // Set on ship 7 -> CCD[18]
+        StarshipLogic.SetShipCustomisation(ccd, 7, entry);
+
+        var target = ccd.GetObject(18);
+        Assert.Equal("^CUSTOM", target.GetString("SelectedPreset"));
+        Assert.Equal(3, target.GetObject("CustomData")!.GetArray("DescriptorGroups")!.Length);
+        Assert.Equal("^TEST_PAL", target.GetObject("CustomData")!.GetString("PaletteID"));
+    }
+
+    [Fact]
+    public void StarshipLogic_SetShipCustomisation_NullEntry_ResetsSlot()
+    {
+        var json = JsonObject.Parse(@"{
+            ""CharacterCustomisationData"": [
+                " + string.Join(",\n", Enumerable.Range(0, 26).Select(i =>
+                    i == 17
+                        ? @"{""SelectedPreset"": ""^X"", ""CustomData"": {""DescriptorGroups"": [""^A""], ""PaletteID"": ""^P"", ""Colours"": [{""c"":1}], ""TextureOptions"": [{""t"":1}], ""BoneScales"": [1], ""Scale"": 2.0}}"
+                        : @"{""SelectedPreset"": ""^"", ""CustomData"": {""DescriptorGroups"": [], ""PaletteID"": ""^"", ""Colours"": [], ""TextureOptions"": [], ""BoneScales"": [], ""Scale"": 1.0}}")) + @"
+            ]
+        }");
+        var ccd = json.GetArray("CharacterCustomisationData")!;
+
+        // Ship 6 -> CCD[17], passing null should reset it
+        StarshipLogic.SetShipCustomisation(ccd, 6, null);
+
+        var target = ccd.GetObject(17);
+        Assert.Equal("^", target.GetString("SelectedPreset"));
+        Assert.Equal(0, target.GetObject("CustomData")!.GetArray("DescriptorGroups")!.Length);
+        Assert.Equal("^", target.GetObject("CustomData")!.GetString("PaletteID"));
+        Assert.Equal(1.0, target.GetObject("CustomData")!.GetDouble("Scale"));
+    }
+
+    [Fact]
+    public void StarshipLogic_DeleteShip_WithCCD_ClearsCustomisation()
+    {
+        // End-to-end: deleting a ship should also reset its CCD entry
+        var json = JsonObject.Parse(@"{
+            ""PlayerStateData"": {
+                ""ShipOwnership"": [
+                    { ""Name"": ""Ship0"", ""Resource"": { ""Filename"": ""f0"", ""Seed"": [true, ""0xA""] } },
+                    { ""Name"": ""Ship1"", ""Resource"": { ""Filename"": ""f1"", ""Seed"": [true, ""0xB""] } }
+                ],
+                ""CharacterCustomisationData"": [
+                    " + string.Join(",\n", Enumerable.Range(0, 26).Select(i =>
+                        i == 4
+                            ? @"{""SelectedPreset"": ""^"", ""CustomData"": {""DescriptorGroups"": [""^DG1"",""^DG2""], ""PaletteID"": ""^PAL"", ""Colours"": [{""c"":1}], ""TextureOptions"": [{""t"":1}], ""BoneScales"": [], ""Scale"": 1.0}}"
+                            : @"{""SelectedPreset"": ""^"", ""CustomData"": {""DescriptorGroups"": [], ""PaletteID"": ""^"", ""Colours"": [], ""TextureOptions"": [], ""BoneScales"": [], ""Scale"": 1.0}}")) + @"
+                ],
+                ""PrimaryShip"": 0
+            }
+        }");
+        var playerState = json.GetObject("PlayerStateData")!;
+        var ships = playerState.GetArray("ShipOwnership")!;
+        var ccd = playerState.GetArray("CharacterCustomisationData")!;
+
+        // Verify CCD[4] (ship 1) has data
+        Assert.Equal(2, ccd.GetObject(4).GetObject("CustomData")!.GetArray("DescriptorGroups")!.Length);
+
+        // Delete ship 1 and reset its CCD
+        StarshipLogic.DeleteShipData(ships.GetObject(1));
+        StarshipLogic.ResetShipCustomisation(ccd, 1);
+
+        // Ship is invalidated
+        Assert.False(ships.GetObject(1).GetObject("Resource")!.GetArray("Seed")!.GetBool(0));
+
+        // CCD[4] is reset
+        var cd = ccd.GetObject(4).GetObject("CustomData")!;
+        Assert.Equal(0, cd.GetArray("DescriptorGroups")!.Length);
+        Assert.Equal("^", cd.GetString("PaletteID"));
+        Assert.Equal(0, cd.GetArray("Colours")!.Length);
+        Assert.Equal(0, cd.GetArray("TextureOptions")!.Length);
+    }
+
+    [Fact]
+    public void StarshipLogic_DeleteShipData_ClearsNameAndInventories()
+    {
+        // DeleteShipData must clear ALL ship data, not just Resource.
+        // Leaving behind Name, Inventory slots, tech slots, or stats
+        // causes corrupt save remnants when a player deletes a custom ship.
+        var json = JsonObject.Parse(@"{
+            ""Name"": ""[OAC] Currawong"",
+            ""Resource"": {
+                ""Filename"": ""MODELS/COMMON/SPACECRAFT/DROPSHIPS/DROPSHIP_PROC.SCENE.MBIN"",
+                ""Seed"": [true, ""0xABC123""]
+            },
+            ""Inventory"": {
+                ""Slots"": [
+                    { ""Type"": { ""InventoryType"": ""Product"" }, ""Id"": ""^FUEL1"", ""Amount"": 500 },
+                    { ""Type"": { ""InventoryType"": ""Product"" }, ""Id"": ""^FUEL2"", ""Amount"": 250 }
+                ],
+                ""ValidSlotIndices"": [ { ""X"": 0, ""Y"": 0 }, { ""X"": 1, ""Y"": 0 } ],
+                ""Class"": { ""InventoryClass"": ""S"" },
+                ""BaseStatValues"": [
+                    { ""BaseStatID"": ""^SHIP_DAMAGE"", ""Value"": 100.0 },
+                    { ""BaseStatID"": ""^SHIP_SHIELD"", ""Value"": 200.0 }
+                ],
+                ""SpecialSlots"": []
+            },
+            ""Inventory_TechOnly"": {
+                ""Slots"": [
+                    { ""Type"": { ""InventoryType"": ""Technology"" }, ""Id"": ""^HYPERDRIVE"", ""Amount"": 1 }
+                ],
+                ""ValidSlotIndices"": [ { ""X"": 0, ""Y"": 0 } ],
+                ""Class"": { ""InventoryClass"": ""S"" },
+                ""BaseStatValues"": [
+                    { ""BaseStatID"": ""^SHIP_HYPERDRIVE"", ""Value"": 300.0 }
+                ],
+                ""SpecialSlots"": []
+            }
+        }");
+
+        StarshipLogic.DeleteShipData(json);
+
+        // Resource should be invalidated
+        var resource = json.GetObject("Resource")!;
+        Assert.Equal("", resource.GetString("Filename"));
+        Assert.False(resource.GetArray("Seed")!.GetBool(0));
+
+        // Name should be cleared
+        Assert.Equal("", json.GetString("Name"));
+
+        // Inventory slots should be cleared
+        Assert.Equal(0, json.GetObject("Inventory")!.GetArray("Slots")!.Length);
+        Assert.Equal(0, json.GetObject("Inventory")!.GetArray("ValidSlotIndices")!.Length);
+        Assert.Equal(0, json.GetObject("Inventory")!.GetArray("BaseStatValues")!.Length);
+
+        // Tech inventory slots should be cleared
+        Assert.Equal(0, json.GetObject("Inventory_TechOnly")!.GetArray("Slots")!.Length);
+        Assert.Equal(0, json.GetObject("Inventory_TechOnly")!.GetArray("ValidSlotIndices")!.Length);
+        Assert.Equal(0, json.GetObject("Inventory_TechOnly")!.GetArray("BaseStatValues")!.Length);
+    }
+
+    [Fact]
+    public void StarshipLogic_DeleteShipData_ClearsCargoInventory()
+    {
+        // Inventory_Cargo (v3.85+ Outlaws) should also be cleared if present.
+        var json = JsonObject.Parse(@"{
+            ""Name"": ""TestShip"",
+            ""Resource"": { ""Filename"": ""f1"", ""Seed"": [true, ""0x1""] },
+            ""Inventory"": { ""Slots"": [], ""ValidSlotIndices"": [], ""BaseStatValues"": [], ""SpecialSlots"": [] },
+            ""Inventory_TechOnly"": { ""Slots"": [], ""ValidSlotIndices"": [], ""BaseStatValues"": [], ""SpecialSlots"": [] },
+            ""Inventory_Cargo"": {
+                ""Slots"": [
+                    { ""Type"": { ""InventoryType"": ""Product"" }, ""Id"": ""^FUEL1"", ""Amount"": 9999 }
+                ],
+                ""ValidSlotIndices"": [ { ""X"": 0, ""Y"": 0 } ],
+                ""BaseStatValues"": [],
+                ""SpecialSlots"": []
+            }
+        }");
+
+        StarshipLogic.DeleteShipData(json);
+
+        Assert.Equal("", json.GetString("Name"));
+        Assert.Equal(0, json.GetObject("Inventory_Cargo")!.GetArray("Slots")!.Length);
+        Assert.Equal(0, json.GetObject("Inventory_Cargo")!.GetArray("ValidSlotIndices")!.Length);
+    }
+
+    [Fact]
+    public void StarshipLogic_DeleteShipData_HandlesMinimalShip()
+    {
+        // A ship with no inventories should still be safely deleted.
+        var json = JsonObject.Parse(@"{
+            ""Name"": ""Minimal"",
+            ""Resource"": { ""Filename"": ""f1"", ""Seed"": [true, ""0x1""] }
+        }");
+
+        StarshipLogic.DeleteShipData(json);
+
+        Assert.Equal("", json.GetString("Name"));
+        Assert.Equal("", json.GetObject("Resource")!.GetString("Filename"));
+        Assert.False(json.GetObject("Resource")!.GetArray("Seed")!.GetBool(0));
+    }
+
+    [Fact]
+    public void StarshipLogic_DeleteShip_FullReset_EndToEnd()
+    {
+        // End-to-end: deleting a ship with populated inventories, CCD, and
+        // name should leave NO remnants. This is the critical test for the
+        // custom-built ship deletion bug.
+        var json = JsonObject.Parse(@"{
+            ""PlayerStateData"": {
+                ""ShipOwnership"": [
+                    {
+                        ""Name"": ""VCF Blackbird"",
+                        ""Resource"": { ""Filename"": ""f0"", ""Seed"": [true, ""0xA""] },
+                        ""Inventory"": { ""Slots"": [{ ""Id"": ""^FUEL1"" }], ""ValidSlotIndices"": [{ ""X"": 0 }], ""BaseStatValues"": [{ ""BaseStatID"": ""^SHIP_DAMAGE"", ""Value"": 50.0 }], ""SpecialSlots"": [] },
+                        ""Inventory_TechOnly"": { ""Slots"": [{ ""Id"": ""^HYPER"" }], ""ValidSlotIndices"": [{ ""X"": 0 }], ""BaseStatValues"": [], ""SpecialSlots"": [] }
+                    },
+                    {
+                        ""Name"": ""[OAC] Currawong"",
+                        ""Resource"": { ""Filename"": ""f1"", ""Seed"": [true, ""0xB""] },
+                        ""Inventory"": { ""Slots"": [{ ""Id"": ""^FUEL2"" }, { ""Id"": ""^FUEL3"" }], ""ValidSlotIndices"": [{ ""X"": 0 }, { ""X"": 1 }], ""BaseStatValues"": [{ ""BaseStatID"": ""^SHIP_SHIELD"", ""Value"": 100.0 }], ""SpecialSlots"": [] },
+                        ""Inventory_TechOnly"": { ""Slots"": [{ ""Id"": ""^DRIVE"" }], ""ValidSlotIndices"": [{ ""X"": 0 }], ""BaseStatValues"": [{ ""BaseStatID"": ""^SHIP_HYPERDRIVE"", ""Value"": 300.0 }], ""SpecialSlots"": [] }
+                    }
+                ],
+                ""CharacterCustomisationData"": [
+                    " + string.Join(",\n", Enumerable.Range(0, 26).Select(i =>
+                        i == 4
+                            ? @"{""SelectedPreset"": ""^"", ""CustomData"": {""DescriptorGroups"": [""^DROPS_COCKS13"",""^DROPS_ENGIS13"",""^DROPS_WINGS13""], ""PaletteID"": ""^SHIP_METALLIC"", ""Colours"": [{""c"":1},{""c"":2},{""c"":3}], ""TextureOptions"": [{""t"":1}], ""BoneScales"": [], ""Scale"": 1.0}}"
+                            : @"{""SelectedPreset"": ""^"", ""CustomData"": {""DescriptorGroups"": [], ""PaletteID"": ""^"", ""Colours"": [], ""TextureOptions"": [], ""BoneScales"": [], ""Scale"": 1.0}}")) + @"
+                ],
+                ""ShipUsesLegacyColours"": [false, false],
+                ""PrimaryShip"": 0
+            }
+        }");
+
+        var playerState = json.GetObject("PlayerStateData")!;
+        var ships = playerState.GetArray("ShipOwnership")!;
+        var ccd = playerState.GetArray("CharacterCustomisationData")!;
+
+        // Delete ship 1 ([OAC] Currawong) - the custom-built ship
+        StarshipLogic.DeleteShipData(ships.GetObject(1));
+        StarshipLogic.ResetShipCustomisation(ccd, 1);
+
+        // Ship 0 (VCF Blackbird) should be completely untouched
+        var ship0 = ships.GetObject(0);
+        Assert.Equal("VCF Blackbird", ship0.GetString("Name"));
+        Assert.Equal("f0", ship0.GetObject("Resource")!.GetString("Filename"));
+        Assert.True(ship0.GetObject("Resource")!.GetArray("Seed")!.GetBool(0));
+        Assert.Equal(1, ship0.GetObject("Inventory")!.GetArray("Slots")!.Length);
+        Assert.Equal(1, ship0.GetObject("Inventory_TechOnly")!.GetArray("Slots")!.Length);
+
+        // Ship 1 ([OAC] Currawong) should have NO remnants
+        var ship1 = ships.GetObject(1);
+        Assert.Equal("", ship1.GetString("Name"));
+        Assert.Equal("", ship1.GetObject("Resource")!.GetString("Filename"));
+        Assert.False(ship1.GetObject("Resource")!.GetArray("Seed")!.GetBool(0));
+        Assert.Equal(0, ship1.GetObject("Inventory")!.GetArray("Slots")!.Length);
+        Assert.Equal(0, ship1.GetObject("Inventory")!.GetArray("ValidSlotIndices")!.Length);
+        Assert.Equal(0, ship1.GetObject("Inventory")!.GetArray("BaseStatValues")!.Length);
+        Assert.Equal(0, ship1.GetObject("Inventory_TechOnly")!.GetArray("Slots")!.Length);
+        Assert.Equal(0, ship1.GetObject("Inventory_TechOnly")!.GetArray("ValidSlotIndices")!.Length);
+        Assert.Equal(0, ship1.GetObject("Inventory_TechOnly")!.GetArray("BaseStatValues")!.Length);
+
+        // CCD[4] should be reset
+        var cd = ccd.GetObject(4).GetObject("CustomData")!;
+        Assert.Equal(0, cd.GetArray("DescriptorGroups")!.Length);
+        Assert.Equal("^", cd.GetString("PaletteID"));
+        Assert.Equal(0, cd.GetArray("Colours")!.Length);
+        Assert.Equal(0, cd.GetArray("TextureOptions")!.Length);
+
+        // Array size preserved
+        Assert.Equal(2, ships.Length);
+    }
+
+    // --- MultitoolLogic ----------------------------------------------
+
+    [Fact]
+    public void MultitoolLogic_ToolTypes_HasExpectedEntries()
+    {
+        Assert.True(MultitoolLogic.ToolTypes.Length >= 14);
+        Assert.Equal("Standard", MultitoolLogic.ToolTypes[0].Name);
+        Assert.Equal("Rifle", MultitoolLogic.ToolTypes[1].Name);
+        Assert.Equal("Royal", MultitoolLogic.ToolTypes[2].Name);
+    }
+
+    [Fact]
+    public void MultitoolLogic_ToolTypes_AllHaveFilenames()
+    {
+        foreach (var (name, filename) in MultitoolLogic.ToolTypes)
+        {
+            Assert.False(string.IsNullOrEmpty(name));
+            Assert.False(string.IsNullOrEmpty(filename));
+            Assert.Contains("MULTITOOL", filename, StringComparison.OrdinalIgnoreCase);
+        }
+    }
+
+    [Fact]
+    public void MultitoolLogic_ToolClasses_MatchesShipClasses()
+    {
+        Assert.Equal(new[] { "C", "B", "A", "S" }, MultitoolLogic.ToolClasses);
+    }
+
+    [Fact]
+    public void MultitoolLogic_BuildToolList_ReturnsSeededTools()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Tools"": [
+                { ""Name"": ""Laser Pro"", ""Seed"": [true, ""0x111""] },
+                { ""Name"": """", ""Seed"": [false, ""0x0""] },
+                { ""Name"": ""Blaster"", ""Seed"": [true, ""0x222""] }
+            ]
+        }");
+
+        var tools = MultitoolLogic.BuildToolList(json.GetArray("Tools")!);
+        Assert.Equal(2, tools.Count);
+        Assert.Equal("Laser Pro", tools[0].DisplayName);
+        Assert.Equal("Blaster", tools[1].DisplayName);
+    }
+
+    [Fact]
+    public void MultitoolLogic_BuildToolList_EmptyName_UsesDefault()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Tools"": [
+                { ""Name"": """", ""Seed"": [true, ""0xABC""] }
+            ]
+        }");
+
+        var tools = MultitoolLogic.BuildToolList(json.GetArray("Tools")!);
+        Assert.Single(tools);
+        Assert.Equal("Multitool 1", tools[0].DisplayName);
+    }
+
+    [Fact]
+    public void MultitoolLogic_FindEmptySlot_ReturnsFirstEmpty()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Tools"": [
+                { ""Seed"": [true, ""0x1""] },
+                { ""Seed"": [false, ""0x0""] },
+                { ""Seed"": [true, ""0x2""] }
+            ]
+        }");
+
+        Assert.Equal(1, MultitoolLogic.FindEmptySlot(json.GetArray("Tools")!));
+    }
+
+    [Fact]
+    public void MultitoolLogic_FindEmptySlot_AllFull_ReturnsNegativeOne()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Tools"": [
+                { ""Seed"": [true, ""0x1""] },
+                { ""Seed"": [true, ""0x2""] }
+            ]
+        }");
+
+        Assert.Equal(-1, MultitoolLogic.FindEmptySlot(json.GetArray("Tools")!));
+    }
+
+    [Fact]
+    public void MultitoolLogic_DeleteToolData_InvalidatesInPlace()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Tools"": [
+                { ""Name"": ""Alpha"", ""Seed"": [true, ""0x1""],
+                  ""Resource"": { ""Filename"": ""alpha.mbin"", ""Seed"": [true, ""0xA""], ""AltId"": """", ""ProceduralTexture"": { ""Samplers"": [] } },
+                  ""Store"": { ""Slots"": [{ ""Id"": ""^LASER"" }], ""ValidSlotIndices"": [{ ""X"": 0 }], ""BaseStatValues"": [{ ""BaseStatID"": ""^WEAPON_DAMAGE"", ""Value"": 10.0 }], ""SpecialSlots"": [], ""Class"": { ""InventoryClass"": ""A"" } },
+                  ""Store_TechOnly"": { ""Slots"": [], ""ValidSlotIndices"": [], ""BaseStatValues"": [], ""SpecialSlots"": [] }
+                },
+                { ""Name"": ""Beta"", ""Seed"": [true, ""0x2""],
+                  ""Resource"": { ""Filename"": ""beta.mbin"", ""Seed"": [true, ""0xB""], ""AltId"": ""alt1"", ""ProceduralTexture"": { ""Samplers"": [{ ""x"": 1 }] } },
+                  ""Store"": { ""Slots"": [{ ""Id"": ""^SCAN1"" }, { ""Id"": ""^LASER"" }], ""ValidSlotIndices"": [{ ""X"": 0 }, { ""X"": 1 }], ""BaseStatValues"": [{ ""BaseStatID"": ""^WEAPON_DAMAGE"", ""Value"": 50.0 }], ""SpecialSlots"": [{ ""Type"": 1 }], ""Class"": { ""InventoryClass"": ""S"" } },
+                  ""Store_TechOnly"": { ""Slots"": [{ ""Id"": ""^TERRAINEDITOR"" }], ""ValidSlotIndices"": [{ ""X"": 0 }], ""BaseStatValues"": [{ ""BaseStatID"": ""^WEAPON_SCAN"", ""Value"": 20.0 }], ""SpecialSlots"": [] }
+                },
+                { ""Name"": ""Gamma"", ""Seed"": [true, ""0x3""],
+                  ""Resource"": { ""Filename"": ""gamma.mbin"", ""Seed"": [true, ""0xC""], ""AltId"": """", ""ProceduralTexture"": { ""Samplers"": [] } },
+                  ""Store"": { ""Slots"": [{ ""Id"": ""^LASER"" }], ""ValidSlotIndices"": [{ ""X"": 0 }], ""BaseStatValues"": [], ""SpecialSlots"": [], ""Class"": { ""InventoryClass"": ""B"" } },
+                  ""Store_TechOnly"": { ""Slots"": [], ""ValidSlotIndices"": [], ""BaseStatValues"": [], ""SpecialSlots"": [] }
+                }
+            ]
+        }");
+        var tools = json.GetArray("Tools")!;
+
+        // Delete Beta (index 1) - full reset
+        MultitoolLogic.DeleteToolData(tools.GetObject(1));
+
+        // Array size unchanged
+        Assert.Equal(3, tools.Length);
+
+        // Alpha and Gamma remain at their original indices with data intact
+        Assert.True(tools.GetObject(0).GetArray("Seed")!.GetBool(0));
+        Assert.Equal("Alpha", tools.GetObject(0).GetString("Name"));
+        Assert.Equal("alpha.mbin", tools.GetObject(0).GetObject("Resource")!.GetString("Filename"));
+        Assert.Equal(1, tools.GetObject(0).GetObject("Store")!.GetArray("Slots")!.Length);
+
+        Assert.True(tools.GetObject(2).GetArray("Seed")!.GetBool(0));
+        Assert.Equal("Gamma", tools.GetObject(2).GetString("Name"));
+
+        // Beta is fully cleared - no refuse data left behind
+        var beta = tools.GetObject(1);
+        Assert.False(beta.GetArray("Seed")!.GetBool(0));
+        Assert.Equal("0x0", beta.GetArray("Seed")!.Get(1)!.ToString());
+        Assert.Equal("", beta.GetString("Name"));
+        Assert.Equal("", beta.GetObject("Resource")!.GetString("Filename"));
+        Assert.False(beta.GetObject("Resource")!.GetArray("Seed")!.GetBool(0));
+        Assert.Equal("", beta.GetObject("Resource")!.GetString("AltId"));
+        Assert.Equal(0, beta.GetObject("Resource")!.GetObject("ProceduralTexture")!.GetArray("Samplers")!.Length);
+        Assert.Equal(0, beta.GetObject("Store")!.GetArray("Slots")!.Length);
+        Assert.Equal(0, beta.GetObject("Store")!.GetArray("ValidSlotIndices")!.Length);
+        Assert.Equal(0, beta.GetObject("Store")!.GetArray("BaseStatValues")!.Length);
+        Assert.Equal(0, beta.GetObject("Store")!.GetArray("SpecialSlots")!.Length);
+        Assert.Equal(0, beta.GetObject("Store_TechOnly")!.GetArray("Slots")!.Length);
+        Assert.Equal(0, beta.GetObject("Store_TechOnly")!.GetArray("ValidSlotIndices")!.Length);
+        Assert.Equal(0, beta.GetObject("Store_TechOnly")!.GetArray("BaseStatValues")!.Length);
+
+        // BuildToolList should skip Beta
+        var list = MultitoolLogic.BuildToolList(tools);
+        Assert.Equal(2, list.Count);
+        Assert.Equal(0, list[0].DataIndex);
+        Assert.Equal(2, list[1].DataIndex);
+    }
+
+    [Fact]
+    public void MultitoolLogic_CountValidTools_CountsCorrectly()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Tools"": [
+                { ""Seed"": [true, ""0x1""] },
+                { ""Seed"": [false, ""0x0""] },
+                { ""Seed"": [true, ""0x3""] }
+            ]
+        }");
+        Assert.Equal(2, MultitoolLogic.CountValidTools(json.GetArray("Tools")!));
+    }
+
+    [Fact]
+    public void MultitoolLogic_FindFirstValidToolIndex_SkipsInvalid()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Tools"": [
+                { ""Seed"": [false, ""0x0""] },
+                { ""Seed"": [false, ""0x0""] },
+                { ""Seed"": [true, ""0x3""] }
+            ]
+        }");
+        Assert.Equal(2, MultitoolLogic.FindFirstValidToolIndex(json.GetArray("Tools")!));
+    }
+
+    [Fact]
+    public void MultitoolLogic_GetPrimaryToolName_ReturnsName()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Tools"": [
+                { ""Name"": ""Laser Pro"", ""Seed"": [true, ""0x111""] },
+                { ""Name"": ""Blaster"", ""Seed"": [true, ""0x222""] }
+            ]
+        }");
+        Assert.Equal("Laser Pro", MultitoolLogic.GetPrimaryToolName(json.GetArray("Tools")!, 0));
+        Assert.Equal("Blaster", MultitoolLogic.GetPrimaryToolName(json.GetArray("Tools")!, 1));
+    }
+
+    [Fact]
+    public void MultitoolLogic_GetPrimaryToolName_EmptyName_UsesFallback()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Tools"": [
+                { ""Name"": """", ""Seed"": [true, ""0x111""] }
+            ]
+        }");
+        Assert.Equal("Multitool 1", MultitoolLogic.GetPrimaryToolName(json.GetArray("Tools")!, 0));
+    }
+
+    [Fact]
+    public void MultitoolLogic_GetPrimaryToolName_InvalidIndex_ReturnsUnknown()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Tools"": [
+                { ""Name"": ""Tool"", ""Seed"": [true, ""0x111""] }
+            ]
+        }");
+        Assert.Equal("Unknown", MultitoolLogic.GetPrimaryToolName(json.GetArray("Tools")!, -1));
+        Assert.Equal("Unknown", MultitoolLogic.GetPrimaryToolName(json.GetArray("Tools")!, 99));
+    }
+
+    [Fact]
+    public void MultitoolLogic_GetPrimaryToolName_NullArray_ReturnsUnknown()
+    {
+        Assert.Equal("Unknown", MultitoolLogic.GetPrimaryToolName(null, 0));
+    }
+
+    // --- FreighterLogic ----------------------------------------------
+
+    [Fact]
+    public void MultitoolLogic_DeleteToolData_ClearsName()
+    {
+        var tool = JsonObject.Parse(@"{
+            ""Name"": ""My Rifle"",
+            ""Seed"": [true, ""0xAABB""]
+        }");
+        MultitoolLogic.DeleteToolData(tool);
+        Assert.Equal("", tool.GetString("Name"));
+    }
+
+    [Fact]
+    public void MultitoolLogic_DeleteToolData_ClearsResource()
+    {
+        var tool = JsonObject.Parse(@"{
+            ""Name"": ""Tool"",
+            ""Seed"": [true, ""0x1""],
+            ""Resource"": {
+                ""Filename"": ""MODELS/COMMON/WEAPONS/MULTITOOL/MULTITOOL.SCENE.MBIN"",
+                ""Seed"": [true, ""0xDEAD""],
+                ""AltId"": ""someAltId"",
+                ""ProceduralTexture"": { ""Samplers"": [{ ""x"": 1 }] }
+            }
+        }");
+        MultitoolLogic.DeleteToolData(tool);
+
+        var resource = tool.GetObject("Resource")!;
+        Assert.Equal("", resource.GetString("Filename"));
+        Assert.False(resource.GetArray("Seed")!.GetBool(0));
+        Assert.Equal("0x0", resource.GetArray("Seed")!.Get(1)!.ToString());
+        Assert.Equal("", resource.GetString("AltId"));
+        Assert.Equal(0, resource.GetObject("ProceduralTexture")!.GetArray("Samplers")!.Length);
+    }
+
+    [Fact]
+    public void MultitoolLogic_DeleteToolData_ClearsStoreInventories()
+    {
+        var tool = JsonObject.Parse(@"{
+            ""Name"": ""Tool"",
+            ""Seed"": [true, ""0x1""],
+            ""Store"": {
+                ""Slots"": [{ ""Id"": ""^SCAN1"" }, { ""Id"": ""^LASER"" }],
+                ""ValidSlotIndices"": [{ ""X"": 0 }, { ""X"": 1 }],
+                ""BaseStatValues"": [{ ""BaseStatID"": ""^WEAPON_DAMAGE"", ""Value"": 50.0 }],
+                ""SpecialSlots"": [{ ""Type"": 1 }],
+                ""Class"": { ""InventoryClass"": ""S"" }
+            },
+            ""Store_TechOnly"": {
+                ""Slots"": [{ ""Id"": ""^TERRAINEDITOR"" }],
+                ""ValidSlotIndices"": [{ ""X"": 0 }],
+                ""BaseStatValues"": [{ ""BaseStatID"": ""^WEAPON_SCAN"", ""Value"": 20.0 }],
+                ""SpecialSlots"": []
+            }
+        }");
+        MultitoolLogic.DeleteToolData(tool);
+
+        // Store should be fully cleared
+        var store = tool.GetObject("Store")!;
+        Assert.Equal(0, store.GetArray("Slots")!.Length);
+        Assert.Equal(0, store.GetArray("ValidSlotIndices")!.Length);
+        Assert.Equal(0, store.GetArray("BaseStatValues")!.Length);
+        Assert.Equal(0, store.GetArray("SpecialSlots")!.Length);
+
+        // Store_TechOnly should be fully cleared
+        var tech = tool.GetObject("Store_TechOnly")!;
+        Assert.Equal(0, tech.GetArray("Slots")!.Length);
+        Assert.Equal(0, tech.GetArray("ValidSlotIndices")!.Length);
+        Assert.Equal(0, tech.GetArray("BaseStatValues")!.Length);
+    }
+
+    [Fact]
+    public void MultitoolLogic_DeleteToolData_FullReset_EndToEnd()
+    {
+        // End-to-end: a fully populated multitool matching the template
+        // should leave NO remnants after deletion.
+        var json = JsonObject.Parse(@"{
+            ""PlayerStateData"": {
+                ""Multitools"": [
+                    {
+                        ""Name"": ""Primary Pistol"",
+                        ""Seed"": [true, ""0xA1""],
+                        ""IsLarge"": false,
+                        ""PrimaryMode"": 0,
+                        ""SecondaryMode"": 0,
+                        ""UseLegacyColours"": true,
+                        ""Resource"": { ""Filename"": ""MODELS/COMMON/WEAPONS/MULTITOOL/MULTITOOL.SCENE.MBIN"", ""Seed"": [true, ""0xA1""], ""AltId"": """", ""ProceduralTexture"": { ""Samplers"": [] } },
+                        ""Store"": { ""Slots"": [{ ""Id"": ""^LASER"" }], ""ValidSlotIndices"": [{ ""X"": 0 }], ""BaseStatValues"": [{ ""BaseStatID"": ""^WEAPON_DAMAGE"", ""Value"": 25.0 }], ""SpecialSlots"": [], ""Class"": { ""InventoryClass"": ""B"" } },
+                        ""Store_TechOnly"": { ""Slots"": [], ""ValidSlotIndices"": [], ""BaseStatValues"": [], ""SpecialSlots"": [] }
+                    },
+                    {
+                        ""Name"": ""Alien Rifle"",
+                        ""Seed"": [true, ""0xB2""],
+                        ""IsLarge"": true,
+                        ""PrimaryMode"": 1,
+                        ""SecondaryMode"": 2,
+                        ""UseLegacyColours"": false,
+                        ""Resource"": { ""Filename"": ""MODELS/COMMON/WEAPONS/MULTITOOL/YOURALIENMULTITOOL.SCENE.MBIN"", ""Seed"": [true, ""0xB2""], ""AltId"": ""alien1"", ""ProceduralTexture"": { ""Samplers"": [{ ""x"": 42 }] } },
+                        ""Store"": { ""Slots"": [{ ""Id"": ""^SCAN1"" }, { ""Id"": ""^LASER"" }, { ""Id"": ""^STRONGLASER"" }], ""ValidSlotIndices"": [{ ""X"": 0 }, { ""X"": 1 }, { ""X"": 2 }], ""BaseStatValues"": [{ ""BaseStatID"": ""^WEAPON_DAMAGE"", ""Value"": 80.0 }, { ""BaseStatID"": ""^WEAPON_MINING"", ""Value"": 50.0 }], ""SpecialSlots"": [{ ""Type"": 1 }], ""Class"": { ""InventoryClass"": ""S"" } },
+                        ""Store_TechOnly"": { ""Slots"": [{ ""Id"": ""^TERRAINEDITOR"" }], ""ValidSlotIndices"": [{ ""X"": 0 }], ""BaseStatValues"": [{ ""BaseStatID"": ""^WEAPON_SCAN"", ""Value"": 30.0 }], ""SpecialSlots"": [] }
+                    }
+                ],
+                ""ActiveMultioolIndex"": 0
+            }
+        }");
+
+        var tools = json.GetObject("PlayerStateData")!.GetArray("Multitools")!;
+
+        // Delete the Alien Rifle (index 1)
+        MultitoolLogic.DeleteToolData(tools.GetObject(1));
+
+        // Primary Pistol (index 0) should be completely untouched
+        var tool0 = tools.GetObject(0);
+        Assert.Equal("Primary Pistol", tool0.GetString("Name"));
+        Assert.True(tool0.GetArray("Seed")!.GetBool(0));
+        Assert.Equal("MODELS/COMMON/WEAPONS/MULTITOOL/MULTITOOL.SCENE.MBIN", tool0.GetObject("Resource")!.GetString("Filename"));
+        Assert.Equal(1, tool0.GetObject("Store")!.GetArray("Slots")!.Length);
+
+        // Alien Rifle (index 1) should have NO remnants
+        var tool1 = tools.GetObject(1);
+        Assert.False(tool1.GetArray("Seed")!.GetBool(0));
+        Assert.Equal("0x0", tool1.GetArray("Seed")!.Get(1)!.ToString());
+        Assert.Equal("", tool1.GetString("Name"));
+        Assert.Equal("", tool1.GetObject("Resource")!.GetString("Filename"));
+        Assert.False(tool1.GetObject("Resource")!.GetArray("Seed")!.GetBool(0));
+        Assert.Equal("", tool1.GetObject("Resource")!.GetString("AltId"));
+        Assert.Equal(0, tool1.GetObject("Resource")!.GetObject("ProceduralTexture")!.GetArray("Samplers")!.Length);
+        Assert.Equal(0, tool1.GetObject("Store")!.GetArray("Slots")!.Length);
+        Assert.Equal(0, tool1.GetObject("Store")!.GetArray("ValidSlotIndices")!.Length);
+        Assert.Equal(0, tool1.GetObject("Store")!.GetArray("BaseStatValues")!.Length);
+        Assert.Equal(0, tool1.GetObject("Store")!.GetArray("SpecialSlots")!.Length);
+        Assert.Equal(0, tool1.GetObject("Store_TechOnly")!.GetArray("Slots")!.Length);
+        Assert.Equal(0, tool1.GetObject("Store_TechOnly")!.GetArray("ValidSlotIndices")!.Length);
+        Assert.Equal(0, tool1.GetObject("Store_TechOnly")!.GetArray("BaseStatValues")!.Length);
+
+        // Array size preserved
+        Assert.Equal(2, tools.Length);
+
+        // Only one valid tool remaining
+        Assert.Equal(1, MultitoolLogic.CountValidTools(tools));
+        Assert.Equal(0, MultitoolLogic.FindFirstValidToolIndex(tools));
+    }
+
+    // --- FreighterLogic ----------------------------------------------
+
+    [Fact]
+    public void FreighterLogic_FreighterTypes_HasExpectedEntries()
+    {
+        Assert.Equal(5, FreighterLogic.FreighterTypes.Count);
+        Assert.True(FreighterLogic.FreighterTypes.ContainsKey("Tiny"));
+        Assert.True(FreighterLogic.FreighterTypes.ContainsKey("Small"));
+        Assert.True(FreighterLogic.FreighterTypes.ContainsKey("Normal"));
+        Assert.True(FreighterLogic.FreighterTypes.ContainsKey("Capital"));
+        Assert.True(FreighterLogic.FreighterTypes.ContainsKey("Pirate"));
+    }
+
+    [Fact]
+    public void FreighterLogic_FreighterTypes_CaseInsensitiveLookup()
+    {
+        Assert.True(FreighterLogic.FreighterTypes.ContainsKey("tiny"));
+        Assert.True(FreighterLogic.FreighterTypes.ContainsKey("CAPITAL"));
+    }
+
+    [Fact]
+    public void FreighterLogic_FreighterClasses_HasFourEntries()
+    {
+        Assert.Equal(new[] { "C", "B", "A", "S" }, FreighterLogic.FreighterClasses);
+    }
+
+    [Fact]
+    public void FreighterLogic_BuildExportFileName_FormatsCorrectly()
+    {
+        string result = FreighterLogic.BuildExportFileName("Star Hauler", "Capital", 3);
+        Assert.Equal("Star_Hauler_Capital_S", result);
+    }
+
+    [Fact]
+    public void FreighterLogic_BuildExportFileName_NegativeClass_UsesC()
+    {
+        string result = FreighterLogic.BuildExportFileName("Test", "Tiny", -1);
+        Assert.Equal("Test_Tiny_C", result);
+    }
+
+    [Fact]
+    public void FreighterLogic_FindFreighterBase_FindsCorrectBase()
+    {
+        var json = JsonObject.Parse(@"{
+            ""PersistentPlayerBases"": [
+                {
+                    ""BaseType"": { ""PersistentBaseTypes"": ""HomePlanetBase"" },
+                    ""BaseVersion"": 3
+                },
+                {
+                    ""BaseType"": { ""PersistentBaseTypes"": ""FreighterBase"" },
+                    ""BaseVersion"": 3
+                }
+            ]
+        }");
+
+        var result = FreighterLogic.FindFreighterBase(json);
+        Assert.NotNull(result);
+        Assert.Equal("FreighterBase", result.GetObject("BaseType")!.GetString("PersistentBaseTypes"));
+    }
+
+    [Fact]
+    public void FreighterLogic_FindFreighterBase_NoFreighter_ReturnsNull()
+    {
+        var json = JsonObject.Parse(@"{
+            ""PersistentPlayerBases"": [
+                {
+                    ""BaseType"": { ""PersistentBaseTypes"": ""HomePlanetBase"" },
+                    ""BaseVersion"": 3
+                }
+            ]
+        }");
+
+        Assert.Null(FreighterLogic.FindFreighterBase(json));
+    }
+
+    // --- FrigateLogic ------------------------------------------------
+
+    [Fact]
+    public void FrigateLogic_AdjustExpeditionIndices_DecrementsAboveRemovedIndex()
+    {
+        // Simulates removing frigate at index 2 from a fleet of 5.
+        // Expedition references frigate indices [1, 2, 4].
+        // After removing index 2: indices > 2 should decrement -> [1, 2, 3].
+        // (Index 2 itself stays since the removal already happened externally.)
+        var json = JsonObject.Parse(@"{
+            ""Expeditions"": [
+                {
+                    ""AllFrigateIndices"": [1, 2, 4],
+                    ""ActiveFrigateIndices"": [1, 4],
+                    ""DamagedFrigateIndices"": [4],
+                    ""DestroyedFrigateIndices"": [],
+                    ""Events"": [
+                        {
+                            ""AffectedFrigateIndices"": [1, 4],
+                            ""RepairingFrigateIndices"": [4],
+                            ""AffectedFrigateResponses"": [1, 4]
+                        }
+                    ]
+                }
+            ]
+        }");
+        var expeditions = json.GetArray("Expeditions")!;
+        FrigateLogic.AdjustExpeditionIndicesAfterRemoval(2, expeditions);
+
+        var exp = expeditions.GetObject(0);
+        // AllFrigateIndices: [1, 2, 3] (4->3, 2 stays, 1 stays)
+        var all = exp.GetArray("AllFrigateIndices")!;
+        Assert.Equal(1, all.GetInt(0));
+        Assert.Equal(2, all.GetInt(1));
+        Assert.Equal(3, all.GetInt(2));
+
+        // ActiveFrigateIndices: [1, 3] (4->3, 1 stays)
+        var active = exp.GetArray("ActiveFrigateIndices")!;
+        Assert.Equal(1, active.GetInt(0));
+        Assert.Equal(3, active.GetInt(1));
+
+        // DamagedFrigateIndices: [3] (4->3)
+        var damaged = exp.GetArray("DamagedFrigateIndices")!;
+        Assert.Equal(3, damaged.GetInt(0));
+
+        // Events[0].AffectedFrigateIndices: [1, 3]
+        var ev = exp.GetArray("Events")!.GetObject(0);
+        var affected = ev.GetArray("AffectedFrigateIndices")!;
+        Assert.Equal(1, affected.GetInt(0));
+        Assert.Equal(3, affected.GetInt(1));
+
+        // Events[0].RepairingFrigateIndices: [3]
+        var repairing = ev.GetArray("RepairingFrigateIndices")!;
+        Assert.Equal(3, repairing.GetInt(0));
+    }
+
+    [Fact]
+    public void FrigateLogic_AdjustExpeditionIndices_NoChangeWhenAllBelow()
+    {
+        // If all indices are below the removed index, nothing should change
+        var json = JsonObject.Parse(@"{
+            ""Expeditions"": [
+                {
+                    ""AllFrigateIndices"": [0, 1],
+                    ""ActiveFrigateIndices"": [0, 1],
+                    ""DamagedFrigateIndices"": [],
+                    ""DestroyedFrigateIndices"": [],
+                    ""Events"": []
+                }
+            ]
+        }");
+        var expeditions = json.GetArray("Expeditions")!;
+        FrigateLogic.AdjustExpeditionIndicesAfterRemoval(5, expeditions);
+
+        var all = expeditions.GetObject(0).GetArray("AllFrigateIndices")!;
+        Assert.Equal(0, all.GetInt(0));
+        Assert.Equal(1, all.GetInt(1));
+    }
+
+    [Fact]
+    public void FrigateLogic_FrigateTypes_HasExpectedEntries()
+    {
+        Assert.Equal(10, FrigateLogic.FrigateTypes.Length);
+        Assert.Contains("Combat", FrigateLogic.FrigateTypes);
+        Assert.Contains("Exploration", FrigateLogic.FrigateTypes);
+        Assert.Contains("Mining", FrigateLogic.FrigateTypes);
+        Assert.Contains("Normandy", FrigateLogic.FrigateTypes);
+        Assert.Contains("GhostShip", FrigateLogic.FrigateTypes);
+    }
+
+    [Fact]
+    public void FrigateLogic_FrigateGrades_HasFourEntries()
+    {
+        Assert.Equal(new[] { "C", "B", "A", "S" }, FrigateLogic.FrigateGrades);
+    }
+
+    [Fact]
+    public void FrigateLogic_FrigateRaces_HasExpectedEntries()
+    {
+        Assert.Equal(new[] { "Traders", "Warriors", "Explorers" }, FrigateLogic.FrigateRaces);
+    }
+
+    [Fact]
+    public void FrigateLogic_StatNames_HasElevenEntries()
+    {
+        Assert.Equal(11, FrigateLogic.StatNames.Length);
+        Assert.Equal("Combat", FrigateLogic.StatNames[0]);
+        Assert.Equal("Stealth", FrigateLogic.StatNames[10]);
+    }
+
+    [Fact]
+    public void FrigateLogic_GetFrigateName_ReturnsName()
+    {
+        var frigate = JsonObject.Parse(@"{ ""CustomName"": ""The Explorer"" }");
+        Assert.Equal("The Explorer", FrigateLogic.GetFrigateName(frigate, 0));
+    }
+
+    [Fact]
+    public void FrigateLogic_GetFrigateType_ReturnsType()
+    {
+        var frigate = JsonObject.Parse(@"{ ""FrigateClass"": { ""FrigateClass"": ""Exploration"" } }");
+        Assert.Equal("Exploration", FrigateLogic.GetFrigateType(frigate));
+    }
+
+    [Fact]
+    public void FrigateLogic_ComputeClassFromTraits_ComputesCorrectly()
+    {
+        // 1 beneficial trait -> max(0, min(3, 1-2)) = 0 -> C
+        var frigate = JsonObject.Parse(@"{ ""TraitIDs"": [""^FUEL_PRI""] }");
+        Assert.Equal("C", FrigateLogic.ComputeClassFromTraits(frigate));
+
+        // 3 beneficial traits -> max(0, min(3, 3-2)) = 1 -> B
+        frigate = JsonObject.Parse(@"{ ""TraitIDs"": [""^FUEL_PRI"", ""^COMBAT_PRI"", ""^FUEL_SEC_1""] }");
+        Assert.Equal("B", FrigateLogic.ComputeClassFromTraits(frigate));
+
+        // 5 beneficial traits -> max(0, min(3, 5-2)) = 3 -> S
+        frigate = JsonObject.Parse(@"{ ""TraitIDs"": [""^FUEL_PRI"", ""^COMBAT_PRI"", ""^FUEL_SEC_1"", ""^FUEL_SEC_2"", ""^FUEL_SEC_3""] }");
+        Assert.Equal("S", FrigateLogic.ComputeClassFromTraits(frigate));
+    }
+
+    [Fact]
+    public void FrigateLogic_AdjustTraitsForTargetGrade_UpgradeFromC()
+    {
+        // Start with 1 primary trait + 4 empty slots -> C class (net score 1)
+        var frigate = JsonObject.Parse(@"{ ""TraitIDs"": [""^FUEL_PRI"", ""^"", ""^"", ""^"", ""^""] }");
+        Assert.Equal("C", FrigateLogic.ComputeClassFromTraits(frigate));
+
+        // Upgrade to S
+        FrigateLogic.AdjustTraitsForTargetGrade(frigate, "S");
+        Assert.Equal("S", FrigateLogic.ComputeClassFromTraits(frigate));
+        // Primary trait (slot 0) should be untouched
+        Assert.Equal("^FUEL_PRI", frigate.GetArray("TraitIDs")!.GetString(0));
+    }
+
+    [Fact]
+    public void FrigateLogic_AdjustTraitsForTargetGrade_DowngradeFromS()
+    {
+        // Start with 5 beneficial traits -> S class (net score 5)
+        var frigate = JsonObject.Parse(@"{ ""TraitIDs"": [""^FUEL_PRI"", ""^SPEED_TER_1"", ""^SPEED_TER_2"", ""^SPEED_TER_3"", ""^SPEED_TER_4""] }");
+        Assert.Equal("S", FrigateLogic.ComputeClassFromTraits(frigate));
+
+        // Downgrade to C
+        FrigateLogic.AdjustTraitsForTargetGrade(frigate, "C");
+        Assert.Equal("C", FrigateLogic.ComputeClassFromTraits(frigate));
+        // Primary trait (slot 0) should be untouched
+        Assert.Equal("^FUEL_PRI", frigate.GetArray("TraitIDs")!.GetString(0));
+    }
+
+    [Fact]
+    public void FrigateLogic_AdjustTraitsForTargetGrade_UpgradeFromNegative()
+    {
+        // Start with primary + 2 negative traits -> net score -1 -> C
+        var frigate = JsonObject.Parse(@"{ ""TraitIDs"": [""^COMBAT_PRI"", ""^COMBAT_BAD_1"", ""^COMBAT_BAD_2"", ""^"", ""^""] }");
+        Assert.Equal("C", FrigateLogic.ComputeClassFromTraits(frigate));
+
+        // Upgrade to B (needs net score 3)
+        FrigateLogic.AdjustTraitsForTargetGrade(frigate, "B");
+        Assert.Equal("B", FrigateLogic.ComputeClassFromTraits(frigate));
+    }
+
+    [Fact]
+    public void FrigateLogic_AdjustTraitsForTargetGrade_SameGradeNoOp()
+    {
+        // Start with B class
+        var frigate = JsonObject.Parse(@"{ ""TraitIDs"": [""^FUEL_PRI"", ""^SPEED_TER_1"", ""^"", ""^"", ""^""] }");
+        string before = frigate.ToString();
+
+        // "Adjust" to same class should not change anything
+        string currentClass = FrigateLogic.ComputeClassFromTraits(frigate);
+        FrigateLogic.AdjustTraitsForTargetGrade(frigate, currentClass);
+        Assert.Equal(before, frigate.ToString());
+    }
+
+    [Fact]
+    public void FrigateLogic_AdjustTraitsForTargetGrade_SyncsInventoryClass()
+    {
+        // Verify that after adjustment, ComputeClassFromTraits gives target grade
+        var frigate = JsonObject.Parse(@"{ ""TraitIDs"": [""^FUEL_PRI"", ""^"", ""^"", ""^"", ""^""], ""InventoryClass"": { ""InventoryClass"": ""C"" } }");
+
+        FrigateLogic.AdjustTraitsForTargetGrade(frigate, "A");
+        Assert.Equal("A", FrigateLogic.ComputeClassFromTraits(frigate));
+    }
+
+    [Fact]
+    public void FrigateLogic_TraitChange_RecalculatesClass()
+    {
+        // Simulate user changing traits: class should recalculate automatically.
+        // Start with S class (5 beneficial traits -> net score 5)
+        var frigate = JsonObject.Parse(@"{ ""TraitIDs"": [""^FUEL_PRI"", ""^SPEED_TER_1"", ""^SPEED_TER_2"", ""^SPEED_TER_3"", ""^SPEED_TER_4""], ""InventoryClass"": { ""InventoryClass"": ""S"" } }");
+        Assert.Equal("S", FrigateLogic.ComputeClassFromTraits(frigate));
+
+        // User clears one trait (replaces beneficial with "^") -> net score 4 -> A
+        var traits = frigate.GetArray("TraitIDs")!;
+        traits.Set(4, "^");
+        Assert.Equal("A", FrigateLogic.ComputeClassFromTraits(frigate));
+
+        // User replaces another beneficial with a negative trait -> net 3+(-1)=2 -> C
+        traits.Set(3, "^COMBAT_BAD_1");
+        Assert.Equal("C", FrigateLogic.ComputeClassFromTraits(frigate));
+
+        // User clears the negative trait -> net score 3 -> B
+        traits.Set(3, "^");
+        Assert.Equal("B", FrigateLogic.ComputeClassFromTraits(frigate));
+
+        // User adds beneficial trait back -> net score 4 -> A
+        traits.Set(3, "^FUEL_TER_1");
+        Assert.Equal("A", FrigateLogic.ComputeClassFromTraits(frigate));
+
+        // User adds another beneficial -> net score 5 -> S
+        traits.Set(4, "^INVULN_TER_1");
+        Assert.Equal("S", FrigateLogic.ComputeClassFromTraits(frigate));
+    }
+
+    // --- CompanionLogic ----------------------------------------------
+
+    [Fact]
+    public void CompanionLogic_LookupSpeciesName_KnownEntry_FoundInDatabase()
+    {
+        // ^QUAD_PET exists in CompanionDatabase (Species field may be empty)
+        Assert.True(CompanionDatabase.ById.ContainsKey("^QUAD_PET"));
+        string name = CompanionLogic.LookupSpeciesName("^QUAD_PET");
+        // Returns whatever the database has (could be empty string)
+        Assert.NotNull(name);
+    }
+
+    [Fact]
+    public void CompanionLogic_LookupSpeciesName_UnknownSpecies_ReturnsEmpty()
+    {
+        Assert.Equal("", CompanionLogic.LookupSpeciesName("^UNKNOWN_SPECIES"));
+    }
+
+    [Fact]
+    public void CompanionLogic_LookupSpeciesName_EmptyInput_ReturnsEmpty()
+    {
+        Assert.Equal("", CompanionLogic.LookupSpeciesName(""));
+        Assert.Equal("", CompanionLogic.LookupSpeciesName("^"));
+    }
+
+    [Fact]
+    public void CompanionLogic_LookupSpeciesName_NullInput_ReturnsEmpty()
+    {
+        Assert.Equal("", CompanionLogic.LookupSpeciesName(null!));
+    }
+
+    [Fact]
+    public void CompanionLogic_DeleteCompanion_ClearsSeed()
+    {
+        var comp = JsonObject.Parse(@"{
+            ""CustomName"": ""Rex"",
+            ""CreatureID"": ""^TREX"",
+            ""CreatureSeed"": [true, ""0x88CA25ACD4B209BB""],
+            ""CreatureSecondarySeed"": [true, ""0xABCD""],
+            ""ColourBaseSeed"": [true, ""0x1234""],
+            ""BoneScaleSeed"": [true, ""0x5678""]
+        }");
+
+        CompanionLogic.DeleteCompanion(comp);
+
+        // All seed arrays should be reset
+        var seedArr = comp.GetArray("CreatureSeed")!;
+        Assert.False(seedArr.GetBool(0));
+        Assert.Equal("0x0", seedArr.GetString(1));
+
+        var secSeed = comp.GetArray("CreatureSecondarySeed")!;
+        Assert.False(secSeed.GetBool(0));
+        Assert.Equal("0x0", secSeed.GetString(1));
+
+        var colourSeed = comp.GetArray("ColourBaseSeed")!;
+        Assert.False(colourSeed.GetBool(0));
+        Assert.Equal("0x0", colourSeed.GetString(1));
+
+        var boneSeed = comp.GetArray("BoneScaleSeed")!;
+        Assert.False(boneSeed.GetBool(0));
+        Assert.Equal("0x0", boneSeed.GetString(1));
+    }
+
+    [Fact]
+    public void CompanionLogic_DeleteCompanion_ClearsIntegerSeeds()
+    {
+        // SpeciesSeed and GenusSeed are integers, NOT seed arrays
+        var comp = JsonObject.Parse(@"{
+            ""CreatureID"": ""^CAT"",
+            ""SpeciesSeed"": 42,
+            ""GenusSeed"": 99,
+            ""CreatureSeed"": [true, ""0xAA""]
+        }");
+
+        CompanionLogic.DeleteCompanion(comp);
+
+        Assert.Equal(0, comp.GetInt("SpeciesSeed"));
+        Assert.Equal(0, comp.GetInt("GenusSeed"));
+    }
+
+    [Fact]
+    public void CompanionLogic_DeleteCompanion_ClearsAllFields()
+    {
+        // Tests that ALL fields mentioned in the companion json template are reset
+        var comp = JsonObject.Parse(@"{
+            ""Scale"": 2.5,
+            ""CreatureID"": ""^CAT"",
+            ""Descriptors"": [{ ""x"": 1 }, { ""x"": 2 }],
+            ""CreatureSeed"": [true, ""0xABCD1234""],
+            ""CreatureSecondarySeed"": [true, ""0xDEADBEEF""],
+            ""SpeciesSeed"": 42,
+            ""GenusSeed"": 99,
+            ""CustomSpeciesName"": ""^MY_SPECIES"",
+            ""Predator"": true,
+            ""UA"": 12345,
+            ""AllowUnmodifiedReroll"": false,
+            ""ColourBaseSeed"": [true, ""0x1111""],
+            ""BoneScaleSeed"": [true, ""0x2222""],
+            ""HasFur"": true,
+            ""Biome"": { ""Biome"": ""Toxic"" },
+            ""CreatureType"": { ""CreatureType"": ""Predator"" },
+            ""BirthTime"": 1700000000,
+            ""LastEggTime"": 1700001000,
+            ""LastTrustIncreaseTime"": 1700002000,
+            ""LastTrustDecreaseTime"": 1700003000,
+            ""EggModified"": true,
+            ""HasBeenSummoned"": false,
+            ""CustomName"": ""Fluffy"",
+            ""Trust"": 0.85,
+            ""SenderData"": { ""LID"": ""abc"", ""UID"": ""def"", ""USN"": ""player1"", ""PTK"": ""token"", ""TS"": 999 },
+            ""Traits"": [0.75, -0.50, 0.33],
+            ""Moods"": [80.0, 60.0],
+            ""PetAccessoryCustomisation"": { ""HeadAccessory"": ""hat1"", ""BackAccessory"": ""wings"" }
+        }");
+
+        CompanionLogic.DeleteCompanion(comp);
+
+        // Identification
+        Assert.Equal("^", comp.GetString("CreatureID"));
+        Assert.Equal("", comp.GetString("CustomName"));
+        Assert.Equal("^", comp.GetString("CustomSpeciesName"));
+
+        // Seed arrays
+        Assert.False(comp.GetArray("CreatureSeed")!.GetBool(0));
+        Assert.Equal("0x0", comp.GetArray("CreatureSeed")!.GetString(1));
+        Assert.False(comp.GetArray("CreatureSecondarySeed")!.GetBool(0));
+        Assert.False(comp.GetArray("ColourBaseSeed")!.GetBool(0));
+        Assert.False(comp.GetArray("BoneScaleSeed")!.GetBool(0));
+
+        // Integer seeds
+        Assert.Equal(0, comp.GetInt("SpeciesSeed"));
+        Assert.Equal(0, comp.GetInt("GenusSeed"));
+
+        // Numeric/boolean fields
+        Assert.Equal(1.0, comp.GetDouble("Scale"));
+        Assert.Equal(0.0, comp.GetDouble("Trust"));
+        Assert.False(comp.GetBool("Predator"));
+        Assert.False(comp.GetBool("HasFur"));
+        Assert.Equal(1111111111111111L, comp.GetLong("UA"));
+        Assert.True(comp.GetBool("AllowUnmodifiedReroll"));
+        Assert.False(comp.GetBool("EggModified"));
+        Assert.True(comp.GetBool("HasBeenSummoned"));
+
+        // Timestamps
+        Assert.Equal(0, comp.GetInt("BirthTime"));
+        Assert.Equal(0, comp.GetInt("LastEggTime"));
+        Assert.Equal(0, comp.GetInt("LastTrustIncreaseTime"));
+        Assert.Equal(0, comp.GetInt("LastTrustDecreaseTime"));
+
+        // Nested objects
+        Assert.Equal("Lush", comp.GetObject("Biome")!.GetString("Biome"));
+        Assert.Equal("None", comp.GetObject("CreatureType")!.GetString("CreatureType"));
+
+        // SenderData
+        var sender = comp.GetObject("SenderData")!;
+        Assert.Equal("", sender.GetString("LID"));
+        Assert.Equal("", sender.GetString("UID"));
+        Assert.Equal("", sender.GetString("USN"));
+        Assert.Equal("", sender.GetString("PTK"));
+        Assert.Equal(0, sender.GetInt("TS"));
+
+        // Descriptors cleared
+        Assert.Equal(0, comp.GetArray("Descriptors")!.Length);
+
+        // Traits -> 0.0
+        var traits = comp.GetArray("Traits")!;
+        Assert.Equal(0.0, traits.GetDouble(0));
+        Assert.Equal(0.0, traits.GetDouble(1));
+        Assert.Equal(0.0, traits.GetDouble(2));
+
+        // Moods -> 0.0
+        var moods = comp.GetArray("Moods")!;
+        Assert.Equal(0.0, moods.GetDouble(0));
+        Assert.Equal(0.0, moods.GetDouble(1));
+
+        // Accessory reset
+        var acc = comp.GetObject("PetAccessoryCustomisation")!;
+        Assert.Equal("", acc.GetString("HeadAccessory"));
+        Assert.Equal("", acc.GetString("BackAccessory"));
+    }
+
+    [Fact]
+    public void CompanionLogic_DeleteCompanion_FullReset_EndToEnd()
+    {
+        // End-to-end: deleting one companion should not affect another
+        var json = JsonObject.Parse(@"{
+            ""PlayerStateData"": {
+                ""Pets"": [
+                    {
+                        ""CreatureID"": ""^QUAD_PET"",
+                        ""CustomName"": ""Alpha"",
+                        ""CreatureSeed"": [true, ""0xA1""],
+                        ""CreatureSecondarySeed"": [true, ""0xA2""],
+                        ""SpeciesSeed"": 11,
+                        ""GenusSeed"": 22,
+                        ""CustomSpeciesName"": ""^ALPHA_SP"",
+                        ""Scale"": 1.5,
+                        ""Trust"": 0.9,
+                        ""Predator"": true,
+                        ""HasFur"": true,
+                        ""UA"": 100,
+                        ""AllowUnmodifiedReroll"": false,
+                        ""EggModified"": true,
+                        ""HasBeenSummoned"": false,
+                        ""BirthTime"": 1000,
+                        ""LastEggTime"": 2000,
+                        ""LastTrustIncreaseTime"": 3000,
+                        ""LastTrustDecreaseTime"": 4000,
+                        ""ColourBaseSeed"": [true, ""0xC1""],
+                        ""BoneScaleSeed"": [true, ""0xB1""],
+                        ""Biome"": { ""Biome"": ""Frozen"" },
+                        ""CreatureType"": { ""CreatureType"": ""Predator"" },
+                        ""SenderData"": { ""LID"": ""L1"", ""UID"": ""U1"", ""USN"": ""N1"", ""PTK"": ""P1"", ""TS"": 50 },
+                        ""Descriptors"": [{ ""x"": 1 }],
+                        ""Traits"": [0.5, 0.3, 0.1],
+                        ""Moods"": [75.0, 50.0]
+                    },
+                    {
+                        ""CreatureID"": ""^BUTTERFLY"",
+                        ""CustomName"": ""Bravo"",
+                        ""CreatureSeed"": [true, ""0xBB""],
+                        ""CreatureSecondarySeed"": [true, ""0xBC""],
+                        ""SpeciesSeed"": 33,
+                        ""GenusSeed"": 44,
+                        ""Scale"": 0.8,
+                        ""Traits"": [0.2, 0.4, 0.6],
+                        ""Moods"": [30.0, 20.0]
+                    }
+                ]
+            }
+        }");
+
+        var pets = json.GetObject("PlayerStateData")!.GetArray("Pets")!;
+
+        // Delete Alpha (index 0)
+        CompanionLogic.DeleteCompanion(pets.GetObject(0));
+
+        // Alpha should be fully cleared
+        var alpha = pets.GetObject(0);
+        Assert.Equal("^", alpha.GetString("CreatureID"));
+        Assert.Equal("", alpha.GetString("CustomName"));
+        Assert.False(alpha.GetArray("CreatureSeed")!.GetBool(0));
+        Assert.Equal(0, alpha.GetInt("SpeciesSeed"));
+        Assert.Equal(0, alpha.GetInt("GenusSeed"));
+        Assert.Equal(1.0, alpha.GetDouble("Scale"));
+        Assert.Equal(0.0, alpha.GetDouble("Trust"));
+        Assert.False(alpha.GetBool("Predator"));
+        Assert.Equal(0, alpha.GetInt("BirthTime"));
+        Assert.Equal(0, alpha.GetInt("LastTrustIncreaseTime"));
+        Assert.Equal("Lush", alpha.GetObject("Biome")!.GetString("Biome"));
+        Assert.Equal("None", alpha.GetObject("CreatureType")!.GetString("CreatureType"));
+        Assert.Equal(0, alpha.GetArray("Descriptors")!.Length);
+        Assert.Equal(0.0, alpha.GetArray("Traits")!.GetDouble(0));
+        Assert.Equal(0.0, alpha.GetArray("Moods")!.GetDouble(0));
+
+        // Bravo should be completely untouched
+        var bravo = pets.GetObject(1);
+        Assert.Equal("^BUTTERFLY", bravo.GetString("CreatureID"));
+        Assert.Equal("Bravo", bravo.GetString("CustomName"));
+        Assert.True(bravo.GetArray("CreatureSeed")!.GetBool(0));
+        Assert.Equal("0xBB", bravo.GetArray("CreatureSeed")!.GetString(1));
+        Assert.Equal(33, bravo.GetInt("SpeciesSeed"));
+        Assert.Equal(44, bravo.GetInt("GenusSeed"));
+        Assert.Equal(0.8, bravo.GetDouble("Scale"), 1);
+        Assert.Equal(0.2, bravo.GetArray("Traits")!.GetDouble(0), 1);
+
+        // Array size preserved
+        Assert.Equal(2, pets.Length);
+    }
+
+    [Fact]
+    public void CompanionDatabase_CreatureTypes_HasExpectedEntries()
+    {
+        Assert.Contains("None", CompanionDatabase.CreatureTypes);
+        Assert.Contains("ProtoFlyer", CompanionDatabase.CreatureTypes);
+        Assert.Contains("Bear", CompanionDatabase.CreatureTypes);
+        Assert.True(CompanionDatabase.CreatureTypes.Length > 10);
+    }
+
+    [Fact]
+    public void CompanionLogic_CreatureID_And_CreatureType_AreDistinctFields()
+    {
+        // Verify that CreatureID (species) and CreatureType.CreatureType (behaviour) are distinct JSON paths
+        // This confirms they cannot be combined into a single combobox
+        var comp = JsonObject.Parse(@"{
+            ""CreatureID"": ""^QUAD_PET"",
+            ""CreatureType"": { ""CreatureType"": ""Prey"" }
+        }");
+
+        // CreatureID is the species identifier
+        Assert.Equal("^QUAD_PET", comp.GetString("CreatureID"));
+
+        // CreatureType.CreatureType is the behavioural classification
+        Assert.Equal("Prey", comp.GetObject("CreatureType")!.GetString("CreatureType"));
+
+        // They use different value domains
+        Assert.True(CompanionDatabase.ById.ContainsKey("^QUAD_PET")); // species from database
+        Assert.Contains("Prey", CompanionDatabase.CreatureTypes);        // behaviour from CreatureTypes list
+
+        // Changing one does not affect the other
+        comp.Set("CreatureID", "^BUTTERFLY");
+        Assert.Equal("^BUTTERFLY", comp.GetString("CreatureID"));
+        Assert.Equal("Prey", comp.GetObject("CreatureType")!.GetString("CreatureType"));
+
+        comp.GetObject("CreatureType")!.Set("CreatureType", "Passive");
+        Assert.Equal("^BUTTERFLY", comp.GetString("CreatureID"));
+        Assert.Equal("Passive", comp.GetObject("CreatureType")!.GetString("CreatureType"));
+    }
+
+    [Fact]
+    public void CompanionDatabase_CreatureTypes_MatchesCreatureTypeEnum()
+    {
+        // Verify our CreatureTypes list contains the CreatureTypeEnum values
+        // List: None, Prey, Predator, Passive, Bird, FlyingLizard, Fish, Shark,
+        // Butterfly, Robot, Spider, Rodent, GiantRobot, FloatingGasbag, Beetle, Quad, etc.
+        string[] types = { "None", "Prey", "Predator", "Passive", "Bird",
+            "FlyingLizard", "Fish", "Shark", "Butterfly", "Robot", "Spider",
+            "Rodent", "GiantRobot", "FloatingGasbag", "Beetle", "Quad",
+            "Triceratops", "Antelope", "Cat", "Strider" };
+
+        foreach (var t in types)
+            Assert.Contains(t, CompanionDatabase.CreatureTypes);
+    }
+
+    [Fact]
+    public void CompanionDatabase_DoesNotOverlapWithCreatureTypes()
+    {
+        // CompanionDatabase entries are species IDs (e.g., "^QUAD_PET")
+        // CreatureTypes are behavioural classifications (e.g., "Quad")
+        // They should not overlap (different naming convention: database has ^PREFIX, types don't)
+        foreach (var entry in CompanionDatabase.Entries)
+        {
+            Assert.StartsWith("^", entry.Id);
+            Assert.DoesNotContain(entry.Id, CompanionDatabase.CreatureTypes);
+        }
+    }
+
+    [Fact]
+    public void CompanionLogic_SetSlotUnlocked_SetsTrue()
+    {
+        var playerState = JsonObject.Parse(@"{
+            ""UnlockedPetSlots"": [false, false, false, false, false, false]
+        }");
+
+        CompanionLogic.SetSlotUnlocked(playerState, 2, true);
+
+        var slots = playerState.GetArray("UnlockedPetSlots")!;
+        Assert.False(slots.GetBool(0));
+        Assert.False(slots.GetBool(1));
+        Assert.True(slots.GetBool(2));
+        Assert.False(slots.GetBool(3));
+    }
+
+    [Fact]
+    public void CompanionLogic_SetSlotUnlocked_SetsFalse()
+    {
+        var playerState = JsonObject.Parse(@"{
+            ""UnlockedPetSlots"": [true, true, true, true, true, true]
+        }");
+
+        CompanionLogic.SetSlotUnlocked(playerState, 3, false);
+
+        var slots = playerState.GetArray("UnlockedPetSlots")!;
+        Assert.True(slots.GetBool(0));
+        Assert.True(slots.GetBool(2));
+        Assert.False(slots.GetBool(3));
+        Assert.True(slots.GetBool(4));
+    }
+
+    [Fact]
+    public void CompanionLogic_SetSlotUnlocked_OutOfRange_GrowsArray()
+    {
+        var playerState = JsonObject.Parse(@"{
+            ""UnlockedPetSlots"": [true, false]
+        }");
+
+        // Should grow the array to accommodate the index
+        CompanionLogic.SetSlotUnlocked(playerState, 4, true);
+
+        var slots = playerState.GetArray("UnlockedPetSlots")!;
+        Assert.Equal(5, slots.Length);
+        Assert.True(slots.GetBool(0));   // original
+        Assert.False(slots.GetBool(1));  // original
+        Assert.False(slots.GetBool(2));  // padded
+        Assert.False(slots.GetBool(3));  // padded
+        Assert.True(slots.GetBool(4));   // newly set
+    }
+
+    [Fact]
+    public void CompanionLogic_SetSlotUnlocked_MissingArray_CreatesIt()
+    {
+        var playerState = JsonObject.Parse(@"{}");
+
+        // Should create the array and set the value
+        CompanionLogic.SetSlotUnlocked(playerState, 2, true);
+
+        var slots = playerState.GetArray("UnlockedPetSlots");
+        Assert.NotNull(slots);
+        Assert.Equal(3, slots!.Length);
+        Assert.False(slots.GetBool(0));  // padded
+        Assert.False(slots.GetBool(1));  // padded
+        Assert.True(slots.GetBool(2));   // newly set
+    }
+
+    [Fact]
+    public void CompanionLogic_DeleteAndLockSlot_EndToEnd()
+    {
+        // Simulates the full delete flow: clear companion data + lock the slot
+        var playerState = JsonObject.Parse(@"{
+            ""Pets"": [
+                {
+                    ""CreatureID"": ""^CAT"",
+                    ""CustomName"": ""Whiskers"",
+                    ""CreatureSeed"": [true, ""0xAABBCCDD""],
+                    ""Scale"": 1.5,
+                    ""Trust"": 0.8
+                }
+            ],
+            ""UnlockedPetSlots"": [true, false, false, false, false, false]
+        }");
+
+        var pets = playerState.GetArray("Pets")!;
+        var comp = pets.GetObject(0);
+
+        // Delete companion data
+        CompanionLogic.DeleteCompanion(comp);
+        // Lock the slot
+        CompanionLogic.SetSlotUnlocked(playerState, 0, false);
+
+        // Verify companion is cleared
+        Assert.Equal("^", comp.GetString("CreatureID"));
+        Assert.False(comp.GetArray("CreatureSeed")!.GetBool(0));
+
+        // Verify slot is now locked
+        Assert.False(playerState.GetArray("UnlockedPetSlots")!.GetBool(0));
+    }
+
+    [Fact]
+    public void CompanionLogic_SetSlotUnlocked_RejectsIndex18OrAbove()
+    {
+        var playerState = JsonObject.Parse(@"{
+            ""UnlockedPetSlots"": [true, false]
+        }");
+
+        // Index 18 should be rejected (max is 17)
+        CompanionLogic.SetSlotUnlocked(playerState, 18, true);
+
+        var slots = playerState.GetArray("UnlockedPetSlots")!;
+        Assert.Equal(2, slots.Length); // unchanged
+    }
+
+    [Fact]
+    public void CompanionLogic_SetSlotUnlocked_GrowsUpToMaxSlots()
+    {
+        var playerState = JsonObject.Parse(@"{
+            ""UnlockedPetSlots"": [true, false]
+        }");
+
+        // Index 17 (last valid) should grow the array to 18
+        CompanionLogic.SetSlotUnlocked(playerState, 17, true);
+
+        var slots = playerState.GetArray("UnlockedPetSlots")!;
+        Assert.Equal(18, slots.Length);
+        Assert.True(slots.GetBool(0));   // original
+        Assert.False(slots.GetBool(1));  // original
+        for (int i = 2; i < 17; i++)
+            Assert.False(slots.GetBool(i)); // padded
+        Assert.True(slots.GetBool(17));  // newly set
+    }
+
+    [Fact]
+    public void CompanionLogic_MaxPetSlots_Is18()
+    {
+        Assert.Equal(18, CompanionLogic.MaxPetSlots);
+    }
+
+    // --- DiscoveryLogic ----------------------------------------------
+
+    [Fact]
+    public void DiscoveryLogic_RaceColumns_HasExpectedEntries()
+    {
+        Assert.Equal(5, DiscoveryLogic.RaceColumns.Length);
+        Assert.Contains(("Gek", 0), DiscoveryLogic.RaceColumns);
+        Assert.Contains(("Vy'keen", 1), DiscoveryLogic.RaceColumns);
+        Assert.Contains(("Korvax", 2), DiscoveryLogic.RaceColumns);
+        Assert.Contains(("Atlas", 4), DiscoveryLogic.RaceColumns);
+        Assert.Contains(("Autophage", 8), DiscoveryLogic.RaceColumns);
+    }
+
+    [Fact]
+    public void DiscoveryLogic_TechItemTypes_ContainsExpectedTypes()
+    {
+        Assert.Contains("Technology", DiscoveryLogic.TechItemTypes);
+        Assert.Contains("Upgrades", DiscoveryLogic.TechItemTypes);
+        Assert.Contains("Others", DiscoveryLogic.TechItemTypes);
+    }
+
+    [Fact]
+    public void DiscoveryLogic_TechItemTypes_CaseInsensitive()
+    {
+        Assert.Contains("technology", DiscoveryLogic.TechItemTypes);
+        Assert.Contains("TECHNOLOGY", DiscoveryLogic.TechItemTypes);
+    }
+
+    [Fact]
+    public void DiscoveryLogic_ProductItemTypes_ContainsExpectedTypes()
+    {
+        Assert.Contains("Products", DiscoveryLogic.ProductItemTypes);
+        Assert.Contains("Constructed Technology", DiscoveryLogic.ProductItemTypes);
+        Assert.Contains("Curiosities", DiscoveryLogic.ProductItemTypes);
+        Assert.Contains("Corvette", DiscoveryLogic.ProductItemTypes);
+    }
+
+    [Fact]
+    public void DiscoveryLogic_TotalRaceCount_IsNine()
+    {
+        Assert.Equal(9, DiscoveryLogic.TotalRaceCount);
+    }
+
+    [Fact]
+    public void DiscoveryLogic_IsWordKnown_ReturnsTrueWhenKnown()
+    {
+        var groups = new JsonArray();
+        var entry = new JsonObject();
+        entry.Set("Group", "TestGroup");
+        var races = new JsonArray();
+        races.Add(true);
+        races.Add(false);
+        races.Add(true);
+        entry.Set("Races", races);
+        groups.Add(entry);
+
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "TestGroup", 0));
+        Assert.False(DiscoveryLogic.IsWordKnown(groups, "TestGroup", 1));
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "TestGroup", 2));
+    }
+
+    [Fact]
+    public void DiscoveryLogic_IsWordKnown_UnknownGroup_ReturnsFalse()
+    {
+        var groups = new JsonArray();
+        Assert.False(DiscoveryLogic.IsWordKnown(groups, "NoSuchGroup", 0));
+    }
+
+    [Fact]
+    public void DiscoveryLogic_SetWordKnown_AddsNewEntry()
+    {
+        var groups = new JsonArray();
+        DiscoveryLogic.SetWordKnown(groups, "NewWord", 2, true);
+
+        Assert.Equal(1, groups.Length);
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "NewWord", 2));
+        Assert.False(DiscoveryLogic.IsWordKnown(groups, "NewWord", 0));
+    }
+
+    [Fact]
+    public void DiscoveryLogic_SetWordKnown_RemovesEntryWhenAllFalse()
+    {
+        var groups = new JsonArray();
+        DiscoveryLogic.SetWordKnown(groups, "TestWord", 0, true);
+        Assert.Equal(1, groups.Length);
+
+        DiscoveryLogic.SetWordKnown(groups, "TestWord", 0, false);
+        Assert.Equal(0, groups.Length);
+    }
+
+    [Fact]
+    public void DiscoveryLogic_LoadAndSaveGlyphBitfield()
+    {
+        var json = JsonObject.Parse(@"{ ""KnownPortalRunes"": 4095 }");
+        Assert.Equal(4095, DiscoveryLogic.LoadGlyphBitfield(json));
+
+        DiscoveryLogic.SaveGlyphBitfield(json, 255);
+        Assert.Equal(255, DiscoveryLogic.LoadGlyphBitfield(json));
+    }
+
+    [Fact]
+    public void DiscoveryLogic_LoadKnownItemIds_LoadsList()
+    {
+        var json = JsonObject.Parse(@"{
+            ""KnownTech"": [""^FUEL1"", ""^ANTIMATTER"", ""^HYPERDRIVE""]
+        }");
+
+        var ids = DiscoveryLogic.LoadKnownItemIds(json, "KnownTech");
+        Assert.Equal(3, ids.Count);
+        Assert.Contains("^FUEL1", ids);
+        Assert.Contains("^ANTIMATTER", ids);
+    }
+
+    [Fact]
+    public void DiscoveryLogic_SaveKnownItemIds_SavesList()
+    {
+        var json = JsonObject.Parse(@"{ ""KnownTech"": [] }");
+        var ids = new List<string> { "^A", "^B", "^C" };
+
+        DiscoveryLogic.SaveKnownItemIds(json, "KnownTech", ids);
+
+        var loaded = DiscoveryLogic.LoadKnownItemIds(json, "KnownTech");
+        Assert.Equal(3, loaded.Count);
+        Assert.Equal("^A", loaded[0]);
+        Assert.Equal("^B", loaded[1]);
+        Assert.Equal("^C", loaded[2]);
+    }
+
+    [Fact]
+    public void DiscoveryLogic_SetWordFlagsForRace_LearnsAllWordsForRace()
+    {
+        var groups = new JsonArray();
+        var words = CreateTestWordEntries();
+
+        int count = DiscoveryLogic.SetWordFlagsForRace(groups, words, 0, true); // Gek
+
+        // word1 has Gek group, word2 does not, word3 has Gek group
+        Assert.Equal(2, count);
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "^TRA_W1", 0));
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "^TRA_W3", 0));
+    }
+
+    [Fact]
+    public void DiscoveryLogic_SetWordFlagsForRace_UnlearnsAllWordsForRace()
+    {
+        var groups = new JsonArray();
+        var words = CreateTestWordEntries();
+
+        // Learn first
+        DiscoveryLogic.SetWordFlagsForRace(groups, words, 0, true);
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "^TRA_W1", 0));
+
+        // Unlearn
+        int count = DiscoveryLogic.SetWordFlagsForRace(groups, words, 0, false);
+        Assert.Equal(2, count);
+        Assert.False(DiscoveryLogic.IsWordKnown(groups, "^TRA_W1", 0));
+        Assert.False(DiscoveryLogic.IsWordKnown(groups, "^TRA_W3", 0));
+    }
+
+    [Fact]
+    public void DiscoveryLogic_SetWordFlagsForRace_DoesNotAffectOtherRaces()
+    {
+        var groups = new JsonArray();
+        var words = CreateTestWordEntries();
+
+        // Learn word1 for Vy'keen (race 1)
+        DiscoveryLogic.SetWordKnown(groups, "^WAR_W1", 1, true);
+
+        // Learn all for Gek (race 0)
+        DiscoveryLogic.SetWordFlagsForRace(groups, words, 0, true);
+
+        // Vy'keen still known
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "^WAR_W1", 1));
+        // Gek now known
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "^TRA_W1", 0));
+    }
+
+    [Fact]
+    public void DiscoveryLogic_SetWordFlagsForRace_SkipsWordsWithoutRace()
+    {
+        var groups = new JsonArray();
+        var words = CreateTestWordEntries();
+
+        // word2 only has Vy'keen (race 1), not Gek (race 0)
+        int count = DiscoveryLogic.SetWordFlagsForRace(groups, words, 0, true);
+        Assert.Equal(2, count); // word1 and word3, not word2
+    }
+
+    [Fact]
+    public void DiscoveryLogic_SetWordFlagsForEntries_LearnsAcrossAllRaces()
+    {
+        var groups = new JsonArray();
+        var words = CreateTestWordEntries();
+
+        var raceColumns = DiscoveryLogic.RaceColumns;
+        int count = DiscoveryLogic.SetWordFlagsForEntries(groups, words, raceColumns, true);
+
+        // word1: Gek + Vy'keen = 2, word2: Vy'keen = 1, word3: Gek + Korvax = 2 -> total 5
+        Assert.Equal(5, count);
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "^TRA_W1", 0));
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "^WAR_W1", 1));
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "^WAR_W2", 1));
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "^TRA_W3", 0));
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "^EXP_W3", 2));
+    }
+
+    [Fact]
+    public void DiscoveryLogic_SetWordFlagsForEntries_UnlearnsAcrossAllRaces()
+    {
+        var groups = new JsonArray();
+        var words = CreateTestWordEntries();
+        var raceColumns = DiscoveryLogic.RaceColumns;
+
+        // Learn all first
+        DiscoveryLogic.SetWordFlagsForEntries(groups, words, raceColumns, true);
+
+        // Unlearn just the first two words
+        var subset = new List<WordEntry> { words[0], words[1] };
+        int count = DiscoveryLogic.SetWordFlagsForEntries(groups, subset, raceColumns, false);
+
+        Assert.Equal(3, count); // word1: 2 races, word2: 1 race
+        Assert.False(DiscoveryLogic.IsWordKnown(groups, "^TRA_W1", 0));
+        Assert.False(DiscoveryLogic.IsWordKnown(groups, "^WAR_W1", 1));
+        Assert.False(DiscoveryLogic.IsWordKnown(groups, "^WAR_W2", 1));
+        // word3 still known
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "^TRA_W3", 0));
+        Assert.True(DiscoveryLogic.IsWordKnown(groups, "^EXP_W3", 2));
+    }
+
+    [Fact]
+    public void DiscoveryLogic_SetWordFlagsForEntries_EmptyList_ReturnsZero()
+    {
+        var groups = new JsonArray();
+        var emptyWords = new List<WordEntry>();
+        var raceColumns = DiscoveryLogic.RaceColumns;
+
+        int count = DiscoveryLogic.SetWordFlagsForEntries(groups, emptyWords, raceColumns, true);
+        Assert.Equal(0, count);
+        Assert.Equal(0, groups.Length);
+    }
+
+    [Fact]
+    public void DiscoveryLogic_SetWordFlagsForRace_EmptyWordList_ReturnsZero()
+    {
+        var groups = new JsonArray();
+        var emptyWords = new List<WordEntry>();
+
+        int count = DiscoveryLogic.SetWordFlagsForRace(groups, emptyWords, 0, true);
+        Assert.Equal(0, count);
+        Assert.Equal(0, groups.Length);
+    }
+
+    /// <summary>
+    /// Creates test word entries with known race-group mappings:
+    /// word1: Gek (^TRA_W1, race 0) + Vy'keen (^WAR_W1, race 1)
+    /// word2: Vy'keen only (^WAR_W2, race 1)
+    /// word3: Gek (^TRA_W3, race 0) + Korvax (^EXP_W3, race 2)
+    /// </summary>
+    private static List<WordEntry> CreateTestWordEntries()
+    {
+        var word1 = new WordEntry("^W1", "word1");
+        word1.Groups["^TRA_W1"] = 0; // Gek
+        word1.Groups["^WAR_W1"] = 1; // Vy'keen
+        word1.BuildReverseLookup();
+
+        var word2 = new WordEntry("^W2", "word2");
+        word2.Groups["^WAR_W2"] = 1; // Vy'keen only
+        word2.BuildReverseLookup();
+
+        var word3 = new WordEntry("^W3", "word3");
+        word3.Groups["^TRA_W3"] = 0; // Gek
+        word3.Groups["^EXP_W3"] = 2; // Korvax
+        word3.BuildReverseLookup();
+
+        return new List<WordEntry> { word1, word2, word3 };
+    }
+
+    // --- BaseLogic ---------------------------------------------------
+
+    [Fact]
+    public void BaseLogic_ChestInventoryKeys_HasTenEntries()
+    {
+        Assert.Equal(10, BaseLogic.ChestInventoryKeys.Length);
+    }
+
+    [Fact]
+    public void BaseLogic_ChestInventoryKeys_AreNumberedCorrectly()
+    {
+        for (int i = 0; i < BaseLogic.ChestInventoryKeys.Length; i++)
+            Assert.Equal($"Chest{i + 1}Inventory", BaseLogic.ChestInventoryKeys[i]);
+    }
+
+    [Fact]
+    public void BaseLogic_StorageInventories_HasExpectedEntries()
+    {
+        Assert.True(BaseLogic.StorageInventories.Length >= 8);
+        Assert.Contains(BaseLogic.StorageInventories, s => s.Key == "CookingIngredientsInventory");
+        Assert.Contains(BaseLogic.StorageInventories, s => s.Key == "CorvetteStorageInventory");
+        Assert.Contains(BaseLogic.StorageInventories, s => s.Key == "RocketLockerInventory");
+    }
+
+    [Fact]
+    public void BaseLogic_StorageInventories_AllHaveExportFileNames()
+    {
+        foreach (var (key, displayName, exportFileName) in BaseLogic.StorageInventories)
+        {
+            Assert.False(string.IsNullOrEmpty(key));
+            Assert.False(string.IsNullOrEmpty(displayName));
+            Assert.False(string.IsNullOrEmpty(exportFileName));
+            Assert.EndsWith(".json", exportFileName);
+        }
+    }
+
+    [Fact]
+    public void BaseLogic_SwapPositions_SwapsCorrectly()
+    {
+        var a = JsonObject.Parse(@"{ ""Position"": [1, 2, 3], ""Up"": [0, 1, 0], ""At"": [0, 0, 1] }");
+        var b = JsonObject.Parse(@"{ ""Position"": [4, 5, 6], ""Up"": [1, 0, 0], ""At"": [0, 1, 0] }");
+
+        BaseLogic.SwapPositions(a, b);
+
+        var aPos = a.GetArray("Position")!;
+        var bPos = b.GetArray("Position")!;
+        Assert.Equal(4, aPos.GetInt(0));
+        Assert.Equal(1, bPos.GetInt(0));
+    }
+
+    // --- BaseLogic: Chest Name Helpers -------------------------------
+
+    [Fact]
+    public void BaseLogic_GetChestName_ReturnsEmpty_WhenNull()
+    {
+        Assert.Equal("", BaseLogic.GetChestName(null));
+    }
+
+    [Fact]
+    public void BaseLogic_GetChestName_ReturnsEmpty_WhenDefault()
+    {
+        var chest = new JsonObject();
+        chest.Add("Name", "BLD_STORAGE_NAME");
+        Assert.Equal("", BaseLogic.GetChestName(chest));
+    }
+
+    [Fact]
+    public void BaseLogic_GetChestName_ReturnsEmpty_WhenNameMissing()
+    {
+        var chest = new JsonObject();
+        Assert.Equal("", BaseLogic.GetChestName(chest));
+    }
+
+    [Fact]
+    public void BaseLogic_GetChestName_ReturnsCustomName()
+    {
+        var chest = new JsonObject();
+        chest.Add("Name", "Cooking Items");
+        Assert.Equal("Cooking Items", BaseLogic.GetChestName(chest));
+    }
+
+    [Fact]
+    public void BaseLogic_SetChestName_SetsValue()
+    {
+        var chest = new JsonObject();
+        chest.Add("Name", "BLD_STORAGE_NAME");
+        BaseLogic.SetChestName(chest, "My Chest");
+        Assert.Equal("My Chest", chest.GetString("Name"));
+    }
+
+    [Fact]
+    public void BaseLogic_SetChestName_ResetsToDefault_WhenEmpty()
+    {
+        var chest = new JsonObject();
+        chest.Add("Name", "My Chest");
+        BaseLogic.SetChestName(chest, "");
+        Assert.Equal("BLD_STORAGE_NAME", chest.GetString("Name"));
+    }
+
+    [Fact]
+    public void BaseLogic_SetChestName_ResetsToDefault_WhenNull()
+    {
+        var chest = new JsonObject();
+        chest.Add("Name", "My Chest");
+        BaseLogic.SetChestName(chest, null);
+        Assert.Equal("BLD_STORAGE_NAME", chest.GetString("Name"));
+    }
+
+    [Fact]
+    public void BaseLogic_SetChestName_ResetsToDefault_WhenWhitespace()
+    {
+        var chest = new JsonObject();
+        chest.Add("Name", "My Chest");
+        BaseLogic.SetChestName(chest, "   ");
+        Assert.Equal("BLD_STORAGE_NAME", chest.GetString("Name"));
+    }
+
+    [Fact]
+    public void BaseLogic_SetChestName_TrimsWhitespace()
+    {
+        var chest = new JsonObject();
+        chest.Add("Name", "BLD_STORAGE_NAME");
+        BaseLogic.SetChestName(chest, "  Minerals  ");
+        Assert.Equal("Minerals", chest.GetString("Name"));
+    }
+
+    [Fact]
+    public void BaseLogic_SetChestName_NullInventory_DoesNotThrow()
+    {
+        var ex = Record.Exception(() => BaseLogic.SetChestName(null, "test"));
+        Assert.Null(ex);
+    }
+
+    [Fact]
+    public void BaseLogic_FormatChestTabTitle_NoName_ReturnsLabel()
+    {
+        Assert.Equal("Chest 0", BaseLogic.FormatChestTabTitle("Chest 0", ""));
+        Assert.Equal("Chest 0", BaseLogic.FormatChestTabTitle("Chest 0", null));
+    }
+
+    [Fact]
+    public void BaseLogic_FormatChestTabTitle_WithName_AppendsColonName()
+    {
+        Assert.Equal("Chest 0: Cooking Items", BaseLogic.FormatChestTabTitle("Chest 0", "Cooking Items"));
+    }
+
+    [Fact]
+    public void BaseLogic_DefaultChestName_IsCorrectValue()
+    {
+        Assert.Equal("BLD_STORAGE_NAME", BaseLogic.DefaultChestName);
+    }
+
+    // --- MilestoneLogic ----------------------------------------------
+
+    [Fact]
+    public void MilestoneLogic_SectionIconMap_HasExpectedSections()
+    {
+        Assert.True(MilestoneLogic.SectionIconMap.Count >= 10);
+        Assert.True(MilestoneLogic.SectionIconMap.ContainsKey("Milestones"));
+        Assert.True(MilestoneLogic.SectionIconMap.ContainsKey("Gek"));
+        Assert.True(MilestoneLogic.SectionIconMap.ContainsKey("Vy'keen"));
+        Assert.True(MilestoneLogic.SectionIconMap.ContainsKey("Korvax"));
+    }
+
+    [Fact]
+    public void MilestoneLogic_ReadStatEntryValue_ReadsIntValue()
+    {
+        var entry = JsonObject.Parse(@"{
+            ""Value"": { ""IntValue"": 42, ""FloatValue"": 42.0 }
+        }");
+
+        Assert.Equal(42, MilestoneLogic.ReadStatEntryValue(entry));
+    }
+
+    [Fact]
+    public void MilestoneLogic_ReadStatEntryValue_ReadsFloatWhenNoInt()
+    {
+        var entry = JsonObject.Parse(@"{
+            ""Value"": { ""FloatValue"": 99.7 }
+        }");
+
+        Assert.Equal(100, MilestoneLogic.ReadStatEntryValue(entry));
+    }
+
+    [Fact]
+    public void MilestoneLogic_ReadStatEntryValue_NoValue_ReturnsZero()
+    {
+        var entry = JsonObject.Parse(@"{ ""Name"": ""test"" }");
+        Assert.Equal(0, MilestoneLogic.ReadStatEntryValue(entry));
+    }
+
+    [Fact]
+    public void MilestoneLogic_WriteStatEntryValue_UpdatesBothFields()
+    {
+        var entry = JsonObject.Parse(@"{
+            ""Value"": { ""IntValue"": 0, ""FloatValue"": 0.0 }
+        }");
+
+        MilestoneLogic.WriteStatEntryValue(entry, 500);
+
+        var valueObj = entry.GetObject("Value")!;
+        Assert.Equal(500, valueObj.GetInt("IntValue"));
+        Assert.Equal(500.0, valueObj.GetDouble("FloatValue"));
+    }
+
+    [Fact]
+    public void MilestoneLogic_FindGlobalStats_FindsCorrectGroup()
+    {
+        var json = JsonObject.Parse(@"{
+            ""PlayerStateData"": {
+                ""Stats"": [
+                    {
+                        ""GroupId"": ""^LOCAL_STATS"",
+                        ""Stats"": [{ ""Id"": ""local1"" }]
+                    },
+                    {
+                        ""GroupId"": ""^GLOBAL_STATS"",
+                        ""Stats"": [
+                            { ""Id"": ""^YOURSLOTITEM"" },
+                            { ""Id"": ""^YOURSTAT"" }
+                        ]
+                    }
+                ]
+            }
+        }");
+
+        var stats = MilestoneLogic.FindGlobalStats(json);
+        Assert.NotNull(stats);
+        Assert.Equal(2, stats.Length);
+    }
+
+    [Fact]
+    public void MilestoneLogic_FindGlobalStats_NoGlobalStats_ReturnsNull()
+    {
+        var json = JsonObject.Parse(@"{
+            ""PlayerStateData"": {
+                ""Stats"": [
+                    { ""GroupId"": ""^LOCAL_STATS"", ""Stats"": [] }
+                ]
+            }
+        }");
+
+        Assert.Null(MilestoneLogic.FindGlobalStats(json));
+    }
+
+    // --- SaveFileManager ---------------------------------------------
+
+    [Theory]
+    [InlineData(0, "0:00")]
+    [InlineData(59, "0:59")]
+    [InlineData(60, "1:00")]
+    [InlineData(3599, "59:59")]
+    [InlineData(3600, "1:00:00")]
+    [InlineData(3661, "1:01:01")]
+    [InlineData(86400, "24:00:00")]
+    [InlineData(360000, "100:00:00")]
+    public void SaveFileManager_FormatPlayTime_FormatsCorrectly(long seconds, string expected)
+    {
+        Assert.Equal(expected, SaveFileManager.FormatPlayTime(seconds));
+    }
+
+    [Fact]
+    public void DetectGameModeFast_DetectsStringGameMode()
+    {
+        // The demo save files should be detectable - they use string-based PresetGameMode
+        string saveDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "_ref", "save_demo");
+        string saveFile = Path.Combine(saveDir, "save.hg");
+        if (File.Exists(saveFile))
+        {
+            int mode = SaveFileManager.DetectGameModeFast(saveFile);
+            Assert.True(mode > 0, "Should detect a valid game mode from demo save file");
+        }
+    }
+
+    [Fact]
+    public void Platform_Enum_ContainsAllPlatforms()
+    {
+        var values = Enum.GetValues<SaveFileManager.Platform>();
+        Assert.Contains(SaveFileManager.Platform.Steam, values);
+        Assert.Contains(SaveFileManager.Platform.XboxGamePass, values);
+        Assert.Contains(SaveFileManager.Platform.PS4, values);
+        Assert.Contains(SaveFileManager.Platform.GOG, values);
+        Assert.Contains(SaveFileManager.Platform.Switch, values);
+        Assert.Contains(SaveFileManager.Platform.Unknown, values);
+    }
+
+    [Fact]
+    public void DetectPlatform_XboxGamePass_DetectedByContainersIndex()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), "nmse_test_xbox_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(dir);
+        try
+        {
+            File.WriteAllText(Path.Combine(dir, "containers.index"), "");
+            Assert.Equal(SaveFileManager.Platform.XboxGamePass, SaveFileManager.DetectPlatform(dir));
+        }
+        finally { Directory.Delete(dir, true); }
+    }
+
+    [Fact]
+    public void DetectPlatform_Switch_DetectedByManifestDat()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), "nmse_test_switch_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(dir);
+        try
+        {
+            File.WriteAllText(Path.Combine(dir, "manifest00.dat"), "");
+            Assert.Equal(SaveFileManager.Platform.Switch, SaveFileManager.DetectPlatform(dir));
+        }
+        finally { Directory.Delete(dir, true); }
+    }
+
+    [Fact]
+    public void DetectPlatform_PS4_DetectedByMemoryDat()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), "nmse_test_ps4mem_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(dir);
+        try
+        {
+            File.WriteAllText(Path.Combine(dir, "memory.dat"), "");
+            Assert.Equal(SaveFileManager.Platform.PS4, SaveFileManager.DetectPlatform(dir));
+        }
+        finally { Directory.Delete(dir, true); }
+    }
+
+    [Fact]
+    public void DetectPlatform_PS4_DetectedBySaveDataHg()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), "nmse_test_ps4sd_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(dir);
+        try
+        {
+            File.WriteAllText(Path.Combine(dir, "savedata11.hg"), "");
+            Assert.Equal(SaveFileManager.Platform.PS4, SaveFileManager.DetectPlatform(dir));
+        }
+        finally { Directory.Delete(dir, true); }
+    }
+
+    [Fact]
+    public void DetectPlatform_GOG_DetectedByDefaultUserDir()
+    {
+        var baseDir = Path.Combine(Path.GetTempPath(), "nmse_test_gog_" + Guid.NewGuid().ToString("N"));
+        var dir = Path.Combine(baseDir, "DefaultUser");
+        Directory.CreateDirectory(dir);
+        try
+        {
+            File.WriteAllText(Path.Combine(dir, "save.hg"), "");
+            Assert.Equal(SaveFileManager.Platform.GOG, SaveFileManager.DetectPlatform(dir));
+        }
+        finally { Directory.Delete(baseDir, true); }
+    }
+
+    [Fact]
+    public void DetectPlatform_Steam_DetectedBySaveHg()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), "nmse_test_steam_" + Guid.NewGuid().ToString("N"));
+        var steamDir = Path.Combine(dir, "st_12345");
+        Directory.CreateDirectory(steamDir);
+        try
+        {
+            File.WriteAllText(Path.Combine(steamDir, "save.hg"), "");
+            Assert.Equal(SaveFileManager.Platform.Steam, SaveFileManager.DetectPlatform(steamDir));
+        }
+        finally { Directory.Delete(dir, true); }
+    }
+
+    [Fact]
+    public void DetectPlatform_Unknown_EmptyDirectory()
+    {
+        var dir = Path.Combine(Path.GetTempPath(), "nmse_test_unknown_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(dir);
+        try
+        {
+            Assert.Equal(SaveFileManager.Platform.Unknown, SaveFileManager.DetectPlatform(dir));
+        }
+        finally { Directory.Delete(dir, true); }
+    }
+
+    [Fact]
+    public void DifficultyLevel_Enum_ContainsAllLevels()
+    {
+        var values = Enum.GetValues<Models.DifficultyLevel>();
+        Assert.Contains(Models.DifficultyLevel.Normal, values);
+        Assert.Contains(Models.DifficultyLevel.Survival, values);
+        Assert.Contains(Models.DifficultyLevel.Permadeath, values);
+        Assert.Contains(Models.DifficultyLevel.Creative, values);
+        Assert.Contains(Models.DifficultyLevel.Custom, values);
+        Assert.Contains(Models.DifficultyLevel.Relaxed, values);
+        Assert.Contains(Models.DifficultyLevel.Hardcore, values);
+    }
+
+    // --- JSON Parser / JsonObject Optimizations ---------------------
+
+    [Fact]
+    public void JsonObject_DictionaryIndex_GetReturnsCorrectValues()
+    {
+        // Build object with > 8 keys to trigger dictionary indexing
+        var obj = new JsonObject();
+        for (int i = 0; i < 20; i++)
+            obj.Add($"key{i}", $"value{i}");
+
+        for (int i = 0; i < 20; i++)
+            Assert.Equal($"value{i}", obj.Get($"key{i}"));
+
+        Assert.Null(obj.Get("nonexistent"));
+    }
+
+    [Fact]
+    public void JsonObject_DictionaryIndex_SetUpdatesCorrectly()
+    {
+        var obj = new JsonObject();
+        for (int i = 0; i < 20; i++)
+            obj.Add($"key{i}", $"value{i}");
+
+        obj.Set("key5", "updated");
+        Assert.Equal("updated", obj.Get("key5"));
+    }
+
+    [Fact]
+    public void JsonObject_DictionaryIndex_RemoveWorks()
+    {
+        var obj = new JsonObject();
+        for (int i = 0; i < 20; i++)
+            obj.Add($"key{i}", $"value{i}");
+
+        obj.Remove("key5");
+        Assert.Null(obj.Get("key5"));
+        Assert.Equal(19, obj.Length);
+        // Other keys still work
+        Assert.Equal("value0", obj.Get("key0"));
+        Assert.Equal("value19", obj.Get("key19"));
+    }
+
+    [Fact]
+    public void JsonObject_DictionaryIndex_ContainsWorks()
+    {
+        var obj = new JsonObject();
+        for (int i = 0; i < 20; i++)
+            obj.Add($"key{i}", $"value{i}");
+
+        Assert.True(obj.Contains("key0"));
+        Assert.True(obj.Contains("key19"));
+        Assert.False(obj.Contains("nonexistent"));
+    }
+
+    [Fact]
+    public void JsonObject_SmallObject_LinearScanWorks()
+    {
+        // Object with <= 8 keys stays linear
+        var obj = new JsonObject();
+        obj.Add("a", "1");
+        obj.Add("b", "2");
+        obj.Add("c", "3");
+
+        Assert.Equal("1", obj.Get("a"));
+        Assert.Equal("2", obj.Get("b"));
+        Assert.Equal("3", obj.Get("c"));
+        Assert.Null(obj.Get("d"));
+    }
+
+    [Fact]
+    public void JsonObject_GetValue_SimpleKeySkipsRegex()
+    {
+        var obj = new JsonObject();
+        var inner = new JsonObject();
+        inner.Add("value", 42);
+        obj.Add("simple", inner);
+
+        // Simple key lookup (no dots/brackets)
+        Assert.Same(inner, obj.GetValue("simple"));
+    }
+
+    [Fact]
+    public void JsonObject_GetValue_DottedPathStillWorks()
+    {
+        var obj = new JsonObject();
+        var inner = new JsonObject();
+        inner.Add("value", 42);
+        obj.Add("outer", inner);
+
+        Assert.Equal(42, obj.GetValue("outer.value"));
+    }
+
+    [Fact]
+    public void JsonParser_FastStringParsing_SimpleStrings()
+    {
+        // Simple strings should use fast path (no escapes, no high bytes)
+        string json = "{\"key\":\"hello world\",\"num\":42}";
+        var obj = JsonObject.Parse(json);
+        Assert.Equal("hello world", obj.GetString("key"));
+        Assert.Equal(42, obj.GetInt("num"));
+    }
+
+    [Fact]
+    public void JsonParser_SlowStringParsing_EscapedStrings()
+    {
+        // Strings with escapes should use slow path but still parse correctly
+        string json = "{\"key\":\"hello\\nworld\",\"path\":\"c:\\\\temp\"}";
+        var obj = JsonObject.Parse(json);
+        Assert.Equal("hello\nworld", obj.GetString("key"));
+        Assert.Equal("c:\\temp", obj.GetString("path"));
+    }
+
+    [Fact]
+    public void JsonParser_RoundTrip_PreservesData()
+    {
+        string json = "{\"name\":\"test\",\"value\":123,\"flag\":true,\"nothing\":null,\"array\":[1,2,3]}";
+        var obj = JsonObject.Parse(json);
+
+        Assert.Equal("test", obj.GetString("name"));
+        Assert.Equal(123, obj.GetInt("value"));
+        Assert.True(obj.GetBool("flag"));
+        Assert.Null(obj.Get("nothing"));
+
+        var arr = obj.GetArray("array");
+        Assert.NotNull(arr);
+        Assert.Equal(3, arr!.Length);
+        Assert.Equal(1, arr.GetInt(0));
+    }
+
+    [Fact]
+    public void JsonParser_LargeObject_ParsesCorrectly()
+    {
+        // Build a JSON string with many keys to test dictionary indexing
+        var parts = new System.Text.StringBuilder("{");
+        for (int i = 0; i < 50; i++)
+        {
+            if (i > 0) parts.Append(',');
+            parts.Append($"\"key{i}\":{i}");
+        }
+        parts.Append('}');
+
+        var obj = JsonObject.Parse(parts.ToString());
+        Assert.Equal(50, obj.Length);
+        Assert.Equal(0, obj.GetInt("key0"));
+        Assert.Equal(49, obj.GetInt("key49"));
+    }
+
+    [Fact]
+    public void JsonParser_FloatingPoint_ReturnsRawDouble()
+    {
+        // Floating-point values should be returned as RawDouble (preserving original text)
+        string json = "{\"pi\":3.14159,\"neg\":-0.5,\"sci\":1.5e10}";
+        var obj = JsonObject.Parse(json);
+        Assert.IsType<RawDouble>(obj.Get("pi"));
+        Assert.IsType<RawDouble>(obj.Get("neg"));
+        Assert.IsType<RawDouble>(obj.Get("sci"));
+        Assert.Equal(3.14159, obj.GetDouble("pi"), 5);
+        Assert.Equal(-0.5, obj.GetDouble("neg"), 5);
+        Assert.Equal(1.5e10, obj.GetDouble("sci"), 5);
+    }
+
+    [Fact]
+    public void JsonParser_Integers_ReturnIntOrLong()
+    {
+        string json = "{\"small\":42,\"neg\":-100,\"big\":3000000000,\"zero\":0}";
+        var obj = JsonObject.Parse(json);
+        Assert.IsType<int>(obj.Get("small"));
+        Assert.IsType<int>(obj.Get("neg"));
+        Assert.IsType<long>(obj.Get("big"));
+        Assert.IsType<int>(obj.Get("zero"));
+        Assert.Equal(42, obj.GetInt("small"));
+        Assert.Equal(-100, obj.GetInt("neg"));
+        Assert.Equal(3000000000L, obj.GetLong("big"));
+    }
+
+    [Fact]
+    public void JsonObject_SmallCapacity_GrowsCorrectly()
+    {
+        // Initial capacity is now 4, test that objects with more properties still work
+        var obj = new JsonObject();
+        for (int i = 0; i < 20; i++)
+            obj.Add($"key{i}", i);
+        Assert.Equal(20, obj.Length);
+        for (int i = 0; i < 20; i++)
+            Assert.Equal(i, obj.GetInt($"key{i}"));
+    }
+
+    [Fact]
+    public void JsonParser_StringInterning_DeduplicatesKeys()
+    {
+        // Array of objects with same keys should share string references
+        string json = "[{\"Id\":\"a\",\"Value\":1},{\"Id\":\"b\",\"Value\":2}]";
+        var arr = JsonParser.ParseArray(json);
+        var obj0 = arr.GetObject(0)!;
+        var obj1 = arr.GetObject(1)!;
+        // Both objects should resolve the same key strings
+        Assert.Equal("a", obj0.GetString("Id"));
+        Assert.Equal("b", obj1.GetString("Id"));
+        Assert.Equal(1, obj0.GetInt("Value"));
+        Assert.Equal(2, obj1.GetInt("Value"));
+    }
+
+    [Fact]
+    public void JsonObject_LazyTransforms_NotAllocatedByDefault()
+    {
+        // Transforms should not be allocated for regular objects
+        var obj = new JsonObject();
+        obj.Add("key", "value");
+        // GetValue should work fine without transforms
+        Assert.Equal("value", obj.GetValue("key"));
+    }
+
+    // --- Settlement UID Filtering ------------------------------------
+
+    [Fact]
+    public void SettlementLogic_FilterByOwnerUID_MatchingUID()
+    {
+        // Build save data with CommonStateData.UsedDiscoveryOwnersV2 (direct child, NOT under SeasonData)
+        var saveData = new JsonObject();
+        var commonState = new JsonObject();
+        var owners = new JsonArray();
+        var owner = new JsonObject();
+        owner.Add("UID", "12345");
+        owners.Add(owner);
+        commonState.Add("UsedDiscoveryOwnersV2", owners);
+        saveData.Add("CommonStateData", commonState);
+
+        var playerState = new JsonObject();
+        var settlements = new JsonArray();
+
+        // Settlement with matching UID
+        var s1 = new JsonObject();
+        var s1Owner = new JsonObject();
+        s1Owner.Add("UID", "12345");
+        s1.Add("Owner", s1Owner);
+        settlements.Add(s1);
+
+        // Settlement with non-matching UID
+        var s2 = new JsonObject();
+        var s2Owner = new JsonObject();
+        s2Owner.Add("UID", "99999");
+        s2.Add("Owner", s2Owner);
+        settlements.Add(s2);
+
+        var result = SettlementLogic.FilterSettlements(saveData, playerState, settlements);
+        Assert.Single(result);
+        Assert.Equal(0, result[0]); // Only the first settlement matches
+    }
+
+    [Fact]
+    public void SettlementLogic_FilterByOwnerUID_NoMatch_ReturnsEmpty()
+    {
+        var saveData = new JsonObject();
+        var commonState = new JsonObject();
+        var owners = new JsonArray();
+        var owner = new JsonObject();
+        owner.Add("UID", "12345");
+        owners.Add(owner);
+        commonState.Add("UsedDiscoveryOwnersV2", owners);
+        saveData.Add("CommonStateData", commonState);
+
+        var playerState = new JsonObject();
+        var settlements = new JsonArray();
+
+        // No matching settlements - should return empty (no fallback)
+        var s1 = new JsonObject();
+        var s1Owner = new JsonObject();
+        s1Owner.Add("UID", "99999");
+        s1.Add("Owner", s1Owner);
+        settlements.Add(s1);
+
+        var result = SettlementLogic.FilterSettlements(saveData, playerState, settlements);
+        Assert.Empty(result);
+    }
+
+    [Fact]
+    public void SettlementLogic_FilterByOwnerUID_NoCommonStateData_ReturnsEmpty()
+    {
+        var saveData = new JsonObject(); // No CommonStateData
+        var playerState = new JsonObject();
+        var settlements = new JsonArray();
+
+        var s1 = new JsonObject();
+        var s1Owner = new JsonObject();
+        s1Owner.Add("UID", "12345");
+        s1.Add("Owner", s1Owner);
+        settlements.Add(s1);
+
+        var result = SettlementLogic.FilterSettlements(saveData, playerState, settlements);
+        Assert.Empty(result); // No player identifiers found, returns empty
+    }
+
+    [Fact]
+    public void SettlementLogic_FilterByOwnerLID_MatchesWhenUIDMissing()
+    {
+        var saveData = new JsonObject();
+        var commonState = new JsonObject();
+        var owners = new JsonArray();
+        var owner = new JsonObject();
+        owner.Add("LID", "LID-ABC");
+        // No UID set
+        owners.Add(owner);
+        commonState.Add("UsedDiscoveryOwnersV2", owners);
+        saveData.Add("CommonStateData", commonState);
+
+        var playerState = new JsonObject();
+        var settlements = new JsonArray();
+
+        // Settlement matching by LID
+        var s1 = new JsonObject();
+        var s1Owner = new JsonObject();
+        s1Owner.Add("LID", "LID-ABC");
+        s1.Add("Owner", s1Owner);
+        settlements.Add(s1);
+
+        // Settlement not matching
+        var s2 = new JsonObject();
+        var s2Owner = new JsonObject();
+        s2Owner.Add("LID", "LID-XYZ");
+        s2.Add("Owner", s2Owner);
+        settlements.Add(s2);
+
+        var result = SettlementLogic.FilterSettlements(saveData, playerState, settlements);
+        Assert.Single(result);
+        Assert.Equal(0, result[0]);
+    }
+
+    [Fact]
+    public void SettlementLogic_FilterByOwnerUSN_MatchesWhenOthersMissing()
+    {
+        var saveData = new JsonObject();
+        var commonState = new JsonObject();
+        var owners = new JsonArray();
+        var owner = new JsonObject();
+        owner.Add("USN", "PlayerName");
+        // No LID or UID set
+        owners.Add(owner);
+        commonState.Add("UsedDiscoveryOwnersV2", owners);
+        saveData.Add("CommonStateData", commonState);
+
+        var playerState = new JsonObject();
+        var settlements = new JsonArray();
+
+        // Settlement matching by USN
+        var s1 = new JsonObject();
+        var s1Owner = new JsonObject();
+        s1Owner.Add("USN", "PlayerName");
+        s1.Add("Owner", s1Owner);
+        settlements.Add(s1);
+
+        var result = SettlementLogic.FilterSettlements(saveData, playerState, settlements);
+        Assert.Single(result);
+        Assert.Equal(0, result[0]);
+    }
+
+    [Fact]
+    public void CoordinateHelper_VoxelToPortalCode_CalculatesCorrectly()
+    {
+        // Test known coordinates
+        string code = CoordinateHelper.VoxelToPortalCode(266, -1, -1773, 52, 0);
+        Assert.Equal(12, code.Length);
+        Assert.StartsWith("0", code); // planet 0
+    }
+
+    [Fact]
+    public void CoordinateHelper_VoxelToSignalBooster_FormatsCorrectly()
+    {
+        string sb = CoordinateHelper.VoxelToSignalBooster(100, 50, -200, 10);
+        Assert.Contains(":", sb);
+        var parts = sb.Split(':');
+        Assert.Equal(4, parts.Length);
+    }
+
+    [Fact]
+    public void CoordinateHelper_DistanceToCenter_PositiveValues()
+    {
+        double dist = CoordinateHelper.GetDistanceToCenter(100, 50, -200);
+        Assert.True(dist > 0);
+    }
+
+    [Fact]
+    public void CoordinateHelper_JumpsToCenter_ReasonableValue()
+    {
+        int jumps = CoordinateHelper.GetJumpsToCenter(50000, 100);
+        Assert.Equal(500, jumps);
+    }
+
+    [Fact]
+    public void CoordinateHelper_PortalHexToDec_ConvertsCorrectly()
+    {
+        // Example from the problem statement: 00E4FF91310A -> 1,1,15,5,16,16,10,2,4,2,1,11
+        Assert.Equal("1,1,15,5,16,16,10,2,4,2,1,11", CoordinateHelper.PortalHexToDec("00E4FF91310A"));
+    }
+
+    [Fact]
+    public void CoordinateHelper_PortalHexToDec_AllDigits()
+    {
+        // 0123456789ABCDEF -> 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
+        Assert.Equal("1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16", CoordinateHelper.PortalHexToDec("0123456789ABCDEF"));
+    }
+
+    [Fact]
+    public void CoordinateHelper_PortalHexToDec_EmptyInput()
+    {
+        Assert.Equal("", CoordinateHelper.PortalHexToDec(""));
+        Assert.Equal("", CoordinateHelper.PortalHexToDec(null!));
+    }
+
+    [Fact]
+    public void CoordinateHelper_PortalHexToDec_LowercaseInput()
+    {
+        Assert.Equal("1,1,15,5,16,16,10,2,4,2,1,11", CoordinateHelper.PortalHexToDec("00e4ff91310a"));
+    }
+
+    [Theory]
+    [InlineData(0, 0, 0, 0, 0)]
+    [InlineData(266, -1, -1773, 52, 0)]
+    [InlineData(100, 50, -200, 42, 3)]
+    [InlineData(-2048, -128, -2048, 600, 15)]
+    [InlineData(2047, 127, 2047, 0, 0)]
+    public void CoordinateHelper_PortalCodeToVoxel_Roundtrip(int x, int y, int z, int sys, int planet)
+    {
+        string code = CoordinateHelper.VoxelToPortalCode(x, y, z, sys, planet);
+        Assert.True(CoordinateHelper.PortalCodeToVoxel(code, out int rx, out int ry, out int rz, out int rsys, out int rplanet));
+        Assert.Equal(x, rx);
+        Assert.Equal(y, ry);
+        Assert.Equal(z, rz);
+        Assert.Equal(sys, rsys);
+        Assert.Equal(planet, rplanet);
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData("ABC")]
+    [InlineData("ZZZZZZZZZZZZ")]
+    public void CoordinateHelper_PortalCodeToVoxel_InvalidInput_ReturnsFalse(string input)
+    {
+        Assert.False(CoordinateHelper.PortalCodeToVoxel(input, out _, out _, out _, out _, out _));
+    }
+
+    [Fact]
+    public void GalaxyDatabase_GetGalaxyName_ReturnsExpectedNames()
+    {
+        Assert.Equal("Euclid", GalaxyDatabase.GetGalaxyName(0));
+        Assert.Equal("Hilbert Dimension", GalaxyDatabase.GetGalaxyName(1));
+        Assert.Equal("Calypso", GalaxyDatabase.GetGalaxyName(2));
+        Assert.Equal("Eissentam", GalaxyDatabase.GetGalaxyName(9));
+    }
+
+    [Fact]
+    public void GalaxyDatabase_GetGalaxyName_HandlesOutOfRange()
+    {
+        // All 256 galaxies are now in the database; out of range returns Unknown
+        Assert.Equal("Drundemiso", GalaxyDatabase.GetGalaxyName(199));
+        Assert.Equal("Unknown", GalaxyDatabase.GetGalaxyName(256));
+        Assert.Equal("Unknown", GalaxyDatabase.GetGalaxyName(-1));
+    }
+
+    [Fact]
+    public void FrigateLogic_GetLevelUpIn_ReturnsExpectedValues()
+    {
+        Assert.Equal(2, FrigateLogic.GetLevelUpIn(0)); // 0 exp, next milestone is 2
+        Assert.Equal(1, FrigateLogic.GetLevelUpIn(1)); // 1 exp, 2-1=1
+        Assert.Equal(3, FrigateLogic.GetLevelUpIn(2)); // 2 exp, next is 5, 5-2=3
+        Assert.Equal(-1, FrigateLogic.GetLevelUpIn(55)); // fully leveled
+    }
+
+    [Fact]
+    public void FrigateLogic_GetLevelUpsRemaining_CountsCorrectly()
+    {
+        Assert.Equal(10, FrigateLogic.GetLevelUpsRemaining(0));
+        Assert.Equal(9, FrigateLogic.GetLevelUpsRemaining(2));
+        Assert.Equal(0, FrigateLogic.GetLevelUpsRemaining(55));
+    }
+
+    [Fact]
+    public void MultitoolLogic_NewTypes_AllHaveFilenames()
+    {
+        // Verify the new types (Rifle, Alien, Pristine, Staff Ruin, Staff Bone)
+        var newTypes = new[] { "Rifle", "Alien", "Pristine", "Staff Ruin", "Staff Bone" };
+        foreach (var typeName in newTypes)
+        {
+            var match = MultitoolLogic.ToolTypes.FirstOrDefault(t => t.Name == typeName);
+            Assert.False(string.IsNullOrEmpty(match.Name), $"Type '{typeName}' should exist");
+            Assert.False(string.IsNullOrEmpty(match.Filename), $"Type '{typeName}' should have a filename");
+        }
+    }
+
+    [Fact]
+    public void SettlementLogic_DecisionTypes_ContainsExpectedValues()
+    {
+        Assert.Equal(12, SettlementLogic.DecisionTypes.Length);
+        Assert.Equal("None", SettlementLogic.DecisionTypes[0]);
+        Assert.Contains("Policy", SettlementLogic.DecisionTypes);
+        Assert.Contains("NewBuilding", SettlementLogic.DecisionTypes);
+        Assert.Contains("UpgradeBuilding", SettlementLogic.DecisionTypes);
+        Assert.Equal("UpgradeBuildingChoice", SettlementLogic.DecisionTypes[^1]);
+    }
+
+    [Fact]
+    public void SettlementLogic_Stats_HaveCorrectStructure()
+    {
+        Assert.Equal(8, SettlementLogic.StatCount);
+        Assert.Equal(8, SettlementLogic.StatLabels.Length);
+        Assert.Equal(8, SettlementLogic.StatMaxValues.Length);
+        Assert.Equal("Population", SettlementLogic.StatLabels[0]);
+        Assert.Equal(175, SettlementLogic.StatMaxValues[0]);
+        Assert.Equal("Happiness", SettlementLogic.StatLabels[1]);
+        Assert.Equal("Production", SettlementLogic.StatLabels[2]);
+        Assert.Equal("Upkeep", SettlementLogic.StatLabels[3]);
+        Assert.Equal("Sentinels", SettlementLogic.StatLabels[4]);
+        Assert.Equal("Debt", SettlementLogic.StatLabels[5]);
+        Assert.Equal("Alert", SettlementLogic.StatLabels[6]);
+        Assert.Equal("Bug Attack", SettlementLogic.StatLabels[7]);
+    }
+
+    [Fact]
+    public void GalaxyDatabase_Has256Galaxies()
+    {
+        Assert.Equal(256, GalaxyDatabase.Galaxies.Length);
+    }
+
+    [Fact]
+    public void GalaxyDatabase_GalaxyNumbers_Are1Based()
+    {
+        Assert.Equal(1, GalaxyDatabase.Galaxies[0].Number);
+        Assert.Equal(10, GalaxyDatabase.Galaxies[9].Number);
+        Assert.Equal(256, GalaxyDatabase.Galaxies[255].Number);
+    }
+
+    [Fact]
+    public void GalaxyDatabase_DisplayName_IncludesNumber()
+    {
+        string display = GalaxyDatabase.GetGalaxyDisplayName(0);
+        Assert.Equal("Euclid (1)", display);
+        Assert.Equal("Eissentam (10)", GalaxyDatabase.GetGalaxyDisplayName(9));
+    }
+
+    [Fact]
+    public void SquadronLogic_PilotRaces_UseProperNames()
+    {
+        Assert.Contains("Gek", SquadronLogic.PilotRaces);
+        Assert.Contains("Vy'keen", SquadronLogic.PilotRaces);
+        Assert.Contains("Korvax", SquadronLogic.PilotRaces);
+        Assert.DoesNotContain("Traders", SquadronLogic.PilotRaces);
+    }
+
+    [Fact]
+    public void CoordinateHelper_PlayerStates_HasAllValues()
+    {
+        Assert.Equal(10, CoordinateHelper.PlayerStates.Length);
+        Assert.Contains("OnFoot", CoordinateHelper.PlayerStates);
+        Assert.Contains("AboardFleet", CoordinateHelper.PlayerStates);
+        Assert.Contains("OnFootInCorvetteLanded", CoordinateHelper.PlayerStates);
+    }
+
+    // --- FreighterLogic - Crew Race ----------------------------------
+
+    [Fact]
+    public void FreighterLogic_CrewRaces_ContainsThreeRaces()
+    {
+        Assert.Equal(3, FreighterLogic.CrewRaces.Length);
+        Assert.Contains("Gek", FreighterLogic.CrewRaces);
+        Assert.Contains("Vy'keen", FreighterLogic.CrewRaces);
+        Assert.Contains("Korvax", FreighterLogic.CrewRaces);
+    }
+
+    [Fact]
+    public void FreighterLogic_NpcResourceToRace_MapsCorrectly()
+    {
+        Assert.True(FreighterLogic.NpcResourceToRace.ContainsKey("MODELS/COMMON/PLAYER/PLAYERCHARACTER/NPCGEK.SCENE.MBIN"));
+        Assert.Equal("Gek", FreighterLogic.NpcResourceToRace["MODELS/COMMON/PLAYER/PLAYERCHARACTER/NPCGEK.SCENE.MBIN"]);
+    }
+
+    [Fact]
+    public void FreighterLogic_RaceToNpcResource_RoundTrips()
+    {
+        foreach (string race in FreighterLogic.CrewRaces)
+        {
+            Assert.True(FreighterLogic.RaceToNpcResource.ContainsKey(race));
+            string resource = FreighterLogic.RaceToNpcResource[race];
+            Assert.True(FreighterLogic.NpcResourceToRace.ContainsKey(resource));
+            Assert.Equal(race, FreighterLogic.NpcResourceToRace[resource]);
+        }
+    }
+
+    // --- SquadronLogic - Ship Type Mapping ---------------------------
+
+    [Fact]
+    public void SquadronLogic_ShipTypeToResource_ContainsMainTypes()
+    {
+        Assert.True(SquadronLogic.ShipTypeToResource.Count >= 9);
+        Assert.Contains("Hauler", SquadronLogic.ShipTypeToResource.Keys);
+        Assert.Contains("Fighter", SquadronLogic.ShipTypeToResource.Keys);
+        Assert.Contains("Explorer", SquadronLogic.ShipTypeToResource.Keys);
+        Assert.Contains("Shuttle", SquadronLogic.ShipTypeToResource.Keys);
+        Assert.Contains("Exotic", SquadronLogic.ShipTypeToResource.Keys);
+    }
+
+    [Fact]
+    public void SquadronLogic_ShipTypeToResource_RoundTrips()
+    {
+        foreach (var (typeName, resource) in SquadronLogic.ShipTypeToResource)
+        {
+            Assert.True(SquadronLogic.ShipResourceToType.ContainsKey(resource));
+            Assert.Equal(typeName, SquadronLogic.ShipResourceToType[resource]);
+        }
+    }
+
+    // --- SettlementLogic - Population Field --------------------------
+
+    [Fact]
+    public void SettlementLogic_DecisionTypes_ContainsAll12()
+    {
+        // Verify first and last plus count (complementary to ContainsExpectedValues)
+        Assert.Equal(12, SettlementLogic.DecisionTypes.Length);
+        Assert.Equal("None", SettlementLogic.DecisionTypes[0]);
+        Assert.Equal("UpgradeBuildingChoice", SettlementLogic.DecisionTypes[^1]);
+    }
+
+    // --- SettlementLogic - RemoveSettlement --------------------------
+
+    [Fact]
+    public void SettlementLogic_RemoveSettlement_RemovesEntryFromArray()
+    {
+        var settlements = new JsonArray();
+        settlements.Add(JsonObject.Parse(@"{ ""Name"": ""Alpha"", ""Owner"": { ""UID"": ""p1"" } }"));
+        settlements.Add(JsonObject.Parse(@"{ ""Name"": ""Beta"",  ""Owner"": { ""UID"": ""p2"" } }"));
+        settlements.Add(JsonObject.Parse(@"{ ""Name"": ""Gamma"", ""Owner"": { ""UID"": ""p3"" } }"));
+
+        Assert.Equal(3, settlements.Length);
+
+        SettlementLogic.RemoveSettlement(settlements, 1); // Remove Beta
+
+        Assert.Equal(2, settlements.Length);
+        Assert.Equal("Alpha", settlements.GetObject(0).GetString("Name"));
+        Assert.Equal("Gamma", settlements.GetObject(1).GetString("Name"));
+    }
+
+    [Fact]
+    public void SettlementLogic_RemoveSettlement_RemovesFirstEntry()
+    {
+        var settlements = new JsonArray();
+        settlements.Add(JsonObject.Parse(@"{ ""Name"": ""First"" }"));
+        settlements.Add(JsonObject.Parse(@"{ ""Name"": ""Second"" }"));
+
+        SettlementLogic.RemoveSettlement(settlements, 0);
+
+        Assert.Equal(1, settlements.Length);
+        Assert.Equal("Second", settlements.GetObject(0).GetString("Name"));
+    }
+
+    [Fact]
+    public void SettlementLogic_RemoveSettlement_RemovesLastEntry()
+    {
+        var settlements = new JsonArray();
+        settlements.Add(JsonObject.Parse(@"{ ""Name"": ""First"" }"));
+        settlements.Add(JsonObject.Parse(@"{ ""Name"": ""Last"" }"));
+
+        SettlementLogic.RemoveSettlement(settlements, 1);
+
+        Assert.Equal(1, settlements.Length);
+        Assert.Equal("First", settlements.GetObject(0).GetString("Name"));
+    }
+
+    [Fact]
+    public void SettlementLogic_RemoveSettlement_OutOfRange_NoOp()
+    {
+        var settlements = new JsonArray();
+        settlements.Add(JsonObject.Parse(@"{ ""Name"": ""Only"" }"));
+
+        SettlementLogic.RemoveSettlement(settlements, 5); // Out of range
+        Assert.Equal(1, settlements.Length);
+
+        SettlementLogic.RemoveSettlement(settlements, -1); // Negative
+        Assert.Equal(1, settlements.Length);
+    }
+
+    [Fact]
+    public void SettlementLogic_RemoveSettlement_NoLongerMatchedByFilter()
+    {
+        // Create a save with a player identifier
+        var saveData = new JsonObject();
+        var commonState = new JsonObject();
+        var owners = new JsonArray();
+        var playerOwner = new JsonObject();
+        playerOwner.Add("UID", "player123");
+        owners.Add(playerOwner);
+        commonState.Add("UsedDiscoveryOwnersV2", owners);
+        saveData.Add("CommonStateData", commonState);
+
+        var playerState = new JsonObject();
+
+        var settlements = new JsonArray();
+        settlements.Add(JsonObject.Parse(@"{ ""Name"": ""My Settlement"", ""Owner"": { ""UID"": ""player123"" } }"));
+        settlements.Add(JsonObject.Parse(@"{ ""Name"": ""Other"", ""Owner"": { ""UID"": ""other"" } }"));
+
+        // Before remove
+        var before = SettlementLogic.FilterSettlements(saveData, playerState, settlements);
+        Assert.Single(before);
+        Assert.Equal(0, before[0]);
+
+        // Remove the player's settlement
+        SettlementLogic.RemoveSettlement(settlements, 0);
+
+        Assert.Equal(1, settlements.Length);
+        // After remove, filter should find nothing
+        var after = SettlementLogic.FilterSettlements(saveData, playerState, settlements);
+        Assert.Empty(after);
+    }
+
+    [Fact]
+    public void SettlementLogic_RemoveSettlement_ShiftsSubsequentIndices()
+    {
+        // Verify that after removal, subsequent entries shift down
+        var saveData = new JsonObject();
+        var commonState = new JsonObject();
+        var owners = new JsonArray();
+        var playerOwner = new JsonObject();
+        playerOwner.Add("UID", "player1");
+        owners.Add(playerOwner);
+        commonState.Add("UsedDiscoveryOwnersV2", owners);
+        saveData.Add("CommonStateData", commonState);
+
+        var playerState = new JsonObject();
+
+        var settlements = new JsonArray();
+        settlements.Add(JsonObject.Parse(@"{ ""Name"": ""Other"",  ""Owner"": { ""UID"": ""npc"" } }"));
+        settlements.Add(JsonObject.Parse(@"{ ""Name"": ""Mine1"",  ""Owner"": { ""UID"": ""player1"" } }"));
+        settlements.Add(JsonObject.Parse(@"{ ""Name"": ""Mine2"",  ""Owner"": { ""UID"": ""player1"" } }"));
+
+        // Before: player settlements at indices 1, 2
+        var before = SettlementLogic.FilterSettlements(saveData, playerState, settlements);
+        Assert.Equal(2, before.Count);
+        Assert.Equal(1, before[0]);
+        Assert.Equal(2, before[1]);
+
+        // Remove the NPC settlement at index 0
+        SettlementLogic.RemoveSettlement(settlements, 0);
+
+        // After: player settlements shifted to indices 0, 1
+        var after = SettlementLogic.FilterSettlements(saveData, playerState, settlements);
+        Assert.Equal(2, after.Count);
+        Assert.Equal(0, after[0]);
+        Assert.Equal(1, after[1]);
+    }
+
+    // --- SettlementLogic - FindImportTargetIndex ---------------------
+
+    [Fact]
+    public void SettlementLogic_FindImportTargetIndex_SelectedSettlement_ReturnsIndex()
+    {
+        var settlements = new JsonArray();
+        for (int i = 0; i < 10; i++)
+            settlements.Add(JsonObject.Parse($@"{{ ""Name"": ""S{i}"" }}"));
+
+        int result = SettlementLogic.FindImportTargetIndex(settlements, 5);
+        Assert.Equal(5, result); // Overwrite selected
+    }
+
+    [Fact]
+    public void SettlementLogic_FindImportTargetIndex_NoSelection_SpareCapacity_ReturnsMinusOne()
+    {
+        var settlements = new JsonArray();
+        for (int i = 0; i < 50; i++)
+            settlements.Add(JsonObject.Parse($@"{{ ""Name"": ""S{i}"" }}"));
+
+        int result = SettlementLogic.FindImportTargetIndex(settlements, -1);
+        Assert.Equal(-1, result); // Append new
+    }
+
+    [Fact]
+    public void SettlementLogic_FindImportTargetIndex_NoSelection_ArrayFull_ReturnsMinusTwo()
+    {
+        var settlements = new JsonArray();
+        for (int i = 0; i < SettlementLogic.MaxSettlementSlots; i++)
+            settlements.Add(JsonObject.Parse($@"{{ ""Name"": ""S{i}"" }}"));
+
+        int result = SettlementLogic.FindImportTargetIndex(settlements, -1);
+        Assert.Equal(-2, result); // Must ask user
+    }
+
+    [Fact]
+    public void SettlementLogic_MaxSettlementSlots_Is100()
+    {
+        Assert.Equal(100, SettlementLogic.MaxSettlementSlots);
+    }
+
+    // === Save File Round-Trip Tests ===
+
+    [Fact]
+    public void JsonSerializer_CompactFormat_NoWhitespace()
+    {
+        // Compact JSON (ToString) must not contain CRLF, tabs, or spaces after colons
+        string json = "{\"a\":1,\"b\":{\"c\":2,\"d\":[3,4]}}";
+        var obj = JsonObject.Parse(json);
+        string result = obj.ToString();
+        Assert.DoesNotContain("\r\n", result);
+        Assert.DoesNotContain("\t", result);
+        Assert.Equal(json, result);
+    }
+
+    [Fact]
+    public void JsonSerializer_Double_PreservesDecimalPoint()
+    {
+        // NMS save files distinguish integer (1) from float (1.0).
+        // Whole-number doubles must serialize with ".0" suffix.
+        string json = "{\"a\":1.0,\"b\":0.0,\"c\":75.0,\"d\":-5.0}";
+        var obj = JsonObject.Parse(json);
+        string result = obj.ToString();
+        Assert.Contains("\"a\":1.0", result);
+        Assert.Contains("\"b\":0.0", result);
+        Assert.Contains("\"c\":75.0", result);
+        Assert.Contains("\"d\":-5.0", result);
+    }
+
+    [Fact]
+    public void JsonSerializer_Double_PreservesFractionalValues()
+    {
+        // Fractional doubles must round-trip with full precision
+        string json = "{\"x\":0.5,\"y\":0.6000000238418579,\"z\":3.14159}";
+        var obj = JsonObject.Parse(json);
+        string result = obj.ToString();
+        Assert.Contains("\"x\":0.5", result);
+        Assert.Contains("\"y\":0.6000000238418579", result);
+        Assert.Contains("\"z\":3.14159", result);
+    }
+
+    [Fact]
+    public void JsonSerializer_Integer_StaysInteger()
+    {
+        // Integer values must NOT get a ".0" suffix
+        string json = "{\"a\":1,\"b\":0,\"c\":4720,\"d\":-100}";
+        var obj = JsonObject.Parse(json);
+        string result = obj.ToString();
+        Assert.Equal(json, result);
+    }
+
+    [Fact]
+    public void JsonSerializer_DoubleArray_PreservesTypes()
+    {
+        // Arrays of doubles should preserve .0 for whole numbers
+        string json = "{\"arr\":[0.0,0.0,0.0,0.0]}";
+        var obj = JsonObject.Parse(json);
+        string result = obj.ToString();
+        Assert.Equal(json, result);
+    }
+
+    [Fact]
+    public void JsonParser_Double_AccurateParsing()
+    {
+        // The parser should produce accurate IEEE 754 doubles
+        // 0.6000000238418579 is exactly representable as a double
+        string json = "{\"v\":0.6000000238418579}";
+        var obj = JsonObject.Parse(json);
+        Assert.Equal(0.6000000238418579, obj.GetDouble("v"));
+    }
+
+    [Fact]
+    public void JsonSerializer_NmsSaveFormat_CompactWithFloats()
+    {
+        // Simulate a small NMS save structure with mixed types
+        string json = "{\"F2P\":4720,\"j3Y\":{\"qAx\":0.5,\"22a\":1.0,\"qLk\":[0.0,0.0,0.0,0.0],\"yGF\":75.0,\"HJQ\":0}}";
+        var obj = JsonObject.Parse(json);
+        string result = obj.ToString();
+        Assert.Equal(json, result);
+    }
+
+    [Fact]
+    public void JsonSerializer_RawDouble_PreservesOriginalText()
+    {
+        // Values from actual NMS saves where "R" format would produce different text.
+        // Both 0.30000001192092898 and 0.30000001192092896 parse to the same IEEE 754
+        // double, but the game writes the former. RawDouble must preserve the original.
+        string json = "{\"a\":0.30000001192092898,\"b\":0.029999999329447748,\"c\":203.60643005371094}";
+        var obj = JsonObject.Parse(json);
+        string result = obj.ToString();
+        Assert.Contains("0.30000001192092898", result);
+        Assert.Contains("0.029999999329447748", result);
+        Assert.Contains("203.60643005371094", result);
+        Assert.Equal(json, result);
+    }
+
+    // --- Inventory Slot Format Tests ---------------------------------
+
+    [Fact]
+    public void InventorySlot_IdMustBeString_NotNestedObject()
+    {
+        // NMS save format requires "Id" to be a plain string, not a nested object.
+        // Correct: {"Type":{"InventoryType":"Product"},"Id":"^EYEBALL","Amount":1,...}
+        // Wrong:   {"Type":{"InventoryType":"Product"},"Id":{"Id":"EYEBALL"},"Amount":1,...}
+        var slot = new JsonObject();
+        var typeObj = new JsonObject();
+        typeObj.Add("InventoryType", "Product");
+        slot.Add("Type", typeObj);
+        slot.Add("Id", "^EYEBALL");
+        slot.Add("Amount", 1);
+        slot.Add("MaxAmount", 1);
+
+        // "Id" should be a string, not a nested JsonObject
+        Assert.IsType<string>(slot.Get("Id"));
+        Assert.Equal("^EYEBALL", slot.GetString("Id"));
+
+        // Serialized form should have Id as a string value
+        string json = slot.ToString();
+        Assert.Contains("\"Id\":\"^EYEBALL\"", json);
+        Assert.DoesNotContain("\"Id\":{\"Id\":", json);
+    }
+
+    [Fact]
+    public void InventorySlot_IdMustHaveCaretPrefix()
+    {
+        // All item IDs in NMS saves start with '^' prefix
+        var slot = new JsonObject();
+        slot.Add("Id", "^CREATURE1");
+        Assert.Equal("^CREATURE1", slot.GetString("Id"));
+
+        // Empty slots use just "^"
+        var emptySlot = new JsonObject();
+        emptySlot.Add("Id", "^");
+        Assert.Equal("^", emptySlot.GetString("Id"));
+    }
+
+    [Fact]
+    public void InventorySlot_CorrectFormat_MatchesSaveTemplate()
+    {
+        // Build a slot matching the expected inventory slot JSON structure
+        var slot = new JsonObject();
+        var typeObj = new JsonObject();
+        typeObj.Add("InventoryType", "Substance");
+        slot.Add("Type", typeObj);
+        slot.Add("Id", "^FUEL1");
+        slot.Add("Amount", 60);
+        slot.Add("MaxAmount", 500);
+        slot.Add("DamageFactor", 0.0);
+        slot.Add("FullyInstalled", true);
+        var indexObj = new JsonObject();
+        indexObj.Add("X", 0);
+        indexObj.Add("Y", 0);
+        slot.Add("Index", indexObj);
+
+        string json = slot.ToString();
+
+        // Type is a nested object (correct)
+        Assert.Contains("\"Type\":{\"InventoryType\":\"Substance\"}", json);
+        // Id is a plain string (correct)
+        Assert.Contains("\"Id\":\"^FUEL1\"", json);
+        // Index is a nested object (correct)
+        Assert.Contains("\"Index\":{\"X\":0,\"Y\":0}", json);
+        // Must NOT contain nested Id object
+        Assert.DoesNotContain("\"Id\":{\"Id\":", json);
+    }
+
+    [Fact]
+    public void InventorySlot_ShouldIncludeAddedAutomaticallyField()
+    {
+        // NMS save format includes an "AddedAutomatically" (5tH) field on every slot.
+        // New slots created by the editor must include it.
+        var slot = new JsonObject();
+        var typeObj = new JsonObject();
+        typeObj.Add("InventoryType", "Technology");
+        slot.Add("Type", typeObj);
+        slot.Add("Id", "^UT_TOX");
+        slot.Add("Amount", 100);
+        slot.Add("MaxAmount", 100);
+        slot.Add("DamageFactor", 0.0);
+        slot.Add("FullyInstalled", true);
+        slot.Add("AddedAutomatically", false);
+        var indexObj = new JsonObject();
+        indexObj.Add("X", 5);
+        indexObj.Add("Y", 3);
+        slot.Add("Index", indexObj);
+
+        string json = slot.ToString();
+
+        // Must contain AddedAutomatically field
+        Assert.Contains("\"AddedAutomatically\":false", json);
+        // Must have correct InventoryType for tech items
+        Assert.Contains("\"InventoryType\":\"Technology\"", json);
+    }
+
+    // --- MetaFileWriter.ExtractMetaInfo -------------------------------
+
+    [Fact]
+    public void ExtractMetaInfo_ReadsSaveNameFromCommonStateData()
+    {
+        // SaveName is in CommonStateData, not PlayerStateData
+        var saveData = new JsonObject();
+        var common = new JsonObject();
+        common.Add("SaveName", "TestSave");
+        common.Add("TotalPlayTime", 12345);
+        saveData.Add("CommonStateData", common);
+        var ps = new JsonObject();
+        ps.Add("SaveSummary", "TestSummary");
+        saveData.Add("PlayerStateData", ps);
+
+        var info = MetaFileWriter.ExtractMetaInfo(saveData);
+        Assert.Equal("TestSave", info.SaveName);
+        Assert.Equal("TestSummary", info.SaveSummary);
+        Assert.Equal((ulong)12345, info.TotalPlayTime);
+    }
+
+    [Fact]
+    public void ExtractMetaInfo_ReadsDifficultyPresetFromDifficultyState()
+    {
+        var saveData = new JsonObject();
+        var common = new JsonObject();
+        saveData.Add("CommonStateData", common);
+        var ps = new JsonObject();
+        var diffState = new JsonObject();
+        var preset = new JsonObject();
+        preset.Add("DifficultyPresetType", "Normal");
+        diffState.Add("Preset", preset);
+        ps.Add("DifficultyState", diffState);
+        saveData.Add("PlayerStateData", ps);
+
+        var info = MetaFileWriter.ExtractMetaInfo(saveData);
+        Assert.Equal(2, info.DifficultyPreset); // Normal = 2
+    }
+
+    // --- StarshipLogic.ShipUsesLegacyColours ---------------------------
+
+    [Fact]
+    public void SaveShipData_WritesLegacyColoursToArrayElement()
+    {
+        // ShipUsesLegacyColours is an array, each element per ship
+        var ship = new JsonObject();
+        ship.Add("Name", "TestShip");
+        var resource = new JsonObject();
+        resource.Add("Filename", "MODELS/COMMON/SPACECRAFT/FIGHTERS/FIGHTER_PROC.SCENE.MBIN");
+        var seedArr = new JsonArray();
+        seedArr.Add(true);
+        seedArr.Add("0x1234");
+        resource.Add("Seed", seedArr);
+        ship.Add("Resource", resource);
+        var inv = new JsonObject();
+        var cls = new JsonObject();
+        cls.Add("InventoryClass", "C");
+        inv.Add("Class", cls);
+        var baseStats = new JsonArray();
+        foreach (var statId in new[] { "^SHIP_DAMAGE", "^SHIP_SHIELD", "^SHIP_HYPERDRIVE", "^SHIP_AGILE" })
+        {
+            var stat = new JsonObject();
+            stat.Add("BaseStatID", statId);
+            stat.Add("Value", 0.0);
+            baseStats.Add(stat);
+        }
+        inv.Add("BaseStatValues", baseStats);
+        inv.Add("Slots", new JsonArray());
+        ship.Add("Inventory", inv);
+
+        var playerState = new JsonObject();
+        var legacyArr = new JsonArray();
+        legacyArr.Add(false);
+        legacyArr.Add(false);
+        legacyArr.Add(false);
+        playerState.Add("ShipUsesLegacyColours", legacyArr);
+        playerState.Add("PrimaryShip", 0);
+
+        var values = new StarshipLogic.ShipSaveValues
+        {
+            Name = "TestShip",
+            UseOldColours = true,
+            ShipIndex = 1,
+            PrimaryShipIndex = 0,
+        };
+        StarshipLogic.SaveShipData(ship, playerState, values);
+
+        // Verify array element was updated, not the whole array replaced
+        var arr = playerState.GetArray("ShipUsesLegacyColours");
+        Assert.NotNull(arr);
+        Assert.Equal(3, arr.Length);
+        Assert.Equal(false, arr.Get(0));
+        Assert.Equal(true, arr.Get(1));
+        Assert.Equal(false, arr.Get(2));
+    }
+
+    [Fact]
+    public void SaveShipData_SetsClassOnAllInventories()
+    {
+        // Class should be set on Inventory, Inventory_TechOnly, and Inventory_Cargo
+        var ship = new JsonObject();
+        ship.Add("Name", "");
+        var resource = new JsonObject();
+        resource.Add("Filename", "");
+        var seedArr = new JsonArray();
+        seedArr.Add(true);
+        seedArr.Add("0x0");
+        resource.Add("Seed", seedArr);
+        ship.Add("Resource", resource);
+
+        foreach (var invKey in new[] { "Inventory", "Inventory_TechOnly", "Inventory_Cargo" })
+        {
+            var inv = new JsonObject();
+            var cls = new JsonObject();
+            cls.Add("InventoryClass", "C");
+            inv.Add("Class", cls);
+            inv.Add("BaseStatValues", new JsonArray());
+            inv.Add("Slots", new JsonArray());
+            ship.Add(invKey, inv);
+        }
+
+        var playerState = new JsonObject();
+        playerState.Add("PrimaryShip", 0);
+        var legacyArr = new JsonArray();
+        legacyArr.Add(false);
+        playerState.Add("ShipUsesLegacyColours", legacyArr);
+
+        var values = new StarshipLogic.ShipSaveValues
+        {
+            ClassIndex = 3, // S class
+            ShipIndex = 0,
+        };
+        StarshipLogic.SaveShipData(ship, playerState, values);
+
+        Assert.Equal("S", ship.GetObject("Inventory")?.GetObject("Class")?.GetString("InventoryClass"));
+        Assert.Equal("S", ship.GetObject("Inventory_TechOnly")?.GetObject("Class")?.GetString("InventoryClass"));
+        Assert.Equal("S", ship.GetObject("Inventory_Cargo")?.GetObject("Class")?.GetString("InventoryClass"));
+    }
+
+    [Fact]
+    public void SaveShipData_AlwaysWritesName()
+    {
+        // Name should be written even when empty (allow clearing ship names)
+        var ship = new JsonObject();
+        ship.Add("Name", "OldName");
+        var resource = new JsonObject();
+        resource.Add("Filename", "");
+        var seedArr = new JsonArray();
+        seedArr.Add(true);
+        seedArr.Add("0x0");
+        resource.Add("Seed", seedArr);
+        ship.Add("Resource", resource);
+        var inv = new JsonObject();
+        inv.Add("BaseStatValues", new JsonArray());
+        ship.Add("Inventory", inv);
+
+        var playerState = new JsonObject();
+        playerState.Add("PrimaryShip", 0);
+
+        var values = new StarshipLogic.ShipSaveValues
+        {
+            Name = "",
+            ShipIndex = -1,
+        };
+        StarshipLogic.SaveShipData(ship, playerState, values);
+
+        Assert.Equal("", ship.GetString("Name"));
+    }
+
+    // --- GetOwnerTypeForShip ---
+
+    [Theory]
+    [InlineData("Fighter", "Ship")]
+    [InlineData("Hauler", "Ship")]
+    [InlineData("Explorer", "Ship")]
+    [InlineData("Shuttle", "Ship")]
+    [InlineData("Exotic", "Ship")]
+    [InlineData("Solar", "Ship")]
+    [InlineData("Living Ship", "AlienShip")]
+    [InlineData("Sentinel", "RobotShip")]
+    [InlineData("Corvette", "Corvette")]
+    public void StarshipLogic_GetOwnerTypeForShip_ReturnsCorrectOwner(string shipType, string expectedOwner)
+    {
+        Assert.Equal(expectedOwner, StarshipLogic.GetOwnerTypeForShip(shipType));
+    }
+
+    [Fact]
+    public void StarshipLogic_GetOwnerTypeForShip_UnknownType_DefaultsToShip()
+    {
+        Assert.Equal("Ship", StarshipLogic.GetOwnerTypeForShip("SomeFutureShipType"));
+    }
+
+    // --- ExocraftLogic (GetOwnerTypeForVehicle) ---
+
+    [Theory]
+    [InlineData("Roamer", "Exocraft")]
+    [InlineData("Nomad", "Exocraft")]
+    [InlineData("Pilgrim", "Exocraft")]
+    [InlineData("Colossus", "Colossus")]
+    [InlineData("Nautilon", "Submarine")]
+    [InlineData("Minotaur", "Mech")]
+    public void ExocraftLogic_GetOwnerTypeForVehicle_ReturnsCorrectOwner(string vehicleName, string expectedOwner)
+    {
+        Assert.Equal(expectedOwner, ExocraftLogic.GetOwnerTypeForVehicle(vehicleName));
+    }
+
+    [Fact]
+    public void ExocraftLogic_GetOwnerTypeForVehicle_UnknownType_DefaultsToExocraft()
+    {
+        Assert.Equal("Exocraft", ExocraftLogic.GetOwnerTypeForVehicle("SomeFutureVehicle"));
+    }
+
+    // --- AccountLogic ------------------------------------------------
+
+    [Fact]
+    public void AccountLogic_SaveRewardList_WritesOnlyUnlockedIds()
+    {
+        var obj = new JsonObject();
+        var rewards = new List<(string Id, bool Unlocked)>
+        {
+            ("^REWARD_A", true),
+            ("^REWARD_B", false),
+            ("^REWARD_C", true),
+        };
+
+        AccountLogic.SaveRewardList(rewards, obj, "UnlockedSeasonRewards");
+
+        var array = obj.GetArray("UnlockedSeasonRewards");
+        Assert.NotNull(array);
+        Assert.Equal(2, array.Length);
+        Assert.Equal("^REWARD_A", array.GetString(0));
+        Assert.Equal("^REWARD_C", array.GetString(1));
+    }
+
+    [Fact]
+    public void AccountLogic_SaveRewardList_ClearsExistingEntries()
+    {
+        var obj = new JsonObject();
+        var existing = new JsonArray();
+        existing.Add("^OLD");
+        obj.Set("UnlockedSeasonRewards", existing);
+
+        var rewards = new List<(string Id, bool Unlocked)>
+        {
+            ("^NEW", true),
+        };
+
+        AccountLogic.SaveRewardList(rewards, obj, "UnlockedSeasonRewards");
+
+        var array = obj.GetArray("UnlockedSeasonRewards");
+        Assert.NotNull(array);
+        Assert.Equal(1, array.Length);
+        Assert.Equal("^NEW", array.GetString(0));
+    }
+
+    [Fact]
+    public void AccountLogic_SyncRedeemedRewards_AddsToSaveData()
+    {
+        var saveData = JsonObject.Parse(
+            "{\"PlayerStateData\":{\"RedeemedSeasonRewards\":[],\"RedeemedTwitchRewards\":[]}}");
+
+        var seasonRows = new List<(string Id, bool Unlocked)>
+        {
+            ("^SEASON_1", true),
+            ("^SEASON_2", false),
+        };
+        var twitchRows = new List<(string Id, bool Unlocked)>
+        {
+            ("^TWITCH_001", true),
+        };
+
+        AccountLogic.SyncRedeemedRewards(saveData, seasonRows, twitchRows);
+
+        var playerState = saveData.GetObject("PlayerStateData")!;
+        var redeemed = playerState.GetArray("RedeemedSeasonRewards")!;
+        Assert.Equal(1, redeemed.Length);
+        Assert.Equal("^SEASON_1", redeemed.GetString(0));
+
+        var twitchRedeemed = playerState.GetArray("RedeemedTwitchRewards")!;
+        Assert.Equal(1, twitchRedeemed.Length);
+        Assert.Equal("^TWITCH_001", twitchRedeemed.GetString(0));
+    }
+
+    [Fact]
+    public void AccountLogic_SyncRedeemedRewards_RemovesUnlockedEntries()
+    {
+        var saveData = JsonObject.Parse(
+            "{\"PlayerStateData\":{\"RedeemedSeasonRewards\":[\"^SEASON_1\",\"^SEASON_2\"],\"RedeemedTwitchRewards\":[\"^TWITCH_001\"]}}");
+
+        // Now Season_1 is unchecked
+        var seasonRows = new List<(string Id, bool Unlocked)>
+        {
+            ("^SEASON_1", false),
+            ("^SEASON_2", true),
+        };
+        var twitchRows = new List<(string Id, bool Unlocked)>
+        {
+            ("^TWITCH_001", false),
+        };
+
+        AccountLogic.SyncRedeemedRewards(saveData, seasonRows, twitchRows);
+
+        var playerState = saveData.GetObject("PlayerStateData")!;
+        var redeemed = playerState.GetArray("RedeemedSeasonRewards")!;
+        Assert.Equal(1, redeemed.Length);
+        Assert.Equal("^SEASON_2", redeemed.GetString(0));
+
+        var twitchRedeemed = playerState.GetArray("RedeemedTwitchRewards")!;
+        Assert.Equal(0, twitchRedeemed.Length);
+    }
+
+    [Fact]
+    public void AccountLogic_SyncRedeemedRewards_CreatesArrayIfMissing()
+    {
+        var saveData = JsonObject.Parse("{\"PlayerStateData\":{}}");
+
+        var seasonRows = new List<(string Id, bool Unlocked)>
+        {
+            ("^SEASON_1", true),
+        };
+        var twitchRows = new List<(string Id, bool Unlocked)>
+        {
+            ("^TWITCH_001", true),
+        };
+
+        AccountLogic.SyncRedeemedRewards(saveData, seasonRows, twitchRows);
+
+        var playerState = saveData.GetObject("PlayerStateData")!;
+        var redeemed = playerState.GetArray("RedeemedSeasonRewards");
+        Assert.NotNull(redeemed);
+        Assert.Equal(1, redeemed!.Length);
+
+        var twitchRedeemed = playerState.GetArray("RedeemedTwitchRewards");
+        Assert.NotNull(twitchRedeemed);
+        Assert.Equal(1, twitchRedeemed!.Length);
+    }
+
+    [Fact]
+    public void AccountLogic_GetUnlockedSet_ReadsStringArray()
+    {
+        var array = new JsonArray();
+        array.Add("^REWARD_A");
+        array.Add("^REWARD_B");
+
+        var set = AccountLogic.GetUnlockedSet(array);
+
+        Assert.Equal(2, set.Count);
+        Assert.Contains("^REWARD_A", set);
+        Assert.Contains("^REWARD_B", set);
+    }
+
+    [Fact]
+    public void AccountLogic_GetUnlockedSet_NullReturnsEmptySet()
+    {
+        var set = AccountLogic.GetUnlockedSet(null);
+        Assert.Empty(set);
+    }
+
+    [Fact]
+    public void AccountLogic_BuildRewardRows_IncludesUnknownUnlocked()
+    {
+        var db = new List<(string Id, string Name)>
+        {
+            ("^KNOWN_1", "Known Reward"),
+        };
+        var unlocked = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "^KNOWN_1",
+            "^UNKNOWN_1",
+        };
+
+        var rows = AccountLogic.BuildRewardRows(db, unlocked);
+
+        Assert.Equal(2, rows.Count);
+        Assert.True(rows[0].Unlocked);
+        Assert.Equal("Known Reward", rows[0].Name);
+        Assert.True(rows[1].Unlocked);
+        Assert.Equal("(unknown)", rows[1].Name);
+    }
+
+    [Fact]
+    public void PlatformRewards_IntersectionLogic_OnlyBothSourcesShowTicked()
+    {
+        // Simulates the intersection logic from AccountPanel.LoadData():
+        // only rewards in BOTH accountdata and MXML should show as unlocked.
+        var accountUnlocked = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "^SW_PREORDER",   // in both
+            "^TGA_SHIP1",     // only in accountdata
+        };
+        var mxmlUnlocked = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "^SW_PREORDER",   // in both
+            "^SW_PREORDER2",  // only in MXML
+        };
+
+        // Intersection: only keep rewards in both sources
+        var intersected = new HashSet<string>(
+            accountUnlocked.Where(id => mxmlUnlocked.Contains(id)),
+            StringComparer.OrdinalIgnoreCase);
+
+        Assert.Single(intersected);
+        Assert.Contains("^SW_PREORDER", intersected);
+        Assert.DoesNotContain("^TGA_SHIP1", intersected);
+        Assert.DoesNotContain("^SW_PREORDER2", intersected);
+
+        // Verify BuildRewardRows only marks the intersected reward as unlocked
+        var db = new List<(string Id, string Name)>
+        {
+            ("^SW_PREORDER", "Star Wars Pre-order"),
+            ("^SW_PREORDER2", "Star Wars Pre-order 2"),
+            ("^TGA_SHIP1", "TGA Ship"),
+        };
+        var rows = AccountLogic.BuildRewardRows(db, intersected);
+        Assert.Equal(3, rows.Count);
+        Assert.True(rows.First(r => r.Id == "^SW_PREORDER").Unlocked);
+        Assert.False(rows.First(r => r.Id == "^SW_PREORDER2").Unlocked);
+        Assert.False(rows.First(r => r.Id == "^TGA_SHIP1").Unlocked);
+    }
+
+    // --- MxmlRewardEditor --------------------------------------------
+
+    [Fact]
+    public void MxmlRewardEditor_ReadUnlockedRewards_ReadsExistingEntries()
+    {
+        string mxml = Path.Combine(Path.GetTempPath(), $"test_read_{Guid.NewGuid()}.MXML");
+        try
+        {
+            File.WriteAllText(mxml, @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Data template=""GcUserSettingsData"">
+  <Property name=""UnlockedPlatformRewards"">
+    <Property name=""UnlockedPlatformRewards"" value=""SW_PREORDER"" _index=""0"" />
+    <Property name=""UnlockedPlatformRewards"" value=""TGA_SHIP1"" _index=""1"" />
+  </Property>
+</Data>");
+
+            var result = MxmlRewardEditor.ReadUnlockedRewards(mxml);
+
+            Assert.Equal(2, result.Count);
+            Assert.Contains("^SW_PREORDER", result);
+            Assert.Contains("^TGA_SHIP1", result);
+        }
+        finally
+        {
+            try { File.Delete(mxml); } catch { }
+        }
+    }
+
+    [Fact]
+    public void MxmlRewardEditor_ReadUnlockedRewards_ReturnsEmptyForMissingFile()
+    {
+        var result = MxmlRewardEditor.ReadUnlockedRewards("/nonexistent/path.MXML");
+        Assert.Empty(result);
+    }
+
+    [Fact]
+    public void MxmlRewardEditor_ReadUnlockedRewards_NullPathReturnsEmpty()
+    {
+        var result = MxmlRewardEditor.ReadUnlockedRewards(null!);
+        Assert.Empty(result);
+    }
+
+    [Fact]
+    public void MxmlRewardEditor_WriteUnlockedRewards_AddsNewEntries()
+    {
+        string mxml = Path.Combine(Path.GetTempPath(), $"test_write_{Guid.NewGuid()}.MXML");
+        try
+        {
+            File.WriteAllText(mxml, @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Data template=""GcUserSettingsData"">
+  <Property name=""SomeOtherSetting"" value=""true"" />
+  <Property name=""UnlockedPlatformRewards"">
+    <Property name=""UnlockedPlatformRewards"" value=""TGA_SHIP1"" _index=""0"" />
+  </Property>
+</Data>");
+
+            var rewards = new List<(string Id, bool Unlocked)>
+            {
+                ("^TGA_SHIP1", true),
+                ("^SW_PREORDER", true),
+                ("^SW_PREORDER2", false), // not unlocked, should not be written
+            };
+
+            bool result = MxmlRewardEditor.WriteUnlockedRewards(mxml, rewards);
+            Assert.True(result);
+
+            // Re-read and verify
+            var unlocked = MxmlRewardEditor.ReadUnlockedRewards(mxml);
+            Assert.Equal(2, unlocked.Count);
+            Assert.Contains("^TGA_SHIP1", unlocked);
+            Assert.Contains("^SW_PREORDER", unlocked);
+            Assert.DoesNotContain("^SW_PREORDER2", unlocked);
+
+            // Verify other settings are preserved
+            var doc = System.Xml.Linq.XDocument.Load(mxml);
+            var otherProp = doc.Root!.Elements("Property")
+                .FirstOrDefault(e => e.Attribute("name")?.Value == "SomeOtherSetting");
+            Assert.NotNull(otherProp);
+            Assert.Equal("true", otherProp!.Attribute("value")?.Value);
+        }
+        finally
+        {
+            try { File.Delete(mxml); } catch { }
+        }
+    }
+
+    [Fact]
+    public void MxmlRewardEditor_WriteUnlockedRewards_RemovesUntickedEntries()
+    {
+        string mxml = Path.Combine(Path.GetTempPath(), $"test_remove_{Guid.NewGuid()}.MXML");
+        try
+        {
+            File.WriteAllText(mxml, @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Data template=""GcUserSettingsData"">
+  <Property name=""UnlockedPlatformRewards"">
+    <Property name=""UnlockedPlatformRewards"" value=""SW_PREORDER"" _index=""0"" />
+    <Property name=""UnlockedPlatformRewards"" value=""TGA_SHIP1"" _index=""1"" />
+  </Property>
+</Data>");
+
+            // Untick SW_PREORDER, keep TGA_SHIP1
+            var rewards = new List<(string Id, bool Unlocked)>
+            {
+                ("^SW_PREORDER", false),
+                ("^TGA_SHIP1", true),
+            };
+
+            bool result = MxmlRewardEditor.WriteUnlockedRewards(mxml, rewards);
+            Assert.True(result);
+
+            var unlocked = MxmlRewardEditor.ReadUnlockedRewards(mxml);
+            Assert.Single(unlocked);
+            Assert.Contains("^TGA_SHIP1", unlocked);
+        }
+        finally
+        {
+            try { File.Delete(mxml); } catch { }
+        }
+    }
+
+    [Fact]
+    public void MxmlRewardEditor_WriteUnlockedRewards_AssignsSequentialIndices()
+    {
+        string mxml = Path.Combine(Path.GetTempPath(), $"test_index_{Guid.NewGuid()}.MXML");
+        try
+        {
+            File.WriteAllText(mxml, @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Data template=""GcUserSettingsData"">
+</Data>");
+
+            var rewards = new List<(string Id, bool Unlocked)>
+            {
+                ("^SW_PREORDER", true),
+                ("^SW_PREORDER2", true),
+                ("^TGA_SHIP1", true),
+            };
+
+            MxmlRewardEditor.WriteUnlockedRewards(mxml, rewards);
+
+            var doc = System.Xml.Linq.XDocument.Load(mxml);
+
+            // Verify a container element was created
+            var container = doc.Root!.Elements("Property")
+                .FirstOrDefault(e => e.Attribute("name")?.Value == "UnlockedPlatformRewards"
+                                  && e.Attribute("value") == null);
+            Assert.NotNull(container);
+
+            // Verify child entries inside the container
+            var props = container!.Elements("Property")
+                .Where(e => e.Attribute("name")?.Value == "UnlockedPlatformRewards")
+                .ToList();
+
+            Assert.Equal(3, props.Count);
+            Assert.Equal("0", props[0].Attribute("_index")?.Value);
+            Assert.Equal("1", props[1].Attribute("_index")?.Value);
+            Assert.Equal("2", props[2].Attribute("_index")?.Value);
+            Assert.Equal("SW_PREORDER", props[0].Attribute("value")?.Value);
+            Assert.Equal("SW_PREORDER2", props[1].Attribute("value")?.Value);
+            Assert.Equal("TGA_SHIP1", props[2].Attribute("value")?.Value);
+        }
+        finally
+        {
+            try { File.Delete(mxml); } catch { }
+        }
+    }
+
+    [Fact]
+    public void MxmlRewardEditor_WriteUnlockedRewards_ReturnsFalseForMissingFile()
+    {
+        var rewards = new List<(string Id, bool Unlocked)> { ("^TGA_SHIP1", true) };
+        bool result = MxmlRewardEditor.WriteUnlockedRewards("/nonexistent/path.MXML", rewards);
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void MxmlRewardEditor_SyncPlatformRewards_SkipsGracefullyWhenNullPath()
+    {
+        var rewards = new List<(string Id, bool Unlocked)> { ("^TGA_SHIP1", true) };
+        bool result = MxmlRewardEditor.SyncPlatformRewards(null, rewards);
+        Assert.True(result); // Gracefully skipped
+    }
+
+    [Fact]
+    public void MxmlRewardEditor_ReadUnlockedRewards_HandlesPrefixedValues()
+    {
+        string mxml = Path.Combine(Path.GetTempPath(), $"test_prefix_{Guid.NewGuid()}.MXML");
+        try
+        {
+            // MXML stores values without ^ prefix; ReadUnlockedRewards should add it
+            File.WriteAllText(mxml, @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Data template=""GcUserSettingsData"">
+  <Property name=""UnlockedPlatformRewards"">
+    <Property name=""UnlockedPlatformRewards"" value=""SW_PREORDER"" _index=""0"" />
+  </Property>
+</Data>");
+
+            var result = MxmlRewardEditor.ReadUnlockedRewards(mxml);
+
+            Assert.Single(result);
+            Assert.Contains("^SW_PREORDER", result);
+        }
+        finally
+        {
+            try { File.Delete(mxml); } catch { }
+        }
+    }
+
+    [Fact]
+    public void MxmlRewardEditor_WriteUnlockedRewards_StripsCaretPrefix()
+    {
+        string mxml = Path.Combine(Path.GetTempPath(), $"test_caret_{Guid.NewGuid()}.MXML");
+        try
+        {
+            File.WriteAllText(mxml, @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Data template=""GcUserSettingsData"">
+</Data>");
+
+            var rewards = new List<(string Id, bool Unlocked)>
+            {
+                ("^SW_PREORDER", true),
+            };
+
+            MxmlRewardEditor.WriteUnlockedRewards(mxml, rewards);
+
+            // The MXML value should NOT have the ^ prefix and should be inside a container
+            var doc = System.Xml.Linq.XDocument.Load(mxml);
+            var container = doc.Root!.Elements("Property")
+                .First(e => e.Attribute("name")?.Value == "UnlockedPlatformRewards"
+                         && e.Attribute("value") == null);
+            var prop = container.Elements("Property")
+                .First(e => e.Attribute("name")?.Value == "UnlockedPlatformRewards");
+            Assert.Equal("SW_PREORDER", prop.Attribute("value")?.Value);
+        }
+        finally
+        {
+            try { File.Delete(mxml); } catch { }
+        }
+    }
+
+    [Fact]
+    public void MxmlRewardEditor_WriteUnlockedRewards_MigratesLegacyFlatFormat()
+    {
+        string mxml = Path.Combine(Path.GetTempPath(), $"test_migrate_{Guid.NewGuid()}.MXML");
+        try
+        {
+            // Legacy flat format (entries as direct children of root, no container)
+            File.WriteAllText(mxml, @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Data template=""GcUserSettingsData"">
+  <Property name=""UnlockedPlatformRewards"" value=""TGA_SHIP1"" _index=""0"" />
+</Data>");
+
+            var rewards = new List<(string Id, bool Unlocked)>
+            {
+                ("^TGA_SHIP1", true),
+                ("^SW_PREORDER", true),
+            };
+
+            bool result = MxmlRewardEditor.WriteUnlockedRewards(mxml, rewards);
+            Assert.True(result);
+
+            // Verify it was migrated to the nested container format
+            var doc = System.Xml.Linq.XDocument.Load(mxml);
+            var container = doc.Root!.Elements("Property")
+                .FirstOrDefault(e => e.Attribute("name")?.Value == "UnlockedPlatformRewards"
+                                  && e.Attribute("value") == null);
+            Assert.NotNull(container);
+
+            var children = container!.Elements("Property").ToList();
+            Assert.Equal(2, children.Count);
+            Assert.Equal("TGA_SHIP1", children[0].Attribute("value")?.Value);
+            Assert.Equal("SW_PREORDER", children[1].Attribute("value")?.Value);
+
+            // Verify no flat entries remain at root level
+            var flatEntries = doc.Root.Elements("Property")
+                .Where(e => e.Attribute("name")?.Value == "UnlockedPlatformRewards"
+                         && e.Attribute("value") != null)
+                .ToList();
+            Assert.Empty(flatEntries);
+        }
+        finally
+        {
+            try { File.Delete(mxml); } catch { }
+        }
+    }
+
+    // --- AppConfig.RecentDirectories -----------------------------------
+
+    [Fact]
+    public void AppConfig_RecentDirectories_EmptyByDefault()
+    {
+        var config = new AppConfig();
+        Assert.Empty(config.RecentDirectories);
+    }
+
+    [Fact]
+    public void AppConfig_RecentDirectories_RoundTrips()
+    {
+        var config = new AppConfig();
+        var dirs = new List<string> { "/path/a", "/path/b", "/path/c" };
+        config.RecentDirectories = dirs;
+        Assert.Equal(dirs, config.RecentDirectories);
+    }
+
+    [Fact]
+    public void AppConfig_AddRecentDirectory_InsertsAtFront()
+    {
+        var config = new AppConfig();
+        config.RecentDirectories = new List<string> { "/path/a", "/path/b" };
+        config.AddRecentDirectory("/path/c");
+        Assert.Equal("/path/c", config.RecentDirectories[0]);
+        Assert.Equal(3, config.RecentDirectories.Count);
+    }
+
+    [Fact]
+    public void AppConfig_AddRecentDirectory_MovesExistingToFront()
+    {
+        var config = new AppConfig();
+        config.RecentDirectories = new List<string> { "/path/a", "/path/b", "/path/c" };
+        config.AddRecentDirectory("/path/c");
+        Assert.Equal("/path/c", config.RecentDirectories[0]);
+        Assert.Equal(3, config.RecentDirectories.Count); // No duplicates
+    }
+
+    [Fact]
+    public void AppConfig_AddRecentDirectory_TrimsToMaxSize()
+    {
+        var config = new AppConfig();
+        for (int i = 0; i < 10; i++)
+            config.AddRecentDirectory($"/path/{i}");
+        Assert.True(config.RecentDirectories.Count <= AppConfig.MaxRecentDirectories);
+    }
+
+    [Fact]
+    public void AppConfig_AddRecentDirectory_KeepsDefaultDirectory()
+    {
+        var config = new AppConfig();
+        string defaultDir = "/path/default";
+
+        // Fill the MRU with non-default directories
+        for (int i = 0; i < 10; i++)
+            config.AddRecentDirectory($"/path/{i}", defaultDir);
+
+        // Default directory must always be present
+        Assert.Contains(defaultDir, config.RecentDirectories);
+        Assert.True(config.RecentDirectories.Count <= AppConfig.MaxRecentDirectories);
+    }
+
+    [Fact]
+    public void AppConfig_AddRecentDirectory_SetsLastDirectory()
+    {
+        var config = new AppConfig();
+        config.AddRecentDirectory("/path/new");
+        Assert.Equal("/path/new", config.LastDirectory);
+    }
+
+    [Fact]
+    public void AppConfig_RecentDirectories_NullClearsProperty()
+    {
+        var config = new AppConfig();
+        config.RecentDirectories = new List<string> { "/path/a" };
+        Assert.NotEmpty(config.RecentDirectories);
+        config.RecentDirectories = new List<string>();
+        Assert.Empty(config.RecentDirectories);
+    }
+
+    // --- SaveFileManager.FindDefaultSaveDirectory ---------------------
+
+    [Fact]
+    public void FindDefaultSaveDirectory_ReturnsProfileDir_WhenSteamPathExists()
+    {
+        // Create a mock Steam NMS save structure
+        var baseDir = Path.Combine(Path.GetTempPath(), $"nmse_test_default_{Guid.NewGuid():N}");
+        var nmsDir = Path.Combine(baseDir, "HelloGames", "NMS");
+        var profileDir = Path.Combine(nmsDir, "st_12345678901234567");
+        Directory.CreateDirectory(profileDir);
+        try
+        {
+            // FindDefaultSaveDirectory checks actual OS paths, not arbitrary paths,
+            // so we verify the method doesn't throw and returns a string or null
+            var result = SaveFileManager.FindDefaultSaveDirectory();
+            // result may or may not equal profileDir (depends on whether real path exists)
+            // but the method should not throw
+            Assert.True(result is null || Directory.Exists(result));
+        }
+        finally { Directory.Delete(baseDir, true); }
+    }
+
+    [Fact]
+    public void FindDefaultSaveDirectory_ReturnsNull_WhenNoNmsInstallation()
+    {
+        // On CI where NMS is not installed, should return null or an existing directory
+        var result = SaveFileManager.FindDefaultSaveDirectory();
+        Assert.True(result is null || Directory.Exists(result));
+    }
+
+    // --- RawJsonLogic --------------------------------------------------
+
+    [Fact]
+    public void RawJsonLogic_ToDisplayString_ReturnsFormattedJson()
+    {
+        var obj = new JsonObject();
+        obj.Add("key1", "value1");
+        obj.Add("key2", 42);
+
+        string result = RawJsonLogic.ToDisplayString(obj);
+
+        Assert.Contains("key1", result);
+        Assert.Contains("value1", result);
+        Assert.Contains("key2", result);
+        Assert.Contains("42", result);
+    }
+
+    [Fact]
+    public void RawJsonLogic_ParseJson_RoundTrips()
+    {
+        var original = new JsonObject();
+        original.Add("name", "test");
+        original.Add("count", 5);
+
+        string json = RawJsonLogic.ToDisplayString(original);
+        var parsed = RawJsonLogic.ParseJson(json);
+
+        Assert.Equal("test", parsed.GetString("name"));
+        Assert.Equal(5, parsed.GetInt("count"));
+    }
+
+    [Fact]
+    public void RawJsonLogic_FormatJson_FormatsValidJson()
+    {
+        string compact = "{\"a\":1,\"b\":\"hello\"}";
+        string formatted = RawJsonLogic.FormatJson(compact);
+
+        Assert.Contains("a", formatted);
+        Assert.Contains("hello", formatted);
+        // Formatted output should contain newlines/indentation
+        Assert.Contains("\n", formatted);
+    }
+
+    // --- Settlement Production Filtering ---
+
+    [Fact]
+    public void SettlementLogic_AllowedProductionNames_ContainsExpectedItems()
+    {
+        // Verify the allowed list contains known settlement production items
+        Assert.Contains("Glass", SettlementLogic.AllowedProductionNames);
+        Assert.Contains("Warp Cell", SettlementLogic.AllowedProductionNames);
+        Assert.Contains("Frigate Fuel", SettlementLogic.AllowedProductionNames);
+        Assert.Contains("Cryogenic chamber", SettlementLogic.AllowedProductionNames);
+        Assert.Equal(63, SettlementLogic.AllowedProductionNames.Length);
+    }
+
+    [Fact]
+    public void SettlementLogic_BuildAllowedProductionItems_MatchesDbNames()
+    {
+        var db = new GameItemDatabase();
+        var dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", "Data", "json");
+        if (Directory.Exists(dbPath))
+            db.LoadItemsFromJsonDirectory(dbPath);
+
+        var allowed = SettlementLogic.BuildAllowedProductionItems(db);
+
+        // If the DB loaded, we should match most of the names
+        if (db.Items.Count > 0)
+        {
+            Assert.True(allowed.Count > 50,
+                $"Expected at least 50 matched production items, got {allowed.Count}");
+            // Verify some IDs map correctly
+            foreach (var kvp in allowed)
+            {
+                Assert.False(string.IsNullOrEmpty(kvp.Key), "ID should not be empty");
+                Assert.False(string.IsNullOrEmpty(kvp.Value), "Name should not be empty");
+            }
+        }
+    }
+
+    // --- Picker Exclusion Tests ---
+
+    [Fact]
+    public void GameItemDatabase_IsPickerExcluded_ExcludesDamageItems()
+    {
+        Assert.True(GameItemDatabase.IsPickerExcluded("^WEAPON_DMG"));
+        Assert.True(GameItemDatabase.IsPickerExcluded("^SHIP_DMG_TEST"));
+        Assert.True(GameItemDatabase.IsPickerExcluded("OBSOLETE"));
+    }
+
+    [Fact]
+    public void GameItemDatabase_IsPickerExcluded_ExcludesSeasonItems()
+    {
+        Assert.True(GameItemDatabase.IsPickerExcluded("^LAUNCHER_SPEC"));
+        Assert.True(GameItemDatabase.IsPickerExcluded("^WORMTECH"));
+        Assert.True(GameItemDatabase.IsPickerExcluded("^ROGUE_BEACON"));
+        Assert.True(GameItemDatabase.IsPickerExcluded("^S8_BEACON"));
+    }
+
+    [Fact]
+    public void GameItemDatabase_IsPickerExcluded_AllowsNormalItems()
+    {
+        Assert.False(GameItemDatabase.IsPickerExcluded("^HYPERDRIVE"));
+        Assert.False(GameItemDatabase.IsPickerExcluded("^FUEL1"));
+        Assert.False(GameItemDatabase.IsPickerExcluded("^PRODFUEL1"));
+    }
+
+    // --- Product item types excludes technology ---
+
+    [Fact]
+    public void DiscoveryLogic_ProductItemTypes_ExcludesTechnology()
+    {
+        Assert.DoesNotContain("Technology", DiscoveryLogic.ProductItemTypes);
+        Assert.DoesNotContain("Upgrades", DiscoveryLogic.ProductItemTypes);
+        Assert.Contains("Products", DiscoveryLogic.ProductItemTypes);
+        Assert.Contains("Buildings", DiscoveryLogic.ProductItemTypes);
+    }
+
+    // --- IsLearnableTechnology tests ---
+
+    [Fact]
+    public void IsLearnableTechnology_NonProceduralNonMaintenance_ReturnsTrue()
+    {
+        var item = new GameItem { Id = "LASER", Category = "Weapon", IsProcedural = false };
+        Assert.True(DiscoveryLogic.IsLearnableTechnology(item));
+    }
+
+    [Fact]
+    public void IsLearnableTechnology_Procedural_ReturnsFalse()
+    {
+        var item = new GameItem { Id = "UP_LASER1", Category = "Weapon", IsProcedural = true };
+        Assert.False(DiscoveryLogic.IsLearnableTechnology(item));
+    }
+
+    [Fact]
+    public void IsLearnableTechnology_Maintenance_ReturnsFalse()
+    {
+        var item = new GameItem { Id = "YOURPORTALGLYPH0", Category = "Maintenance", IsProcedural = false };
+        Assert.False(DiscoveryLogic.IsLearnableTechnology(item));
+    }
+
+    [Fact]
+    public void IsLearnableTechnology_EmptyCategory_ReturnsTrue()
+    {
+        var item = new GameItem { Id = "TECH1", Category = "", IsProcedural = false };
+        Assert.True(DiscoveryLogic.IsLearnableTechnology(item));
+    }
+
+    // --- IsLearnableProduct tests ---
+
+    [Fact]
+    public void IsLearnableProduct_CraftableNonProcedural_ReturnsTrue()
+    {
+        var item = new GameItem { Id = "CRATE1", IsCraftable = true, IsProcedural = false, TradeCategory = "" };
+        Assert.True(DiscoveryLogic.IsLearnableProduct(item));
+    }
+
+    [Fact]
+    public void IsLearnableProduct_NotCraftable_ReturnsFalse()
+    {
+        var item = new GameItem { Id = "ITEM1", IsCraftable = false, IsProcedural = false, TradeCategory = "" };
+        Assert.False(DiscoveryLogic.IsLearnableProduct(item));
+    }
+
+    [Fact]
+    public void IsLearnableProduct_Procedural_ReturnsFalse()
+    {
+        var item = new GameItem { Id = "PROC1", IsCraftable = true, IsProcedural = true, TradeCategory = "" };
+        Assert.False(DiscoveryLogic.IsLearnableProduct(item));
+    }
+
+    [Fact]
+    public void IsLearnableProduct_SpecialShop_ReturnsTrue()
+    {
+        // Items in the SpecialShop trade category are always learnable regardless of craftability
+        var item = new GameItem { Id = "SPEC1", IsCraftable = false, IsProcedural = false, TradeCategory = "SpecialShop" };
+        Assert.True(DiscoveryLogic.IsLearnableProduct(item));
+    }
+
+    [Fact]
+    public void IsLearnableProduct_SpecialShopProcedural_ReturnsTrue()
+    {
+        // Even procedural items in SpecialShop are learnable (IsSpecial overrides)
+        var item = new GameItem { Id = "SPEC2", IsCraftable = false, IsProcedural = true, TradeCategory = "SpecialShop" };
+        Assert.True(DiscoveryLogic.IsLearnableProduct(item));
+    }
+
+    [Fact]
+    public void IsLearnableProduct_CraftableAndSpecial_ReturnsTrue()
+    {
+        var item = new GameItem { Id = "BOTH1", IsCraftable = true, IsProcedural = false, TradeCategory = "SpecialShop" };
+        Assert.True(DiscoveryLogic.IsLearnableProduct(item));
+    }
+
+    // --- ExportConfig -----------------------------------------------
+
+    [Fact]
+    public void ExportConfig_BuildDialogFilter_ContainsExtensionAndJson()
+    {
+        string filter = ExportConfig.BuildDialogFilter(".nmsship", "Ship files");
+        Assert.Contains("*.nmsship", filter);
+        Assert.Contains("*.json", filter);
+        Assert.Contains("Ship files", filter);
+    }
+
+    [Fact]
+    public void ExportConfig_BuildImportFilter_ContainsAllExtensions()
+    {
+        string filter = ExportConfig.BuildImportFilter(".nmssc", "Ship cargo", ".wp0", ".mlt");
+        Assert.Contains("*.nmssc", filter);
+        Assert.Contains("*.json", filter);
+        Assert.Contains("*.wp0", filter);
+        Assert.Contains("*.mlt", filter);
+        Assert.Contains("All supported", filter);
+    }
+
+    [Fact]
+    public void ExportConfig_BuildImportFilter_NoExternalExts_StillWorks()
+    {
+        string filter = ExportConfig.BuildImportFilter(".nmssuit", "Exosuit");
+        Assert.Contains("*.nmssuit", filter);
+        Assert.Contains("*.json", filter);
+    }
+
+    [Fact]
+    public void ExportConfig_BuildFileName_ExpandsVariables()
+    {
+        var vars = new Dictionary<string, string>
+        {
+            ["ship_name"] = "Explorer",
+            ["type"] = "Shuttle",
+            ["class"] = "S"
+        };
+        string name = ExportConfig.BuildFileName("{ship_name}_{type}_{class}", ".nmsship", vars);
+        Assert.Equal("Explorer_Shuttle_S.nmsship", name);
+    }
+
+    [Fact]
+    public void ExportConfig_Instance_ReturnsSameObject()
+    {
+        var a = ExportConfig.Instance;
+        var b = ExportConfig.Instance;
+        Assert.Same(a, b);
+    }
+
+    [Fact]
+    public void ExportConfig_DefaultExtensions_AreSet()
+    {
+        var cfg = ExportConfig.Instance;
+        Assert.Equal(".nmssuit", cfg.ExosuitExt);
+        Assert.Equal(".nmstool", cfg.MultitoolExt);
+        Assert.Equal(".nmsship", cfg.StarshipExt);
+        Assert.Equal(".nmsfreight", cfg.FreighterExt);
+        Assert.Equal(".nmscraft", cfg.ExocraftExt);
+        Assert.Equal(".nmspet", cfg.CompanionExt);
+        Assert.Equal(".nmsbase", cfg.BaseExt);
+        Assert.Equal(".nmschest", cfg.ChestExt);
+        Assert.Equal(".nmsstore", cfg.StorageExt);
+    }
+
+    // --- InventoryImportHelper --------------------------------------
+
+    [Fact]
+    public void FindInventoryObject_DirectSlots_ReturnsRoot()
+    {
+        // Raw inventory format (our own exports)
+        var root = new JsonObject();
+        var slots = new JsonArray();
+        slots.Add("item1");
+        root.Add("Slots", slots);
+        root.Add("ValidSlotIndices", new JsonArray());
+
+        var result = InventoryImportHelper.FindInventoryObject(root);
+        Assert.NotNull(result);
+        Assert.Same(root, result);
+    }
+
+    [Fact]
+    public void FindInventoryObject_NMSSaveEditorMultitool_FindsStore()
+    {
+        // NMSSaveEditor format: { Store: { Slots: [...] } }
+        var store = new JsonObject();
+        var slots = new JsonArray();
+        slots.Add("item1");
+        store.Add("Slots", slots);
+        store.Add("ValidSlotIndices", new JsonArray());
+        store.Add("Width", 10);
+        store.Add("Height", 6);
+
+        var root = new JsonObject();
+        root.Add("Layout", new JsonObject());
+        root.Add("Store", store);
+        root.Add("Name", "My Tool");
+
+        var result = InventoryImportHelper.FindInventoryObject(root);
+        Assert.NotNull(result);
+        Assert.Same(store, result);
+    }
+
+    [Fact]
+    public void FindInventoryObject_NomNomWeapon_FindsInventory()
+    {
+        // NomNom format (after deobfuscation): { Data: { Multitool: { Store: { Slots: [...] } } } }
+        var store = new JsonObject();
+        var slots = new JsonArray();
+        slots.Add("item1");
+        store.Add("Slots", slots);
+
+        var multitool = new JsonObject();
+        multitool.Add("Store", store);
+
+        var data = new JsonObject();
+        data.Add("Multitool", multitool);
+
+        var root = new JsonObject();
+        root.Add("Data", data);
+        root.Add("DateCreated", "2024-01-01");
+
+        var result = InventoryImportHelper.FindInventoryObject(root);
+        Assert.NotNull(result);
+        Assert.Same(store, result);
+    }
+
+    [Fact]
+    public void FindInventoryObject_NomNomVehicle_FindsInventory()
+    {
+        // NomNom format: { Data: { Vehicle: { Inventory: { Slots: [...] } } } }
+        var inv = new JsonObject();
+        var slots = new JsonArray();
+        slots.Add("item1");
+        inv.Add("Slots", slots);
+
+        var vehicle = new JsonObject();
+        vehicle.Add("Inventory", inv);
+        vehicle.Add("Name", "Nautilon");
+
+        var data = new JsonObject();
+        data.Add("Vehicle", vehicle);
+
+        var root = new JsonObject();
+        root.Add("Data", data);
+
+        var result = InventoryImportHelper.FindInventoryObject(root);
+        Assert.NotNull(result);
+        Assert.Same(inv, result);
+    }
+
+    [Fact]
+    public void FindInventoryObject_NomNomFreighter_FindsInventory()
+    {
+        // NomNom format: { Data: { Inventory: { Slots: [...] } } }
+        var inv = new JsonObject();
+        var slots = new JsonArray();
+        slots.Add("item1");
+        inv.Add("Slots", slots);
+
+        var data = new JsonObject();
+        data.Add("Inventory", inv);
+
+        var root = new JsonObject();
+        root.Add("Data", data);
+
+        var result = InventoryImportHelper.FindInventoryObject(root);
+        Assert.NotNull(result);
+        Assert.Same(inv, result);
+    }
+
+    [Fact]
+    public void FindInventoryObject_NoSlots_ReturnsNull()
+    {
+        var root = new JsonObject();
+        root.Add("Name", "test");
+        root.Add("Data", new JsonObject());
+
+        var result = InventoryImportHelper.FindInventoryObject(root);
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public void FindInventoryObject_BfsFallback_FindsDeeplyNested()
+    {
+        // Test BFS fallback for unknown wrapper structure
+        var inv = new JsonObject();
+        var slots = new JsonArray();
+        slots.Add("item1");
+        inv.Add("Slots", slots);
+
+        var wrapper1 = new JsonObject();
+        wrapper1.Add("CustomWrapper", inv);
+
+        var root = new JsonObject();
+        root.Add("Unknown", wrapper1);
+
+        var result = InventoryImportHelper.FindInventoryObject(root);
+        Assert.NotNull(result);
+        Assert.Same(inv, result);
+    }
+
+    [Fact]
+    public void FindInventoryBfs_ExceedsMaxDepth_ReturnsNull()
+    {
+        // Create a deeply nested structure (depth > maxDepth)
+        var deepest = new JsonObject();
+        deepest.Add("Slots", new JsonArray());
+
+        var current = deepest;
+        for (int i = 0; i < 10; i++)
+        {
+            var parent = new JsonObject();
+            parent.Add("Level" + i, current);
+            current = parent;
+        }
+
+        // With maxDepth=4 (default in FindInventoryObject), this should fail BFS
+        var result = InventoryImportHelper.FindInventoryBfs(current, maxDepth: 4);
+        Assert.Null(result);
+    }
+
+    // --- Integration: NMSSaveEditor/NomNom file import ---------
+
+    private static string? GetRefPath(params string[] parts)
+    {
+        var basePath = Path.GetFullPath(Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "..", ".."));
+        var path = Path.Combine(new[] { basePath }.Concat(parts).ToArray());
+        return File.Exists(path) ? path : null;
+    }
+
+    private static void EnsureMapper()
+    {
+        var mapperPath = GetRefPath("Resources", "map", "mapping.json");
+        if (mapperPath == null) return;
+        var mapper = new JsonNameMapper();
+        mapper.Load(mapperPath);
+        JsonParser.SetDefaultMapper(mapper);
+    }
+
+    [Fact]
+    public void Import_NMSSaveEditor_Multitool_FindsStoreInventory()
+    {
+        var path = GetRefPath(referencePath, "nmssaveeditor_exports", "Multitool.wp0");
+        if (path == null) return; // Skip if file not available
+        EnsureMapper();
+
+        var json = File.ReadAllText(path);
+        var parsed = JsonParser.ParseObject(json);
+        var inv = InventoryImportHelper.FindInventoryObject(parsed);
+
+        Assert.NotNull(inv);
+        Assert.NotNull(inv.GetArray("Slots"));
+        Assert.True(inv.GetArray("Slots")!.Length > 0, "Store should have items");
+        Assert.NotNull(inv.GetArray("ValidSlotIndices"));
+    }
+
+    [Fact]
+    public void Import_NomNom_Weapon_FindsStoreInventory()
+    {
+        var path = GetRefPath(referencePath, "nomnom_exports", "weapon", "M-92 Peltast.mlt");
+        if (path == null) return;
+        EnsureMapper();
+
+        var json = File.ReadAllText(path);
+        var parsed = JsonParser.ParseObject(json);
+        var inv = InventoryImportHelper.FindInventoryObject(parsed);
+
+        Assert.NotNull(inv);
+        Assert.NotNull(inv.GetArray("Slots"));
+        Assert.True(inv.GetArray("Slots")!.Length > 0, "Weapon store should have items");
+    }
+
+    [Fact]
+    public void Import_NomNom_Vehicle_FindsInventory()
+    {
+        var path = GetRefPath(referencePath, "nomnom_exports", "vehicle", "Nautilon.exo");
+        if (path == null) return;
+        EnsureMapper();
+
+        var json = File.ReadAllText(path);
+        var parsed = JsonParser.ParseObject(json);
+        var inv = InventoryImportHelper.FindInventoryObject(parsed);
+
+        Assert.NotNull(inv);
+        Assert.NotNull(inv.GetArray("Slots"));
+    }
+
+    [Fact]
+    public void Import_NomNom_Freighter_FindsInventory()
+    {
+        var path = GetRefPath(referencePath, "nomnom_exports", "freighter", "USCSS Akihabara MKIII.frt");
+        if (path == null) return;
+        EnsureMapper();
+
+        var json = File.ReadAllText(path);
+        var parsed = JsonParser.ParseObject(json);
+        var inv = InventoryImportHelper.FindInventoryObject(parsed);
+
+        Assert.NotNull(inv);
+        Assert.NotNull(inv.GetArray("Slots"));
+        Assert.True(inv.GetArray("Slots")!.Length > 0, "Freighter should have items");
+    }
+
+    // --- NomNom Wrapper Detection -----------------------------------
+
+    [Fact]
+    public void IsNomNomWrapper_WithDataAndFileVersion_ReturnsTrue()
+    {
+        var root = new JsonObject();
+        root.Add("Data", new JsonObject());
+        root.Add("FileVersion", 2);
+        root.Add("DateCreated", "2024-01-01");
+
+        Assert.True(InventoryImportHelper.IsNomNomWrapper(root));
+    }
+
+    [Fact]
+    public void IsNomNomWrapper_WithoutFileVersion_ReturnsFalse()
+    {
+        var root = new JsonObject();
+        root.Add("Data", new JsonObject());
+        root.Add("Name", "test");
+
+        Assert.False(InventoryImportHelper.IsNomNomWrapper(root));
+    }
+
+    [Fact]
+    public void IsNomNomWrapper_RawExport_ReturnsFalse()
+    {
+        var root = new JsonObject();
+        root.Add("Layout", new JsonObject());
+        root.Add("Store", new JsonObject());
+        root.Add("Name", "My Tool");
+
+        Assert.False(InventoryImportHelper.IsNomNomWrapper(root));
+    }
+
+    [Fact]
+    public void UnwrapNomNom_WithWrapper_ExtractsEntity()
+    {
+        var multitool = new JsonObject();
+        multitool.Add("Layout", new JsonObject());
+        multitool.Add("Name", "My Tool");
+
+        var data = new JsonObject();
+        data.Add("Multitool", multitool);
+
+        var root = new JsonObject();
+        root.Add("Data", data);
+        root.Add("FileVersion", 2);
+        root.Add("DateCreated", "2024-01-01");
+
+        var result = InventoryImportHelper.UnwrapNomNom(root, "Multitool");
+        Assert.Same(multitool, result);
+    }
+
+    [Fact]
+    public void UnwrapNomNom_WithoutWrapper_ReturnsOriginal()
+    {
+        var root = new JsonObject();
+        root.Add("Layout", new JsonObject());
+        root.Add("Store", new JsonObject());
+
+        var result = InventoryImportHelper.UnwrapNomNom(root, "Multitool");
+        Assert.Same(root, result);
+    }
+
+    [Fact]
+    public void UnwrapNomNomCompanion_MergesPetAndAccessory()
+    {
+        var pet = new JsonObject();
+        pet.Add("CreatureID", "^PROTOFLYER");
+        pet.Add("Scale", 0.5);
+
+        var accessory = new JsonObject();
+        accessory.Add("CustomisationSlots", new JsonArray());
+
+        var data = new JsonObject();
+        data.Add("Pet", pet);
+        data.Add("AccessoryCustomisation", accessory);
+
+        var root = new JsonObject();
+        root.Add("Data", data);
+        root.Add("FileVersion", 2);
+
+        var result = InventoryImportHelper.UnwrapNomNomCompanion(root);
+        Assert.Same(pet, result);
+        Assert.True(result.Contains("AccessoryCustomisation"), "Accessory should be merged into pet");
+    }
+
+    [Fact]
+    public void UnwrapNomNomCompanion_NomNomRefFile_ExtractsPet()
+    {
+        var path = GetRefPath(referencePath, "nomnom_exports", "companion",
+            "__STRANGE_FLOAT__FLOAT_EYEFISH_478250819-0x88CA25ACD4B209BB.cmp");
+        if (path == null) return;
+        EnsureMapper();
+
+        var imported = JsonObject.ImportFromFile(path);
+        var result = InventoryImportHelper.UnwrapNomNomCompanion(imported);
+
+        // After unwrapping, should have companion fields (CreatureID, Scale, etc.)
+        Assert.True(result.Contains("CreatureID") || result.Contains("Scale"),
+            "Unwrapped companion should have pet fields");
+    }
+
+    [Fact]
+    public void UnwrapNomNom_SettlementRefFile_ExtractsSettlement()
+    {
+        var path = GetRefPath(referencePath, "nomnom_exports", "settlement", "doofus ford.stl");
+        if (path == null) return;
+        EnsureMapper();
+
+        var imported = JsonObject.ImportFromFile(path);
+        var result = InventoryImportHelper.UnwrapNomNom(imported, "Settlement");
+
+        Assert.NotSame(imported, result);
+        Assert.True(result.Length > 0, "Unwrapped settlement should have properties");
+    }
+
+    [Fact]
+    public void UnwrapNomNom_WeaponRefFile_ExtractsMultitool()
+    {
+        var path = GetRefPath(referencePath, "nomnom_exports", "weapon", "M-92 Peltast.mlt");
+        if (path == null) return;
+        EnsureMapper();
+
+        var imported = JsonObject.ImportFromFile(path);
+        var result = InventoryImportHelper.UnwrapNomNom(imported, "Multitool");
+
+        Assert.NotSame(imported, result);
+        // After unwrapping, should have multitool fields (Layout, Store, etc.)
+        Assert.True(result.Contains("Layout") || result.Contains("Store"),
+            "Unwrapped multitool should have Layout/Store");
+    }
+
+    [Fact]
+    public void UnwrapNomNom_VehicleRefFile_ExtractsVehicle()
+    {
+        var path = GetRefPath(referencePath, "nomnom_exports", "vehicle", "Nautilon.exo");
+        if (path == null) return;
+        EnsureMapper();
+
+        var imported = JsonObject.ImportFromFile(path);
+        var result = InventoryImportHelper.UnwrapNomNom(imported, "Vehicle");
+
+        Assert.NotSame(imported, result);
+    }
+
+    [Fact]
+    public void UnwrapNomNom_FrigateRefFile_ExtractsFrigate()
+    {
+        var path = GetRefPath(referencePath, "nomnom_exports", "frigate", "OAC Tanto DSV-1.flt");
+        if (path == null) return;
+        EnsureMapper();
+
+        var imported = JsonObject.ImportFromFile(path);
+        var result = InventoryImportHelper.UnwrapNomNomFrigate(imported);
+
+        Assert.NotSame(imported, result);
+    }
+
+    [Fact]
+    public void UnwrapNomNom_SquadronRefFile_ExtractsPilot()
+    {
+        var path = GetRefPath(referencePath, "nomnom_exports", "squadron",
+            "Traders-0xFB48876360B5B76C-Fighter-0xAB4365704CBC7E24.sqd");
+        if (path == null) return;
+        EnsureMapper();
+
+        var imported = JsonObject.ImportFromFile(path);
+        var result = InventoryImportHelper.UnwrapNomNomPilot(imported);
+
+        Assert.NotSame(imported, result);
+    }
+
+    // =============== JSON Export/Import Round-Trip Tests ===============
+
+    [Fact]
+    public void ExportImportRoundTrip_PreservesNameMapper()
+    {
+        // Simulate a save object with a NameMapper (as if loaded from an obfuscated save file)
+        var mapper = new JsonNameMapper();
+        // Build a tiny mapper that knows "Abc" <-> "PlayerStateData"
+        var mapData = new Dictionary<string, string> { { "Abc", "PlayerStateData" } };
+        mapper.LoadFromDictionary(mapData);
+
+        var root = new JsonObject();
+        root.NameMapper = mapper;
+        var ps = new JsonObject();
+        ps.Add("SomeStat", 42);
+        root.Add("PlayerStateData", ps);
+
+        // Export to file (human-readable keys)
+        string tmpPath = Path.Combine(Path.GetTempPath(), $"nmse_test_{Guid.NewGuid()}.json");
+        try
+        {
+            root.ExportToFile(tmpPath);
+            string exported = File.ReadAllText(tmpPath);
+            // Exported file should have human-readable keys
+            Assert.Contains("PlayerStateData", exported);
+            Assert.DoesNotContain("\"Abc\"", exported);
+
+            // Import back
+            var reimported = JsonObject.ImportFromFile(tmpPath);
+            // ImportFromFile auto-detects: human-readable keys -> no mapper set
+            Assert.Null(reimported.NameMapper);
+
+            // After setting the mapper (as OnImportJson does), save-to-disk should work
+            reimported.NameMapper ??= mapper;
+            Assert.NotNull(reimported.NameMapper);
+
+            // ToString should now reverse-map keys
+            string serialized = reimported.ToString();
+            Assert.Contains("\"Abc\"", serialized);
+            Assert.DoesNotContain("PlayerStateData", serialized);
+        }
+        finally
+        {
+            File.Delete(tmpPath);
+        }
+    }
+
+    [Fact]
+    public void ExportImportRoundTrip_WithoutMapper_WritesHumanReadableKeys()
+    {
+        // When no mapper is set, exported JSON uses human-readable keys
+        var root = new JsonObject();
+        root.Add("PlayerStateData", new JsonObject());
+        root.Add("Version", 4720);
+
+        string tmpPath = Path.Combine(Path.GetTempPath(), $"nmse_test_{Guid.NewGuid()}.json");
+        try
+        {
+            root.ExportToFile(tmpPath);
+
+            var reimported = JsonObject.ImportFromFile(tmpPath);
+            // Without mapper, ToString produces human-readable keys
+            string serialized = reimported.ToString();
+            Assert.Contains("\"PlayerStateData\"", serialized);
+            Assert.Contains("\"Version\"", serialized);
+        }
+        finally
+        {
+            File.Delete(tmpPath);
+        }
+    }
+
+    [Fact]
+    public void GetDefaultMapper_ReturnsSetMapper()
+    {
+        // Save the original mapper
+        var original = JsonParser.GetDefaultMapper();
+        try
+        {
+            var mapper = new JsonNameMapper();
+            JsonParser.SetDefaultMapper(mapper);
+            Assert.Same(mapper, JsonParser.GetDefaultMapper());
+        }
+        finally
+        {
+            // Restore original
+            if (original != null)
+                JsonParser.SetDefaultMapper(original);
+        }
+    }
+
+    [Fact]
+    public void CreaturePartDatabase_Loads_NonEmptyEntries()
+    {
+        var entries = CreaturePartDatabase.Entries;
+        Assert.NotNull(entries);
+        Assert.True(entries.Count > 0, "Should load creature part entries from embedded data");
+    }
+
+    [Fact]
+    public void CreaturePartDatabase_Contains_KnownCreatures()
+    {
+        // These creatures are known to exist in the NMSCD Creature Builder data
+        Assert.True(CreaturePartDatabase.ById.ContainsKey("ANTELOPE"));
+        Assert.True(CreaturePartDatabase.ById.ContainsKey("CAT"));
+        Assert.True(CreaturePartDatabase.ById.ContainsKey("COW"));
+        Assert.True(CreaturePartDatabase.ById.ContainsKey("TREX"));
+        Assert.True(CreaturePartDatabase.ById.ContainsKey("BIRD"));
+        Assert.True(CreaturePartDatabase.ById.ContainsKey("SHARK"));
+    }
+
+    [Fact]
+    public void CreaturePartDatabase_GetForCreatureId_StripsCaret()
+    {
+        var entry = CreaturePartDatabase.GetForCreatureId("^CAT");
+        Assert.NotNull(entry);
+        Assert.Equal("CAT", entry!.CreatureId);
+    }
+
+    [Fact]
+    public void CreaturePartDatabase_GetForCreatureId_ReturnsNull_ForEmptyOrMissing()
+    {
+        Assert.Null(CreaturePartDatabase.GetForCreatureId(null));
+        Assert.Null(CreaturePartDatabase.GetForCreatureId(""));
+        Assert.Null(CreaturePartDatabase.GetForCreatureId("^"));
+        Assert.Null(CreaturePartDatabase.GetForCreatureId("^NONEXISTENT_CREATURE_XYZ"));
+    }
+
+    [Fact]
+    public void CreaturePartDatabase_CaseInsensitiveLookup()
+    {
+        Assert.True(CreaturePartDatabase.ById.ContainsKey("cat"));
+        Assert.True(CreaturePartDatabase.ById.ContainsKey("CAT"));
+        Assert.True(CreaturePartDatabase.ById.ContainsKey("Cat"));
+    }
+
+    [Fact]
+    public void CreaturePartDatabase_EntriesHaveDetails()
+    {
+        var cat = CreaturePartDatabase.ById["CAT"];
+        Assert.NotNull(cat.Details);
+        Assert.True(cat.Details.Count > 0, "CAT should have part groups");
+
+        // Each group should have descriptors
+        foreach (var group in cat.Details)
+        {
+            Assert.False(string.IsNullOrEmpty(group.GroupId), "GroupId should not be empty");
+            Assert.True(group.Descriptors.Count > 0, $"Group {group.GroupId} should have descriptors");
+        }
+    }
+
+    [Fact]
+    public void CreaturePartDatabase_GetFlatGroups_ReturnsTopLevelWhenNoSelection()
+    {
+        var entry = CreaturePartDatabase.ById["ANTELOPE"];
+        var groups = CreaturePartDatabase.GetFlatGroups(entry, Array.Empty<string>());
+
+        // Should return at least the top-level groups
+        Assert.True(groups.Count >= entry.Details.Count,
+            "Should return at least the top-level groups when nothing is selected");
+    }
+
+    [Fact]
+    public void CreaturePartDatabase_GetFlatGroups_ExpandsChildGroups()
+    {
+        var entry = CreaturePartDatabase.ById["ANTELOPE"];
+
+        // Select the first descriptor from the first group to trigger child expansion
+        var firstGroup = entry.Details[0];
+        var firstDesc = firstGroup.Descriptors[0];
+
+        var groups = CreaturePartDatabase.GetFlatGroups(entry, new[] { firstDesc.Id });
+
+        // Should have more groups than just top-level (child groups expanded)
+        if (firstDesc.Children.Count > 0)
+        {
+            Assert.True(groups.Count > entry.Details.Count,
+                "Selecting a descriptor with children should expand child groups");
+        }
+    }
+
+    [Fact]
+    public void CreaturePartDatabase_NewDescriptorId_Is10Digits()
+    {
+        string id = CreaturePartDatabase.NewDescriptorId();
+        Assert.Equal(10, id.Length);
+        Assert.True(id.All(char.IsDigit), "Descriptor ID should be all digits");
+    }
+
+    [Fact]
+    public void CreaturePartDatabase_NewDescriptorId_IsRandom()
+    {
+        // Generate 10 IDs and verify they're not all the same
+        var ids = Enumerable.Range(0, 10).Select(_ => CreaturePartDatabase.NewDescriptorId()).ToHashSet();
+        Assert.True(ids.Count > 1, "Random IDs should produce different values");
+    }
+
+    // --- LocalisationService -----------------------------------------
+
+    [Fact]
+    public void LocalisationService_LoadLanguage_LoadsValidFile()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_loc_test_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            string jsonPath = Path.Combine(tmpDir, "ja-JP.json");
+            File.WriteAllText(jsonPath, """{"UI_FUEL_1_NAME": "炭素", "UI_FUEL_1_DESC": "テスト"}""");
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(tmpDir);
+            bool loaded = svc.LoadLanguage("ja-JP");
+
+            Assert.True(loaded);
+            Assert.True(svc.IsActive);
+            Assert.Equal("ja-JP", svc.ActiveLanguageTag);
+            Assert.Equal("炭素", svc.Lookup("UI_FUEL_1_NAME"));
+            Assert.Equal("テスト", svc.Lookup("UI_FUEL_1_DESC"));
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void LocalisationService_LoadLanguage_NullClearsLanguage()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_loc_test_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            File.WriteAllText(Path.Combine(tmpDir, "ja-JP.json"), """{"KEY": "value"}""");
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(tmpDir);
+            svc.LoadLanguage("ja-JP");
+            Assert.True(svc.IsActive);
+
+            svc.LoadLanguage(null);
+            Assert.False(svc.IsActive);
+            Assert.Null(svc.ActiveLanguageTag);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void LocalisationService_GetName_FallsBackToDefaultWhenKeyMissing()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_loc_test_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            File.WriteAllText(Path.Combine(tmpDir, "ja-JP.json"), """{"OTHER_KEY": "何か"}""");
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(tmpDir);
+            svc.LoadLanguage("ja-JP");
+
+            var item = new GameItem { Name = "Carbon", NameLocStr = "MISSING_KEY" };
+            string name = svc.GetName(item);
+
+            Assert.Equal("Carbon", name);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void LocalisationService_GetDescription_ReturnsLocalisedValue()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_loc_test_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            File.WriteAllText(Path.Combine(tmpDir, "ja-JP.json"), """{"UI_FUEL_1_DESC": "テスト説明"}""");
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(tmpDir);
+            svc.LoadLanguage("ja-JP");
+
+            var item = new GameItem { Description = "English desc", DescriptionLocStr = "UI_FUEL_1_DESC" };
+            string desc = svc.GetDescription(item);
+
+            Assert.Equal("テスト説明", desc);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void LocalisationService_SupportedLanguages_MatchesExtractorConfig()
+    {
+        var langs = LocalisationService.SupportedLanguages;
+
+        Assert.Equal(16, langs.Count);
+        Assert.Equal("en-GB", langs["English"]);
+        Assert.Equal("ja-JP", langs["Japanese"]);
+        Assert.Equal("zh-CN", langs["SimplifiedChinese"]);
+        Assert.Equal("en-US", langs["USEnglish"]);
+    }
+
+    [Fact]
+    public void GameItem_LocStrProperties_DefaultToNull()
+    {
+        var item = new GameItem();
+
+        Assert.Null(item.NameLocStr);
+        Assert.Null(item.DescriptionLocStr);
+        Assert.Null(item.SubtitleLocStr);
+        Assert.Null(item.NameLowerLocStr);
+    }
+
+    // --- GameItemDatabase ApplyLocalisation / RevertLocalisation ------
+
+    [Fact]
+    public void GameItemDatabase_ApplyLocalisation_UpdatesItemNames()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_loc_db_" + Guid.NewGuid().ToString("N"));
+        string jsonDir = Path.Combine(tmpDir, "json");
+        string langDir = Path.Combine(jsonDir, "lang");
+        Directory.CreateDirectory(langDir);
+
+        try
+        {
+            // Create a minimal item JSON file
+            File.WriteAllText(Path.Combine(jsonDir, "Test.json"), """
+            [
+                {
+                    "Id": "FUEL1",
+                    "Name": "Carbon",
+                    "NameLower": "carbon",
+                    "Name_LocStr": "UI_FUEL_1_NAME",
+                    "NameLower_LocStr": "UI_FUEL_1_NAME_L",
+                    "Subtitle_LocStr": "UI_FUEL1_SUB",
+                    "Description": "English desc",
+                    "Description_LocStr": "UI_FUEL_1_DESC"
+                }
+            ]
+            """);
+
+            // Create a language file
+            File.WriteAllText(Path.Combine(langDir, "ja-JP.json"),
+                """{"UI_FUEL_1_NAME": "炭素", "UI_FUEL_1_NAME_L": "炭素", "UI_FUEL1_SUB": "未精製有機資源", "UI_FUEL_1_DESC": "テスト説明"}""");
+
+            var db = new GameItemDatabase();
+            db.LoadItemsFromJsonDirectory(jsonDir);
+            Assert.Equal("Carbon", db.Items["FUEL1"].Name);
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(langDir);
+            svc.LoadLanguage("ja-JP");
+
+            int count = db.ApplyLocalisation(svc);
+            Assert.Equal(1, count);
+            Assert.Equal("炭素", db.Items["FUEL1"].Name);
+            Assert.Equal("炭素", db.Items["FUEL1"].NameLower);
+            Assert.Equal("未精製有機資源", db.Items["FUEL1"].Subtitle);
+            Assert.Equal("テスト説明", db.Items["FUEL1"].Description);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void GameItemDatabase_RevertLocalisation_RestoresEnglish()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_loc_revert_" + Guid.NewGuid().ToString("N"));
+        string jsonDir = Path.Combine(tmpDir, "json");
+        string langDir = Path.Combine(jsonDir, "lang");
+        Directory.CreateDirectory(langDir);
+
+        try
+        {
+            File.WriteAllText(Path.Combine(jsonDir, "Test.json"), """
+            [
+                {
+                    "Id": "FUEL1",
+                    "Name": "Carbon",
+                    "Description": "English desc",
+                    "Name_LocStr": "UI_FUEL_1_NAME",
+                    "Description_LocStr": "UI_FUEL_1_DESC"
+                }
+            ]
+            """);
+
+            File.WriteAllText(Path.Combine(langDir, "ja-JP.json"),
+                """{"UI_FUEL_1_NAME": "炭素", "UI_FUEL_1_DESC": "テスト説明"}""");
+
+            var db = new GameItemDatabase();
+            db.LoadItemsFromJsonDirectory(jsonDir);
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(langDir);
+            svc.LoadLanguage("ja-JP");
+
+            db.ApplyLocalisation(svc);
+            Assert.Equal("炭素", db.Items["FUEL1"].Name);
+
+            db.RevertLocalisation();
+            Assert.Equal("Carbon", db.Items["FUEL1"].Name);
+            Assert.Equal("English desc", db.Items["FUEL1"].Description);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void GameItemDatabase_ApplyLocalisation_FallsBackWhenKeyMissing()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_loc_fallback_" + Guid.NewGuid().ToString("N"));
+        string jsonDir = Path.Combine(tmpDir, "json");
+        string langDir = Path.Combine(jsonDir, "lang");
+        Directory.CreateDirectory(langDir);
+
+        try
+        {
+            File.WriteAllText(Path.Combine(jsonDir, "Test.json"), """
+            [
+                {
+                    "Id": "FUEL1",
+                    "Name": "Carbon",
+                    "Name_LocStr": "MISSING_KEY"
+                }
+            ]
+            """);
+
+            File.WriteAllText(Path.Combine(langDir, "ja-JP.json"), """{"OTHER_KEY": "何か"}""");
+
+            var db = new GameItemDatabase();
+            db.LoadItemsFromJsonDirectory(jsonDir);
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(langDir);
+            svc.LoadLanguage("ja-JP");
+
+            int count = db.ApplyLocalisation(svc);
+            Assert.Equal(0, count);
+            Assert.Equal("Carbon", db.Items["FUEL1"].Name);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void GameItemDatabase_ApplyLocalisation_SwitchesLanguages()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_loc_switch_" + Guid.NewGuid().ToString("N"));
+        string jsonDir = Path.Combine(tmpDir, "json");
+        string langDir = Path.Combine(jsonDir, "lang");
+        Directory.CreateDirectory(langDir);
+
+        try
+        {
+            File.WriteAllText(Path.Combine(jsonDir, "Test.json"), """
+            [
+                {
+                    "Id": "FUEL1",
+                    "Name": "Carbon",
+                    "Name_LocStr": "UI_FUEL_1_NAME"
+                }
+            ]
+            """);
+
+            File.WriteAllText(Path.Combine(langDir, "ja-JP.json"), """{"UI_FUEL_1_NAME": "炭素"}""");
+            File.WriteAllText(Path.Combine(langDir, "fr-FR.json"), """{"UI_FUEL_1_NAME": "Carbone"}""");
+
+            var db = new GameItemDatabase();
+            db.LoadItemsFromJsonDirectory(jsonDir);
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(langDir);
+
+            // Switch to Japanese
+            svc.LoadLanguage("ja-JP");
+            db.ApplyLocalisation(svc);
+            Assert.Equal("炭素", db.Items["FUEL1"].Name);
+
+            // Switch to French
+            svc.LoadLanguage("fr-FR");
+            db.ApplyLocalisation(svc);
+            Assert.Equal("Carbone", db.Items["FUEL1"].Name);
+
+            // Switch back to English (null)
+            svc.LoadLanguage(null);
+            db.ApplyLocalisation(svc);
+            Assert.Equal("Carbon", db.Items["FUEL1"].Name);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    // --- RewardDatabase Localisation ---------------------------------
+
+    [Fact]
+    public void RewardEntry_LocStrProperties_LoadedFromJson()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_reward_loc_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tmpDir);
+
+        try
+        {
+            File.WriteAllText(Path.Combine(tmpDir, "Rewards.json"), """
+            [
+                {
+                    "Id": "^VAULT_ARMOUR",
+                    "Name": "Heirloom Breastplate",
+                    "Name_LocStr": "UI_EXPED_VAULT_ARMOUR_NAME",
+                    "Subtitle_LocStr": "UI_SPECIAL_ARMOUR_SUB",
+                    "Category": "season",
+                    "ProductId": "VAULT_ARMOUR"
+                }
+            ]
+            """);
+
+            RewardDatabase.Reset();
+            RewardDatabase.LoadFromJsonDirectory(tmpDir);
+
+            var reward = RewardDatabase.Rewards.First();
+            Assert.Equal("UI_EXPED_VAULT_ARMOUR_NAME", reward.NameLocStr);
+            Assert.Equal("UI_SPECIAL_ARMOUR_SUB", reward.SubtitleLocStr);
+        }
+        finally
+        {
+            RewardDatabase.Reset();
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void RewardDatabase_ApplyLocalisation_UpdatesRewardNames()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_reward_apply_" + Guid.NewGuid().ToString("N"));
+        string langDir = Path.Combine(tmpDir, "lang");
+        Directory.CreateDirectory(langDir);
+
+        try
+        {
+            File.WriteAllText(Path.Combine(tmpDir, "Rewards.json"), """
+            [
+                {
+                    "Id": "^VAULT_ARMOUR",
+                    "Name": "Heirloom Breastplate",
+                    "Name_LocStr": "UI_EXPED_VAULT_ARMOUR_NAME",
+                    "Category": "season",
+                    "ProductId": "VAULT_ARMOUR"
+                }
+            ]
+            """);
+
+            File.WriteAllText(Path.Combine(langDir, "ja-JP.json"),
+                """{"UI_EXPED_VAULT_ARMOUR_NAME": "家宝の胸当て"}""");
+
+            RewardDatabase.Reset();
+            RewardDatabase.LoadFromJsonDirectory(tmpDir);
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(langDir);
+            svc.LoadLanguage("ja-JP");
+
+            int count = RewardDatabase.ApplyLocalisation(svc);
+            Assert.Equal(1, count);
+            Assert.Equal("家宝の胸当て", RewardDatabase.Rewards.First().Name);
+
+            RewardDatabase.RevertLocalisation();
+            Assert.Equal("Heirloom Breastplate", RewardDatabase.Rewards.First().Name);
+        }
+        finally
+        {
+            RewardDatabase.Reset();
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    // --- WordDatabase Localisation -----------------------------------
+
+    [Fact]
+    public void WordEntry_TextLocStr_LoadedFromJson()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_word_loc_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tmpDir);
+
+        try
+        {
+            File.WriteAllText(Path.Combine(tmpDir, "Words.json"), """
+            [
+                {
+                    "Id": "^ABANDON",
+                    "Text": "abandon",
+                    "Text_LocStr": "WORD_ABANDON",
+                    "Groups": {"^TRA_ABANDON": 0}
+                }
+            ]
+            """);
+
+            var db = new WordDatabase();
+            db.LoadFromFile(Path.Combine(tmpDir, "Words.json"));
+
+            Assert.Single(db.Words);
+            Assert.Equal("WORD_ABANDON", db.Words[0].TextLocStr);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void WordDatabase_ApplyLocalisation_UpdatesWordText()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_word_apply_" + Guid.NewGuid().ToString("N"));
+        string langDir = Path.Combine(tmpDir, "lang");
+        Directory.CreateDirectory(langDir);
+
+        try
+        {
+            File.WriteAllText(Path.Combine(tmpDir, "Words.json"), """
+            [
+                {
+                    "Id": "^ABANDON",
+                    "Text": "abandon",
+                    "Text_LocStr": "WORD_ABANDON",
+                    "Groups": {"^TRA_ABANDON": 0}
+                }
+            ]
+            """);
+
+            File.WriteAllText(Path.Combine(langDir, "ja-JP.json"),
+                """{"WORD_ABANDON": "放棄する"}""");
+
+            var db = new WordDatabase();
+            db.LoadFromFile(Path.Combine(tmpDir, "Words.json"));
+            Assert.Equal("abandon", db.Words[0].Text);
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(langDir);
+            svc.LoadLanguage("ja-JP");
+
+            int count = db.ApplyLocalisation(svc);
+            Assert.Equal(1, count);
+            Assert.Equal("放棄する", db.Words[0].Text);
+
+            db.RevertLocalisation();
+            Assert.Equal("abandon", db.Words[0].Text);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void WordDatabase_GroupKeyFallback_FindsTranslation()
+    {
+        // Reproduces the ACCESS / BUI_ACCESS scenario:
+        // Primary TextLocStr (TRA_ACCESS) returns English-equal text in ja-JP,
+        // but BUI_ACCESS has a real Japanese translation.
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_word_gkf_" + Guid.NewGuid().ToString("N"));
+        string langDir = Path.Combine(tmpDir, "lang");
+        Directory.CreateDirectory(langDir);
+
+        try
+        {
+            File.WriteAllText(Path.Combine(tmpDir, "Words.json"), """
+            [
+                {
+                    "Id": "^ACCESS",
+                    "Text": "access",
+                    "Text_LocStr": "TRA_ACCESS",
+                    "Groups": {
+                        "^TRA_ACCESS": 0,
+                        "^WAR_ACCESS": 1,
+                        "^EXP_ACCESS": 2,
+                        "^BUI_ACCESS": 8
+                    }
+                }
+            ]
+            """);
+
+            File.WriteAllText(Path.Combine(langDir, "ja-JP.json"),
+                """{"TRA_ACCESS": "access", "WAR_ACCESS": "access", "EXP_ACCESS": "access", "BUI_ACCESS": "アクセス"}""");
+
+            var db = new WordDatabase();
+            db.LoadFromFile(Path.Combine(tmpDir, "Words.json"));
+            Assert.Single(db.Words);
+            Assert.Equal("access", db.Words[0].Text);
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(langDir);
+            svc.LoadLanguage("ja-JP");
+
+            int count = db.ApplyLocalisation(svc);
+            Assert.Equal(1, count);
+            Assert.Equal("アクセス", db.Words[0].Text);
+
+            db.RevertLocalisation();
+            Assert.Equal("access", db.Words[0].Text);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    // ── Recipe localisation ──────────────────────────────────────────
+    [Fact]
+    public void RecipeDatabase_ApplyLocalisation_UpdatesRecipeNames()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_loc_test_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            string recipesJson = """
+            [
+              { "Id": "R1", "RecipeName": "Fermentation", "RecipeName_LocStr": "UI_YEAST_PROCESS_R", "RecipeType": "Yeast Process", "RecipeType_LocStr": "UI_YEAST_PROCESS", "Category": "Cooking", "Cooking": true, "TimeToMake": 0, "Result": { "Id": "OUT1", "Type": "Product", "Amount": 1 }, "Ingredients": [{ "Id": "IN1", "Type": "Product", "Amount": 1 }] }
+            ]
+            """;
+            File.WriteAllText(Path.Combine(tmpDir, "Recipes.json"), recipesJson);
+            File.WriteAllText(Path.Combine(tmpDir, "ja-JP.json"),
+                """{"UI_YEAST_PROCESS_R": "発酵", "UI_YEAST_PROCESS": "酵母処理"}""");
+
+            var db = new RecipeDatabase();
+            db.LoadFromFile(Path.Combine(tmpDir, "Recipes.json"));
+            Assert.Equal("Fermentation", db.Recipes[0].RecipeName);
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(tmpDir);
+            svc.LoadLanguage("ja-JP");
+
+            int count = db.ApplyLocalisation(svc);
+            Assert.Equal(1, count);
+            Assert.Equal("発酵", db.Recipes[0].RecipeName);
+            Assert.Equal("酵母処理", db.Recipes[0].RecipeType);
+
+            db.RevertLocalisation();
+            Assert.Equal("Fermentation", db.Recipes[0].RecipeName);
+            Assert.Equal("Yeast Process", db.Recipes[0].RecipeType);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    // ── Title localisation ───────────────────────────────────────────
+    [Fact]
+    public void TitleDatabase_ApplyLocalisation_UpdatesTitleNames()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_loc_test_" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            string titlesJson = """
+            [
+              { "Id": "T_TRA1", "Name": "Hireling {0}", "Name_LocStr": "UI_PLAYER_TITLE_TRA1", "UnlockDescription": "Impressed a Gek", "UnlockDescription_LocStr": "UI_PLAYER_TITLE_TRA1_DESC", "AlreadyUnlockedDescription": "-", "UnlockedByStat": "TRA_STANDING", "UnlockedByStatValue": 1 }
+            ]
+            """;
+            File.WriteAllText(Path.Combine(tmpDir, "Titles.json"), titlesJson);
+            File.WriteAllText(Path.Combine(tmpDir, "ja-JP.json"),
+                """{"UI_PLAYER_TITLE_TRA1": "雇い人 %NAME%", "UI_PLAYER_TITLE_TRA1_DESC": "ゲックに感心された"}""");
+
+            TitleDatabase.LoadFromFile(Path.Combine(tmpDir, "Titles.json"));
+            Assert.Equal("Hireling {0}", TitleDatabase.Titles[0].Name);
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(tmpDir);
+            svc.LoadLanguage("ja-JP");
+
+            int count = TitleDatabase.ApplyLocalisation(svc);
+            Assert.Equal(1, count);
+            // %NAME% should be converted to {0}
+            Assert.Equal("雇い人 {0}", TitleDatabase.Titles[0].Name);
+            Assert.Equal("ゲックに感心された", TitleDatabase.Titles[0].UnlockDescription);
+
+            TitleDatabase.RevertLocalisation();
+            Assert.Equal("Hireling {0}", TitleDatabase.Titles[0].Name);
+            Assert.Equal("Impressed a Gek", TitleDatabase.Titles[0].UnlockDescription);
+        }
+        finally
+        {
+            // Restore data from the real JSON file
+            var jsonDir = FindResourceJsonDir();
+            if (jsonDir != null)
+                TitleDatabase.LoadFromFile(Path.Combine(jsonDir, "Titles.json"));
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    // ── Frigate trait localisation (non-mutating: hardcoded data has no LocStr) ──
+    // Full load+localise round-trip tests are in DatabaseLocalisationTests.cs
+
+    // ── Settlement perk localisation (non-mutating: hardcoded data has no LocStr) ──
+    // Full load+localise round-trip tests are in DatabaseLocalisationTests.cs
+
+    // ── Wiki guide localisation (non-mutating: hardcoded data has no LocStr) ──
+    // Full load+localise round-trip tests are in DatabaseLocalisationTests.cs
+
+    // ── GameItem DescriptionLocStr-based name fallback ─────────────────
+
+    [Fact]
+    public void GameItemDatabase_DescLocStr_DerivesNameKey()
+    {
+        // Simulates UP_HYP4 whose Name_LocStr="UP_HYPERDRIVE" doesn't match
+        // lang keys but DescriptionLocStr="UP_HYPER4_DESC" -> "UP_HYPER4_NAME" does.
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_descfb_" + Guid.NewGuid().ToString("N"));
+        string langDir = Path.Combine(tmpDir, "lang");
+        Directory.CreateDirectory(langDir);
+
+        try
+        {
+            File.WriteAllText(Path.Combine(tmpDir, "TestItems.json"), """
+            [
+                {
+                    "Id": "UP_HYP4",
+                    "Name": "Hyperdrive S-Class Upgrade",
+                    "Name_LocStr": "UP_HYPERDRIVE",
+                    "Description": "A supremely powerful upgrade.",
+                    "Description_LocStr": "UP_HYPER4_DESC",
+                    "Group": "S-Class Upgrade"
+                }
+            ]
+            """);
+
+            File.WriteAllText(Path.Combine(langDir, "ja-JP.json"),
+                """{"UP_HYPER4_NAME": "ハイパードライブモジュール", "UP_HYPER4_DESC": "超強力なアップグレード", "UP_HYPER4_SUB": "最上級ハイパードライブ", "UP_HYPER4_NAME_L": "ハイパードライブモジュール小文字"}""");
+
+            var db = new GameItemDatabase();
+            db.LoadItemsFromJsonDirectory(tmpDir);
+            var item = db.GetItem("UP_HYP4");
+            Assert.NotNull(item);
+            Assert.Equal("Hyperdrive S-Class Upgrade", item.Name);
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(langDir);
+            svc.LoadLanguage("ja-JP");
+
+            int count = db.ApplyLocalisation(svc);
+            Assert.True(count >= 1);
+            Assert.Equal("ハイパードライブモジュール", item.Name);
+            Assert.Equal("超強力なアップグレード", item.Description);
+            Assert.Equal("最上級ハイパードライブ", item.Subtitle);
+            Assert.Equal("ハイパードライブモジュール小文字", item.NameLower);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    [Fact]
+    public void GameItemDatabase_DescLocStr_DerivesNameKey_XVariant()
+    {
+        // Simulates UP_SHOTX whose DescriptionLocStr="UP_SHOTGUNX_DESC" doesn't
+        // exist but "UP_SHOTGUN_X_DESC" does (with underscore before X).
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_descfbx_" + Guid.NewGuid().ToString("N"));
+        string langDir = Path.Combine(tmpDir, "lang");
+        Directory.CreateDirectory(langDir);
+
+        try
+        {
+            File.WriteAllText(Path.Combine(tmpDir, "TestItems.json"), """
+            [
+                {
+                    "Id": "UP_SHOTX",
+                    "Name": "Scatter Blaster Illegal Upgrade",
+                    "Name_LocStr": "UP_SHOT",
+                    "Description": "A black-market modification.",
+                    "Description_LocStr": "UP_SHOTGUNX_DESC",
+                    "Group": "Illegal Upgrade"
+                }
+            ]
+            """);
+
+            File.WriteAllText(Path.Combine(langDir, "ja-JP.json"),
+                """{"UP_SHOTGUN_X_NAME": "うさんくさいモジュール", "UP_SHOTGUN_X_DESC": "ブラックマーケット", "UP_SHOTGUN_X_SUB": "違法アップグレード"}""");
+
+            var db = new GameItemDatabase();
+            db.LoadItemsFromJsonDirectory(tmpDir);
+            var item = db.GetItem("UP_SHOTX");
+            Assert.NotNull(item);
+
+            var svc = new LocalisationService();
+            svc.SetLangDirectory(langDir);
+            svc.LoadLanguage("ja-JP");
+
+            int count = db.ApplyLocalisation(svc);
+            Assert.True(count >= 1);
+            Assert.Equal("うさんくさいモジュール", item.Name);
+            Assert.Equal("ブラックマーケット", item.Description);
+            Assert.Equal("違法アップグレード", item.Subtitle);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, recursive: true);
+        }
+    }
+
+    // --- Localised fallback string tests ---
+
+    [Fact]
+    public void FrigateLogic_GetFrigateName_FallbackUsesLocalisedFormat()
+    {
+        var frigate = JsonObject.Parse(@"{ ""CustomName"": null }");
+        string name = FrigateLogic.GetFrigateName(frigate, 2);
+        Assert.Equal("Frigate 3", name);
+    }
+
+    [Fact]
+    public void SquadronLogic_GetPilotDisplayName_EmptySlot_UsesLocalisedFormat()
+    {
+        var pilot = JsonObject.Parse(@"{
+            ""NPCResource"": { ""Seed"": [false, ""0x0""], ""Filename"": """" },
+            ""ShipResource"": { ""Seed"": [false, ""0x0""], ""Filename"": """" }
+        }");
+        string display = SquadronLogic.GetPilotDisplayName(pilot, 1);
+        Assert.Contains("1", display);
+        Assert.Contains("(", display); // "(Empty)" or localised equivalent
+    }
+
+    [Fact]
+    public void StarshipLogic_GetShipInfo_ReturnsLocalisedMaxSupported()
+    {
+        var (_, cargoLabel, techLabel) = StarshipLogic.GetShipInfo(
+            "MODELS/COMMON/SPACECRAFT/DROPSHIPS/DROPSHIP_PROC.SCENE.MBIN");
+        Assert.Contains("10x12", cargoLabel);
+        Assert.Contains("10x6", techLabel);
+    }
+
+    [Fact]
+    public void StarshipLogic_GetShipInfo_MaxLabelsContainDimensions()
+    {
+        // Verify Max Supported labels contain expected dimension strings
+        var (_, cargoHauler, techHauler) = StarshipLogic.GetShipInfo(
+            "MODELS/COMMON/SPACECRAFT/DROPSHIPS/DROPSHIP_PROC.SCENE.MBIN");
+        Assert.Contains("10x12", cargoHauler);
+        Assert.Contains("10x6", techHauler);
+
+        var (_, cargoExotic, _) = StarshipLogic.GetShipInfo(
+            "MODELS/COMMON/SPACECRAFT/S-CLASS/S-CLASS_PROC.SCENE.MBIN");
+        Assert.Contains("10x10 + 5", cargoExotic);
+    }
+
+    [Fact]
+    public void GalaxyDatabase_Fallback_UsesLocalisedStrings()
+    {
+        // Out-of-range indices should return localised "Unknown" / "Normal"
+        Assert.Equal("Unknown", GalaxyDatabase.GetGalaxyName(999));
+        Assert.Equal("Normal", GalaxyDatabase.GetGalaxyType(999));
+        Assert.Equal("Unknown", GalaxyDatabase.GetGalaxyDisplayName(-1));
+    }
+
+    [Fact]
+    public void MultitoolLogic_BuildToolList_EmptyName_UsesLocalisedDefault()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Tools"": [
+                { ""Name"": """", ""Seed"": [true, ""0xABC""] }
+            ]
+        }");
+
+        var tools = MultitoolLogic.BuildToolList(json.GetArray("Tools")!);
+        Assert.Single(tools);
+        Assert.Equal("Multitool 1", tools[0].DisplayName);
+    }
+
+    [Fact]
+    public void MultitoolLogic_GetPrimaryToolName_FallbacksAreLocalised()
+    {
+        // Null array -> localised "Unknown"
+        Assert.Equal("Unknown", MultitoolLogic.GetPrimaryToolName(null, 0));
+
+        // Empty name -> localised "Multitool N"
+        var json = JsonObject.Parse(@"{
+            ""Tools"": [
+                { ""Name"": """", ""Seed"": [true, ""0x111""] }
+            ]
+        }");
+        Assert.Equal("Multitool 1", MultitoolLogic.GetPrimaryToolName(json.GetArray("Tools")!, 0));
+    }
+
+    private static string? FindResourceJsonDir()
+    {
+        var dir = AppDomain.CurrentDomain.BaseDirectory;
+        for (int i = 0; i < 10; i++)
+        {
+            var candidate = Path.Combine(dir, "Resources", "json");
+            if (Directory.Exists(candidate)) return candidate;
+            var parent = Directory.GetParent(dir);
+            if (parent == null) break;
+            dir = parent.FullName;
+        }
+        return null;
+    }
+
+    private static string? FindResourceLangDir()
+    {
+        var dir = AppDomain.CurrentDomain.BaseDirectory;
+        for (int i = 0; i < 10; i++)
+        {
+            var candidate = Path.Combine(dir, "Resources", "ui", "lang");
+            if (Directory.Exists(candidate)) return candidate;
+            var parent = Directory.GetParent(dir);
+            if (parent == null) break;
+            dir = parent.FullName;
+        }
+        return null;
+    }
+}

@@ -1,0 +1,106 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <!-- Include only the data-layer source files needed for testing (no WinForms dependency) -->
+  <ItemGroup>
+    <Compile Include="..\Data\TechPackDatabase.cs" Link="Data\TechPackDatabase.cs" />
+    <Compile Include="..\Data\GameItem.cs" Link="Data\GameItem.cs" />
+    <Compile Include="..\Data\GameItemDatabase.cs" Link="Data\GameItemDatabase.cs" />
+    <Compile Include="..\Data\FrigateTraitDatabase.cs" Link="Data\FrigateTraitDatabase.cs" />
+    <Compile Include="..\Data\InventoryStackDatabase.cs" Link="Data\InventoryStackDatabase.cs" />
+    <Compile Include="..\Data\SettlementPerkDatabase.cs" Link="Data\SettlementPerkDatabase.cs" />
+    <Compile Include="..\Data\RewardDatabase.cs" Link="Data\RewardDatabase.cs" />
+    <Compile Include="..\Data\WordDatabase.cs" Link="Data\WordDatabase.cs" />
+    <Compile Include="..\Data\CompanionDatabase.cs" Link="Data\CompanionDatabase.cs" />
+    <Compile Include="..\Data\ProceduralStubs.cs" Link="Data\ProceduralStubs.cs" />
+    <Compile Include="..\Data\TechAdjacencyDatabase.cs" Link="Data\TechAdjacencyDatabase.cs" />
+    <Compile Include="..\Data\JsonNameMapper.cs" Link="Data\JsonNameMapper.cs" />
+    <Compile Include="..\Data\GalaxyDatabase.cs" Link="Data\GalaxyDatabase.cs" />
+    <Compile Include="..\Data\CoordinateHelper.cs" Link="Data\CoordinateHelper.cs" />
+    <Compile Include="..\Data\WikiGuideDatabase.cs" Link="Data\WikiGuideDatabase.cs" />
+    <Compile Include="..\Data\BaseStatLimits.cs" Link="Data\BaseStatLimits.cs" />
+    <Compile Include="..\Data\TitleDatabase.cs" Link="Data\TitleDatabase.cs" />
+    <Compile Include="..\Data\RecipeDatabase.cs" Link="Data\RecipeDatabase.cs" />
+    <Compile Include="..\Data\LocalisationService.cs" Link="Data\LocalisationService.cs" />
+    <Compile Include="..\Data\UiStrings.cs" Link="Data\UiStrings.cs" />
+  </ItemGroup>
+
+  <!-- Models (JSON engine, no WinForms dependency) -->
+  <ItemGroup>
+    <Compile Include="..\Models\JsonObject.cs" Link="Models\JsonObject.cs" />
+    <Compile Include="..\Models\JsonArray.cs" Link="Models\JsonArray.cs" />
+    <Compile Include="..\Models\JsonParser.cs" Link="Models\JsonParser.cs" />
+    <Compile Include="..\Models\RawDouble.cs" Link="Models\RawDouble.cs" />
+    <Compile Include="..\Models\JsonReader.cs" Link="Models\JsonReader.cs" />
+    <Compile Include="..\Models\JsonException.cs" Link="Models\JsonException.cs" />
+    <Compile Include="..\Models\BinaryData.cs" Link="Models\BinaryData.cs" />
+    <Compile Include="..\Models\IPropertyChangeListener.cs" Link="Models\IPropertyChangeListener.cs" />
+    <Compile Include="..\Models\SaveFileMetadata.cs" Link="Models\SaveFileMetadata.cs" />
+    <Compile Include="..\Models\DifficultyLevel.cs" Link="Models\DifficultyLevel.cs" />
+    <Compile Include="..\Models\Recipe.cs" Link="Models\Recipe.cs" />
+  </ItemGroup>
+
+  <!-- IO layer (SaveFileManager, compression - no WinForms dependency) -->
+  <ItemGroup>
+    <Compile Include="..\IO\SaveFileManager.cs" Link="IO\SaveFileManager.cs" />
+    <Compile Include="..\IO\BinaryIO.cs" Link="IO\BinaryIO.cs" />
+    <Compile Include="..\IO\Lz4Compressor.cs" Link="IO\Lz4Compressor.cs" />
+    <Compile Include="..\IO\Lz4CompressorStream.cs" Link="IO\Lz4CompressorStream.cs" />
+    <Compile Include="..\IO\Lz4DecompressorStream.cs" Link="IO\Lz4DecompressorStream.cs" />
+    <Compile Include="..\IO\Lz4BufferedCompressorStream.cs" Link="IO\Lz4BufferedCompressorStream.cs" />
+    <Compile Include="..\IO\Lz4ChunkedCompressorStream.cs" Link="IO\Lz4ChunkedCompressorStream.cs" />
+    <Compile Include="..\IO\MetaCrypto.cs" Link="IO\MetaCrypto.cs" />
+    <Compile Include="..\IO\MetaFileWriter.cs" Link="IO\MetaFileWriter.cs" />
+    <Compile Include="..\IO\MemoryDatManager.cs" Link="IO\MemoryDatManager.cs" />
+    <Compile Include="..\IO\ContainersIndexManager.cs" Link="IO\ContainersIndexManager.cs" />
+    <Compile Include="..\IO\SaveSlotManager.cs" Link="IO\SaveSlotManager.cs" />
+  </ItemGroup>
+
+  <!-- Core Logic classes (pure data logic, no WinForms dependency) -->
+  <ItemGroup>
+    <Compile Include="..\Core\StarshipLogic.cs" Link="Core\StarshipLogic.cs" />
+    <Compile Include="..\Core\ExportConfig.cs" Link="Core\ExportConfig.cs" />
+    <Compile Include="..\Core\MultitoolLogic.cs" Link="Core\MultitoolLogic.cs" />
+    <Compile Include="..\Core\FreighterLogic.cs" Link="Core\FreighterLogic.cs" />
+    <Compile Include="..\Core\FileNameHelper.cs" Link="Core\FileNameHelper.cs" />
+    <Compile Include="..\Core\StatHelper.cs" Link="Core\StatHelper.cs" />
+    <Compile Include="..\Core\SeedHelper.cs" Link="Core\SeedHelper.cs" />
+    <Compile Include="..\Core\FrigateLogic.cs" Link="Core\FrigateLogic.cs" />
+    <Compile Include="..\Core\CompanionLogic.cs" Link="Core\CompanionLogic.cs" />
+    <Compile Include="..\Core\MilestoneLogic.cs" Link="Core\MilestoneLogic.cs" />
+    <Compile Include="..\Core\DiscoveryLogic.cs" Link="Core\DiscoveryLogic.cs" />
+    <Compile Include="..\Core\BaseLogic.cs" Link="Core\BaseLogic.cs" />
+    <Compile Include="..\Core\SettlementLogic.cs" Link="Core\SettlementLogic.cs" />
+    <Compile Include="..\Core\SquadronLogic.cs" Link="Core\SquadronLogic.cs" />
+    <Compile Include="..\Core\ExocraftLogic.cs" Link="Core\ExocraftLogic.cs" />
+    <Compile Include="..\Core\AccountLogic.cs" Link="Core\AccountLogic.cs" />
+    <Compile Include="..\Core\MxmlRewardEditor.cs" Link="Core\MxmlRewardEditor.cs" />
+    <Compile Include="..\Core\RawJsonLogic.cs" Link="Core\RawJsonLogic.cs" />
+    <Compile Include="..\Core\InventoryImportHelper.cs" Link="Core\InventoryImportHelper.cs" />
+    <Compile Include="..\Core\InventorySlotHelper.cs" Link="Core\InventorySlotHelper.cs" />
+    <Compile Include="..\Core\UpdateService.cs" Link="Core\UpdateService.cs" />
+  </ItemGroup>
+
+  <!-- Config (application settings - no WinForms dependency) -->
+  <ItemGroup>
+    <Compile Include="..\Config\AppConfig.cs" Link="Config\AppConfig.cs" />
+  </ItemGroup>
+
+</Project>
