@@ -1,11 +1,11 @@
 # ---------------------------------------------------------------
-# NMSE.Site — GitHub Pages Deployment
+# NMSE.Site - GitHub Pages Deployment
 # Deploys the static HTML/JS/CSS landing page from `NMSE.Site/`
 # to GitHub Pages using the modern actions/deploy-pages workflow.
 #
 # Two-job pipeline:
-#   1. build  — uploads the site directory as a Pages artifact
-#   2. deploy — publishes the artifact to the Pages environment
+#   1. build  - uploads the site directory as a Pages artifact
+#   2. deploy - publishes the artifact to the Pages environment
 #
 # All actions are pinned to immutable commit SHAs to mitigate
 # supply-chain attacks (e.g. the 2025 tj-actions tag-rewrite
@@ -21,7 +21,7 @@
 name: Deploy NMSE.Site to GitHub Pages
 
 on:
-  # ── Uncomment the push block below to enable automatic deploys ──
+  # Uncomment the below push block below to enable automatic deploys
   # push:
   #   branches:
   #     - main

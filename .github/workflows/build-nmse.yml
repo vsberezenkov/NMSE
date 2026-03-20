@@ -1,0 +1,115 @@
+# --------------------------------------------------------------
+# NMSE Release Build Workflow
+# Builds, tests, zips, and publishes a GitHub Release whenever
+# version.json is updated on the default branch.
+#
+# Push builds publish a pre-zipped artifact and update the
+# "latest" GitHub Release so the NMSE.Site download button can
+# link directly to the zip (no GitHub login required).
+#
+# All actions are pinned to immutable commit SHAs to mitigate
+# supply-chain attacks.  When upgrading, update both the SHA
+# and the version comment.
+#
+# --- DISABLED ----------------------------------------------
+# This workflow is currently restricted to workflow_dispatch
+# (manual trigger) only.  To activate it for production use,
+# uncomment the 'push' trigger block below.
+# --------------------------------------------------------------
+
+name: Build NMSE
+
+env:
+  PROJECT_NAME: NMSE
+  PROJECT_FILE: NMSE.csproj
+  TEST_PROJECT_FILE: NMSE.Tests/NMSE.Tests.csproj
+  DOTNET_VERSION: "10.0.x"
+  BUILD_CONFIGURATION: Release
+  RELEASE_TAG: latest
+
+on:
+  # -- Uncomment the push block below to enable automated releases --
+  # push:
+  #   paths:
+  #     - "version.json"
+
+  # Allow manual triggering from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Read version from version.json
+        id: version
+        shell: pwsh
+        run: |
+          $v = Get-Content version.json | ConvertFrom-Json
+          $ver = "$($v.major).$($v.minor).$($v.patch)"
+          "VERSION=$ver" >> $env:GITHUB_OUTPUT
+          Write-Host "Version: $ver"
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.PROJECT_FILE }}
+
+      - name: Build
+        run: dotnet build ${{ env.PROJECT_FILE }} --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore
+
+      - name: Restore test dependencies
+        run: dotnet restore ${{ env.TEST_PROJECT_FILE }}
+
+      - name: Run tests
+        run: dotnet test ${{ env.TEST_PROJECT_FILE }} --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore --verbosity normal
+
+      # -- Publish artifacts ----------------------------------
+
+      - name: Locate build zip
+        if: success()
+        id: find-zip
+        shell: pwsh
+        run: |
+          $zip = Get-ChildItem -Path Build/bin -Filter "NMSE-*-${{ env.BUILD_CONFIGURATION }}.zip" |
+                 Select-Object -First 1
+          if (-not $zip) { Write-Error "No build zip found in Build/bin/"; exit 1 }
+          "ZIP_PATH=$($zip.FullName)"  >> $env:GITHUB_OUTPUT
+          "ZIP_NAME=$($zip.Name)"      >> $env:GITHUB_OUTPUT
+
+      - name: Upload build artifact
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ${{ env.PROJECT_NAME }}-build
+          path: ${{ steps.find-zip.outputs.ZIP_PATH }}
+          if-no-files-found: warn
+
+      - name: Update latest release
+        if: success()
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $ver = "${{ steps.version.outputs.VERSION }}"
+
+          # Remove the previous release + tag if it exists
+          $existing = gh release view $env:RELEASE_TAG 2>&1
+          if ($LASTEXITCODE -eq 0) {
+            gh release delete $env:RELEASE_TAG --yes --cleanup-tag
+          }
+
+          # Create a new release and attach the pre-zipped build
+          gh release create $env:RELEASE_TAG `
+            "${{ steps.find-zip.outputs.ZIP_PATH }}" `
+            --title "NMSE v${ver}" `
+            --notes "Automated release **v${ver}** (build #${{ github.run_number }}) from ``${{ github.sha }}``" `
+            --prerelease
