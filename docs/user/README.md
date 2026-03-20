@@ -509,6 +509,8 @@ You can move the base computer to another component's location via the <kbd>Move
 
 You can edit the contents of your numbered storage chests / containers (0–9) via tabs. Each container has its own inventory grid with export, import and usual editing capabilities.
 
+You can edit the names of your storage chests via the fields at the top of the tab.
+
 | Chests |
 |-------|
 | <img src="../img/chests.png"> |

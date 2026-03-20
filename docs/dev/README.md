@@ -97,7 +97,7 @@ grid headers, and other user-visible labels. The system loads per-language
 JSON files from `Resources/ui/lang/{bcp47}.json`, falls back to English,
 and updates all panels via their `ApplyUiLocalisation()` methods.
 
-- UiStrings handles loading, lookup, formatting, and fallback behavior
+- UiStrings handles loading, lookup, formatting, and fallback behaviour
 - Language menu triggers reloads and updates every UI panel
 - Supports 16 languages (en-GB source + 15 translations)
 

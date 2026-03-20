@@ -136,7 +136,7 @@ NMSE.slnx
 
 **Branch:** `main` (direct commits - this is foundational restructuring)
 
-**Why on main:** The lib extraction doesn't change any behavior - it's a refactor. The existing WinForms app keeps working throughout. Tests keep passing. This is safe to do on main because every lot is independently verifiable.
+**Why on main:** The lib extraction doesn't change any behaviour - it's a refactor. The existing WinForms app keeps working throughout. Tests keep passing. This is safe to do on main because every lot is independently verifiable.
 
 ### Lot 1.1 - Create NMSE.Lib Project Skeleton
 
