@@ -1031,8 +1031,12 @@ internal class ChestsSubPanel : UserControl
                 Padding = new Padding(0, 0, 0, 6)
             };
 
-            // Controls with Dock = Top are added in reverse order (last added appears at top),
-            // so we add grid (fills remaining space), warning (middle), then nameRow (top).
+            // WinForms quirk: controls with Dock = Top are laid out in reverse
+            // add-order (last added appears at the top of the container).
+            // See: https://learn.microsoft.com/dotnet/desktop/winforms/controls/how-to-dock-controls
+            // NOTE: Eto.Forms (cross-platform migration target) does NOT share this
+            // behaviour — it stacks in add-order. Re-evaluate when migrating.
+            // We add grid (fills remaining space), warning (middle), then nameRow (top).
             chestPanel.Controls.Add(_chestGrids[i]);
             chestPanel.Controls.Add(_chestWarnings[i]);
             chestPanel.Controls.Add(nameRow);

@@ -25,6 +25,13 @@ public partial class MainFormResources : Form
     private readonly StatusStrip _statusStrip;
     private readonly TabControl _tabControl;
     private ToolStripMenuItem _languageMenu = null!;
+    // Help menu item references for robust localisation
+    // (avoids fragile hardcoded indices that break when items are reordered/added).
+    private ToolStripMenuItem _helpMenu = null!;
+    private ToolStripMenuItem _helpGitHubItem = null!;
+    private ToolStripMenuItem _helpSponsorItem = null!;
+    private ToolStripMenuItem _helpCheckUpdatesItem = null!;
+    private ToolStripMenuItem _helpAboutItem = null!;
     private readonly ToolStripStatusLabel _statusLabel;
     private readonly ToolStripStatusLabel _itemCountLabel;
     private int _totalDatabaseItems;
@@ -248,16 +255,20 @@ public partial class MainFormResources : Form
         }
         _menuStrip.Items.Add(_languageMenu);
 
-        // Help menu
-        var helpMenu = new ToolStripMenuItem("&Help");
-        helpMenu.DropDownItems.Add(new ToolStripMenuItem("&GitHub Page", null, OnGitHub));
-        helpMenu.DropDownItems.Add(new ToolStripSeparator());
-        helpMenu.DropDownItems.Add(new ToolStripMenuItem("&Sponsor Development", null, OnSponsor));
-        helpMenu.DropDownItems.Add(new ToolStripSeparator());
-        helpMenu.DropDownItems.Add(new ToolStripMenuItem("Check for &Updates...", null, OnCheckForUpdates));
-        helpMenu.DropDownItems.Add(new ToolStripSeparator());
-        helpMenu.DropDownItems.Add(new ToolStripMenuItem("&About", null, OnAbout));
-        _menuStrip.Items.Add(helpMenu);
+        // Help menu — store item references for robust localisation
+        _helpMenu = new ToolStripMenuItem("&Help");
+        _helpGitHubItem = new ToolStripMenuItem("&GitHub Page", null, OnGitHub);
+        _helpSponsorItem = new ToolStripMenuItem("&Sponsor Development", null, OnSponsor);
+        _helpCheckUpdatesItem = new ToolStripMenuItem("Check for &Updates...", null, OnCheckForUpdates);
+        _helpAboutItem = new ToolStripMenuItem("&About", null, OnAbout);
+        _helpMenu.DropDownItems.Add(_helpGitHubItem);
+        _helpMenu.DropDownItems.Add(new ToolStripSeparator());
+        _helpMenu.DropDownItems.Add(_helpSponsorItem);
+        _helpMenu.DropDownItems.Add(new ToolStripSeparator());
+        _helpMenu.DropDownItems.Add(_helpCheckUpdatesItem);
+        _helpMenu.DropDownItems.Add(new ToolStripSeparator());
+        _helpMenu.DropDownItems.Add(_helpAboutItem);
+        _menuStrip.Items.Add(_helpMenu);
     }
 
     private void InitializeToolbar()
@@ -1569,6 +1580,10 @@ public partial class MainFormResources : Form
         UiStrings.Load(tag);
         string loadingMsg = UiStrings.Get("status.switching_language");
 
+        // `using var` is correct here: ShowDialog() blocks until the form is closed
+        // (by loadingForm.Close() in the Shown handler below), then the using-var
+        // disposes the form when the enclosing method returns.  This is equivalent
+        // to wrapping ShowDialog in a using-block but slightly more concise.
         using var loadingForm = new Form
         {
             Text = loadingMsg,
@@ -1743,23 +1758,14 @@ public partial class MainFormResources : Form
                     toolsMenu.DropDownItems[1].Text = UiStrings.Get("menu.tools.import_json");
                 }
             }
-            // Language - use stored field reference, BCP 47 tags stay as-is
+            // Language — use stored field reference, BCP 47 tags stay as-is
             _languageMenu.Text = UiStrings.Get("menu.language");
-            // Help (index 4)
-            if (_menuStrip.Items[4] is ToolStripMenuItem helpMenu)
-            {
-                helpMenu.Text = UiStrings.Get("menu.help");
-                if (helpMenu.DropDownItems.Count >= 7)
-                {
-                    helpMenu.DropDownItems[0].Text = UiStrings.Get("menu.help.github");
-                    // index 1 is separator
-                    helpMenu.DropDownItems[2].Text = UiStrings.Get("menu.help.sponsor");
-                    // index 3 is separator
-                    helpMenu.DropDownItems[4].Text = UiStrings.Get("menu.help.check_updates");
-                    // index 5 is separator
-                    helpMenu.DropDownItems[6].Text = UiStrings.Get("menu.help.about");
-                }
-            }
+            // Help — use stored field references (avoids fragile hardcoded indices)
+            _helpMenu.Text = UiStrings.Get("menu.help");
+            _helpGitHubItem.Text = UiStrings.Get("menu.help.github");
+            _helpSponsorItem.Text = UiStrings.Get("menu.help.sponsor");
+            _helpCheckUpdatesItem.Text = UiStrings.Get("menu.help.check_updates");
+            _helpAboutItem.Text = UiStrings.Get("menu.help.about");
         }
 
         // ---- Toolbar labels ----

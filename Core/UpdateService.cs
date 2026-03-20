@@ -177,10 +177,12 @@ public static class UpdateService
         string destPath,
         IProgress<(long received, long? total)>? progress = null)
     {
-        // Security: only allow downloads from GitHub to prevent redirect attacks
+        // Security: only allow downloads from known GitHub domains to prevent redirect attacks.
+        // EndsWith alone is insufficient (e.g. "fakegithub.com" would pass), so use exact matching.
         var uri = new Uri(url);
-        if (!uri.Host.EndsWith("github.com", StringComparison.OrdinalIgnoreCase))
-            throw new InvalidOperationException($"Download blocked: URL host '{uri.Host}' is not github.com");
+        if (!uri.Host.Equals("github.com", StringComparison.OrdinalIgnoreCase)
+            && !uri.Host.Equals("objects.githubusercontent.com", StringComparison.OrdinalIgnoreCase))
+            throw new InvalidOperationException($"Download blocked: URL host '{uri.Host}' is not a known GitHub domain");
 
         using var response = await Http.GetAsync(url, HttpCompletionOption.ResponseHeadersRead)
                                        .ConfigureAwait(false);
@@ -260,8 +262,14 @@ public static class UpdateService
     {
         appDir ??= AppContext.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
 
-        // Determine the EXE name from the current process
-        string exeName = Path.GetFileName(Environment.ProcessPath ?? "NMSE.exe");
+        // Determine the EXE name from the running assembly, falling back to
+        // Environment.ProcessPath and then a hardcoded default.  Deriving it
+        // from assembly metadata means renaming the executable in a rebrand
+        // or different distribution won't silently break the updater.
+        string exeName = Path.GetFileName(
+            System.Reflection.Assembly.GetEntryAssembly()?.Location
+            ?? Environment.ProcessPath
+            ?? "NMSE.exe");
 
         // Extract zip to a temporary directory
         string extractDir = Path.Combine(Path.GetTempPath(), $"NMSE-update-{Guid.NewGuid():N}");
@@ -286,14 +294,20 @@ public static class UpdateService
         string script = GenerateUpdaterScript(pid, extractDir, appDir, exeName);
         File.WriteAllText(scriptPath, script);
 
-        // Launch the updater script hidden
-        Process.Start(new ProcessStartInfo
+        // Launch the updater script hidden.
+        // If Process.Start returns null the updater failed to launch, and
+        // the caller will exit the app — leaving the user with nothing running
+        // and no update applied.  Throw so the caller can show an error.
+        var proc = Process.Start(new ProcessStartInfo
         {
             FileName        = "cmd.exe",
             Arguments       = $"/c \"{scriptPath}\"",
             UseShellExecute = false,
             CreateNoWindow  = true
         });
+        if (proc == null)
+            throw new InvalidOperationException(
+                "Failed to launch the updater script. The update was not applied.");
 
         return true;
     }

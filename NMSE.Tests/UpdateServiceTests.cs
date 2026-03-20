@@ -255,7 +255,9 @@ public class UpdateServiceTests
     {
         string script = UpdateService.GenerateUpdaterScript(
             12345, @"C:\temp\extract", @"C:\app", "NMSE.exe");
-        Assert.Contains("12345", script);
+        // Verify the PID is used in the correct tasklist filter context, not just
+        // that the number appears somewhere in the script.
+        Assert.Contains("tasklist /fi \"PID eq 12345\"", script);
     }
 
     [Fact]
