@@ -284,6 +284,7 @@ public partial class FreighterPanel : UserControl
         _freighterSubPage.Text = UiStrings.Get("freighter.tab_freighter");
         _roomsSubPage.Text = UiStrings.Get("freighter.tab_rooms");
         _nameLabel.Text = UiStrings.Get("freighter.name");
+        _freighterName.PlaceholderText = UiStrings.Get("common.procedural_no_name");
         _typeLabel.Text = UiStrings.Get("freighter.type");
         _classLabel.Text = UiStrings.Get("freighter.class");
         _homeSeedLabel.Text = UiStrings.Get("freighter.home_seed");

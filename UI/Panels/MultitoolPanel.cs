@@ -48,6 +48,7 @@ public partial class MultitoolPanel : UserControl
         _statsLabel.Text = UiStrings.Get("multitool.base_stats");
         _selectLabel.Text = UiStrings.Get("multitool.select");
         _nameLabel.Text = UiStrings.Get("multitool.name");
+        _toolName.PlaceholderText = UiStrings.Get("common.procedural_no_name");
         _typeLabel.Text = UiStrings.Get("multitool.type");
         _classLabel.Text = UiStrings.Get("multitool.class");
         _seedLabel.Text = UiStrings.Get("multitool.seed");

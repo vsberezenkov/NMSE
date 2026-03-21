@@ -130,7 +130,7 @@ partial class ExocraftPanel
 
         _deployedLabel = new Label { Text = "", AutoSize = true, Padding = new Padding(10, 5, 10, 0) };
 
-        _undeployBtn = new Button { Text = "Undeploy", Width = 80 };
+        _undeployBtn = new Button { Text = "Undeploy", AutoSize = true, MinimumSize = new Size(80, 0) };
         _undeployBtn.Click += OnUndeploy;
 
         statusPanel.Controls.Add(_primaryVehicleCheck);

@@ -238,6 +238,7 @@ public static class Categorizer
             "Autophage Appearance Modification", "Bespoke Personal Identification",
             "Collected Flotsam", "Commercial Cartographic Data",
             "Exosuit Visual Enhancement", "Freighter Engine Flare Override",
+            "Specialist Exosuit Visuals",
             "Jetpack Exhaust Override", "Living Curiosity",
             "Pyrotechnics Multi-Pack", "Robotic Spawn Capsule",
             "Rogue Technology Echo", "Salvaged Autophage Component",
@@ -425,7 +426,8 @@ public static class Categorizer
     {
         "Edible Product", "Exclusive Companion Egg",
         "Exclusive Multifunction Survival Device", "Exclusive Spacecraft",
-        "Pyrotechnics Multi-Pack", "Unlockable Armour", "Unlockable Boots",
+        "Pyrotechnics Multi-Pack", "Specialist Exosuit Visuals",
+        "Unlockable Armour", "Unlockable Boots",
         "Unlockable Cape", "Unlockable Companion Accessory", "Unlockable Gloves",
         "Unlockable Head", "Unlockable Helmet", "Unlockable Hood",
         "Unlockable Jetpack", "Unlockable Leg Customisation",

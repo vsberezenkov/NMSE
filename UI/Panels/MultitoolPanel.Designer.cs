@@ -1,4 +1,5 @@
 using NMSE.Core;
+using NMSE.Data;
 using NMSE.UI.Util;
 
 namespace NMSE.UI.Panels;
@@ -123,7 +124,7 @@ partial class MultitoolPanel
 
         var seedPanel = new Panel { Dock = DockStyle.Fill, Height = 26 };
         _toolSeed = new TextBox { Dock = DockStyle.Fill };
-        _generateSeedBtn = new Button { Text = "Generate", Dock = DockStyle.Right, Width = 70 };
+        _generateSeedBtn = new Button { Text = "Generate", Dock = DockStyle.Right, AutoSize = true, MinimumSize = new Size(70, 0) };
         _generateSeedBtn.Click += (s, e) =>
         {
             byte[] bytes = new byte[8];
@@ -178,13 +179,13 @@ partial class MultitoolPanel
             AutoSize = true,
             FlowDirection = FlowDirection.LeftToRight
         };
-        _deleteBtn = new Button { Text = "Delete Multitool", Width = 110 };
+        _deleteBtn = new Button { Text = "Delete Multitool", AutoSize = true, MinimumSize = new Size(110, 0) };
         _deleteBtn.Click += OnDeleteTool;
-        _exportBtn = new Button { Text = "Export Multitool", Width = 70 };
+        _exportBtn = new Button { Text = "Export Multitool", AutoSize = true, MinimumSize = new Size(70, 0) };
         _exportBtn.Click += OnExportTool;
-        _importBtn = new Button { Text = "Import Multitool", Width = 70 };
+        _importBtn = new Button { Text = "Import Multitool", AutoSize = true, MinimumSize = new Size(70, 0) };
         _importBtn.Click += OnImportTool;
-        _makePrimaryBtn = new Button { Text = "Make Primary", Width = 88 };
+        _makePrimaryBtn = new Button { Text = "Make Primary", AutoSize = true, MinimumSize = new Size(88, 0) };
         _makePrimaryBtn.Click += OnMakePrimary;
         buttonPanel.Controls.Add(_deleteBtn);
         buttonPanel.Controls.Add(_exportBtn);
@@ -204,7 +205,7 @@ partial class MultitoolPanel
         Controls.Add(rootLayout);
 
         // Set Max Supported label for multitool technology
-        _storeGrid.SetMaxSupportedLabel("Max Supported: 10x6");
+        _storeGrid.SetMaxSupportedLabel(UiStrings.Format("common.max_supported", "10x6"));
 
         ResumeLayout(false);
         PerformLayout();

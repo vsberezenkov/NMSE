@@ -10,7 +10,7 @@ public partial class SettlementPanel : UserControl
     private static string[] StatLabels => SettlementLogic.StatLabels;
     private const int StatCount = SettlementLogic.StatCount;
     private const int ProductionMaxAmount = SettlementLogic.ProductionMaxAmount;
-    private const int PerkSlotCount = 6;
+    private const int PerkSlotCount = 18;
 
     // Filtered settlement data: indices into SettlementStatesV2
     private readonly List<int> _filteredIndices = new();
@@ -273,29 +273,38 @@ public partial class SettlementPanel : UserControl
 
             SettlementLogic.SaveSettlementData(settlement, saveValues);
 
-            // Save perks
+            // Save perks — grow the JSON array if it has fewer than PerkSlotCount entries
             var perksArr = settlement.GetArray("Perks");
-            if (perksArr != null)
+            if (perksArr == null)
             {
-                for (int i = 0; i < PerkSlotCount && i < perksArr.Length; i++)
-                {
-                    var item = _perkCombos[i].SelectedItem as PerkComboItem;
-                    string val;
-                    if (item?.Perk == null)
-                    {
-                        val = "^";
-                    }
-                    else if (item.Perk.Procedural && !string.IsNullOrEmpty(_perkSeedFields[i].Text))
-                    {
-                        val = $"{item.Perk.Id}#{_perkSeedFields[i].Text}";
-                    }
-                    else
-                    {
-                        val = item.Perk.Id;
-                    }
-                    perksArr.Set(i, val);
-                }
+                perksArr = new Models.JsonArray();
+                settlement.Set("Perks", perksArr);
             }
+            for (int i = 0; i < PerkSlotCount; i++)
+            {
+                var item = _perkCombos[i].SelectedItem as PerkComboItem;
+                string val;
+                if (item?.Perk == null)
+                {
+                    val = "^";
+                }
+                else if (item.Perk.Procedural && !string.IsNullOrEmpty(_perkSeedFields[i].Text))
+                {
+                    val = $"{item.Perk.Id}#{_perkSeedFields[i].Text}";
+                }
+                else
+                {
+                    val = item.Perk.Id;
+                }
+
+                if (i < perksArr.Length)
+                    perksArr.Set(i, val);
+                else
+                    perksArr.Add(val);
+            }
+            // Trim trailing empty "^" entries back to save file cleanliness
+            while (perksArr.Length > 0 && (perksArr.GetString(perksArr.Length - 1) ?? "") == "^")
+                perksArr.RemoveAt(perksArr.Length - 1);
 
             // Save production state
             var prodArr = settlement.GetArray("ProductionState");
@@ -344,6 +353,7 @@ public partial class SettlementPanel : UserControl
 
             // Perks
             var perksArr = settlement.GetArray("Perks");
+            int perksLoaded = 0;
             if (perksArr != null)
             {
                 for (int i = 0; i < PerkSlotCount && i < perksArr.Length; i++)
@@ -354,8 +364,12 @@ public partial class SettlementPanel : UserControl
                         LoadPerkSlot(i, raw);
                     }
                     catch { _perkCombos[i].SelectedIndex = 0; }
+                    perksLoaded++;
                 }
             }
+            // Clear any remaining perk slots beyond the array length
+            for (int i = perksLoaded; i < PerkSlotCount; i++)
+                _perkCombos[i].SelectedIndex = 0;
 
             // Production state
             _productionGrid.Rows.Clear();

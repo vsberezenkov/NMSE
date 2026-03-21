@@ -65,11 +65,11 @@ partial class InventoryGridPanel
         _resizeWidth = new NumericUpDown { Minimum = 1, Maximum = 20, Value = 10, Width = 50, Dock = DockStyle.Left };
         _resizeHeightLabel = new Label { Text = "Height:", AutoSize = true, Dock = DockStyle.Left, Padding = new Padding(8, 4, 2, 0) };
         _resizeHeight = new NumericUpDown { Minimum = 1, Maximum = 20, Value = 6, Width = 50, Dock = DockStyle.Left };
-        _resizeButton = new Button { Text = "Resize", Width = 60, Dock = DockStyle.Left };
+        _resizeButton = new Button { Text = "Resize", AutoSize = true, MinimumSize = new Size(60, 0), Dock = DockStyle.Left };
         _resizeButton.Click += OnResizeInventory;
-        _importButton = new Button { Text = "Import", Width = 60, Dock = DockStyle.Left, Margin = new Padding(16, 0, 0, 0) };
+        _importButton = new Button { Text = "Import", AutoSize = true, MinimumSize = new Size(60, 0), Dock = DockStyle.Left, Margin = new Padding(16, 0, 0, 0) };
         _importButton.Click += OnImportInventory;
-        _exportButton = new Button { Text = "Export", Width = 60, Dock = DockStyle.Left, Margin = new Padding(4, 0, 0, 0) };
+        _exportButton = new Button { Text = "Export", AutoSize = true, MinimumSize = new Size(60, 0), Dock = DockStyle.Left, Margin = new Padding(4, 0, 0, 0) };
         _exportButton.Click += OnExportInventory;
         resizePanel.Controls.Add(_resizeWidthLabel);
         resizePanel.Controls.Add(_resizeWidth);
@@ -271,7 +271,7 @@ partial class InventoryGridPanel
         // Search box
         var searchPanel = new Panel { Dock = DockStyle.Fill, Height = 26 };
         _searchBox = new TextBox { Dock = DockStyle.Fill, PlaceholderText = "Search items..." };
-        _searchButton = new Button { Text = "Search", Dock = DockStyle.Right, Width = 60 };
+        _searchButton = new Button { Text = "Search", Dock = DockStyle.Right, AutoSize = true, MinimumSize = new Size(60, 0) };
         _searchButton.Click += OnSearch;
         _searchBox.KeyDown += (s, e) => { if (e.KeyCode == Keys.Enter) OnSearch(s, e); };
         searchPanel.Controls.Add(_searchBox);

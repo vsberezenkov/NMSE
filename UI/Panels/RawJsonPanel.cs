@@ -661,6 +661,7 @@ public partial class RawJsonPanel : UserControl
 
     private readonly List<TreeNode> _searchResults = new();
     private int _searchIndex;
+    private string _lastSearchQuery = "";
 
     private readonly List<List<string>> _searchPaths = new();
 
@@ -669,6 +670,14 @@ public partial class RawJsonPanel : UserControl
         string query = _searchBox.Text.Trim();
         if (string.IsNullOrEmpty(query)) return;
 
+        // If the query hasn't changed and we have results, advance to next
+        if (query == _lastSearchQuery && _searchPaths.Count > 0)
+        {
+            FindNext();
+            return;
+        }
+
+        _lastSearchQuery = query;
         ClearHighlights();
         _searchResults.Clear();
         _searchPaths.Clear();
@@ -693,6 +702,19 @@ public partial class RawJsonPanel : UserControl
             _statusLabel.Text = UiStrings.Get("raw_json.no_matches_found");
             _statusLabel.ForeColor = Color.Red;
         }
+    }
+
+    private void FindNext()
+    {
+        if (_searchPaths.Count == 0) return;
+
+        // Dim previous result
+        if (_searchIndex >= 0 && _searchIndex < _searchResults.Count)
+            _searchResults[_searchIndex].BackColor = Color.LightYellow;
+
+        _searchIndex = (_searchIndex + 1) % _searchPaths.Count;
+        NavigateToSearchResult(_searchIndex);
+        _statusLabel.Text = UiStrings.Format("raw_json.match_position", _searchIndex + 1, _searchPaths.Count);
     }
 
     private void SearchJsonData(object? value, string query, List<string> path)
@@ -829,15 +851,7 @@ public partial class RawJsonPanel : UserControl
         }
         else if (e.KeyCode == Keys.F3 || (e.KeyCode == Keys.Enter && _searchPaths.Count > 0))
         {
-            if (_searchPaths.Count > 0)
-            {
-                // Dim previous result if it exists
-                if (_searchIndex >= 0 && _searchIndex < _searchResults.Count)
-                    _searchResults[_searchIndex].BackColor = Color.LightYellow;
-                _searchIndex = (_searchIndex + 1) % _searchPaths.Count;
-                NavigateToSearchResult(_searchIndex);
-                _statusLabel.Text = UiStrings.Format("raw_json.match_position", _searchIndex + 1, _searchPaths.Count);
-            }
+            FindNext();
             e.Handled = true;
         }
     }

@@ -603,6 +603,32 @@ public class StaticDataDatabaseTests
         }
     }
 
+    [Fact]
+    public void RewardDatabase_ContainsSpecXoHelmet_WhenLoaded()
+    {
+        try
+        {
+            string jsonDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Resources", "json");
+            if (!Directory.Exists(jsonDir))
+                jsonDir = Path.Combine(AppContext.BaseDirectory, "Resources", "json");
+            if (!Directory.Exists(jsonDir)) return;
+
+            RewardDatabase.LoadFromJsonDirectory(jsonDir);
+
+            var reward = RewardDatabase.Rewards.FirstOrDefault(r => r.Id == "^ENT_XO_HELMET");
+            Assert.NotNull(reward);
+            Assert.Equal("SPEC_XOHELMET", reward.ProductId);
+            Assert.Equal("entitlement", reward.Category);
+
+            // Entitlement rewards should appear in PlatformRewards
+            Assert.Contains(RewardDatabase.PlatformRewards, r => r.Id == "^ENT_XO_HELMET");
+        }
+        finally
+        {
+            RewardDatabase.Reset();
+        }
+    }
+
     // --- RewardDatabase JSON loading ---
 
     [Fact]

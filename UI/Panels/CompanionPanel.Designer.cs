@@ -86,11 +86,11 @@ partial class CompanionPanel
             FlowDirection = FlowDirection.LeftToRight
         };
         _countLabel = new Label { Text = "Total: 0 slots", AutoSize = true, Anchor = AnchorStyles.Left, Padding = new Padding(0, 5, 0, 0) };
-        _deleteBtn = new Button { Text = "Delete", Width = 70 };
+        _deleteBtn = new Button { Text = "Delete", AutoSize = true, MinimumSize = new Size(70, 0) };
         _deleteBtn.Click += OnDelete;
-        _exportCompanionBtn = new Button { Text = "Export", Width = 70 };
+        _exportCompanionBtn = new Button { Text = "Export", AutoSize = true, MinimumSize = new Size(70, 0) };
         _exportCompanionBtn.Click += OnExport;
-        _importCompanionBtn = new Button { Text = "Import", Width = 70 };
+        _importCompanionBtn = new Button { Text = "Import", AutoSize = true, MinimumSize = new Size(70, 0) };
         _importCompanionBtn.Click += OnImport;
         _resetAccessoryBtn = new Button { Text = "Reset Accessory", AutoSize = true };
         _resetAccessoryBtn.Click += OnResetAccessory;

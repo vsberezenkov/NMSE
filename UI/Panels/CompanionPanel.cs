@@ -979,6 +979,7 @@ public partial class CompanionPanel : UserControl
         _slotUnlockedLabel.Text = UiStrings.GetOrNull("companion.slot_unlocked") ?? "Slot Unlocked:";
         _speciesLabel.Text = UiStrings.GetOrNull("companion.species") ?? "Species:";
         _nameLabel.Text = UiStrings.GetOrNull("companion.name") ?? "Name:";
+        _nameField.PlaceholderText = UiStrings.Get("common.procedural_no_name");
         _typeLabel.Text = UiStrings.GetOrNull("companion.type") ?? "Type:";
         _biomeLabel.Text = UiStrings.GetOrNull("companion.biome") ?? "Biome:";
         _predatorLabel.Text = UiStrings.GetOrNull("companion.predator") ?? "Predator:";

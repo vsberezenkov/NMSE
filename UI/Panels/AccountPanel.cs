@@ -124,8 +124,6 @@ public partial class AccountPanel : UserControl
 
     private static void ApplyFilter(DataGridView grid, string filterText)
     {
-        var currencyManager = (CurrencyManager)grid.BindingContext![grid.DataSource ?? (object)grid];
-        currencyManager.SuspendBinding();
         try
         {
             foreach (DataGridViewRow row in grid.Rows)
@@ -142,9 +140,9 @@ public partial class AccountPanel : UserControl
                            || name.Contains(filterText, StringComparison.OrdinalIgnoreCase);
             }
         }
-        finally
+        catch (InvalidOperationException)
         {
-            currencyManager.ResumeBinding();
+            // Grid may not be fully initialised yet — silently ignore
         }
     }
 

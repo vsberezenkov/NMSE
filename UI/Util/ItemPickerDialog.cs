@@ -7,6 +7,7 @@ using NMSE.Data;
 public class ItemPickerDialog : Form
 {
     public string? SelectedId { get; private set; }
+    public List<string> SelectedIds { get; } = new();
     private readonly DataGridView _grid;
     private readonly Button _addButton;
     private readonly TextBox _manualIdBox;
@@ -71,8 +72,15 @@ public class ItemPickerDialog : Form
         _addButton = new Button { Text = UiStrings.Get("item_picker.add"), Dock = DockStyle.Right, DialogResult = DialogResult.OK, Enabled = false };
         _addButton.Click += (s, e) =>
         {
-            if (_grid.SelectedRows.Count > 0)
-                SelectedId = _grid.SelectedRows[0].Cells["ID"].Value as string;
+            SelectedIds.Clear();
+            foreach (DataGridViewRow row in _grid.SelectedRows)
+            {
+                var id = row.Cells["ID"].Value as string;
+                if (!string.IsNullOrEmpty(id))
+                    SelectedIds.Add(id!);
+            }
+            if (SelectedIds.Count > 0)
+                SelectedId = SelectedIds[0];
         };
 
         _grid.SelectionChanged += (s, e) => _addButton.Enabled = _grid.SelectedRows.Count > 0;

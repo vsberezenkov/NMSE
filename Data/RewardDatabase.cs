@@ -65,7 +65,7 @@ public static class RewardDatabase
             _loadedRewards = entries;
             _loadedSeasonRewards = entries.Where(r => r.Category == "season").ToList();
             _loadedTwitchRewards = entries.Where(r => r.Category == "twitch").ToList();
-            _loadedPlatformRewards = entries.Where(r => r.Category == "platform").ToList();
+            _loadedPlatformRewards = entries.Where(r => r.Category is "platform" or "entitlement").ToList();
             return true;
         }
         catch

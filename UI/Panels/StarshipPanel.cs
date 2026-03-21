@@ -83,6 +83,7 @@ public partial class StarshipPanel : UserControl
         _statsLabel.Text = UiStrings.Get("starship.base_stats");
         _selectLabel.Text = UiStrings.Get("starship.select");
         _nameLabel.Text = UiStrings.Get("starship.name");
+        _shipName.PlaceholderText = UiStrings.Get("common.procedural_no_name");
         _typeLabel.Text = UiStrings.Get("starship.type");
         _classLabel.Text = UiStrings.Get("starship.class");
         _seedLabel.Text = UiStrings.Get("starship.seed");

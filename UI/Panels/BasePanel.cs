@@ -222,7 +222,7 @@ internal class BasesSubPanel : UserControl
 
         var seedPanel = new Panel { Dock = DockStyle.Fill, Height = 26 };
         _npcSeed = new TextBox { Dock = DockStyle.Fill };
-        _generateNpcSeedBtn = new Button { Text = UiStrings.Get("common.generate"), Dock = DockStyle.Right, Width = 70 };
+        _generateNpcSeedBtn = new Button { Text = UiStrings.Get("common.generate"), Dock = DockStyle.Right, AutoSize = true, MinimumSize = new Size(70, 0) };
         _generateNpcSeedBtn.Click += OnGenerateNpcSeed;
         seedPanel.Controls.Add(_npcSeed);
         seedPanel.Controls.Add(_generateNpcSeedBtn);
@@ -271,11 +271,11 @@ internal class BasesSubPanel : UserControl
             FlowDirection = FlowDirection.LeftToRight,
             Padding = new Padding(0, 6, 0, 0)
         };
-        _backupBtn = new Button { Text = UiStrings.Get("base.backup"), Width = 80, Enabled = false };
+        _backupBtn = new Button { Text = UiStrings.Get("base.backup"), AutoSize = true, MinimumSize = new Size(80, 0), Enabled = false };
         _backupBtn.Click += OnBackup;
-        _restoreBtn = new Button { Text = UiStrings.Get("base.restore"), Width = 80, Enabled = false };
+        _restoreBtn = new Button { Text = UiStrings.Get("base.restore"), AutoSize = true, MinimumSize = new Size(80, 0), Enabled = false };
         _restoreBtn.Click += OnRestore;
-        _moveBaseComputerBtn = new Button { Text = UiStrings.Get("base.move_basecomp"), Width = 140, Enabled = false };
+        _moveBaseComputerBtn = new Button { Text = UiStrings.Get("base.move_basecomp"), AutoSize = true, MinimumSize = new Size(140, 0), Enabled = false };
         _moveBaseComputerBtn.Click += OnMoveBaseComputer;
         buttonPanel.Controls.Add(_backupBtn);
         buttonPanel.Controls.Add(_restoreBtn);
@@ -974,6 +974,7 @@ internal class ChestsSubPanel : UserControl
 
             _chestGrids[i] = new InventoryGridPanel { Dock = DockStyle.Fill };
             _chestGrids[i].SetIsStorageInventory(true);
+            _chestGrids[i].SetIsChestInventory(true);
             _chestGrids[i].SetIsCargoInventory(true);
             _chestGrids[i].SetInventoryGroup("Chest");
 

@@ -202,8 +202,19 @@ public static class JsonParser
                 case '"': sb.Append("\\\""); break;
                 case '\\': sb.Append("\\\\"); break;
                 default:
-                    if (c >= ' ')
+                    if (c >= ' ' && c <= '~')
                         sb.Append(c);
+                    else if (c >= ' ')
+                    {
+                        // Non-ASCII printable: write as \uXXXX to preserve
+                        // characters such as \u03BB (λ) or \u0166 (Ŧ) in their
+                        // escaped form for save-file round-trip safety.
+                        sb.Append("\\u");
+                        sb.Append(HexChars[(c >> 12) & 0xF]);
+                        sb.Append(HexChars[(c >> 8) & 0xF]);
+                        sb.Append(HexChars[(c >> 4) & 0xF]);
+                        sb.Append(HexChars[c & 0xF]);
+                    }
                     else
                     {
                         sb.Append("\\u");
@@ -330,17 +341,26 @@ public static class JsonParser
         int c = reader.ReadSkipWhitespace();
         if (c == '"')
         {
-            bool shouldAutoDetect = (mapper == null); // Only auto-detect on first key if no mapper provided
+            // Auto-detect: check the first several keys for obfuscation.
+            // PS4/PS5 saves may start with non-obfuscated keys (e.g. "Version")
+            // followed by obfuscated ones (e.g. "XTp", "<h0"), so checking only
+            // the first key is insufficient.
+            int autoDetectRemaining = (mapper == null) ? 10 : 0;
             while (true)
             {
                 string key = ParseStringValue(reader);
 
-                // Auto-detect obfuscated keys on the first key of the root object
-                if (shouldAutoDetect && activeMapper == null)
+                // Auto-detect obfuscated keys on the first N keys of the root object
+                if (autoDetectRemaining > 0 && activeMapper == null)
                 {
-                    shouldAutoDetect = false;
-                    if (mapper == null && _defaultSaveMapper != null && _defaultSaveMapper.IsObfuscatedKey(key))
+                    autoDetectRemaining--;
+                    if (_defaultSaveMapper != null && _defaultSaveMapper.IsObfuscatedKey(key))
+                    {
                         activeMapper = _defaultSaveMapper;
+                        autoDetectRemaining = 0;
+                        // Re-map any keys already added to the object
+                        obj.RemapKeys(activeMapper);
+                    }
                 }
 
                 // Translate obfuscated key to human-readable name
@@ -501,7 +521,9 @@ public static class JsonParser
                             {
                                 if (hasStringContent) sb.Append((char)c);
                                 if (trackBytes) AppendByte(ref byteBuffer, ref byteCount, (byte)c);
-                                if (c >= 0x80 && c <= 0xFF) hasHighBytes = true;
+                                // Note: \u00XX escapes are intentional Unicode, NOT raw binary.
+                                // Do NOT set hasHighBytes here — only raw source bytes >= 0x80
+                                // (from Latin-1 decoded binary payloads) should trigger BinaryData.
                             }
                             else
                             {

@@ -108,6 +108,22 @@ public partial class JsonObject
         Length++;
     }
 
+    /// <summary>
+    /// Re-maps existing keys using the given mapper.
+    /// Called during parsing when obfuscated keys are detected after some
+    /// non-obfuscated keys have already been added (e.g., PS4 saves that
+    /// start with "Version" followed by obfuscated keys).
+    /// </summary>
+    internal void RemapKeys(NMSE.Data.JsonNameMapper mapper)
+    {
+        for (int i = 0; i < Length; i++)
+        {
+            if (mapper.IsObfuscatedKey(_names[i]))
+                _names[i] = mapper.ToName(_names[i]);
+        }
+        _index = null; // Invalidate the index so it's rebuilt on next access
+    }
+
     private void BuildIndex()
     {
         _index = new Dictionary<string, int>(Length, StringComparer.Ordinal);

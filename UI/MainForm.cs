@@ -22,6 +22,7 @@ public partial class MainFormResources : Form
     // Strips + buttons
     private readonly MenuStrip _menuStrip;
     private readonly ToolStrip _toolStrip;
+    private readonly ToolStrip _toolStrip2;
     private readonly StatusStrip _statusStrip;
     private readonly TabControl _tabControl;
     private ToolStripMenuItem _languageMenu = null!;
@@ -95,13 +96,14 @@ public partial class MainFormResources : Form
         // Initialize components
         _menuStrip = new MenuStrip();
         _toolStrip = new ToolStrip();
+        _toolStrip2 = new ToolStrip();
         _statusStrip = new StatusStrip();
         _tabControl = new DoubleBufferedTabControl();
         _statusLabel = new ToolStripStatusLabel("Ready");
         _itemCountLabel = new ToolStripStatusLabel("") { Alignment = ToolStripItemAlignment.Right };
-        _directoryCombo = new ToolStripComboBox { AutoSize = false, Width = 440 };
-        _saveSlotCombo = new ToolStripComboBox { AutoSize = false, Width = 120 };
-        _saveFileCombo = new ToolStripComboBox { AutoSize = false, Width = 120 };
+        _directoryCombo = new ToolStripComboBox { AutoSize = false, Width = 420 };
+        _saveSlotCombo = new ToolStripComboBox { AutoSize = false, Width = 300 };
+        _saveFileCombo = new ToolStripComboBox { AutoSize = false, Width = 220 };
         _loadButton = new ToolStripButton("Load");
         _saveButton = new ToolStripButton("Save") { Enabled = false };
 
@@ -135,6 +137,7 @@ public partial class MainFormResources : Form
         _shipPanel.DataModified += (s, e) => _hasUnsavedChanges = true;
         _freighterPanel.DataModified += (s, e) => _hasUnsavedChanges = true;
         _vehiclePanel.DataModified += (s, e) => _hasUnsavedChanges = true;
+        _discoveryPanel.DataModified += (s, e) => _hasUnsavedChanges = true;
 
         // Wire up Save Utilities reload event
         _mainStatsPanel.ReloadRequested += (s, e) =>
@@ -195,10 +198,13 @@ public partial class MainFormResources : Form
         {
             var asm = typeof(MainFormResources).Assembly;
             // Manifest resource name: <DefaultNamespace>.Resources.app.NMSE.ico
-            using var stream = asm.GetManifestResourceStream(IconResource);
+            // Note: do NOT use 'using' – WinForms may reference the stream after
+            // this scope; the GC will reclaim it when the Form is disposed.
+            var stream = asm.GetManifestResourceStream(IconResource);
             if (stream != null)
             {
                 Icon = new Icon(stream);
+                ShowIcon = true;
             }
         }
         catch
@@ -213,6 +219,7 @@ public partial class MainFormResources : Form
         // Controls are processed in reverse z-order (last added = back = processed first).
         // Order: TabControl (Fill, front) -> ToolStrip (Top) -> MenuStrip (Top) -> StatusStrip (Bottom, back)
         Controls.Add(_tabControl);
+        Controls.Add(_toolStrip2);
         Controls.Add(_toolStrip);
         Controls.Add(_menuStrip);
         Controls.Add(_statusStrip);
@@ -273,17 +280,19 @@ public partial class MainFormResources : Form
 
     private void InitializeToolbar()
     {
+        // Row 1: Directory
         _toolStrip.Items.Add(new ToolStripLabel("Directory:"));
         _toolStrip.Items.Add(_directoryCombo);
         _toolStrip.Items.Add(new ToolStripButton("Browse...", null, OnBrowseDirectory));
-        _toolStrip.Items.Add(new ToolStripSeparator());
-        _toolStrip.Items.Add(new ToolStripLabel("Save Slot:"));
-        _toolStrip.Items.Add(_saveSlotCombo);
-        _toolStrip.Items.Add(new ToolStripLabel("File:"));
-        _toolStrip.Items.Add(_saveFileCombo);
-        _toolStrip.Items.Add(new ToolStripSeparator());
-        _toolStrip.Items.Add(_loadButton);
-        _toolStrip.Items.Add(_saveButton);
+
+        // Row 2: Save Slot, File, Load, Save
+        _toolStrip2.Items.Add(new ToolStripLabel("Save Slot:"));
+        _toolStrip2.Items.Add(_saveSlotCombo);
+        _toolStrip2.Items.Add(new ToolStripLabel("File:"));
+        _toolStrip2.Items.Add(_saveFileCombo);
+        _toolStrip2.Items.Add(new ToolStripSeparator());
+        _toolStrip2.Items.Add(_loadButton);
+        _toolStrip2.Items.Add(_saveButton);
 
         _loadButton.Click += OnLoadSlot;
         _saveButton.Click += OnSave;
@@ -784,9 +793,8 @@ public partial class MainFormResources : Form
 
                     saveFiles.Add(slotFiles);
                     string difficulty = DetectDifficulty(slotFiles[0]);
-                    string label = string.IsNullOrEmpty(difficulty)
-                        ? $"Slot {i + 1}"
-                        : $"Slot {i + 1} - {difficulty}";
+                    string saveName = DetectSaveName(slotFiles[0]);
+                    string label = BuildSlotLabel($"Slot {i + 1}", saveName, difficulty);
                     _saveSlotCombo.Items.Add(label);
                 }
             }
@@ -801,9 +809,8 @@ public partial class MainFormResources : Form
                 {
                     saveFiles.Add(new List<string> { ps4Files[i] });
                     string difficulty = DetectDifficulty(ps4Files[i]);
-                    string label = string.IsNullOrEmpty(difficulty)
-                        ? $"Save {i + 1}"
-                        : $"Save {i + 1} - {difficulty}";
+                    string saveName = DetectSaveName(ps4Files[i]);
+                    string label = BuildSlotLabel($"Save {i + 1}", saveName, difficulty);
                     _saveSlotCombo.Items.Add(label);
                 }
             }
@@ -834,9 +841,14 @@ public partial class MainFormResources : Form
             return;
 
         var files = _saveSlotFiles[slotIndex];
-        foreach (var filePath in files)
+        int newestIndex = 0;
+        DateTime newestTime = DateTime.MinValue;
+
+        for (int i = 0; i < files.Count; i++)
         {
+            var filePath = files[i];
             string fileName = Path.GetFileName(filePath);
+
             // Determine if this is a manual or auto save based on file naming
             string suffix;
             if (fileName.StartsWith("savedata", StringComparison.OrdinalIgnoreCase))
@@ -852,11 +864,26 @@ public partial class MainFormResources : Form
                 bool isAuto = int.TryParse(numPart, out int num) && num % 2 == 0;
                 suffix = isAuto ? " (Auto)" : " (Manual)";
             }
-            _saveFileCombo.Items.Add($"{fileName}{suffix}");
+
+            // Append file timestamp
+            string timestamp = "";
+            try
+            {
+                var lastWrite = File.GetLastWriteTime(filePath);
+                timestamp = $" - {lastWrite:dd/MM/yy h:mmtt}";
+                if (lastWrite > newestTime)
+                {
+                    newestTime = lastWrite;
+                    newestIndex = i;
+                }
+            }
+            catch { }
+
+            _saveFileCombo.Items.Add($"{fileName}{suffix}{timestamp}");
         }
 
         if (_saveFileCombo.Items.Count > 0)
-            _saveFileCombo.SelectedIndex = 0;
+            _saveFileCombo.SelectedIndex = newestIndex;
     }
 
     /// <summary>
@@ -873,6 +900,28 @@ public partial class MainFormResources : Form
         }
         catch { }
         return "";
+    }
+
+    private static string DetectSaveName(string filePath)
+    {
+        try
+        {
+            return SaveFileManager.DetectSaveNameFast(filePath);
+        }
+        catch { }
+        return "";
+    }
+
+    /// <summary>
+    /// Build a slot label combining prefix, save name, and difficulty.
+    /// Format: "Slot N - SaveName - DIFFICULTY" or "Slot N - DIFFICULTY" or "Slot N".
+    /// </summary>
+    private static string BuildSlotLabel(string prefix, string saveName, string difficulty)
+    {
+        var parts = new List<string> { prefix };
+        if (!string.IsNullOrEmpty(saveName)) parts.Add(saveName);
+        if (!string.IsNullOrEmpty(difficulty)) parts.Add(difficulty);
+        return string.Join(" - ", parts);
     }
 
     /// <summary>
@@ -903,16 +952,6 @@ public partial class MainFormResources : Form
             _progressBar.Value = 0;
             _statusLabel.Text = UiStrings.Get("status.loading_save");
 
-            // Start backup in background (fire-and-forget, runs concurrently with loading)
-            string? saveDir = Path.GetDirectoryName(filePath);
-            if (saveDir != null)
-            {
-                _ = Task.Run(() =>
-                {
-                    try { SaveFileManager.BackupSaveDirectory(saveDir); }
-                    catch (Exception ex) { Debug.WriteLine($"Backup failed: {ex.Message}"); }
-                });
-            }
 
             // Load and decompress file in background
             var progress = new Progress<int>(v => _progressBar.Value = v);
@@ -926,6 +965,10 @@ public partial class MainFormResources : Form
             });
 
             _currentFilePath = filePath;
+            string? saveDir = Path.GetDirectoryName(filePath);
+
+            // If the file was loaded directly (Open File), update the toolbar to reflect it
+            UpdateToolbarForLoadedFile(filePath);
 
             // Update panels - only load the currently active tab eagerly.
             // Other tabs are loaded on first selection (deferred loading).
@@ -982,6 +1025,64 @@ public partial class MainFormResources : Form
             MessageBox.Show(UiStrings.Format("dialog.failed_load_save", ex.Message), UiStrings.Get("dialog.error"),
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             _statusLabel.Text = UiStrings.Get("status.failed_load_save");
+        }
+    }
+
+    /// <summary>
+    /// Updates the toolbar combos to reflect a directly-loaded file.
+    /// Sets the directory combo to the file's parent directory and
+    /// selects the correct save slot and file if possible.
+    /// </summary>
+    private void UpdateToolbarForLoadedFile(string filePath)
+    {
+        string? dir = Path.GetDirectoryName(filePath);
+        if (dir == null) return;
+
+        string fileName = Path.GetFileName(filePath);
+
+        // If the directory is not already in the combo, add it
+        bool dirFound = false;
+        for (int i = 0; i < _directoryCombo.Items.Count; i++)
+        {
+            if (string.Equals(_directoryCombo.Items[i]?.ToString(), dir, StringComparison.OrdinalIgnoreCase))
+            {
+                // Temporarily unhook to avoid re-populating save slots
+                _directoryCombo.SelectedIndexChanged -= OnDirectoryComboChanged;
+                _directoryCombo.SelectedIndex = i;
+                _directoryCombo.SelectedIndexChanged += OnDirectoryComboChanged;
+                dirFound = true;
+                break;
+            }
+        }
+
+        if (!dirFound)
+        {
+            _directoryCombo.SelectedIndexChanged -= OnDirectoryComboChanged;
+            _directoryCombo.Items.Insert(0, dir);
+            _directoryCombo.SelectedIndex = 0;
+            _directoryCombo.SelectedIndexChanged += OnDirectoryComboChanged;
+            // Re-detect platform and populate slots for this directory
+            PopulateSaveSlots();
+        }
+
+        // Try to match the loaded file to a slot+file in the combos
+        for (int slot = 0; slot < _saveSlotFiles.Count; slot++)
+        {
+            var files = _saveSlotFiles[slot];
+            for (int fi = 0; fi < files.Count; fi++)
+            {
+                if (string.Equals(Path.GetFileName(files[fi]), fileName, StringComparison.OrdinalIgnoreCase))
+                {
+                    if (_saveSlotCombo.SelectedIndex != slot)
+                    {
+                        _saveSlotCombo.SelectedIndex = slot;
+                    }
+                    // After setting slot, try to select the file
+                    if (fi < _saveFileCombo.Items.Count)
+                        _saveFileCombo.SelectedIndex = fi;
+                    return;
+                }
+            }
         }
     }
 
@@ -1241,6 +1342,17 @@ public partial class MainFormResources : Form
         {
             // Sync all panel data to in-memory JsonObjects
             SyncAllPanelData();
+
+            // Backup the save directory before writing, but only if there are unsaved changes
+            if (_hasUnsavedChanges)
+            {
+                string? saveDir = Path.GetDirectoryName(_currentFilePath);
+                if (saveDir != null)
+                {
+                    try { SaveFileManager.BackupSaveDirectory(saveDir); }
+                    catch (Exception ex) { Debug.WriteLine($"Backup failed: {ex.Message}"); }
+                }
+            }
 
             // Determine slot index for meta writing
             int slotIdx = _saveSlotCombo.SelectedIndex >= 0 ? _saveSlotCombo.SelectedIndex : 0;
@@ -1769,14 +1881,17 @@ public partial class MainFormResources : Form
         }
 
         // ---- Toolbar labels ----
-        // Toolbar items: Directory: [0], combo [1], Browse [2], sep [3],
-        //   Save Slot: [4], combo [5], File: [6], combo [7], sep [8], Load [9], Save [10]
-        if (_toolStrip.Items.Count >= 11)
+        // Row 1: Directory: [0], combo [1], Browse [2]
+        if (_toolStrip.Items.Count >= 3)
         {
             _toolStrip.Items[0].Text = UiStrings.Get("toolbar.directory");
             _toolStrip.Items[2].Text = UiStrings.Get("toolbar.browse");
-            _toolStrip.Items[4].Text = UiStrings.Get("toolbar.save_slot");
-            _toolStrip.Items[6].Text = UiStrings.Get("toolbar.file");
+        }
+        // Row 2: Save Slot: [0], combo [1], File: [2], combo [3], sep [4], Load [5], Save [6]
+        if (_toolStrip2.Items.Count >= 7)
+        {
+            _toolStrip2.Items[0].Text = UiStrings.Get("toolbar.save_slot");
+            _toolStrip2.Items[2].Text = UiStrings.Get("toolbar.file");
             _loadButton.Text = UiStrings.Get("toolbar.load");
             _saveButton.Text = UiStrings.Get("toolbar.save");
         }

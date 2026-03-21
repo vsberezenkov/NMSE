@@ -87,7 +87,7 @@ partial class SettlementPanel
         // Warning
         var settleWarn = new Label
         {
-            Text = "\u26A0 Deleting a settlement doesn't remove the teleporter entry. You can remove it from Discoveries -> Known Location.",
+            Text = "\u26A0 Deleting a settlement doesn't remove the teleporter entry. You can remove it from Discoveries -> Teleport Destinations.",
             AutoSize = true,
             ForeColor = Color.DarkOrange,
             Font = new System.Drawing.Font("Segoe UI Emoji", 9F, System.Drawing.FontStyle.Bold),
@@ -98,18 +98,19 @@ partial class SettlementPanel
         layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         layout.Controls.Add(settleWarn, 0, row++);
 
-        // 2-column form
+        // 3-column form layout
         var formPanel = new TableLayoutPanel
         {
             Dock = DockStyle.Top,
-            ColumnCount = 2,
+            ColumnCount = 3,
             AutoSize = true,
             Padding = new Padding(0, 0, 0, 10)
         };
-        formPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 55));
-        formPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45));
+        formPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38));
+        formPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40));
+        formPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 22));
 
-        // Left column: Name, Seed, Perks 1-6, Decision Type, Last Decision
+        // Column 1: Name, Seed, Perks 1-9
         var leftPanel = new TableLayoutPanel
         {
             Dock = DockStyle.Top,
@@ -126,7 +127,7 @@ partial class SettlementPanel
 
         var seedPanel = new Panel { Dock = DockStyle.Fill, Height = 23 };
         _seedField = new TextBox { Dock = DockStyle.Fill };
-        _generateSeedBtn = new Button { Text = "Generate", Dock = DockStyle.Right, Width = 70, Height = 23 };
+        _generateSeedBtn = new Button { Text = "Generate", Dock = DockStyle.Right, AutoSize = true, MinimumSize = new Size(70, 23) };
         _generateSeedBtn.Click += (s, e) =>
         {
             byte[] bytes = new byte[8];
@@ -137,7 +138,7 @@ partial class SettlementPanel
         seedPanel.Controls.Add(_generateSeedBtn);
         _seedLabel = AddRow(leftPanel, "Seed:", seedPanel, leftRow++);
 
-        // Perk slots 1-6
+        // Perk slots (all 18)
         _perkCombos = new ComboBox[PerkSlotCount];
         _perkSeedFields = new TextBox[PerkSlotCount];
         _perkSeedPanels = new Panel[PerkSlotCount];
@@ -185,13 +186,28 @@ partial class SettlementPanel
             perkRowPanel.Controls.Add(perkSeedContainer, 1, 0);
             perkRowPanel.Controls.Add(removeBtn, 2, 0);
 
-            _perkLabels[i] = AddRow(leftPanel, $"Perk {i + 1}:", perkRowPanel, leftRow++);
+            // First 9 perks go into leftPanel, last 9 into middlePanel (added below)
+            if (i < 9)
+                _perkLabels[i] = AddRow(leftPanel, $"Perk {i + 1}:", perkRowPanel, leftRow++);
         }
 
-        // Decision controls at bottom of left column (after perks)
+        formPanel.Controls.Add(leftPanel, 0, 0);
+
+        // Column 2: Decision Type, Last Decision, Perks 10-18
+        var middlePanel = new TableLayoutPanel
+        {
+            Dock = DockStyle.Top,
+            ColumnCount = 2,
+            AutoSize = true
+        };
+        middlePanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        middlePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        int midRow = 0;
+
+        // Decision controls at top of middle column
         _decisionTypeField = new ComboBox { Dock = DockStyle.Fill, DropDownStyle = ComboBoxStyle.DropDownList };
         _decisionTypeField.Items.AddRange(SettlementLogic.DecisionTypes);
-        _decisionTypeLabel = AddRow(leftPanel, "Decision Type:", _decisionTypeField, leftRow++);
+        _decisionTypeLabel = AddRow(middlePanel, "Decision Type:", _decisionTypeField, midRow++);
 
         _lastDecisionTimeField = new DateTimePicker
         {
@@ -199,11 +215,19 @@ partial class SettlementPanel
             Format = DateTimePickerFormat.Custom,
             CustomFormat = "yyyy-MM-dd HH:mm:ss"
         };
-        _lastDecisionLabel = AddRow(leftPanel, "Last Decision:", _lastDecisionTimeField, leftRow++);
+        _lastDecisionLabel = AddRow(middlePanel, "Last Decision:", _lastDecisionTimeField, midRow++);
 
-        formPanel.Controls.Add(leftPanel, 0, 0);
+        // Perks 10-18 into middle column
+        for (int i = 9; i < PerkSlotCount; i++)
+        {
+            // The perk row panels were already created above; add them to the middle panel
+            var perkRowPanel = (TableLayoutPanel)_perkCombos[i].Parent!;
+            _perkLabels[i] = AddRow(middlePanel, $"Perk {i + 1}:", perkRowPanel, midRow++);
+        }
 
-        // Right column: Stats only
+        formPanel.Controls.Add(middlePanel, 1, 0);
+
+        // Column 3: Stats
         var rightPanel = new TableLayoutPanel
         {
             Dock = DockStyle.Top,
@@ -227,7 +251,7 @@ partial class SettlementPanel
             _statRowLabels[i] = AddRow(rightPanel, StatLabels[i] + ":", _statFields[i], rightRow++);
         }
 
-        formPanel.Controls.Add(rightPanel, 1, 0);
+        formPanel.Controls.Add(rightPanel, 2, 0);
 
         layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         layout.Controls.Add(formPanel, 0, row++);

@@ -6,6 +6,11 @@ namespace NMSE.UI.Panels;
 
 public partial class DiscoveryPanel : UserControl
 {
+    /// <summary>Raised when discovery data is modified by the user.</summary>
+    public event EventHandler? DataModified;
+
+    private void RaiseDataModified() => DataModified?.Invoke(this, EventArgs.Empty);
+
     private static readonly Bitmap PlaceholderIcon = new(24, 24);
 
     private readonly Dictionary<string, Image> _scaledIconCache = new(StringComparer.OrdinalIgnoreCase);
@@ -313,16 +318,20 @@ public partial class DiscoveryPanel : UserControl
         if (unknownTechs == null || unknownTechs.Count == 0) return;
 
         using var picker = new ItemPickerDialog("Add Technology", unknownTechs);
-        if (picker.ShowDialog(this) == DialogResult.OK && !string.IsNullOrEmpty(picker.SelectedId))
+        if (picker.ShowDialog(this) == DialogResult.OK && picker.SelectedIds.Count > 0)
         {
-            var item = _database.GetItem(picker.SelectedId!);
-            if (item != null)
+            foreach (var selectedId in picker.SelectedIds)
             {
-                _techGrid.Rows.Add(GetScaledIcon(item.Id) ?? (object)PlaceholderIcon, item.Name, item.Subtitle, item.Id);
+                var item = _database.GetItem(selectedId);
+                if (item != null)
+                {
+                    _techGrid.Rows.Add(GetScaledIcon(item.Id) ?? (object)PlaceholderIcon, item.Name, item.Subtitle, item.Id);
+                }
             }
+            RaiseDataModified();
         }
     }
-    private void RemoveTech_Click(object? sender, EventArgs e) => RemoveSelectedFromGrid(_techGrid);
+    private void RemoveTech_Click(object? sender, EventArgs e) { RemoveSelectedFromGrid(_techGrid); RaiseDataModified(); }
 
     // --- Tab 2: Known Products events ---
 
@@ -363,16 +372,20 @@ public partial class DiscoveryPanel : UserControl
         if (unknownProducts == null || unknownProducts.Count == 0) return;
 
         using var picker = new ItemPickerDialog("Add Product", unknownProducts);
-        if (picker.ShowDialog(this) == DialogResult.OK && !string.IsNullOrEmpty(picker.SelectedId))
+        if (picker.ShowDialog(this) == DialogResult.OK && picker.SelectedIds.Count > 0)
         {
-            var item = _database.GetItem(picker.SelectedId!);
-            if (item != null)
+            foreach (var selectedId in picker.SelectedIds)
             {
-                _productGrid.Rows.Add(GetScaledIcon(item.Id) ?? (object)PlaceholderIcon, item.Name, item.Subtitle, item.Id);
+                var item = _database.GetItem(selectedId);
+                if (item != null)
+                {
+                    _productGrid.Rows.Add(GetScaledIcon(item.Id) ?? (object)PlaceholderIcon, item.Name, item.Subtitle, item.Id);
+                }
             }
+            RaiseDataModified();
         }
     }
-    private void RemoveProduct_Click(object? sender, EventArgs e) => RemoveSelectedFromGrid(_productGrid);
+    private void RemoveProduct_Click(object? sender, EventArgs e) { RemoveSelectedFromGrid(_productGrid); RaiseDataModified(); }
 
     // --- Tab 3: Known Words ---
 
@@ -474,6 +487,7 @@ public partial class DiscoveryPanel : UserControl
 
         bool value = row.Cells[e.ColumnIndex].Value is true;
         SetWordKnown(groupName, raceOrdinal, value);
+        RaiseDataModified();
     }
 
     private void SaveKnownWords(JsonObject playerState)
@@ -508,6 +522,7 @@ public partial class DiscoveryPanel : UserControl
         {
             _wordGrid.CellValueChanged += WordGrid_CellValueChanged;
         }
+        RaiseDataModified();
     }
 
     private void LearnAllWords_Click(object? sender, EventArgs e) => SetAllWordFlags(true);
@@ -559,6 +574,7 @@ public partial class DiscoveryPanel : UserControl
         {
             _wordGrid.CellValueChanged += WordGrid_CellValueChanged;
         }
+        RaiseDataModified();
     }
 
     /// <summary>
@@ -613,6 +629,7 @@ public partial class DiscoveryPanel : UserControl
         {
             _wordGrid.CellValueChanged += WordGrid_CellValueChanged;
         }
+        RaiseDataModified();
     }
 
     // --- Tab 4: Known Glyphs ---
@@ -676,6 +693,7 @@ public partial class DiscoveryPanel : UserControl
     {
         for (int i = 0; i < 16; i++)
             _glyphCheckBoxes[i].Checked = value;
+        RaiseDataModified();
     }
 
     private void LearnAllGlyphs_Click(object? sender, EventArgs e) => SetAllGlyphs(true);
@@ -889,6 +907,7 @@ public partial class DiscoveryPanel : UserControl
         // Re-index remaining rows
         for (int i = 0; i < _locationsGrid.Rows.Count; i++)
             _locationsGrid.Rows[i].Cells[0].Value = i;
+        RaiseDataModified();
     }
 
     private void TravelToSystem_Click(object? sender, EventArgs e)
@@ -950,6 +969,7 @@ public partial class DiscoveryPanel : UserControl
 
             MessageBox.Show(UiStrings.Get("discovery.travel_complete"),
                 UiStrings.Get("discovery.travel_complete_title"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            RaiseDataModified();
         }
         catch
         {
@@ -1104,6 +1124,7 @@ public partial class DiscoveryPanel : UserControl
             Image? fishIcon = GetScaledIcon(lookupId);
             _fishGrid.Rows.Add(fishIcon ?? (object)PlaceholderIcon, saveId, name, 0, 0.0);
             _fishGrid.Rows[^1].Tag = emptySlot;
+            RaiseDataModified();
         }
     }
 
@@ -1126,6 +1147,7 @@ public partial class DiscoveryPanel : UserControl
             largestList.Set(idx, 0.0);
 
         _fishGrid.Rows.Remove(row);
+        RaiseDataModified();
     }
 
     private void ApplyFishFilter()
@@ -1280,6 +1302,7 @@ public partial class DiscoveryPanel : UserControl
             }
 
             MessageBox.Show(UiStrings.Format("discovery.import_success_items", added), UiStrings.Get("discovery.import_title"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            RaiseDataModified();
         }
         catch (Exception ex)
         {
@@ -1334,6 +1357,7 @@ public partial class DiscoveryPanel : UserControl
             }
 
             MessageBox.Show(UiStrings.Format("discovery.import_words_success", added), UiStrings.Get("discovery.import_title"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            RaiseDataModified();
         }
         catch (Exception ex)
         {
@@ -1391,6 +1415,7 @@ public partial class DiscoveryPanel : UserControl
             {
                 try { _glyphCheckBoxes[i].Checked = arr.GetBool(i); } catch { }
             }
+            RaiseDataModified();
         }
         catch (Exception ex)
         {
@@ -1458,6 +1483,7 @@ public partial class DiscoveryPanel : UserControl
             // Refresh the grid
             LoadKnownLocations(_savedPlayerState);
             MessageBox.Show(UiStrings.Format("discovery.import_locations_success", arr.Length), UiStrings.Get("discovery.import_title"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            RaiseDataModified();
         }
         catch (Exception ex)
         {
@@ -1519,6 +1545,7 @@ public partial class DiscoveryPanel : UserControl
             // Refresh
             LoadKnownFish(_savedPlayerState);
             MessageBox.Show(UiStrings.Get("discovery.import_fish_success"), UiStrings.Get("discovery.import_title"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+            RaiseDataModified();
         }
         catch (Exception ex)
         {

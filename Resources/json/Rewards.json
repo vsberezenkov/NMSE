@@ -5278,5 +5278,13 @@
 		"Subtitle_LocStr": "UI_SPECIAL_GUN_SUB",
 		"Category": "platform",
 		"ProductId": "SWITCH_GUN01"
+	},
+	{
+		"Id": "^ENT_XO_HELMET",
+		"Name": "X.O. Helmet",
+		"Name_LocStr": "UI_SPEC_XOHELMET_NAME",
+		"Subtitle_LocStr": "UI_SPEC_XOHELMET_NAME_SUB",
+		"Category": "entitlement",
+		"ProductId": "SPEC_XOHELMET"
 	}
 ]

@@ -77,6 +77,13 @@ public partial class InventoryGridPanel : UserControl
         _isStorageInventory = isStorage;
     }
 
+    // Identify chest inventories that can be resized (up to 10x12)
+    private bool _isChestInventory = false;
+    public void SetIsChestInventory(bool isChest)
+    {
+        _isChestInventory = isChest;
+    }
+
     // Identify technology-only inventories for charge display and context menu
     private bool _isTechInventory = false;
     public void SetIsTechInventory(bool isTech)
@@ -643,9 +650,10 @@ public partial class InventoryGridPanel : UserControl
     private void EnableControlsAfterInventoryLoad()
     {
         // Enable controls after inventory is loaded
-        _resizeWidth.Enabled = !_isStorageInventory;
-        _resizeHeight.Enabled = !_isStorageInventory;
-        _resizeButton.Enabled = !_isStorageInventory;
+        bool hideResize = _isStorageInventory && !_isChestInventory;
+        _resizeWidth.Enabled = !hideResize;
+        _resizeHeight.Enabled = !hideResize;
+        _resizeButton.Enabled = !hideResize;
         _detailAmount.Enabled = true;
         _detailMaxAmount.Enabled = true;
         _detailDamageFactor.Enabled = true;
@@ -670,9 +678,12 @@ public partial class InventoryGridPanel : UserControl
         // (e.g. when switching languages while scrolled down).
         _gridContainer.AutoScrollPosition = Point.Empty;
 
-        // Dispose old cells (timers, bitmaps) before removing them
-        foreach (Control ctrl in _gridContainer.Controls)
-            ctrl.Dispose();
+        // Dispose old cells (ToolTips, bitmaps) before removing them
+        foreach (var cell in _cells)
+        {
+            _gridContainer.Controls.Remove(cell);
+            cell.Dispose();
+        }
         _gridContainer.Controls.Clear();
         EnableControlsAfterInventoryLoad();
         _cells.Clear();
@@ -755,16 +766,23 @@ public partial class InventoryGridPanel : UserControl
             // Set NUDs to current inventory dimensions
             _resizeWidth.Value = Math.Clamp(width, _resizeWidth.Minimum, _resizeWidth.Maximum);
             _resizeHeight.Value = Math.Clamp(height, _resizeHeight.Minimum, _resizeHeight.Maximum);
-            _resizeWidthLabel.Visible = !_isStorageInventory;
-            _resizeHeightLabel.Visible = !_isStorageInventory;
-            _resizeWidth.Visible = !_isStorageInventory;
-            _resizeHeight.Visible = !_isStorageInventory;
-            _resizeButton.Visible = !_isStorageInventory;
-            _resizeWidthLabel.Enabled = !_isStorageInventory;
-            _resizeHeightLabel.Enabled = !_isStorageInventory;
-            _resizeWidth.Enabled = !_isStorageInventory;
-            _resizeHeight.Enabled = !_isStorageInventory;
-            _resizeButton.Enabled = !_isStorageInventory;
+            bool hideResize = _isStorageInventory && !_isChestInventory;
+            _resizeWidthLabel.Visible = !hideResize;
+            _resizeHeightLabel.Visible = !hideResize;
+            _resizeWidth.Visible = !hideResize;
+            _resizeHeight.Visible = !hideResize;
+            _resizeButton.Visible = !hideResize;
+            _resizeWidthLabel.Enabled = !hideResize;
+            _resizeHeightLabel.Enabled = !hideResize;
+            _resizeWidth.Enabled = !hideResize;
+            _resizeHeight.Enabled = !hideResize;
+            _resizeButton.Enabled = !hideResize;
+            // Chest inventories support up to 10x12 (120 slots)
+            if (_isChestInventory)
+            {
+                _resizeWidth.Maximum = 10;
+                _resizeHeight.Maximum = 12;
+            }
         }
         catch { }
 
@@ -2631,8 +2649,13 @@ public partial class InventoryGridPanel : UserControl
             }
         }
 
+        // Update inventory Width and Height so LoadInventory reads the new dimensions
+        _currentInventory.Set("Width", newWidth);
+        _currentInventory.Set("Height", newHeight);
+
         // Reload the grid
         LoadInventory(_currentInventory);
+        RaiseDataModified();
     }
 
     private void OnExportInventory(object? sender, EventArgs e)
@@ -3447,6 +3470,22 @@ public partial class InventoryGridPanel : UserControl
             _toolTip.SetToolTip(_iconBox, tip2);
             _toolTip.SetToolTip(_amountLabel, tip2);
             _toolTip.SetToolTip(_nameLabel, tip2);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _toolTip?.Dispose();
+                // Dispose composite bitmap if it's not a shared reference
+                var img = _iconBox?.Image;
+                if (img != null && img != IconImage && img != ClassMiniIcon)
+                {
+                    _iconBox!.Image = null;
+                    img.Dispose();
+                }
+            }
+            base.Dispose(disposing);
         }
     }
 }
