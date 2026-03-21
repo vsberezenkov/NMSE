@@ -1,16 +1,16 @@
-using NMSE.UI;
+using Avalonia;
 
 namespace NMSE;
 
 static class Program
 {
-    /// <summary>
-    /// The main entry point for the NMS Save Editor application.
-    /// </summary>
     [STAThread]
-    static void Main()
-    {
-        ApplicationConfiguration.Initialize();
-        Application.Run(new MainFormResources());
-    }
+    public static void Main(string[] args) => BuildAvaloniaApp()
+        .StartWithClassicDesktopLifetime(args);
+
+    public static AppBuilder BuildAvaloniaApp()
+        => AppBuilder.Configure<App>()
+            .UsePlatformDetect()
+            .WithInterFont()
+            .LogToTrace();
 }

@@ -267,8 +267,7 @@ public static class UpdateService
         // from assembly metadata means renaming the executable in a rebrand
         // or different distribution won't silently break the updater.
         string exeName = Path.GetFileName(
-            System.Reflection.Assembly.GetEntryAssembly()?.Location
-            ?? Environment.ProcessPath
+            Environment.ProcessPath
             ?? "NMSE.exe");
 
         // Extract zip to a temporary directory
