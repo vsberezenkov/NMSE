@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
+using System.Linq;
 using NMSE.Data;
 
 /// <summary>Dialog for selecting a game item from a filterable list.</summary>
@@ -14,6 +15,7 @@ public class ItemPickerDialog : Form
     private readonly Button _addManualButton;
     private readonly TextBox _filterBox;
     private readonly Button _filterClearButton;
+    private bool _adjustingSelection;
 
     public ItemPickerDialog(string title, List<(Image? icon, string name, string id, string category)> items)
     {
@@ -75,6 +77,7 @@ public class ItemPickerDialog : Form
             SelectedIds.Clear();
             foreach (DataGridViewRow row in _grid.SelectedRows)
             {
+                if (!row.Visible) continue;
                 var id = row.Cells["ID"].Value as string;
                 if (!string.IsNullOrEmpty(id))
                     SelectedIds.Add(id!);
@@ -83,7 +86,7 @@ public class ItemPickerDialog : Form
                 SelectedId = SelectedIds[0];
         };
 
-        _grid.SelectionChanged += (s, e) => _addButton.Enabled = _grid.SelectedRows.Count > 0;
+        _grid.SelectionChanged += OnGridSelectionChanged;
 
         // Manual entry controls with padding and vertical layout
         _manualIdBox = new TextBox
@@ -142,22 +145,54 @@ public class ItemPickerDialog : Form
         AcceptButton = _addButton;
     }
 
+    private void OnGridSelectionChanged(object? sender, EventArgs e)
+    {
+        if (_adjustingSelection) return;
+        _adjustingSelection = true;
+        try
+        {
+            var toDeselect = _grid.SelectedRows.Cast<DataGridViewRow>()
+                .Where(r => !r.Visible).ToList();
+            foreach (var row in toDeselect)
+                row.Selected = false;
+        }
+        finally
+        {
+            _adjustingSelection = false;
+        }
+        _addButton.Enabled = _grid.SelectedRows.Cast<DataGridViewRow>().Any(r => r.Visible);
+    }
+
     private void ApplyFilter()
     {
         var filter = _filterBox.Text.Trim();
-        foreach (DataGridViewRow row in _grid.Rows)
+        _adjustingSelection = true;
+        try
         {
-            if (string.IsNullOrEmpty(filter))
+            foreach (DataGridViewRow row in _grid.Rows)
             {
-                row.Visible = true;
-                continue;
+                bool visible;
+                if (string.IsNullOrEmpty(filter))
+                {
+                    visible = true;
+                }
+                else
+                {
+                    string name = row.Cells["Name"].Value as string ?? "";
+                    string category = row.Cells["Category"].Value as string ?? "";
+                    string id = row.Cells["ID"].Value as string ?? "";
+                    visible = name.Contains(filter, StringComparison.OrdinalIgnoreCase)
+                           || category.Contains(filter, StringComparison.OrdinalIgnoreCase)
+                           || id.Contains(filter, StringComparison.OrdinalIgnoreCase);
+                }
+                if (!visible && row.Selected)
+                    row.Selected = false;
+                row.Visible = visible;
             }
-            string name = row.Cells["Name"].Value as string ?? "";
-            string category = row.Cells["Category"].Value as string ?? "";
-            string id = row.Cells["ID"].Value as string ?? "";
-            row.Visible = name.Contains(filter, StringComparison.OrdinalIgnoreCase)
-                       || category.Contains(filter, StringComparison.OrdinalIgnoreCase)
-                       || id.Contains(filter, StringComparison.OrdinalIgnoreCase);
+        }
+        finally
+        {
+            _adjustingSelection = false;
         }
     }
 }

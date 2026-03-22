@@ -1059,7 +1059,9 @@ public partial class DiscoveryPanel : UserControl
                 }
                 if (largestList != null && idx < largestList.Length)
                 {
-                    if (double.TryParse(row.Cells["LargestCatch"].Value?.ToString(), out double lc))
+                    if (double.TryParse(row.Cells["LargestCatch"].Value?.ToString(),
+                            System.Globalization.NumberStyles.Float,
+                            System.Globalization.CultureInfo.InvariantCulture, out double lc))
                         largestList.Set(idx, lc);
                 }
             }
@@ -1177,7 +1179,9 @@ public partial class DiscoveryPanel : UserControl
         }
         else if (colName == "LargestCatch")
         {
-            if (!double.TryParse(e.FormattedValue?.ToString(), out _))
+            if (!double.TryParse(e.FormattedValue?.ToString(),
+                    System.Globalization.NumberStyles.Float,
+                    System.Globalization.CultureInfo.InvariantCulture, out _))
                 e.Cancel = true;
         }
     }

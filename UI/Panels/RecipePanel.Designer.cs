@@ -65,7 +65,7 @@ partial class RecipePanel
         };
         filterPanel.Controls.Add(clearFilterBtn);
 
-        _nmsRecipesBtn = new Button { Text = "NMS Recipes (Web)", AutoSize = true, Height = 23, Margin = new Padding(10, 0, 0, 0) };
+        _nmsRecipesBtn = new Button { Text = "NMS Recipes (Web)", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, Margin = new Padding(10, 0, 0, 0) };
 
         _nmsRecipesBtn.Click += (s, e) =>
         {

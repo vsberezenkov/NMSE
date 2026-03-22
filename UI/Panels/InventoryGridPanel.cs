@@ -23,6 +23,7 @@ public partial class InventoryGridPanel : UserControl
     private const string SuperchargeIndicator = "⚡ ";
 
     // State
+    private readonly ToolTip _sharedToolTip = new();
     private readonly List<SlotCell> _cells = new();
     private SlotCell? _selectedCell;
     private SlotCell? _contextCell; // Cell that was right-clicked
@@ -836,7 +837,7 @@ public partial class InventoryGridPanel : UserControl
         {
             for (int col = 0; col < width; col++)
             {
-                var cell = new SlotCell(col, r, CellWidth, CellHeight);
+                var cell = new SlotCell(col, r, CellWidth, CellHeight, _sharedToolTip);
                 cell.IsInTechInventory = _isTechInventory;
                 cell.Location = new Point(
                     col * (CellWidth + CellPadding) + CellPadding,
@@ -2896,7 +2897,7 @@ public partial class InventoryGridPanel : UserControl
         {
             base.OnVisibleChanged(e);
             if (!Visible) _timer?.Stop();
-            else CheckScroll();
+            else if (IsHandleCreated) CheckScroll();
         }
 
         protected override void OnHandleDestroyed(EventArgs e)
@@ -2911,10 +2912,11 @@ public partial class InventoryGridPanel : UserControl
             var textWidth = (int)e.Graphics.MeasureString(Text, Font).Width;
             if (_shouldScroll)
             {
+                using var brush = new SolidBrush(ForeColor);
                 int x = -_offset;
                 while (x < Width)
                 {
-                    e.Graphics.DrawString(Text, Font, new SolidBrush(ForeColor), x, 0);
+                    e.Graphics.DrawString(Text, Font, brush, x, 0);
                     x += textWidth + 40; // gap between repeats
                 }
                 if (_offset > textWidth + 40)
@@ -3121,7 +3123,7 @@ public partial class InventoryGridPanel : UserControl
             set { _isSelected = value; UpdateDisplay(); }
         }
 
-        public SlotCell(int x, int y, int width, int height)
+        public SlotCell(int x, int y, int width, int height, ToolTip sharedToolTip)
         {
             GridX = x;
             GridY = y;
@@ -3176,7 +3178,7 @@ public partial class InventoryGridPanel : UserControl
                 AutoEllipsis = true
             };
 
-            _toolTip = new ToolTip();
+            _toolTip = sharedToolTip;
 
             // Add controls in z-order: amount (bottom), icon container (middle), name (top)
             Controls.Add(_amountLabel);
@@ -3476,7 +3478,8 @@ public partial class InventoryGridPanel : UserControl
         {
             if (disposing)
             {
-                _toolTip?.Dispose();
+                // Do NOT dispose _toolTip — it is shared across all cells and
+                // owned by the parent InventoryGridPanel.
                 // Dispose composite bitmap if it's not a shared reference
                 var img = _iconBox?.Image;
                 if (img != null && img != IconImage && img != ClassMiniIcon)

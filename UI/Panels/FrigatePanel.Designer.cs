@@ -154,22 +154,30 @@ partial class FrigatePanel
         // _deleteBtn
         //
         this._deleteBtn.Text = "Delete";
-        this._deleteBtn.Width = 70;
+        this._deleteBtn.AutoSize = true;
+        this._deleteBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+        this._deleteBtn.MinimumSize = new System.Drawing.Size(75, 0);
         //
         // _copyBtn
         //
         this._copyBtn.Text = "Copy";
-        this._copyBtn.Width = 70;
+        this._copyBtn.AutoSize = true;
+        this._copyBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+        this._copyBtn.MinimumSize = new System.Drawing.Size(75, 0);
         //
         // _exportBtn
         //
         this._exportBtn.Text = "Export";
-        this._exportBtn.Width = 70;
+        this._exportBtn.AutoSize = true;
+        this._exportBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+        this._exportBtn.MinimumSize = new System.Drawing.Size(75, 0);
         //
         // _importBtn
         //
         this._importBtn.Text = "Import";
-        this._importBtn.Width = 70;
+        this._importBtn.AutoSize = true;
+        this._importBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+        this._importBtn.MinimumSize = new System.Drawing.Size(75, 0);
         //
         // _detailPanel
         //

@@ -222,14 +222,14 @@ internal class BasesSubPanel : UserControl
 
         var seedPanel = new Panel { Dock = DockStyle.Fill, Height = 26 };
         _npcSeed = new TextBox { Dock = DockStyle.Fill };
-        _generateNpcSeedBtn = new Button { Text = UiStrings.Get("common.generate"), Dock = DockStyle.Right, AutoSize = true, MinimumSize = new Size(70, 0) };
+        _generateNpcSeedBtn = new Button { Text = UiStrings.Get("common.generate"), Dock = DockStyle.Right, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(70, 0) };
         _generateNpcSeedBtn.Click += OnGenerateNpcSeed;
         seedPanel.Controls.Add(_npcSeed);
         seedPanel.Controls.Add(_generateNpcSeedBtn);
         _seedLabel = AddRow(layout, UiStrings.Get("base.npc_seed_label"), seedPanel, row); row++;
 
         // Summon NPC worker to selected base
-        _summonWorkerBtn = new Button { Text = UiStrings.Get("base.summon_npc"), AutoSize = true, Enabled = false };
+        _summonWorkerBtn = new Button { Text = UiStrings.Get("base.summon_npc"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, Enabled = false };
         _summonWorkerBtn.Click += OnSummonWorkerToBase;
         layout.Controls.Add(_summonWorkerBtn, 1, row);
         row++;
@@ -271,11 +271,11 @@ internal class BasesSubPanel : UserControl
             FlowDirection = FlowDirection.LeftToRight,
             Padding = new Padding(0, 6, 0, 0)
         };
-        _backupBtn = new Button { Text = UiStrings.Get("base.backup"), AutoSize = true, MinimumSize = new Size(80, 0), Enabled = false };
+        _backupBtn = new Button { Text = UiStrings.Get("base.backup"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(80, 0), Enabled = false };
         _backupBtn.Click += OnBackup;
-        _restoreBtn = new Button { Text = UiStrings.Get("base.restore"), AutoSize = true, MinimumSize = new Size(80, 0), Enabled = false };
+        _restoreBtn = new Button { Text = UiStrings.Get("base.restore"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(80, 0), Enabled = false };
         _restoreBtn.Click += OnRestore;
-        _moveBaseComputerBtn = new Button { Text = UiStrings.Get("base.move_basecomp"), AutoSize = true, MinimumSize = new Size(140, 0), Enabled = false };
+        _moveBaseComputerBtn = new Button { Text = UiStrings.Get("base.move_basecomp"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(140, 0), Enabled = false };
         _moveBaseComputerBtn.Click += OnMoveBaseComputer;
         buttonPanel.Controls.Add(_backupBtn);
         buttonPanel.Controls.Add(_restoreBtn);
@@ -1238,6 +1238,7 @@ internal class StorageSubPanel : UserControl
 
     private readonly TabControl _storageTabs;
     private readonly List<StorageTab> _tabs = new();
+    private readonly Label _freighterRefundWarning;
 
     private GameItemDatabase? _database;
     private IconManager? _iconManager;
@@ -1307,7 +1308,7 @@ internal class StorageSubPanel : UserControl
 
             var wrapper = new Panel { Dock = DockStyle.Fill };
             var spacer = new Panel { Height = 6, Dock = DockStyle.Top };
-            var warning = new Label
+            _freighterRefundWarning = new Label
             {
                 Text = UiStrings.Get("base.storage_freighter_refund_warning"),
                 ForeColor = Color.Red,
@@ -1317,7 +1318,7 @@ internal class StorageSubPanel : UserControl
             };
             wrapper.Controls.Add(grid);
             wrapper.Controls.Add(spacer);
-            wrapper.Controls.Add(warning);
+            wrapper.Controls.Add(_freighterRefundWarning);
 
             var page = new TabPage(UiStrings.Get("base.storage_freighter_refund"));
             page.Controls.Add(wrapper);
@@ -1435,6 +1436,7 @@ internal class StorageSubPanel : UserControl
             _storageTabs.TabPages[5].Text = UiStrings.Get("base.storage_fish_bait");
             _storageTabs.TabPages[6].Text = UiStrings.Get("base.storage_food_unit");
             _storageTabs.TabPages[7].Text = UiStrings.Get("base.storage_freighter_refund");
+            _freighterRefundWarning.Text = UiStrings.Get("base.storage_freighter_refund_warning");
         }
     }
 }
@@ -1475,7 +1477,7 @@ internal class DoubleBufferedTabControl : TabControl
     /// <summary>Freeze painting just before the tab switch begins.</summary>
     protected override void OnSelecting(TabControlCancelEventArgs e)
     {
-        Visible = false;
+        SuspendLayout();
         base.OnSelecting(e);
     }
 
@@ -1483,9 +1485,9 @@ internal class DoubleBufferedTabControl : TabControl
     protected override void OnSelected(TabControlEventArgs e)
     {
         base.OnSelected(e);
-        Visible = true;
+        ResumeLayout(true);
         Invalidate(true);  // recursive - invalidates all child controls
-        Update();          // paints synchronously so there's no flash
+        Update();           // paints synchronously so there's no flash
     }
 
     /// <summary>

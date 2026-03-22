@@ -2892,6 +2892,86 @@ public class LogicTests
     }
 
     [Fact]
+    public void JsonParser_Serialize_DoubleUsesInvariantDecimalPoint()
+    {
+        // Verify that serialising a double always uses '.' as the decimal separator,
+        // even when the current thread culture uses a comma.
+        var saved = System.Globalization.CultureInfo.CurrentCulture;
+        try
+        {
+            // Use German culture which uses comma as decimal separator
+            System.Threading.Thread.CurrentThread.CurrentCulture =
+                new System.Globalization.CultureInfo("de-DE");
+
+            var obj = new JsonObject();
+            obj.Add("catch", 12.5);
+            string json = JsonParser.Serialize(obj, false, skipReverseMapping: true);
+
+            // Must contain a dot, must NOT contain a comma decimal separator
+            Assert.Contains("12.5", json);
+            Assert.DoesNotContain("12,5", json);
+        }
+        finally
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = saved;
+        }
+    }
+
+    [Fact]
+    public void JsonParser_Serialize_FloatUsesInvariantDecimalPoint()
+    {
+        var saved = System.Globalization.CultureInfo.CurrentCulture;
+        try
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture =
+                new System.Globalization.CultureInfo("fr-FR");
+
+            var obj = new JsonObject();
+            obj.Add("scale", 1.75f);
+            string json = JsonParser.Serialize(obj, false, skipReverseMapping: true);
+
+            Assert.Contains("1.75", json);
+            Assert.DoesNotContain("1,75", json);
+        }
+        finally
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = saved;
+        }
+    }
+
+    [Fact]
+    public void JsonParser_RoundTrip_DoublePreservesDecimalPointUnderCommaLocale()
+    {
+        // Simulate: parse JSON → set a new double value → re-serialize → verify '.' separator
+        var saved = System.Globalization.CultureInfo.CurrentCulture;
+        try
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture =
+                new System.Globalization.CultureInfo("de-DE");
+
+            string original = "{\"LargestCatchList\":[0.0]}";
+            var obj = JsonObject.Parse(original);
+            var arr = obj.GetArray("LargestCatchList");
+            Assert.NotNull(arr);
+
+            // Simulate user entering a value (through invariant TryParse)
+            double.TryParse("23.7",
+                System.Globalization.NumberStyles.Float,
+                System.Globalization.CultureInfo.InvariantCulture,
+                out double userValue);
+            arr!.Set(0, userValue);
+
+            string serialized = JsonParser.Serialize(obj, false, skipReverseMapping: true);
+            Assert.Contains("23.7", serialized);
+            Assert.DoesNotContain("23,7", serialized);
+        }
+        finally
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = saved;
+        }
+    }
+
+    [Fact]
     public void JsonParser_Integers_ReturnIntOrLong()
     {
         string json = "{\"small\":42,\"neg\":-100,\"big\":3000000000,\"zero\":0}";

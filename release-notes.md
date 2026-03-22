@@ -1,4 +1,17 @@
-## NMSE — No Man's Save Editor
+## NMSE — No Man's Save Editor v1.0.356 (preview)
+
+### Changelog
+
+- Further GDI hardening to help with crash-to-desktop for some users. ()
+- Add item dialog fixes for discoveries panels (multi-select bugs).
+- Fix for comma separated floats in the UI (via InvariantCulture).
+- Further chnages to buttons for DPI scaling (AutoSize).
+- UI localisation string fixes.
+
+These fixes and changes address Issues #7, #5, #13, #9, and #11
+
+<details>
+<summary>Previous Changelog 1.0.355 (preview)</summary>
 
 ### Changelog
 
@@ -23,6 +36,8 @@ This preview release contains critical bug fixes and additions for the following
 - Backup call needs moving to start of save call to avoid pointless backup bloat.
 - Raw JSON Editor find next bugs need fixing.
 
+</details>
+
 _Documentation will need some future updates to cover these changes._
 
 **Thanks everyone for your help so far squashing launch bugs. Please keep the feedback and testing coming!**
@@ -39,7 +54,7 @@ Download via **Assets** below.
 > Requires **.NET 10.0 Runtime** (Windows 10/11 64-bit).
 > Linux and macOS users can run NMSE via Wine — see the [guides](https://github.com/vectorcmdr/NMSE#-cross-platform-via-wine).
 
-> 🛡️ VirusTotal scans for peace of mind are pending [here](#): pending
+> 🛡️ VirusTotal scans for peace of mind are pending [here](#): pending...
 
 <!-- 
 > 🛡️ VirusTotal scans for peace of mind are available [here](https://www.virustotal.com/gui/file/86a36fc8dc34134403b86909814623c14b22d381b9c3bb53bd15806206806298?nocache=1): passed ✔️

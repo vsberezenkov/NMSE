@@ -90,19 +90,19 @@ partial class MainStatsPanel
         if (_slotSourceCombo.Items.Count > 0) _slotSourceCombo.SelectedIndex = 0;
         if (_slotDestCombo.Items.Count > 1) _slotDestCombo.SelectedIndex = 1;
 
-        _copySlotBtn = new Button { Text = "Copy Slot", AutoSize = true };
+        _copySlotBtn = new Button { Text = "Copy Slot", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _copySlotBtn.Click += OnCopySlot;
-        _moveSlotBtn = new Button { Text = "Move Slot", AutoSize = true };
+        _moveSlotBtn = new Button { Text = "Move Slot", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _moveSlotBtn.Click += OnMoveSlot;
-        _swapSlotBtn = new Button { Text = "Swap Slots", AutoSize = true };
+        _swapSlotBtn = new Button { Text = "Swap Slots", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _swapSlotBtn.Click += OnSwapSlots;
-        _deleteSlotBtn = new Button { Text = "Delete Slot", AutoSize = true };
+        _deleteSlotBtn = new Button { Text = "Delete Slot", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _deleteSlotBtn.Click += OnDeleteSlot;
 
         _transferPlatformCombo = new ComboBox { Width = 120, DropDownStyle = ComboBoxStyle.DropDownList };
         _transferPlatformCombo.Items.AddRange(new object[] { "Steam", "GOG", "Xbox Game Pass", "PS4", "Switch" });
         if (_transferPlatformCombo.Items.Count > 0) _transferPlatformCombo.SelectedIndex = 0;
-        _transferBtn = new Button { Text = "Transfer to Platform…", AutoSize = true };
+        _transferBtn = new Button { Text = "Transfer to Platform…", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _transferBtn.Click += OnTransferPlatform;
 
         _portalGlyphPanel = new FlowLayoutPanel
@@ -120,19 +120,19 @@ partial class MainStatsPanel
         _voxelZNud = new NumericUpDown { Width = 150, Minimum = -2048, Maximum = 2047 };
         _solarSystemNud = new NumericUpDown { Width = 150, Minimum = 0, Maximum = 600 };
         _planetNud = new NumericUpDown { Width = 150, Minimum = 0, Maximum = 15 };
-        _applyCoordinatesBtn = new Button { Text = "Apply Coordinates", AutoSize = true };
+        _applyCoordinatesBtn = new Button { Text = "Apply Coordinates", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _applyCoordinatesBtn.Click += OnApplyCoordinates;
 
         _portalHexInput = new TextBox { Width = 150, MaxLength = 12 };
-        _convertPortalBtn = new Button { Text = "Convert to Coords", AutoSize = true };
+        _convertPortalBtn = new Button { Text = "Convert to Coords", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _convertPortalBtn.Click += OnConvertPortalCode;
 
-        _coordinateRouletteBtn = new Button { Text = "Coordinate Roulette!", AutoSize = true };
+        _coordinateRouletteBtn = new Button { Text = "Coordinate Roulette!", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _coordinateRouletteBtn.Click += OnCoordinateRoulette;
 
         _warpsToNextBattleField = new NumericUpDown { Width = 100, Minimum = 0, Maximum = 999, ReadOnly = true };
         _timeToNextBattleField = new TextBox { Width = 150, ReadOnly = true };
-        _triggerBattleBtn = new Button { Text = "Trigger Space Battle", AutoSize = true };
+        _triggerBattleBtn = new Button { Text = "Trigger Space Battle", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _triggerBattleBtn.Click += OnTriggerSpaceBattle;
 
         _guidesFilter = new TextBox { Width = 250 };
@@ -420,9 +420,9 @@ partial class MainStatsPanel
         _guidesFilterLabel = new Label { Text = "Filter:", AutoSize = true, Padding = new Padding(0, 5, 5, 0) };
         filterPanel.Controls.Add(_guidesFilterLabel);
         filterPanel.Controls.Add(_guidesFilter);
-        var unlockAllBtn = new Button { Text = UiStrings.Get("player.guide_unlock_all"), AutoSize = true };
+        var unlockAllBtn = new Button { Text = UiStrings.Get("player.guide_unlock_all"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         unlockAllBtn.Click += OnUnlockAllGuides;
-        var lockAllBtn = new Button { Text = UiStrings.Get("player.guide_lock_all"), AutoSize = true };
+        var lockAllBtn = new Button { Text = UiStrings.Get("player.guide_lock_all"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         lockAllBtn.Click += OnLockAllGuides;
         filterPanel.Controls.Add(unlockAllBtn);
         filterPanel.Controls.Add(lockAllBtn);
@@ -506,9 +506,9 @@ partial class MainStatsPanel
         titlesLayout.Controls.Add(_titlesTitle, 0, 0);
 
         var titlesButtonPanel = new FlowLayoutPanel { AutoSize = true, FlowDirection = FlowDirection.LeftToRight };
-        var unlockAllTitlesBtn = new Button { Text = UiStrings.Get("player.titles_unlock_all"), AutoSize = true };
+        var unlockAllTitlesBtn = new Button { Text = UiStrings.Get("player.titles_unlock_all"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         unlockAllTitlesBtn.Click += OnUnlockAllTitles;
-        var lockAllTitlesBtn = new Button { Text = UiStrings.Get("player.titles_lock_all"), AutoSize = true };
+        var lockAllTitlesBtn = new Button { Text = UiStrings.Get("player.titles_lock_all"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         lockAllTitlesBtn.Click += OnLockAllTitles;
         titlesButtonPanel.Controls.Add(unlockAllTitlesBtn);
         titlesButtonPanel.Controls.Add(lockAllTitlesBtn);

@@ -101,7 +101,7 @@ public partial class MainFormResources : Form
         _tabControl = new DoubleBufferedTabControl();
         _statusLabel = new ToolStripStatusLabel("Ready");
         _itemCountLabel = new ToolStripStatusLabel("") { Alignment = ToolStripItemAlignment.Right };
-        _directoryCombo = new ToolStripComboBox { AutoSize = false, Width = 420 };
+        _directoryCombo = new ToolStripComboBox { AutoSize = false, Width = 550 };
         _saveSlotCombo = new ToolStripComboBox { AutoSize = false, Width = 300 };
         _saveFileCombo = new ToolStripComboBox { AutoSize = false, Width = 220 };
         _loadButton = new ToolStripButton("Load");

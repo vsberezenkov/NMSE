@@ -447,7 +447,7 @@ public partial class FrigatePanel : UserControl
         seedField.Dock = DockStyle.Fill;
         panel.Controls.Add(seedField, 0, 0);
 
-        var genBtn = new Button { Text = "Gen", Width = 40, Height = 23 };
+        var genBtn = new Button { Text = "Gen", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(40, 23) };
         genBtn.Click += (s, e) =>
         {
             byte[] bytes = new byte[8];

@@ -102,19 +102,25 @@ partial class ByteBeatPanel
         // _exportBtn
         //
         this._exportBtn.Text = "Export";
-        this._exportBtn.Width = 70;
+        this._exportBtn.AutoSize = true;
+        this._exportBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+        this._exportBtn.MinimumSize = new System.Drawing.Size(75, 0);
         this._exportBtn.Click += OnExport;
         //
         // _importBtn
         //
         this._importBtn.Text = "Import";
-        this._importBtn.Width = 70;
+        this._importBtn.AutoSize = true;
+        this._importBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+        this._importBtn.MinimumSize = new System.Drawing.Size(75, 0);
         this._importBtn.Click += OnImport;
         //
         // _deleteBtn
         //
         this._deleteBtn.Text = "Delete";
-        this._deleteBtn.Width = 70;
+        this._deleteBtn.AutoSize = true;
+        this._deleteBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+        this._deleteBtn.MinimumSize = new System.Drawing.Size(75, 0);
         this._deleteBtn.Click += OnDeleteSong;
         //
         // _infoLabel

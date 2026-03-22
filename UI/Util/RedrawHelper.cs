@@ -2,30 +2,32 @@ namespace NMSE.UI.Util;
 
 /// <summary>
 /// Cross-platform painting suspension for WinForms controls.
-/// Hides the control before a batch update and shows it afterwards,
-/// preventing all intermediate redraws. The single re-show triggers
-/// one flicker-free repaint of the control and all its children.
+/// Uses <see cref="Control.SuspendLayout"/> / <see cref="Control.ResumeLayout(bool)"/>
+/// to batch layout changes and prevent intermediate redraws.
+/// Unlike toggling <see cref="Control.Visible"/>, layout suspension does not
+/// destroy or recreate native window handles in the subtree, which avoids
+/// GDI handle exhaustion under heavy control churn.
 /// Call <see cref="Suspend"/> before a batch update and <see cref="Resume"/>
 /// afterwards.
 /// </summary>
 internal static class RedrawHelper
 {
     /// <summary>
-    /// Suspends painting on the control by hiding it.
-    /// No paint messages will be processed until <see cref="Resume"/> is called.
+    /// Suspends layout logic on the control.
+    /// No layout or paint messages will be processed until <see cref="Resume"/> is called.
     /// </summary>
     public static void Suspend(Control control)
     {
-        control.Visible = false;
+        control.SuspendLayout();
     }
 
     /// <summary>
-    /// Resumes painting on the control by making it visible again,
-    /// triggering a full synchronous repaint of the control and all its children.
+    /// Resumes layout on the control and triggers a full synchronous repaint
+    /// of the control and all its children.
     /// </summary>
     public static void Resume(Control control)
     {
-        control.Visible = true;
+        control.ResumeLayout(true);
         control.Invalidate(true);
         control.Update();
     }

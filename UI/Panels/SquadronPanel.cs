@@ -231,7 +231,7 @@ public partial class SquadronPanel : UserControl
         seedField.Dock = DockStyle.None;
         seedField.Width = 200;
         panel.Controls.Add(seedField);
-        var btn = new Button { Text = "Generate", AutoSize = true };
+        var btn = new Button { Text = "Generate", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         btn.Click += (s, e) =>
         {
             byte[] bytes = new byte[8];

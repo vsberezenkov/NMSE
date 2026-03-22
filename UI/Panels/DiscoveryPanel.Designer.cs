@@ -69,13 +69,13 @@ partial class DiscoveryPanel
             AutoSize = true,
             FlowDirection = FlowDirection.LeftToRight,
         };
-        _addTechButton = new Button { Text = "Add Technology", AutoSize = true };
-        _removeTechButton = new Button { Text = "Remove Selected", AutoSize = true };
+        _addTechButton = new Button { Text = "Add Technology", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
+        _removeTechButton = new Button { Text = "Remove Selected", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _addTechButton.Click += AddTech_Click;
         _removeTechButton.Click += RemoveTech_Click;
-        _exportTechBtn = new Button { Text = "Export", AutoSize = true };
+        _exportTechBtn = new Button { Text = "Export", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _exportTechBtn.Click += (s, e) => ExportDiscoveryList("Known Technologies", _techGrid, "ID");
-        _importTechBtn = new Button { Text = "Import", AutoSize = true };
+        _importTechBtn = new Button { Text = "Import", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _importTechBtn.Click += (s, e) => ImportItemList(_techGrid, "KnownTech");
         techButtonPanel.Controls.Add(_addTechButton);
         techButtonPanel.Controls.Add(_removeTechButton);
@@ -121,13 +121,13 @@ partial class DiscoveryPanel
             AutoSize = true,
             FlowDirection = FlowDirection.LeftToRight,
         };
-        _addProductButton = new Button { Text = "Add Product", AutoSize = true };
-        _removeProductButton = new Button { Text = "Remove Selected", AutoSize = true };
+        _addProductButton = new Button { Text = "Add Product", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
+        _removeProductButton = new Button { Text = "Remove Selected", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _addProductButton.Click += AddProduct_Click;
         _removeProductButton.Click += RemoveProduct_Click;
-        _exportProductBtn = new Button { Text = "Export", AutoSize = true };
+        _exportProductBtn = new Button { Text = "Export", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _exportProductBtn.Click += (s, e) => ExportDiscoveryList("Known Products", _productGrid, "ID");
-        _importProductBtn = new Button { Text = "Import", AutoSize = true };
+        _importProductBtn = new Button { Text = "Import", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _importProductBtn.Click += (s, e) => ImportItemList(_productGrid, "KnownProducts");
         productButtonPanel.Controls.Add(_addProductButton);
         productButtonPanel.Controls.Add(_removeProductButton);
@@ -251,17 +251,17 @@ partial class DiscoveryPanel
             AutoSize = true,
             FlowDirection = FlowDirection.LeftToRight,
         };
-        _learnAllWordsButton = new Button { Text = "Learn All", AutoSize = true };
-        _unlearnAllWordsButton = new Button { Text = "Unlearn All", AutoSize = true };
+        _learnAllWordsButton = new Button { Text = "Learn All", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
+        _unlearnAllWordsButton = new Button { Text = "Unlearn All", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _learnAllWordsButton.Click += LearnAllWords_Click;
         _unlearnAllWordsButton.Click += UnlearnAllWords_Click;
-        _learnSelectedWordsButton = new Button { Text = "Learn Selected", AutoSize = true };
-        _unlearnSelectedWordsButton = new Button { Text = "Unlearn Selected", AutoSize = true };
+        _learnSelectedWordsButton = new Button { Text = "Learn Selected", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
+        _unlearnSelectedWordsButton = new Button { Text = "Unlearn Selected", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _learnSelectedWordsButton.Click += LearnSelectedWords_Click;
         _unlearnSelectedWordsButton.Click += UnlearnSelectedWords_Click;
-        _exportWordsBtn = new Button { Text = "Export", AutoSize = true };
+        _exportWordsBtn = new Button { Text = "Export", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _exportWordsBtn.Click += (s, e) => ExportDiscoveryList("Known Words", _wordGrid, "Word");
-        _importWordsBtn = new Button { Text = "Import", AutoSize = true };
+        _importWordsBtn = new Button { Text = "Import", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _importWordsBtn.Click += (s, e) => ImportWordsList();
         wordButtonPanel.Controls.Add(_learnAllWordsButton);
         wordButtonPanel.Controls.Add(_unlearnAllWordsButton);
@@ -335,13 +335,13 @@ partial class DiscoveryPanel
             AutoSize = true,
             FlowDirection = FlowDirection.LeftToRight,
         };
-        _learnAllGlyphsButton = new Button { Text = "Learn All", AutoSize = true };
-        _unlearnAllGlyphsButton = new Button { Text = "Unlearn All", AutoSize = true };
+        _learnAllGlyphsButton = new Button { Text = "Learn All", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
+        _unlearnAllGlyphsButton = new Button { Text = "Unlearn All", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _learnAllGlyphsButton.Click += LearnAllGlyphs_Click;
         _unlearnAllGlyphsButton.Click += UnlearnAllGlyphs_Click;
-        _exportGlyphsBtn = new Button { Text = "Export", AutoSize = true };
+        _exportGlyphsBtn = new Button { Text = "Export", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _exportGlyphsBtn.Click += (s, e) => ExportGlyphsList();
-        _importGlyphsBtn = new Button { Text = "Import", AutoSize = true };
+        _importGlyphsBtn = new Button { Text = "Import", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _importGlyphsBtn.Click += (s, e) => ImportGlyphsList();
         glyphButtonPanel.Controls.Add(_learnAllGlyphsButton);
         glyphButtonPanel.Controls.Add(_unlearnAllGlyphsButton);
@@ -377,15 +377,15 @@ partial class DiscoveryPanel
         locationsLayout.Controls.Add(locFilterPanel, 0, 0);
 
         var locBtnPanel = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, FlowDirection = FlowDirection.LeftToRight };
-        _deleteLocationBtn = new Button { Text = "Delete Selected", Width = 120 };
+        _deleteLocationBtn = new Button { Text = "Delete Selected", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _deleteLocationBtn.Click += DeleteLocation_Click;
         locBtnPanel.Controls.Add(_deleteLocationBtn);
-        _travelToBtn = new Button { Text = "Travel to System", Width = 130 };
+        _travelToBtn = new Button { Text = "Travel to System", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _travelToBtn.Click += TravelToSystem_Click;
         locBtnPanel.Controls.Add(_travelToBtn);
-        _exportLocBtn = new Button { Text = "Export", AutoSize = true };
+        _exportLocBtn = new Button { Text = "Export", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _exportLocBtn.Click += (s, e) => ExportLocationsList();
-        _importLocBtn = new Button { Text = "Import", AutoSize = true };
+        _importLocBtn = new Button { Text = "Import", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _importLocBtn.Click += (s, e) => ImportLocationsList();
         locBtnPanel.Controls.Add(_exportLocBtn);
         locBtnPanel.Controls.Add(_importLocBtn);
@@ -499,13 +499,13 @@ partial class DiscoveryPanel
             AutoSize = true,
             FlowDirection = FlowDirection.LeftToRight,
         };
-        _addFishBtn = new Button { Text = "Add Fish", AutoSize = true };
+        _addFishBtn = new Button { Text = "Add Fish", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _addFishBtn.Click += AddFish_Click;
-        _removeFishBtn = new Button { Text = "Remove Selected", AutoSize = true };
+        _removeFishBtn = new Button { Text = "Remove Selected", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _removeFishBtn.Click += RemoveFish_Click;
-        _exportFishBtn = new Button { Text = "Export", AutoSize = true };
+        _exportFishBtn = new Button { Text = "Export", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _exportFishBtn.Click += (s, e) => ExportFishList();
-        _importFishBtn = new Button { Text = "Import", AutoSize = true };
+        _importFishBtn = new Button { Text = "Import", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _importFishBtn.Click += (s, e) => ImportFishList();
         fishButtonPanel.Controls.Add(_addFishBtn);
         fishButtonPanel.Controls.Add(_removeFishBtn);

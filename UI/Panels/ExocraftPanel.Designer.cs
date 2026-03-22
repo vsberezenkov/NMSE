@@ -130,7 +130,7 @@ partial class ExocraftPanel
 
         _deployedLabel = new Label { Text = "", AutoSize = true, Padding = new Padding(10, 5, 10, 0) };
 
-        _undeployBtn = new Button { Text = "Undeploy", AutoSize = true, MinimumSize = new Size(80, 0) };
+        _undeployBtn = new Button { Text = "Undeploy", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(80, 0) };
         _undeployBtn.Click += OnUndeploy;
 
         statusPanel.Controls.Add(_primaryVehicleCheck);
@@ -150,14 +150,18 @@ partial class ExocraftPanel
         // _exportBtn
         // 
         _exportBtn.Text = "Export Exocraft";
-        _exportBtn.Width = 80;
+        _exportBtn.AutoSize = true;
+        _exportBtn.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        _exportBtn.MinimumSize = new Size(75, 0);
         _exportBtn.Click += OnExportVehicle;
 
         // 
         // _importBtn
         // 
         _importBtn.Text = "Import Exocraft";
-        _importBtn.Width = 80;
+        _importBtn.AutoSize = true;
+        _importBtn.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        _importBtn.MinimumSize = new Size(75, 0);
         _importBtn.Click += OnImportVehicle;
 
         // 

@@ -67,7 +67,7 @@ partial class CompanionPanel
         FontManager.ApplyHeadingFont(_titleLabel, 14);
         leftLayout.Controls.Add(_titleLabel, 0, 0);
 
-        _creatureBuilderBtn = new Button { Text = "Creature Builder (Web)", AutoSize = true, Dock = DockStyle.Fill };
+        _creatureBuilderBtn = new Button { Text = "Creature Builder (Web)", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, Dock = DockStyle.Fill };
         _creatureBuilderBtn.Click += (s, e) =>
         {
             try { Process.Start(new ProcessStartInfo("https://creature.nmscd.com/#/builder") { UseShellExecute = true }); }
@@ -86,13 +86,13 @@ partial class CompanionPanel
             FlowDirection = FlowDirection.LeftToRight
         };
         _countLabel = new Label { Text = "Total: 0 slots", AutoSize = true, Anchor = AnchorStyles.Left, Padding = new Padding(0, 5, 0, 0) };
-        _deleteBtn = new Button { Text = "Delete", AutoSize = true, MinimumSize = new Size(70, 0) };
+        _deleteBtn = new Button { Text = "Delete", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _deleteBtn.Click += OnDelete;
-        _exportCompanionBtn = new Button { Text = "Export", AutoSize = true, MinimumSize = new Size(70, 0) };
+        _exportCompanionBtn = new Button { Text = "Export", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _exportCompanionBtn.Click += OnExport;
-        _importCompanionBtn = new Button { Text = "Import", AutoSize = true, MinimumSize = new Size(70, 0) };
+        _importCompanionBtn = new Button { Text = "Import", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _importCompanionBtn.Click += OnImport;
-        _resetAccessoryBtn = new Button { Text = "Reset Accessory", AutoSize = true };
+        _resetAccessoryBtn = new Button { Text = "Reset Accessory", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _resetAccessoryBtn.Click += OnResetAccessory;
         btnPanel.Controls.Add(_deleteBtn);
         btnPanel.Controls.Add(_exportCompanionBtn);

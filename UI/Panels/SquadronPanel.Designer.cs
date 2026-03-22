@@ -75,11 +75,11 @@ partial class SquadronPanel
             FlowDirection = FlowDirection.LeftToRight
         };
         _countLabel = new Label { Text = "No pilots loaded.", AutoSize = true, Anchor = AnchorStyles.Left, Padding = new Padding(0, 5, 0, 0) };
-        _deleteBtn = new Button { Text = "Delete", AutoSize = true, MinimumSize = new Size(70, 0) };
+        _deleteBtn = new Button { Text = "Delete", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _deleteBtn.Click += OnDelete;
-        _exportBtn = new Button { Text = "Export", AutoSize = true, MinimumSize = new Size(70, 0) };
+        _exportBtn = new Button { Text = "Export", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _exportBtn.Click += OnExport;
-        _importBtn = new Button { Text = "Import", AutoSize = true, MinimumSize = new Size(70, 0) };
+        _importBtn = new Button { Text = "Import", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _importBtn.Click += OnImport;
         btnPanel.Controls.Add(_deleteBtn);
         btnPanel.Controls.Add(_exportBtn);

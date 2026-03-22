@@ -99,7 +99,7 @@ public static class JsonParser
         {
             case null: sb.Append("null"); break;
             case bool b: sb.Append(b ? "true" : "false"); break;
-            case decimal d: sb.Append(d.ToString("G")); break;
+            case decimal d: sb.Append(d.ToString("G", System.Globalization.CultureInfo.InvariantCulture)); break;
             case int i: sb.Append(i); break;
             case long l: sb.Append(l); break;
             case float f: AppendFloat(sb, f); break;
@@ -120,7 +120,7 @@ public static class JsonParser
     /// </summary>
     private static void AppendDouble(StringBuilder sb, double d)
     {
-        string s = d.ToString("R");
+        string s = d.ToString("R", System.Globalization.CultureInfo.InvariantCulture);
         sb.Append(s);
         // Ensure whole-number doubles keep their decimal point (1 -> 1.0)
         if (s.IndexOfAny(_floatIndicators) < 0)
@@ -132,7 +132,7 @@ public static class JsonParser
     /// </summary>
     private static void AppendFloat(StringBuilder sb, float f)
     {
-        string s = f.ToString("R");
+        string s = f.ToString("R", System.Globalization.CultureInfo.InvariantCulture);
         sb.Append(s);
         if (s.IndexOfAny(_floatIndicators) < 0)
             sb.Append(".0");

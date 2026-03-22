@@ -73,11 +73,11 @@ partial class SettlementPanel
         };
         _settlementSelector = new ComboBox { Width = 300, DropDownStyle = ComboBoxStyle.DropDownList };
         _settlementSelector.SelectedIndexChanged += OnSettlementSelected;
-        _deleteSettlementBtn = new Button { Text = "Delete Settlement", AutoSize = true };
+        _deleteSettlementBtn = new Button { Text = "Delete Settlement", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _deleteSettlementBtn.Click += OnDeleteSettlement;
-        _exportSettlementBtn = new Button { Text = "Export", AutoSize = true };
+        _exportSettlementBtn = new Button { Text = "Export", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _exportSettlementBtn.Click += OnExportSettlement;
-        _importSettlementBtn = new Button { Text = "Import", AutoSize = true };
+        _importSettlementBtn = new Button { Text = "Import", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _importSettlementBtn.Click += OnImportSettlement;
         selectorPanel.Controls.Add(_settlementSelector);
         selectorPanel.Controls.Add(_deleteSettlementBtn);
@@ -127,7 +127,7 @@ partial class SettlementPanel
 
         var seedPanel = new Panel { Dock = DockStyle.Fill, Height = 23 };
         _seedField = new TextBox { Dock = DockStyle.Fill };
-        _generateSeedBtn = new Button { Text = "Generate", Dock = DockStyle.Right, AutoSize = true, MinimumSize = new Size(70, 23) };
+        _generateSeedBtn = new Button { Text = "Generate", Dock = DockStyle.Right, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(70, 23) };
         _generateSeedBtn.Click += (s, e) =>
         {
             byte[] bytes = new byte[8];

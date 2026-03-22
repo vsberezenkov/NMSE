@@ -138,7 +138,7 @@ partial class StarshipPanel
 
         var seedPanel = new Panel { Dock = DockStyle.Fill, Height = 26 };
         _shipSeed = new TextBox { Dock = DockStyle.Fill };
-        _generateSeedBtn = new Button { Text = "Generate", Dock = DockStyle.Right, AutoSize = true, MinimumSize = new Size(70, 0) };
+        _generateSeedBtn = new Button { Text = "Generate", Dock = DockStyle.Right, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(70, 0) };
         _generateSeedBtn.Click += (s, e) =>
         {
             byte[] bytes = new byte[8];
@@ -200,21 +200,21 @@ partial class StarshipPanel
             AutoSize = true,
             FlowDirection = FlowDirection.LeftToRight
         };
-        _deleteBtn = new Button { Text = "Delete Ship", AutoSize = true, MinimumSize = new Size(76, 0) };
+        _deleteBtn = new Button { Text = "Delete Ship", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(76, 0) };
         _deleteBtn.Click += OnDeleteShip;
-        _exportBtn = new Button { Text = "Export Starship", AutoSize = true, MinimumSize = new Size(70, 0) };
+        _exportBtn = new Button { Text = "Export Starship", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _exportBtn.Click += OnExportShip;
-        _importBtn = new Button { Text = "Import Starship", AutoSize = true, MinimumSize = new Size(70, 0) };
+        _importBtn = new Button { Text = "Import Starship", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _importBtn.Click += OnImportShip;
-        _exportCorvetteBtn = new Button { Text = "Export Corvette", AutoSize = true, MinimumSize = new Size(100, 0), Visible = false };
+        _exportCorvetteBtn = new Button { Text = "Export Corvette", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(100, 0), Visible = false };
         _exportCorvetteBtn.Click += OnExportCorvette;
-        _importCorvetteBtn = new Button { Text = "Import Corvette", AutoSize = true, MinimumSize = new Size(100, 0), Visible = false };
+        _importCorvetteBtn = new Button { Text = "Import Corvette", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(100, 0), Visible = false };
         _importCorvetteBtn.Click += OnImportCorvette;
-        _makePrimaryBtn = new Button { Text = "Make Primary", AutoSize = true, MinimumSize = new Size(88, 0) };
+        _makePrimaryBtn = new Button { Text = "Make Primary", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(88, 0) };
         _makePrimaryBtn.Click += OnMakePrimary;
-        _snapshotTechBtn = new Button { Text = "Snapshot Tech", AutoSize = true, MinimumSize = new Size(100, 0), Visible = false };
+        _snapshotTechBtn = new Button { Text = "Snapshot Tech", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(100, 0), Visible = false };
         _snapshotTechBtn.Click += OnSnapshotTech;
-        _importSnapshotBtn = new Button { Text = "Import Snapshot", AutoSize = true, MinimumSize = new Size(100, 0), Visible = false };
+        _importSnapshotBtn = new Button { Text = "Import Snapshot", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(100, 0), Visible = false };
         _importSnapshotBtn.Click += OnImportSnapshot;
         _corvetteWarningLabel = new ColorEmojiLabel
         {

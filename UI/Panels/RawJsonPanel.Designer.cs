@@ -60,25 +60,25 @@ partial class RawJsonPanel
             FlowDirection = FlowDirection.LeftToRight
         };
 
-        _treeViewButton = new Button { Text = "Tree View", Width = 80, Enabled = false };
+        _treeViewButton = new Button { Text = "Tree View", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0), Enabled = false };
         _treeViewButton.Click += (_, _) => ShowTreeView();
 
-        _textViewButton = new Button { Text = "Text View", Width = 80 };
+        _textViewButton = new Button { Text = "Text View", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _textViewButton.Click += (_, _) => ShowTextView();
 
-        _formatButton = new Button { Text = "Format", Width = 70, Visible = false };
+        _formatButton = new Button { Text = "Format", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(70, 0), Visible = false };
         _formatButton.Click += OnFormat;
 
-        _validateButton = new Button { Text = "Validate", Width = 70, Visible = false };
+        _validateButton = new Button { Text = "Validate", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(70, 0), Visible = false };
         _validateButton.Click += OnValidate;
 
-        _expandAllButton = new Button { Text = "Expand All", Width = 80 };
+        _expandAllButton = new Button { Text = "Expand All", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _expandAllButton.Click += async (_, _) => await ExpandAllBatchedAsync();
 
-        _stopExpandBtn = new Button { Text = "Stop", Width = 60, Visible = false };
+        _stopExpandBtn = new Button { Text = "Stop", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(50, 0), Visible = false };
         _stopExpandBtn.Click += (_, _) => _cancelExpand = true;
 
-        _collapseAllButton = new Button { Text = "Collapse All", Width = 85 };
+        _collapseAllButton = new Button { Text = "Collapse All", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _collapseAllButton.Click += (_, _) =>
         {
             var tv = _treeView!;
@@ -93,7 +93,7 @@ partial class RawJsonPanel
         _searchBox = new TextBox { Width = 200, PlaceholderText = "Search keys or values..." };
         _searchBox.KeyDown += (_, e) => { if (e.KeyCode == Keys.Enter) { OnSearch(); e.SuppressKeyPress = true; } };
 
-        _searchButton = new Button { Text = "Find", Width = 50 };
+        _searchButton = new Button { Text = "Find", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(50, 0) };
         _searchButton.Click += (_, _) => OnSearch();
 
         _clearSearchButton = new Button { Text = "X", Width = 30 };

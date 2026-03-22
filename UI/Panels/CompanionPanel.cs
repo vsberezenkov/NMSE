@@ -47,7 +47,7 @@ public partial class CompanionPanel : UserControl
         seedField.Dock = DockStyle.Fill;
         panel.Controls.Add(seedField, 0, 0);
 
-        var genBtn = new Button { Text = UiStrings.Get("companion.gen"), Width = 40, Height = 23 };
+        var genBtn = new Button { Text = UiStrings.Get("companion.gen"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(40, 23) };
         genBtn.Click += (s, e) =>
         {
             byte[] bytes = new byte[8];
@@ -531,7 +531,8 @@ public partial class CompanionPanel : UserControl
     {
         var comp = SelectedCompanion;
         if (comp == null) return;
-        if (double.TryParse(_scaleField.Text, out double val))
+        if (double.TryParse(_scaleField.Text, System.Globalization.NumberStyles.Float,
+                System.Globalization.CultureInfo.InvariantCulture, out double val))
             comp.Set("Scale", val);
     }
 
@@ -539,7 +540,8 @@ public partial class CompanionPanel : UserControl
     {
         var comp = SelectedCompanion;
         if (comp == null) return;
-        if (double.TryParse(_trustField.Text, out double val))
+        if (double.TryParse(_trustField.Text, System.Globalization.NumberStyles.Float,
+                System.Globalization.CultureInfo.InvariantCulture, out double val))
             comp.Set("Trust", val);
     }
 
@@ -584,7 +586,9 @@ public partial class CompanionPanel : UserControl
         var comp = SelectedCompanion;
         if (comp == null) return;
         var traits = comp.GetArray("Traits");
-        if (traits != null && index < traits.Length && double.TryParse(field.Text, out double val))
+        if (traits != null && index < traits.Length && double.TryParse(field.Text,
+                System.Globalization.NumberStyles.Float,
+                System.Globalization.CultureInfo.InvariantCulture, out double val))
             traits.Set(index, val);
     }
 
@@ -594,7 +598,9 @@ public partial class CompanionPanel : UserControl
         var comp = SelectedCompanion;
         if (comp == null) return;
         var moods = comp.GetArray("Moods");
-        if (moods != null && index < moods.Length && double.TryParse(field.Text, out double val))
+        if (moods != null && index < moods.Length && double.TryParse(field.Text,
+                System.Globalization.NumberStyles.Float,
+                System.Globalization.CultureInfo.InvariantCulture, out double val))
             moods.Set(index, val);
     }
 
@@ -755,7 +761,7 @@ public partial class CompanionPanel : UserControl
         }
 
         // Add a "Regen Descriptor ID" button
-        _regenDescriptorBtn = new Button { Text = UiStrings.Get("companion.regen_descriptor_id"), AutoSize = true };
+        _regenDescriptorBtn = new Button { Text = UiStrings.Get("companion.regen_descriptor_id"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
         _regenDescriptorBtn.Click += (s, e) =>
         {
             if (_loading) return;
