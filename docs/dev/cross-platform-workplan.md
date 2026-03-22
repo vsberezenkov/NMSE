@@ -352,7 +352,7 @@ This is by far the hardest panel to implement. The WinForms version (~3,926 line
 - **Custom `SlotCell` inner class** (~459 lines, extends `Panel`) with custom `Paint` handlers rendering 5 visual elements per cell:
   1. **Item icon** - the item's image from the database, downscaled to fit the cell
   2. **Marquee label** - a scrolling text label for long item names that animates via timer
-  3. **Amount display** - formatted counts (e.g. "250/250") with colour coding (full = green, partial = yellow, empty = grey)
+  3. **Amount display** - formatted counts with filtering for how the counts are displayed base on type (e.g. "" for base tech, "250/250", 60% for chargeable items, etc.) 
   4. **Class mini icon** - for technology/upgrade items, shows C/B/A/S class badge
   5. **Element badge** - element symbol overlay
 - **`MarqueeLabel`** (~89 lines) - custom scrolling text control for long item names
