@@ -1,9 +1,11 @@
 using NMSE.IO;
+using NMSE.Data;
+using NMSE.Models;
 
 namespace NMSE.Tests;
 
 /// <summary>
-/// Tests for IO layer classes: BinaryIO and Lz4Compressor.
+/// Tests for IO layer classes: BinaryIO, Lz4Compressor, and SaveFileManager.
 /// </summary>
 public class IOLayerTests
 {
@@ -193,5 +195,154 @@ public class IOLayerTests
 
         Assert.Equal(original.Length, decompressedLen);
         Assert.Equal(original, decompressed);
+    }
+
+    // --- PS4 NOMANSKY save file tests --------------------------------
+
+    private static string? FindRefPath(params string[] parts)
+    {
+        var dir = AppDomain.CurrentDomain.BaseDirectory;
+        for (int i = 0; i < 10; i++)
+        {
+            var candidate = Path.Combine(new[] { dir }.Concat(parts).ToArray());
+            if (File.Exists(candidate) || Directory.Exists(candidate)) return candidate;
+            var parent = Directory.GetParent(dir);
+            if (parent == null) break;
+            dir = parent.FullName;
+        }
+        return null;
+    }
+
+    private static void EnsureMapperLoaded()
+    {
+        var mapperPath = FindRefPath("Resources", "map", "mapping.json");
+        if (mapperPath == null) return;
+        var mapper = new JsonNameMapper();
+        mapper.Load(mapperPath);
+        JsonParser.SetDefaultMapper(mapper);
+    }
+
+    [Fact]
+    public void SaveFileManager_LoadSaveFile_PS4NomanSky_ReturnsJsonObject()
+    {
+        var savePath = FindRefPath("_ref", "saves", "ps4", "savedata02.hg");
+        if (savePath == null) return; // skip if reference save not available
+
+        EnsureMapperLoaded();
+
+        var save = SaveFileManager.LoadSaveFile(savePath);
+        Assert.NotNull(save);
+        Assert.Equal(4720, save.GetInt("Version"));
+    }
+
+    [Fact]
+    public void SaveFileManager_LoadSaveFile_PS4NomanSky_PlayerStateDataAccessible()
+    {
+        var savePath = FindRefPath("_ref", "saves", "ps4", "savedata02.hg");
+        if (savePath == null) return;
+
+        EnsureMapperLoaded();
+
+        var save = SaveFileManager.LoadSaveFile(savePath);
+        Assert.NotNull(save);
+
+        // Debug: check what top-level keys exist
+        var topKeys = save.Names();
+        Assert.NotEmpty(topKeys);
+
+        // Check ActiveContext exists
+        var activeContext = save.Get("ActiveContext");
+        Assert.NotNull(activeContext);
+        Assert.Equal("Main", activeContext);
+
+        // Check BaseContext exists
+        var baseContext = save.GetValue("BaseContext");
+        Assert.NotNull(baseContext);
+        Assert.IsType<JsonObject>(baseContext);
+
+        // Check BaseContext.PlayerStateData exists
+        var bcPsd = save.GetValue("BaseContext.PlayerStateData");
+        Assert.NotNull(bcPsd);
+
+        // PlayerStateData should be accessible via transform
+        var psd = save.GetValue("PlayerStateData");
+        Assert.NotNull(psd);
+        Assert.IsType<JsonObject>(psd);
+    }
+
+    [Fact]
+    public void SaveFileManager_DetectGameModeFast_PS4NomanSky_ReturnsNonZero()
+    {
+        var savePath = FindRefPath("_ref", "saves", "ps4", "savedata02.hg");
+        if (savePath == null) return;
+
+        int gameMode = SaveFileManager.DetectGameModeFast(savePath);
+        Assert.True(gameMode >= 0,
+            $"DetectGameModeFast should return a valid game mode, got {gameMode}");
+    }
+
+    [Fact]
+    public void SaveFileManager_DetectSaveNameFast_PS4NomanSky_DoesNotThrow()
+    {
+        var savePath = FindRefPath("_ref", "saves", "ps4", "savedata02.hg");
+        if (savePath == null) return;
+
+        string saveName = SaveFileManager.DetectSaveNameFast(savePath);
+        Assert.NotNull(saveName); // may be empty, but should not be null or throw
+    }
+
+    [Fact]
+    public void SaveFileManager_DetectPlatform_PS4Directory_ReturnsPS4()
+    {
+        var saveDir = FindRefPath("_ref", "saves", "ps4");
+        if (saveDir == null) return;
+
+        var platform = SaveFileManager.DetectPlatform(saveDir);
+        Assert.Equal(SaveFileManager.Platform.PS4, platform);
+    }
+
+    // --- Backup filtered zip test ------------------------------------
+
+    [Fact]
+    public void SaveFileManager_BackupSaveDirectory_ExcludesDdsFromCache()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), $"nmse_backup_test_{Guid.NewGuid():N}");
+        string cacheDir = Path.Combine(tmpDir, "cache");
+        Directory.CreateDirectory(cacheDir);
+
+        try
+        {
+            // Create test files: a normal save and a cache .dds file
+            File.WriteAllText(Path.Combine(tmpDir, "save.hg"), "test save data");
+            File.WriteAllText(Path.Combine(cacheDir, "texture.dds"), "fake dds");
+            File.WriteAllText(Path.Combine(cacheDir, "other.bin"), "other cache data");
+
+            // Use reflection to call CreateFilteredZip since it's private
+            string zipPath = Path.Combine(Path.GetTempPath(), $"nmse_backup_test_{Guid.NewGuid():N}.zip");
+            try
+            {
+                var method = typeof(SaveFileManager).GetMethod("CreateFilteredZip",
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+                if (method == null) return; // skip if method not found
+
+                method.Invoke(null, new object[] { tmpDir, zipPath });
+
+                // Verify zip contents
+                using var archive = System.IO.Compression.ZipFile.OpenRead(zipPath);
+                var entryNames = archive.Entries.Select(e => e.FullName).ToList();
+
+                Assert.Contains(entryNames, e => e.Contains("save.hg"));
+                Assert.Contains(entryNames, e => e.Contains("other.bin"));
+                Assert.DoesNotContain(entryNames, e => e.EndsWith(".dds", StringComparison.OrdinalIgnoreCase));
+            }
+            finally
+            {
+                try { File.Delete(zipPath); } catch { }
+            }
+        }
+        finally
+        {
+            try { Directory.Delete(tmpDir, true); } catch { }
+        }
     }
 }

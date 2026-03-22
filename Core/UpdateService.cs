@@ -17,11 +17,10 @@ public static class UpdateService
     // Change these constants when migrating to the final release repo.
     public const string GitHubOwner = "vectorcmdr";
     public const string GitHubRepo  = "NMSE";
-    public const string ReleaseTag  = "latest";
 
-    /// <summary>GitHub API URL for the rolling release.</summary>
+    /// <summary>GitHub API URL for the latest published release.</summary>
     public static string ReleasesApiUrl =>
-        $"https://api.github.com/repos/{GitHubOwner}/{GitHubRepo}/releases/tags/{ReleaseTag}";
+        $"https://api.github.com/repos/{GitHubOwner}/{GitHubRepo}/releases/latest";
 
     // HttpClient (shared, long-lived)
     private static readonly HttpClient Http = CreateHttpClient();

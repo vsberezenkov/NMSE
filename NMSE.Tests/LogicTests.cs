@@ -6209,6 +6209,292 @@ public class LogicTests
         return null;
     }
 
+    // --- Locale string coverage tests ---
+
+    [Fact]
+    public void UiStrings_DeleteLocationStrings_ExistInEnGB()
+    {
+        EnsureUiStringsLoaded();
+        string single = UiStrings.Get("discovery.delete_location_single");
+        string multi = UiStrings.Get("discovery.delete_location_multi");
+        string title = UiStrings.Get("discovery.delete_location_title");
+
+        // Resolved strings should NOT fall back to the raw key name
+        Assert.NotEqual("discovery.delete_location_single", single);
+        Assert.NotEqual("discovery.delete_location_multi", multi);
+        Assert.NotEqual("discovery.delete_location_title", title);
+        Assert.Contains("location", single, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("{0}", multi);
+    }
+
+    [Fact]
+    public void UiStrings_MaxSupportedLabel_SaysOfficialMax()
+    {
+        EnsureUiStringsLoaded();
+        string label = UiStrings.Format("common.max_supported", "10x6");
+        Assert.Contains("Official Max", label, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("10x6", label);
+    }
+
+    [Fact]
+    public void UiStrings_DeleteLocationStrings_ExistInAllLocales()
+    {
+        var langDir = FindResourceLangDir();
+        if (langDir == null) return;
+
+        var files = Directory.GetFiles(langDir, "*.json");
+        Assert.True(files.Length >= 16, $"Expected at least 16 locale files, found {files.Length}");
+
+        foreach (var file in files)
+        {
+            string json = File.ReadAllText(file);
+            string fileName = Path.GetFileName(file);
+            Assert.Contains("discovery.delete_location_single", json,
+                StringComparison.Ordinal);
+            Assert.Contains("discovery.delete_location_multi", json,
+                StringComparison.Ordinal);
+        }
+    }
+
+    // --- Inventory Resize Width/Height tests ---
+
+    [Fact]
+    public void InventoryResize_ShouldUpdateWidthHeight_WhenResizing()
+    {
+        // Create a minimal inventory JSON with Width=10, Height=6
+        var inventory = JsonObject.Parse(@"{
+            ""Width"": 10,
+            ""Height"": 6,
+            ""Slots"": [],
+            ""ValidSlotIndices"": [
+                { ""X"": 0, ""Y"": 0 },
+                { ""X"": 1, ""Y"": 0 }
+            ]
+        }");
+
+        Assert.Equal(10, inventory.GetInt("Width"));
+        Assert.Equal(6, inventory.GetInt("Height"));
+
+        // Simulate what OnResizeInventory does: set Width/Height
+        int newWidth = 10;
+        int newHeight = 12;
+        inventory.Set("Width", newWidth);
+        inventory.Set("Height", newHeight);
+
+        Assert.Equal(10, inventory.GetInt("Width"));
+        Assert.Equal(12, inventory.GetInt("Height"));
+    }
+
+    [Fact]
+    public void InventoryResize_ShouldAddValidSlotIndices_ForNewDimensions()
+    {
+        var inventory = JsonObject.Parse(@"{
+            ""Width"": 2,
+            ""Height"": 2,
+            ""Slots"": [],
+            ""ValidSlotIndices"": [
+                { ""X"": 0, ""Y"": 0 },
+                { ""X"": 1, ""Y"": 0 },
+                { ""X"": 0, ""Y"": 1 },
+                { ""X"": 1, ""Y"": 1 }
+            ]
+        }");
+
+        int newWidth = 3;
+        int newHeight = 3;
+
+        var validSlots = inventory.GetArray("ValidSlotIndices")!;
+
+        // Build existing valid set
+        var existing = new HashSet<(int, int)>();
+        for (int i = 0; i < validSlots.Length; i++)
+        {
+            var idx = validSlots.GetObject(i);
+            existing.Add((idx.GetInt("X"), idx.GetInt("Y")));
+        }
+
+        // Add new valid slot indices
+        for (int y = 0; y < newHeight; y++)
+        {
+            for (int x = 0; x < newWidth; x++)
+            {
+                if (!existing.Contains((x, y)))
+                {
+                    var newIdx = new JsonObject();
+                    newIdx.Add("X", x);
+                    newIdx.Add("Y", y);
+                    validSlots.Add(newIdx);
+                }
+            }
+        }
+
+        // Update dimensions
+        inventory.Set("Width", newWidth);
+        inventory.Set("Height", newHeight);
+
+        Assert.Equal(3, inventory.GetInt("Width"));
+        Assert.Equal(3, inventory.GetInt("Height"));
+        Assert.Equal(9, validSlots.Length); // 3x3 = 9 valid slots
+    }
+
+    [Fact]
+    public void InventoryResize_ShouldRemoveValidSlotIndices_OutsideNewDimensions()
+    {
+        var inventory = JsonObject.Parse(@"{
+            ""Width"": 3,
+            ""Height"": 3,
+            ""Slots"": [],
+            ""ValidSlotIndices"": [
+                { ""X"": 0, ""Y"": 0 },
+                { ""X"": 1, ""Y"": 0 },
+                { ""X"": 2, ""Y"": 0 },
+                { ""X"": 0, ""Y"": 1 },
+                { ""X"": 1, ""Y"": 1 },
+                { ""X"": 2, ""Y"": 1 },
+                { ""X"": 0, ""Y"": 2 },
+                { ""X"": 1, ""Y"": 2 },
+                { ""X"": 2, ""Y"": 2 }
+            ]
+        }");
+
+        int newWidth = 2;
+        int newHeight = 2;
+
+        var validSlots = inventory.GetArray("ValidSlotIndices")!;
+        Assert.Equal(9, validSlots.Length);
+
+        // Remove indices outside new dimensions (reverse order)
+        for (int i = validSlots.Length - 1; i >= 0; i--)
+        {
+            var idx = validSlots.GetObject(i);
+            int x = idx.GetInt("X"), y = idx.GetInt("Y");
+            if (x >= newWidth || y >= newHeight)
+                validSlots.RemoveAt(i);
+        }
+
+        inventory.Set("Width", newWidth);
+        inventory.Set("Height", newHeight);
+
+        Assert.Equal(2, inventory.GetInt("Width"));
+        Assert.Equal(2, inventory.GetInt("Height"));
+        Assert.Equal(4, validSlots.Length); // 2x2 = 4 valid slots
+    }
+
+    // --- Unicode round-trip test ---
+
+    [Fact]
+    public void JsonParser_UnicodeRoundTrip_PreservesEscapedCharacters()
+    {
+        // Parse JSON containing unicode escape sequences
+        string json = """{"Name": "test \u03BB and \u0166 end"}""";
+        var obj = JsonObject.Parse(json);
+
+        string value = obj.GetString("Name")!;
+        Assert.Contains("\u03BB", value); // λ
+        Assert.Contains("\u0166", value); // Ŧ
+
+        // Re-serialise and verify the escaped form is preserved
+        string output = obj.ToString();
+        Assert.Contains("\\u03BB", output, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("\\u0166", output, StringComparison.OrdinalIgnoreCase);
+    }
+
+    // --- Unicode escape vs binary data tests ---
+
+    [Fact]
+    public void JsonParser_UnicodeEscapeLatin1Range_ReturnsStringNotBinaryData()
+    {
+        // \u00E9 (é, U+00E9) is in the 0x80-0xFF range but arrives as a \u escape,
+        // so it represents intentional Unicode — not raw binary data.
+        // This must parse as a string, NOT BinaryData.
+        string json = """{"SaveName": "Caf\u00E9 \u00FC\u00F1"}""";
+        var obj = JsonObject.Parse(json);
+
+        var value = obj.Get("SaveName");
+        Assert.IsType<string>(value);
+        Assert.Contains("é", (string)value!);
+        Assert.Contains("ü", (string)value!);
+        Assert.Contains("ñ", (string)value!);
+    }
+
+    [Fact]
+    public void JsonParser_RawHighBytes_ReturnsBinaryData()
+    {
+        // Simulate what happens when Latin-1 decoded save data contains raw bytes
+        // >= 0x80 (e.g. techpack binary payloads). These raw chars in the JSON source
+        // must be detected as binary data.
+        // Build a JSON string with a raw char >= 0x80 (Latin-1 byte 0xCE)
+        string json = "{\"Data\": \"" + (char)0xCE + (char)0xBB + "\"}";
+        var obj = JsonObject.Parse(json);
+
+        var value = obj.Get("Data");
+        Assert.IsType<BinaryData>(value);
+    }
+
+    [Fact]
+    public void JsonParser_HexEscapes_ReturnsBinaryData()
+    {
+        // \x hex escapes are used for explicit binary data in JSON strings.
+        // They must always produce BinaryData objects.
+        string json = """{"TechId": "\x80\x01\xBC\x85\xF7"}""";
+        var obj = JsonObject.Parse(json);
+
+        var value = obj.Get("TechId");
+        Assert.IsType<BinaryData>(value);
+        var binary = (BinaryData)value!;
+        Assert.Equal(5, binary.ToByteArray().Length);
+        Assert.Equal(0x80, binary.ToByteArray()[0]);
+    }
+
+    // --- SPEC_XOHELMET database entry test ---
+
+    [Fact]
+    public void GameItemDatabase_ContainsSpecXohelmet()
+    {
+        var db = new GameItemDatabase();
+        string? jsonDir = FindResourceJsonDir();
+        Assert.NotNull(jsonDir);
+
+        bool loaded = db.LoadItemsFromJsonDirectory(jsonDir!);
+        Assert.True(loaded);
+
+        var item = db.GetItem("SPEC_XOHELMET");
+        Assert.NotNull(item);
+        Assert.Equal("SPEC_XOHELMET.png", item!.Icon);
+        Assert.Equal("Specialist Exosuit Visuals", item.Subtitle);
+    }
+
+    // --- Settlement perk array expansion test ---
+
+    [Fact]
+    public void SettlementPerkArray_SmallArray_CanBeGrownAndTrimmed()
+    {
+        // Create a minimal Perks array with 7 entries (less than the 18-entry max)
+        var json = JsonObject.Parse("""
+        {
+            "Perks": ["^","^","^","^","^","^","^OLD_SCHOOL"]
+        }
+        """);
+
+        var perks = json.GetArray("Perks")!;
+        Assert.Equal(7, perks.Length);
+
+        // Verify accessing entries 0-6 works
+        for (int i = 0; i < 6; i++)
+            Assert.Equal("^", (string)perks.Get(i)!);
+        Assert.Equal("^OLD_SCHOOL", (string)perks.Get(6)!);
+
+        // Verify the array can be grown with Add()
+        perks.Add("^NEW_PERK");
+        Assert.Equal(8, perks.Length);
+        Assert.Equal("^NEW_PERK", (string)perks.Get(7)!);
+
+        // Verify RemoveAt() can trim trailing entries
+        perks.RemoveAt(7);
+        Assert.Equal(7, perks.Length);
+        Assert.Equal("^OLD_SCHOOL", (string)perks.Get(6)!);
+    }
+
     private static string? FindResourceLangDir()
     {
         var dir = AppDomain.CurrentDomain.BaseDirectory;

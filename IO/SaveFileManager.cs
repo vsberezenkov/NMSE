@@ -148,6 +148,7 @@ public class SaveFileManager
 
     /// <summary>
     /// Creates a timestamped zip backup of the save directory, retaining up to 10 backups.
+    /// Excludes *.dds files from the cache sub-folder to reduce backup size.
     /// </summary>
     /// <param name="saveDirectory">The save directory to back up.</param>
     public static void BackupSaveDirectory(string saveDirectory)
@@ -176,13 +177,38 @@ public class SaveFileManager
         // Avoid zipping if already exists for this second
         if (!File.Exists(backupPath))
         {
-            ZipFile.CreateFromDirectory(saveDirectory, backupPath, CompressionLevel.Fastest, false);
+            CreateFilteredZip(saveDirectory, backupPath);
+        }
+    }
+
+    /// <summary>
+    /// Creates a zip from a directory, excluding *.dds files inside any "cache" sub-folder.
+    /// </summary>
+    private static void CreateFilteredZip(string sourceDir, string zipPath)
+    {
+        using var zip = ZipFile.Open(zipPath, ZipArchiveMode.Create);
+        string basePath = Path.GetFullPath(sourceDir).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+
+        foreach (string filePath in Directory.EnumerateFiles(sourceDir, "*", SearchOption.AllDirectories))
+        {
+            string fullFilePath = Path.GetFullPath(filePath);
+            if (!fullFilePath.StartsWith(basePath + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
+                continue; // Skip files outside the source directory
+
+            string relativePath = fullFilePath[(basePath.Length + 1)..];
+
+            // Exclude *.dds files inside cache folders
+            if (relativePath.EndsWith(".dds", StringComparison.OrdinalIgnoreCase) &&
+                relativePath.Contains($"cache{Path.DirectorySeparatorChar}", StringComparison.OrdinalIgnoreCase))
+                continue;
+
+            zip.CreateEntryFromFile(filePath, relativePath, CompressionLevel.Fastest);
         }
     }
 
     /// <summary>
     /// Load a save file and return the JSON data.
-    /// Handles both compressed (LZ4) and uncompressed save files.
+    /// Handles compressed (LZ4), NOMANSKY-header (PS4/PS5), and uncompressed save files.
     /// Uses streaming I/O and string.Create to minimize intermediate memory allocations.
     /// </summary>
     public static JsonObject LoadSaveFile(string filePath)
@@ -191,11 +217,16 @@ public class SaveFileManager
         using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read,
             bufferSize: 65536, FileOptions.SequentialScan))
         {
-            byte[] header = new byte[4];
-            int headerRead = fs.Read(header, 0, Math.Min(4, (int)fs.Length));
+            byte[] header = new byte[8];
+            int headerRead = fs.Read(header, 0, Math.Min(8, (int)fs.Length));
             fs.Position = 0;
 
-            if (headerRead >= 4 && IsLz4Compressed(header))
+            if (headerRead >= 8 && IsNomanSkyHeader(header))
+            {
+                // PS4/PS5 save: NOMANSKY header, JSON data after header
+                json = ReadNomanSkySave(fs);
+            }
+            else if (headerRead >= 4 && IsLz4Compressed(header))
             {
                 json = DecompressLz4SaveStreamed(fs);
             }
@@ -361,6 +392,71 @@ public class SaveFileManager
         if (data.Length < 4) return false;
         return data[0] == Lz4Magic[0] && data[1] == Lz4Magic[1] &&
                data[2] == Lz4Magic[2] && data[3] == Lz4Magic[3];
+    }
+
+    /// <summary>
+    /// NOMANSKY magic header for PS4/PS5 save files.
+    /// </summary>
+    private static readonly byte[] NomanSkyMagic = "NOMANSKY"u8.ToArray();
+
+    private static bool IsNomanSkyHeader(byte[] data)
+    {
+        if (data.Length < 8) return false;
+        for (int i = 0; i < 8; i++)
+            if (data[i] != NomanSkyMagic[i]) return false;
+        return true;
+    }
+
+    /// <summary>
+    /// Read a PS4/PS5 NOMANSKY-header save file.
+    /// The header contains a fixed preamble followed by the JSON data.
+    /// The JSON data size is stored at offset 0x5C (little-endian uint32).
+    /// </summary>
+    private static string ReadNomanSkySave(FileStream fs)
+    {
+        // Read full header to find JSON offset and size
+        byte[] headerBuf = new byte[0x70]; // Max header size we expect
+        int read = 0;
+        while (read < headerBuf.Length && read < fs.Length)
+        {
+            int n = fs.Read(headerBuf, read, headerBuf.Length - read);
+            if (n <= 0) break;
+            read += n;
+        }
+
+        // JSON data size at offset 0x5C (little-endian)
+        int jsonSize = headerBuf[0x5C] | (headerBuf[0x5D] << 8) |
+                       (headerBuf[0x5E] << 16) | (headerBuf[0x5F] << 24);
+
+        // Seek to JSON start at offset 0x70
+        fs.Position = 0x70;
+
+        // If jsonSize is unreasonable, read everything after header
+        if (jsonSize <= 0 || jsonSize > fs.Length - fs.Position)
+            jsonSize = (int)(fs.Length - fs.Position);
+
+        byte[] buffer = ArrayPool<byte>.Shared.Rent(jsonSize);
+        try
+        {
+            read = 0;
+            while (read < jsonSize)
+            {
+                int n = fs.Read(buffer, read, jsonSize - read);
+                if (n <= 0) break;
+                read += n;
+            }
+
+            // PS4/PS5 saves use UTF-8 encoding for the JSON data.
+            // Trim trailing NUL bytes that may pad the JSON region.
+            int jsonEnd = read;
+            while (jsonEnd > 0 && buffer[jsonEnd - 1] == 0)
+                jsonEnd--;
+            return Encoding.UTF8.GetString(buffer, 0, jsonEnd);
+        }
+        finally
+        {
+            ArrayPool<byte>.Shared.Return(buffer);
+        }
     }
 
     /// <summary>
@@ -536,6 +632,21 @@ public class SaveFileManager
                 }
                 text = Latin1.GetString(decompressed, 0, read);
             }
+            else if (IsNomanSkyHeader(header))
+            {
+                // PS4/PS5 NOMANSKY header — JSON starts at 0x70
+                fs.Position = 0x70;
+                int limit = (int)Math.Min(fs.Length - fs.Position, 64 * 1024);
+                byte[] prefix = new byte[limit];
+                int read = 0;
+                while (read < limit)
+                {
+                    int n = fs.Read(prefix, read, limit - read);
+                    if (n <= 0) break;
+                    read += n;
+                }
+                text = Encoding.UTF8.GetString(prefix, 0, read);
+            }
             else
             {
                 // Uncompressed - read a limited prefix
@@ -582,8 +693,142 @@ public class SaveFileManager
     }
 
     /// <summary>
-    /// Map a game mode string to its corresponding integer.
+    /// Quickly extract the SaveName from a save file without fully parsing it.
+    /// Only reads and decompresses the first LZ4 block to scan for the SaveName key.
+    /// Returns empty string if not found or on error.
     /// </summary>
+    public static string DetectSaveNameFast(string filePath)
+    {
+        try
+        {
+            string text;
+            byte[] header = new byte[16];
+
+            using var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+            if (fs.Read(header, 0, 16) < 16) return "";
+
+            if (header[0] == Lz4Magic[0] && header[1] == Lz4Magic[1] &&
+                header[2] == Lz4Magic[2] && header[3] == Lz4Magic[3])
+            {
+                int compressedLen = header[4] | (header[5] << 8) | (header[6] << 16) | (header[7] << 24);
+                int uncompressedLen = header[8] | (header[9] << 8) | (header[10] << 16) | (header[11] << 24);
+                if (compressedLen <= 0 || uncompressedLen <= 0) return "";
+                if (compressedLen > 256 * 1024 * 1024 || uncompressedLen > 256 * 1024 * 1024) return "";
+
+                byte[] compressedBlock = new byte[compressedLen];
+                int totalRead = 0;
+                while (totalRead < compressedLen)
+                {
+                    int n = fs.Read(compressedBlock, totalRead, compressedLen - totalRead);
+                    if (n <= 0) break;
+                    totalRead += n;
+                }
+
+                using var blockStream = new MemoryStream(compressedBlock, 0, totalRead);
+                using var lz4Stream = new Lz4DecompressorStream(blockStream, uncompressedLen);
+                byte[] decompressed = new byte[uncompressedLen];
+                int read = 0;
+                while (read < uncompressedLen)
+                {
+                    int n = lz4Stream.Read(decompressed, read, uncompressedLen - read);
+                    if (n <= 0) break;
+                    read += n;
+                }
+                text = Encoding.UTF8.GetString(decompressed, 0, read);
+            }
+            else if (IsNomanSkyHeader(header))
+            {
+                // PS4/PS5 NOMANSKY header — JSON starts at 0x70
+                fs.Position = 0x70;
+                int limit = (int)Math.Min(fs.Length - fs.Position, 64 * 1024);
+                byte[] prefix = new byte[limit];
+                int read = 0;
+                while (read < limit)
+                {
+                    int n = fs.Read(prefix, read, limit - read);
+                    if (n <= 0) break;
+                    read += n;
+                }
+                text = Encoding.UTF8.GetString(prefix, 0, read);
+            }
+            else
+            {
+                int limit = (int)Math.Min(fs.Length, 64 * 1024);
+                byte[] prefix = new byte[limit];
+                fs.Position = 0;
+                int read = 0;
+                while (read < limit)
+                {
+                    int n = fs.Read(prefix, read, limit - read);
+                    if (n <= 0) break;
+                    read += n;
+                }
+                text = Encoding.UTF8.GetString(prefix, 0, read);
+            }
+
+            // Try both deobfuscated and obfuscated SaveName keys
+            // "SaveName" or "Pk4" (obfuscated key for SaveName)
+            return ExtractJsonStringValue(text, "\"SaveName\"")
+                ?? ExtractJsonStringValue(text, "\"Pk4\"")
+                ?? "";
+        }
+        catch { }
+        return "";
+    }
+
+    /// <summary>
+    /// Extract a JSON string value following a key in raw text.
+    /// Returns null if the key is not found.
+    /// </summary>
+    private static string? ExtractJsonStringValue(string text, string key)
+    {
+        int idx = text.IndexOf(key, StringComparison.Ordinal);
+        if (idx < 0) return null;
+
+        // Skip past key, find colon, then opening quote
+        int colonIdx = text.IndexOf(':', idx + key.Length);
+        if (colonIdx < 0) return null;
+
+        int quoteStart = text.IndexOf('"', colonIdx + 1);
+        if (quoteStart < 0) return null;
+
+        // Find the closing quote, handling escape sequences
+        int pos = quoteStart + 1;
+        var sb = new StringBuilder();
+        while (pos < text.Length)
+        {
+            char c = text[pos];
+            if (c == '\\' && pos + 1 < text.Length)
+            {
+                char next = text[pos + 1];
+                if (next == 'u' && pos + 5 < text.Length)
+                {
+                    // Unicode escape: \uXXXX
+                    string hex = text.Substring(pos + 2, 4);
+                    if (int.TryParse(hex, System.Globalization.NumberStyles.HexNumber, null, out int codePoint))
+                        sb.Append((char)codePoint);
+                    else
+                        sb.Append("\\u").Append(hex);
+                    pos += 6;
+                }
+                else
+                {
+                    sb.Append(next switch { 'n' => '\n', 'r' => '\r', 't' => '\t', _ => next });
+                    pos += 2;
+                }
+            }
+            else if (c == '"')
+            {
+                break;
+            }
+            else
+            {
+                sb.Append(c);
+                pos++;
+            }
+        }
+        return sb.ToString();
+    }
     private static int GameModeStringToInt(string mode) => mode switch
     {
         "Normal" => 1,

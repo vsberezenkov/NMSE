@@ -85,13 +85,13 @@ public class UpdateServiceTests
     {
         string json = """
         {
-            "tag_name": "latest",
+            "tag_name": "v1.1.140",
             "name": "NMSE v1.1.140",
             "body": "Automated release",
             "assets": [
                 {
                     "name": "NMSE-1.1.140-Release.zip",
-                    "browser_download_url": "https://github.com/vectorcmdr/NMSE/releases/download/latest/NMSE-1.1.140-Release.zip"
+                    "browser_download_url": "https://github.com/vectorcmdr/NMSE/releases/download/v1.1.140/NMSE-1.1.140-Release.zip"
                 }
             ]
         }
@@ -101,7 +101,7 @@ public class UpdateServiceTests
 
         string? url = UpdateService.FindAssetDownloadUrl(release);
         Assert.Equal(
-            "https://github.com/vectorcmdr/NMSE/releases/download/latest/NMSE-1.1.140-Release.zip",
+            "https://github.com/vectorcmdr/NMSE/releases/download/v1.1.140/NMSE-1.1.140-Release.zip",
             url);
     }
 
@@ -110,7 +110,7 @@ public class UpdateServiceTests
     {
         string json = """
         {
-            "tag_name": "latest",
+            "tag_name": "v1.1.140",
             "name": "NMSE v1.1.140",
             "assets": [
                 {
@@ -131,7 +131,7 @@ public class UpdateServiceTests
     {
         string json = """
         {
-            "tag_name": "latest",
+            "tag_name": "v1.1.140",
             "name": "NMSE v1.1.140",
             "assets": []
         }
@@ -147,7 +147,7 @@ public class UpdateServiceTests
     {
         string json = """
         {
-            "tag_name": "latest",
+            "tag_name": "v1.1.140",
             "name": "NMSE v1.1.140"
         }
         """;
@@ -162,7 +162,7 @@ public class UpdateServiceTests
     {
         string json = """
         {
-            "tag_name": "latest",
+            "tag_name": "v2.0.0",
             "assets": [
                 {
                     "name": "checksums.txt",
@@ -193,7 +193,7 @@ public class UpdateServiceTests
     {
         string json = """
         {
-            "tag_name": "latest",
+            "tag_name": "v1.1.140",
             "name": "NMSE v1.1.140"
         }
         """;
@@ -239,7 +239,7 @@ public class UpdateServiceTests
     {
         string json = """
         {
-            "tag_name": "latest"
+            "tag_name": "v1.1.140"
         }
         """;
         var release = JsonObject.Parse(json);
@@ -292,7 +292,7 @@ public class UpdateServiceTests
         string url = UpdateService.ReleasesApiUrl;
         Assert.Contains(UpdateService.GitHubOwner, url);
         Assert.Contains(UpdateService.GitHubRepo, url);
-        Assert.Contains(UpdateService.ReleaseTag, url);
+        Assert.Contains("/releases/latest", url);
         Assert.StartsWith("https://api.github.com/repos/", url);
     }
 
@@ -305,6 +305,5 @@ public class UpdateServiceTests
         // These are the values that would be changed for the final release repo.
         Assert.False(string.IsNullOrEmpty(UpdateService.GitHubOwner));
         Assert.False(string.IsNullOrEmpty(UpdateService.GitHubRepo));
-        Assert.False(string.IsNullOrEmpty(UpdateService.ReleaseTag));
     }
 }

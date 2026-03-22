@@ -3,18 +3,13 @@
 # Builds, tests, zips, and publishes a GitHub Release whenever
 # version.json is updated on the default branch.
 #
-# Push builds publish a pre-zipped artifact and update the
-# "latest" GitHub Release so the NMSE.Site download button can
-# link directly to the zip (no GitHub login required).
+# Each release is tagged with a semantic version (e.g. v1.2.3)
+# derived from version.json.  The release body is read from
+# release-notes.md in the repo root.
 #
 # All actions are pinned to immutable commit SHAs to mitigate
 # supply-chain attacks.  When upgrading, update both the SHA
 # and the version comment.
-#
-# --- DISABLED ----------------------------------------------
-# This workflow is currently restricted to workflow_dispatch
-# (manual trigger) only.  To activate it for production use,
-# uncomment the 'push' trigger block below.
 # --------------------------------------------------------------
 
 name: Build NMSE
@@ -25,7 +20,6 @@ env:
   TEST_PROJECT_FILE: NMSE.Tests/NMSE.Tests.csproj
   DOTNET_VERSION: "10.0.x"
   BUILD_CONFIGURATION: Release
-  RELEASE_TAG: latest
 
 on:
   # -- Un/comment the push block below to enable automated releases --
@@ -57,8 +51,9 @@ jobs:
         run: |
           $v = Get-Content version.json | ConvertFrom-Json
           $ver = "$($v.major).$($v.minor).$($v.patch)"
-          "VERSION=$ver" >> $env:GITHUB_OUTPUT
-          Write-Host "Version: $ver"
+          "VERSION=$ver"     >> $env:GITHUB_OUTPUT
+          "TAG=v$ver"        >> $env:GITHUB_OUTPUT
+          Write-Host "Version: $ver  Tag: v$ver"
 
       - name: Restore dependencies
         run: dotnet restore ${{ env.PROJECT_FILE }}
@@ -93,23 +88,47 @@ jobs:
           path: ${{ steps.find-zip.outputs.ZIP_PATH }}
           if-no-files-found: warn
 
-      - name: Update latest release
+      - name: Build release notes
+        if: success()
+        id: notes
+        shell: pwsh
+        run: |
+          $ver  = "${{ steps.version.outputs.VERSION }}"
+          $sha  = "${{ github.sha }}"
+          $run  = "${{ github.run_number }}"
+
+          # Start with release-notes.md template (if it exists)
+          $body = ""
+          if (Test-Path "release-notes.md") {
+            $body = (Get-Content "release-notes.md" -Raw).Trim()
+          }
+
+          # Append build metadata
+          $meta = "`n`n---`n`n*Automated release **v${ver}** (build #${run}) from ``${sha}``*"
+          $body = ($body + $meta).Trim()
+
+          # Write to a temp file for gh release --notes-file
+          $body | Out-File release-body.md -Encoding utf8
+          "NOTES_FILE=release-body.md" >> $env:GITHUB_OUTPUT
+
+      - name: Create versioned release
         if: success()
         shell: pwsh
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          $tag = "${{ steps.version.outputs.TAG }}"
           $ver = "${{ steps.version.outputs.VERSION }}"
 
-          # Remove the previous release + tag if it exists
-          $existing = gh release view $env:RELEASE_TAG 2>&1
+          # Check whether this version tag already exists
+          $existing = gh release view $tag 2>&1
           if ($LASTEXITCODE -eq 0) {
-            gh release delete $env:RELEASE_TAG --yes --cleanup-tag
+            Write-Host "Release $tag already exists — deleting to recreate"
+            gh release delete $tag --yes --cleanup-tag
           }
 
-          # Create a new release and attach the pre-zipped build
-          gh release create $env:RELEASE_TAG `
+          # Create a new release tagged with the semantic version
+          gh release create $tag `
             "${{ steps.find-zip.outputs.ZIP_PATH }}" `
             --title "NMSE v${ver}" `
-            --notes "Automated release **v${ver}** (build #${{ github.run_number }}) from ``${{ github.sha }}``" `
-            --prerelease
+            --notes-file "${{ steps.notes.outputs.NOTES_FILE }}"

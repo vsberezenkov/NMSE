@@ -11,7 +11,7 @@
 const SITE_CONFIG = {
   owner: "vectorcmdr",                                                         // GitHub user / org
   repo: "NMSE",                                                                // Repository name
-  releaseTag: "latest",                                                        // Tag used by the CI for rolling builds
+  releaseTag: "latest",                                                        // LEGACY – no longer used (kept for reference)
   workflowFile: "build-nmse.yml",                                              // Workflow that produces the artifact (fallback)
   discordInvite: "https://discord.gg/WbDQKKP3us",                              // Discord invite link
   userdoc: "https://github.com/vectorcmdr/NMSE/blob/main/docs/user/README.md", // Path to user guide documentation in the repo
@@ -51,9 +51,9 @@ function timeAgo(dateString) {
   link.href = actionsUrl;
   link.textContent = "Download";
 
-  // Fetch the latest GitHub Release (created by CI on every push build)
+  // Fetch the latest GitHub Release (created by CI with a versioned tag e.g. v1.2.3)
   const apiUrl =
-    `https://api.github.com/repos/${SITE_CONFIG.owner}/${SITE_CONFIG.repo}/releases/tags/${SITE_CONFIG.releaseTag}`;
+    `https://api.github.com/repos/${SITE_CONFIG.owner}/${SITE_CONFIG.repo}/releases/latest`;
 
   fetch(apiUrl)
     .then(res => {
@@ -66,9 +66,8 @@ function timeAgo(dateString) {
         link.href = asset.browser_download_url;
         link.textContent = "Download NMSE";
 
-        // Extract "Build #N" from the release notes if available
-        const match = release.body && release.body.match(/build\s+#(\d+)/i);
-        buildNumber.textContent = match ? `Build #${match[1]}` : release.name;
+        // Show the version from the release name or tag (e.g. "NMSE v1.2.3" or "v1.2.3")
+        buildNumber.textContent = release.name || release.tag_name;
         buildUpdated.textContent = `updated ${timeAgo(release.published_at)}`;
         buildInfo.hidden = false;
         note.textContent = "Direct download \u2013 no GitHub login required.";

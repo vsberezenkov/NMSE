@@ -2018,6 +2018,71 @@ public static class Parsers
             Console.WriteLine($"  [SKIP] Platform rewards: UNLOCKABLEPLATFORMREWARDS.MXML not found");
         }
 
+        // --- Entitlement rewards (from RewardTable EntitlementTable) ---
+        // These rewards are defined in REWARDTABLE.MXML under the EntitlementTable key.
+        // They reference products via GcRewardSpecificSpecial -> ID.
+        string rewardTablePath = Path.Combine(mbinDir, "REWARDTABLE.MXML");
+        if (!File.Exists(rewardTablePath))
+            rewardTablePath = Path.Combine(mbinDir, "nms_reality_gcrewardtable.MXML");
+        int entitlementCount = 0;
+        if (File.Exists(rewardTablePath))
+        {
+            try
+            {
+                var root = MxmlParser.LoadXml(rewardTablePath);
+                var entTableProp = root.Descendants("Property")
+                    .FirstOrDefault(e => e.Attribute("name")?.Value == "EntitlementTable");
+                if (entTableProp != null)
+                {
+                    foreach (var elem in entTableProp.Elements("Property")
+                        .Where(e => e.Attribute("name")?.Value == "EntitlementTable"))
+                    {
+                        string rewardId = MxmlParser.GetPropertyValue(elem, "RewardId");
+                        if (string.IsNullOrEmpty(rewardId)) continue;
+
+                        // Try to find the product ID from the reward sub-element
+                        // GcRewardSpecificSpecial -> ID, GcRewardSpecificProduct -> ID, etc.
+                        string productId = "";
+                        var rewardProp = elem.Elements("Property")
+                            .FirstOrDefault(e => e.Attribute("name")?.Value == "Reward");
+                        if (rewardProp != null)
+                        {
+                            // Look inside the nested reward type for an ID property
+                            productId = rewardProp.Descendants("Property")
+                                .Where(e => e.Attribute("name")?.Value == "ID")
+                                .Select(e => e.Attribute("value")?.Value ?? "")
+                                .FirstOrDefault(v => !string.IsNullOrEmpty(v)) ?? "";
+
+                            // Fallback: try TechId for tech rewards
+                            if (string.IsNullOrEmpty(productId))
+                                productId = rewardProp.Descendants("Property")
+                                    .Where(e => e.Attribute("name")?.Value == "TechId")
+                                    .Select(e => e.Attribute("value")?.Value ?? "")
+                                    .FirstOrDefault(v => !string.IsNullOrEmpty(v)) ?? "";
+                        }
+
+                        if (string.IsNullOrEmpty(productId)) continue;
+
+                        string name = ResolveProductName(productsLookup, localisation, productId);
+                        productsLookup.TryGetValue(productId, out var entProduct);
+
+                        rewards.Add(new Dictionary<string, object?>
+                        {
+                            ["Id"] = $"^{rewardId}",
+                            ["Name"] = name,
+                            ["Name_LocStr"] = entProduct?.GetValueOrDefault("Name_LocStr"),
+                            ["Subtitle_LocStr"] = entProduct?.GetValueOrDefault("Subtitle_LocStr"),
+                            ["Category"] = "entitlement",
+                            ["ProductId"] = NullIfEmpty(productId),
+                        });
+                        entitlementCount++;
+                    }
+                    Console.WriteLine($"  [OK] Entitlement rewards: {entitlementCount}");
+                }
+            }
+            catch (Exception ex) { Console.WriteLine($"  [WARN] Entitlement rewards: {ex.Message}"); }
+        }
+
         Console.WriteLine($"[OK] Parsed {rewards.Count} total rewards");
         return rewards;
     }

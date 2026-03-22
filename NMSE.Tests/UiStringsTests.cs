@@ -260,4 +260,59 @@ public class UiStringsTests : IDisposable
         Assert.Equal(0, UiStrings.TotalKeyCount);
         Assert.Equal("menu.file", UiStrings.Get("menu.file"));
     }
+
+    // --- Locale key existence tests using real en-GB data ---
+
+    private static string? FindRealLangDir()
+    {
+        var dir = AppDomain.CurrentDomain.BaseDirectory;
+        for (int i = 0; i < 10; i++)
+        {
+            var candidate = Path.Combine(dir, "Resources", "ui", "lang");
+            if (Directory.Exists(candidate)) return candidate;
+            var parent = Directory.GetParent(dir);
+            if (parent == null) break;
+            dir = parent.FullName;
+        }
+        return null;
+    }
+
+    [Fact]
+    public void UiStrings_DiscoveryTabLocations_HasExpectedValue()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        UiStrings.SetDirectory(langDir);
+        UiStrings.Load("en-GB");
+
+        Assert.Equal("Teleport Destinations", UiStrings.Get("discovery.tab_locations"));
+    }
+
+    [Fact]
+    public void UiStrings_CommonProceduralNoName_ExistsInEnGB()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        UiStrings.SetDirectory(langDir);
+        UiStrings.Load("en-GB");
+
+        string value = UiStrings.Get("common.procedural_no_name");
+        // Should resolve to a real string, not fall back to the raw key
+        Assert.NotEqual("common.procedural_no_name", value);
+    }
+
+    [Fact]
+    public void UiStrings_SettlementDeleteWarning_ContainsTeleportDestinations()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        UiStrings.SetDirectory(langDir);
+        UiStrings.Load("en-GB");
+
+        string value = UiStrings.Get("settlement.delete_warning");
+        Assert.Contains("Teleport Destinations", value);
+    }
 }
