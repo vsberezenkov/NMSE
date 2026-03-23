@@ -95,11 +95,22 @@ find_wine() {
         log "Using bundled Wine: $WINE_BIN"
         return
     fi
+    if [[ -x "$SCRIPT_DIR/wine/bin/wine64" ]]; then
+        WINE_BIN="$SCRIPT_DIR/wine/bin/wine64"
+        log "Using bundled Wine (wine64): $WINE_BIN"
+        return
+    fi
 
-    # 2. System Wine
+    # 2. System Wine (try 'wine', then 'wine64' for Ubuntu 24.04+)
     if command -v wine >/dev/null 2>&1; then
         WINE_BIN="$(command -v wine)"
         log "Using system Wine: $WINE_BIN"
+        return
+    fi
+
+    if command -v wine64 >/dev/null 2>&1; then
+        WINE_BIN="$(command -v wine64)"
+        log "Using system Wine (wine64): $WINE_BIN"
         return
     fi
 

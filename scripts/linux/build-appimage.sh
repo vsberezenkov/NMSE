@@ -56,16 +56,22 @@ if [[ ! -f "$NMSE_PUBLISH_DIR/NMSE.exe" ]]; then
 fi
 
 # ── Verify Wine is available ──────────────────────────────────
-if ! command -v wine >/dev/null 2>&1; then
+# Accept 'wine' or 'wine64' (Ubuntu 24.04+ only ships wine64/wine32)
+WINE_CMD=""
+if command -v wine >/dev/null 2>&1; then
+    WINE_CMD="wine"
+elif command -v wine64 >/dev/null 2>&1; then
+    WINE_CMD="wine64"
+else
     echo "ERROR: Wine not found. Install Wine 9.0+ to build the AppImage."
-    echo "  Ubuntu/Debian:  sudo apt install wine"
+    echo "  Ubuntu/Debian:  sudo apt install wine64 wine32"
     echo "  Fedora:         sudo dnf install wine"
     echo "  Arch:           sudo pacman -S wine"
     exit 1
 fi
 
-WINE_VERSION="$(wine --version 2>/dev/null | sed 's/wine-//')"
-echo "[BUILD] Using Wine $WINE_VERSION"
+WINE_VERSION="$("$WINE_CMD" --version 2>/dev/null | sed 's/wine-//')"
+echo "[BUILD] Using Wine $WINE_VERSION (via $WINE_CMD)"
 
 # ── Create AppDir structure ───────────────────────────────────
 BUILD_DIR="$(mktemp -d)"
@@ -91,7 +97,7 @@ done
 
 if [[ -z "$WINE_PREFIX_DIR" ]]; then
     # Fall back to copying from PATH
-    WINE_BIN_DIR="$(dirname "$(command -v wine)")"
+    WINE_BIN_DIR="$(dirname "$(command -v "$WINE_CMD")")"
     WINE_PREFIX_DIR="$(dirname "$WINE_BIN_DIR")"
 fi
 
@@ -100,6 +106,15 @@ echo "[BUILD] Wine installation root: $WINE_PREFIX_DIR"
 # Copy Wine binaries
 if [[ -d "$WINE_PREFIX_DIR/bin" ]]; then
     cp -r "$WINE_PREFIX_DIR/bin" "$APPDIR/wine/"
+fi
+
+# Ensure a 'wine' binary exists in the bundled bin/ for the AppRun launcher.
+# Ubuntu 24.04+ ships wine64/wine32 but no 'wine' wrapper.
+if [[ -d "$APPDIR/wine/bin" ]] && [[ ! -e "$APPDIR/wine/bin/wine" ]]; then
+    if [[ -x "$APPDIR/wine/bin/wine64" ]]; then
+        ln -s wine64 "$APPDIR/wine/bin/wine"
+        echo "[BUILD] Created wine -> wine64 symlink in AppDir"
+    fi
 fi
 
 # Copy Wine libraries (needed for WoW64 and PE DLLs)
