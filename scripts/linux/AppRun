@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ──────────────────────────────────────────────────────────────
+# ================================================================
 # AppRun - AppImage entry point for NMSE
 #
 # This script is the standard AppImage entry point. When a user
@@ -13,7 +13,7 @@
 #
 # This script simply delegates to nmse.sh with the correct
 # paths resolved.
-# ──────────────────────────────────────────────────────────────
+# ================================================================
 
 set -euo pipefail
 
@@ -22,7 +22,7 @@ APPDIR="${APPDIR:-"$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"}"
 
 # Use bundled Wine from the AppImage
 export PATH="$APPDIR/wine/bin:$PATH"
-export LD_LIBRARY_PATH="${APPDIR}/wine/lib:${APPDIR}/wine/lib64:${LD_LIBRARY_PATH:-}"
+export LD_LIBRARY_PATH="${APPDIR}/wine/lib:${APPDIR}/wine/lib64:${APPDIR}/wine/lib/wine:${APPDIR}/wine/lib/x86_64-linux-gnu/wine:${APPDIR}/wine/lib/i386-linux-gnu/wine:${LD_LIBRARY_PATH:-}"
 
 # Wine prefix - stored in user's config directory (persists across AppImage updates)
 export WINEPREFIX="${XDG_DATA_HOME:-$HOME/.local/share}/nmse/wineprefix"

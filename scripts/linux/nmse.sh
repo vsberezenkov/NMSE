@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# ──────────────────────────────────────────────────────────────
+# ================================================================
 # NMSE Wine Launch Script for Linux
 #
 # Launches NMSE (No Man's Save Editor) using Wine on Linux.
@@ -17,11 +17,11 @@
 #   - x86_64 Linux (Wine does not support ARM Linux)
 #
 # See docs/wine-linux-guide.md for full setup instructions.
-# ──────────────────────────────────────────────────────────────
+# ================================================================
 
 set -euo pipefail
 
-# ── Constants ─────────────────────────────────────────────────
+# Constants
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 APP_DIR="$SCRIPT_DIR/app"
 NMSE_EXE="$APP_DIR/NMSE.exe"
@@ -31,7 +31,7 @@ PREFIX_DIR="$SCRIPT_DIR/.nmse-wineprefix"
 MIN_WINE_MAJOR=9
 MIN_WINE_MINOR=0
 
-# ── Helpers ───────────────────────────────────────────────────
+# Helpers
 log()   { echo "[NMSE] $*"; }
 warn()  { echo "[NMSE] WARNING: $*" >&2; }
 die()   { echo "[NMSE] ERROR: $*" >&2; exit 1; }
@@ -62,7 +62,7 @@ EOF
     exit 0
 }
 
-# ── Version check ─────────────────────────────────────────────
+# Version check
 check_wine_version() {
     local version_str
     version_str="$("$WINE_BIN" --version 2>/dev/null)" || die "Cannot determine Wine version"
@@ -87,7 +87,7 @@ check_wine_version() {
     fi
 }
 
-# ── Locate Wine ───────────────────────────────────────────────
+# Locate Wine
 find_wine() {
     # 1. Bundled Wine (if building an AppImage or portable bundle)
     if [[ -x "$SCRIPT_DIR/wine/bin/wine" ]]; then
@@ -114,6 +114,13 @@ find_wine() {
         return
     fi
 
+    # 3. Ubuntu 24.04 system packages put wine64 in /usr/lib/wine/ (not PATH)
+    if [[ -x /usr/lib/wine/wine64 ]]; then
+        WINE_BIN="/usr/lib/wine/wine64"
+        log "Using system Wine: $WINE_BIN"
+        return
+    fi
+
     die "Wine not found. Install Wine 9.0+ via your package manager:
     Ubuntu/Debian:  sudo apt install wine
     Fedora:         sudo dnf install wine
@@ -123,7 +130,7 @@ find_wine() {
   Or visit: https://wiki.winehq.org/Download"
 }
 
-# ── Wine prefix setup ─────────────────────────────────────────
+# Wine prefix setup
 setup_prefix() {
     export WINEPREFIX="$PREFIX_DIR"
     export WINEARCH=win64
@@ -135,7 +142,7 @@ setup_prefix() {
     fi
 }
 
-# ── NMS save directory symlink hint ───────────────────────────
+# NMS save directory symlink hint
 show_save_hint() {
     local steam_save="$HOME/.local/share/Steam/steamapps/compatdata/275850/pfx/drive_c/users/steamuser/AppData/Roaming/HelloGames/NMS"
     local flatpak_save="$HOME/.var/app/com.valvesoftware.Steam/data/Steam/steamapps/compatdata/275850/pfx/drive_c/users/steamuser/AppData/Roaming/HelloGames/NMS"
@@ -152,7 +159,7 @@ show_save_hint() {
     fi
 }
 
-# ── Main ──────────────────────────────────────────────────────
+# Main
 main() {
     local debug=false
     local reset=false
@@ -205,7 +212,7 @@ main() {
     # Show save directory hint on first run
     show_save_hint
 
-    # ── Wine environment for best WinForms compatibility ──────
+    # Wine environment for best WinForms compatibility
     # Disable Gecko/Mono installers (not needed for .NET self-contained builds)
     export WINEDLLOVERRIDES="mscoree=d;mshtml=d"
 
