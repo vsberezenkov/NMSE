@@ -8,6 +8,9 @@ assignees: ''
 
 ## 📋 Guidelines
 
+<!-- You don't need to fill the below brackets
+     they will show as tick boxes when you post the issue -->
+
 - [ ] I have encountered this bug in the [latest release of NMSE](https://github.com/vectorcmdr/NMSE/releases/latest).
 - [ ] I have encountered this bug in the [official downloads of NMSE](https://github.com/vectorcmdr/NMSE/releases/latest).
 - [ ] I have [searched the issue tracker for open and closed issues](https://github.com/vectorcmdr/NMSE/issues) that are similar to the bug report I want to file, without success.
