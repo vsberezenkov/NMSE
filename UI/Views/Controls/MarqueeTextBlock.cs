@@ -1,5 +1,4 @@
 using Avalonia;
-using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Threading;
@@ -7,10 +6,13 @@ using Avalonia.Threading;
 namespace NMSE.UI.Views.Controls;
 
 /// <summary>
-/// A TextBlock that scrolls its text horizontally when the text is wider than the control.
+/// A TextBlock that scrolls its text horizontally in a continuous wrap loop
+/// when the text is wider than the control.
 /// </summary>
 public class MarqueeTextBlock : Control
 {
+    private const double Gap = 40;
+
     public static readonly StyledProperty<string> TextProperty =
         AvaloniaProperty.Register<MarqueeTextBlock, string>(nameof(Text), "");
 
@@ -137,7 +139,9 @@ public class MarqueeTextBlock : Control
 
     private void StopTimer()
     {
-        _timer?.Stop();
+        if (_timer == null) return;
+        _timer.Stop();
+        _timer.Tick -= OnTick;
         _timer = null;
     }
 
@@ -154,12 +158,9 @@ public class MarqueeTextBlock : Control
         double step = ScrollSpeed * 0.033;
         _offset += step;
 
-        double maxOffset = _textWidth - Bounds.Width;
-        if (_offset >= maxOffset + 20)
-        {
-            _offset = 0;
-            _pauseRemaining = PauseSeconds;
-        }
+        double cycle = _textWidth + Gap;
+        if (_offset >= cycle)
+            _offset -= cycle;
 
         InvalidateVisual();
     }
@@ -178,7 +179,19 @@ public class MarqueeTextBlock : Control
 
         using (context.PushClip(new Rect(Bounds.Size)))
         {
-            context.DrawText(_formattedText, new Point(-_offset, 0));
+            if (!_scrolling)
+            {
+                context.DrawText(_formattedText, new Point(0, 0));
+                return;
+            }
+
+            double cycle = _textWidth + Gap;
+            double x = -_offset;
+            while (x < Bounds.Width)
+            {
+                context.DrawText(_formattedText, new Point(x, 0));
+                x += cycle;
+            }
         }
     }
 

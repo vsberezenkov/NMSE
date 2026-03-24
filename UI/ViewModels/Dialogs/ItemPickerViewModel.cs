@@ -33,6 +33,10 @@ public partial class ItemPickerViewModel : ViewModelBase
     [ObservableProperty] private string _manualItemId = "";
     [ObservableProperty] private string _resultItemId = "";
     [ObservableProperty] private bool _hasResult;
+    [ObservableProperty] private bool _allowMultiSelect;
+
+    public List<string> ResultItemIds { get; } = new();
+    public List<ItemPickerItemViewModel> SelectedItems { get; } = new();
 
     public void Initialize(GameItemDatabase database, IconManager? iconManager,
         string? filterCategory = null, string? filterType = null)
@@ -118,13 +122,24 @@ public partial class ItemPickerViewModel : ViewModelBase
     [RelayCommand]
     private void ConfirmSelection()
     {
-        if (SelectedItem != null)
+        if (AllowMultiSelect && SelectedItems.Count > 0)
         {
+            ResultItemIds.Clear();
+            ResultItemIds.AddRange(SelectedItems.Select(i => i.Id));
+            ResultItemId = ResultItemIds[0];
+            HasResult = true;
+        }
+        else if (SelectedItem != null)
+        {
+            ResultItemIds.Clear();
+            ResultItemIds.Add(SelectedItem.Id);
             ResultItemId = SelectedItem.Id;
             HasResult = true;
         }
         else if (!string.IsNullOrWhiteSpace(ManualItemId))
         {
+            ResultItemIds.Clear();
+            ResultItemIds.Add(ManualItemId.Trim());
             ResultItemId = ManualItemId.Trim();
             HasResult = true;
         }

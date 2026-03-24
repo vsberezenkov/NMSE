@@ -346,17 +346,19 @@ public partial class InventoryGridViewModel : ObservableObject
         string category = "";
         string description = "";
         Bitmap? icon = null;
+        GameItem? resolvedItem = null;
 
         if (!isEmpty)
         {
-            var (gameItem, displayName, techPackIcon) = ResolveItemAndDisplayName(itemId);
-            if (gameItem != null)
+            var (gi, displayName, techPackIcon) = ResolveItemAndDisplayName(itemId);
+            resolvedItem = gi;
+            if (gi != null)
             {
                 itemName = displayName;
-                itemType = gameItem.ItemType;
-                category = gameItem.Category ?? "";
-                description = gameItem.Description ?? "";
-                icon = _iconManager?.GetIcon(techPackIcon ?? gameItem.Icon);
+                itemType = gi.ItemType;
+                category = gi.Category ?? "";
+                description = gi.Description ?? "";
+                icon = _iconManager?.GetIcon(techPackIcon ?? gi.Icon);
             }
             else
             {
@@ -367,17 +369,30 @@ public partial class InventoryGridViewModel : ObservableObject
         bool slotIsSupercharged = isSupercharged || slotData.GetBool("SuperCharged");
         bool isDamaged = damage > 0;
 
-        string displayAmount = "";
-        if (!isEmpty && amount > 0)
-            displayAmount = amount.ToString("N0");
+        bool isChargeable = resolvedItem?.IsChargeable ?? false;
+        bool isTechChargeable = _isTechInventory && isChargeable && amount >= 0 && maxAmount > 0;
 
+        string displayAmount = "";
         string chargeDisplay = "";
         bool showCharge = false;
-        if (!isEmpty && _isTechInventory && maxAmount > 0)
+
+        if (!isEmpty)
         {
-            double chargePercent = maxAmount > 0 ? (double)amount / maxAmount * 100 : 0;
-            chargeDisplay = $"{chargePercent:F0}%";
-            showCharge = true;
+            if (isTechChargeable)
+            {
+                int pct = maxAmount > 0 ? (int)Math.Ceiling((double)amount / maxAmount * 100) : 0;
+                displayAmount = $"{pct}%";
+                showCharge = true;
+                chargeDisplay = displayAmount;
+            }
+            else if (_isTechInventory && !isChargeable)
+            {
+                // Non-chargeable installed tech: no amount display
+            }
+            else if (amount > 0 || maxAmount > 0)
+            {
+                displayAmount = $"{amount:N0}";
+            }
         }
 
         return new InventorySlotViewModel

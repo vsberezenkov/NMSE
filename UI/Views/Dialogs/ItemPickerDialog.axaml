@@ -40,19 +40,21 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
                 <Button Content="{loc:Locale common.ok}" Command="{Binding ConfirmSelectionCommand}"
+                        x:Name="OkButton"
                         IsEnabled="{Binding SelectedItem, Converter={x:Static ObjectConverters.IsNotNull}}" />
                 <Button Content="{loc:Locale common.cancel}" Click="OnCancelClicked" />
             </StackPanel>
         </StackPanel>
 
         <!-- Items List -->
-        <DataGrid ItemsSource="{Binding FilteredItems}"
+        <DataGrid x:Name="ItemGrid"
+                  ItemsSource="{Binding FilteredItems}"
                   SelectedItem="{Binding SelectedItem}"
                   IsReadOnly="True"
                   CanUserSortColumns="True"
                   CanUserResizeColumns="True"
                   GridLinesVisibility="Horizontal"
-                  SelectionMode="Single">
+                  SelectionMode="Extended">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="{loc:Locale item_picker.col_icon}" Width="40">
                     <DataGridTemplateColumn.CellTemplate>
