@@ -120,26 +120,26 @@
                                         <Border IsVisible="{Binding IsDragOver}"
                                                 Background="#402196F3" CornerRadius="3" />
 
-                                        <!-- Item icon (full width) -->
+                                        <!-- Item icon (fill entire cell) -->
                                         <Image Source="{Binding Icon}" Stretch="Uniform"
-                                               Width="56" Height="56"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                               HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                               Margin="2" />
 
-                                        <!-- Class mini icon badge (top-left, 24x24) -->
-                                        <Image Source="{Binding ClassMiniIcon}" Stretch="Uniform"
-                                               Width="24" Height="24"
-                                               HorizontalAlignment="Left" VerticalAlignment="Top"
-                                               Margin="1,1,0,0"
-                                               IsVisible="{Binding HasClassMiniIcon}"
-                                               IsHitTestVisible="False" />
-
-                                        <!-- Supercharge indicator (gold lightning) -->
+                                        <!-- Supercharge indicator (gold lightning, top-left) -->
                                         <TextBlock Text="&#x26A1;" FontSize="14" FontWeight="Bold"
                                                    Foreground="{Binding SuperchargeColor}"
                                                    IsVisible="{Binding IsSupercharged}"
-                                                   HorizontalAlignment="Right" VerticalAlignment="Top"
-                                                   Margin="0,1,2,0"
+                                                   HorizontalAlignment="Left" VerticalAlignment="Top"
+                                                   Margin="2,1,0,0"
                                                    IsHitTestVisible="False" />
+
+                                        <!-- Class mini icon badge (top-right, 24x24) -->
+                                        <Image Source="{Binding ClassMiniIcon}" Stretch="Uniform"
+                                               Width="24" Height="24"
+                                               HorizontalAlignment="Right" VerticalAlignment="Top"
+                                               Margin="0,1,1,0"
+                                               IsVisible="{Binding HasClassMiniIcon}"
+                                               IsHitTestVisible="False" />
 
                                         <!-- Item name (top, scrolling) -->
                                         <ctrl:MarqueeTextBlock Text="{Binding ItemName}"
@@ -148,7 +148,7 @@
                                                               IsVisible="{Binding !IsEmpty}"
                                                               HorizontalAlignment="Stretch"
                                                               VerticalAlignment="Top"
-                                                              Margin="26,4,18,0"
+                                                              Margin="18,4,26,0"
                                                               ScrollSpeed="25" PauseSeconds="2" />
 
                                         <!-- Element symbol badge (bottom-right) -->
