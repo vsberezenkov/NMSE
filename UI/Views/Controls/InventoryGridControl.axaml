@@ -125,6 +125,16 @@
                                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                                                Margin="2" />
 
+                                        <!-- Item name (top, scrolling, below icons) -->
+                                        <ctrl:MarqueeTextBlock Text="{Binding ItemName}"
+                                                              FontSize="10"
+                                                              Foreground="{DynamicResource SemiColorText0}"
+                                                              IsVisible="{Binding !IsEmpty}"
+                                                              HorizontalAlignment="Stretch"
+                                                              VerticalAlignment="Top"
+                                                              Margin="16,4,16,0"
+                                                              ScrollSpeed="25" PauseSeconds="2" />
+
                                         <!-- Supercharge indicator (gold lightning, top-left) -->
                                         <TextBlock Text="&#x26A1;" FontSize="14" FontWeight="Bold"
                                                    Foreground="{Binding SuperchargeColor}"
@@ -140,16 +150,6 @@
                                                Margin="0,1,1,0"
                                                IsVisible="{Binding HasClassMiniIcon}"
                                                IsHitTestVisible="False" />
-
-                                        <!-- Item name (top, scrolling) -->
-                                        <ctrl:MarqueeTextBlock Text="{Binding ItemName}"
-                                                              FontSize="10"
-                                                              Foreground="{DynamicResource SemiColorText0}"
-                                                              IsVisible="{Binding !IsEmpty}"
-                                                              HorizontalAlignment="Stretch"
-                                                              VerticalAlignment="Top"
-                                                              Margin="16,4,16,0"
-                                                              ScrollSpeed="25" PauseSeconds="2" />
 
                                         <!-- Element symbol badge (bottom-right) -->
                                         <Border IsVisible="{Binding HasElementSymbol}"
