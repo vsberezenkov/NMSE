@@ -41,13 +41,13 @@
                               MinHeight="{Binding GridPixelHeight}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <WrapPanel ItemWidth="76" ItemHeight="106" />
+                            <WrapPanel ItemWidth="84" ItemHeight="84" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate x:DataType="vm:InventorySlotViewModel">
                             <Button Classes="slotButton"
-                                    Width="72" Height="102"
+                                    Width="80" Height="80"
                                     Padding="0"
                                     Background="Transparent"
                                     BorderThickness="0"
@@ -105,105 +105,92 @@
                                     </ContextMenu>
                                 </Button.ContextMenu>
                                 <Border CornerRadius="4"
-                                        Background="{Binding SlotBackground}"
+                                        Background="{DynamicResource SemiColorBackground1}"
                                         BorderBrush="{DynamicResource SemiColorBorder}"
                                         BorderThickness="1"
                                         Opacity="{Binding SlotOpacity}">
-                                    <Grid RowDefinitions="18,*,20">
-                                        <!-- Top banner: item name -->
-                                        <Border Grid.Row="0" Background="#60000000" CornerRadius="3,3,0,0"
-                                                IsVisible="{Binding !IsEmpty}">
-                                            <Grid>
-                                                <ctrl:MarqueeTextBlock Text="{Binding ItemName}"
-                                                                      FontSize="10"
-                                                                      Foreground="White"
-                                                                      HorizontalAlignment="Stretch"
-                                                                      VerticalAlignment="Center"
-                                                                      Margin="2,0,2,0"
-                                                                      ScrollSpeed="25" PauseSeconds="2" />
-                                                <!-- Mini class icon badge -->
-                                                <Image Source="{Binding ClassMiniIcon}" Stretch="Uniform"
-                                                       Width="12" Height="12"
-                                                       HorizontalAlignment="Right" VerticalAlignment="Center"
-                                                       Margin="0,0,1,0"
-                                                       IsVisible="{Binding HasClassMiniIcon}"
-                                                       IsHitTestVisible="False" />
-                                            </Grid>
+                                    <Panel>
+                                        <Border IsVisible="{Binding IsEmpty}"
+                                                Background="{DynamicResource SemiColorBackground2}"
+                                                CornerRadius="3" Opacity="0.5" />
+
+                                        <Border IsVisible="{Binding IsDamaged}"
+                                                Background="#40FF4444" CornerRadius="3" />
+
+                                        <Border IsVisible="{Binding IsDragOver}"
+                                                Background="#402196F3" CornerRadius="3" />
+
+                                        <!-- Item icon (full width) -->
+                                        <Image Source="{Binding Icon}" Stretch="Uniform"
+                                               Width="56" Height="56"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                                        <!-- Class mini icon badge (top-left, 24x24) -->
+                                        <Image Source="{Binding ClassMiniIcon}" Stretch="Uniform"
+                                               Width="24" Height="24"
+                                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                                               Margin="1,1,0,0"
+                                               IsVisible="{Binding HasClassMiniIcon}"
+                                               IsHitTestVisible="False" />
+
+                                        <!-- Supercharge indicator (gold lightning) -->
+                                        <TextBlock Text="&#x26A1;" FontSize="14" FontWeight="Bold"
+                                                   Foreground="{Binding SuperchargeColor}"
+                                                   IsVisible="{Binding IsSupercharged}"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Top"
+                                                   Margin="0,1,2,0"
+                                                   IsHitTestVisible="False" />
+
+                                        <!-- Item name (top, scrolling) -->
+                                        <ctrl:MarqueeTextBlock Text="{Binding ItemName}"
+                                                              FontSize="10"
+                                                              Foreground="{DynamicResource SemiColorText0}"
+                                                              IsVisible="{Binding !IsEmpty}"
+                                                              HorizontalAlignment="Stretch"
+                                                              VerticalAlignment="Top"
+                                                              Margin="26,4,18,0"
+                                                              ScrollSpeed="25" PauseSeconds="2" />
+
+                                        <!-- Element symbol badge (bottom-right) -->
+                                        <Border IsVisible="{Binding HasElementSymbol}"
+                                                Background="#C0D4C4A0" CornerRadius="6"
+                                                HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                                Padding="3,1" Margin="0,0,2,2"
+                                                IsHitTestVisible="False">
+                                            <TextBlock Text="{Binding ElementSymbol}" FontSize="9" FontWeight="Bold"
+                                                       Foreground="#333" />
                                         </Border>
 
-                                        <!-- Center: icon area -->
-                                        <Panel Grid.Row="1">
-                                            <Border IsVisible="{Binding IsDamaged}"
-                                                    Background="#40FF4444" />
-                                            <Border IsVisible="{Binding IsDragOver}"
-                                                    Background="#402196F3" />
+                                        <!-- Charge bar (bottom) -->
+                                        <ProgressBar IsVisible="{Binding ShowCharge}"
+                                                     Value="{Binding Amount}" Maximum="{Binding MaxAmount}"
+                                                     Height="3" Minimum="0"
+                                                     MinWidth="0"
+                                                     Width="30"
+                                                     HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                                     Margin="3,0,0,4" />
 
-                                            <Image Source="{Binding Icon}" Stretch="Uniform"
-                                                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                                   Margin="2" />
+                                        <!-- Amount display (bottom-right) -->
+                                        <TextBlock Text="{Binding DisplayAmount}"
+                                                   FontSize="10" FontWeight="Bold"
+                                                   Foreground="{DynamicResource SemiColorText0}"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                                   Margin="0,0,3,2" />
 
-                                            <!-- Supercharge indicator -->
-                                            <TextBlock Text="&#x26A1;" FontSize="14" FontWeight="Bold"
-                                                       Foreground="{Binding SuperchargeColor}"
-                                                       IsVisible="{Binding IsSupercharged}"
-                                                       HorizontalAlignment="Left" VerticalAlignment="Top"
-                                                       Margin="1,0,0,0"
-                                                       IsHitTestVisible="False" />
-
-                                            <!-- Element symbol badge -->
-                                            <Border IsVisible="{Binding HasElementSymbol}"
-                                                    Background="#C0D4C4A0" CornerRadius="6"
-                                                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                                                    Padding="3,1" Margin="0,0,2,1"
-                                                    IsHitTestVisible="False">
-                                                <TextBlock Text="{Binding ElementSymbol}" FontSize="9" FontWeight="Bold"
-                                                           Foreground="#333" />
-                                            </Border>
-                                        </Panel>
-
-                                        <!-- Bottom banner: amount -->
-                                        <Border Grid.Row="2" Background="#60000000" CornerRadius="0,0,3,3"
-                                                IsVisible="{Binding !IsEmpty}">
-                                            <Grid>
-                                                <TextBlock Text="{Binding DisplayAmount}"
-                                                           FontSize="10" FontWeight="Bold"
-                                                           Foreground="White"
-                                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                <!-- Thin charge bar at very bottom -->
-                                                <ProgressBar IsVisible="{Binding ShowCharge}"
-                                                             Value="{Binding Amount}" Maximum="{Binding MaxAmount}"
-                                                             Height="3" Minimum="0"
-                                                             MinWidth="0"
-                                                             HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
-                                                             Margin="1,0,1,0" />
-                                            </Grid>
-                                        </Border>
-
-                                        <!-- Adjacency border overlay (spans all rows) -->
-                                        <Border Grid.Row="0" Grid.RowSpan="3"
-                                                IsVisible="{Binding HasAdjacencyBorder}"
+                                        <!-- Adjacency border -->
+                                        <Border IsVisible="{Binding HasAdjacencyBorder}"
                                                 BorderBrush="{Binding AdjBorderColor}"
                                                 BorderThickness="{Binding AdjBorderThickness}"
                                                 CornerRadius="3"
                                                 IsHitTestVisible="False"
                                                 Opacity="0.7" />
 
-                                        <!-- Supercharge border override -->
-                                        <Border Grid.Row="0" Grid.RowSpan="3"
-                                                IsVisible="{Binding IsSupercharged}"
-                                                BorderBrush="{Binding SuperchargeBorderColor}"
-                                                BorderThickness="2"
-                                                CornerRadius="3"
-                                                IsHitTestVisible="False"
-                                                Opacity="0.85" />
-
                                         <!-- Selection border -->
-                                        <Border Grid.Row="0" Grid.RowSpan="3"
-                                                IsVisible="{Binding IsSelected}"
+                                        <Border IsVisible="{Binding IsSelected}"
                                                 BorderBrush="{DynamicResource SemiColorPrimary}"
                                                 BorderThickness="2" CornerRadius="3"
                                                 IsHitTestVisible="False" />
-                                    </Grid>
+                                    </Panel>
                                 </Border>
                             </Button>
                         </DataTemplate>

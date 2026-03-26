@@ -60,8 +60,8 @@
     <Style Selector="Button.slotButton">
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="2" />
-        <Setter Property="Width" Value="72" />
-        <Setter Property="Height" Value="102" />
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Height" Value="80" />
         <Setter Property="CornerRadius" Value="{DynamicResource SemiBorderRadiusSmall}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />

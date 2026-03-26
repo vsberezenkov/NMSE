@@ -56,8 +56,7 @@ public partial class InventorySlotViewModel : ObservableObject
 public partial class InventoryGridViewModel : ObservableObject
 {
     private const int GridColumns = 10;
-    private const double SlotVisualWidth = 76;
-    private const double SlotVisualHeight = 106;
+    private const double SlotVisualSize = 84;
 
     private JsonArray? _slots;
     private JsonObject? _currentInventory;
@@ -80,8 +79,8 @@ public partial class InventoryGridViewModel : ObservableObject
     [ObservableProperty] private InventorySlotViewModel? _selectedSlot;
     [ObservableProperty] private int _gridWidth = 10;
     [ObservableProperty] private int _gridHeight = 6;
-    [ObservableProperty] private double _gridPixelWidth = GridColumns * SlotVisualWidth;
-    [ObservableProperty] private double _gridPixelHeight = 6 * SlotVisualHeight;
+    [ObservableProperty] private double _gridPixelWidth = GridColumns * SlotVisualSize;
+    [ObservableProperty] private double _gridPixelHeight = 6 * SlotVisualSize;
     [ObservableProperty] private int _resizeWidth = 10;
     [ObservableProperty] private int _resizeHeight = 6;
     [ObservableProperty] private string _maxSupportedText = "";
@@ -153,8 +152,8 @@ public partial class InventoryGridViewModel : ObservableObject
         var (validWidth, validHeight) = DetermineGridDimensions(inventory, _slots);
         GridWidth = validWidth;
         GridHeight = validHeight;
-        GridPixelWidth = validWidth * SlotVisualWidth;
-        GridPixelHeight = validHeight * SlotVisualHeight;
+        GridPixelWidth = validWidth * SlotVisualSize;
+        GridPixelHeight = validHeight * SlotVisualSize;
         ResizeWidth = validWidth;
         ResizeHeight = validHeight;
 
