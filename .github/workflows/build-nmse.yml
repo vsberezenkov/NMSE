@@ -1,10 +1,7 @@
 # --------------------------------------------------------------
 # NMSE Release Build Workflow
-# Builds, tests, publishes (Native AOT), and creates a GitHub
-# Release whenever version.json is updated on the default branch.
-#
-# The publish step produces a fully self-contained, trimmed,
-# Native AOT executable - users do not need .NET installed.
+# Builds, tests, zips, and publishes a GitHub Release whenever
+# version.json is updated on the default branch.
 #
 # Each release is tagged with a semantic version (e.g. v1.2.3)
 # derived from version.json.  The release body is read from
@@ -15,7 +12,7 @@
 # and the version comment.
 # --------------------------------------------------------------
 
-name: Build NMSE
+name: Build NMSE (Plus Linxu)
 
 env:
   PROJECT_NAME: NMSE
@@ -25,7 +22,7 @@ env:
   BUILD_CONFIGURATION: Release
 
 on:
-  #-- Un/comment the push block below to enable automated releases --
+  # -- Un/comment the push block below to enable automated releases --
   push:
     paths:
       - "version.json"
@@ -34,7 +31,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-win:
     runs-on: windows-latest
     permissions:
       contents: write
@@ -48,20 +45,9 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Read version from version.json
-        id: version
-        shell: pwsh
-        run: |
-          $v = Get-Content version.json | ConvertFrom-Json
-          $ver = "$($v.major).$($v.minor).$($v.patch)"
-          "VERSION=$ver"     >> $env:GITHUB_OUTPUT
-          "TAG=v$ver"        >> $env:GITHUB_OUTPUT
-          Write-Host "Version: $ver  Tag: v$ver"
-
       - name: Restore dependencies
         run: dotnet restore ${{ env.PROJECT_FILE }}
 
-      # Build managed IL for testing (fast, no AOT compilation)
       - name: Build
         run: dotnet build ${{ env.PROJECT_FILE }} --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore
 
@@ -77,7 +63,7 @@ jobs:
       - name: Publish (Native AOT)
         if: success()
         run: dotnet publish ${{ env.PROJECT_FILE }} --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore
-
+      
       # -- Publish artifacts ----------------------------------
 
       - name: Locate build zip
@@ -99,6 +85,74 @@ jobs:
           path: ${{ steps.find-zip.outputs.ZIP_PATH }}
           if-no-files-found: warn
 
+  build-linux:
+    runs-on: ubuntu-latest
+    needs: build-win
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - name: Download win build
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: ${{ env.PROJECT_NAME }}-build
+
+      - name: Unzip win build
+        run: |
+          winbuild="$(ls NMSE*.zip)"
+          unzip "$winbuild" -d $GITHUB_WORKSPACE/win
+
+      - name: Install Wine
+        run: |
+          sudo mkdir -pm755 /etc/apt/keyrings
+          wget -O - https://dl.winehq.org/wine-builds/winehq.key | sudo gpg --dearmor -o /etc/apt/keyrings/winehq-archive.key -
+          sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/questing/winehq-questing.sources
+          sudo apt update
+          sudo apt install winehq-stable --no-install-recommends -y
+
+      - name: Run build-appimage script
+        id: appimage
+        run: |
+          sudo chmod +x ./scripts/linux/build-appimage.sh
+          WIN_DIR="$GITHUB_WORKSPACE/win"
+          OUTPUT_FILE="$GITHUB_WORKSPACE/NMSE-x64.AppImage"
+          scripts/linux/build-appimage.sh "$WIN_DIR" "$OUTPUT_FILE"
+          echo "APPIMAGE_PATH=$OUTPUT_FILE" >> $GITHUB_OUTPUT
+      
+      - name: Upload AppImage artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ${{ env.PROJECT_NAME }}-Wine-AppImage
+          path: ${{ steps.appimage.outputs.APPIMAGE_PATH }}
+          if-no-files-found: error
+
+  release:
+    runs-on: windows-latest
+    needs: build-linux
+    steps:  
+      - name: Checkout repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - name: Download WinBuild
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: ${{ env.PROJECT_NAME }}-build        
+
+      - name: Download AppImage
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: ${{ env.PROJECT_NAME }}-Wine-AppImage
+
+      - name: Read version from version.json
+        id: version
+        shell: pwsh
+        run: |
+          $v = Get-Content version.json | ConvertFrom-Json
+          $ver = "$($v.major).$($v.minor).$($v.patch)"
+          "VERSION=$ver"     >> $env:GITHUB_OUTPUT
+          "TAG=v$ver"        >> $env:GITHUB_OUTPUT
+          Write-Host "Version: $ver  Tag: v$ver"
+          
       - name: Build release notes
         if: success()
         id: notes
@@ -131,6 +185,9 @@ jobs:
           $tag = "${{ steps.version.outputs.TAG }}"
           $ver = "${{ steps.version.outputs.VERSION }}"
 
+          # Rename AppImage to match win build
+          Rename-Item -Path "NMSE-x64.AppImage" -NewName "NMSE-x64-${{ steps.version.outputs.VERSION }}-${{ env.BUILD_CONFIGURATION}}.AppImage"
+
           # Check whether this version tag already exists
           $existing = gh release view $tag 2>&1
           if ($LASTEXITCODE -eq 0) {
@@ -140,6 +197,7 @@ jobs:
 
           # Create a new release tagged with the semantic version
           gh release create $tag `
-            "${{ steps.find-zip.outputs.ZIP_PATH }}" `
+            "*.zip" "*.AppImage"`
             --title "NMSE v${ver}" `
             --notes-file "${{ steps.notes.outputs.NOTES_FILE }}"
+          
