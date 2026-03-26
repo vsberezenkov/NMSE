@@ -82,7 +82,10 @@ NMSE is localised in **16 languages**: English (UK), English (US), French, Itali
 
 ### 🐧 Cross-Platform (via Wine)
 
-While NMSE is a native Windows application, it runs on **Linux** and **macOS** via Wine compatibility layers. Guides are available for [Wine][guide-wine], [Bottles][guide-bottles], [Whisky][guide-whisky], and [CrossOver][guide-crossover]. A native cross-platform version [is planned][cross-platfom-plan].
+While NMSE is a native Windows application, it runs on **Linux** and **macOS** via Wine compatibility layers. <br>
+An AppImage is available for Linux users from the releases page.
+
+Guides are available for [Wine][guide-wine], [Bottles][guide-bottles], [Whisky][guide-whisky], and [CrossOver][guide-crossover]. A native cross-platform version [is planned][cross-platfom-plan].
 
 ---
 
