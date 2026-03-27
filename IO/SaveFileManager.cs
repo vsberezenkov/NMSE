@@ -101,8 +101,20 @@ public class SaveFileManager
         if (Directory.Exists(xboxPath))
         {
             var nmsDirs = Directory.GetDirectories(xboxPath, "HelloGames*");
-            if (nmsDirs.Length > 0)
-                return nmsDirs[0];
+            foreach (var nmsDir in nmsDirs)
+            {
+                // Xbox Game Pass saves live under SystemAppData/wgs/{SaveId}/ which
+                // contains the containers.index file.
+                string wgsPath = Path.Combine(nmsDir, "SystemAppData", "wgs");
+                if (Directory.Exists(wgsPath))
+                {
+                    foreach (var saveIdDir in Directory.GetDirectories(wgsPath))
+                    {
+                        if (File.Exists(Path.Combine(saveIdDir, "containers.index")))
+                            return saveIdDir;
+                    }
+                }
+            }
         }
 
         // macOS: ~/Library/Application Support/HelloGames/NMS
@@ -634,7 +646,7 @@ public class SaveFileManager
             }
             else if (IsNomanSkyHeader(header))
             {
-                // PS4/PS5 NOMANSKY header — JSON starts at 0x70
+                // PS4/PS5 NOMANSKY header. JSON starts at offset 0x70
                 fs.Position = 0x70;
                 int limit = (int)Math.Min(fs.Length - fs.Position, 64 * 1024);
                 byte[] prefix = new byte[limit];
@@ -738,7 +750,7 @@ public class SaveFileManager
             }
             else if (IsNomanSkyHeader(header))
             {
-                // PS4/PS5 NOMANSKY header — JSON starts at 0x70
+                // PS4/PS5 NOMANSKY header. JSON starts at offset 0x70
                 fs.Position = 0x70;
                 int limit = (int)Math.Min(fs.Length - fs.Position, 64 * 1024);
                 byte[] prefix = new byte[limit];

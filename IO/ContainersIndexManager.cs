@@ -107,7 +107,7 @@ public static class ContainersIndexManager
 
             offset += 45;
 
-            string blobDirPath = Path.Combine(baseDir, directoryGuid.ToString("D"));
+            string blobDirPath = ResolveBlobDirectory(baseDir, directoryGuid);
 
             var slotInfo = new XboxSlotInfo
             {
@@ -270,6 +270,28 @@ public static class ContainersIndexManager
     // Internal
 
     /// <summary>
+    /// Resolves the on-disk blob directory for a GUID.
+    /// Xbox wgs directories may use either the hyphenated ("D") or compact ("N") GUID
+    /// format in upper- or lower-case.  Try all common variants and fall back to the
+    /// no-hyphens uppercase form (used by most Game Pass installs).
+    /// </summary>
+    private static string ResolveBlobDirectory(string baseDir, Guid guid)
+    {
+        // Most Xbox Game Pass installs use uppercase, no-hyphens
+        string upperN = Path.Combine(baseDir, guid.ToString("N").ToUpperInvariant());
+        if (Directory.Exists(upperN)) return upperN;
+
+        string lowerN = Path.Combine(baseDir, guid.ToString("N"));
+        if (Directory.Exists(lowerN)) return lowerN;
+
+        // Some older installs may use the hyphenated form
+        string hyphenated = Path.Combine(baseDir, guid.ToString("D"));
+        if (Directory.Exists(hyphenated)) return hyphenated;
+
+        return upperN; // default for new directories
+    }
+
+    /// <summary>
     /// Get the file path for a GUID-named blob file, trying both uppercase and lowercase.
     /// Xbox blob files use GUID-named files without hyphens.
     /// </summary>
@@ -324,7 +346,7 @@ public static class ContainersIndexManager
             // If we found data file, we're done
             if (slotInfo.DataFilePath != null && File.Exists(slotInfo.DataFilePath))
             {
-                slotInfo.BlobContainerExtension = byte.TryParse(Path.GetExtension(containerFile).TrimStart('.'), out byte ext) ? ext : (byte)1;
+                slotInfo.BlobContainerExtension = byte.TryParse(Path.GetExtension(containerFile).TrimStart('.'), System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out byte ext) ? ext : (byte)1;
                 break;
             }
         }

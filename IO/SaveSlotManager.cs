@@ -450,7 +450,7 @@ public static class SaveSlotManager
 
         // saveN.hg -> storage slot N + 1  (save2.hg -> 3, save3.hg -> 4, etc.)
         if (name.StartsWith("save", StringComparison.OrdinalIgnoreCase) &&
-            int.TryParse(name.AsSpan(4), out int n) && n >= 2)
+            int.TryParse(name.AsSpan(4), System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out int n) && n >= 2)
             return n + 1;
 
         // Unknown file name - fall back to slot 2 as a safe default
