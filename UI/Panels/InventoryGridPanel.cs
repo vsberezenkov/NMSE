@@ -1119,18 +1119,33 @@ public partial class InventoryGridPanel : UserControl
                 // Use TechPack icon when the item was resolved via TechPacks, otherwise use the game item icon
                 string iconName = techPackIcon ?? gameItem.Icon;
 
-                // For CV_ corvette tech items, try to guess the actual base part from the corvette's Objects
+                // For CV_ corvette tech items, try to guess the actual base part from the corvette's Objects.
+                // Use cached corvette override when available (preserved across drag/drop moves).
                 if (_corvettePartCollection != null && IsCorvetteTechId(itemId))
                 {
-                    var basePart = GuessCorvetteBasePart(itemId);
-                    if (basePart != null)
+                    // Both CorvetteDisplayName and CorvetteIconName are always set/cleared together.
+                    if (cell.CorvetteDisplayName != null && cell.CorvetteIconName != null)
                     {
-                        // Override icon and name with the actual base part's info
-                        iconName = basePart.Icon;
-                        string variant = "";
-                        var vm = Regex.Match(itemId, @"#\d{5,}$");
-                        if (vm.Success) variant = vm.Value;
-                        cell.DisplayName = string.IsNullOrEmpty(variant) ? basePart.Name : $"{basePart.Name} [{variant}]";
+                        // Reuse cached corvette resolution from a previous LoadCellData
+                        iconName = cell.CorvetteIconName;
+                        cell.DisplayName = cell.CorvetteDisplayName;
+                    }
+                    else
+                    {
+                        var basePart = GuessCorvetteBasePart(itemId);
+                        if (basePart != null)
+                        {
+                            // Override icon and name with the actual base part's info
+                            iconName = basePart.Icon;
+                            string variant = "";
+                            var vm = Regex.Match(itemId, @"#\d{5,}$");
+                            if (vm.Success) variant = vm.Value;
+                            cell.DisplayName = string.IsNullOrEmpty(variant) ? basePart.Name : $"{basePart.Name} [{variant}]";
+
+                            // Cache for drag/drop preservation
+                            cell.CorvetteDisplayName = cell.DisplayName;
+                            cell.CorvetteIconName = iconName;
+                        }
                     }
                 }
 
@@ -1583,6 +1598,10 @@ public partial class InventoryGridPanel : UserControl
         target.IsValidEmpty = false;
         target.IsEmpty = false;
 
+        // Preserve corvette override cache so it survives LoadCellData re-resolution
+        target.CorvetteDisplayName = source.CorvetteDisplayName;
+        target.CorvetteIconName = source.CorvetteIconName;
+
         // Clear source cell
         source.SlotData = null;
         source.SlotIndex = -1;
@@ -1610,6 +1629,10 @@ public partial class InventoryGridPanel : UserControl
         // Swap slot data references
         (cellA.SlotData, cellB.SlotData) = (cellB.SlotData, cellA.SlotData);
         (cellA.SlotIndex, cellB.SlotIndex) = (cellB.SlotIndex, cellA.SlotIndex);
+
+        // Swap corvette override caches so they follow their respective items
+        (cellA.CorvetteDisplayName, cellB.CorvetteDisplayName) = (cellB.CorvetteDisplayName, cellA.CorvetteDisplayName);
+        (cellA.CorvetteIconName, cellB.CorvetteIconName) = (cellB.CorvetteIconName, cellA.CorvetteIconName);
 
         // Reload both cells
         LoadCellData(cellA);
@@ -1672,6 +1695,11 @@ public partial class InventoryGridPanel : UserControl
         target.SlotData = newSlot;
         target.IsValidEmpty = false;
         target.IsEmpty = false;
+
+        // Preserve corvette override cache for duplicated items
+        target.CorvetteDisplayName = source.CorvetteDisplayName;
+        target.CorvetteIconName = source.CorvetteIconName;
+
         LoadCellData(target);
         target.UpdateDisplay();
     }
@@ -1694,6 +1722,8 @@ public partial class InventoryGridPanel : UserControl
         cell.AdjacencyBorderColor = Color.Transparent;
         cell.ItemClass = "";
         cell.IsChargeable = false;
+        cell.CorvetteDisplayName = null;
+        cell.CorvetteIconName = null;
     }
     private void ConfigureContextMenuItems(SlotCell cell)
     {
@@ -3095,6 +3125,14 @@ public partial class InventoryGridPanel : UserControl
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsChargeable { get; set; }
 
+        /// <summary>Cached corvette-resolved display name. Preserved across drag/drop so
+        /// the greedy GuessCorvetteBasePart match is not lost when cells move.</summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string? CorvetteDisplayName { get; set; }
+        /// <summary>Cached corvette-resolved icon name for re-loading after drag/drop.</summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string? CorvetteIconName { get; set; }
+
         /// <summary>Triggers a repaint to show/hide adjacency border.</summary>
         public void UpdateBorderOverlay()
         {
@@ -3478,9 +3516,9 @@ public partial class InventoryGridPanel : UserControl
         {
             if (disposing)
             {
-                // Do NOT dispose _toolTip — it is shared across all cells and
+                // Do NOT dispose _toolTip - it is shared across all cells and
                 // owned by the parent InventoryGridPanel.
-                // Dispose composite bitmap if it's not a shared reference
+                // Dispose composite bitmap if it's not a shared reference.
                 var img = _iconBox?.Image;
                 if (img != null && img != IconImage && img != ClassMiniIcon)
                 {
