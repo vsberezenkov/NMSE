@@ -124,7 +124,14 @@ partial class MultitoolPanel
 
         var seedPanel = new Panel { Dock = DockStyle.Fill, Height = 26 };
         _toolSeed = new TextBox { Dock = DockStyle.Fill };
-        _generateSeedBtn = new Button { Text = "Generate", Dock = DockStyle.Right, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(70, 0) };
+        _generateSeedBtn = new Button
+        {
+            Text = "Generate",
+            Dock = DockStyle.Right,
+            AutoSize = true,
+            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            MinimumSize = new Size(70, 0)
+        };
         _generateSeedBtn.Click += (s, e) =>
         {
             byte[] bytes = new byte[8];

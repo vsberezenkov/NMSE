@@ -263,10 +263,10 @@ public partial class CompanionPanel : UserControl
             catch { _creatureTypeField.SelectedIndex = -1; }
 
             // Scale
-            try { _scaleField.Text = comp.GetDouble("Scale").ToString(); } catch { _scaleField.Text = ""; }
+            try { _scaleField.Text = comp.GetDouble("Scale").ToString(System.Globalization.CultureInfo.InvariantCulture); } catch { _scaleField.Text = ""; }
 
             // Trust
-            try { _trustField.Text = comp.GetDouble("Trust").ToString(); } catch { _trustField.Text = ""; }
+            try { _trustField.Text = comp.GetDouble("Trust").ToString(System.Globalization.CultureInfo.InvariantCulture); } catch { _trustField.Text = ""; }
 
             // Bone Scale Seed
             try
@@ -291,9 +291,9 @@ public partial class CompanionPanel : UserControl
             try
             {
                 var traits = comp.GetArray("Traits");
-                _helpfulnessField.Text = traits != null && traits.Length > 0 ? traits.GetDouble(0).ToString() : "0";
-                _aggressionField.Text = traits != null && traits.Length > 1 ? traits.GetDouble(1).ToString() : "0";
-                _independenceField.Text = traits != null && traits.Length > 2 ? traits.GetDouble(2).ToString() : "0";
+                _helpfulnessField.Text = traits != null && traits.Length > 0 ? traits.GetDouble(0).ToString(System.Globalization.CultureInfo.InvariantCulture) : "0";
+                _aggressionField.Text = traits != null && traits.Length > 1 ? traits.GetDouble(1).ToString(System.Globalization.CultureInfo.InvariantCulture) : "0";
+                _independenceField.Text = traits != null && traits.Length > 2 ? traits.GetDouble(2).ToString(System.Globalization.CultureInfo.InvariantCulture) : "0";
             }
             catch
             {
@@ -306,8 +306,8 @@ public partial class CompanionPanel : UserControl
             try
             {
                 var moods = comp.GetArray("Moods");
-                _hungryField.Text = moods != null && moods.Length > 0 ? moods.GetDouble(0).ToString() : "0";
-                _lonelyField.Text = moods != null && moods.Length > 1 ? moods.GetDouble(1).ToString() : "0";
+                _hungryField.Text = moods != null && moods.Length > 0 ? moods.GetDouble(0).ToString(System.Globalization.CultureInfo.InvariantCulture) : "0";
+                _lonelyField.Text = moods != null && moods.Length > 1 ? moods.GetDouble(1).ToString(System.Globalization.CultureInfo.InvariantCulture) : "0";
             }
             catch
             {
@@ -349,7 +349,7 @@ public partial class CompanionPanel : UserControl
             try { _allowUnmodifiedRerollField.Checked = comp.GetBool("AllowUnmodifiedReroll"); } catch { _allowUnmodifiedRerollField.Checked = false; }
 
             // UA
-            try { _uaField.Text = comp.GetLong("UA").ToString(); } catch { _uaField.Text = "0"; }
+            try { _uaField.Text = comp.GetLong("UA").ToString(System.Globalization.CultureInfo.InvariantCulture); } catch { _uaField.Text = "0"; }
 
             // LastTrustIncreaseTime
             try
@@ -638,7 +638,8 @@ public partial class CompanionPanel : UserControl
     {
         var comp = SelectedCompanion;
         if (comp == null) return;
-        if (long.TryParse(_uaField.Text, out long val))
+        if (long.TryParse(_uaField.Text, System.Globalization.NumberStyles.Integer,
+                System.Globalization.CultureInfo.InvariantCulture, out long val))
             comp.Set("UA", val);
     }
 

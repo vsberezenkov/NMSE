@@ -117,6 +117,25 @@ public static class BaseStatLimits
     }
 
     /// <summary>
+    /// Returns the clamped UI value unless it matches the clamped raw value (meaning
+    /// the user didn't change it), in which case the original raw value is returned
+    /// to preserve externally-edited data.
+    /// When <paramref name="rawValues"/> is null or does not contain the stat, falls
+    /// back to normal clamping.
+    /// </summary>
+    public static double ConditionalClampStatValue(string entityType, string statId, double uiValue,
+        StatCategory category, Dictionary<string, double>? rawValues)
+    {
+        if (rawValues != null && rawValues.TryGetValue(statId, out double raw))
+        {
+            double clamped = ClampStatValue(entityType, statId, raw, category);
+            if (uiValue == clamped)
+                return raw; // User didn't change it - preserve original value
+        }
+        return ClampStatValue(entityType, statId, uiValue, category);
+    }
+
+    /// <summary>
     /// Gets the base stat range for a given entity type and stat ID.
     /// Returns null if no limits are defined for that combination.
     /// </summary>

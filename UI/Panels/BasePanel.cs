@@ -998,8 +998,9 @@ internal class ChestsSubPanel : UserControl
             _chestRenameButtons[i] = new Button
             {
                 Text = UiStrings.Get("base.chest_rename"),
-                AutoSize = false,
-                Width = 90,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                MinimumSize = new Size(70, 0),
                 Anchor = AnchorStyles.Left
             };
             _chestClearButtons[i] = new Button
@@ -1035,8 +1036,8 @@ internal class ChestsSubPanel : UserControl
             // WinForms quirk: controls with Dock = Top are laid out in reverse
             // add-order (last added appears at the top of the container).
             // See: https://learn.microsoft.com/dotnet/desktop/winforms/controls/how-to-dock-controls
-            // NOTE: Eto.Forms (cross-platform migration target) does NOT share this
-            // behaviour — it stacks in add-order. Re-evaluate when migrating.
+            // NOTE: Avalonia (cross-platform migration target) does NOT share this
+            // behaviour - it stacks in add-order. Re-evaluate when migrating.
             // We add grid (fills remaining space), warning (middle), then nameRow (top).
             chestPanel.Controls.Add(_chestGrids[i]);
             chestPanel.Controls.Add(_chestWarnings[i]);

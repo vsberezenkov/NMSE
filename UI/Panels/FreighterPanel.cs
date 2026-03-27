@@ -15,6 +15,9 @@ public partial class FreighterPanel : UserControl
     private JsonObject? _freighterBase;
     private readonly Random _rng = new();
 
+    /// <summary>Raw (unclamped) freighter stat values read from JSON at load time.</summary>
+    private Dictionary<string, double>? _rawFreighterStatValues;
+
     private static Dictionary<string, string> FreighterTypes => FreighterLogic.FreighterTypes;
 
     public FreighterPanel()
@@ -77,6 +80,13 @@ public partial class FreighterPanel : UserControl
 
             _hyperdriveField.Value = (decimal)data.Hyperdrive;
             _fleetField.Value = (decimal)data.FleetCoordination;
+
+            // Store raw stat values for preservation before limits clamp the NUDs
+            _rawFreighterStatValues = new Dictionary<string, double>
+            {
+                ["^FREI_HYPERDRIVE"] = data.Hyperdrive,
+                ["^FREI_FLEET"] = data.FleetCoordination,
+            };
 
             // Apply BaseStatLimits to the NumericUpDown controls
             ApplyStatLimits(_hyperdriveField, "Normal", "^FREI_HYPERDRIVE", StatCategory.Freighter);
@@ -159,6 +169,7 @@ public partial class FreighterPanel : UserControl
                 ModelSeed = _modelSeed.Text,
                 Hyperdrive = (double)_hyperdriveField.Value,
                 FleetCoordination = (double)_fleetField.Value,
+                RawStatValues = _rawFreighterStatValues
             });
 
             // Save inventories

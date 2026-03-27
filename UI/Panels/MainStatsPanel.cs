@@ -25,6 +25,12 @@ public partial class MainStatsPanel : UserControl
     private string? _saveFilePath;
     private IconManager? _iconManager;
 
+    /// <summary>Raw (unclamped) stat values read from JSON at load time, keyed by JSON field name.</summary>
+    private Dictionary<string, decimal>? _rawStatValues;
+
+    /// <summary>Raw (unclamped) coordinate values read from JSON at load time, keyed by JSON field name.</summary>
+    private Dictionary<string, int>? _rawCoordValues;
+
     private static readonly string[] GuideCategories =
         { "Survival Basics", "Getting Around", "Making Discoveries", "Upgrades & Crafting", "Construction", "Making Money", "Alien Lifeforms", "Combat" };
 
@@ -114,7 +120,16 @@ public partial class MainStatsPanel : UserControl
             var playerState = saveData.GetObject("PlayerStateData");
             if (playerState == null) return;
 
-            // Player stats
+            // Player stats - store raw values (only write back if user changed them)
+            _rawStatValues = new Dictionary<string, decimal>
+            {
+                ["Health"] = MainStatsLogic.ReadRawStatValue(playerState, "Health"),
+                ["Shield"] = MainStatsLogic.ReadRawStatValue(playerState, "Shield"),
+                ["Energy"] = MainStatsLogic.ReadRawStatValue(playerState, "Energy"),
+                ["Units"] = MainStatsLogic.ReadRawStatValue(playerState, "Units"),
+                ["Nanites"] = MainStatsLogic.ReadRawStatValue(playerState, "Nanites"),
+                ["Specials"] = MainStatsLogic.ReadRawStatValue(playerState, "Specials"),
+            };
             _healthField.Value = MainStatsLogic.ReadStatValue(playerState, "Health", _healthField.Minimum, _healthField.Maximum);
             _shieldField.Value = MainStatsLogic.ReadStatValue(playerState, "Shield", _shieldField.Minimum, _shieldField.Maximum);
             _energyField.Value = MainStatsLogic.ReadStatValue(playerState, "Energy", _energyField.Minimum, _energyField.Maximum);
@@ -211,6 +226,17 @@ public partial class MainStatsPanel : UserControl
             int solarIdx = galactic.GetInt("SolarSystemIndex");
             int planetIdx = 0;
             try { planetIdx = galactic.GetInt("PlanetIndex"); } catch { }
+
+            // Store raw coordinate values for preservation
+            _rawCoordValues = new Dictionary<string, int>
+            {
+                ["RealityIndex"] = realityIndex,
+                ["VoxelX"] = voxelX,
+                ["VoxelY"] = voxelY,
+                ["VoxelZ"] = voxelZ,
+                ["SolarSystemIndex"] = solarIdx,
+                ["PlanetIndex"] = planetIdx,
+            };
 
             _portalCodeField.Text = CoordinateHelper.VoxelToPortalCode(voxelX, voxelY, voxelZ, solarIdx, planetIdx);
             _portalCodeDecField.Text = CoordinateHelper.PortalHexToDec(_portalCodeField.Text);
@@ -482,7 +508,8 @@ public partial class MainStatsPanel : UserControl
 
         MainStatsLogic.WriteStatValues(playerState,
             _healthField.Value, _shieldField.Value, _energyField.Value,
-            _unitsField.Value, _nanitesField.Value, _quicksilverField.Value);
+            _unitsField.Value, _nanitesField.Value, _quicksilverField.Value,
+            _rawStatValues);
 
         // Save name / summary
         try { saveData.GetObject("CommonStateData")?.Set("SaveName", _saveNameField.Text); } catch { }
@@ -537,18 +564,32 @@ public partial class MainStatsPanel : UserControl
             var addr = playerState.GetObject("UniverseAddress");
             if (addr == null) return;
 
-            addr.Set("RealityIndex", (int)_galaxyNud.Value);
+            WriteCoordIfChanged(addr, "RealityIndex", (int)_galaxyNud.Value, _galaxyNud);
 
             var galactic = addr.GetObject("GalacticAddress");
             if (galactic == null) return;
 
-            galactic.Set("VoxelX", (int)_voxelXNud.Value);
-            galactic.Set("VoxelY", (int)_voxelYNud.Value);
-            galactic.Set("VoxelZ", (int)_voxelZNud.Value);
-            galactic.Set("SolarSystemIndex", (int)_solarSystemNud.Value);
-            galactic.Set("PlanetIndex", (int)_planetNud.Value);
+            WriteCoordIfChanged(galactic, "VoxelX", (int)_voxelXNud.Value, _voxelXNud);
+            WriteCoordIfChanged(galactic, "VoxelY", (int)_voxelYNud.Value, _voxelYNud);
+            WriteCoordIfChanged(galactic, "VoxelZ", (int)_voxelZNud.Value, _voxelZNud);
+            WriteCoordIfChanged(galactic, "SolarSystemIndex", (int)_solarSystemNud.Value, _solarSystemNud);
+            WriteCoordIfChanged(galactic, "PlanetIndex", (int)_planetNud.Value, _planetNud);
         }
         catch { }
+    }
+
+    /// <summary>
+    /// Writes a coordinate value only if the user changed it from the clamped display value.
+    /// </summary>
+    private void WriteCoordIfChanged(JsonObject target, string key, int uiValue, NumericUpDown nud)
+    {
+        if (_rawCoordValues != null && _rawCoordValues.TryGetValue(key, out int raw))
+        {
+            int clamped = Math.Clamp(raw, (int)nud.Minimum, (int)nud.Maximum);
+            if (uiValue == clamped)
+                return; // User didn't change it - preserve original JSON value
+        }
+        target.Set(key, uiValue);
     }
 
     private void RefreshCoordinateDisplay()

@@ -11,6 +11,9 @@ public partial class MilestonePanel : UserControl
     private readonly List<(Label label, string locKey)> _localisedLabels = new();
     private IconManager? _iconManager;
 
+    /// <summary>Raw (unclamped) milestone stat values read from JSON at load time, keyed by stat Id.</summary>
+    private readonly Dictionary<string, int> _rawMilestoneValues = new();
+
     private readonly Dictionary<string, PictureBox> _sectionIcons = new();
 
     private static readonly Dictionary<string, string> SectionIconMap = MilestoneLogic.SectionIconMap;
@@ -170,6 +173,8 @@ public partial class MilestonePanel : UserControl
         foreach (var nud in _fields.Values)
             nud.Value = 0;
 
+        _rawMilestoneValues.Clear();
+
         var entries = FindGlobalStats(saveData);
         if (entries == null) return;
 
@@ -181,6 +186,7 @@ public partial class MilestonePanel : UserControl
             if (id == null || !_fields.TryGetValue(id, out var nud)) continue;
 
             int val = MilestoneLogic.ReadStatEntryValue(entry);
+            _rawMilestoneValues[id] = val;
             nud.Value = Math.Max(nud.Minimum, Math.Min(nud.Maximum, val));
         }
         }
@@ -206,6 +212,15 @@ public partial class MilestonePanel : UserControl
             if (valueObj != null)
             {
                 int value = (int)nud.Value;
+
+                // Skip write if user didn't change the value from its clamped display
+                if (_rawMilestoneValues.TryGetValue(id, out int raw))
+                {
+                    int clamped = (int)Math.Max(nud.Minimum, Math.Min(nud.Maximum, raw));
+                    if (value == clamped)
+                        continue; // Preserve original JSON value
+                }
+
                 MilestoneLogic.WriteStatEntryValue(entry, value);
             }
         }

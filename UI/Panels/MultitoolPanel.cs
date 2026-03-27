@@ -16,6 +16,9 @@ public partial class MultitoolPanel : UserControl
     private readonly Random _rng = new();
     private int _activeToolIndex;
 
+    /// <summary>Raw (unclamped) tool stat values read from JSON for the currently selected tool.</summary>
+    private Dictionary<string, double>? _rawToolStatValues;
+
     public MultitoolPanel()
     {
         InitializeComponent();
@@ -60,6 +63,7 @@ public partial class MultitoolPanel : UserControl
         _exportBtn.Text = UiStrings.Get("multitool.export");
         _importBtn.Text = UiStrings.Get("multitool.import");
         _makePrimaryBtn.Text = UiStrings.Get("multitool.make_primary");
+        _storeGrid.SetMaxSupportedLabel(UiStrings.Format("common.max_supported", "10x6"));
         RefreshToolTypeCombo();
         _storeGrid.ApplyUiLocalisation();
     }
@@ -177,7 +181,8 @@ public partial class MultitoolPanel : UserControl
                     Seed = _toolSeed.Text,
                     Damage = (double)_damageField.Value,
                     Mining = (double)_miningField.Value,
-                    Scan = (double)_scanField.Value
+                    Scan = (double)_scanField.Value,
+                    RawStatValues = _rawToolStatValues
                 };
 
                 // Determine if this is the primary tool for syncing purposes
@@ -230,6 +235,14 @@ public partial class MultitoolPanel : UserControl
                 try { _damageField.Value = (decimal)data.Damage; } catch { _damageField.Value = 0; }
                 try { _miningField.Value = (decimal)data.Mining; } catch { _miningField.Value = 0; }
                 try { _scanField.Value = (decimal)data.Scan; } catch { _scanField.Value = 0; }
+
+                // Store raw stat values for preservation before limits clamp the NUDs
+                _rawToolStatValues = new Dictionary<string, double>
+                {
+                    ["^WEAPON_DAMAGE"] = data.Damage,
+                    ["^WEAPON_MINING"] = data.Mining,
+                    ["^WEAPON_SCAN"] = data.Scan,
+                };
 
                 // Apply BaseStatLimits to the NumericUpDown controls
                 ApplyStatLimits(_damageField, "Normal", "^WEAPON_DAMAGE", StatCategory.Weapon);

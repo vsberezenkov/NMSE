@@ -17,6 +17,9 @@ public partial class StarshipPanel : UserControl
     private int _primaryShipIndex;
     private readonly Random _rng = new();
 
+    /// <summary>Raw (unclamped) ship stat values read from JSON for the currently selected ship.</summary>
+    private Dictionary<string, double>? _rawShipStatValues;
+
     private void SetStarshipMaxSupportedLabels(string filename)
     {
         var (_, cargoLabel, techLabel) = StarshipLogic.GetShipInfo(filename);
@@ -217,7 +220,8 @@ public partial class StarshipPanel : UserControl
                 Maneuver = (double)_maneuverField.Value,
                 UseOldColours = _useOldColours.Checked,
                 ShipIndex = idx,
-                PrimaryShipIndex = _primaryShipIndex
+                PrimaryShipIndex = _primaryShipIndex,
+                RawStatValues = _rawShipStatValues
             };
 
             StarshipLogic.SaveShipData(ship, playerState, values);
@@ -300,6 +304,15 @@ public partial class StarshipPanel : UserControl
             try { _shieldField.Value = (decimal)data.Shield; } catch { _shieldField.Value = 0; }
             try { _hyperdriveField.Value = (decimal)data.Hyperdrive; } catch { _hyperdriveField.Value = 0; }
             try { _maneuverField.Value = (decimal)data.Maneuver; } catch { _maneuverField.Value = 0; }
+
+            // Store raw stat values for preservation before limits clamp the NUDs
+            _rawShipStatValues = new Dictionary<string, double>
+            {
+                ["^SHIP_DAMAGE"] = data.Damage,
+                ["^SHIP_SHIELD"] = data.Shield,
+                ["^SHIP_HYPERDRIVE"] = data.Hyperdrive,
+                ["^SHIP_AGILE"] = data.Maneuver,
+            };
 
             // Apply BaseStatLimits to the NumericUpDown controls.
             // Use "Alien" limits when the ship type contains "Alien", otherwise "Normal".

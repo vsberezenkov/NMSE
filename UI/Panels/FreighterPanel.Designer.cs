@@ -493,7 +493,9 @@ partial class FreighterPanel
         // 
         _exportBtn.Location = new Point(3, 3);
         _exportBtn.Name = "_exportBtn";
-        _exportBtn.Size = new Size(80, 23);
+        _exportBtn.AutoSize = true;
+        _exportBtn.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        _exportBtn.MinimumSize = new Size(70, 0);
         _exportBtn.TabIndex = 0;
         _exportBtn.Text = "Export Freighter";
         // 
@@ -501,7 +503,9 @@ partial class FreighterPanel
         // 
         _importBtn.Location = new Point(89, 3);
         _importBtn.Name = "_importBtn";
-        _importBtn.Size = new Size(80, 23);
+        _importBtn.AutoSize = true;
+        _importBtn.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+        _importBtn.MinimumSize = new Size(70, 0);
         _importBtn.TabIndex = 1;
         _importBtn.Text = "Import Freighter";
         // 

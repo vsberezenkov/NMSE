@@ -346,6 +346,7 @@ public partial class RawJsonPanel : UserControl
         string s => $"\"{EscapeString(s)}\"",
         bool b => b ? "true" : "false",
         BinaryData bd => $"<binary:{bd.ToHexString()}>",
+        IFormattable f => f.ToString(null, System.Globalization.CultureInfo.InvariantCulture) ?? "null",
         _ => value.ToString() ?? "null"
     };
 
@@ -428,7 +429,7 @@ public partial class RawJsonPanel : UserControl
                 parentObj.Set(tag.Key, parsed);
             else if (tag.Parent is JsonArray parentArr && tag.Key != null && tag.Key.StartsWith('['))
             {
-                int idx = int.Parse(tag.Key.Trim('[', ']'));
+                int idx = int.Parse(tag.Key.Trim('[', ']'), System.Globalization.CultureInfo.InvariantCulture);
                 parentArr.Set(idx, parsed);
             }
 
@@ -450,7 +451,8 @@ public partial class RawJsonPanel : UserControl
         if (input.StartsWith('"') && input.EndsWith('"'))
             return input[1..^1].Replace("\\\"", "\"").Replace("\\\\", "\\")
                                .Replace("\\n", "\n").Replace("\\r", "\r").Replace("\\t", "\t");
-        if (long.TryParse(input, out long l))
+        if (long.TryParse(input, System.Globalization.NumberStyles.Integer,
+                System.Globalization.CultureInfo.InvariantCulture, out long l))
             return l >= int.MinValue && l <= int.MaxValue ? (int)l : l;
         if (double.TryParse(input, System.Globalization.NumberStyles.Float,
                 System.Globalization.CultureInfo.InvariantCulture, out double d))
@@ -556,7 +558,7 @@ public partial class RawJsonPanel : UserControl
         }
         else if (tag.Parent is JsonArray parentArr && tag.Key.StartsWith('['))
         {
-            int idx = int.Parse(tag.Key.Trim('[', ']'));
+            int idx = int.Parse(tag.Key.Trim('[', ']'), System.Globalization.CultureInfo.InvariantCulture);
             parentArr.RemoveAt(idx);
             var parentNode = node.Parent;
             node.Remove();

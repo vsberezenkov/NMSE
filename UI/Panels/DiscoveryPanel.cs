@@ -254,14 +254,21 @@ public partial class DiscoveryPanel : UserControl
         var icon = _iconManager.GetIconForItem(itemId, _database);
         if (icon == null) return null;
 
-        var scaled = new Bitmap(24, 24);
-        using (var g = Graphics.FromImage(scaled))
+        try
         {
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            g.DrawImage(icon, 0, 0, 24, 24);
+            var scaled = new Bitmap(24, 24);
+            using (var g = Graphics.FromImage(scaled))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawImage(icon, 0, 0, 24, 24);
+            }
+            _scaledIconCache[itemId] = scaled;
+            return scaled;
         }
-        _scaledIconCache[itemId] = scaled;
-        return scaled;
+        catch
+        {
+            return null;
+        }
     }
 
     private static void RemoveSelectedFromGrid(DataGridView grid)
@@ -1018,7 +1025,9 @@ public partial class DiscoveryPanel : UserControl
                 Image? icon = GetScaledIcon(lookupId);
 
                 var row = new DataGridViewRow();
-                row.CreateCells(_fishGrid, icon ?? (object)PlaceholderIcon, productId, name, catchCount, largestCatch);
+                row.CreateCells(_fishGrid, icon ?? (object)PlaceholderIcon, productId, name,
+                    catchCount.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                    largestCatch.ToString(System.Globalization.CultureInfo.InvariantCulture));
                 row.Tag = i; // store array index for saving
                 rowList.Add(row);
             }
@@ -1054,7 +1063,9 @@ public partial class DiscoveryPanel : UserControl
 
                 if (countList != null && idx < countList.Length)
                 {
-                    if (int.TryParse(row.Cells["Count"].Value?.ToString(), out int c))
+                    if (int.TryParse(row.Cells["Count"].Value?.ToString(),
+                            System.Globalization.NumberStyles.Integer,
+                            System.Globalization.CultureInfo.InvariantCulture, out int c))
                         countList.Set(idx, c);
                 }
                 if (largestList != null && idx < largestList.Length)
@@ -1174,7 +1185,9 @@ public partial class DiscoveryPanel : UserControl
         var colName = _fishGrid.Columns[e.ColumnIndex].Name;
         if (colName == "Count")
         {
-            if (!int.TryParse(e.FormattedValue?.ToString(), out _))
+            if (!int.TryParse(e.FormattedValue?.ToString(),
+                    System.Globalization.NumberStyles.Integer,
+                    System.Globalization.CultureInfo.InvariantCulture, out _))
                 e.Cancel = true;
         }
         else if (colName == "LargestCatch")

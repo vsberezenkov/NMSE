@@ -230,9 +230,9 @@ internal static class MultitoolLogic
         catch { }
 
         var toolStore = tool.GetObject("Store");
-        StatHelper.WriteBaseStatValue(toolStore, "^WEAPON_DAMAGE", Data.BaseStatLimits.ClampStatValue("Normal", "^WEAPON_DAMAGE", values.Damage, Data.StatCategory.Weapon));
-        StatHelper.WriteBaseStatValue(toolStore, "^WEAPON_MINING", Data.BaseStatLimits.ClampStatValue("Normal", "^WEAPON_MINING", values.Mining, Data.StatCategory.Weapon));
-        StatHelper.WriteBaseStatValue(toolStore, "^WEAPON_SCAN", Data.BaseStatLimits.ClampStatValue("Normal", "^WEAPON_SCAN", values.Scan, Data.StatCategory.Weapon));
+        StatHelper.WriteBaseStatValue(toolStore, "^WEAPON_DAMAGE", Data.BaseStatLimits.ConditionalClampStatValue("Normal", "^WEAPON_DAMAGE", values.Damage, Data.StatCategory.Weapon, values.RawStatValues));
+        StatHelper.WriteBaseStatValue(toolStore, "^WEAPON_MINING", Data.BaseStatLimits.ConditionalClampStatValue("Normal", "^WEAPON_MINING", values.Mining, Data.StatCategory.Weapon, values.RawStatValues));
+        StatHelper.WriteBaseStatValue(toolStore, "^WEAPON_SCAN", Data.BaseStatLimits.ConditionalClampStatValue("Normal", "^WEAPON_SCAN", values.Scan, Data.StatCategory.Weapon, values.RawStatValues));
 
         // If primary tool, sync Store to WeaponInventory in PlayerStateData
         // This keeps the game's live inventory copy in sync with the tool data
@@ -460,5 +460,10 @@ internal static class MultitoolLogic
         public double Mining { get; set; }
         /// <summary>The scan stat value to write.</summary>
         public double Scan { get; set; }
+
+        /// <summary>Raw (unclamped) stat values read from JSON at load time.
+        /// When set, each stat is only written if the UI value differs from
+        /// the clamped raw value - preserving externally-edited values.</summary>
+        public Dictionary<string, double>? RawStatValues { get; set; }
     }
 }

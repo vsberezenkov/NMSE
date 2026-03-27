@@ -307,19 +307,20 @@ internal static class StarshipLogic
         // Write base stats to ALL inventories to keep them in sync
         // Determine ship category for clamping: "Alien" if the selected type contains it, else "Normal"
         string shipCategory = (values.SelectedTypeName ?? "").Contains("Alien", StringComparison.OrdinalIgnoreCase) ? "Alien" : "Normal";
-        double clampedDamage = Data.BaseStatLimits.ClampStatValue(shipCategory, "^SHIP_DAMAGE", values.Damage, Data.StatCategory.Ship);
-        double clampedShield = Data.BaseStatLimits.ClampStatValue(shipCategory, "^SHIP_SHIELD", values.Shield, Data.StatCategory.Ship);
-        double clampedHyperdrive = Data.BaseStatLimits.ClampStatValue(shipCategory, "^SHIP_HYPERDRIVE", values.Hyperdrive, Data.StatCategory.Ship);
-        double clampedManeuver = Data.BaseStatLimits.ClampStatValue(shipCategory, "^SHIP_AGILE", values.Maneuver, Data.StatCategory.Ship);
+
+        double writeDamage = Data.BaseStatLimits.ConditionalClampStatValue(shipCategory, "^SHIP_DAMAGE", values.Damage, Data.StatCategory.Ship, values.RawStatValues);
+        double writeShield = Data.BaseStatLimits.ConditionalClampStatValue(shipCategory, "^SHIP_SHIELD", values.Shield, Data.StatCategory.Ship, values.RawStatValues);
+        double writeHyperdrive = Data.BaseStatLimits.ConditionalClampStatValue(shipCategory, "^SHIP_HYPERDRIVE", values.Hyperdrive, Data.StatCategory.Ship, values.RawStatValues);
+        double writeManeuver = Data.BaseStatLimits.ConditionalClampStatValue(shipCategory, "^SHIP_AGILE", values.Maneuver, Data.StatCategory.Ship, values.RawStatValues);
 
         foreach (string invKey in new[] { "Inventory", "Inventory_TechOnly", "Inventory_Cargo" })
         {
             var inv = ship.GetObject(invKey);
             if (inv == null) continue;
-            StatHelper.WriteBaseStatValue(inv, "^SHIP_DAMAGE", clampedDamage);
-            StatHelper.WriteBaseStatValue(inv, "^SHIP_SHIELD", clampedShield);
-            StatHelper.WriteBaseStatValue(inv, "^SHIP_HYPERDRIVE", clampedHyperdrive);
-            StatHelper.WriteBaseStatValue(inv, "^SHIP_AGILE", clampedManeuver);
+            StatHelper.WriteBaseStatValue(inv, "^SHIP_DAMAGE", writeDamage);
+            StatHelper.WriteBaseStatValue(inv, "^SHIP_SHIELD", writeShield);
+            StatHelper.WriteBaseStatValue(inv, "^SHIP_HYPERDRIVE", writeHyperdrive);
+            StatHelper.WriteBaseStatValue(inv, "^SHIP_AGILE", writeManeuver);
         }
 
         // ShipUsesLegacyColours is an array indexed per-ship; update the correct element
@@ -589,6 +590,9 @@ internal static class StarshipLogic
 
     /// <summary>
     /// Finds the index of a corvette's player ship base entry by matching its seed against the base owner timestamp.
+    /// The game can drift the TS epoch timestamp by up to ~120 seconds relative to the seed, so this method
+    /// uses a 3-tier fallback: exact match -> +/-1s -> +/-60s -> +/-120s. When multiple candidates fall within
+    /// the same tolerance tier, the one with the smallest absolute delta is chosen.
     /// </summary>
     /// <param name="bases">The persistent player bases JSON array.</param>
     /// <param name="seedDecimal">The decimal seed value to match.</param>
@@ -596,25 +600,47 @@ internal static class StarshipLogic
     internal static int FindCorvetteBaseIndex(JsonArray? bases, long seedDecimal)
     {
         if (bases == null || seedDecimal == 0) return -1;
-        for (int i = 0; i < bases.Length; i++)
-        {
-            try
-            {
-                var b = bases.GetObject(i);
-                var owner = b.GetObject("Owner");
-                if (owner == null) continue;
-                long ts = 0;
-                try { ts = (long)owner.GetDouble("TS"); } catch { }
-                if (ts != seedDecimal) continue;
 
-                var baseType = b.GetObject("BaseType");
-                if (baseType == null) continue;
-                string bt = baseType.GetString("PersistentBaseTypes") ?? "";
-                if (bt.Equals("PlayerShipBase", StringComparison.OrdinalIgnoreCase))
-                    return i;
+        // Tolerance tiers in seconds (ascending).
+        ReadOnlySpan<long> tolerances = [0, 1, 60, 120];
+
+        foreach (long tol in tolerances)
+        {
+            int bestIndex = -1;
+            long bestDelta = long.MaxValue;
+
+            for (int i = 0; i < bases.Length; i++)
+            {
+                try
+                {
+                    var b = bases.GetObject(i);
+                    var owner = b.GetObject("Owner");
+                    if (owner == null) continue;
+
+                    long ts = 0;
+                    try { ts = (long)owner.GetDouble("TS"); } catch { }
+
+                    long delta = Math.Abs(ts - seedDecimal);
+                    if (delta > tol) continue;
+
+                    var baseType = b.GetObject("BaseType");
+                    if (baseType == null) continue;
+                    string bt = baseType.GetString("PersistentBaseTypes") ?? "";
+                    if (!bt.Equals("PlayerShipBase", StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    if (delta < bestDelta)
+                    {
+                        bestDelta = delta;
+                        bestIndex = i;
+                    }
+                }
+                catch { }
             }
-            catch { }
+
+            if (bestIndex >= 0) return bestIndex;
         }
+
         return -1;
     }
 
@@ -749,5 +775,10 @@ internal static class StarshipLogic
         public int ShipIndex { get; set; } = -1;
         /// <summary>The index of the ship to set as primary.</summary>
         public int PrimaryShipIndex { get; set; }
+
+        /// <summary>Raw (unclamped) stat values read from JSON at load time.
+        /// When set, each stat is only written if the UI value differs from
+        /// the clamped raw value - preserving externally-edited values.</summary>
+        public Dictionary<string, double>? RawStatValues { get; set; }
     }
 }

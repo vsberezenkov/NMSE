@@ -142,7 +142,7 @@ public partial class AccountPanel : UserControl
         }
         catch (InvalidOperationException)
         {
-            // Grid may not be fully initialised yet — silently ignore
+            // Grid may not be fully initialised yet (silently ignore)
         }
     }
 

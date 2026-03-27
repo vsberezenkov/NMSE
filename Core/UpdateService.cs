@@ -63,9 +63,9 @@ public static class UpdateService
             var candidate = span[start..i].ToString();
             var parts = candidate.Split('.');
             if (parts.Length >= 3
-                && int.TryParse(parts[0], out int major)
-                && int.TryParse(parts[1], out int minor)
-                && int.TryParse(parts[2], out int patch))
+                && int.TryParse(parts[0], System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out int major)
+                && int.TryParse(parts[1], System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out int minor)
+                && int.TryParse(parts[2], System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out int patch))
             {
                 return new Version(major, minor, patch);
             }
@@ -294,8 +294,10 @@ public static class UpdateService
 
         // Launch the updater script hidden.
         // If Process.Start returns null the updater failed to launch, and
-        // the caller will exit the app — leaving the user with nothing running
-        // and no update applied.  Throw so the caller can show an error.
+        // the caller will exit the app.
+        // This leavies the user with nothing running and no update applied.
+        // Throw exception so the caller can show an error.
+        // Will need to be fixed if we want to support non-Windows platforms (soon).
         var proc = Process.Start(new ProcessStartInfo
         {
             FileName        = "cmd.exe",

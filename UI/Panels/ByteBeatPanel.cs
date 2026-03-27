@@ -211,7 +211,7 @@ public partial class ByteBeatPanel : UserControl
         var vars = new Dictionary<string, string>
         {
             ["name"] = song.GetString("Name") ?? "song",
-            ["timestamp"] = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()
+            ["timestamp"] = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(System.Globalization.CultureInfo.InvariantCulture)
         };
 
         using var dialog = new SaveFileDialog

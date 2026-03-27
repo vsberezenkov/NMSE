@@ -311,8 +311,8 @@ internal static class FreighterLogic
             var inv = playerState.GetObject(invKey);
             if (inv != null)
             {
-                WriteStatBonus(inv, "^FREI_HYPERDRIVE", Data.BaseStatLimits.ClampStatValue("Normal", "^FREI_HYPERDRIVE", values.Hyperdrive, Data.StatCategory.Freighter));
-                WriteStatBonus(inv, "^FREI_FLEET", Data.BaseStatLimits.ClampStatValue("Normal", "^FREI_FLEET", values.FleetCoordination, Data.StatCategory.Freighter));
+                WriteStatBonus(inv, "^FREI_HYPERDRIVE", Data.BaseStatLimits.ConditionalClampStatValue("Normal", "^FREI_HYPERDRIVE", values.Hyperdrive, Data.StatCategory.Freighter, values.RawStatValues));
+                WriteStatBonus(inv, "^FREI_FLEET", Data.BaseStatLimits.ConditionalClampStatValue("Normal", "^FREI_FLEET", values.FleetCoordination, Data.StatCategory.Freighter, values.RawStatValues));
             }
         }
     }
@@ -544,5 +544,10 @@ internal static class FreighterLogic
         public double Hyperdrive { get; set; }
         /// <summary>The fleet coordination stat value to write.</summary>
         public double FleetCoordination { get; set; }
+
+        /// <summary>Raw (unclamped) stat values read from JSON at load time.
+        /// When set, each stat is only written if the UI value differs from
+        /// the clamped raw value - preserving externally-edited values.</summary>
+        public Dictionary<string, double>? RawStatValues { get; set; }
     }
 }
