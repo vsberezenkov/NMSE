@@ -33,7 +33,7 @@ public class StaticDataDatabaseTests
             if (jsonDir == null) return;
 
             FrigateTraitDatabase.LoadFromFile(Path.Combine(jsonDir, "FrigateTraits.json"));
-            SettlementPerkDatabase.LoadFromFile(Path.Combine(jsonDir, "SettlementPerks.json"));
+            SettlementDatabase.LoadFromFile(Path.Combine(jsonDir, "SettlementPerks.json"));
             WikiGuideDatabase.LoadFromFile(Path.Combine(jsonDir, "WikiGuide.json"));
             TitleDatabase.LoadFromFile(Path.Combine(jsonDir, "Titles.json"));
 
@@ -507,40 +507,40 @@ public class StaticDataDatabaseTests
         Assert.Equal(expected, GameItemDatabase.IsPickerExcluded(id));
     }
 
-    // --- SettlementPerkDatabase ---
+    // --- SettlementDatabase ---
 
     [Fact]
-    public void SettlementPerkDatabase_HasExpectedPerkCount()
+    public void SettlementDatabase_HasExpectedPerkCount()
     {
-        Assert.Equal(90, SettlementPerkDatabase.Perks.Count);
+        Assert.Equal(90, SettlementDatabase.Perks.Count);
     }
 
     [Fact]
-    public void SettlementPerkDatabase_ById_ContainsAllPerks()
+    public void SettlementDatabase_ById_ContainsAllPerks()
     {
-        Assert.Equal(SettlementPerkDatabase.Perks.Count, SettlementPerkDatabase.ById.Count);
+        Assert.Equal(SettlementDatabase.Perks.Count, SettlementDatabase.ById.Count);
     }
 
     [Fact]
-    public void SettlementPerkDatabase_CanLookupKnownPerk()
+    public void SettlementDatabase_CanLookupKnownPerk()
     {
-        Assert.True(SettlementPerkDatabase.ById.ContainsKey("^STARTING_NEG1"));
-        var perk = SettlementPerkDatabase.ById["^STARTING_NEG1"];
+        Assert.True(SettlementDatabase.ById.ContainsKey("^STARTING_NEG1"));
+        var perk = SettlementDatabase.ById["^STARTING_NEG1"];
         Assert.Equal("Worm infestation", perk.Name);
         Assert.Equal("Increases maintenance costs", perk.Description);
         Assert.False(perk.Beneficial);
         Assert.False(perk.Procedural);
         Assert.True(perk.Starter);
         // Additional known perks
-        Assert.True(SettlementPerkDatabase.ById.ContainsKey("^STARTING_POS1"));
-        Assert.True(SettlementPerkDatabase.ById.ContainsKey("^SENT_RELEASED"));
+        Assert.True(SettlementDatabase.ById.ContainsKey("^STARTING_POS1"));
+        Assert.True(SettlementDatabase.ById.ContainsKey("^SENT_RELEASED"));
     }
 
     [Fact]
-    public void SettlementPerkDatabase_ProceduralPerk_HasCorrectAttributes()
+    public void SettlementDatabase_ProceduralPerk_HasCorrectAttributes()
     {
-        Assert.True(SettlementPerkDatabase.ById.ContainsKey("^BLESS_POS"));
-        var perk = SettlementPerkDatabase.ById["^BLESS_POS"];
+        Assert.True(SettlementDatabase.ById.ContainsKey("^BLESS_POS"));
+        var perk = SettlementDatabase.ById["^BLESS_POS"];
         Assert.True(perk.Procedural);
         Assert.True(perk.Beneficial);
         Assert.False(perk.Starter);

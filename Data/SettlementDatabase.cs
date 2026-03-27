@@ -19,7 +19,7 @@ public class PerkStatChange
     {
         get
         {
-            if (!SettlementPerkDatabase.PerkStatRanges.TryGetValue(Type, out var ranges)) return "";
+            if (!SettlementDatabase.PerkStatRanges.TryGetValue(Type, out var ranges)) return "";
             int[] r = ranges[(int)Strength];
             string sign = Strength.ToString().StartsWith("Negative") ? "" : "+";
             return $"{sign}{r[0]}..{r[1]}";
@@ -57,9 +57,30 @@ public class SettlementPerk
     public override string ToString() => $"{Name} ({Id})";
 }
 
-/// <summary>Static database of all known settlement perks and their stat effects.</summary>
-public static class SettlementPerkDatabase
+/// <summary>Static database of all known settlement perks, stat effects, and building-state milestones.</summary>
+public static class SettlementDatabase
 {
+    /// <summary>
+    /// Known milestone values from empirical game data.
+    /// The int32 is the canonical value stored in the save file.
+    /// </summary>
+    internal static readonly (int Value, string LocKey)[] KnownMilestones =
+    {
+        (0,           "settlement.bs_empty_lot"),
+        (127,         "settlement.bs_c_construction_complete"),
+        (67108991,    "settlement.bs_c_system_activated"),
+        (68157567,    "settlement.bs_c_to_b_upgrade"),
+        (202375295,   "settlement.bs_c_to_b_awaiting"),
+        (204472447,   "settlement.bs_b_complete"),
+        (208666751,   "settlement.bs_b_to_a_upgrade"),
+        (477102207,   "settlement.bs_b_to_a_awaiting"),
+        (485490815,   "settlement.bs_a_complete"),
+        (502268031,   "settlement.bs_a_to_s_upgrade"),
+        (1039138943,  "settlement.bs_a_to_s_awaiting"),
+        (1072693375,  "settlement.bs_s_complete"),
+        (1073740927,  "settlement.bs_s_full"),
+    };
+
     /// <summary>Per-stat perk strength ranges from database. Indexed by PerkStatStrength ordinal (0=PositiveWide..6=NegativeLarge).</summary>
     public static readonly Dictionary<PerkStatType, int[][]> PerkStatRanges = new()
     {
@@ -79,7 +100,7 @@ public static class SettlementPerkDatabase
     /// </summary>
     public static readonly IReadOnlyList<SettlementPerk> Perks = new List<SettlementPerk>();
 
-    // ── Hardcoded fallback data removed ──
+    // --- Hardcoded fallback data removed ---
     // Perk data is now loaded from Resources/json/SettlementPerks.json at startup.
     // The JSON file is produced by the extractor's ParseSettlementPerks() method
     // from SETTLEMENTPERKSTABLE.MXML and contains perk IDs, names, descriptions,

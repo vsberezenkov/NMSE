@@ -12,6 +12,12 @@ public partial class SettlementPanel : UserControl
     private const int ProductionMaxAmount = SettlementLogic.ProductionMaxAmount;
     private const int PerkSlotCount = 18;
 
+    // Building-state bit-field region size aliases (from SettlementBuildingState)
+    private const int InitPhaseCount = SettlementLogic.SettlementBuildingState.InitPhaseCount;
+    private const int UpgradePhaseCount = SettlementLogic.SettlementBuildingState.UpgradePhaseCount;
+    private const int TierBitCount = SettlementLogic.SettlementBuildingState.TierBitCount;
+    private const int FlagBitCount = SettlementLogic.SettlementBuildingState.FlagBitCount;
+
     // Filtered settlement data: indices into SettlementStatesV2
     private readonly List<int> _filteredIndices = new();
     private JsonArray? _settlements;
@@ -19,6 +25,17 @@ public partial class SettlementPanel : UserControl
     private GameItemDatabase? _database;
     private IconManager? _iconManager;
     private Dictionary<string, string>? _allowedProductionItems;
+
+    /// <summary>Raw (unclamped) settlement stat values read from JSON for the currently-selected settlement.</summary>
+    private int[]? _rawSettlementStats;
+    /// <summary>Raw (unclamped) population value for preservation.</summary>
+    private int? _rawPopulation;
+    /// <summary>Whether the current settlement has a top-level Population key (NMS 5.70+ saves).</summary>
+    private bool _hasPopulationKey;
+
+    private int[]? _rawBuildingStates;
+    private bool _hasBuildingStates;
+    private bool _editorUpdating;
 
     public void SetDatabase(GameItemDatabase? database)
     {
@@ -62,16 +79,28 @@ public partial class SettlementPanel : UserControl
         public override string ToString() => DisplayText;
     }
 
+    private sealed class RaceComboItem
+    {
+        public string InternalId { get; }
+        public string DisplayText { get; }
+        public RaceComboItem(string internalId, string displayText)
+        {
+            InternalId = internalId;
+            DisplayText = displayText;
+        }
+        public override string ToString() => DisplayText;
+    }
+
     private static void PopulatePerkCombo(ComboBox combo)
     {
         combo.Items.Add(new PerkComboItem(null));
-        foreach (var perk in SettlementPerkDatabase.Perks)
+        foreach (var perk in SettlementDatabase.Perks)
             combo.Items.Add(new PerkComboItem(perk));
         combo.SelectedIndex = 0;
     }
 
     /// <summary>
-    /// Repopulates the perk combo boxes from SettlementPerkDatabase.
+    /// Repopulates the perk combo boxes from SettlementDatabase.
     /// Must be called after LoadDatabase() since the panels are constructed
     /// before the JSON databases are loaded.
     /// </summary>
@@ -101,7 +130,7 @@ public partial class SettlementPanel : UserControl
         else if (item.Perk == null)
             textColor = combo.ForeColor;
         else
-            textColor = item.Perk.Beneficial ? Color.RoyalBlue : Color.IndianRed;
+            textColor = item.Perk.Beneficial ? Color.ForestGreen : Color.Crimson;
 
         var font = e.Font ?? combo.Font;
         using var brush = new SolidBrush(textColor);
@@ -117,6 +146,17 @@ public partial class SettlementPanel : UserControl
         _perkSeedPanels[slot].Visible = showSeed;
         if (!showSeed)
             _perkSeedFields[slot].Text = "";
+    }
+
+    /// <summary>
+    /// Generates a random integer seed for the specified perk slot.
+    /// The seed is a non-negative 32-bit integer stored as a decimal string after the '#'.
+    /// </summary>
+    private void GeneratePerkSeed(int slot)
+    {
+        if (slot < 0 || slot >= PerkSlotCount) return;
+        _perkSeedFields[slot].Text = _rng.Next(0, int.MaxValue)
+            .ToString(System.Globalization.CultureInfo.InvariantCulture);
     }
 
     private void LoadPerkSlot(int slot, string raw)
@@ -136,7 +176,7 @@ public partial class SettlementPanel : UserControl
             seed = raw[(hashIdx + 1)..];
         }
 
-        if (SettlementPerkDatabase.ById.TryGetValue(perkId, out var perk))
+        if (SettlementDatabase.ById.TryGetValue(perkId, out var perk))
         {
             for (int j = 0; j < _perkCombos[slot].Items.Count; j++)
             {
@@ -223,12 +263,12 @@ public partial class SettlementPanel : UserControl
                     _filteredIndices.Add(i);
                     var settlement = _settlements.GetObject(i);
                     string name = settlement.GetString("Name") ?? UiStrings.Format("settlement.fallback_name", i + 1);
-                    _settlementSelector.Items.Add(name);
+                    _settlementSelector.Items.Add($"[{i}] {name}");
                 }
                 catch
                 {
                     _filteredIndices.Add(i);
-                    _settlementSelector.Items.Add(UiStrings.Format("settlement.fallback_name", i + 1));
+                    _settlementSelector.Items.Add($"[{i}] {UiStrings.Format("settlement.fallback_name", i + 1)}");
                 }
             }
 
@@ -266,14 +306,41 @@ public partial class SettlementPanel : UserControl
                 Name = _settlementName.Text,
                 SeedValue = _seedField.Text,
                 DecisionTypeIndex = _decisionTypeField.SelectedIndex,
-                LastDecisionTime = _lastDecisionTimeField.Value,
+                LastDecisionTime = _lastDecisionTimeField.Checked ? _lastDecisionTimeField.Value : (DateTime?)null,
+                RawStats = _rawSettlementStats,
+                HasPopulationKey = _hasPopulationKey,
+                AlienRace = GetSelectedRace(),
+                LastBugAttackChangeTime = ReadTimestamp(_lastBugAttackTimeField),
+                LastAlertChangeTime = ReadTimestamp(_lastAlertTimeField),
+                LastDebtChangeTime = ReadTimestamp(_lastDebtTimeField),
+                LastUpkeepDebtCheckTime = ReadTimestamp(_lastUpkeepTimeField),
+                LastPopulationChangeTime = ReadTimestamp(_lastPopulationTimeField),
+                MiniMissionStartTime = ReadTimestamp(_miniMissionStartTimeField),
+                HasBuildingStates = _hasBuildingStates,
+                RawBuildingStates = _rawBuildingStates,
             };
+            if (_hasPopulationKey)
+            {
+                saveValues.Population = (int)_populationField.Value;
+                saveValues.RawPopulation = _rawPopulation;
+            }
             for (int i = 0; i < StatCount; i++)
                 saveValues.Stats[i] = (int)_statFields[i].Value;
 
+            // Mission seed
+            if (int.TryParse(_missionSeedField.Text.Trim(), System.Globalization.NumberStyles.Integer,
+                    System.Globalization.CultureInfo.InvariantCulture, out int missionSeed))
+                saveValues.MiniMissionSeed = missionSeed;
+
+            // Building states
+            for (int i = 0; i < SettlementLogic.BuildingStateSlotCount; i++)
+            {
+                saveValues.BuildingStates[i] = (int)_buildingStateNuds[i].Value;
+            }
+
             SettlementLogic.SaveSettlementData(settlement, saveValues);
 
-            // Save perks — grow the JSON array if it has fewer than PerkSlotCount entries
+            // Save perks - grow the JSON array if it has fewer than PerkSlotCount entries
             var perksArr = settlement.GetArray("Perks");
             if (perksArr == null)
             {
@@ -290,7 +357,18 @@ public partial class SettlementPanel : UserControl
                 }
                 else if (item.Perk.Procedural && !string.IsNullOrEmpty(_perkSeedFields[i].Text))
                 {
-                    val = $"{item.Perk.Id}#{_perkSeedFields[i].Text}";
+                    // Validate seed is a valid integer
+                    string seedText = _perkSeedFields[i].Text.Trim();
+                    if (int.TryParse(seedText, System.Globalization.NumberStyles.Integer,
+                            System.Globalization.CultureInfo.InvariantCulture, out _))
+                    {
+                        val = $"{item.Perk.Id}#{seedText}";
+                    }
+                    else
+                    {
+                        // Invalid seed - save perk without seed
+                        val = item.Perk.Id;
+                    }
                 }
                 else
                 {
@@ -316,7 +394,9 @@ public partial class SettlementPanel : UserControl
                     var elementId = _productionGrid.Rows[i].Cells["ElementId"].Value?.ToString() ?? "";
                     prodObj.Set("ElementId", elementId);
 
-                    if (int.TryParse(_productionGrid.Rows[i].Cells["Amount"].Value?.ToString(), out int amount))
+                    if (int.TryParse(_productionGrid.Rows[i].Cells["Amount"].Value?.ToString(),
+                            System.Globalization.NumberStyles.Integer,
+                            System.Globalization.CultureInfo.InvariantCulture, out int amount))
                     {
                         amount = Math.Clamp(amount, 0, ProductionMaxAmount);
                         prodObj.Set("Amount", amount);
@@ -343,13 +423,64 @@ public partial class SettlementPanel : UserControl
             _seedField.Text = sdata.SeedValue;
 
             for (int i = 0; i < StatCount; i++)
+            {
                 _statFields[i].Value = sdata.Stats[i];
+                ApplyStatColor(i);
+            }
+
+            // Population field (separate from Stats[0] MaxPopulation)
+            _hasPopulationKey = sdata.HasPopulationKey;
+            _populationField.Enabled = sdata.HasPopulationKey;
+            if (sdata.HasPopulationKey)
+            {
+                _populationField.Value = sdata.Population;
+                _rawPopulation = sdata.RawPopulation;
+            }
+            else
+            {
+                _populationField.Value = 0;
+                _rawPopulation = null;
+            }
+
+            // Store raw stat values for preservation
+            _rawSettlementStats = (int[])sdata.RawStats.Clone();
 
             _decisionTypeField.SelectedIndex = sdata.DecisionTypeIndex;
             if (sdata.LastDecisionTime.HasValue)
-                _lastDecisionTimeField.Value = sdata.LastDecisionTime.Value;
+                LoadTimestamp(_lastDecisionTimeField, ((DateTimeOffset)sdata.LastDecisionTime.Value.ToUniversalTime()).ToUnixTimeSeconds());
             else
-                _lastDecisionTimeField.Value = _lastDecisionTimeField.MinDate;
+                _lastDecisionTimeField.Checked = false;
+
+            // NPC Race
+            LoadRaceCombo(sdata.AlienRace);
+
+            // Timestamp fields
+            LoadTimestamp(_lastBugAttackTimeField, sdata.LastBugAttackChangeTime);
+            LoadTimestamp(_lastAlertTimeField, sdata.LastAlertChangeTime);
+            LoadTimestamp(_lastDebtTimeField, sdata.LastDebtChangeTime);
+            LoadTimestamp(_lastUpkeepTimeField, sdata.LastUpkeepDebtCheckTime);
+            LoadTimestamp(_lastPopulationTimeField, sdata.LastPopulationChangeTime);
+
+            // Mission seed & start time
+            _missionSeedField.Text = sdata.MiniMissionSeed != 0
+                ? sdata.MiniMissionSeed.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                : "";
+            LoadTimestamp(_miniMissionStartTimeField, sdata.MiniMissionStartTime);
+
+            // Building states
+            _rawBuildingStates = (int[])sdata.RawBuildingStates.Clone();
+            _hasBuildingStates = sdata.HasBuildingStates;
+            for (int i = 0; i < SettlementLogic.BuildingStateSlotCount; i++)
+            {
+                _editorUpdating = true;
+                try
+                {
+                    SetBuildingStateComboValue(i, sdata.BuildingStates[i]);
+                    _buildingStateInfoLabels[i].Text = SettlementLogic.SettlementBuildingState.GetBuildingSlotDescription(sdata.BuildingStates[i]);
+                }
+                finally { _editorUpdating = false; }
+            }
+            LoadEditorFromSlot();
 
             // Perks
             var perksArr = settlement.GetArray("Perks");
@@ -389,7 +520,8 @@ public partial class SettlementPanel : UserControl
                         Image? icon = GetProductionIcon(lookupId);
                         int amount = 0;
                         try { amount = prodObj.GetInt("Amount"); } catch { }
-                        _productionGrid.Rows.Add(icon ?? (object)_placeholderIcon, itemName, elementId, amount);
+                        _productionGrid.Rows.Add(icon ?? (object)_placeholderIcon, itemName, elementId,
+                            amount.ToString(System.Globalization.CultureInfo.InvariantCulture));
                     }
                     catch { }
                 }
@@ -401,13 +533,14 @@ public partial class SettlementPanel : UserControl
     private void OnSettlementNameChanged(object? sender, EventArgs e)
     {
         if (_settlementSelector.SelectedIndex < 0 || _settlementSelector.Items.Count == 0) return;
+        int dataIdx = _filteredIndices[_settlementSelector.SelectedIndex];
         string newName = string.IsNullOrWhiteSpace(_settlementName.Text)
-            ? UiStrings.Format("settlement.fallback_name", _filteredIndices[_settlementSelector.SelectedIndex] + 1)
+            ? UiStrings.Format("settlement.fallback_name", dataIdx + 1)
             : _settlementName.Text;
         int idx = _settlementSelector.SelectedIndex;
         _settlementSelector.SelectedIndexChanged -= OnSettlementSelected;
         _settlementSelector.Items.RemoveAt(idx);
-        _settlementSelector.Items.Insert(idx, newName);
+        _settlementSelector.Items.Insert(idx, $"[{dataIdx}] {newName}");
         _settlementSelector.SelectedIndex = idx;
         _settlementSelector.SelectedIndexChanged += OnSettlementSelected;
     }
@@ -417,9 +550,16 @@ public partial class SettlementPanel : UserControl
         _settlementName.Text = "";
         _seedField.Text = "";
         for (int i = 0; i < StatCount; i++)
+        {
             _statFields[i].Value = 0;
+            _statFields[i].ForeColor = SystemColors.WindowText;
+        }
+        _populationField.Value = 0;
+        _populationField.Enabled = false;
+        _hasPopulationKey = false;
+        _rawPopulation = null;
         _decisionTypeField.SelectedIndex = -1;
-        _lastDecisionTimeField.Value = _lastDecisionTimeField.MinDate;
+        _lastDecisionTimeField.Checked = false;
         for (int i = 0; i < PerkSlotCount; i++)
         {
             _perkCombos[i].SelectedIndex = 0;
@@ -427,6 +567,42 @@ public partial class SettlementPanel : UserControl
             _perkSeedPanels[i].Visible = false;
         }
         _productionGrid.Rows.Clear();
+
+        // New fields
+        _raceField.SelectedIndex = -1;
+        _lastBugAttackTimeField.Checked = false;
+        _lastAlertTimeField.Checked = false;
+        _lastDebtTimeField.Checked = false;
+        _lastUpkeepTimeField.Checked = false;
+        _lastPopulationTimeField.Checked = false;
+        _miniMissionStartTimeField.Checked = false;
+        _missionSeedField.Text = "";
+        _rawBuildingStates = null;
+        _hasBuildingStates = false;
+        for (int i = 0; i < SettlementLogic.BuildingStateSlotCount; i++)
+        {
+            _editorUpdating = true;
+            try
+            {
+                SetBuildingStateComboValue(i, 0);
+            }
+            finally { _editorUpdating = false; }
+            _buildingStateInfoLabels[i].Text = "";
+        }
+
+        // Clear building editor
+        _editorUpdating = true;
+        try
+        {
+            _editorRawValueField.Value = 0;
+            _editorClassValueLabel.Text = "-";
+            _editorStateValueLabel.Text = "-";
+            for (int i = 0; i < InitPhaseCount; i++) _editorInitCheckboxes[i].Checked = false;
+            for (int i = 0; i < UpgradePhaseCount; i++) _editorUpgradeCheckboxes[i].Checked = false;
+            for (int i = 0; i < TierBitCount; i++) _editorTierCheckboxes[i].Checked = false;
+            for (int i = 0; i < FlagBitCount; i++) _editorFlagCheckboxes[i].Checked = false;
+        }
+        finally { _editorUpdating = false; }
     }
 
     // --- Production icon support ---
@@ -442,14 +618,21 @@ public partial class SettlementPanel : UserControl
         var icon = _iconManager.GetIconForItem(itemId, _database);
         if (icon == null) return null;
 
-        var scaled = new Bitmap(24, 24);
-        using (var g = Graphics.FromImage(scaled))
+        try
         {
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            g.DrawImage(icon, 0, 0, 24, 24);
+            var scaled = new Bitmap(24, 24);
+            using (var g = Graphics.FromImage(scaled))
+            {
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawImage(icon, 0, 0, 24, 24);
+            }
+            _scaledIconCache[itemId] = scaled;
+            return scaled;
         }
-        _scaledIconCache[itemId] = scaled;
-        return scaled;
+        catch
+        {
+            return null;
+        }
     }
 
     private void OnProductionGridCellClick(object? sender, DataGridViewCellEventArgs e)
@@ -641,9 +824,344 @@ public partial class SettlementPanel : UserControl
             : -1;
     }
 
+    // --- Timestamp helpers ---
+
+    private static void LoadTimestamp(DateTimePicker picker, long unixSeconds)
+    {
+        if (unixSeconds > 0)
+        {
+            picker.Value = DateTimeOffset.FromUnixTimeSeconds(unixSeconds).ToLocalTime().DateTime;
+            picker.Checked = true;
+        }
+        else
+        {
+            picker.Checked = false;
+        }
+    }
+
+    private static long ReadTimestamp(DateTimePicker picker)
+    {
+        if (!picker.Checked) return 0;
+        return ((DateTimeOffset)picker.Value.ToUniversalTime()).ToUnixTimeSeconds();
+    }
+
+    // --- Race ComboBox support ---
+
+    private static void OnRaceComboDrawItem(object? sender, DrawItemEventArgs e)
+    {
+        if (e.Index < 0) return;
+        var combo = (ComboBox)sender!;
+        if (combo.Items[e.Index] is not RaceComboItem item) return;
+
+        e.DrawBackground();
+        var font = e.Font ?? combo.Font;
+        using var brush = new SolidBrush(e.ForeColor);
+        e.Graphics.DrawString(item.DisplayText, font, brush, e.Bounds);
+        e.DrawFocusRectangle();
+    }
+
+    private void PopulateRaceCombo()
+    {
+        _raceField.Items.Clear();
+        foreach (var race in SettlementLogic.AlienRaces)
+        {
+            string display = SettlementLogic.AlienRaceDisplayNames.TryGetValue(race, out var dn) ? dn : race;
+            if (SettlementLogic.AlienRaceLocKeys.TryGetValue(race, out var locKey))
+            {
+                var localised = UiStrings.Get(locKey);
+                if (!string.IsNullOrEmpty(localised) && localised != locKey)
+                    display = localised;
+            }
+            _raceField.Items.Add(new RaceComboItem(race, $"{display} ({race})"));
+        }
+    }
+
+    private void LoadRaceCombo(string alienRace)
+    {
+        for (int i = 0; i < _raceField.Items.Count; i++)
+        {
+            if (_raceField.Items[i] is RaceComboItem item &&
+                string.Equals(item.InternalId, alienRace, StringComparison.OrdinalIgnoreCase))
+            {
+                _raceField.SelectedIndex = i;
+                return;
+            }
+        }
+        _raceField.SelectedIndex = _raceField.Items.Count > 0 ? 0 : -1;
+    }
+
+    private string GetSelectedRace()
+    {
+        if (_raceField.SelectedItem is RaceComboItem item)
+            return item.InternalId;
+        return "None";
+    }
+
+    private void RefreshRaceCombo()
+    {
+        int savedIdx = _raceField.SelectedIndex;
+        string? savedRace = (_raceField.SelectedItem as RaceComboItem)?.InternalId;
+        PopulateRaceCombo();
+        if (savedRace != null)
+            LoadRaceCombo(savedRace);
+        else if (savedIdx >= 0 && savedIdx < _raceField.Items.Count)
+            _raceField.SelectedIndex = savedIdx;
+    }
+
+    // --- Building state support ---
+
+    private void OnBuildingStateChanged(int slot)
+    {
+        if (slot < 0 || slot >= SettlementLogic.BuildingStateSlotCount) return;
+        int value = (int)_buildingStateNuds[slot].Value;
+        _buildingStateInfoLabels[slot].Text = SettlementLogic.SettlementBuildingState.GetBuildingSlotDescription(value);
+        // Sync editor if showing the same slot
+        if (_editorSlotSelector != null && (int)_editorSlotSelector.Value - 1 == slot && !_editorUpdating)
+        {
+            _editorUpdating = true;
+            try
+            {
+                _editorRawValueField.Value = value;
+                UpdateEditorCheckboxesFromValue(value);
+                UpdateEditorClassState(value);
+            }
+            finally { _editorUpdating = false; }
+        }
+    }
+
+    private void OnBuildingStateNudChanged(int slot)
+    {
+        if (_editorUpdating) return;
+        int value = (int)_buildingStateNuds[slot].Value;
+        _editorUpdating = true;
+        try
+        {
+            SyncComboToValue(slot, value);
+
+            _buildingStateInfoLabels[slot].Text = SettlementLogic.SettlementBuildingState.GetBuildingSlotDescription(value);
+
+            if (_editorSlotSelector != null && (int)_editorSlotSelector.Value - 1 == slot)
+            {
+                _editorRawValueField.Value = value;
+                UpdateEditorCheckboxesFromValue(value);
+                UpdateEditorClassState(value);
+            }
+        }
+        finally { _editorUpdating = false; }
+    }
+
+    private void OnBuildingStateComboChanged(int slot)
+    {
+        if (_editorUpdating) return;
+        int selectedIdx = _buildingStateFields[slot].SelectedIndex;
+        if (selectedIdx < 0) return;
+
+        _editorUpdating = true;
+        try
+        {
+            if (selectedIdx < SettlementDatabase.KnownMilestones.Length)
+            {
+                int value = SettlementDatabase.KnownMilestones[selectedIdx].Value;
+                _buildingStateNuds[slot].Value = value;
+                _buildingStateInfoLabels[slot].Text = SettlementLogic.SettlementBuildingState.GetBuildingSlotDescription(value);
+
+                if (_editorSlotSelector != null && (int)_editorSlotSelector.Value - 1 == slot)
+                {
+                    _editorRawValueField.Value = value;
+                    UpdateEditorCheckboxesFromValue(value);
+                    UpdateEditorClassState(value);
+                }
+            }
+            else
+            {
+                _buildingStateNuds[slot].Value = 0;
+                _buildingStateInfoLabels[slot].Text = SettlementLogic.SettlementBuildingState.GetBuildingSlotDescription(0);
+
+                if (_editorSlotSelector != null && (int)_editorSlotSelector.Value - 1 == slot)
+                {
+                    _editorRawValueField.Value = 0;
+                    UpdateEditorCheckboxesFromValue(0);
+                    UpdateEditorClassState(0);
+                }
+            }
+        }
+        finally { _editorUpdating = false; }
+    }
+
+    /// <summary>Populates a building state ComboBox with known milestone values.</summary>
+    private static void PopulateBuildingStateCombo(ComboBox combo)
+    {
+        foreach (var (value, locKey) in SettlementDatabase.KnownMilestones)
+        {
+            string label = UiStrings.Get(locKey);
+            combo.Items.Add($"{value} - {label}");
+        }
+        combo.Items.Add(UiStrings.Get("settlement.bs_custom"));
+    }
+
+    /// <summary>Returns the ComboBox index for a milestone value, or -1 if not a known milestone.</summary>
+    private static int FindMilestoneIndex(int value)
+    {
+        for (int j = 0; j < SettlementDatabase.KnownMilestones.Length; j++)
+        {
+            if (SettlementDatabase.KnownMilestones[j].Value == value)
+                return j;
+        }
+        return -1;
+    }
+
+    /// <summary>Selects the matching milestone in the combo or falls back to the "Custom" entry.</summary>
+    private void SyncComboToValue(int slot, int value)
+    {
+        int idx = FindMilestoneIndex(value);
+        _buildingStateFields[slot].SelectedIndex = idx >= 0 ? idx : _buildingStateFields[slot].Items.Count - 1;
+    }
+
+    /// <summary>Sets the value of a building state slot, syncing both NUD and ComboBox.</summary>
+    private void SetBuildingStateComboValue(int slot, int value)
+    {
+        _buildingStateNuds[slot].Value = value;
+        SyncComboToValue(slot, value);
+    }
+
+    /// <summary>Re-populates all building state ComboBoxes with localised milestone labels.</summary>
+    private void RefreshBuildingStateCombos()
+    {
+        if (_buildingStateFields == null) return;
+        for (int i = 0; i < _buildingStateFields.Length; i++)
+        {
+            int currentValue = (int)_buildingStateNuds[i].Value;
+            _buildingStateFields[i].Items.Clear();
+            PopulateBuildingStateCombo(_buildingStateFields[i]);
+            SyncComboToValue(i, currentValue);
+        }
+    }
+
+    // --- Building Editor support ---
+
+    private void OnEditorSlotChanged(object? sender, EventArgs e)
+    {
+        if (_editorRawValueField == null) return;
+        LoadEditorFromSlot();
+    }
+
+    private void LoadEditorFromSlot()
+    {
+        if (_editorRawValueField == null || _editorInitCheckboxes == null) return;
+        int slot = (int)_editorSlotSelector.Value - 1;
+        if (slot < 0 || slot >= SettlementLogic.BuildingStateSlotCount) return;
+
+        int value = (int)_buildingStateNuds[slot].Value;
+
+        _editorUpdating = true;
+        try
+        {
+            _editorRawValueField.Value = value;
+            UpdateEditorCheckboxesFromValue(value);
+            UpdateEditorClassState(value);
+        }
+        finally { _editorUpdating = false; }
+    }
+
+    private void UpdateEditorCheckboxesFromValue(int value)
+    {
+        for (int i = 0; i < InitPhaseCount; i++)
+            _editorInitCheckboxes[i].Checked = ((value >> i) & 1) != 0;
+        for (int i = 0; i < UpgradePhaseCount; i++)
+            _editorUpgradeCheckboxes[i].Checked = ((value >> (10 + i)) & 1) != 0;
+        for (int i = 0; i < TierBitCount; i++)
+            _editorTierCheckboxes[i].Checked = ((value >> (20 + i)) & 1) != 0;
+        for (int i = 0; i < FlagBitCount; i++)
+            _editorFlagCheckboxes[i].Checked = ((value >> (26 + i)) & 1) != 0;
+    }
+
+    private void UpdateEditorClassState(int value)
+    {
+        if (SettlementLogic.SettlementBuildingState.IsEmpty(value))
+        {
+            _editorClassValueLabel.Text = "-";
+            _editorStateValueLabel.Text = UiStrings.Get("settlement.bs_empty");
+            return;
+        }
+        var (classKey, stateKey) = SettlementLogic.SettlementBuildingState.DetermineClassAndState(value);
+        _editorClassValueLabel.Text = UiStrings.Get(classKey);
+        _editorStateValueLabel.Text = UiStrings.Get(stateKey);
+    }
+
+    private int ComputeValueFromEditorCheckboxes()
+    {
+        int value = 0;
+        for (int i = 0; i < InitPhaseCount; i++)
+            if (_editorInitCheckboxes[i].Checked) value |= (1 << i);
+        for (int i = 0; i < UpgradePhaseCount; i++)
+            if (_editorUpgradeCheckboxes[i].Checked) value |= (1 << (10 + i));
+        for (int i = 0; i < TierBitCount; i++)
+            if (_editorTierCheckboxes[i].Checked) value |= (1 << (20 + i));
+        for (int i = 0; i < FlagBitCount; i++)
+            if (_editorFlagCheckboxes[i].Checked) value |= (1 << (26 + i));
+        return value;
+    }
+
+    private void OnEditorCheckboxChanged(object? sender, EventArgs e)
+    {
+        if (_editorUpdating || _editorRawValueField == null) return;
+        int value = ComputeValueFromEditorCheckboxes();
+        _editorUpdating = true;
+        try
+        {
+            _editorRawValueField.Value = value;
+            UpdateEditorClassState(value);
+        }
+        finally { _editorUpdating = false; }
+    }
+
+    private void OnEditorRawValueChanged(object? sender, EventArgs e)
+    {
+        if (_editorUpdating) return;
+        int value = (int)_editorRawValueField.Value;
+        _editorUpdating = true;
+        try
+        {
+            UpdateEditorCheckboxesFromValue(value);
+            UpdateEditorClassState(value);
+        }
+        finally { _editorUpdating = false; }
+    }
+
+    private void OnEditorApply(object? sender, EventArgs e)
+    {
+        int slot = (int)_editorSlotSelector.Value - 1;
+        if (slot < 0 || slot >= SettlementLogic.BuildingStateSlotCount) return;
+
+        int value = ComputeValueFromEditorCheckboxes();
+        _editorUpdating = true;
+        try
+        {
+            SetBuildingStateComboValue(slot, value);
+            OnBuildingStateChanged(slot);
+        }
+        finally { _editorUpdating = false; }
+    }
+
+    /// <summary>
+    /// Applies colour coding to the stat NUD at the given index.
+    /// Crimson if ≤ min threshold, Tomato if ≥ max threshold, default otherwise.
+    /// </summary>
+    private void ApplyStatColor(int index)
+    {
+        if (index < 0 || index >= StatCount) return;
+        int value = (int)_statFields[index].Value;
+        if (value <= SettlementLogic.StatMinValues[index])
+            _statFields[index].ForeColor = Color.Crimson;
+        else if (value >= SettlementLogic.StatMaxValues[index])
+            _statFields[index].ForeColor = Color.Tomato;
+        else
+            _statFields[index].ForeColor = SystemColors.WindowText;
+    }
+
     private static readonly string[] StatLocKeys =
     {
-        "settlement.population", "settlement.happiness", "settlement.productivity",
+        "settlement.max_population", "settlement.happiness", "settlement.productivity",
         "settlement.upkeep", "settlement.sentinels", "settlement.debt",
         "settlement.alert", "settlement.bug_attack"
     };
@@ -655,6 +1173,8 @@ public partial class SettlementPanel : UserControl
         _exportSettlementBtn.Text = UiStrings.Get("common.export");
         _importSettlementBtn.Text = UiStrings.Get("common.import");
         _generateSeedBtn.Text = UiStrings.Get("common.generate");
+        for (int i = 0; i < _perkSeedGenerateButtons.Length; i++)
+            _perkSeedGenerateButtons[i].Text = UiStrings.Get("common.generate");
 
         // Form row labels
         _nameLabel.Text = UiStrings.Get("settlement.name");
@@ -667,6 +1187,7 @@ public partial class SettlementPanel : UserControl
         // Stat row labels
         for (int i = 0; i < StatCount && i < StatLocKeys.Length; i++)
             _statRowLabels[i].Text = UiStrings.Get(StatLocKeys[i]);
+        _populationLabel.Text = UiStrings.Get("settlement.population");
 
         // Production section
         _productionHeaderLabel.Text = UiStrings.Get("settlement.production_header");
@@ -677,8 +1198,53 @@ public partial class SettlementPanel : UserControl
         if (_productionGrid.Columns["Edit"] is DataGridViewColumn editCol) editCol.HeaderText = UiStrings.Get("settlement.col_edit");
         if (_productionGrid.Columns["Amount"] is DataGridViewColumn amtCol) amtCol.HeaderText = UiStrings.Get("settlement.col_amount");
 
+        // Tab labels
+        _tabControl.TabPages[0].Text = UiStrings.Get("settlement.tab_stats_perks");
+        _tabControl.TabPages[1].Text = UiStrings.Get("settlement.tab_production");
+        _tabControl.TabPages[2].Text = UiStrings.Get("settlement.tab_building_states");
+        _tabControl.TabPages[3].Text = UiStrings.Get("settlement.tab_building_editor");
+
+        // Experimental warning labels
+        _buildingStatesExperimentalWarningLabel.Text = UiStrings.Get("settlement.experimental_warning");
+        _editorExperimentalWarningLabel.Text = UiStrings.Get("settlement.experimental_warning");
+
+        // New field labels
+        _raceLabel.Text = UiStrings.Get("settlement.race");
+        _lastBugAttackTimeLabel.Text = UiStrings.Get("settlement.last_bug_attack_time");
+        _lastAlertTimeLabel.Text = UiStrings.Get("settlement.last_alert_time");
+        _lastDebtTimeLabel.Text = UiStrings.Get("settlement.last_debt_time");
+        _lastUpkeepTimeLabel.Text = UiStrings.Get("settlement.last_upkeep_time");
+        _lastPopulationTimeLabel.Text = UiStrings.Get("settlement.last_population_time");
+        _missionSeedLabel.Text = UiStrings.Get("settlement.mission_seed");
+        _generateMissionSeedBtn.Text = UiStrings.Get("common.generate");
+        _miniMissionStartTimeLabel.Text = UiStrings.Get("settlement.mini_mission_start_time");
+
+        // Refresh race combo with localised names
+        RefreshRaceCombo();
+
         // Refresh decision type combo with localised display names
         RefreshDecisionTypeCombo();
+
+        // Refresh building state combos with localised milestone labels
+        RefreshBuildingStateCombos();
+
+        // Building Editor tab labels
+        _editorHeaderLabel.Text = UiStrings.Get("settlement.tab_building_editor");
+        _editorRawValueLabel.Text = UiStrings.Get("settlement.bs_editor_raw_value");
+        _editorApplyBtn.Text = UiStrings.Get("settlement.bs_editor_apply");
+        _editorClassDisplayLabel.Text = UiStrings.Get("settlement.bs_editor_class");
+        _editorStateDisplayLabel.Text = UiStrings.Get("settlement.bs_editor_state");
+        _editorInitPhasesLabel.Text = UiStrings.Get("settlement.bs_editor_init_phases");
+        _editorUpgradePhasesLabel.Text = UiStrings.Get("settlement.bs_editor_upgrade_phases");
+        _editorTierLabel.Text = UiStrings.Get("settlement.bs_editor_tier_heading");
+        _editorTierInlineLabels[0].Text = UiStrings.Get("settlement.bs_editor_tier_b");
+        _editorTierInlineLabels[1].Text = UiStrings.Get("settlement.bs_editor_tier_a");
+        _editorTierInlineLabels[2].Text = UiStrings.Get("settlement.bs_editor_tier_s");
+        _editorFlagsLabel.Text = UiStrings.Get("settlement.bs_editor_flags_heading");
+        _editorFlagCheckboxes[0].Text = UiStrings.Get("settlement.bs_editor_class_active");
+        _editorFlagCheckboxes[1].Text = UiStrings.Get("settlement.bs_editor_b_arrived");
+        _editorFlagCheckboxes[2].Text = UiStrings.Get("settlement.bs_editor_a_arrived");
+        _editorFlagCheckboxes[3].Text = UiStrings.Get("settlement.bs_editor_s_arrived");
     }
 
     private void RefreshDecisionTypeCombo()

@@ -53,7 +53,7 @@ public class GameItemDatabase
 
                     // Skip non-item-database files that have different schemas
                     // and are loaded separately (e.g. RewardDatabase, RecipeDatabase,
-                    // FrigateTraitDatabase, SettlementPerkDatabase, WikiGuideDatabase, etc.)
+                    // FrigateTraitDatabase, SettlementDatabase, WikiGuideDatabase, etc.)
                     if (itemType.Equals("Rewards", StringComparison.OrdinalIgnoreCase) ||
                         itemType.Equals("Recipes", StringComparison.OrdinalIgnoreCase) ||
                         itemType.Equals("Words", StringComparison.OrdinalIgnoreCase) ||
