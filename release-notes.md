@@ -8,6 +8,7 @@
 
 - Discoveries panel renamed to Catalogue to align with the game.
 - Optimise button added to Corvettes in the Starship panel (re-orders components for better handling stats and quicker loading times).
+- Support for NMS Model IO Tool .nmsship importing.
 <!-- - macOS .dmg available (require Wine/Whisky/etc. to be installed). -->
 - Raw JSON Editor improvements:
     - Basic inline editing.
