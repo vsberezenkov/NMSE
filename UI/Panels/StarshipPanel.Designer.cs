@@ -216,6 +216,8 @@ partial class StarshipPanel
         _snapshotTechBtn.Click += OnSnapshotTech;
         _importSnapshotBtn = new Button { Text = "Import Snapshot", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(100, 0), Visible = false };
         _importSnapshotBtn.Click += OnImportSnapshot;
+        _optimiseBtn = new Button { Text = "Optimise", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(100, 0), Visible = false };
+        _optimiseBtn.Click += OnOptimiseCorvette;
         _corvetteWarningLabel = new ColorEmojiLabel
         {
             Text = "\u26A0 Saves only store full Technology slots for your last active Corvette.",
@@ -233,6 +235,7 @@ partial class StarshipPanel
         buttonPanel.Controls.Add(_makePrimaryBtn);
         buttonPanel.Controls.Add(_snapshotTechBtn);
         buttonPanel.Controls.Add(_importSnapshotBtn);
+        buttonPanel.Controls.Add(_optimiseBtn);
         buttonPanel.Controls.Add(_corvetteWarningLabel);
         detailsStatsLayout.Controls.Add(buttonPanel, 0, 1);
         detailsStatsLayout.SetColumnSpan(buttonPanel, 2);
@@ -293,6 +296,7 @@ partial class StarshipPanel
     private Button _importCorvetteBtn = null!;
     private Button _snapshotTechBtn = null!;
     private Button _importSnapshotBtn = null!;
+    private Button _optimiseBtn = null!;
     private DoubleBufferedTabControl _invTabs = null!;
     private InventoryGridPanel _inventoryGrid = null!;
     private InventoryGridPanel _techGrid = null!;

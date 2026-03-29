@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using NMSE.Data;
 using NMSE.Models;
 
@@ -589,19 +590,46 @@ internal static class StarshipLogic
     }
 
     /// <summary>
-    /// Finds the index of a corvette's player ship base entry by matching its seed against the base owner timestamp.
-    /// The game can drift the TS epoch timestamp by up to ~120 seconds relative to the seed, so this method
-    /// uses a 3-tier fallback: exact match -> +/-1s -> +/-60s -> +/-120s. When multiple candidates fall within
-    /// the same tolerance tier, the one with the smallest absolute delta is chosen.
+    /// Finds the index of a corvette's player ship base entry in the PersistentPlayerBases array.
+    /// Uses two strategies in order:
+    ///   1. UserData matching - the base's UserData field stores the ShipOwnership index directly.
+    ///      This is a more reliable method than the previous community TS understanding.
+    ///   2. TS/seed matching - falls back to matching the base Owner.TS against the ship seed
+    ///      with tolerance tiers (exact, +/-1s, +/-60s, +/-120s) for saves where UserData
+    ///      may not align. Effectively obsolete.
+    /// Only bases with BaseType "PlayerShipBase" are considered.
     /// </summary>
     /// <param name="bases">The persistent player bases JSON array.</param>
-    /// <param name="seedDecimal">The decimal seed value to match.</param>
+    /// <param name="shipIndex">The ship's index in the ShipOwnership array.</param>
+    /// <param name="seedDecimal">The decimal seed value for TS fallback matching.</param>
     /// <returns>The base index, or -1 if not found.</returns>
-    internal static int FindCorvetteBaseIndex(JsonArray? bases, long seedDecimal)
+    internal static int FindCorvetteBaseIndex(JsonArray? bases, int shipIndex, long seedDecimal)
     {
-        if (bases == null || seedDecimal == 0) return -1;
+        if (bases == null) return -1;
 
-        // Tolerance tiers in seconds (ascending).
+        // Strategy 1: match by base UserData == shipIndex
+        for (int i = 0; i < bases.Length; i++)
+        {
+            try
+            {
+                var b = bases.GetObject(i);
+                var baseType = b.GetObject("BaseType");
+                if (baseType == null) continue;
+                string bt = baseType.GetString("PersistentBaseTypes") ?? "";
+                if (!bt.Equals("PlayerShipBase", StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                long ud = 0;
+                try { ud = (long)b.GetDouble("UserData"); } catch { }
+                if (ud == shipIndex)
+                    return i;
+            }
+            catch { }
+        }
+
+        // Strategy 2: TS/seed matching with tolerance tiers (obsolete).
+        if (seedDecimal == 0) return -1;
+
         ReadOnlySpan<long> tolerances = [0, 1, 60, 120];
 
         foreach (long tol in tolerances)
@@ -614,20 +642,19 @@ internal static class StarshipLogic
                 try
                 {
                     var b = bases.GetObject(i);
-                    var owner = b.GetObject("Owner");
-                    if (owner == null) continue;
-
-                    long ts = 0;
-                    try { ts = (long)owner.GetDouble("TS"); } catch { }
-
-                    long delta = Math.Abs(ts - seedDecimal);
-                    if (delta > tol) continue;
-
                     var baseType = b.GetObject("BaseType");
                     if (baseType == null) continue;
                     string bt = baseType.GetString("PersistentBaseTypes") ?? "";
                     if (!bt.Equals("PlayerShipBase", StringComparison.OrdinalIgnoreCase))
                         continue;
+
+                    var owner = b.GetObject("Owner");
+                    if (owner == null) continue;
+                    long ts = 0;
+                    try { ts = (long)owner.GetDouble("TS"); } catch { }
+
+                    long delta = Math.Abs(ts - seedDecimal);
+                    if (delta > tol) continue;
 
                     if (delta < bestDelta)
                     {
@@ -642,6 +669,15 @@ internal static class StarshipLogic
         }
 
         return -1;
+    }
+
+    /// <summary>
+    /// Legacy overload that uses seed-only matching.
+    /// Retained for backwards compatibility with callers that do not have the ship index.
+    /// </summary>
+    internal static int FindCorvetteBaseIndex(JsonArray? bases, long seedDecimal)
+    {
+        return FindCorvetteBaseIndex(bases, -1, seedDecimal);
     }
 
     /// <summary>
@@ -661,6 +697,93 @@ internal static class StarshipLogic
             return string.IsNullOrEmpty(name) ? $"Ship {primaryIndex + 1}" : name;
         }
         catch { return "Unknown"; }
+    }
+
+    /// <summary>
+    /// Checks whether the CCD entry represents the default/blank customisation
+    /// (all empty collections, Scale 1.0, SelectedPreset "^", PaletteID "^").
+    /// </summary>
+    internal static bool IsCcdDefault(JsonObject ccd)
+    {
+        try
+        {
+            string preset = ccd.GetString("SelectedPreset") ?? "";
+            if (preset != "^" && preset != "") return false;
+
+            var custom = ccd.GetObject("CustomData");
+            if (custom == null) return true;
+
+            string palette = custom.GetString("PaletteID") ?? "";
+            if (palette != "^" && palette != "") return false;
+
+            foreach (var name in new[] { "DescriptorGroups", "Colours", "TextureOptions", "BoneScales" })
+            {
+                var arr = custom.GetArray(name);
+                if (arr != null && arr.Length > 0) return false;
+            }
+
+            return true;
+        }
+        catch
+        {
+            return true;
+        }
+    }
+
+    /// <summary>
+    /// Attempts to read a .nmsship file as a ZIP archive containing so.json, ccd.json, and objects.json.
+    /// Returns null if the file is not a ZIP or does not contain so.json.
+    /// This is to support IO Tool exports which are ZIPs containing the ship data in JSON files within.
+    /// </summary>
+    internal static (JsonObject ship, JsonObject? ccd, JsonArray? objects)? TryReadNmsshipZip(string filePath)
+    {
+        try
+        {
+            using var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+            byte[] header = new byte[4];
+            if (fs.Read(header, 0, 4) < 4) return null;
+            // PK header check (ZIP magic: 0x50 0x4B 0x03 0x04)
+            // WHO'S TOES ARE THOSE???
+            if (header[0] != 0x50 || header[1] != 0x4B || header[2] != 0x03 || header[3] != 0x04)
+                return null;
+
+            fs.Position = 0;
+            using var archive = new ZipArchive(fs, ZipArchiveMode.Read);
+
+            var soEntry = archive.GetEntry("so.json");
+            if (soEntry == null) return null;
+
+            JsonObject ship;
+            using (var reader = new StreamReader(soEntry.Open()))
+            {
+                string json = reader.ReadToEnd();
+                ship = JsonObject.Parse(json);
+            }
+
+            JsonObject? ccd = null;
+            var ccdEntry = archive.GetEntry("ccd.json");
+            if (ccdEntry != null)
+            {
+                using var reader = new StreamReader(ccdEntry.Open());
+                string json = reader.ReadToEnd();
+                ccd = JsonObject.Parse(json);
+            }
+
+            JsonArray? objects = null;
+            var objectsEntry = archive.GetEntry("objects.json");
+            if (objectsEntry != null)
+            {
+                using var reader = new StreamReader(objectsEntry.Open());
+                string json = reader.ReadToEnd();
+                objects = JsonArray.Parse(json);
+            }
+
+            return (ship, ccd, objects);
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     /// <summary>
@@ -780,5 +903,199 @@ internal static class StarshipLogic
         /// When set, each stat is only written if the UI value differs from
         /// the clamped raw value - preserving externally-edited values.</summary>
         public Dictionary<string, double>? RawStatValues { get; set; }
+    }
+
+    // --- Corvette optimisation ---
+
+    /// <summary>Minimum scale for the beam-up landing bay.</summary>
+    private const double MinBeamUpScale = 0.058;
+
+    /// <summary>
+    /// Returns the optimiser sort priority for a corvette building object.
+    ///
+    /// Uses the game's own <c>CorvettePartCategory</c> data (loaded from
+    /// <c>Corvette.json</c> via <see cref="Data.StarshipDatabase"/>) to
+    /// determine the correct category.  Only five functional categories
+    /// are sorted; everything else is left unsorted at the end.
+    ///
+    /// The priority order is:
+    /// Reactors -> Engines -> Landing Gears -> Landing Bays -> Cockpit -> Other
+    /// </summary>
+    internal static int GetPartPriority(string objectId)
+        => Data.StarshipDatabase.GetOptimizerPriority(objectId);
+
+    /// <summary>
+    /// Optimises a corvette's base building objects by reordering them to improve
+    /// the ships stats/handling in game.
+    ///
+    /// The priority order is determined by the game's own CorvettePartCategory data:
+    /// Reactors -> Engines (Thrusters + Wings) -> Landing Gears -> Landing Bays -> Cockpit -> Other
+    ///
+    /// Only functional parts (Reactor, Engine, Gear, Access, Cockpit) are sorted.
+    /// Non-functional parts (Wing, Shield, Hull, Connector, Interior, Decor, Gun,
+    /// Hab, etc.) are left unsorted at the end, preserving original save order.
+    ///
+    /// Within each sorted category, parts are in ordered (descending) by
+    /// Y-position (height) i.e. highest parts first.
+    ///
+    /// The optimisation also enforces these Corvette game rules:
+    ///   - The first cockpit becomes the camera cockpit
+    ///   - The second cockpit becomes the boarding cockpit
+    ///   - The highest landing bay becomes the active beam-up destination
+    ///   - The beam-up landing bay must be at least 0.058 in scale
+    ///   
+    /// Enforcements are derived from community testing and input.
+    /// 
+    /// </summary>
+    /// <param name="bases">The PersistentPlayerBases array from the save.</param>
+    /// <param name="shipIndex">The ship's index in the ShipOwnership array.</param>
+    /// <param name="seedDecimal">Decimal seed value of the corvette (used for TS fallback).</param>
+    /// <returns>The number of objects reordered, or -1 if the base was not found.</returns>
+    internal static int OptimiseCorvetteBase(JsonArray? bases, int shipIndex, long seedDecimal)
+    {
+        if (bases == null) return -1;
+
+        int baseIdx = FindCorvetteBaseIndex(bases, shipIndex, seedDecimal);
+        if (baseIdx < 0) return -1;
+
+        var baseObj = bases.GetObject(baseIdx);
+        var objectsArr = baseObj.GetArray("Objects");
+        if (objectsArr == null || objectsArr.Length <= 1) return 0;
+
+        return ReorderBuildingObjects(objectsArr);
+    }
+
+    /// <summary>
+    /// Legacy overload for callers that only have the seed (no ship index).
+    /// </summary>
+    internal static int OptimiseCorvetteBase(JsonArray? bases, long seedDecimal)
+    {
+        return OptimiseCorvetteBase(bases, -1, seedDecimal);
+    }
+
+    /// <summary>
+    /// Reads the Y-component (height) from an object's Position array.
+    /// Returns 0 if Position is missing or malformed.
+    /// </summary>
+    private static double GetPositionY(JsonObject obj)
+    {
+        try
+        {
+            var pos = obj.GetArray("Position");
+            if (pos != null && pos.Length >= 2)
+                return pos.GetDouble(1); // Y is index 1 in [X, Y, Z]
+        }
+        catch { }
+        return 0.0;
+    }
+
+    /// <summary>
+    /// Reads the Scale value from an object.
+    /// Returns 1.0 if Scale is missing or malformed.
+    /// </summary>
+    private static double GetScale(JsonObject obj)
+    {
+        try { return obj.GetDouble("Scale"); }
+        catch { return 1.0; }
+    }
+
+    /// <summary>
+    /// Reorders a building objects array in place by part category priority.
+    /// The priority order is driven by the game's own CorvettePartCategory data:
+    /// Reactors -> Engines -> Landing Gears -> Landing Bays -> Cockpit -> Other
+    ///
+    /// Within each sorted category, parts are ordered by Y-position descending
+    /// (highest parts first). Unsorted parts preserve their original relative order.
+    ///
+    /// Corvette rules enforced:
+    /// The beam-up landing bay (last in Access group = highest Y) must have
+    /// Scale >= 0.058f - if below, it is clamped up.
+    /// </summary>
+    /// <param name="objects">The Objects array from a PersistentPlayerBase entry.</param>
+    /// <returns>The number of objects in the reordered array.</returns>
+    internal static int ReorderBuildingObjects(JsonArray objects)
+    {
+        int count = objects.Length;
+        if (count <= 1) return count;
+
+        // Extract all objects with their original indices and priority
+        var items = new List<(int origIndex, int priority, string objectId, JsonObject obj)>(count);
+        for (int i = 0; i < count; i++)
+        {
+            var obj = objects.GetObject(i);
+            string objectId = "";
+            try { objectId = obj.GetString("ObjectID") ?? ""; } catch { }
+            int priority = GetPartPriority(objectId);
+            items.Add((i, priority, objectId, obj));
+        }
+
+        // Sort matching algorithm:
+        //   Primary: by category priority (Reactor -> Engine -> Gear -> Access -> Cockpit -> Other)
+        //   Secondary (then by with StringComparison.OrdinalIgnoreCase):
+        //     - Categories 1->4 (Reactor, Thruster, Wing, Gear) by fixed sub-order from priority map
+        //     - Categories 5->6 (Access, Cockpit) preserve original array index
+        //     - Other (int.MaxValue): alphabetically by object list display name, fallback to ObjectID
+        //   Tertiary: origIndex tiebreaker (in place of LINQ)
+        items.Sort((a, b) =>
+        {
+            int cmp = a.priority.CompareTo(b.priority);
+            if (cmp != 0) return cmp;
+
+            string keyA = GetSortKey(a.priority, a.objectId, a.origIndex);
+            string keyB = GetSortKey(b.priority, b.objectId, b.origIndex);
+            cmp = string.Compare(keyA, keyB, StringComparison.OrdinalIgnoreCase);
+            if (cmp != 0) return cmp;
+
+            // Stable tiebreaker: preserve original array order for equal keys
+            return a.origIndex.CompareTo(b.origIndex);
+        });
+
+        // Enforce the beam-up landing bay scale >= 0.058f.
+        // The last Access category object is the beam-up destination
+        int lastAccessIdx = -1;
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].priority == Data.StarshipDatabase.AccessPriority)
+                lastAccessIdx = i;
+        }
+        if (lastAccessIdx >= 0)
+        {
+            var bayObj = items[lastAccessIdx].obj;
+            double scale = GetScale(bayObj);
+            if (scale < MinBeamUpScale)
+            {
+                bayObj.Set("Scale", MinBeamUpScale);
+            }
+        }
+
+        // Rebuild the array in sorted order
+        objects.Clear();
+        foreach (var (_, _, _, obj) in items)
+            objects.Add(obj);
+
+        return count;
+    }
+
+    /// <summary>
+    /// Computes the secondary sort key for a corvette building object.
+    /// </summary>
+    private static string GetSortKey(int priority, string objectId, int origIndex)
+    {
+        // Access (5) and Cockpit (6) preserve original index
+        if (priority == Data.StarshipDatabase.AccessPriority ||
+            priority == Data.StarshipDatabase.CockpitPriority)
+        {
+            return origIndex.ToString("D6");
+        }
+
+        // Other (int.MaxValue): alphabetical by object list display name, fallback to ObjectID
+        if (priority == Data.StarshipDatabase.OtherPriority)
+        {
+            string displayName = Data.StarshipDatabase.GetDisplayName(objectId);
+            return !string.IsNullOrEmpty(displayName) ? displayName : objectId;
+        }
+
+        // Categories 1 -> 4 (Reactor, Thruster, Wing, Gear) by fixed sub-order
+        return Data.StarshipDatabase.GetSubOrder(objectId).ToString("D6");
     }
 }
