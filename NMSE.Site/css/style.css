@@ -164,10 +164,10 @@ main {
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-block;
-  margin-top: 1rem;
-  padding: 0.7rem 1.2rem;
+  margin-top: 0.75rem;
+  padding: 0.45rem 0.8rem;
   font-family: var(--font-mono);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--glow-teal);
@@ -177,22 +177,80 @@ main {
   cursor: pointer;
   transition: background 0.2s, box-shadow 0.2s;
   text-decoration: none;
+  min-width: 7.4rem;
+  text-align: center;
 }
 
 /* Ensure SVG icons inside buttons align nicely with the text */
 .btn svg {
-  width: 1.05rem;
-  height: 1.05rem;
+  width: 0.95rem;
+  height: 0.95rem;
   vertical-align: middle;
-  margin-right: 0.45rem;
+  margin-right: 0.25rem;
   fill: currentColor;
+}
+
+/* Tooltip pop-over for no-build state (CSS bubble) */
+.btn[data-tooltip] {
+  position: relative;
+}
+
+.btn[data-tooltip]:hover::after,
+.btn[data-tooltip]:focus::after {
+  content: attr(data-tooltip);
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: min(70vw, 400px);
+  white-space: normal;
+  background: rgba(28, 38, 71, 0.95);
+  color: #ffffff;
+  border: 1px solid rgba(125, 210, 255, 0.8);
+  border-radius: 4px;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.74rem;
+  z-index: 9999;
+  pointer-events: none;
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.35);
+}
+
+.btn[data-tooltip]:hover::before,
+.btn[data-tooltip]:focus::before {
+  content: "";
+  position: fixed;
+  top: 0.9rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px 5px 0 5px;
+  border-style: solid;
+  border-color: rgba(28, 38, 71, 0.95) transparent transparent transparent;
+  z-index: 9999;
+}
+
+#download {
+  padding: 0.95rem;
+}
+
+#download .btn-row {
+  margin-top: 0.4rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.4rem;
+  overflow-x: auto;
+}
+
+.btn-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 #download .build-info {
   margin-top: 0.3rem;
-}
-#download .btn-row {
-  margin-top: 0rem;
 }
 #download .note {
   margin-top: 0.8rem;
@@ -202,14 +260,6 @@ main {
 #download-link-linux svg {
   width: 1.45rem;
   height: 1.45rem;
-}
-
-.btn-row {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1rem;
 }
 
 .btn:hover {
