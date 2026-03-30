@@ -1207,6 +1207,9 @@ public partial class SettlementPanel : UserControl
             _statRowLabels[i].Text = UiStrings.Get(StatLocKeys[i]);
         _populationLabel.Text = UiStrings.Get("settlement.population");
 
+        // Deletion warning label
+        _settleWarnLabel.Text = UiStrings.Get("settlement.delete_warning");
+
         // Production section
         _productionHeaderLabel.Text = UiStrings.Get("settlement.production_header");
 

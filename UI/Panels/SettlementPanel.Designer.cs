@@ -113,9 +113,9 @@ partial class SettlementPanel
         selectorPanel.Controls.Add(_importSettlementBtn);
 
         // Warning
-        var settleWarn = new Label
+        _settleWarnLabel = new Label
         {
-            Text = "\u26A0 Deleting a settlement doesn't remove the teleporter entry. You can remove it from Discoveries -> Teleport Destinations.",
+            Text = UiStrings.Get("⚠ Deleting a settlement doesn't remove the teleporter entry. You can remove it from Catalogue -> Teleport Destinations."),
             AutoSize = true,
             ForeColor = Color.DarkOrange,
             Font = new System.Drawing.Font("Segoe UI Emoji", 9F, System.Drawing.FontStyle.Bold),
@@ -125,7 +125,7 @@ partial class SettlementPanel
         // Add selector row, then place the warning label inline in the same FlowLayoutPanel so it appears next to the buttons
         topLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         topLayout.Controls.Add(selectorPanel, 0, topRow++);
-        selectorPanel.Controls.Add(settleWarn);
+        selectorPanel.Controls.Add(_settleWarnLabel);
 
         topLayout.RowCount = topRow;
         mainLayout.Controls.Add(topLayout, 0, 0);
@@ -508,7 +508,7 @@ partial class SettlementPanel
 
         _buildingStatesExperimentalWarningLabel = new Label
         {
-            Text = UiStrings.Get("settlement.experimental_warning"),
+            Text = UiStrings.Get("Warning: This panel functionality is currently experimental!"),
             AutoSize = true,
             ForeColor = Color.DarkOrange,
             Padding = new Padding(0, 0, 0, 5),
@@ -895,6 +895,7 @@ partial class SettlementPanel
     private Label[] _statRowLabels = null!;
     private Label _populationLabel = null!;
     private Label _productionHeaderLabel = null!;
+    private Label _settleWarnLabel = null!;
 
     // NPC Race
     private ComboBox _raceField = null!;
