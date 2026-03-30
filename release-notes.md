@@ -1,8 +1,20 @@
-## NMSE — No Man's Save Editor v1.0.375 (preview)
+## NMSE — No Man's Save Editor v1.0.376 (preview)
 
 > This is a preview build. Please practice safe backup practices and expect some bugs.
 
 ### Changelog
+
+#### Features:
+
+- Add import file type filter to Corvette import button for .nmsship ZIP packages from NMS Model IO Tool.
+
+<br />
+
+
+<details>
+<summary>Previous Changelogs</summary>
+
+### Previous Changelog 1.0.375 (preview)
 
 #### Features:
 
@@ -15,10 +27,6 @@
 - Additional fixes for XBOX / Game Pass saves and some general enhancements and safeties around console save editing. (Issue #18, Issue #22)
 
 <br />
-
-
-<details>
-<summary>Previous Changelogs</summary>
 
 ### Previous Changelog 1.0.374 (preview)
 
