@@ -1,4 +1,4 @@
-## NMSE — No Man's Save Editor v1.0.374 (preview)
+## NMSE — No Man's Save Editor v1.0.375 (preview)
 
 > This is a preview build. Please practice safe backup practices and expect some bugs.
 
@@ -6,10 +6,28 @@
 
 #### Features:
 
+- Enhance ship names in drop down list (ships with no custom name now show their slot, type and class - named ships show their slot, name and class). (Feature Request #23)
+- Increase all base state value maximums to int.MaxValue to completely unclamp Starship, Multi-tool and Freighter stats. (Feature Request #23)
+- Settlement population value max clamp raised to 400. Colored warnings changed to exclusive values.
+
+#### Bug Fixes:
+
+- Additional fixes for XBOX / Game Pass saves and some general enhancements and safeties around console save editing. (Issue #18, Issue #22)
+
+<br />
+
+
+<details>
+<summary>Previous Changelogs</summary>
+
+### Previous Changelog 1.0.374 (preview)
+
+#### Features:
+
 - Discoveries panel renamed to Catalogue to align with the game.
 - Optimise button added to Corvettes in the Starship panel (re-orders components for better handling stats and quicker loading times).
 - Support for NMS Model IO Tool .nmsship importing.
-<!-- - macOS .dmg available (require Wine/Whisky/etc. to be installed). -->
+- macOS .dmg available (requires Wine/Whisky/etc. to be installed).
 - Raw JSON Editor improvements:
     - Basic inline editing.
     - In window export/import buttons.
@@ -40,10 +58,6 @@
 
 <br />
 
-
-<details>
-<summary>Previous Changelogs</summary>
-
 ### Previous Changelog 1.0.369 (preview)
 
 #### Features:
@@ -55,7 +69,7 @@
     - Production moved to it's own tab.
     - Building States (experimental) tab added. Contains initial reverse engineered state data and an ability to set building states from list or integer.
     - Building Editor (experimental) tab added. Contains the same reverse engineered states but with the ability to set each bit in the bitflag (for custom states).
-- Linux AppImage builds now on CI (thanks @maniro-x)
+- Linux AppImage builds now on CI
 - Both Windows and Linux downloads now supported on the website (via latest build fetch).
 
 #### Bug Fixes:
@@ -133,9 +147,9 @@ Happy travels interlopers! 👨‍🚀
 
 User guides are available from the [repo](https://github.com/vectorcmdr/NMSE/blob/main/docs/user/README.md), or via the [website](https://nmse.vectorcmdr.xyz/).
 
-Download via **Assets** below (for Windows and Linux).
+Download via **Assets** below (Windows (ZIP), Linux (AppImage) and macOS (DMG - requires Wine)).
 
-> Linux and macOS users can also run NMSE via Wine — see the [guides](https://github.com/vectorcmdr/NMSE#-cross-platform-via-wine).
+> Linux and macOS users can also run NMSE manually via Wine — see the [guides](https://github.com/vectorcmdr/NMSE#-cross-platform-via-wine).
 
 > 🛡️ VirusTotal scans for peace of mind are pending [here](#): pending...
 
