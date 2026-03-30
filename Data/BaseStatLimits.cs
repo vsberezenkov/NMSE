@@ -35,17 +35,17 @@ public static class BaseStatLimits
     {
         ["Normal"] = new()
         {
-            ["^SHIP_DAMAGE"] = new BaseStatRange { Id = "^SHIP_DAMAGE", MinValue = 0, MaxValue = 100 },
-            ["^SHIP_SHIELD"] = new BaseStatRange { Id = "^SHIP_SHIELD", MinValue = 0, MaxValue = 100 },
-            ["^SHIP_HYPERDRIVE"] = new BaseStatRange { Id = "^SHIP_HYPERDRIVE", MinValue = 0, MaxValue = 300 },
-            ["^SHIP_AGILE"] = new BaseStatRange { Id = "^SHIP_AGILE", MinValue = 0, MaxValue = 100 },
+            ["^SHIP_DAMAGE"] = new BaseStatRange { Id = "^SHIP_DAMAGE", MinValue = 0, MaxValue = int.MaxValue },
+            ["^SHIP_SHIELD"] = new BaseStatRange { Id = "^SHIP_SHIELD", MinValue = 0, MaxValue = int.MaxValue },
+            ["^SHIP_HYPERDRIVE"] = new BaseStatRange { Id = "^SHIP_HYPERDRIVE", MinValue = 0, MaxValue = int.MaxValue },
+            ["^SHIP_AGILE"] = new BaseStatRange { Id = "^SHIP_AGILE", MinValue = 0, MaxValue = int.MaxValue },
         },
         ["Alien"] = new()
         {
-            ["^SHIP_DAMAGE"] = new BaseStatRange { Id = "^SHIP_DAMAGE", MinValue = 0, MaxValue = 100 },
-            ["^SHIP_SHIELD"] = new BaseStatRange { Id = "^SHIP_SHIELD", MinValue = 0, MaxValue = 100 },
-            ["^SHIP_HYPERDRIVE"] = new BaseStatRange { Id = "^SHIP_HYPERDRIVE", MinValue = 0, MaxValue = 300 },
-            ["^SHIP_AGILE"] = new BaseStatRange { Id = "^SHIP_AGILE", MinValue = 0, MaxValue = 100 },
+            ["^SHIP_DAMAGE"] = new BaseStatRange { Id = "^SHIP_DAMAGE", MinValue = 0, MaxValue = int.MaxValue },
+            ["^SHIP_SHIELD"] = new BaseStatRange { Id = "^SHIP_SHIELD", MinValue = 0, MaxValue = int.MaxValue },
+            ["^SHIP_HYPERDRIVE"] = new BaseStatRange { Id = "^SHIP_HYPERDRIVE", MinValue = 0, MaxValue = int.MaxValue },
+            ["^SHIP_AGILE"] = new BaseStatRange { Id = "^SHIP_AGILE", MinValue = 0, MaxValue = int.MaxValue },
         },
     };
 
@@ -57,9 +57,9 @@ public static class BaseStatLimits
     {
         ["Normal"] = new()
         {
-            ["^WEAPON_DAMAGE"] = new BaseStatRange { Id = "^WEAPON_DAMAGE", MinValue = 0, MaxValue = 100 },
-            ["^WEAPON_MINING"] = new BaseStatRange { Id = "^WEAPON_MINING", MinValue = 0, MaxValue = 100 },
-            ["^WEAPON_SCAN"] = new BaseStatRange { Id = "^WEAPON_SCAN", MinValue = 0, MaxValue = 100 },
+            ["^WEAPON_DAMAGE"] = new BaseStatRange { Id = "^WEAPON_DAMAGE", MinValue = 0, MaxValue = int.MaxValue },
+            ["^WEAPON_MINING"] = new BaseStatRange { Id = "^WEAPON_MINING", MinValue = 0, MaxValue = int.MaxValue },
+            ["^WEAPON_SCAN"] = new BaseStatRange { Id = "^WEAPON_SCAN", MinValue = 0, MaxValue = int.MaxValue },
         },
     };
 
@@ -71,8 +71,8 @@ public static class BaseStatLimits
     {
         ["Normal"] = new()
         {
-            ["^FREI_HYPERDRIVE"] = new BaseStatRange { Id = "^FREI_HYPERDRIVE", MinValue = 0, MaxValue = 300 },
-            ["^FREI_FLEET"] = new BaseStatRange { Id = "^FREI_FLEET", MinValue = 0, MaxValue = 100 },
+            ["^FREI_HYPERDRIVE"] = new BaseStatRange { Id = "^FREI_HYPERDRIVE", MinValue = 0, MaxValue = int.MaxValue },
+            ["^FREI_FLEET"] = new BaseStatRange { Id = "^FREI_FLEET", MinValue = 0, MaxValue = int.MaxValue },
         },
     };
 
