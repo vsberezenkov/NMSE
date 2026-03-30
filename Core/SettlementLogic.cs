@@ -16,8 +16,10 @@ internal static class SettlementLogic
     internal static readonly int[] StatMinValues = { 0, -30, 0, 0, 0, 0, 0, 0 };
     /// <summary>Display labels for each settlement stat.</summary>
     internal static readonly string[] StatLabels = { "Max Population", "Happiness", "Production", "Upkeep", "Sentinels", "Debt", "Alert", "Bug Attack" };
-    /// <summary>Maximum value for the top-level Population field.</summary>
-    internal const int PopulationMax = 200;
+    /// <summary>Maximum value for the top-level Population field (hard cap).</summary>
+    internal const int PopulationMax = 400;
+    /// <summary>Soft-cap value for the Population field used for colour warning indication (matches original game default max).</summary>
+    internal const int PopulationSoftMax = 200;
     /// <summary>Total number of tracked settlement stats.</summary>
     internal const int StatCount = 8;
     /// <summary>Maximum allowed production output amount.</summary>

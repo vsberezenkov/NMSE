@@ -435,6 +435,7 @@ public partial class SettlementPanel : UserControl
             {
                 _populationField.Value = sdata.Population;
                 _rawPopulation = sdata.RawPopulation;
+                ApplyPopulationColor();
             }
             else
             {
@@ -1145,18 +1146,35 @@ public partial class SettlementPanel : UserControl
 
     /// <summary>
     /// Applies colour coding to the stat NUD at the given index.
-    /// Crimson if ≤ min threshold, Tomato if ≥ max threshold, default otherwise.
+    /// Crimson when value falls below the min threshold, Tomato when value rises above the max threshold, default otherwise.
+    /// Comparisons are exclusive: colour is applied only when values strictly exceed the soft-cap thresholds.
     /// </summary>
     private void ApplyStatColor(int index)
     {
         if (index < 0 || index >= StatCount) return;
         int value = (int)_statFields[index].Value;
-        if (value <= SettlementLogic.StatMinValues[index])
+        if (value < SettlementLogic.StatMinValues[index])
             _statFields[index].ForeColor = Color.Crimson;
-        else if (value >= SettlementLogic.StatMaxValues[index])
+        else if (value > SettlementLogic.StatMaxValues[index])
             _statFields[index].ForeColor = Color.Tomato;
         else
             _statFields[index].ForeColor = SystemColors.WindowText;
+    }
+
+    /// <summary>
+    /// Applies colour coding to the population NUD.
+    /// Crimson when value drops below 0, Tomato when value exceeds the soft-cap (PopulationSoftMax).
+    /// Comparisons are exclusive: colour is applied only when values strictly exceed the thresholds.
+    /// </summary>
+    private void ApplyPopulationColor()
+    {
+        int value = (int)_populationField.Value;
+        if (value < 0)
+            _populationField.ForeColor = Color.Crimson;
+        else if (value > SettlementLogic.PopulationSoftMax)
+            _populationField.ForeColor = Color.Tomato;
+        else
+            _populationField.ForeColor = SystemColors.WindowText;
     }
 
     private static readonly string[] StatLocKeys =

@@ -214,6 +214,7 @@ partial class SettlementPanel
             Maximum = SettlementLogic.PopulationMax,
             Minimum = 0,
         };
+        _populationField.ValueChanged += (s, e) => ApplyPopulationColor();
         _populationLabel = AddRow(leftPanel, "Population:", _populationField, leftRow++);
 
         // 6. Last Population Change Time
