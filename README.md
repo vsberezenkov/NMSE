@@ -192,7 +192,6 @@ dotnet test NMSE.Extractor.Tests/
 - [ ] Support for in-game archives
 - [ ] Starship/Multi-tool/etc. collection system
 - [ ] Community seeds library
-
 - [ ] Integrations with NMS Optimizer app
 
 ---
