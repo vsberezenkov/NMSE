@@ -203,16 +203,10 @@ partial class StarshipPanel
         };
         _deleteBtn = new Button { Text = "Delete Ship", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(76, 0) };
         _deleteBtn.Click += OnDeleteShip;
-        _exportBtn = new Button { Text = "Export Starship", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
+        _exportBtn = new Button { Text = "Export", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _exportBtn.Click += OnExportShip;
-        _importBtn = new Button { Text = "Import Starship", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
+        _importBtn = new Button { Text = "Import", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(75, 0) };
         _importBtn.Click += OnImportShip;
-        _exportCorvetteBtn = new Button { Text = "Export Corvette", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(100, 0), Visible = false };
-        _exportCorvetteBtn.Click += OnExportCorvette;
-        _importCorvetteBtn = new Button { Text = "Import Corvette", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(100, 0), Visible = false };
-        _importCorvetteBtn.Click += OnImportCorvette;
-        _importEmptySlotBtn = new Button { Text = "Import to Empty Slot", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(100, 0) };
-        _importEmptySlotBtn.Click += OnImportToEmptySlot;
         _makePrimaryBtn = new Button { Text = "Make Primary", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(88, 0) };
         _makePrimaryBtn.Click += OnMakePrimary;
         _corvetteWarningLabel = new ColorEmojiLabel
@@ -227,9 +221,6 @@ partial class StarshipPanel
         buttonPanel.Controls.Add(_deleteBtn);
         buttonPanel.Controls.Add(_exportBtn);
         buttonPanel.Controls.Add(_importBtn);
-        buttonPanel.Controls.Add(_exportCorvetteBtn);
-        buttonPanel.Controls.Add(_importCorvetteBtn);
-        buttonPanel.Controls.Add(_importEmptySlotBtn);
         buttonPanel.Controls.Add(_makePrimaryBtn);
         buttonPanel.Controls.Add(_corvetteWarningLabel);
         detailsStatsLayout.Controls.Add(buttonPanel, 0, 1);
@@ -249,7 +240,7 @@ partial class StarshipPanel
         _snapshotTechBtn.Click += OnSnapshotTech;
         _importSnapshotBtn = new Button { Text = "Import Snapshot", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(100, 0) };
         _importSnapshotBtn.Click += OnImportSnapshot;
-        _optimiseBtn = new Button { Text = "Optimise", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(100, 0) };
+        _optimiseBtn = new Button { Text = "Optimise Build", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, MinimumSize = new Size(100, 0) };
         _optimiseBtn.Click += OnOptimiseCorvette;
         _optimiseIndicator = new Label
         {
@@ -314,12 +305,9 @@ partial class StarshipPanel
     private Button _deleteBtn = null!;
     private Button _exportBtn = null!;
     private Button _importBtn = null!;
-    private Button _importEmptySlotBtn = null!;
     private Button _makePrimaryBtn = null!;
     private Label _primaryShipLabel = null!;
     private ColorEmojiLabel _corvetteWarningLabel = null!;
-    private Button _exportCorvetteBtn = null!;
-    private Button _importCorvetteBtn = null!;
     private FlowLayoutPanel _corvetteExtrasPanel = null!;
     private Button _snapshotTechBtn = null!;
     private Button _importSnapshotBtn = null!;

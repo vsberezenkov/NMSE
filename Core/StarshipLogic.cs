@@ -413,6 +413,24 @@ internal static class StarshipLogic
         ClearJsonArray(inventory.GetArray("SpecialSlots"));
     }
 
+    /// <summary>
+    /// Invalidates a corvette's PlayerShipBase entry in PersistentPlayerBases
+    /// by clearing its Objects array, preventing orphaned base data from
+    /// persisting after the corvette ship is deleted.
+    /// </summary>
+    /// <param name="bases">The PersistentPlayerBases JSON array.</param>
+    /// <param name="shipIndex">The ship's index in the ShipOwnership array.</param>
+    /// <param name="seedDecimal">The decimal seed value for base matching.</param>
+    internal static void InvalidateCorvetteBase(JsonArray? bases, int shipIndex, long seedDecimal)
+    {
+        if (bases == null) return;
+        int baseIdx = FindCorvetteBaseIndex(bases, shipIndex, seedDecimal);
+        if (baseIdx < 0) return;
+
+        var baseObj = bases.GetObject(baseIdx);
+        ClearJsonArray(baseObj.GetArray("Objects"));
+    }
+
     // --- Ship Customisation Data (CharacterCustomisationData) --------
 
     /// <summary>

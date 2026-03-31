@@ -489,4 +489,45 @@ public class StarshipLogicTests
         bases.Add(baseObj);
         return bases;
     }
+
+    // --- InvalidateCorvetteBase tests ---
+
+    [Fact]
+    public void InvalidateCorvetteBase_ClearsObjects()
+    {
+        var bases = BuildBaseArray(0, 0x123,
+            ("YOURSHIP_REACTOR", 0),
+            ("YOURSHIP_ENGINE", 0),
+            ("YOURSHIP_COCKPIT", 0));
+
+        // Base should have 3 objects before invalidation
+        var baseObj = bases.GetObject(0);
+        Assert.Equal(3, baseObj.GetArray("Objects")!.Length);
+
+        StarshipLogic.InvalidateCorvetteBase(bases, 0, 0x123);
+
+        // After invalidation, the Objects array should be empty
+        Assert.Equal(0, baseObj.GetArray("Objects")!.Length);
+    }
+
+    [Fact]
+    public void InvalidateCorvetteBase_NullBases_DoesNotThrow()
+    {
+        // Should not throw when bases is null
+        StarshipLogic.InvalidateCorvetteBase(null, 0, 0x123);
+    }
+
+    [Fact]
+    public void InvalidateCorvetteBase_NoMatchingBase_DoesNothing()
+    {
+        var bases = BuildBaseArray(0, 0x123,
+            ("YOURSHIP_REACTOR", 0));
+
+        // Try to invalidate with a non-matching ship index
+        StarshipLogic.InvalidateCorvetteBase(bases, 5, 0x999);
+
+        // Objects should remain intact since no base matched
+        var baseObj = bases.GetObject(0);
+        Assert.Equal(1, baseObj.GetArray("Objects")!.Length);
+    }
 }

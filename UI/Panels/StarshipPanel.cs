@@ -98,9 +98,6 @@ public partial class StarshipPanel : UserControl
         _deleteBtn.Text = UiStrings.Get("starship.delete");
         _exportBtn.Text = UiStrings.Get("starship.export");
         _importBtn.Text = UiStrings.Get("starship.import");
-        _exportCorvetteBtn.Text = UiStrings.Get("starship.export_corvette");
-        _importCorvetteBtn.Text = UiStrings.Get("starship.import_corvette");
-        _importEmptySlotBtn.Text = UiStrings.Get("starship.import_empty_slot");
         _makePrimaryBtn.Text = UiStrings.Get("starship.make_primary");
         _snapshotTechBtn.Text = UiStrings.Get("starship.export_snapshot");
         _importSnapshotBtn.Text = UiStrings.Get("starship.import_snapshot");
@@ -324,11 +321,7 @@ public partial class StarshipPanel : UserControl
             ApplyStatLimits(_hyperdriveField, shipCategory, "^SHIP_HYPERDRIVE", StatCategory.Ship);
             ApplyStatLimits(_maneuverField, shipCategory, "^SHIP_AGILE", StatCategory.Ship);
 
-            // Toggle corvette vs normal export/import buttons and warning
-            _exportBtn.Visible = !isCorvette;
-            _importBtn.Visible = !isCorvette;
-            _exportCorvetteBtn.Visible = isCorvette;
-            _importCorvetteBtn.Visible = isCorvette;
+            // Toggle corvette extras panel and warning
             _corvetteExtrasPanel.Visible = isCorvette;
             _corvetteWarningLabel.Visible = isCorvette;
 
@@ -412,11 +405,18 @@ public partial class StarshipPanel : UserControl
             int idx = item.DataIndex;
             if (idx >= _shipOwnership.Length) return;
 
+            var ship = _shipOwnership.GetObject(idx);
+
+            // If the ship is a corvette, invalidate its PlayerShipBase entry
+            // so that building objects don't remain orphaned in the save.
+            if (IsShipCorvette(ship) && _saveData != null)
+                InvalidateCorvetteBaseForShip(ship, idx);
+
             // Invalidate the ship in place - do NOT remove from array.
             // The slot stays in the ShipOwnership array (preserving index alignment
             // with the parallel ShipUsesLegacyColours array) but is
             // filtered out by BuildShipList().
-            StarshipLogic.DeleteShipData(_shipOwnership.GetObject(idx));
+            StarshipLogic.DeleteShipData(ship);
 
             // Clear the corresponding CharacterCustomisationData entry so that
             // player-built ship customisation (DescriptorGroups, colours, etc.)
@@ -459,6 +459,14 @@ public partial class StarshipPanel : UserControl
 
             var ship = _shipOwnership.GetObject(idx);
 
+            bool isCorvette = IsShipCorvette(ship);
+
+            // For corvettes, prevent export if the corvette is the primary ship
+            if (isCorvette)
+            {
+                if (!CheckCorvettePrimarySafety("exporting")) return;
+            }
+
             var cfg = ExportConfig.Instance;
             string shipName = _shipName.Text ?? "";
             string type = (_shipType.SelectedItem as StarshipLogic.ShipTypeItem)?.InternalName ?? "";
@@ -471,13 +479,26 @@ public partial class StarshipPanel : UserControl
                 ["class"] = cls
             };
 
-            var resource = ship.GetObject("Resource");
-            string filename = resource?.GetString("Filename") ?? "";
-            bool isCorvette = StarshipLogic.IsCorvette(filename);
-
             string template = isCorvette ? cfg.CorvetteTemplate : cfg.StarshipTemplate;
             string ext = isCorvette ? cfg.CorvetteExt : cfg.StarshipExt;
             string label = isCorvette ? "Corvette files" : "Starship files";
+
+            // For corvettes, find the base data before showing the dialog
+            JsonObject? baseObj = null;
+            if (isCorvette && _saveData != null)
+            {
+                long seedDecimal = StarshipLogic.SeedToDecimal(GetShipSeed(ship));
+
+                var playerState = _saveData.GetObject("PlayerStateData");
+                var bases = playerState?.GetArray("PersistentPlayerBases");
+                int baseIdx = StarshipLogic.FindCorvetteBaseIndex(bases, idx, seedDecimal);
+                if (baseIdx < 0)
+                {
+                    MessageBox.Show(UiStrings.Get("starship.corvette_no_base"), UiStrings.Get("common.error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                baseObj = bases!.GetObject(baseIdx);
+            }
 
             using var dialog = new SaveFileDialog
             {
@@ -494,7 +515,20 @@ public partial class StarshipPanel : UserControl
                 if (ccdEntry != null)
                     ship.Set("__ShipCustomisation", ccdEntry);
 
-                ship.ExportToFile(dialog.FileName);
+                if (isCorvette)
+                {
+                    // Corvette export: wrap ship + base in a combined object
+                    var export = new JsonObject();
+                    export.Set("Ship", ship);
+                    if (baseObj != null)
+                        export.Set("Base", baseObj);
+                    export.ExportToFile(dialog.FileName);
+                }
+                else
+                {
+                    // Standard ship export
+                    ship.ExportToFile(dialog.FileName);
+                }
 
                 // Remove the transient key so it doesn't persist in the live save
                 ship.Remove("__ShipCustomisation");
@@ -510,157 +544,19 @@ public partial class StarshipPanel : UserControl
     {
         try
         {
-            if (_shipOwnership == null || _shipSelector.SelectedIndex < 0) return;
-
-            var cfg = ExportConfig.Instance;
-
-            // Determine if current selection is a corvette
-            var currentItem = (StarshipLogic.ShipListItem)_shipSelector.Items[_shipSelector.SelectedIndex]!;
-            int currentIdx = currentItem.DataIndex;
-            if (currentIdx >= _shipOwnership.Length) return;
-            var currentShip = _shipOwnership.GetObject(currentIdx);
-            var resource = currentShip.GetObject("Resource");
-            string filename = resource?.GetString("Filename") ?? "";
-            bool isCorvette = StarshipLogic.IsCorvette(filename);
-
-            string ext = isCorvette ? cfg.CorvetteExt : cfg.StarshipExt;
-            string label = isCorvette ? "Corvette files" : "Starship files";
-
-            using var dialog = new OpenFileDialog
-            {
-                Filter = ExportConfig.BuildOpenFilter(ext, label)
-            };
-
-            if (dialog.ShowDialog() != DialogResult.OK) return;
-
-            // Try ZIP format first (other editor's .nmsship format)
-            var zipResult = StarshipLogic.TryReadNmsshipZip(dialog.FileName);
-
-            JsonObject imported;
-            JsonObject? zipCcd = null;
-            JsonArray? zipObjects = null;
-
-            if (zipResult != null)
-            {
-                imported = zipResult.Value.ship;
-                zipCcd = zipResult.Value.ccd;
-                zipObjects = zipResult.Value.objects;
-            }
-            else
-            {
-                imported = JsonObject.ImportFromFile(dialog.FileName);
-
-                // Unwrap NomNom wrapper if present (Data -> Starship or Data -> Vehicle)
-                if (InventoryImportHelper.IsNomNomWrapper(imported))
-                {
-                    var data = imported.GetObject("Data");
-                    if (data != null)
-                    {
-                        // NomNom may use "Starship" or "Ship" as the key depending on
-                        // the export version; try both for maximum compatibility.
-                        var entity = data.GetObject("Starship") ?? data.GetObject("Ship");
-                        if (entity != null) imported = entity;
-                    }
-                }
-            }
-
-            var item = (StarshipLogic.ShipListItem)_shipSelector.Items[_shipSelector.SelectedIndex]!;
-            int idx = item.DataIndex;
-            if (idx >= _shipOwnership.Length) return;
-
-            var ship = _shipOwnership.GetObject(idx);
-
-            // Extract the embedded CharacterCustomisationData before copying
-            // properties (so the transient key doesn't end up in the save).
-            var importedCcd = imported.GetObject("__ShipCustomisation");
-
-            // Copy all properties from imported ship to current slot
-            foreach (var name in imported.Names())
-            {
-                if (name == "__ShipCustomisation") continue; // skip transient key
-                ship.Set(name, imported.Get(name));
-            }
-
-            // Remove the transient key from the live ship object if it leaked
-            ship.Remove("__ShipCustomisation");
-
-            // Determine CCD source: prefer ZIP CCD if present and non-default
-            JsonObject? ccdToApply = importedCcd;
-            if (zipCcd != null && !StarshipLogic.IsCcdDefault(zipCcd))
-                ccdToApply = zipCcd;
-
-            var ccdArray = _playerState?.GetArray("CharacterCustomisationData");
-            StarshipLogic.SetShipCustomisation(ccdArray, idx, ccdToApply);
-
-            // Import base building objects for corvette ships from ZIP
-            if (zipObjects != null && _saveData != null)
-            {
-                var importedResource = imported.GetObject("Resource");
-                string importedFilename = importedResource?.GetString("Filename") ?? "";
-                bool importedIsCorvette = StarshipLogic.IsCorvette(importedFilename);
-                bool targetIsCorvette = StarshipLogic.IsCorvette(
-                    ship.GetObject("Resource")?.GetString("Filename") ?? "");
-
-                if (importedIsCorvette || targetIsCorvette)
-                {
-                    string seed = "";
-                    try
-                    {
-                        var res = ship.GetObject("Resource");
-                        seed = res?.GetArray("Seed")?.Get(1)?.ToString() ?? "";
-                    }
-                    catch { }
-
-                    long seedDecimal = StarshipLogic.SeedToDecimal(seed);
-                    if (seedDecimal > 0)
-                    {
-                        var playerState = _saveData.GetObject("PlayerStateData");
-                        var bases = playerState?.GetArray("PersistentPlayerBases");
-                        int baseIdx = StarshipLogic.FindCorvetteBaseIndex(bases, idx, seedDecimal);
-                        if (baseIdx >= 0)
-                        {
-                            var existingBase = bases!.GetObject(baseIdx);
-                            existingBase.Set("Objects", zipObjects);
-                        }
-                    }
-                }
-            }
-
-            // Refresh display
-            OnShipSelected(this, EventArgs.Empty);
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(UiStrings.Format("common.import_failed", ex.Message), UiStrings.Get("common.error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
-    private void OnImportToEmptySlot(object? sender, EventArgs e)
-    {
-        try
-        {
             if (_shipOwnership == null || _playerState == null || _saveData == null) return;
-
-            int emptyIdx = StarshipLogic.FindEmptySlot(_shipOwnership);
-            if (emptyIdx < 0)
-            {
-                MessageBox.Show(
-                    UiStrings.Get("starship.no_empty_slots"),
-                    UiStrings.Get("starship.import_ship_title"),
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            if (_shipSelector.SelectedIndex < 0) return;
 
             var cfg = ExportConfig.Instance;
 
-            // Accept both starship and corvette file formats
-            string filter = ExportConfig.BuildImportFilter(cfg.StarshipExt, "Starship files",
-                cfg.CorvetteExt, cfg.CorvetteSnapshotExt, ".nmsship");
+            // Accept all ship file formats in one import dialog
+            string filter = ExportConfig.BuildImportFilter(cfg.StarshipExt, "Ship files",
+                cfg.CorvetteExt, ".nmsship");
 
             using var dialog = new OpenFileDialog { Filter = filter };
             if (dialog.ShowDialog() != DialogResult.OK) return;
 
-            // Try ZIP format first (other editor's .nmsship format)
+            // --- Parse the imported file ---
             var zipResult = StarshipLogic.TryReadNmsshipZip(dialog.FileName);
 
             JsonObject? importedShip;
@@ -681,7 +577,7 @@ public partial class StarshipPanel : UserControl
             {
                 var imported = JsonObject.ImportFromFile(dialog.FileName);
 
-                // Check for corvette format (Ship + Base wrapper)
+                // Check for corvette wrapper format (Ship + Base)
                 importedShip = imported.GetObject("Ship");
                 if (importedShip != null)
                 {
@@ -715,20 +611,62 @@ public partial class StarshipPanel : UserControl
                 return;
             }
 
-            var ship = _shipOwnership.GetObject(emptyIdx);
+            // Determine if the imported ship is a corvette
+            bool importedIsCorvette = IsShipCorvette(importedShip);
+
+            // --- Decide target slot: empty slot if available, otherwise current ---
+            int emptyIdx = StarshipLogic.FindEmptySlot(_shipOwnership);
+            bool importToEmpty = emptyIdx >= 0;
+            int targetIdx;
+
+            if (importToEmpty)
+            {
+                targetIdx = emptyIdx;
+            }
+            else
+            {
+                // Import over the currently selected ship
+                var currentItem = (StarshipLogic.ShipListItem)_shipSelector.Items[_shipSelector.SelectedIndex]!;
+                targetIdx = currentItem.DataIndex;
+                if (targetIdx >= _shipOwnership.Length) return;
+
+                // Confirm before overwriting an existing ship
+                var overwriteResult = MessageBox.Show(
+                    UiStrings.Get("starship.import_overwrite_confirm"),
+                    UiStrings.Get("starship.import_overwrite_title"),
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (overwriteResult != DialogResult.Yes) return;
+            }
+
+            // For corvette imports over an existing slot, enforce primary safety
+            if (importedIsCorvette && !importToEmpty)
+            {
+                if (!CheckCorvettePrimarySafety("importing")) return;
+            }
+
+            var targetShip = _shipOwnership.GetObject(targetIdx);
+
+            // If we're overwriting an existing ship, clean up the old data first
+            if (!importToEmpty)
+            {
+                // If the current ship is a corvette, clean up its base data
+                if (IsShipCorvette(targetShip))
+                    InvalidateCorvetteBaseForShip(targetShip, targetIdx);
+            }
 
             // Extract the embedded CharacterCustomisationData before copying
             var importedCcd = importedShip.GetObject("__ShipCustomisation");
 
-            // Copy all properties from imported ship to the empty slot
+            // Copy all properties from imported ship to target slot
             foreach (var name in importedShip.Names())
             {
                 if (name == "__ShipCustomisation") continue;
-                ship.Set(name, importedShip.Get(name));
+                targetShip.Set(name, importedShip.Get(name));
             }
 
             // Remove the transient key from the live ship object if it leaked
-            ship.Remove("__ShipCustomisation");
+            targetShip.Remove("__ShipCustomisation");
 
             // Determine CCD source: prefer ZIP CCD if present and non-default
             JsonObject? ccdToApply = importedCcd;
@@ -736,52 +674,46 @@ public partial class StarshipPanel : UserControl
                 ccdToApply = zipCcd;
 
             var ccdArray = _playerState.GetArray("CharacterCustomisationData");
-            StarshipLogic.SetShipCustomisation(ccdArray, emptyIdx, ccdToApply);
+            StarshipLogic.SetShipCustomisation(ccdArray, targetIdx, ccdToApply);
 
             // Import base building objects for corvette ships
-            if (importedBase != null)
+            if (importedBase != null && importedIsCorvette)
             {
-                var importedResource = importedShip.GetObject("Resource");
-                string importedFilename = importedResource?.GetString("Filename") ?? "";
-                if (StarshipLogic.IsCorvette(importedFilename))
+                long seedDecimal = StarshipLogic.SeedToDecimal(GetShipSeed(targetShip));
+                if (seedDecimal > 0)
                 {
-                    string seed = "";
-                    try
+                    var bases = _playerState.GetArray("PersistentPlayerBases");
+                    int baseIdx = StarshipLogic.FindCorvetteBaseIndex(bases, targetIdx, seedDecimal);
+                    if (baseIdx >= 0)
                     {
-                        var res = ship.GetObject("Resource");
-                        seed = res?.GetArray("Seed")?.Get(1)?.ToString() ?? "";
-                    }
-                    catch { }
-
-                    long seedDecimal = StarshipLogic.SeedToDecimal(seed);
-                    if (seedDecimal > 0)
-                    {
-                        var bases = _playerState.GetArray("PersistentPlayerBases");
-                        int baseIdx = StarshipLogic.FindCorvetteBaseIndex(bases, emptyIdx, seedDecimal);
-                        if (baseIdx >= 0)
-                        {
-                            var existingBase = bases!.GetObject(baseIdx);
-                            foreach (var name in importedBase.Names())
-                                existingBase.Set(name, importedBase.Get(name));
-                        }
+                        var existingBase = bases!.GetObject(baseIdx);
+                        foreach (var name in importedBase.Names())
+                            existingBase.Set(name, importedBase.Get(name));
                     }
                 }
             }
 
-            // Rebuild the ship list and select the newly imported ship
-            _shipSelector.Items.Clear();
-            var shipList = StarshipLogic.BuildShipList(_shipOwnership);
-            foreach (var shipItem in shipList)
-                _shipSelector.Items.Add(shipItem);
-
-            // Find and select the newly imported slot
-            for (int i = 0; i < _shipSelector.Items.Count; i++)
+            if (importToEmpty)
             {
-                if (((StarshipLogic.ShipListItem)_shipSelector.Items[i]!).DataIndex == emptyIdx)
+                // Rebuild ship list and select the newly imported ship
+                _shipSelector.Items.Clear();
+                var shipList = StarshipLogic.BuildShipList(_shipOwnership);
+                foreach (var shipItem in shipList)
+                    _shipSelector.Items.Add(shipItem);
+
+                for (int i = 0; i < _shipSelector.Items.Count; i++)
                 {
-                    _shipSelector.SelectedIndex = i;
-                    break;
+                    if (((StarshipLogic.ShipListItem)_shipSelector.Items[i]!).DataIndex == targetIdx)
+                    {
+                        _shipSelector.SelectedIndex = i;
+                        break;
+                    }
                 }
+            }
+            else
+            {
+                // Refresh display for in-place import
+                OnShipSelected(this, EventArgs.Empty);
             }
 
             DataModified?.Invoke(this, EventArgs.Empty);
@@ -814,9 +746,7 @@ public partial class StarshipPanel : UserControl
 
             // Warn if the selected ship is a Corvette
             var ship = _shipOwnership.GetObject(idx);
-            var resource = ship?.GetObject("Resource");
-            string filename = resource?.GetString("Filename") ?? "";
-            if (StarshipLogic.IsCorvette(filename))
+            if (IsShipCorvette(ship))
             {
                 var result = MessageBox.Show(
                     UiStrings.Get("starship.corvette_primary_warning"),
@@ -854,15 +784,7 @@ public partial class StarshipPanel : UserControl
             }
 
             // Find the corvette's matching PlayerShipBase (same as export)
-            string seed = "";
-            try
-            {
-                var resource = ship.GetObject("Resource");
-                seed = resource?.GetArray("Seed")?.Get(1)?.ToString() ?? "";
-            }
-            catch { }
-
-            long seedDecimal = StarshipLogic.SeedToDecimal(seed);
+            long seedDecimal = StarshipLogic.SeedToDecimal(GetShipSeed(ship));
             JsonObject? baseObj = null;
             {
                 var playerState = _saveData.GetObject("PlayerStateData");
@@ -949,15 +871,7 @@ public partial class StarshipPanel : UserControl
             var importedBase = imported.GetObject("Base");
             if (importedBase != null)
             {
-                string seed = "";
-                try
-                {
-                    var resource = ship.GetObject("Resource");
-                    seed = resource?.GetArray("Seed")?.Get(1)?.ToString() ?? "";
-                }
-                catch { }
-
-                long seedDecimal = StarshipLogic.SeedToDecimal(seed);
+                long seedDecimal = StarshipLogic.SeedToDecimal(GetShipSeed(ship));
                 {
                     var playerState = _saveData.GetObject("PlayerStateData");
                     var bases = playerState?.GetArray("PersistentPlayerBases");
@@ -996,173 +910,6 @@ public partial class StarshipPanel : UserControl
         return true;
     }
 
-    private void OnExportCorvette(object? sender, EventArgs e)
-    {
-        try
-        {
-            if (_shipOwnership == null || _shipSelector.SelectedIndex < 0 || _saveData == null) return;
-            if (!CheckCorvettePrimarySafety("exporting")) return;
-
-            var item = (StarshipLogic.ShipListItem)_shipSelector.Items[_shipSelector.SelectedIndex]!;
-            int idx = item.DataIndex;
-            if (idx >= _shipOwnership.Length) return;
-
-            var ship = _shipOwnership.GetObject(idx);
-            string seed = "";
-            try
-            {
-                var resource = ship.GetObject("Resource");
-                seed = resource?.GetArray("Seed")?.Get(1)?.ToString() ?? "";
-            }
-            catch { }
-
-            long seedDecimal = StarshipLogic.SeedToDecimal(seed);
-
-            var playerState = _saveData.GetObject("PlayerStateData");
-            var bases = playerState?.GetArray("PersistentPlayerBases");
-            int baseIdx = StarshipLogic.FindCorvetteBaseIndex(bases, idx, seedDecimal);
-            if (baseIdx < 0)
-            {
-                MessageBox.Show(UiStrings.Get("starship.corvette_no_base"), UiStrings.Get("common.error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            var baseObj = bases!.GetObject(baseIdx);
-
-            var cfg = ExportConfig.Instance;
-            string shipName = _shipName.Text ?? "";
-            string type = (_shipType.SelectedItem as StarshipLogic.ShipTypeItem)?.InternalName ?? "";
-            string cls = _shipClass.SelectedIndex >= 0 && _shipClass.SelectedIndex < StarshipLogic.ShipClasses.Length
-                ? StarshipLogic.ShipClasses[_shipClass.SelectedIndex] : "C";
-            var vars = new Dictionary<string, string>
-            {
-                ["ship_name"] = shipName,
-                ["type"] = type,
-                ["class"] = cls
-            };
-
-            using var dialog = new SaveFileDialog
-            {
-                Filter = ExportConfig.BuildDialogFilter(cfg.CorvetteExt, "Corvette files"),
-                DefaultExt = cfg.CorvetteExt.TrimStart('.'),
-                FileName = ExportConfig.BuildFileName(cfg.CorvetteTemplate, cfg.CorvetteExt, vars)
-            };
-
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                // Create combined export object
-                var export = new JsonObject();
-                export.Set("Ship", ship);
-                export.Set("Base", baseObj);
-                export.ExportToFile(dialog.FileName);
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(UiStrings.Format("common.export_failed", ex.Message), UiStrings.Get("common.error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
-    private void OnImportCorvette(object? sender, EventArgs e)
-    {
-        try
-        {
-            if (_shipOwnership == null || _shipSelector.SelectedIndex < 0 || _saveData == null) return;
-            if (!CheckCorvettePrimarySafety("importing")) return;
-
-            var cfg = ExportConfig.Instance;
-
-            using var dialog = new OpenFileDialog
-            {
-                Filter = ExportConfig.BuildImportFilter(cfg.CorvetteExt, "Corvette files", cfg.StarshipExt)
-            };
-            if (dialog.ShowDialog() != DialogResult.OK) return;
-
-            // Try ZIP format first (other editor's .nmsship format)
-            var zipResult = StarshipLogic.TryReadNmsshipZip(dialog.FileName);
-
-            JsonObject? importedShip;
-            JsonObject? importedBase = null;
-            JsonObject? zipCcd = null;
-
-            if (zipResult != null)
-            {
-                // ZIP format: so.json is the ship data (no wrapping "Ship" key)
-                importedShip = zipResult.Value.ship;
-                zipCcd = zipResult.Value.ccd;
-
-                // objects.json maps to base Objects
-                if (zipResult.Value.objects != null)
-                {
-                    importedBase = new JsonObject();
-                    importedBase.Set("Objects", zipResult.Value.objects);
-                }
-            }
-            else
-            {
-                var imported = JsonObject.ImportFromFile(dialog.FileName);
-                importedShip = imported.GetObject("Ship");
-                importedBase = imported.GetObject("Base");
-            }
-
-            if (importedShip == null)
-            {
-                MessageBox.Show(UiStrings.Get("starship.no_valid_ship"), UiStrings.Get("common.error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            var item = (StarshipLogic.ShipListItem)_shipSelector.Items[_shipSelector.SelectedIndex]!;
-            int idx = item.DataIndex;
-            if (idx >= _shipOwnership.Length) return;
-
-            var ship = _shipOwnership.GetObject(idx);
-
-            // Copy ship data
-            foreach (var name in importedShip.Names())
-                ship.Set(name, importedShip.Get(name));
-
-            // Apply ZIP CCD if present and non-default
-            if (zipCcd != null && !StarshipLogic.IsCcdDefault(zipCcd))
-            {
-                var ccdArray = _playerState?.GetArray("CharacterCustomisationData");
-                StarshipLogic.SetShipCustomisation(ccdArray, idx, zipCcd);
-            }
-
-            // Import base data if present
-            if (importedBase != null)
-            {
-                // Get the current ship's seed to find its base slot
-                string seed = "";
-                try
-                {
-                    var resource = ship.GetObject("Resource");
-                    seed = resource?.GetArray("Seed")?.Get(1)?.ToString() ?? "";
-                }
-                catch { }
-
-                long seedDecimal = StarshipLogic.SeedToDecimal(seed);
-                {
-                    var playerState = _saveData.GetObject("PlayerStateData");
-                    var bases = playerState?.GetArray("PersistentPlayerBases");
-                    int baseIdx = StarshipLogic.FindCorvetteBaseIndex(bases, idx, seedDecimal);
-                    if (baseIdx >= 0)
-                    {
-                        var existingBase = bases!.GetObject(baseIdx);
-                        foreach (var name in importedBase.Names())
-                            existingBase.Set(name, importedBase.Get(name));
-                    }
-                }
-            }
-
-            // Refresh display
-            OnShipSelected(this, EventArgs.Empty);
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(UiStrings.Format("common.import_failed", ex.Message), UiStrings.Get("common.error"), MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-    }
-
     private void OnOptimiseCorvette(object? sender, EventArgs e)
     {
         try
@@ -1174,15 +921,7 @@ public partial class StarshipPanel : UserControl
             if (idx >= _shipOwnership.Length) return;
 
             var ship = _shipOwnership.GetObject(idx);
-            string seed = "";
-            try
-            {
-                var resource = ship.GetObject("Resource");
-                seed = resource?.GetArray("Seed")?.Get(1)?.ToString() ?? "";
-            }
-            catch { }
-
-            long seedDecimal = StarshipLogic.SeedToDecimal(seed);
+            long seedDecimal = StarshipLogic.SeedToDecimal(GetShipSeed(ship));
 
             var playerState = _saveData.GetObject("PlayerStateData");
             var bases = playerState?.GetArray("PersistentPlayerBases");
@@ -1231,15 +970,7 @@ public partial class StarshipPanel : UserControl
         try
         {
             var ship = _shipOwnership.GetObject(shipIndex);
-            string seed = "";
-            try
-            {
-                var resource = ship.GetObject("Resource");
-                seed = resource?.GetArray("Seed")?.Get(1)?.ToString() ?? "";
-            }
-            catch { }
-
-            long seedDecimal = StarshipLogic.SeedToDecimal(seed);
+            long seedDecimal = StarshipLogic.SeedToDecimal(GetShipSeed(ship));
             var playerState = _saveData.GetObject("PlayerStateData");
             var bases = playerState?.GetArray("PersistentPlayerBases");
             bool optimised = StarshipLogic.IsCorvetteOptimised(bases, shipIndex, seedDecimal);
@@ -1249,6 +980,42 @@ public partial class StarshipPanel : UserControl
         {
             SetOptimiseIndicator(false);
         }
+    }
+
+    /// <summary>
+    /// Returns whether a ship object represents a Corvette based on its resource filename.
+    /// </summary>
+    private static bool IsShipCorvette(JsonObject ship)
+    {
+        var resource = ship.GetObject("Resource");
+        string filename = resource?.GetString("Filename") ?? "";
+        return StarshipLogic.IsCorvette(filename);
+    }
+
+    /// <summary>
+    /// Extracts the seed string (Seed[1]) from a ship object's Resource.
+    /// Returns an empty string if the seed cannot be read.
+    /// </summary>
+    private static string GetShipSeed(JsonObject ship)
+    {
+        try
+        {
+            var resource = ship.GetObject("Resource");
+            return resource?.GetArray("Seed")?.Get(1)?.ToString() ?? "";
+        }
+        catch { return ""; }
+    }
+
+    /// <summary>
+    /// Invalidates the corvette base entry associated with the given ship,
+    /// clearing orphaned building objects from the save.
+    /// </summary>
+    private void InvalidateCorvetteBaseForShip(JsonObject ship, int shipIndex)
+    {
+        if (_playerState == null) return;
+        long seedDecimal = StarshipLogic.SeedToDecimal(GetShipSeed(ship));
+        var bases = _playerState.GetArray("PersistentPlayerBases");
+        StarshipLogic.InvalidateCorvetteBase(bases, shipIndex, seedDecimal);
     }
 
 }
