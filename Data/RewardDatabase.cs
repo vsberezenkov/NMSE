@@ -9,11 +9,19 @@ public class RewardEntry
     public string Name { get; set; } = "";
     /// <summary>Reward category ("season", "twitch", or "platform").</summary>
     public string Category { get; init; } = "";
-    /// <summary>Whether this reward represents an unlock (true) or a cosmetic item.</summary>
+    /// <summary>Whether this reward requires explicit account-level unlocking
+    /// (from MXML MustBeUnlocked). When false, the reward is auto-available.</summary>
     public bool Unlock { get; init; }
     /// <summary>Product ID used to look up item info (icon, description, name) from the game item database.
     /// May differ from Id for twitch/platform rewards (e.g. TwitchId vs ProductId).</summary>
     public string ProductId { get; init; } = "";
+
+    /// <summary>The expedition/season number this reward belongs to (e.g. 21 for Expedition 21).
+    /// -1 when not applicable or unknown. Season rewards only.</summary>
+    public int SeasonId { get; init; } = -1;
+    /// <summary>The progression stage within the expedition (-1 means no specific stage).
+    /// Season rewards only.</summary>
+    public int StageId { get; init; } = -1;
 
     /// <summary>Localisation lookup key for Name (e.g. "UI_EXPED_VAULT_ARMOUR_NAME"). Null when not available.</summary>
     public string? NameLocStr { get; init; }
@@ -107,6 +115,9 @@ public static class RewardDatabase
                 Name = name,
                 Category = category,
                 ProductId = productId,
+                Unlock = element.TryGetProperty("MustBeUnlocked", out var muProp) && muProp.ValueKind == System.Text.Json.JsonValueKind.True,
+                SeasonId = element.TryGetProperty("SeasonId", out var siProp) && siProp.TryGetInt32(out int si) ? si : -1,
+                StageId = element.TryGetProperty("StageId", out var stProp) && stProp.TryGetInt32(out int st) ? st : -1,
                 NameLocStr = element.TryGetProperty("Name_LocStr", out var nls) ? nls.GetString() : null,
                 SubtitleLocStr = element.TryGetProperty("Subtitle_LocStr", out var sls) ? sls.GetString() : null,
             });

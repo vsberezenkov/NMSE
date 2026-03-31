@@ -28,18 +28,24 @@ partial class AccountPanel
         this._seasonToolbar = new System.Windows.Forms.FlowLayoutPanel();
         this._seasonUnlockAllBtn = new System.Windows.Forms.Button();
         this._seasonLockAllBtn = new System.Windows.Forms.Button();
+        this._seasonRedeemAllBtn = new System.Windows.Forms.Button();
+        this._seasonRemoveAllBtn = new System.Windows.Forms.Button();
         this._seasonFilterLabel = new System.Windows.Forms.Label();
         this._seasonFilterBox = new System.Windows.Forms.TextBox();
         this._seasonGrid = new System.Windows.Forms.DataGridView();
         this._seasonIconColumn = new System.Windows.Forms.DataGridViewImageColumn();
         this._seasonRewardIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         this._seasonRewardNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        this._seasonExpeditionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         this._seasonUnlockedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+        this._seasonRedeemedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
         this._twitchPage = new System.Windows.Forms.TabPage();
         this._twitchTabLayout = new System.Windows.Forms.TableLayoutPanel();
         this._twitchToolbar = new System.Windows.Forms.FlowLayoutPanel();
         this._twitchUnlockAllBtn = new System.Windows.Forms.Button();
         this._twitchLockAllBtn = new System.Windows.Forms.Button();
+        this._twitchRedeemAllBtn = new System.Windows.Forms.Button();
+        this._twitchRemoveAllBtn = new System.Windows.Forms.Button();
         this._twitchFilterLabel = new System.Windows.Forms.Label();
         this._twitchFilterBox = new System.Windows.Forms.TextBox();
         this._twitchGrid = new System.Windows.Forms.DataGridView();
@@ -47,6 +53,7 @@ partial class AccountPanel
         this._twitchRewardIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         this._twitchRewardNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         this._twitchUnlockedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+        this._twitchRedeemedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
         this._platformPage = new System.Windows.Forms.TabPage();
         this._platformTabLayout = new System.Windows.Forms.TableLayoutPanel();
         this._platformMxmlInfoLabel = new System.Windows.Forms.Label();
@@ -57,6 +64,8 @@ partial class AccountPanel
         this._platformToolbar = new System.Windows.Forms.FlowLayoutPanel();
         this._platformUnlockAllBtn = new System.Windows.Forms.Button();
         this._platformLockAllBtn = new System.Windows.Forms.Button();
+        this._platformRedeemAllBtn = new System.Windows.Forms.Button();
+        this._platformRemoveAllBtn = new System.Windows.Forms.Button();
         this._platformFilterLabel = new System.Windows.Forms.Label();
         this._platformFilterBox = new System.Windows.Forms.TextBox();
         this._platformGrid = new System.Windows.Forms.DataGridView();
@@ -64,6 +73,7 @@ partial class AccountPanel
         this._platformRewardIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         this._platformRewardNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         this._platformUnlockedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+        this._platformRedeemedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
         this._mainLayout.SuspendLayout();
         this._tabControl.SuspendLayout();
         this._seasonPage.SuspendLayout();
@@ -138,6 +148,8 @@ partial class AccountPanel
         this._seasonToolbar.Padding = new System.Windows.Forms.Padding(2);
         this._seasonToolbar.Controls.Add(this._seasonUnlockAllBtn);
         this._seasonToolbar.Controls.Add(this._seasonLockAllBtn);
+        this._seasonToolbar.Controls.Add(this._seasonRedeemAllBtn);
+        this._seasonToolbar.Controls.Add(this._seasonRemoveAllBtn);
         this._seasonToolbar.Controls.Add(this._seasonFilterLabel);
         this._seasonToolbar.Controls.Add(this._seasonFilterBox);
         //
@@ -150,6 +162,16 @@ partial class AccountPanel
         //
         this._seasonLockAllBtn.Text = "Lock All";
         this._seasonLockAllBtn.AutoSize = true;
+        //
+        // _seasonRedeemAllBtn
+        //
+        this._seasonRedeemAllBtn.Text = "Redeem All";
+        this._seasonRedeemAllBtn.AutoSize = true;
+        //
+        // _seasonRemoveAllBtn
+        //
+        this._seasonRemoveAllBtn.Text = "Remove All";
+        this._seasonRemoveAllBtn.AutoSize = true;
         //
         // _seasonFilterLabel
         //
@@ -171,7 +193,7 @@ partial class AccountPanel
         this._seasonGrid.RowHeadersVisible = false;
         this._seasonGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
         this._seasonGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-        this._seasonGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this._seasonIconColumn, this._seasonRewardIdColumn, this._seasonRewardNameColumn, this._seasonUnlockedColumn });
+        this._seasonGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this._seasonIconColumn, this._seasonRewardIdColumn, this._seasonRewardNameColumn, this._seasonExpeditionColumn, this._seasonUnlockedColumn, this._seasonRedeemedColumn });
         //
         // _seasonIconColumn
         //
@@ -186,20 +208,33 @@ partial class AccountPanel
         this._seasonRewardIdColumn.Name = "RewardId";
         this._seasonRewardIdColumn.HeaderText = "Reward ID";
         this._seasonRewardIdColumn.ReadOnly = true;
-        this._seasonRewardIdColumn.FillWeight = 40F;
+        this._seasonRewardIdColumn.FillWeight = 30F;
         //
         // _seasonRewardNameColumn
         //
         this._seasonRewardNameColumn.Name = "RewardName";
         this._seasonRewardNameColumn.HeaderText = "Name";
         this._seasonRewardNameColumn.ReadOnly = true;
-        this._seasonRewardNameColumn.FillWeight = 40F;
+        this._seasonRewardNameColumn.FillWeight = 30F;
+        //
+        // _seasonExpeditionColumn
+        //
+        this._seasonExpeditionColumn.Name = "Expedition";
+        this._seasonExpeditionColumn.HeaderText = "Expedition";
+        this._seasonExpeditionColumn.ReadOnly = true;
+        this._seasonExpeditionColumn.FillWeight = 10F;
         //
         // _seasonUnlockedColumn
         //
         this._seasonUnlockedColumn.Name = "Unlocked";
-        this._seasonUnlockedColumn.HeaderText = "Unlocked";
-        this._seasonUnlockedColumn.FillWeight = 20F;
+        this._seasonUnlockedColumn.HeaderText = "Unlocked on Account";
+        this._seasonUnlockedColumn.FillWeight = 15F;
+        //
+        // _seasonRedeemedColumn
+        //
+        this._seasonRedeemedColumn.Name = "RedeemedInSave";
+        this._seasonRedeemedColumn.HeaderText = "Redeemed in Save";
+        this._seasonRedeemedColumn.FillWeight = 15F;
         //
         // _twitchPage
         //
@@ -224,6 +259,8 @@ partial class AccountPanel
         this._twitchToolbar.Padding = new System.Windows.Forms.Padding(2);
         this._twitchToolbar.Controls.Add(this._twitchUnlockAllBtn);
         this._twitchToolbar.Controls.Add(this._twitchLockAllBtn);
+        this._twitchToolbar.Controls.Add(this._twitchRedeemAllBtn);
+        this._twitchToolbar.Controls.Add(this._twitchRemoveAllBtn);
         this._twitchToolbar.Controls.Add(this._twitchFilterLabel);
         this._twitchToolbar.Controls.Add(this._twitchFilterBox);
         //
@@ -236,6 +273,16 @@ partial class AccountPanel
         //
         this._twitchLockAllBtn.Text = "Lock All";
         this._twitchLockAllBtn.AutoSize = true;
+        //
+        // _twitchRedeemAllBtn
+        //
+        this._twitchRedeemAllBtn.Text = "Redeem All";
+        this._twitchRedeemAllBtn.AutoSize = true;
+        //
+        // _twitchRemoveAllBtn
+        //
+        this._twitchRemoveAllBtn.Text = "Remove All";
+        this._twitchRemoveAllBtn.AutoSize = true;
         //
         // _twitchFilterLabel
         //
@@ -257,7 +304,7 @@ partial class AccountPanel
         this._twitchGrid.RowHeadersVisible = false;
         this._twitchGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
         this._twitchGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-        this._twitchGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this._twitchIconColumn, this._twitchRewardIdColumn, this._twitchRewardNameColumn, this._twitchUnlockedColumn });
+        this._twitchGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this._twitchIconColumn, this._twitchRewardIdColumn, this._twitchRewardNameColumn, this._twitchUnlockedColumn, this._twitchRedeemedColumn });
         //
         // _twitchIconColumn
         //
@@ -272,20 +319,26 @@ partial class AccountPanel
         this._twitchRewardIdColumn.Name = "RewardId";
         this._twitchRewardIdColumn.HeaderText = "Reward ID";
         this._twitchRewardIdColumn.ReadOnly = true;
-        this._twitchRewardIdColumn.FillWeight = 40F;
+        this._twitchRewardIdColumn.FillWeight = 35F;
         //
         // _twitchRewardNameColumn
         //
         this._twitchRewardNameColumn.Name = "RewardName";
         this._twitchRewardNameColumn.HeaderText = "Name";
         this._twitchRewardNameColumn.ReadOnly = true;
-        this._twitchRewardNameColumn.FillWeight = 40F;
+        this._twitchRewardNameColumn.FillWeight = 35F;
         //
         // _twitchUnlockedColumn
         //
         this._twitchUnlockedColumn.Name = "Unlocked";
-        this._twitchUnlockedColumn.HeaderText = "Unlocked";
-        this._twitchUnlockedColumn.FillWeight = 20F;
+        this._twitchUnlockedColumn.HeaderText = "Unlocked on Account";
+        this._twitchUnlockedColumn.FillWeight = 15F;
+        //
+        // _twitchRedeemedColumn
+        //
+        this._twitchRedeemedColumn.Name = "RedeemedInSave";
+        this._twitchRedeemedColumn.HeaderText = "Redeemed in Save";
+        this._twitchRedeemedColumn.FillWeight = 15F;
         //
         // _platformPage
         //
@@ -351,6 +404,8 @@ partial class AccountPanel
         this._platformToolbar.Padding = new System.Windows.Forms.Padding(2);
         this._platformToolbar.Controls.Add(this._platformUnlockAllBtn);
         this._platformToolbar.Controls.Add(this._platformLockAllBtn);
+        this._platformToolbar.Controls.Add(this._platformRedeemAllBtn);
+        this._platformToolbar.Controls.Add(this._platformRemoveAllBtn);
         this._platformToolbar.Controls.Add(this._platformFilterLabel);
         this._platformToolbar.Controls.Add(this._platformFilterBox);
         //
@@ -363,6 +418,16 @@ partial class AccountPanel
         //
         this._platformLockAllBtn.Text = "Lock All";
         this._platformLockAllBtn.AutoSize = true;
+        //
+        // _platformRedeemAllBtn
+        //
+        this._platformRedeemAllBtn.Text = "Redeem All";
+        this._platformRedeemAllBtn.AutoSize = true;
+        //
+        // _platformRemoveAllBtn
+        //
+        this._platformRemoveAllBtn.Text = "Remove All";
+        this._platformRemoveAllBtn.AutoSize = true;
         //
         // _platformFilterLabel
         //
@@ -384,7 +449,7 @@ partial class AccountPanel
         this._platformGrid.RowHeadersVisible = false;
         this._platformGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
         this._platformGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-        this._platformGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this._platformIconColumn, this._platformRewardIdColumn, this._platformRewardNameColumn, this._platformUnlockedColumn });
+        this._platformGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this._platformIconColumn, this._platformRewardIdColumn, this._platformRewardNameColumn, this._platformUnlockedColumn, this._platformRedeemedColumn });
         //
         // _platformIconColumn
         //
@@ -399,20 +464,26 @@ partial class AccountPanel
         this._platformRewardIdColumn.Name = "RewardId";
         this._platformRewardIdColumn.HeaderText = "Reward ID";
         this._platformRewardIdColumn.ReadOnly = true;
-        this._platformRewardIdColumn.FillWeight = 40F;
+        this._platformRewardIdColumn.FillWeight = 35F;
         //
         // _platformRewardNameColumn
         //
         this._platformRewardNameColumn.Name = "RewardName";
         this._platformRewardNameColumn.HeaderText = "Name";
         this._platformRewardNameColumn.ReadOnly = true;
-        this._platformRewardNameColumn.FillWeight = 40F;
+        this._platformRewardNameColumn.FillWeight = 35F;
         //
         // _platformUnlockedColumn
         //
         this._platformUnlockedColumn.Name = "Unlocked";
-        this._platformUnlockedColumn.HeaderText = "Unlocked";
-        this._platformUnlockedColumn.FillWeight = 20F;
+        this._platformUnlockedColumn.HeaderText = "Unlocked on Account";
+        this._platformUnlockedColumn.FillWeight = 15F;
+        //
+        // _platformRedeemedColumn
+        //
+        this._platformRedeemedColumn.Name = "RedeemedInSave";
+        this._platformRedeemedColumn.HeaderText = "Redeemed in Save";
+        this._platformRedeemedColumn.FillWeight = 15F;
         //
         // AccountPanel
         //
@@ -445,14 +516,20 @@ partial class AccountPanel
     {
         _seasonUnlockAllBtn.Click += (_, _) => SetAllUnlocked(_seasonGrid, true);
         _seasonLockAllBtn.Click += (_, _) => SetAllUnlocked(_seasonGrid, false);
+        _seasonRedeemAllBtn.Click += (_, _) => SetAllRedeemed(_seasonGrid, true);
+        _seasonRemoveAllBtn.Click += (_, _) => SetAllRedeemed(_seasonGrid, false);
         _seasonFilterBox.TextChanged += (_, _) => ApplyFilter(_seasonGrid, _seasonFilterBox.Text);
 
         _twitchUnlockAllBtn.Click += (_, _) => SetAllUnlocked(_twitchGrid, true);
         _twitchLockAllBtn.Click += (_, _) => SetAllUnlocked(_twitchGrid, false);
+        _twitchRedeemAllBtn.Click += (_, _) => SetAllRedeemed(_twitchGrid, true);
+        _twitchRemoveAllBtn.Click += (_, _) => SetAllRedeemed(_twitchGrid, false);
         _twitchFilterBox.TextChanged += (_, _) => ApplyFilter(_twitchGrid, _twitchFilterBox.Text);
 
         _platformUnlockAllBtn.Click += (_, _) => SetAllUnlocked(_platformGrid, true);
         _platformLockAllBtn.Click += (_, _) => SetAllUnlocked(_platformGrid, false);
+        _platformRedeemAllBtn.Click += (_, _) => SetAllRedeemed(_platformGrid, true);
+        _platformRemoveAllBtn.Click += (_, _) => SetAllRedeemed(_platformGrid, false);
         _platformFilterBox.TextChanged += (_, _) => ApplyFilter(_platformGrid, _platformFilterBox.Text);
         _platformMxmlBrowseBtn.Click += OnBrowseMxml;
 
@@ -479,18 +556,24 @@ partial class AccountPanel
     private System.Windows.Forms.FlowLayoutPanel _seasonToolbar;
     private System.Windows.Forms.Button _seasonUnlockAllBtn;
     private System.Windows.Forms.Button _seasonLockAllBtn;
+    private System.Windows.Forms.Button _seasonRedeemAllBtn;
+    private System.Windows.Forms.Button _seasonRemoveAllBtn;
     private System.Windows.Forms.Label _seasonFilterLabel;
     private System.Windows.Forms.TextBox _seasonFilterBox;
     private System.Windows.Forms.DataGridView _seasonGrid;
     private System.Windows.Forms.DataGridViewImageColumn _seasonIconColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn _seasonRewardIdColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn _seasonRewardNameColumn;
+    private System.Windows.Forms.DataGridViewTextBoxColumn _seasonExpeditionColumn;
     private System.Windows.Forms.DataGridViewCheckBoxColumn _seasonUnlockedColumn;
+    private System.Windows.Forms.DataGridViewCheckBoxColumn _seasonRedeemedColumn;
     private System.Windows.Forms.TabPage _twitchPage;
     private System.Windows.Forms.TableLayoutPanel _twitchTabLayout;
     private System.Windows.Forms.FlowLayoutPanel _twitchToolbar;
     private System.Windows.Forms.Button _twitchUnlockAllBtn;
     private System.Windows.Forms.Button _twitchLockAllBtn;
+    private System.Windows.Forms.Button _twitchRedeemAllBtn;
+    private System.Windows.Forms.Button _twitchRemoveAllBtn;
     private System.Windows.Forms.Label _twitchFilterLabel;
     private System.Windows.Forms.TextBox _twitchFilterBox;
     private System.Windows.Forms.DataGridView _twitchGrid;
@@ -498,6 +581,7 @@ partial class AccountPanel
     private System.Windows.Forms.DataGridViewTextBoxColumn _twitchRewardIdColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn _twitchRewardNameColumn;
     private System.Windows.Forms.DataGridViewCheckBoxColumn _twitchUnlockedColumn;
+    private System.Windows.Forms.DataGridViewCheckBoxColumn _twitchRedeemedColumn;
     private System.Windows.Forms.TabPage _platformPage;
     private System.Windows.Forms.TableLayoutPanel _platformTabLayout;
     private System.Windows.Forms.Label _platformMxmlInfoLabel;
@@ -508,6 +592,8 @@ partial class AccountPanel
     private System.Windows.Forms.FlowLayoutPanel _platformToolbar;
     private System.Windows.Forms.Button _platformUnlockAllBtn;
     private System.Windows.Forms.Button _platformLockAllBtn;
+    private System.Windows.Forms.Button _platformRedeemAllBtn;
+    private System.Windows.Forms.Button _platformRemoveAllBtn;
     private System.Windows.Forms.Label _platformFilterLabel;
     private System.Windows.Forms.TextBox _platformFilterBox;
     private System.Windows.Forms.DataGridView _platformGrid;
@@ -515,4 +601,5 @@ partial class AccountPanel
     private System.Windows.Forms.DataGridViewTextBoxColumn _platformRewardIdColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn _platformRewardNameColumn;
     private System.Windows.Forms.DataGridViewCheckBoxColumn _platformUnlockedColumn;
+    private System.Windows.Forms.DataGridViewCheckBoxColumn _platformRedeemedColumn;
 }

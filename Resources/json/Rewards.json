@@ -5,7 +5,10 @@
 		"Name_LocStr": "UI_EXPED_VAULT_ARMOUR_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_ARMOUR_SUB",
 		"Category": "season",
-		"ProductId": "VAULT_ARMOUR"
+		"ProductId": "VAULT_ARMOUR",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": -1
 	},
 	{
 		"Id": "^VAULT_TORSO",
@@ -13,7 +16,10 @@
 		"Name_LocStr": "UI_EXPED_VAULT_TORSO_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_TORSO_SUB",
 		"Category": "season",
-		"ProductId": "VAULT_TORSO"
+		"ProductId": "VAULT_TORSO",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": -1
 	},
 	{
 		"Id": "^VAULT_GLOVES",
@@ -21,7 +27,10 @@
 		"Name_LocStr": "UI_EXPED_VAULT_GLOVES_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_GLOVE_SUB",
 		"Category": "season",
-		"ProductId": "VAULT_GLOVES"
+		"ProductId": "VAULT_GLOVES",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": -1
 	},
 	{
 		"Id": "^VAULT_LEGS",
@@ -29,7 +38,10 @@
 		"Name_LocStr": "UI_EXPED_VAULT_LEGS_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_LEGS_SUB",
 		"Category": "season",
-		"ProductId": "VAULT_LEGS"
+		"ProductId": "VAULT_LEGS",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": -1
 	},
 	{
 		"Id": "^VAULT_BOOTS",
@@ -37,7 +49,10 @@
 		"Name_LocStr": "UI_EXPED_VAULT_BOOTS_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_BOOTS_SUB",
 		"Category": "season",
-		"ProductId": "VAULT_BOOTS"
+		"ProductId": "VAULT_BOOTS",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_TITLE21",
@@ -45,7 +60,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_21_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE21"
+		"ProductId": "EXPD_TITLE21",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_DECAL21",
@@ -53,7 +71,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_21_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL21"
+		"ProductId": "EXPD_DECAL21",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_BANNER21",
@@ -61,7 +82,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_21_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER21"
+		"ProductId": "EXPD_BANNER21",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": -1
 	},
 	{
 		"Id": "^TRUCK_WHEELS08",
@@ -69,7 +93,10 @@
 		"Name_LocStr": "UI_TRUCK_WHEELS08_NAME",
 		"Subtitle_LocStr": "UI_VEHICLE_CUSTOM_SUB",
 		"Category": "season",
-		"ProductId": "TRUCK_WHEELS08"
+		"ProductId": "TRUCK_WHEELS08",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": 4
 	},
 	{
 		"Id": "^TRUCK_CAB03",
@@ -77,7 +104,10 @@
 		"Name_LocStr": "UI_TRUCK_CAB03_NAME",
 		"Subtitle_LocStr": "UI_VEHICLE_CUSTOM_SUB",
 		"Category": "season",
-		"ProductId": "TRUCK_CAB03"
+		"ProductId": "TRUCK_CAB03",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": 3
 	},
 	{
 		"Id": "^TRUCK_PAINT03",
@@ -85,7 +115,10 @@
 		"Name_LocStr": "UI_TRUCK_PAINT03_NAME",
 		"Subtitle_LocStr": "UI_VEHICLE_CUSTOM_SUB",
 		"Category": "season",
-		"ProductId": "TRUCK_PAINT03"
+		"ProductId": "TRUCK_PAINT03",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": 2
 	},
 	{
 		"Id": "^SPEC_EMOTE16",
@@ -93,7 +126,10 @@
 		"Name_LocStr": "EMOTE_HONK_HORN_U",
 		"Subtitle_LocStr": "UI_SPECIAL_EMOTE_SUB",
 		"Category": "season",
-		"ProductId": "SPEC_EMOTE16"
+		"ProductId": "SPEC_EMOTE16",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER21C",
@@ -101,7 +137,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER21C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER21C"
+		"ProductId": "EXPD_POSTER21C",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER21B",
@@ -109,7 +148,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER21B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER21B"
+		"ProductId": "EXPD_POSTER21B",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER21A",
@@ -117,7 +159,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER21A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER21A"
+		"ProductId": "EXPD_POSTER21A",
+		"MustBeUnlocked": false,
+		"SeasonId": 21,
+		"StageId": 1
 	},
 	{
 		"Id": "^B_WNG_P",
@@ -125,7 +170,10 @@
 		"Name_LocStr": null,
 		"Subtitle_LocStr": null,
 		"Category": "season",
-		"ProductId": "B_WNG_P"
+		"ProductId": "B_WNG_P",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": -1
 	},
 	{
 		"Id": "^B_WNG_R",
@@ -133,7 +181,10 @@
 		"Name_LocStr": null,
 		"Subtitle_LocStr": null,
 		"Category": "season",
-		"ProductId": "B_WNG_R"
+		"ProductId": "B_WNG_R",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": -1
 	},
 	{
 		"Id": "^B_STR_AA_N",
@@ -141,7 +192,10 @@
 		"Name_LocStr": null,
 		"Subtitle_LocStr": null,
 		"Category": "season",
-		"ProductId": "B_STR_AA_N"
+		"ProductId": "B_STR_AA_N",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_TITLE20",
@@ -149,7 +203,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_20_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE20"
+		"ProductId": "EXPD_TITLE20",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL20",
@@ -157,7 +214,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_20_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL20"
+		"ProductId": "EXPD_DECAL20",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_BANNER20",
@@ -165,7 +225,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_20_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER20"
+		"ProductId": "EXPD_BANNER20",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": 5
 	},
 	{
 		"Id": "^B_WNG_Q",
@@ -173,7 +236,10 @@
 		"Name_LocStr": null,
 		"Subtitle_LocStr": null,
 		"Category": "season",
-		"ProductId": "B_WNG_Q"
+		"ProductId": "B_WNG_Q",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": 4
 	},
 	{
 		"Id": "^B_DECO_S",
@@ -181,7 +247,10 @@
 		"Name_LocStr": null,
 		"Subtitle_LocStr": null,
 		"Category": "season",
-		"ProductId": "B_DECO_S"
+		"ProductId": "B_DECO_S",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": 4
 	},
 	{
 		"Id": "^B_DECO_T",
@@ -189,7 +258,10 @@
 		"Name_LocStr": null,
 		"Subtitle_LocStr": null,
 		"Category": "season",
-		"ProductId": "B_DECO_T"
+		"ProductId": "B_DECO_T",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": 4
 	},
 	{
 		"Id": "^B_SHL_E",
@@ -197,7 +269,10 @@
 		"Name_LocStr": null,
 		"Subtitle_LocStr": null,
 		"Category": "season",
-		"ProductId": "B_SHL_E"
+		"ProductId": "B_SHL_E",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": 3
 	},
 	{
 		"Id": "^B_DECO_R",
@@ -205,7 +280,10 @@
 		"Name_LocStr": null,
 		"Subtitle_LocStr": null,
 		"Category": "season",
-		"ProductId": "B_DECO_R"
+		"ProductId": "B_DECO_R",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": 3
 	},
 	{
 		"Id": "^B_DECO_Q_0",
@@ -213,7 +291,10 @@
 		"Name_LocStr": null,
 		"Subtitle_LocStr": null,
 		"Category": "season",
-		"ProductId": "B_DECO_Q_0"
+		"ProductId": "B_DECO_Q_0",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": 3
 	},
 	{
 		"Id": "^SHIP_ATLAS",
@@ -221,7 +302,10 @@
 		"Name_LocStr": "UI_SHIPTRAIL_ATLAS_NAME",
 		"Subtitle_LocStr": "UI_SHIPTRAIL_SUB",
 		"Category": "season",
-		"ProductId": "SHIP_ATLAS"
+		"ProductId": "SHIP_ATLAS",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER20C",
@@ -229,7 +313,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER20C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER20C"
+		"ProductId": "EXPD_POSTER20C",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER20B",
@@ -237,7 +324,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER20B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER20B"
+		"ProductId": "EXPD_POSTER20B",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER20A",
@@ -245,7 +335,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER20A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER20A"
+		"ProductId": "EXPD_POSTER20A",
+		"MustBeUnlocked": false,
+		"SeasonId": 20,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_EGG_19",
@@ -253,7 +346,10 @@
 		"Name_LocStr": "UI_EXPD_EGG_19_NAME",
 		"Subtitle_LocStr": "UI_EXPD_EGG_19_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_EGG_19"
+		"ProductId": "EXPD_EGG_19",
+		"MustBeUnlocked": false,
+		"SeasonId": 19,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_TITLE19",
@@ -261,7 +357,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_19_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE19"
+		"ProductId": "EXPD_TITLE19",
+		"MustBeUnlocked": false,
+		"SeasonId": 19,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_BANNER19",
@@ -269,7 +368,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_19_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER19"
+		"ProductId": "EXPD_BANNER19",
+		"MustBeUnlocked": false,
+		"SeasonId": 19,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL19",
@@ -277,7 +379,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_19_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL19"
+		"ProductId": "EXPD_DECAL19",
+		"MustBeUnlocked": false,
+		"SeasonId": 19,
+		"StageId": 5
 	},
 	{
 		"Id": "^B_TUR_B",
@@ -285,7 +390,10 @@
 		"Name_LocStr": null,
 		"Subtitle_LocStr": null,
 		"Category": "season",
-		"ProductId": "B_TUR_B"
+		"ProductId": "B_TUR_B",
+		"MustBeUnlocked": false,
+		"SeasonId": 19,
+		"StageId": 4
 	},
 	{
 		"Id": "^SHIP_PLASMA",
@@ -293,7 +401,10 @@
 		"Name_LocStr": "UI_SHIPTRAIL_PLASMA_NAME",
 		"Subtitle_LocStr": "UI_SHIPTRAIL_SUB",
 		"Category": "season",
-		"ProductId": "SHIP_PLASMA"
+		"ProductId": "SHIP_PLASMA",
+		"MustBeUnlocked": false,
+		"SeasonId": 19,
+		"StageId": 3
 	},
 	{
 		"Id": "^JETS_RUIN",
@@ -301,7 +412,10 @@
 		"Name_LocStr": "UI_JETTRAIL_RUIN_NAME",
 		"Subtitle_LocStr": "UI_JETTRAIL_SUB",
 		"Category": "season",
-		"ProductId": "JETS_RUIN"
+		"ProductId": "JETS_RUIN",
+		"MustBeUnlocked": false,
+		"SeasonId": 19,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER19C",
@@ -309,7 +423,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER19C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER19C"
+		"ProductId": "EXPD_POSTER19C",
+		"MustBeUnlocked": false,
+		"SeasonId": 19,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER19B",
@@ -317,7 +434,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER19B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER19B"
+		"ProductId": "EXPD_POSTER19B",
+		"MustBeUnlocked": false,
+		"SeasonId": 19,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER19A",
@@ -325,7 +445,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER19A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER19A"
+		"ProductId": "EXPD_POSTER19A",
+		"MustBeUnlocked": false,
+		"SeasonId": 19,
+		"StageId": 1
 	},
 	{
 		"Id": "^STONE_HAT",
@@ -333,7 +456,10 @@
 		"Name_LocStr": "UI_EXPED_STONE_HAT_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_HAT_SUB",
 		"Category": "season",
-		"ProductId": "STONE_HAT"
+		"ProductId": "STONE_HAT",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": -1
 	},
 	{
 		"Id": "^STONE_TORSO",
@@ -341,7 +467,10 @@
 		"Name_LocStr": "UI_EXPED_STONE_TORSO_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_TORSO_SUB",
 		"Category": "season",
-		"ProductId": "STONE_TORSO"
+		"ProductId": "STONE_TORSO",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": -1
 	},
 	{
 		"Id": "^STONE_ARMOUR",
@@ -349,7 +478,10 @@
 		"Name_LocStr": "UI_EXPED_STONE_ARMOUR_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_ARMOUR_SUB",
 		"Category": "season",
-		"ProductId": "STONE_ARMOUR"
+		"ProductId": "STONE_ARMOUR",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": -1
 	},
 	{
 		"Id": "^STONE_GLOVES",
@@ -357,7 +489,10 @@
 		"Name_LocStr": "UI_EXPED_STONE_GLOVES_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_GLOVE_SUB",
 		"Category": "season",
-		"ProductId": "STONE_GLOVES"
+		"ProductId": "STONE_GLOVES",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": -1
 	},
 	{
 		"Id": "^STONE_LEGS",
@@ -365,7 +500,10 @@
 		"Name_LocStr": "UI_EXPED_STONE_LEGS_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_LEGS_SUB",
 		"Category": "season",
-		"ProductId": "STONE_LEGS"
+		"ProductId": "STONE_LEGS",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": -1
 	},
 	{
 		"Id": "^STONE_BOOTS",
@@ -373,7 +511,10 @@
 		"Name_LocStr": "UI_EXPED_STONE_BOOTS_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_BOOTS_SUB",
 		"Category": "season",
-		"ProductId": "STONE_BOOTS"
+		"ProductId": "STONE_BOOTS",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_TITLE18",
@@ -381,7 +522,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_18_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE18"
+		"ProductId": "EXPD_TITLE18",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL18",
@@ -389,7 +533,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_18_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL18"
+		"ProductId": "EXPD_DECAL18",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_BANNER18",
@@ -397,7 +544,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_18_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER18"
+		"ProductId": "EXPD_BANNER18",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_STONE_PACK",
@@ -405,7 +555,10 @@
 		"Name_LocStr": "UI_EXPED_STONE_PACK_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_PACK_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_STONE_PACK"
+		"ProductId": "EXPD_STONE_PACK",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPD_STAFF_18",
@@ -413,7 +566,10 @@
 		"Name_LocStr": "UI_EXPED_STAFF_18_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_STAFF_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_STAFF_18"
+		"ProductId": "EXPD_STAFF_18",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_EGG_18",
@@ -421,7 +577,10 @@
 		"Name_LocStr": "UI_EXPD_EGG_18_NAME",
 		"Subtitle_LocStr": "UI_EXPD_EGG_18_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_EGG_18"
+		"ProductId": "EXPD_EGG_18",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER18C",
@@ -429,7 +588,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER18C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER18C"
+		"ProductId": "EXPD_POSTER18C",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER18B",
@@ -437,7 +599,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER18B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER18B"
+		"ProductId": "EXPD_POSTER18B",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER18A",
@@ -445,7 +610,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER18A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER18A"
+		"ProductId": "EXPD_POSTER18A",
+		"MustBeUnlocked": false,
+		"SeasonId": 18,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_SHIP17",
@@ -453,7 +621,10 @@
 		"Name_LocStr": "UI_EXPD_SHIP_17_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_SHIP_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_SHIP17"
+		"ProductId": "EXPD_SHIP17",
+		"MustBeUnlocked": false,
+		"SeasonId": 17,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_TITLE17",
@@ -461,7 +632,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_17_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE17"
+		"ProductId": "EXPD_TITLE17",
+		"MustBeUnlocked": false,
+		"SeasonId": 17,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL17",
@@ -469,7 +643,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_17_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL17"
+		"ProductId": "EXPD_DECAL17",
+		"MustBeUnlocked": false,
+		"SeasonId": 17,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_BANNER17",
@@ -477,7 +654,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_17_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER17"
+		"ProductId": "EXPD_BANNER17",
+		"MustBeUnlocked": false,
+		"SeasonId": 17,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_STAFF_17",
@@ -485,7 +665,10 @@
 		"Name_LocStr": "UI_EXPED_STAFF_17_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_STAFF_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_STAFF_17"
+		"ProductId": "EXPD_STAFF_17",
+		"MustBeUnlocked": false,
+		"SeasonId": 17,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPD_CAPE17",
@@ -493,7 +676,10 @@
 		"Name_LocStr": "UI_CAPE_S17_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_CAPE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_CAPE17"
+		"ProductId": "EXPD_CAPE17",
+		"MustBeUnlocked": false,
+		"SeasonId": 17,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_SHIPMAT17",
@@ -501,7 +687,10 @@
 		"Name_LocStr": "UI_EXPD_SHIPMAT_17_NAME",
 		"Subtitle_LocStr": "UI_SPEC_SHIPMAT_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_SHIPMAT17"
+		"ProductId": "EXPD_SHIPMAT17",
+		"MustBeUnlocked": false,
+		"SeasonId": 17,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER17A",
@@ -509,7 +698,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER17A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER17A"
+		"ProductId": "EXPD_POSTER17A",
+		"MustBeUnlocked": false,
+		"SeasonId": 17,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER17B",
@@ -517,7 +709,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER17B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER17B"
+		"ProductId": "EXPD_POSTER17B",
+		"MustBeUnlocked": false,
+		"SeasonId": 17,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER17C",
@@ -525,7 +720,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER17C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER17C"
+		"ProductId": "EXPD_POSTER17C",
+		"MustBeUnlocked": false,
+		"SeasonId": 17,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_SHIP16",
@@ -533,7 +731,10 @@
 		"Name_LocStr": "UI_EXPD_SHIP_16_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_SHIP_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_SHIP16"
+		"ProductId": "EXPD_SHIP16",
+		"MustBeUnlocked": false,
+		"SeasonId": 16,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_EGG_16",
@@ -541,7 +742,10 @@
 		"Name_LocStr": "UI_EXPD_EGG_16_NAME",
 		"Subtitle_LocStr": "UI_EXPD_EGG_16_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_EGG_16"
+		"ProductId": "EXPD_EGG_16",
+		"MustBeUnlocked": false,
+		"SeasonId": 16,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPD_S16_HAT",
@@ -549,7 +753,10 @@
 		"Name_LocStr": "UI_EXPED_SQUID_HAT_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_HAT_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_S16_HAT"
+		"ProductId": "EXPD_S16_HAT",
+		"MustBeUnlocked": false,
+		"SeasonId": 16,
+		"StageId": 3
 	},
 	{
 		"Id": "^S16_HEATER",
@@ -557,7 +764,10 @@
 		"Name_LocStr": "BLD_S16_HEATER_NAME",
 		"Subtitle_LocStr": "BLD_S16_HEATER_SUB",
 		"Category": "season",
-		"ProductId": "S16_HEATER"
+		"ProductId": "S16_HEATER",
+		"MustBeUnlocked": false,
+		"SeasonId": 16,
+		"StageId": 2
 	},
 	{
 		"Id": "^JETS_SQUID",
@@ -565,7 +775,10 @@
 		"Name_LocStr": "UI_JETTRAIL_SQUID_NAME",
 		"Subtitle_LocStr": "UI_JETTRAIL_SUB",
 		"Category": "season",
-		"ProductId": "JETS_SQUID"
+		"ProductId": "JETS_SQUID",
+		"MustBeUnlocked": false,
+		"SeasonId": 16,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER16A",
@@ -573,7 +786,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER16A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER16A"
+		"ProductId": "EXPD_POSTER16A",
+		"MustBeUnlocked": false,
+		"SeasonId": 16,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER16B",
@@ -581,7 +797,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER16B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER16B"
+		"ProductId": "EXPD_POSTER16B",
+		"MustBeUnlocked": false,
+		"SeasonId": 16,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER16C",
@@ -589,7 +808,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER16C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER16C"
+		"ProductId": "EXPD_POSTER16C",
+		"MustBeUnlocked": false,
+		"SeasonId": 16,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_TITLE16",
@@ -597,7 +819,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_16_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE16"
+		"ProductId": "EXPD_TITLE16",
+		"MustBeUnlocked": false,
+		"SeasonId": 16,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_BANNER16",
@@ -605,7 +830,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_16_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER16"
+		"ProductId": "EXPD_BANNER16",
+		"MustBeUnlocked": false,
+		"SeasonId": 16,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL16",
@@ -613,7 +841,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_16_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL16"
+		"ProductId": "EXPD_DECAL16",
+		"MustBeUnlocked": false,
+		"SeasonId": 16,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_FISH_PACK",
@@ -621,7 +852,10 @@
 		"Name_LocStr": "UI_EXPED_FISH_PACK_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_PACK_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_FISH_PACK"
+		"ProductId": "EXPD_FISH_PACK",
+		"MustBeUnlocked": false,
+		"SeasonId": 15,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_S15_LASER",
@@ -629,7 +863,10 @@
 		"Name_LocStr": "UI_S15_FISHLASER_NAME",
 		"Subtitle_LocStr": "UI_S15_FISHLASER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_S15_LASER"
+		"ProductId": "EXPD_S15_LASER",
+		"MustBeUnlocked": false,
+		"SeasonId": 15,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPD_S15_ARMOUR",
@@ -637,7 +874,10 @@
 		"Name_LocStr": "UI_EXPED_FISH_ARMOUR_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_ARMOUR_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_S15_ARMOUR"
+		"ProductId": "EXPD_S15_ARMOUR",
+		"MustBeUnlocked": false,
+		"SeasonId": 15,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_S15_HAT",
@@ -645,7 +885,10 @@
 		"Name_LocStr": "UI_EXPED_FISH_HAT_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_HAT_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_S15_HAT"
+		"ProductId": "EXPD_S15_HAT",
+		"MustBeUnlocked": false,
+		"SeasonId": 15,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_S15_LEGS",
@@ -653,7 +896,10 @@
 		"Name_LocStr": "UI_EXPED_FISH_LEGS_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_LEGS_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_S15_LEGS"
+		"ProductId": "EXPD_S15_LEGS",
+		"MustBeUnlocked": false,
+		"SeasonId": 15,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_S15_BOOTS",
@@ -661,7 +907,10 @@
 		"Name_LocStr": "UI_EXPED_FISH_BOOTS_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_BOOTS_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_S15_BOOTS"
+		"ProductId": "EXPD_S15_BOOTS",
+		"MustBeUnlocked": false,
+		"SeasonId": 15,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER15A",
@@ -669,7 +918,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER15A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER15A"
+		"ProductId": "EXPD_POSTER15A",
+		"MustBeUnlocked": false,
+		"SeasonId": 15,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER15B",
@@ -677,7 +929,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER15B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER15B"
+		"ProductId": "EXPD_POSTER15B",
+		"MustBeUnlocked": false,
+		"SeasonId": 15,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER15C",
@@ -685,7 +940,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER15C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER15C"
+		"ProductId": "EXPD_POSTER15C",
+		"MustBeUnlocked": false,
+		"SeasonId": 15,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_TITLE15",
@@ -693,7 +951,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_15_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE15"
+		"ProductId": "EXPD_TITLE15",
+		"MustBeUnlocked": false,
+		"SeasonId": 15,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_BANNER15",
@@ -701,7 +962,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_15_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER15"
+		"ProductId": "EXPD_BANNER15",
+		"MustBeUnlocked": false,
+		"SeasonId": 15,
+		"StageId": 5
 	},
 	{
 		"Id": "^BOBBLE_OCTO",
@@ -709,7 +973,10 @@
 		"Name_LocStr": "UI_S15_FISH_BOBBLE",
 		"Subtitle_LocStr": "UI_BOBBLE_SUB",
 		"Category": "season",
-		"ProductId": "BOBBLE_OCTO"
+		"ProductId": "BOBBLE_OCTO",
+		"MustBeUnlocked": false,
+		"SeasonId": 15,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL15",
@@ -717,7 +984,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_15_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL15"
+		"ProductId": "EXPD_DECAL15",
+		"MustBeUnlocked": false,
+		"SeasonId": 15,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_EGG_14",
@@ -725,7 +995,10 @@
 		"Name_LocStr": "UI_EXPD_EGG_14_NAME",
 		"Subtitle_LocStr": "UI_EXPD_EGG_14_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_EGG_14"
+		"ProductId": "EXPD_EGG_14",
+		"MustBeUnlocked": true,
+		"SeasonId": 14,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPED_BUG_PACK",
@@ -733,7 +1006,10 @@
 		"Name_LocStr": "UI_EXPED_BUG_PACK_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_PACK_SUB",
 		"Category": "season",
-		"ProductId": "EXPED_BUG_PACK"
+		"ProductId": "EXPED_BUG_PACK",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPED_BUG_ARMOR",
@@ -741,7 +1017,10 @@
 		"Name_LocStr": "UI_EXPED_BUG_ARMOUR_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_ARMOUR_SUB",
 		"Category": "season",
-		"ProductId": "EXPED_BUG_ARMOR"
+		"ProductId": "EXPED_BUG_ARMOR",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPED_BUG_HAT",
@@ -749,7 +1028,10 @@
 		"Name_LocStr": "UI_EXPED_BUG_HAT_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_HAT_SUB",
 		"Category": "season",
-		"ProductId": "EXPED_BUG_HAT"
+		"ProductId": "EXPED_BUG_HAT",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPED_BUG_GLOVE",
@@ -757,7 +1039,10 @@
 		"Name_LocStr": "UI_EXPED_BUG_GLOVES_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_GLOVE_SUB",
 		"Category": "season",
-		"ProductId": "EXPED_BUG_GLOVE"
+		"ProductId": "EXPED_BUG_GLOVE",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPED_BUG_BOOTS",
@@ -765,7 +1050,10 @@
 		"Name_LocStr": "UI_EXPED_BUG_BOOTS_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_BOOTS_SUB",
 		"Category": "season",
-		"ProductId": "EXPED_BUG_BOOTS"
+		"ProductId": "EXPED_BUG_BOOTS",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_POSTER14A",
@@ -773,7 +1061,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER14A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER14A"
+		"ProductId": "EXPD_POSTER14A",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER14B",
@@ -781,7 +1072,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER14B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER14B"
+		"ProductId": "EXPD_POSTER14B",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER14C",
@@ -789,7 +1083,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER14C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER14C"
+		"ProductId": "EXPD_POSTER14C",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 1
 	},
 	{
 		"Id": "^BLD_BUGHEAD1",
@@ -797,7 +1094,10 @@
 		"Name_LocStr": "BLD_EXPD_BUGHEAD1_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_BUGHEAD1"
+		"ProductId": "BLD_BUGHEAD1",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 2
 	},
 	{
 		"Id": "^BLD_BUGHEAD2",
@@ -805,7 +1105,10 @@
 		"Name_LocStr": "BLD_EXPD_BUGHEAD2_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_BUGHEAD2"
+		"ProductId": "BLD_BUGHEAD2",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 2
 	},
 	{
 		"Id": "^BLD_BUGHEAD3",
@@ -813,7 +1116,10 @@
 		"Name_LocStr": "BLD_EXPD_BUGHEAD3_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_BUGHEAD3"
+		"ProductId": "BLD_BUGHEAD3",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 2
 	},
 	{
 		"Id": "^BLD_BUGHEAD4",
@@ -821,7 +1127,10 @@
 		"Name_LocStr": "BLD_EXPD_BUGHEAD4_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_BUGHEAD4"
+		"ProductId": "BLD_BUGHEAD4",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 2
 	},
 	{
 		"Id": "^BLD_BUGHEAD5",
@@ -829,7 +1138,10 @@
 		"Name_LocStr": "BLD_EXPD_BUGHEAD5_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_BUGHEAD5"
+		"ProductId": "BLD_BUGHEAD5",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_TITLE14",
@@ -837,7 +1149,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_14_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE14"
+		"ProductId": "EXPD_TITLE14",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL14",
@@ -845,7 +1160,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_14_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL14"
+		"ProductId": "EXPD_DECAL14",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_BANNER14",
@@ -853,7 +1171,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_14_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER14"
+		"ProductId": "EXPD_BANNER14",
+		"MustBeUnlocked": false,
+		"SeasonId": 14,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_TITLE13",
@@ -861,7 +1182,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_13_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE13"
+		"ProductId": "EXPD_TITLE13",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL13",
@@ -869,7 +1193,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_13_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL13"
+		"ProductId": "EXPD_DECAL13",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_BANNER13",
@@ -877,7 +1204,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_13_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER13"
+		"ProductId": "EXPD_BANNER13",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_SHIP13",
@@ -885,7 +1215,10 @@
 		"Name_LocStr": "UI_EXPD_SHIP_13_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_SHIP_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_SHIP13"
+		"ProductId": "EXPD_SHIP13",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_SHIP_METAL",
@@ -893,7 +1226,10 @@
 		"Name_LocStr": "UI_EXPD_SHIPMAT_BOLT_NAME",
 		"Subtitle_LocStr": "UI_SPEC_SHIPMAT_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_SHIP_METAL"
+		"ProductId": "EXPD_SHIP_METAL",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_GHOSTFRIG",
@@ -901,7 +1237,10 @@
 		"Name_LocStr": "UI_EXPD_GHOSTFRIG_NAME",
 		"Subtitle_LocStr": "UI_EXPD_GHOSTFRIG_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_GHOSTFRIG"
+		"ProductId": "EXPD_GHOSTFRIG",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPD_EGG_13",
@@ -909,7 +1248,10 @@
 		"Name_LocStr": "UI_EXPD_EGG_13_NAME",
 		"Subtitle_LocStr": "UI_EXPD_EGG_13_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_EGG_13"
+		"ProductId": "EXPD_EGG_13",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_SHIPMAT13",
@@ -917,7 +1259,10 @@
 		"Name_LocStr": "UI_EXPD_SHIPMAT_CAMO_NAME",
 		"Subtitle_LocStr": "UI_SPEC_SHIPMAT_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_SHIPMAT13"
+		"ProductId": "EXPD_SHIPMAT13",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 1
 	},
 	{
 		"Id": "^BLD_SHIPBREAK1",
@@ -925,7 +1270,10 @@
 		"Name_LocStr": "BLD_EXPD_SHIPBREAK1_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_SHIPBREAK1"
+		"ProductId": "BLD_SHIPBREAK1",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 2
 	},
 	{
 		"Id": "^BLD_SHIPBREAK2",
@@ -933,7 +1281,10 @@
 		"Name_LocStr": "BLD_EXPD_SHIPBREAK2_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_SHIPBREAK2"
+		"ProductId": "BLD_SHIPBREAK2",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 2
 	},
 	{
 		"Id": "^BLD_SHIPBREAK3",
@@ -941,7 +1292,10 @@
 		"Name_LocStr": "BLD_EXPD_SHIPBREAK3_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_SHIPBREAK3"
+		"ProductId": "BLD_SHIPBREAK3",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 2
 	},
 	{
 		"Id": "^BLD_SHIPBREAK4",
@@ -949,7 +1303,10 @@
 		"Name_LocStr": "BLD_EXPD_SHIPBREAK4_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_SHIPBREAK4"
+		"ProductId": "BLD_SHIPBREAK4",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 2
 	},
 	{
 		"Id": "^BLD_SHIPBREAK5",
@@ -957,7 +1314,10 @@
 		"Name_LocStr": "BLD_EXPD_SHIPBREAK5_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_SHIPBREAK5"
+		"ProductId": "BLD_SHIPBREAK5",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER13C",
@@ -965,7 +1325,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER13C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER13C"
+		"ProductId": "EXPD_POSTER13C",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER13B",
@@ -973,7 +1336,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER13B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER13B"
+		"ProductId": "EXPD_POSTER13B",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER13A",
@@ -981,7 +1347,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER13A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER13A"
+		"ProductId": "EXPD_POSTER13A",
+		"MustBeUnlocked": false,
+		"SeasonId": 13,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_BANNER12",
@@ -989,7 +1358,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_12_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER12"
+		"ProductId": "EXPD_BANNER12",
+		"MustBeUnlocked": false,
+		"SeasonId": 12,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_TITLE12",
@@ -997,7 +1369,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_12_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE12"
+		"ProductId": "EXPD_TITLE12",
+		"MustBeUnlocked": false,
+		"SeasonId": 12,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL12",
@@ -1005,7 +1380,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_12_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL12"
+		"ProductId": "EXPD_DECAL12",
+		"MustBeUnlocked": false,
+		"SeasonId": 12,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_SHIP12",
@@ -1013,7 +1391,10 @@
 		"Name_LocStr": "UI_EXPD_SHIP_12_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_SHIP_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_SHIP12"
+		"ProductId": "EXPD_SHIP12",
+		"MustBeUnlocked": false,
+		"SeasonId": 12,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_ATLASPACK",
@@ -1021,7 +1402,10 @@
 		"Name_LocStr": "UI_EXPD_ATLASPACK_NAME",
 		"Subtitle_LocStr": "UI_BACKPACK2_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_ATLASPACK"
+		"ProductId": "EXPD_ATLASPACK",
+		"MustBeUnlocked": false,
+		"SeasonId": 12,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPD_ATLASSTAFF",
@@ -1029,7 +1413,10 @@
 		"Name_LocStr": "UI_EXPD_ATLASSTAFF_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_STAFF_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_ATLASSTAFF"
+		"ProductId": "EXPD_ATLASSTAFF",
+		"MustBeUnlocked": false,
+		"SeasonId": 12,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_ATLASHELM",
@@ -1037,7 +1424,10 @@
 		"Name_LocStr": "UI_EXPD_ATLASHELM_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_HAT_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_ATLASHELM"
+		"ProductId": "EXPD_ATLASHELM",
+		"MustBeUnlocked": false,
+		"SeasonId": 12,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER12C",
@@ -1045,7 +1435,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER12C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER12C"
+		"ProductId": "EXPD_POSTER12C",
+		"MustBeUnlocked": false,
+		"SeasonId": 12,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER12B",
@@ -1053,7 +1446,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER12B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER12B"
+		"ProductId": "EXPD_POSTER12B",
+		"MustBeUnlocked": false,
+		"SeasonId": 12,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER12A",
@@ -1061,7 +1457,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER12A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER12A"
+		"ProductId": "EXPD_POSTER12A",
+		"MustBeUnlocked": false,
+		"SeasonId": 12,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_EGG_11",
@@ -1069,7 +1468,10 @@
 		"Name_LocStr": "UI_EXPD_EGG_11_NAME",
 		"Subtitle_LocStr": "UI_EXPD_EGG_11_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_EGG_11"
+		"ProductId": "EXPD_EGG_11",
+		"MustBeUnlocked": false,
+		"SeasonId": 11,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_BANNER11",
@@ -1077,7 +1479,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_11_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER11"
+		"ProductId": "EXPD_BANNER11",
+		"MustBeUnlocked": false,
+		"SeasonId": 11,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_TITLE11",
@@ -1085,7 +1490,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_11_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE11"
+		"ProductId": "EXPD_TITLE11",
+		"MustBeUnlocked": false,
+		"SeasonId": 11,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL11",
@@ -1093,7 +1501,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_11_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL11"
+		"ProductId": "EXPD_DECAL11",
+		"MustBeUnlocked": false,
+		"SeasonId": 11,
+		"StageId": 5
 	},
 	{
 		"Id": "^BLD_BUI_HEAD",
@@ -1101,7 +1512,10 @@
 		"Name_LocStr": "BLD_BUI_HEAD_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_BUI_HEAD"
+		"ProductId": "BLD_BUI_HEAD",
+		"MustBeUnlocked": false,
+		"SeasonId": 11,
+		"StageId": 4
 	},
 	{
 		"Id": "^BLD_BUI_HAND",
@@ -1109,7 +1523,10 @@
 		"Name_LocStr": "BLD_BUI_HAND_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_BUI_HAND"
+		"ProductId": "BLD_BUI_HAND",
+		"MustBeUnlocked": false,
+		"SeasonId": 11,
+		"StageId": 4
 	},
 	{
 		"Id": "^BLD_BUI_TENT",
@@ -1117,7 +1534,10 @@
 		"Name_LocStr": "BLD_BUI_TENT_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_BUI_TENT"
+		"ProductId": "BLD_BUI_TENT",
+		"MustBeUnlocked": false,
+		"SeasonId": 11,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPD_PETCUST11",
@@ -1125,7 +1545,10 @@
 		"Name_LocStr": "UI_EXPD_PET_CUSTOM_11_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_PET_CUSTOM_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_PETCUST11"
+		"ProductId": "EXPD_PETCUST11",
+		"MustBeUnlocked": false,
+		"SeasonId": 11,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_POSTER11C",
@@ -1133,7 +1556,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER11C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER11C"
+		"ProductId": "EXPD_POSTER11C",
+		"MustBeUnlocked": false,
+		"SeasonId": 11,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER11B",
@@ -1141,7 +1567,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER11B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER11B"
+		"ProductId": "EXPD_POSTER11B",
+		"MustBeUnlocked": false,
+		"SeasonId": 11,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER11A",
@@ -1149,7 +1578,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER11A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER11A"
+		"ProductId": "EXPD_POSTER11A",
+		"MustBeUnlocked": false,
+		"SeasonId": 11,
+		"StageId": 2
 	},
 	{
 		"Id": "^JETS_ELECTRIC",
@@ -1157,7 +1589,10 @@
 		"Name_LocStr": "UI_JETTRAIL_ELECTRIC_NAME",
 		"Subtitle_LocStr": "UI_JETTRAIL_SUB",
 		"Category": "season",
-		"ProductId": "JETS_ELECTRIC"
+		"ProductId": "JETS_ELECTRIC",
+		"MustBeUnlocked": false,
+		"SeasonId": 11,
+		"StageId": 1
 	},
 	{
 		"Id": "^S10_PART1A",
@@ -1165,7 +1600,10 @@
 		"Name_LocStr": "UI_SPEC_CONSTRUCT_HEAD_A_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_HEAD_SUB",
 		"Category": "season",
-		"ProductId": "S10_PART1A"
+		"ProductId": "S10_PART1A",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": -1
 	},
 	{
 		"Id": "^S10_PART1B",
@@ -1173,7 +1611,10 @@
 		"Name_LocStr": "UI_SPEC_CONSTRUCT_HEAD_B_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_HEAD_SUB",
 		"Category": "season",
-		"ProductId": "S10_PART1B"
+		"ProductId": "S10_PART1B",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": -1
 	},
 	{
 		"Id": "^S10_PART2",
@@ -1181,7 +1622,10 @@
 		"Name_LocStr": "UI_SPEC_CONSTRUCT_GLOVES_NAME",
 		"Subtitle_LocStr": "UI_BUILDER_CUSTOM_SUB",
 		"Category": "season",
-		"ProductId": "S10_PART2"
+		"ProductId": "S10_PART2",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": -1
 	},
 	{
 		"Id": "^S10_PART3",
@@ -1189,7 +1633,10 @@
 		"Name_LocStr": "UI_SPEC_CONSTRUCT_TORSO_NAME",
 		"Subtitle_LocStr": "UI_BUILDER_CUSTOM_SUB",
 		"Category": "season",
-		"ProductId": "S10_PART3"
+		"ProductId": "S10_PART3",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": -1
 	},
 	{
 		"Id": "^S10_PART4",
@@ -1197,7 +1644,10 @@
 		"Name_LocStr": "UI_SPEC_CONSTRUCT_BOOTS_NAME",
 		"Subtitle_LocStr": "UI_BUILDER_CUSTOM_SUB",
 		"Category": "season",
-		"ProductId": "S10_PART4"
+		"ProductId": "S10_PART4",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": -1
 	},
 	{
 		"Id": "^S10_PART5",
@@ -1205,7 +1655,10 @@
 		"Name_LocStr": "UI_SPEC_CONSTRUCT_LEGS_NAME",
 		"Subtitle_LocStr": "UI_BUILDER_CUSTOM_SUB",
 		"Category": "season",
-		"ProductId": "S10_PART5"
+		"ProductId": "S10_PART5",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_BANNER10",
@@ -1213,7 +1666,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_10_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER10"
+		"ProductId": "EXPD_BANNER10",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL10",
@@ -1221,7 +1677,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_10_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL10"
+		"ProductId": "EXPD_DECAL10",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_TITLE10",
@@ -1229,7 +1688,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_10_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE10"
+		"ProductId": "EXPD_TITLE10",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": 5
 	},
 	{
 		"Id": "^SPEC_ROCKETHAT",
@@ -1237,7 +1699,10 @@
 		"Name_LocStr": "UI_SPEC_ROCKETHAT_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_HAT_SUB",
 		"Category": "season",
-		"ProductId": "SPEC_ROCKETHAT"
+		"ProductId": "SPEC_ROCKETHAT",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": 4
 	},
 	{
 		"Id": "^BLD_CRYS_DRONE",
@@ -1245,7 +1710,10 @@
 		"Name_LocStr": "BLD_CRYS_DRONE_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "BLD_CRYS_DRONE"
+		"ProductId": "BLD_CRYS_DRONE",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": 3
 	},
 	{
 		"Id": "^JETS_CORRUPT",
@@ -1253,7 +1721,10 @@
 		"Name_LocStr": "UI_CORRUPT_TRAIL_NAME",
 		"Subtitle_LocStr": "UI_JETTRAIL_SUB",
 		"Category": "season",
-		"ProductId": "JETS_CORRUPT"
+		"ProductId": "JETS_CORRUPT",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": 2
 	},
 	{
 		"Id": "^FREI_TRAIL_RED",
@@ -1261,7 +1732,10 @@
 		"Name_LocStr": "UI_FREI_TRAIL_RED_NAME",
 		"Subtitle_LocStr": "UI_FREI_TRAIL_SUB",
 		"Category": "season",
-		"ProductId": "FREI_TRAIL_RED"
+		"ProductId": "FREI_TRAIL_RED",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER10C",
@@ -1269,7 +1743,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER10C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER10C"
+		"ProductId": "EXPD_POSTER10C",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER10B",
@@ -1277,7 +1754,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER10B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER10B"
+		"ProductId": "EXPD_POSTER10B",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER10A",
@@ -1285,7 +1765,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER10A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER10A"
+		"ProductId": "EXPD_POSTER10A",
+		"MustBeUnlocked": false,
+		"SeasonId": 10,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_SHIP09",
@@ -1293,7 +1776,10 @@
 		"Name_LocStr": "UI_EXPD_SHIP_09_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_SHIP_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_SHIP09"
+		"ProductId": "EXPD_SHIP09",
+		"MustBeUnlocked": false,
+		"SeasonId": 9,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_BANNER09",
@@ -1301,7 +1787,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_09_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER09"
+		"ProductId": "EXPD_BANNER09",
+		"MustBeUnlocked": false,
+		"SeasonId": 9,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL09",
@@ -1309,7 +1798,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_09_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL09"
+		"ProductId": "EXPD_DECAL09",
+		"MustBeUnlocked": false,
+		"SeasonId": 9,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_TITLE09",
@@ -1317,7 +1809,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_09_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE09"
+		"ProductId": "EXPD_TITLE09",
+		"MustBeUnlocked": false,
+		"SeasonId": 9,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_EGG_09",
@@ -1325,7 +1820,10 @@
 		"Name_LocStr": "UI_EXPD_EGG_09_NAME",
 		"Subtitle_LocStr": "UI_EXPD_EGG_09_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_EGG_09"
+		"ProductId": "EXPD_EGG_09",
+		"MustBeUnlocked": false,
+		"SeasonId": 9,
+		"StageId": 4
 	},
 	{
 		"Id": "^SPEC_BUCKETHELM",
@@ -1333,7 +1831,10 @@
 		"Name_LocStr": "UI_SPEC_BUCKETHELM_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_HAT_SUB",
 		"Category": "season",
-		"ProductId": "SPEC_BUCKETHELM"
+		"ProductId": "SPEC_BUCKETHELM",
+		"MustBeUnlocked": false,
+		"SeasonId": 9,
+		"StageId": 3
 	},
 	{
 		"Id": "^BLD_HOLOGEK",
@@ -1341,7 +1842,10 @@
 		"Name_LocStr": "BLD_HOLOGEK_NAME",
 		"Subtitle_LocStr": "BLD_HOLOGEK_SUB",
 		"Category": "season",
-		"ProductId": "BLD_HOLOGEK"
+		"ProductId": "BLD_HOLOGEK",
+		"MustBeUnlocked": false,
+		"SeasonId": 9,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER09C",
@@ -1349,7 +1853,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER9C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER09C"
+		"ProductId": "EXPD_POSTER09C",
+		"MustBeUnlocked": false,
+		"SeasonId": 9,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER09B",
@@ -1357,7 +1864,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER9B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER09B"
+		"ProductId": "EXPD_POSTER09B",
+		"MustBeUnlocked": false,
+		"SeasonId": 9,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER09A",
@@ -1365,7 +1875,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER9A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER09A"
+		"ProductId": "EXPD_POSTER09A",
+		"MustBeUnlocked": false,
+		"SeasonId": 9,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_EGG_08",
@@ -1373,7 +1886,10 @@
 		"Name_LocStr": "UI_EXPD_EGG_08_NAME",
 		"Subtitle_LocStr": "UI_EXPD_EGG_08_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_EGG_08"
+		"ProductId": "EXPD_EGG_08",
+		"MustBeUnlocked": false,
+		"SeasonId": 8,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_BANNER08",
@@ -1381,7 +1897,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_08_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER08"
+		"ProductId": "EXPD_BANNER08",
+		"MustBeUnlocked": false,
+		"SeasonId": 8,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL08",
@@ -1389,7 +1908,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_08_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL08"
+		"ProductId": "EXPD_DECAL08",
+		"MustBeUnlocked": false,
+		"SeasonId": 8,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_TITLE08",
@@ -1397,7 +1919,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_08_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE08"
+		"ProductId": "EXPD_TITLE08",
+		"MustBeUnlocked": false,
+		"SeasonId": 8,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_CAPE08",
@@ -1405,7 +1930,10 @@
 		"Name_LocStr": "UI_FLEETCAPE_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_CAPE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_CAPE08"
+		"ProductId": "EXPD_CAPE08",
+		"MustBeUnlocked": false,
+		"SeasonId": 8,
+		"StageId": 4
 	},
 	{
 		"Id": "^BLD_DATASIGN",
@@ -1413,7 +1941,10 @@
 		"Name_LocStr": "BLD_DATASIGN_NAME",
 		"Subtitle_LocStr": "BLD_DATASIGN_SUB",
 		"Category": "season",
-		"ProductId": "BLD_DATASIGN"
+		"ProductId": "BLD_DATASIGN",
+		"MustBeUnlocked": false,
+		"SeasonId": 8,
+		"StageId": 3
 	},
 	{
 		"Id": "^BLD_FIREPIT",
@@ -1421,7 +1952,10 @@
 		"Name_LocStr": "BLD_FIREPIT_NAME",
 		"Subtitle_LocStr": "BLD_FIREPIT_SUB",
 		"Category": "season",
-		"ProductId": "BLD_FIREPIT"
+		"ProductId": "BLD_FIREPIT",
+		"MustBeUnlocked": false,
+		"SeasonId": 8,
+		"StageId": 3
 	},
 	{
 		"Id": "^BLD_MAPTUBE",
@@ -1429,7 +1963,10 @@
 		"Name_LocStr": "BLD_MAPTUBE_NAME",
 		"Subtitle_LocStr": "BLD_MAPTUBE_SUB",
 		"Category": "season",
-		"ProductId": "BLD_MAPTUBE"
+		"ProductId": "BLD_MAPTUBE",
+		"MustBeUnlocked": false,
+		"SeasonId": 8,
+		"StageId": 3
 	},
 	{
 		"Id": "^FREI_TRAIL_GRAV",
@@ -1437,7 +1974,10 @@
 		"Name_LocStr": "UI_FREI_TRAIL_01_NAME",
 		"Subtitle_LocStr": "UI_FREI_TRAIL_SUB",
 		"Category": "season",
-		"ProductId": "FREI_TRAIL_GRAV"
+		"ProductId": "FREI_TRAIL_GRAV",
+		"MustBeUnlocked": false,
+		"SeasonId": 8,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER08C",
@@ -1445,7 +1985,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER8C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER08C"
+		"ProductId": "EXPD_POSTER08C",
+		"MustBeUnlocked": false,
+		"SeasonId": 8,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER08B",
@@ -1453,7 +1996,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER8B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER08B"
+		"ProductId": "EXPD_POSTER08B",
+		"MustBeUnlocked": false,
+		"SeasonId": 8,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER08A",
@@ -1461,7 +2007,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER8A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER08A"
+		"ProductId": "EXPD_POSTER08A",
+		"MustBeUnlocked": false,
+		"SeasonId": 8,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_BIOFRIG",
@@ -1469,7 +2018,10 @@
 		"Name_LocStr": "UI_EXPD_BIOFRIG_NAME",
 		"Subtitle_LocStr": "UI_EXPD_BIOFRIG_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BIOFRIG"
+		"ProductId": "EXPD_BIOFRIG",
+		"MustBeUnlocked": false,
+		"SeasonId": 7,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_BANNER07",
@@ -1477,7 +2029,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_07_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER07"
+		"ProductId": "EXPD_BANNER07",
+		"MustBeUnlocked": false,
+		"SeasonId": 7,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL07",
@@ -1485,7 +2040,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_07_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL07"
+		"ProductId": "EXPD_DECAL07",
+		"MustBeUnlocked": false,
+		"SeasonId": 7,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_TITLE07",
@@ -1493,7 +2051,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_07_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE07"
+		"ProductId": "EXPD_TITLE07",
+		"MustBeUnlocked": false,
+		"SeasonId": 7,
+		"StageId": 5
 	},
 	{
 		"Id": "^BLD_MINI_BIOFRI",
@@ -1501,7 +2062,10 @@
 		"Name_LocStr": "BLD_MINI_BIOFRIG_NAME",
 		"Subtitle_LocStr": "BLD_MINI_BIOFRIG_SUB",
 		"Category": "season",
-		"ProductId": "BLD_MINI_BIOFRI"
+		"ProductId": "BLD_MINI_BIOFRI",
+		"MustBeUnlocked": false,
+		"SeasonId": 7,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPD_CAPE07",
@@ -1509,7 +2073,10 @@
 		"Name_LocStr": "UI_ROGUECAPE_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_CAPE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_CAPE07"
+		"ProductId": "EXPD_CAPE07",
+		"MustBeUnlocked": false,
+		"SeasonId": 7,
+		"StageId": 3
 	},
 	{
 		"Id": "^SHIP_ROGUE",
@@ -1517,7 +2084,10 @@
 		"Name_LocStr": "UI_SHIPTRAIL_ROGUE_NAME",
 		"Subtitle_LocStr": "UI_SHIPTRAIL_SUB",
 		"Category": "season",
-		"ProductId": "SHIP_ROGUE"
+		"ProductId": "SHIP_ROGUE",
+		"MustBeUnlocked": false,
+		"SeasonId": 7,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER07C",
@@ -1525,7 +2095,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER7C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER07C"
+		"ProductId": "EXPD_POSTER07C",
+		"MustBeUnlocked": false,
+		"SeasonId": 7,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER07B",
@@ -1533,7 +2106,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER7B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER07B"
+		"ProductId": "EXPD_POSTER07B",
+		"MustBeUnlocked": false,
+		"SeasonId": 7,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_POSTER07A",
@@ -1541,7 +2117,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER7A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER07A"
+		"ProductId": "EXPD_POSTER07A",
+		"MustBeUnlocked": false,
+		"SeasonId": 7,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_CAPE06",
@@ -1549,7 +2128,10 @@
 		"Name_LocStr": "UI_PIRATECAPE_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_CAPE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_CAPE06"
+		"ProductId": "EXPD_CAPE06",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_BANNER06",
@@ -1557,7 +2139,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_06_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER06"
+		"ProductId": "EXPD_BANNER06",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL06",
@@ -1565,7 +2150,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_06_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL06"
+		"ProductId": "EXPD_DECAL06",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_TITLE06",
@@ -1573,7 +2161,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_06_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE06"
+		"ProductId": "EXPD_TITLE06",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_CUBE_06",
@@ -1581,7 +2172,10 @@
 		"Name_LocStr": "UI_EXPD_CUBE_06_NAME",
 		"Subtitle_LocStr": "UI_EXPD_CUBE_06_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_CUBE_06"
+		"ProductId": "EXPD_CUBE_06",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPD_ODD_EGG",
@@ -1589,7 +2183,10 @@
 		"Name_LocStr": "UI_ODD_EGG_NAME",
 		"Subtitle_LocStr": "UI_ODD_EGG_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_ODD_EGG"
+		"ProductId": "EXPD_ODD_EGG",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPD_FLAG_06E",
@@ -1597,7 +2194,10 @@
 		"Name_LocStr": "UI_EXPD_FLAG_06E_NAME",
 		"Subtitle_LocStr": "BLD_EXPD_FLAG_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_FLAG_06E"
+		"ProductId": "EXPD_FLAG_06E",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_FLAG_06D",
@@ -1605,7 +2205,10 @@
 		"Name_LocStr": "UI_EXPD_FLAG_06D_NAME",
 		"Subtitle_LocStr": "BLD_EXPD_FLAG_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_FLAG_06D"
+		"ProductId": "EXPD_FLAG_06D",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_FLAG_06C",
@@ -1613,7 +2216,10 @@
 		"Name_LocStr": "UI_EXPD_FLAG_06C_NAME",
 		"Subtitle_LocStr": "BLD_EXPD_FLAG_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_FLAG_06C"
+		"ProductId": "EXPD_FLAG_06C",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_FLAG_06B",
@@ -1621,7 +2227,10 @@
 		"Name_LocStr": "UI_EXPD_FLAG_06B_NAME",
 		"Subtitle_LocStr": "BLD_EXPD_FLAG_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_FLAG_06B"
+		"ProductId": "EXPD_FLAG_06B",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_FLAG_06A",
@@ -1629,7 +2238,10 @@
 		"Name_LocStr": "UI_EXPD_FLAG_06A_NAME",
 		"Subtitle_LocStr": "BLD_EXPD_FLAG_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_FLAG_06A"
+		"ProductId": "EXPD_FLAG_06A",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_POSTER06C",
@@ -1637,7 +2249,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER6C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER06C"
+		"ProductId": "EXPD_POSTER06C",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER06B",
@@ -1645,7 +2260,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER6B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER06B"
+		"ProductId": "EXPD_POSTER06B",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER06A",
@@ -1653,7 +2271,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER6A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER06A"
+		"ProductId": "EXPD_POSTER06A",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 2
 	},
 	{
 		"Id": "^SHIP_PIRATE",
@@ -1661,7 +2282,10 @@
 		"Name_LocStr": "UI_SHIPTRAIL_PIRATE_NAME",
 		"Subtitle_LocStr": "UI_SHIPTRAIL_SUB",
 		"Category": "season",
-		"ProductId": "SHIP_PIRATE"
+		"ProductId": "SHIP_PIRATE",
+		"MustBeUnlocked": false,
+		"SeasonId": 6,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_EGG_05",
@@ -1669,7 +2293,10 @@
 		"Name_LocStr": "UI_EXPD_EGG_05_NAME",
 		"Subtitle_LocStr": "UI_EXPD_EGG_05_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_EGG_05"
+		"ProductId": "EXPD_EGG_05",
+		"MustBeUnlocked": false,
+		"SeasonId": 5,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_BANNER05",
@@ -1677,7 +2304,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_05_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER05"
+		"ProductId": "EXPD_BANNER05",
+		"MustBeUnlocked": false,
+		"SeasonId": 5,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL05",
@@ -1685,7 +2315,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_05_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL05"
+		"ProductId": "EXPD_DECAL05",
+		"MustBeUnlocked": false,
+		"SeasonId": 5,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_TITLE05",
@@ -1693,7 +2326,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_05_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE05"
+		"ProductId": "EXPD_TITLE05",
+		"MustBeUnlocked": false,
+		"SeasonId": 5,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_BACKPACK05",
@@ -1701,7 +2337,10 @@
 		"Name_LocStr": "UI_EXPD_BACKPACK_05_NAME",
 		"Subtitle_LocStr": "UI_BACKPACK2_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BACKPACK05"
+		"ProductId": "EXPD_BACKPACK05",
+		"MustBeUnlocked": false,
+		"SeasonId": 5,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPD_PETCUST05",
@@ -1709,7 +2348,10 @@
 		"Name_LocStr": "UI_EXPD_PET_CUSTOM_05_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_PET_CUSTOM_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_PETCUST05"
+		"ProductId": "EXPD_PETCUST05",
+		"MustBeUnlocked": false,
+		"SeasonId": 5,
+		"StageId": 3
 	},
 	{
 		"Id": "^EXPD_POSTER05C",
@@ -1717,7 +2359,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER5C_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER05C"
+		"ProductId": "EXPD_POSTER05C",
+		"MustBeUnlocked": false,
+		"SeasonId": 5,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER05B",
@@ -1725,7 +2370,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER5B_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER05B"
+		"ProductId": "EXPD_POSTER05B",
+		"MustBeUnlocked": false,
+		"SeasonId": 5,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_POSTER05A",
@@ -1733,7 +2381,10 @@
 		"Name_LocStr": "BLD_EXPD_POSTER5A_NAME",
 		"Subtitle_LocStr": "BLD_DECOR_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_POSTER05A"
+		"ProductId": "EXPD_POSTER05A",
+		"MustBeUnlocked": false,
+		"SeasonId": 5,
+		"StageId": 2
 	},
 	{
 		"Id": "^JETS_SENT",
@@ -1741,7 +2392,10 @@
 		"Name_LocStr": "UI_SENTTRAIL_NAME",
 		"Subtitle_LocStr": "UI_JETTRAIL_SUB",
 		"Category": "season",
-		"ProductId": "JETS_SENT"
+		"ProductId": "JETS_SENT",
+		"MustBeUnlocked": false,
+		"SeasonId": 5,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_EGG_04",
@@ -1749,7 +2403,10 @@
 		"Name_LocStr": "UI_EXPD_EGG_04_NAME",
 		"Subtitle_LocStr": "UI_EXPD_EGG_04_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_EGG_04"
+		"ProductId": "EXPD_EGG_04",
+		"MustBeUnlocked": false,
+		"SeasonId": 4,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_BANNER04",
@@ -1757,7 +2414,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_04_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER04"
+		"ProductId": "EXPD_BANNER04",
+		"MustBeUnlocked": false,
+		"SeasonId": 4,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL04",
@@ -1765,7 +2425,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_04_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL04"
+		"ProductId": "EXPD_DECAL04",
+		"MustBeUnlocked": false,
+		"SeasonId": 4,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_TITLE04",
@@ -1773,7 +2436,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_04_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE04"
+		"ProductId": "EXPD_TITLE04",
+		"MustBeUnlocked": false,
+		"SeasonId": 4,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_WORMHAT",
@@ -1781,7 +2447,10 @@
 		"Name_LocStr": "UI_WORMHAT_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_HAT_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_WORMHAT"
+		"ProductId": "EXPD_WORMHAT",
+		"MustBeUnlocked": false,
+		"SeasonId": 4,
+		"StageId": 4
 	},
 	{
 		"Id": "^BLD_SKULL",
@@ -1789,7 +2458,10 @@
 		"Name_LocStr": "BLD_WORMSKULL_NAME",
 		"Subtitle_LocStr": "BLD_WORMSKULL_SUB",
 		"Category": "season",
-		"ProductId": "BLD_SKULL"
+		"ProductId": "BLD_SKULL",
+		"MustBeUnlocked": false,
+		"SeasonId": 4,
+		"StageId": 3
 	},
 	{
 		"Id": "^JETS_WORM",
@@ -1797,7 +2469,10 @@
 		"Name_LocStr": "UI_WORMTRAIL_NAME",
 		"Subtitle_LocStr": "UI_JETTRAIL_SUB",
 		"Category": "season",
-		"ProductId": "JETS_WORM"
+		"ProductId": "JETS_WORM",
+		"MustBeUnlocked": false,
+		"SeasonId": 4,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_FIREPACK04",
@@ -1805,7 +2480,10 @@
 		"Name_LocStr": "UI_FIREWORK_PACK_EXPD_04_NAME",
 		"Subtitle_LocStr": "BLD_FIREWORK_PACK_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_FIREPACK04"
+		"ProductId": "EXPD_FIREPACK04",
+		"MustBeUnlocked": false,
+		"SeasonId": 4,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_EGG_03",
@@ -1813,7 +2491,10 @@
 		"Name_LocStr": "UI_EXPD_EGG_03_NAME",
 		"Subtitle_LocStr": "UI_EXPD_EGG_03_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_EGG_03"
+		"ProductId": "EXPD_EGG_03",
+		"MustBeUnlocked": false,
+		"SeasonId": 3,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_BANNER03",
@@ -1821,7 +2502,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_03_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER03"
+		"ProductId": "EXPD_BANNER03",
+		"MustBeUnlocked": false,
+		"SeasonId": 3,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL03",
@@ -1829,7 +2513,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_03_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL03"
+		"ProductId": "EXPD_DECAL03",
+		"MustBeUnlocked": false,
+		"SeasonId": 3,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_TITLE03",
@@ -1837,7 +2524,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_03_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE03"
+		"ProductId": "EXPD_TITLE03",
+		"MustBeUnlocked": false,
+		"SeasonId": 3,
+		"StageId": 5
 	},
 	{
 		"Id": "^BASE_CAVE1",
@@ -1845,7 +2535,10 @@
 		"Name_LocStr": "BLD_CAVEPLANT_1_NAME",
 		"Subtitle_LocStr": "BLD_FLORA_SUB",
 		"Category": "season",
-		"ProductId": "BASE_CAVE1"
+		"ProductId": "BASE_CAVE1",
+		"MustBeUnlocked": false,
+		"SeasonId": 3,
+		"StageId": 4
 	},
 	{
 		"Id": "^BASE_CAVE2",
@@ -1853,7 +2546,10 @@
 		"Name_LocStr": "BLD_CAVEPLANT_2_NAME",
 		"Subtitle_LocStr": "BLD_FLORA_SUB",
 		"Category": "season",
-		"ProductId": "BASE_CAVE2"
+		"ProductId": "BASE_CAVE2",
+		"MustBeUnlocked": false,
+		"SeasonId": 3,
+		"StageId": 4
 	},
 	{
 		"Id": "^BASE_CAVE3",
@@ -1861,7 +2557,10 @@
 		"Name_LocStr": "BLD_CAVEPLANT_3_NAME",
 		"Subtitle_LocStr": "BLD_FLORA_SUB",
 		"Category": "season",
-		"ProductId": "BASE_CAVE3"
+		"ProductId": "BASE_CAVE3",
+		"MustBeUnlocked": false,
+		"SeasonId": 3,
+		"StageId": 4
 	},
 	{
 		"Id": "^BASE_CAVE4",
@@ -1869,7 +2568,10 @@
 		"Name_LocStr": "BLD_CAVEPLANT_4_NAME",
 		"Subtitle_LocStr": "BLD_FLORA_SUB",
 		"Category": "season",
-		"ProductId": "BASE_CAVE4"
+		"ProductId": "BASE_CAVE4",
+		"MustBeUnlocked": false,
+		"SeasonId": 3,
+		"StageId": 4
 	},
 	{
 		"Id": "^BASE_CAVE5",
@@ -1877,7 +2579,10 @@
 		"Name_LocStr": "BLD_CAVEPLANT_5_NAME",
 		"Subtitle_LocStr": "BLD_FLORA_SUB",
 		"Category": "season",
-		"ProductId": "BASE_CAVE5"
+		"ProductId": "BASE_CAVE5",
+		"MustBeUnlocked": false,
+		"SeasonId": 3,
+		"StageId": 4
 	},
 	{
 		"Id": "^BLD_FLYJAR",
@@ -1885,7 +2590,10 @@
 		"Name_LocStr": "BLD_FLYJAR_NAME",
 		"Subtitle_LocStr": "BLD_FLYJAR_SUB",
 		"Category": "season",
-		"ProductId": "BLD_FLYJAR"
+		"ProductId": "BLD_FLYJAR",
+		"MustBeUnlocked": false,
+		"SeasonId": 3,
+		"StageId": 3
 	},
 	{
 		"Id": "^BLD_PLANET_HOLO",
@@ -1893,7 +2601,10 @@
 		"Name_LocStr": "BLD_PLANET_HOLO_NAME",
 		"Subtitle_LocStr": "BLD_PLANET_HOLO_SUB",
 		"Category": "season",
-		"ProductId": "BLD_PLANET_HOLO"
+		"ProductId": "BLD_PLANET_HOLO",
+		"MustBeUnlocked": false,
+		"SeasonId": 3,
+		"StageId": 2
 	},
 	{
 		"Id": "^JETS_BUBBLE",
@@ -1901,7 +2612,10 @@
 		"Name_LocStr": "UI_JETTRAIL_BUBBLE_NAME",
 		"Subtitle_LocStr": "UI_JETTRAIL_SUB",
 		"Category": "season",
-		"ProductId": "JETS_BUBBLE"
+		"ProductId": "JETS_BUBBLE",
+		"MustBeUnlocked": false,
+		"SeasonId": 3,
+		"StageId": 1
 	},
 	{
 		"Id": "^EXPD_SPEC02",
@@ -1909,7 +2623,10 @@
 		"Name_LocStr": "UI_EXPD_SPEC_02_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_SPEC_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_SPEC02"
+		"ProductId": "EXPD_SPEC02",
+		"MustBeUnlocked": true,
+		"SeasonId": 2,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_BANNER02",
@@ -1917,7 +2634,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_02_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER02"
+		"ProductId": "EXPD_BANNER02",
+		"MustBeUnlocked": true,
+		"SeasonId": 2,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL02",
@@ -1925,7 +2645,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_02_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL02"
+		"ProductId": "EXPD_DECAL02",
+		"MustBeUnlocked": true,
+		"SeasonId": 2,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_TITLE02A",
@@ -1933,7 +2656,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_02A_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE02A"
+		"ProductId": "EXPD_TITLE02A",
+		"MustBeUnlocked": true,
+		"SeasonId": 2,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_TITLE02B",
@@ -1941,7 +2667,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_02B_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE02B"
+		"ProductId": "EXPD_TITLE02B",
+		"MustBeUnlocked": true,
+		"SeasonId": 2,
+		"StageId": -1
 	},
 	{
 		"Id": "^MYSTERY_TRACKER",
@@ -1949,7 +2678,10 @@
 		"Name_LocStr": "UI_MYSTERY_TRACKER_NAME",
 		"Subtitle_LocStr": "UI_MYSTERY_TRACKER_SUB",
 		"Category": "season",
-		"ProductId": "MYSTERY_TRACKER"
+		"ProductId": "MYSTERY_TRACKER",
+		"MustBeUnlocked": false,
+		"SeasonId": 2,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_SHIP01",
@@ -1957,7 +2689,10 @@
 		"Name_LocStr": "UI_EXPD_SHIP_01_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_SHIP_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_SHIP01"
+		"ProductId": "EXPD_SHIP01",
+		"MustBeUnlocked": false,
+		"SeasonId": 1,
+		"StageId": -1
 	},
 	{
 		"Id": "^EXPD_BANNER01",
@@ -1965,7 +2700,10 @@
 		"Name_LocStr": "UI_BANNER_EXPD_01_NAME",
 		"Subtitle_LocStr": "UI_BANNER_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BANNER01"
+		"ProductId": "EXPD_BANNER01",
+		"MustBeUnlocked": false,
+		"SeasonId": 1,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_DECAL01",
@@ -1973,7 +2711,10 @@
 		"Name_LocStr": "BLD_DECAL_EXPD_01_NAME",
 		"Subtitle_LocStr": "BLD_DECAL_SUBTITLE",
 		"Category": "season",
-		"ProductId": "EXPD_DECAL01"
+		"ProductId": "EXPD_DECAL01",
+		"MustBeUnlocked": false,
+		"SeasonId": 1,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_TITLE01",
@@ -1981,7 +2722,10 @@
 		"Name_LocStr": "UI_EXPD_TITLE_01_NAME",
 		"Subtitle_LocStr": "UI_SPEC_TITLE_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_TITLE01"
+		"ProductId": "EXPD_TITLE01",
+		"MustBeUnlocked": false,
+		"SeasonId": 1,
+		"StageId": 5
 	},
 	{
 		"Id": "^EXPD_BACKPACK01",
@@ -1989,7 +2733,10 @@
 		"Name_LocStr": "UI_EXPD_BACKPACK_01_NAME",
 		"Subtitle_LocStr": "UI_BACKPACK2_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_BACKPACK01"
+		"ProductId": "EXPD_BACKPACK01",
+		"MustBeUnlocked": false,
+		"SeasonId": 1,
+		"StageId": 4
 	},
 	{
 		"Id": "^EXPD_HELMET01",
@@ -1997,7 +2744,10 @@
 		"Name_LocStr": "UI_EXPD_HELMET_01_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_HAT_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_HELMET01"
+		"ProductId": "EXPD_HELMET01",
+		"MustBeUnlocked": false,
+		"SeasonId": 1,
+		"StageId": 3
 	},
 	{
 		"Id": "^BLD_EXPD_BASE01",
@@ -2005,7 +2755,10 @@
 		"Name_LocStr": "BLD_EXPD_01_NAME",
 		"Subtitle_LocStr": "UI_SPECIAL_BLD_SUB",
 		"Category": "season",
-		"ProductId": "BLD_EXPD_BASE01"
+		"ProductId": "BLD_EXPD_BASE01",
+		"MustBeUnlocked": false,
+		"SeasonId": 1,
+		"StageId": 2
 	},
 	{
 		"Id": "^EXPD_FIREPACK01",
@@ -2013,7 +2766,10 @@
 		"Name_LocStr": "UI_FIREWORK_PACK_EXPD_01_NAME",
 		"Subtitle_LocStr": "BLD_FIREWORK_PACK_SUB",
 		"Category": "season",
-		"ProductId": "EXPD_FIREPACK01"
+		"ProductId": "EXPD_FIREPACK01",
+		"MustBeUnlocked": false,
+		"SeasonId": 1,
+		"StageId": 1
 	},
 	{
 		"Id": "^TWITCH_376",

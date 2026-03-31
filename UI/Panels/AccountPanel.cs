@@ -13,6 +13,7 @@ public partial class AccountPanel : UserControl
     private GameItemDatabase? _database;
     private IconManager? _iconManager;
     private SaveFileManager.Platform _currentPlatform = SaveFileManager.Platform.Unknown;
+    private JsonObject? _currentSaveData;
 
     /// <summary>The loaded account data object, or null if not loaded.</summary>
     public JsonObject? AccountData => _accountData;
@@ -29,10 +30,10 @@ public partial class AccountPanel : UserControl
                                                or SaveFileManager.Platform.GOG
                                                or SaveFileManager.Platform.Unknown;
 
-    // Rewards database from rewards.xml
-    private readonly List<(string Id, string Name)> _seasonRewardsDb = new();
-    private readonly List<(string Id, string Name)> _twitchRewardsDb = new();
-    private readonly List<(string Id, string Name)> _platformRewardsDb = new();
+    // Rewards database from Rewards.json
+    private readonly List<AccountLogic.RewardDbEntry> _seasonRewardsDb = new();
+    private readonly List<AccountLogic.RewardDbEntry> _twitchRewardsDb = new();
+    private readonly List<AccountLogic.RewardDbEntry> _platformRewardsDb = new();
     // Maps reward Id -> ProductId for item database lookups (icon, name, description)
     private readonly Dictionary<string, string> _productIdMap = new(StringComparer.OrdinalIgnoreCase);
 
@@ -85,17 +86,24 @@ public partial class AccountPanel : UserControl
 
         foreach (var reward in RewardDatabase.SeasonRewards)
         {
-            _seasonRewardsDb.Add((reward.Id, ResolveDisplayName(reward)));
+            _seasonRewardsDb.Add(new AccountLogic.RewardDbEntry
+            {
+                Id = reward.Id, Name = ResolveDisplayName(reward),
+                SeasonId = reward.SeasonId, StageId = reward.StageId,
+                MustBeUnlocked = reward.Unlock,
+            });
             StoreProductId(reward);
         }
         foreach (var reward in RewardDatabase.TwitchRewards)
         {
-            _twitchRewardsDb.Add((reward.Id, ResolveDisplayName(reward)));
+            _twitchRewardsDb.Add(new AccountLogic.RewardDbEntry
+                { Id = reward.Id, Name = ResolveDisplayName(reward) });
             StoreProductId(reward);
         }
         foreach (var reward in RewardDatabase.PlatformRewards)
         {
-            _platformRewardsDb.Add((reward.Id, ResolveDisplayName(reward)));
+            _platformRewardsDb.Add(new AccountLogic.RewardDbEntry
+                { Id = reward.Id, Name = ResolveDisplayName(reward) });
             StoreProductId(reward);
         }
     }
@@ -111,11 +119,18 @@ public partial class AccountPanel : UserControl
         RefreshList(_twitchRewardsDb, RewardDatabase.TwitchRewards);
         RefreshList(_platformRewardsDb, RewardDatabase.PlatformRewards);
 
-        void RefreshList(List<(string Id, string Name)> cache, IEnumerable<RewardEntry> source)
+        void RefreshList(List<AccountLogic.RewardDbEntry> cache, IEnumerable<RewardEntry> source)
         {
             cache.Clear();
             foreach (var reward in source)
-                cache.Add((reward.Id, ResolveDisplayName(reward)));
+            {
+                cache.Add(new AccountLogic.RewardDbEntry
+                {
+                    Id = reward.Id, Name = ResolveDisplayName(reward),
+                    SeasonId = reward.SeasonId, StageId = reward.StageId,
+                    MustBeUnlocked = reward.Unlock,
+                });
+            }
         }
     }
 
@@ -151,6 +166,15 @@ public partial class AccountPanel : UserControl
         {
             if (!row.Visible) continue;
             row.Cells["Unlocked"].Value = value;
+        }
+    }
+
+    private static void SetAllRedeemed(DataGridView grid, bool value)
+    {
+        foreach (DataGridViewRow row in grid.Rows)
+        {
+            if (!row.Visible) continue;
+            row.Cells["RedeemedInSave"].Value = value;
         }
     }
 
@@ -258,14 +282,28 @@ public partial class AccountPanel : UserControl
         _statusLabel.Text = data.StatusMessage ?? "";
     }
 
-    private void PopulateRewardGrid(DataGridView grid, List<(string Id, string Name)> rewardsDb, HashSet<string> unlocked)
+    private void PopulateRewardGrid(DataGridView grid, List<AccountLogic.RewardDbEntry> rewardsDb,
+        HashSet<string> unlocked, HashSet<string>? redeemed = null)
     {
         grid.Rows.Clear();
-        var rows = AccountLogic.BuildRewardRows(rewardsDb, unlocked);
+        var rows = AccountLogic.BuildRewardRows(rewardsDb, unlocked, redeemed);
+        bool hasExpeditionCol = grid.Columns.Contains("Expedition");
         foreach (var row in rows)
         {
             Image? icon = GetRewardIcon(row.Id, row.Name);
-            grid.Rows.Add((object?)icon ?? DBNull.Value, row.Id, row.Name, row.Unlocked);
+            int idx;
+            if (hasExpeditionCol)
+            {
+                // Season grid: include Expedition column
+                string expLabel = row.SeasonId >= 0 ? row.SeasonId.ToString() : "";
+                idx = grid.Rows.Add((object?)icon ?? DBNull.Value, row.Id, row.Name,
+                    expLabel, row.Unlocked, row.Redeemed);
+            }
+            else
+            {
+                idx = grid.Rows.Add((object?)icon ?? DBNull.Value, row.Id, row.Name,
+                    row.Unlocked, row.Redeemed);
+            }
         }
     }
 
@@ -302,19 +340,40 @@ public partial class AccountPanel : UserControl
     }
 
     /// <summary>
-    /// LoadData stub.
-    /// The real loading is done via LoadAccountFile().
+    /// Reads the per-save redeemed reward state from the loaded save data.
+    /// Call this after the save data is loaded so the "Redeemed in Save" column
+    /// reflects the current save's state.
     /// </summary>
     public void LoadData(JsonObject saveData)
     {
-        // Stub for uniformity.
-        // Account rewards are in accountdata.hg, not in the save file.
-        // LoadAccountFile() handles the actual loading.
+        _currentSaveData = saveData;
+
+        // Read redeemed sets from save
+        var (seasonRedeemed, twitchRedeemed) = AccountLogic.GetRedeemedSets(saveData);
+
+        // Update the redeemed column in each grid
+        UpdateRedeemedColumn(_seasonGrid, seasonRedeemed);
+        UpdateRedeemedColumn(_twitchGrid, twitchRedeemed);
+        // Platform rewards do not have per-save redemption arrays
+        UpdateRedeemedColumn(_platformGrid, new HashSet<string>(StringComparer.OrdinalIgnoreCase));
+    }
+
+    /// <summary>
+    /// Updates the "Redeemed in Save" column for all rows in the given grid
+    /// based on the provided set of redeemed reward IDs.
+    /// </summary>
+    private static void UpdateRedeemedColumn(DataGridView grid, HashSet<string> redeemed)
+    {
+        foreach (DataGridViewRow row in grid.Rows)
+        {
+            var rewardId = row.Cells["RewardId"].Value?.ToString() ?? "";
+            row.Cells["RedeemedInSave"].Value = redeemed.Contains(rewardId);
+        }
     }
 
     /// <summary>
     /// Syncs the current grid state to the in-memory account data object.
-    /// Also syncs redeemed rewards to the game save data.
+    /// Saves redeemed rewards to the game save data independently of account unlock state.
     /// Additionally writes platform rewards to the MXML file if configured.
     /// Does NOT write to disk for account data - that happens in MainForm.OnSave().
     /// </summary>
@@ -329,27 +388,38 @@ public partial class AccountPanel : UserControl
         var twitchRows = CollectRewardRows(_twitchGrid);
         var platformRows = CollectRewardRows(_platformGrid);
 
-        AccountLogic.SaveRewardList(seasonRows, userSettings, "UnlockedSeasonRewards");
-        AccountLogic.SaveRewardList(twitchRows, userSettings, "UnlockedTwitchRewards");
-        AccountLogic.SaveRewardList(platformRows, userSettings, "UnlockedPlatformRewards");
+        // Save account-level unlocks (to accountdata.hg in memory)
+        AccountLogic.SaveRewardList(
+            seasonRows.Select(r => (r.Id, r.Unlocked)).ToList(),
+            userSettings, "UnlockedSeasonRewards");
+        AccountLogic.SaveRewardList(
+            twitchRows.Select(r => (r.Id, r.Unlocked)).ToList(),
+            userSettings, "UnlockedTwitchRewards");
+        AccountLogic.SaveRewardList(
+            platformRows.Select(r => (r.Id, r.Unlocked)).ToList(),
+            userSettings, "UnlockedPlatformRewards");
 
-        // Sync redeemed rewards to the game save (required by game alongside account unlock)
-        AccountLogic.SyncRedeemedRewards(saveData, seasonRows, twitchRows);
+        // Save per-save redeemed state (independently of account unlock)
+        AccountLogic.SaveRedeemedRewards(saveData,
+            seasonRows.Select(r => (r.Id, r.Redeemed)).ToList(),
+            twitchRows.Select(r => (r.Id, r.Redeemed)).ToList());
 
         // Additionally write platform rewards to MXML file (PC platforms only).
         // Console platforms (Xbox, PS4, Switch) do not use MXML files.
         if (UsesMxml)
-            MxmlRewardEditor.SyncPlatformRewards(_mxmlFilePath, platformRows);
+            MxmlRewardEditor.SyncPlatformRewards(_mxmlFilePath,
+                platformRows.Select(r => (r.Id, r.Unlocked)).ToList());
     }
 
-    private static List<(string Id, bool Unlocked)> CollectRewardRows(DataGridView grid)
+    private static List<(string Id, bool Unlocked, bool Redeemed)> CollectRewardRows(DataGridView grid)
     {
-        var result = new List<(string Id, bool Unlocked)>();
+        var result = new List<(string Id, bool Unlocked, bool Redeemed)>();
         foreach (DataGridViewRow row in grid.Rows)
         {
             var rewardId = row.Cells["RewardId"].Value?.ToString() ?? "";
             bool unlocked = row.Cells["Unlocked"].Value is true;
-            result.Add((rewardId, unlocked));
+            bool redeemed = row.Cells["RedeemedInSave"].Value is true;
+            result.Add((rewardId, unlocked, redeemed));
         }
         return result;
     }
@@ -418,12 +488,18 @@ public partial class AccountPanel : UserControl
         _platformPage.Text = UiStrings.Get("account.tab_platform");
 
         // Buttons
-        _seasonUnlockAllBtn.Text = UiStrings.Get("common.unlock_all");
-        _seasonLockAllBtn.Text = UiStrings.Get("common.lock_all");
-        _twitchUnlockAllBtn.Text = UiStrings.Get("common.unlock_all");
-        _twitchLockAllBtn.Text = UiStrings.Get("common.lock_all");
-        _platformUnlockAllBtn.Text = UiStrings.Get("common.unlock_all");
-        _platformLockAllBtn.Text = UiStrings.Get("common.lock_all");
+        _seasonUnlockAllBtn.Text = UiStrings.Get("account.unlock_all");
+        _seasonLockAllBtn.Text = UiStrings.Get("account.lock_all");
+        _seasonRedeemAllBtn.Text = UiStrings.Get("account.redeem_all");
+        _seasonRemoveAllBtn.Text = UiStrings.Get("account.remove_all");
+        _twitchUnlockAllBtn.Text = UiStrings.Get("account.unlock_all");
+        _twitchLockAllBtn.Text = UiStrings.Get("account.lock_all");
+        _twitchRedeemAllBtn.Text = UiStrings.Get("account.redeem_all");
+        _twitchRemoveAllBtn.Text = UiStrings.Get("account.remove_all");
+        _platformUnlockAllBtn.Text = UiStrings.Get("account.unlock_all");
+        _platformLockAllBtn.Text = UiStrings.Get("account.lock_all");
+        _platformRedeemAllBtn.Text = UiStrings.Get("account.redeem_all");
+        _platformRemoveAllBtn.Text = UiStrings.Get("account.remove_all");
         _platformMxmlBrowseBtn.Text = UiStrings.Get("common.browse");
 
         // Filter labels
@@ -437,12 +513,16 @@ public partial class AccountPanel : UserControl
         // Column headers
         _seasonRewardIdColumn.HeaderText = UiStrings.Get("account.col_reward_id");
         _seasonRewardNameColumn.HeaderText = UiStrings.Get("account.col_name");
+        _seasonExpeditionColumn.HeaderText = UiStrings.Get("account.col_expedition");
         _seasonUnlockedColumn.HeaderText = UiStrings.Get("account.col_unlocked");
+        _seasonRedeemedColumn.HeaderText = UiStrings.Get("account.col_redeemed");
         _twitchRewardIdColumn.HeaderText = UiStrings.Get("account.col_reward_id");
         _twitchRewardNameColumn.HeaderText = UiStrings.Get("account.col_name");
         _twitchUnlockedColumn.HeaderText = UiStrings.Get("account.col_unlocked");
+        _twitchRedeemedColumn.HeaderText = UiStrings.Get("account.col_redeemed");
         _platformRewardIdColumn.HeaderText = UiStrings.Get("account.col_reward_id");
         _platformRewardNameColumn.HeaderText = UiStrings.Get("account.col_name");
         _platformUnlockedColumn.HeaderText = UiStrings.Get("account.col_unlocked");
+        _platformRedeemedColumn.HeaderText = UiStrings.Get("account.col_redeemed");
     }
 }
