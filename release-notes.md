@@ -1,4 +1,4 @@
-## NMSE — No Man's Save Editor v1.0.378 (preview)
+## NMSE — No Man's Save Editor v1.0.379 (preview)
 
 > This is a preview build. Please practice safe backup practices and expect some bugs.
 
