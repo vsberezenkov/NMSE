@@ -470,6 +470,12 @@ public class ParsersIntegrationTests
     <Property name=""Table"" value=""GcUnlockableSeasonReward"" _id=""VAULT_ARMOUR"">
       <Property name=""ID"" value=""VAULT_ARMOUR"" />
       <Property name=""MustBeUnlocked"" value=""false"" />
+      <Property name=""SeasonIds"">
+        <Property name=""SeasonIds"" value=""21"" _index=""0"" />
+      </Property>
+      <Property name=""StageIds"">
+        <Property name=""StageIds"" value=""-1"" _index=""0"" />
+      </Property>
     </Property>
   </Property>
 </Data>";
@@ -514,6 +520,9 @@ public class ParsersIntegrationTests
             Assert.Equal("^VAULT_ARMOUR", season["Id"]);
             Assert.Equal("season", season["Category"]);
             Assert.Equal("VAULT_ARMOUR", season["ProductId"]);
+            Assert.Equal(false, season["MustBeUnlocked"]);
+            Assert.Equal(21, season["SeasonId"]);
+            Assert.Equal(-1, season["StageId"]);
 
             // Twitch reward
             var twitch = rewards.First(r => r["Category"]?.ToString() == "twitch");

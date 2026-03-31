@@ -1912,6 +1912,34 @@ public static class Parsers
                         string name = ResolveProductName(productsLookup, localisation, id);
                         productsLookup.TryGetValue(id, out var seasonProduct);
 
+                        // Parse MustBeUnlocked flag
+                        string mustUnlockRaw = MxmlParser.GetPropertyValue(elem, "MustBeUnlocked");
+                        bool mustBeUnlocked = string.Equals(mustUnlockRaw, "true", StringComparison.OrdinalIgnoreCase);
+
+                        // Parse SeasonIds array (take first value)
+                        int seasonId = -1;
+                        var seasonIdsProp = elem.Elements("Property")
+                            .FirstOrDefault(e => e.Attribute("name")?.Value == "SeasonIds");
+                        if (seasonIdsProp != null)
+                        {
+                            var firstId = seasonIdsProp.Elements("Property")
+                                .FirstOrDefault(e => e.Attribute("name")?.Value == "SeasonIds");
+                            if (firstId != null && int.TryParse(firstId.Attribute("value")?.Value, out int sid))
+                                seasonId = sid;
+                        }
+
+                        // Parse StageIds array (take first value)
+                        int stageId = -1;
+                        var stageIdsProp = elem.Elements("Property")
+                            .FirstOrDefault(e => e.Attribute("name")?.Value == "StageIds");
+                        if (stageIdsProp != null)
+                        {
+                            var firstStage = stageIdsProp.Elements("Property")
+                                .FirstOrDefault(e => e.Attribute("name")?.Value == "StageIds");
+                            if (firstStage != null && int.TryParse(firstStage.Attribute("value")?.Value, out int stid))
+                                stageId = stid;
+                        }
+
                         rewards.Add(new Dictionary<string, object?>
                         {
                             ["Id"] = $"^{id}",
@@ -1920,6 +1948,9 @@ public static class Parsers
                             ["Subtitle_LocStr"] = seasonProduct?.GetValueOrDefault("Subtitle_LocStr"),
                             ["Category"] = "season",
                             ["ProductId"] = id,
+                            ["MustBeUnlocked"] = mustBeUnlocked,
+                            ["SeasonId"] = seasonId,
+                            ["StageId"] = stageId,
                         });
                     }
                     Console.WriteLine($"  [OK] Season rewards: {rewards.Count}");

@@ -785,6 +785,31 @@ public class LogicTests
     }
 
     [Fact]
+    public void StarshipLogic_FindEmptySlot_ReturnsFirstEmpty()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Ships"": [
+                { ""Name"": ""A"", ""Resource"": { ""Filename"": ""f1"", ""Seed"": [true, ""0x1""] } },
+                { ""Name"": ""B"", ""Resource"": { ""Filename"": """",   ""Seed"": [false, ""0x0""] } },
+                { ""Name"": ""C"", ""Resource"": { ""Filename"": ""f3"", ""Seed"": [true, ""0x3""] } }
+            ]
+        }");
+        Assert.Equal(1, StarshipLogic.FindEmptySlot(json.GetArray("Ships")!));
+    }
+
+    [Fact]
+    public void StarshipLogic_FindEmptySlot_AllFull_ReturnsNegativeOne()
+    {
+        var json = JsonObject.Parse(@"{
+            ""Ships"": [
+                { ""Name"": ""A"", ""Resource"": { ""Filename"": ""f1"", ""Seed"": [true, ""0x1""] } },
+                { ""Name"": ""B"", ""Resource"": { ""Filename"": ""f2"", ""Seed"": [true, ""0x2""] } }
+            ]
+        }");
+        Assert.Equal(-1, StarshipLogic.FindEmptySlot(json.GetArray("Ships")!));
+    }
+
+    [Fact]
     public void StarshipLogic_DeleteShip_PreservesParallelArrayAlignment()
     {
         // Verifies that deleting a ship doesn't break alignment between
@@ -4532,22 +4557,22 @@ public class LogicTests
     }
 
     [Fact]
-    public void AccountLogic_SyncRedeemedRewards_AddsToSaveData()
+    public void AccountLogic_SaveRedeemedRewards_WritesToSaveData()
     {
         var saveData = JsonObject.Parse(
             "{\"PlayerStateData\":{\"RedeemedSeasonRewards\":[],\"RedeemedTwitchRewards\":[]}}");
 
-        var seasonRows = new List<(string Id, bool Unlocked)>
+        var seasonRows = new List<(string Id, bool Redeemed)>
         {
             ("^SEASON_1", true),
             ("^SEASON_2", false),
         };
-        var twitchRows = new List<(string Id, bool Unlocked)>
+        var twitchRows = new List<(string Id, bool Redeemed)>
         {
             ("^TWITCH_001", true),
         };
 
-        AccountLogic.SyncRedeemedRewards(saveData, seasonRows, twitchRows);
+        AccountLogic.SaveRedeemedRewards(saveData, seasonRows, twitchRows);
 
         var playerState = saveData.GetObject("PlayerStateData")!;
         var redeemed = playerState.GetArray("RedeemedSeasonRewards")!;
@@ -4560,23 +4585,23 @@ public class LogicTests
     }
 
     [Fact]
-    public void AccountLogic_SyncRedeemedRewards_RemovesUnlockedEntries()
+    public void AccountLogic_SaveRedeemedRewards_RemovesUncheckedEntries()
     {
         var saveData = JsonObject.Parse(
             "{\"PlayerStateData\":{\"RedeemedSeasonRewards\":[\"^SEASON_1\",\"^SEASON_2\"],\"RedeemedTwitchRewards\":[\"^TWITCH_001\"]}}");
 
-        // Now Season_1 is unchecked
-        var seasonRows = new List<(string Id, bool Unlocked)>
+        // Season_1 is unchecked, Season_2 stays redeemed
+        var seasonRows = new List<(string Id, bool Redeemed)>
         {
             ("^SEASON_1", false),
             ("^SEASON_2", true),
         };
-        var twitchRows = new List<(string Id, bool Unlocked)>
+        var twitchRows = new List<(string Id, bool Redeemed)>
         {
             ("^TWITCH_001", false),
         };
 
-        AccountLogic.SyncRedeemedRewards(saveData, seasonRows, twitchRows);
+        AccountLogic.SaveRedeemedRewards(saveData, seasonRows, twitchRows);
 
         var playerState = saveData.GetObject("PlayerStateData")!;
         var redeemed = playerState.GetArray("RedeemedSeasonRewards")!;
@@ -4588,20 +4613,20 @@ public class LogicTests
     }
 
     [Fact]
-    public void AccountLogic_SyncRedeemedRewards_CreatesArrayIfMissing()
+    public void AccountLogic_SaveRedeemedRewards_CreatesArrayIfMissing()
     {
         var saveData = JsonObject.Parse("{\"PlayerStateData\":{}}");
 
-        var seasonRows = new List<(string Id, bool Unlocked)>
+        var seasonRows = new List<(string Id, bool Redeemed)>
         {
             ("^SEASON_1", true),
         };
-        var twitchRows = new List<(string Id, bool Unlocked)>
+        var twitchRows = new List<(string Id, bool Redeemed)>
         {
             ("^TWITCH_001", true),
         };
 
-        AccountLogic.SyncRedeemedRewards(saveData, seasonRows, twitchRows);
+        AccountLogic.SaveRedeemedRewards(saveData, seasonRows, twitchRows);
 
         var playerState = saveData.GetObject("PlayerStateData")!;
         var redeemed = playerState.GetArray("RedeemedSeasonRewards");
@@ -4611,6 +4636,61 @@ public class LogicTests
         var twitchRedeemed = playerState.GetArray("RedeemedTwitchRewards");
         Assert.NotNull(twitchRedeemed);
         Assert.Equal(1, twitchRedeemed!.Length);
+    }
+
+    [Fact]
+    public void AccountLogic_GetRedeemedSets_ReadsFromSaveData()
+    {
+        var saveData = JsonObject.Parse(
+            "{\"PlayerStateData\":{\"RedeemedSeasonRewards\":[\"^SEASON_1\",\"^SEASON_2\"],\"RedeemedTwitchRewards\":[\"^TWITCH_001\"]}}");
+
+        var (seasonRedeemed, twitchRedeemed) = AccountLogic.GetRedeemedSets(saveData);
+
+        Assert.Equal(2, seasonRedeemed.Count);
+        Assert.Contains("^SEASON_1", seasonRedeemed);
+        Assert.Contains("^SEASON_2", seasonRedeemed);
+        Assert.Single(twitchRedeemed);
+        Assert.Contains("^TWITCH_001", twitchRedeemed);
+    }
+
+    [Fact]
+    public void AccountLogic_GetRedeemedSets_NullSaveDataReturnsEmpty()
+    {
+        var (seasonRedeemed, twitchRedeemed) = AccountLogic.GetRedeemedSets(null);
+        Assert.Empty(seasonRedeemed);
+        Assert.Empty(twitchRedeemed);
+    }
+
+    [Fact]
+    public void AccountLogic_GetRedeemedSets_MissingArraysReturnsEmpty()
+    {
+        var saveData = JsonObject.Parse("{\"PlayerStateData\":{}}");
+        var (seasonRedeemed, twitchRedeemed) = AccountLogic.GetRedeemedSets(saveData);
+        Assert.Empty(seasonRedeemed);
+        Assert.Empty(twitchRedeemed);
+    }
+
+    [Fact]
+    public void AccountLogic_SaveRedeemedRewards_IndependentOfAccountUnlock()
+    {
+        // This test verifies that redeemed state is independent of account unlock state.
+        // A reward can be redeemed in save without being unlocked on account, and vice versa.
+        var saveData = JsonObject.Parse("{\"PlayerStateData\":{}}");
+
+        // Only ^SEASON_2 is redeemed, even though account might have ^SEASON_1 unlocked
+        var seasonRows = new List<(string Id, bool Redeemed)>
+        {
+            ("^SEASON_1", false),
+            ("^SEASON_2", true),
+        };
+        var twitchRows = new List<(string Id, bool Redeemed)>();
+
+        AccountLogic.SaveRedeemedRewards(saveData, seasonRows, twitchRows);
+
+        var playerState = saveData.GetObject("PlayerStateData")!;
+        var redeemed = playerState.GetArray("RedeemedSeasonRewards")!;
+        Assert.Equal(1, redeemed.Length);
+        Assert.Equal("^SEASON_2", redeemed.GetString(0));
     }
 
     [Fact]
@@ -4637,9 +4717,9 @@ public class LogicTests
     [Fact]
     public void AccountLogic_BuildRewardRows_IncludesUnknownUnlocked()
     {
-        var db = new List<(string Id, string Name)>
+        var db = new List<AccountLogic.RewardDbEntry>
         {
-            ("^KNOWN_1", "Known Reward"),
+            new() { Id = "^KNOWN_1", Name = "Known Reward" },
         };
         var unlocked = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
@@ -4683,17 +4763,81 @@ public class LogicTests
         Assert.DoesNotContain("^SW_PREORDER2", intersected);
 
         // Verify BuildRewardRows only marks the intersected reward as unlocked
-        var db = new List<(string Id, string Name)>
+        var db = new List<AccountLogic.RewardDbEntry>
         {
-            ("^SW_PREORDER", "Star Wars Pre-order"),
-            ("^SW_PREORDER2", "Star Wars Pre-order 2"),
-            ("^TGA_SHIP1", "TGA Ship"),
+            new() { Id = "^SW_PREORDER", Name = "Star Wars Pre-order" },
+            new() { Id = "^SW_PREORDER2", Name = "Star Wars Pre-order 2" },
+            new() { Id = "^TGA_SHIP1", Name = "TGA Ship" },
         };
         var rows = AccountLogic.BuildRewardRows(db, intersected);
         Assert.Equal(3, rows.Count);
         Assert.True(rows.First(r => r.Id == "^SW_PREORDER").Unlocked);
         Assert.False(rows.First(r => r.Id == "^SW_PREORDER2").Unlocked);
         Assert.False(rows.First(r => r.Id == "^TGA_SHIP1").Unlocked);
+    }
+
+    [Fact]
+    public void AccountLogic_BuildRewardRows_PropagatesSeasonMetadata()
+    {
+        var db = new List<AccountLogic.RewardDbEntry>
+        {
+            new() { Id = "^VAULT_ARMOUR", Name = "Heirloom Breastplate", SeasonId = 21, StageId = -1, MustBeUnlocked = false },
+            new() { Id = "^EXPD_EGG_14", Name = "Companion Egg", SeasonId = 14, StageId = 3, MustBeUnlocked = true },
+        };
+        var unlocked = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "^VAULT_ARMOUR" };
+
+        var rows = AccountLogic.BuildRewardRows(db, unlocked);
+
+        Assert.Equal(2, rows.Count);
+        // First row: season 21, unlocked, not MustBeUnlocked
+        Assert.Equal(21, rows[0].SeasonId);
+        Assert.Equal(-1, rows[0].StageId);
+        Assert.False(rows[0].MustBeUnlocked);
+        Assert.True(rows[0].Unlocked);
+        // Second row: season 14, stage 3, locked, MustBeUnlocked
+        Assert.Equal(14, rows[1].SeasonId);
+        Assert.Equal(3, rows[1].StageId);
+        Assert.True(rows[1].MustBeUnlocked);
+        Assert.False(rows[1].Unlocked);
+    }
+
+    [Fact]
+    public void RewardDatabase_LoadsNewFieldsFromJson()
+    {
+        // Create a temp Rewards.json with the new fields
+        string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_test_reward_fields_" + Guid.NewGuid().ToString("N")[..8]);
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            string json = @"[
+                { ""Id"": ""^TEST_REWARD"", ""Name"": ""Test"", ""Category"": ""season"",
+                  ""ProductId"": ""TEST"", ""MustBeUnlocked"": true, ""SeasonId"": 5, ""StageId"": 2 },
+                { ""Id"": ""^TWITCH_1"", ""Name"": ""Twitch Test"", ""Category"": ""twitch"",
+                  ""ProductId"": ""TW1"" }
+            ]";
+            File.WriteAllText(Path.Combine(tmpDir, "Rewards.json"), json);
+
+            RewardDatabase.Reset();
+            bool loaded = RewardDatabase.LoadFromJsonDirectory(tmpDir);
+            Assert.True(loaded);
+
+            var season = RewardDatabase.SeasonRewards.First();
+            Assert.Equal("^TEST_REWARD", season.Id);
+            Assert.True(season.Unlock);
+            Assert.Equal(5, season.SeasonId);
+            Assert.Equal(2, season.StageId);
+
+            var twitch = RewardDatabase.TwitchRewards.First();
+            Assert.Equal("^TWITCH_1", twitch.Id);
+            Assert.False(twitch.Unlock);
+            Assert.Equal(-1, twitch.SeasonId);
+            Assert.Equal(-1, twitch.StageId);
+        }
+        finally
+        {
+            RewardDatabase.Reset();
+            try { Directory.Delete(tmpDir, true); } catch { }
+        }
     }
 
     // --- MxmlRewardEditor --------------------------------------------
