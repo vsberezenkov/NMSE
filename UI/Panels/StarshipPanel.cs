@@ -1074,7 +1074,7 @@ public partial class StarshipPanel : UserControl
 
             using var dialog = new OpenFileDialog
             {
-                Filter = ExportConfig.BuildOpenFilter(cfg.CorvetteExt, "Corvette files")
+                Filter = ExportConfig.BuildImportFilter(cfg.CorvetteExt, "Corvette files", cfg.StarshipExt)
             };
             if (dialog.ShowDialog() != DialogResult.OK) return;
 
