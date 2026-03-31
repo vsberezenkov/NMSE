@@ -1326,7 +1326,7 @@
   "starship.corvette_no_seed": "このコルベットのシードを読み取れませんでした。",
   "starship.corvette_primary_corruption": "現在のプライマリ船であるコルベットをインポート/エクスポートしています。\nこれによりデータ破損が発生する可能性があり、サポートされていません。\n\nゲーム内でプライマリをコルベット以外の船に変更してから\n再度お試しください。",
   "starship.corvette_primary_warning": "エディターからコルベットをプライマリとして設定することは推奨されません。コルベットはゲーム内で挙動が不安定です。続行しますか？",
-  "starship.corvette_warning": "⚠ セーブデータは最後にアクティブだったコルベットの完全なテクノロジースロットのみを保存します。",
+  "starship.corvette_warning": "⚠ 最近搭乗したコルベットのテクノロジー スロットが満杯の場合のみ保存されます。",
   "starship.corvette_warning_title": "コルベット警告",
   "starship.damage": "ダメージ:",
   "starship.delete": "削除",

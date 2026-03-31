@@ -1326,7 +1326,7 @@
   "starship.corvette_no_seed": "Impossibile leggere il seme di questa corvetta.",
   "starship.corvette_primary_corruption": "Stai importando/esportando una corvetta che è la tua nave principale attuale.\nQuesto può causare corruzione e non è supportato.\n\nPer favore cambia in una nave non corvetta come primaria\ntramite il gioco e poi riprova.",
   "starship.corvette_primary_warning": "Impostare una corvetta come primaria dall'editor non è consigliato, poiché le corvette funzionano in modo strano nel gioco. Continuare?",
-  "starship.corvette_warning": "⚠ I salvataggi conservano solo gli slot Tecnologia completi per la tua ultima Corvetta attiva.",
+  "starship.corvette_warning": "⚠ Salva solo gli slot tecnologici completi del negozio per la tua 'Corvette appena salita a bordo'.",
   "starship.corvette_warning_title": "Avviso Corvetta",
   "starship.damage": "Danno:",
   "starship.delete": "Elimina",

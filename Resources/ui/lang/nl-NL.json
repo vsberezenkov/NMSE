@@ -1326,7 +1326,7 @@
   "starship.corvette_no_seed": "Kan de seed voor deze korvet niet lezen.",
   "starship.corvette_primary_corruption": "Je importeert/exporteert een korvet dat je huidige primaire schip is.\nDit kan corruptie veroorzaken en wordt niet ondersteund.\n\nWijzig in het spel je primaire schip naar een niet-korvet\nen probeer het daarna opnieuw.",
   "starship.corvette_primary_warning": "Het instellen van een korvet als primair vanuit de editor wordt niet aanbevolen, omdat korvetten vreemd werken in het spel. Doorgaan?",
-  "starship.corvette_warning": "⚠ Opslagen slaan alleen volledige technologiesloten op voor je laatste actieve korvet.",
+  "starship.corvette_warning": "⚠ Hiermee worden alleen volle technologie-slots opgeslagen voor je 'recent ingestapte Corvette'.",
   "starship.corvette_warning_title": "Korvetwaarschuwing",
   "starship.damage": "Schade:",
   "starship.delete": "Verwijderen",

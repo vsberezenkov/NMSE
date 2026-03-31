@@ -1326,7 +1326,7 @@
   "starship.corvette_no_seed": "無法讀取此輕型護衛艦的種子。",
   "starship.corvette_primary_corruption": "您正在匯入/匯出目前主要船隻的護航艦。\n這可能會導致損壞，且不受支援。\n\n請在遊戲中將主要船隻更改為非護航艦\n然後再試一次。",
   "starship.corvette_primary_warning": "不建議透過編輯器將護航艦設為主要船隻，因為護航艦在遊戲中運作異常。是否繼續？",
-  "starship.corvette_warning": "⚠ 存檔僅保存最後一艘活躍護航艦的完整科技槽位。",
+  "starship.corvette_warning": "⚠ 僅保存您「最近登上的 Corvette」的完整技術插槽。",
   "starship.corvette_warning_title": "護航艦警告",
   "starship.damage": "傷害:",
   "starship.delete": "刪除",

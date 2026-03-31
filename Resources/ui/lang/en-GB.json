@@ -1322,7 +1322,7 @@
   "starship.corvette_no_seed": "Could not read the seed for this corvette.",
   "starship.corvette_primary_corruption": "You are importing/exporting a corvette that\nis your current primary ship.\nThis can cause corruption and is not supported.\n\nPlease change to a non-corvette ship as your primary\nvia the game and then try again.",
   "starship.corvette_primary_warning": "Setting a Corvette as primary from the editor is not recommended as Corvettes work weirdly in the game. Continue?",
-  "starship.corvette_warning": "⚠ Saves only store full Technology slots for your last actively docked Corvette.",
+  "starship.corvette_warning": "⚠ Saves only store full Technology slots for your 'recently boarded Corvette'.",
   "starship.corvette_warning_title": "Corvette Warning",
   "starship.damage": "Damage:",
   "starship.delete": "Delete",

@@ -1326,7 +1326,7 @@
   "starship.corvette_no_seed": "이 코르벳의 시드를 읽을 수 없습니다.",
   "starship.corvette_primary_corruption": "현재 기본 함선인 코벳을 가져오거나 내보내고 있습니다.\n이로 인해 손상이 발생할 수 있으며 지원되지 않습니다.\n\n게임에서 기본 함선을 코벳이 아닌 다른 함선으로 변경한 다음\n다시 시도하세요.",
   "starship.corvette_primary_warning": "편집기에서 코벳을 기본으로 설정하는 것은 권장되지 않습니다. 코벳은 게임에서 이상하게 동작합니다. 계속하시겠습니까?",
-  "starship.corvette_warning": "⚠ 저장 데이터는 마지막으로 활성화된 코르벳의 기술 슬롯만 저장합니다.",
+  "starship.corvette_warning": "⚠ 저장 기능은 '최근 탑승한 코르벳함'의 기술 슬롯을 가득 채운 경우에만 작동합니다.",
   "starship.corvette_warning_title": "코벳 경고",
   "starship.damage": "공격력:",
   "starship.delete": "삭제",

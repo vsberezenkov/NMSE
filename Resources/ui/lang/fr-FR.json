@@ -1326,7 +1326,7 @@
   "starship.corvette_no_seed": "Impossible de lire la graine de cette corvette.",
   "starship.corvette_primary_corruption": "Vous importez/exportez une corvette qui est votre vaisseau principal actuel.\nCela peut provoquer une corruption et n'est pas pris en charge.\n\nVeuillez changer pour un vaisseau non-corvette comme vaisseau principal\nvia le jeu, puis réessayez.",
   "starship.corvette_primary_warning": "Définir une corvette comme vaisseau principal depuis l'éditeur n'est pas recommandé, car les corvettes fonctionnent de manière étrange dans le jeu. Continuer ?",
-  "starship.corvette_warning": "⚠ Saves only store full Technology slots for your last active Corvette.",
+  "starship.corvette_warning": "⚠ Ne sauvegarde que les emplacements technologiques complets du magasin pour votre 'Corvette récemment embarquée'.",
   "starship.corvette_warning_title": "Avertissement Corvette",
   "starship.damage": "Damage:",
   "starship.delete": "Supprimer",

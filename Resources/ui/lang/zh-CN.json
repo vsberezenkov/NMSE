@@ -1326,7 +1326,7 @@
   "starship.corvette_no_seed": "无法读取此轻型护卫舰的种子。",
   "starship.corvette_primary_corruption": "您正在导入/导出当前主船的护航舰。\n这可能导致损坏，且不受支持。\n\n请在游戏中将主船更改为非护航舰\n然后再试一次。",
   "starship.corvette_primary_warning": "不建议通过编辑器将护航舰设置为主船，因为护航舰在游戏中表现异常。继续吗？",
-  "starship.corvette_warning": "⚠ 存档仅保存最后一艘活跃护航舰的完整科技槽位。",
+  "starship.corvette_warning": "⚠ 仅保存您“最近登上的 Corvette”的完整技术槽位。。",
   "starship.corvette_warning_title": "护航舰警告",
   "starship.damage": "伤害:",
   "starship.delete": "删除",

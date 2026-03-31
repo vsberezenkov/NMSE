@@ -1326,7 +1326,7 @@
   "starship.corvette_no_seed": "Nie udało się odczytać ziarna dla tej korwety.",
   "starship.corvette_primary_corruption": "Importujesz/eksportujesz korwetę, która jest twoim aktualnym głównym statkiem.\nMoże to spowodować uszkodzenie danych i nie jest wspierane.\n\nZmień w grze swój główny statek na inny niż korweta\ni spróbuj ponownie.",
   "starship.corvette_primary_warning": "Ustawienie korwety jako podstawowego statku z edytora nie jest zalecane, ponieważ korwety działają dziwnie w grze. Kontynuować?",
-  "starship.corvette_warning": "⚠ Saves only store full Technology slots for your last active Corvette.",
+  "starship.corvette_warning": "⚠ Zapisuje tylko pełne sloty technologiczne dla „niedawno wsiadłej Corvette”.",
   "starship.corvette_warning_title": "Ostrzeżenie o korwecie",
   "starship.damage": "Obrażenia:",
   "starship.delete": "Usuń",

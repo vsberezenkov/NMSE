@@ -1326,7 +1326,7 @@
   "starship.corvette_no_seed": "No se pudo leer la semilla de esta corbeta.",
   "starship.corvette_primary_corruption": "Estás importando/exportando una corbeta que es tu nave principal actual.\nEsto puede causar corrupción y no está soportado.\n\nPor favor, cambia a una nave que no sea corbeta como tu nave principal\nmediante el juego y luego inténtalo de nuevo.",
   "starship.corvette_primary_warning": "Establecer una corbeta como principal desde el editor no es recomendable, ya que las corbetas funcionan de manera extraña en el juego. ¿Continuar?",
-  "starship.corvette_warning": "⚠ Saves only store full Technology slots for your last active Corvette.",
+  "starship.corvette_warning": "⚠ Las partidas solo almacenan ranuras completas de tecnología para tu 'Corvette abordado recientemente'.",
   "starship.corvette_warning_title": "Advertencia de Corbeta",
   "starship.damage": "Damage:",
   "starship.delete": "Eliminar",
