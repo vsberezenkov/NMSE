@@ -2684,6 +2684,11 @@ public partial class InventoryGridPanel : UserControl
         _currentInventory.Set("Width", newWidth);
         _currentInventory.Set("Height", newHeight);
 
+        // Reset corvette part matches so they can be re-resolved during reload
+        if (_corvettePartCollection != null)
+            foreach (var entry in _corvettePartCollection)
+                entry.Found = false;
+
         // Reload the grid
         LoadInventory(_currentInventory);
         RaiseDataModified();
