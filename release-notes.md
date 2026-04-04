@@ -1,17 +1,29 @@
-## NMSE — No Man's Save Editor v1.0.385 (preview)
+## NMSE — No Man's Save Editor v1.0.386 (preview)
 
 > This is a preview build. Please practice safe backup practices and expect some bugs.
 
 ### Changelog
+
+#### Features:
+
+- Add 'fake/glitch' galaxy 257 (Yilsrussimil) to the galaxy list. (Issue #33)
+
+#### Bug Fixes:
+
+- Fix galaxy 256 name (Odyalutai) in galaxy list. (Issue #33)
+
+<br />
+
+<details>
+<summary>Previous Changelogs</summary>
+
+### Previous Changelog 1.0.385 (preview)
 
 #### Bug Fixes:
 
 - Fix for "Ship" type Technology item filtering for starships (Sentinel and Corvette ships).
 
 <br />
-
-<details>
-<summary>Previous Changelogs</summary>
 
 ### Previous Changelog 1.0.384 (preview)
 
