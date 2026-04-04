@@ -887,7 +887,7 @@
   "player.explorer_default": "Odkrywca",
   "player.freighter_in_system": "Frachtowiec w systemie:",
   "player.galaxy": "Galaktyka:",
-  "player.galaxy_range": "Galaktyka (0-255):",
+  "player.galaxy_range": "Galaktyka (0-256):",
   "player.glyphs_label": "Glify:",
   "player.guide_cat_0": "Podstawy przetrwania",
   "player.guide_cat_1": "Poruszanie się",

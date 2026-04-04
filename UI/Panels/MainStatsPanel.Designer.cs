@@ -114,7 +114,7 @@ partial class MainStatsPanel
             Padding = new Padding(0),
         };
 
-        _galaxyNud = new NumericUpDown { Width = 150, Minimum = 0, Maximum = 255 };
+        _galaxyNud = new NumericUpDown { Width = 150, Minimum = 0, Maximum = 256 };
         _voxelXNud = new NumericUpDown { Width = 150, Minimum = -2048, Maximum = 2047 };
         _voxelYNud = new NumericUpDown { Width = 150, Minimum = -128, Maximum = 127 };
         _voxelZNud = new NumericUpDown { Width = 150, Minimum = -2048, Maximum = 2047 };
@@ -254,7 +254,7 @@ partial class MainStatsPanel
         int editRow = 0;
 
         _editCoordsHeader = AddSectionHeader(editLayout, "Edit Coordinates", editRow++);
-        _galaxyRangeLabel = AddRow(editLayout, "Galaxy (0–255):", _galaxyNud, editRow++);
+        _galaxyRangeLabel = AddRow(editLayout, "Galaxy (0–256):", _galaxyNud, editRow++);
         _voxelXLabel = AddRow(editLayout, "Voxel X (-2048–2047):", _voxelXNud, editRow++);
         _voxelYLabel = AddRow(editLayout, "Voxel Y (-128–127):", _voxelYNud, editRow++);
         _voxelZLabel = AddRow(editLayout, "Voxel Z (-2048–2047):", _voxelZNud, editRow++);

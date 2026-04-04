@@ -887,7 +887,7 @@
   "player.explorer_default": "Explorateur",
   "player.freighter_in_system": "Cargo dans le système :",
   "player.galaxy": "Galaxie :",
-  "player.galaxy_range": "Galaxie (0–255) :",
+  "player.galaxy_range": "Galaxie (0–256) :",
   "player.glyphs_label": "Glyphes :",
   "player.guide_cat_0": "Survival Basics",
   "player.guide_cat_1": "Getting Around",
