@@ -263,12 +263,20 @@ partial class StarshipPanel
         _techGrid = new InventoryGridPanel { Dock = DockStyle.Fill };
         _techGrid.SetIsTechInventory(true);
         _inventoryGrid.SetIsCargoInventory(true);
+        _inventoryGrid.SetSortingEnabled(true);
         _techGrid.SetInventoryOwnerType("Ship");
         _inventoryGrid.SetInventoryOwnerType("Ship");
         _inventoryGrid.SetInventoryGroup("ShipCargo");
+        _inventoryGrid.SetPinSlotFeatureEnabled(true);
         _techGrid.SetInventoryGroup("Ship");
         _inventoryGrid.DataModified += (s, e) => DataModified?.Invoke(this, e);
         _techGrid.DataModified += (s, e) => DataModified?.Invoke(this, e);
+        _inventoryGrid.PinnedSlotsChanged += OnPinnedSlotsChanged;
+        _inventoryGrid.AutoStackToStorageRequested += OnAutoStackToStorageRequested;
+        _inventoryGrid.AutoStackToFreighterRequested += OnAutoStackToFreighterRequested;
+        _inventoryGrid.AutoStackSelectedSlotToStorageRequested += OnAutoStackSelectedSlotToStorageRequested;
+        _inventoryGrid.AutoStackSelectedSlotToFreighterRequested += OnAutoStackSelectedSlotToFreighterRequested;
+        _inventoryGrid.RefreshToolbarActions();
 
         _invTabs = new DoubleBufferedTabControl { Dock = DockStyle.Fill };
         _cargoTabPage = new TabPage("Cargo");

@@ -92,6 +92,8 @@
     <Compile Include="..\Core\SettlementLogic.cs" Link="Core\SettlementLogic.cs" />
     <Compile Include="..\Core\SquadronLogic.cs" Link="Core\SquadronLogic.cs" />
     <Compile Include="..\Core\ExocraftLogic.cs" Link="Core\ExocraftLogic.cs" />
+    <Compile Include="..\Core\ExosuitLogic.cs" Link="Core\ExosuitLogic.cs" />
+    <Compile Include="..\Core\ExosuitAutoStackLogic.cs" Link="Core\ExosuitAutoStackLogic.cs" />
     <Compile Include="..\Core\AccountLogic.cs" Link="Core\AccountLogic.cs" />
     <Compile Include="..\Core\MxmlRewardEditor.cs" Link="Core\MxmlRewardEditor.cs" />
     <Compile Include="..\Core\RawJsonLogic.cs" Link="Core\RawJsonLogic.cs" />

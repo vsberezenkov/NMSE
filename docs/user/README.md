@@ -253,6 +253,16 @@ The **Exosuit** tab shows your personal inventory in a visual grid layout.
 
 - Cargo and Technology inventories allow you to export and import an inventory layout via the <kbd>Import</kbd> and <kbd>Export</kbd> buttons.
 
+### Sort and Auto-Stack
+
+- Exosuit Cargo has a <kbd>Sort</kbd> control at the top of the grid.
+- The <kbd>Auto-Stack</kbd> button moves matching items from Exosuit Cargo to Chests, Starship Cargo, or Freighter Cargo.
+- The Exosuit Cargo context menu can also auto-stack only the slot you right-clicked.
+- You can pin a slot from the context menu. Pinned slots are ignored by auto-stack.
+- If you use the single-slot auto-stack action on a pinned slot, the action is blocked.
+- If the destination stack becomes full, the extra items go to another free slot in the same destination when possible.
+- If there is no valid free slot, the remaining items stay in Exosuit Cargo.
+
 ---
 
 ## Multi-tools
@@ -329,6 +339,16 @@ Export / Import via the <kbd>Export</kbd> and <kbd>Import</kbd> buttons.
 
 Set the selected ship to the primary starship with the <kbd>Make Primary</kbd> button.
 
+### Cargo Sort and Auto-Stack
+
+- Starship Cargo has a <kbd>Sort</kbd> control at the top of the grid.
+- The <kbd>Auto-Stack</kbd> button in Starship Cargo moves matching items to Chests or Freighter Cargo.
+- The Starship Cargo context menu can also auto-stack only the slot you right-clicked.
+- You can pin a slot from the context menu. Pinned slots are ignored by auto-stack.
+- If you use the single-slot auto-stack action on a pinned slot, the action is blocked.
+- If the destination stack becomes full, the extra items go to another free slot in the same destination when possible.
+- If there is no valid free slot, the remaining items stay in Starship Cargo.
+
 ### Changing Ship Appearance
 
 Changing the **Seed** value will change how your ship looks and it's base stats. Each seed generates a unique combination of parts and colours. You can find seeds shared by the community online to get specific ship appearances.
@@ -373,6 +393,8 @@ Edit your freighter's stats, inventory, technology, and view the functional room
 | **Rooms** | Freighter base room presence |
 
 Export / Import via the <kbd>Export</kbd> and <kbd>Import</kbd> buttons.
+
+- Freighter Cargo has a <kbd>Sort</kbd> control at the top of the grid.
 
 ### Frigates
 
@@ -508,6 +530,8 @@ You can move the base computer to another component's location via the <kbd>Move
 ### Chests Tab
 
 You can edit the contents of your numbered storage chests / containers (0–9) via tabs. Each container has its own inventory grid with export, import and usual editing capabilities.
+
+Chest inventories also have a <kbd>Sort</kbd> control at the top of the grid.
 
 You can edit the names of your storage chests via the fields at the top of the tab.
 

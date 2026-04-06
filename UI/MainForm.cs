@@ -139,8 +139,10 @@ public partial class MainFormResources : Form
 
         // Track unsaved changes from inventory grids
         _exosuitPanel.DataModified += (s, e) => _hasUnsavedChanges = true;
+        _exosuitPanel.CrossInventoryTransferCompleted += OnExosuitCrossInventoryTransferCompleted;
         _multitoolPanel.DataModified += (s, e) => _hasUnsavedChanges = true;
         _shipPanel.DataModified += (s, e) => _hasUnsavedChanges = true;
+        _shipPanel.CrossInventoryTransferCompleted += OnStarshipCrossInventoryTransferCompleted;
         _freighterPanel.DataModified += (s, e) => _hasUnsavedChanges = true;
         _vehiclePanel.DataModified += (s, e) => _hasUnsavedChanges = true;
         _cataloguePanel.DataModified += (s, e) => _hasUnsavedChanges = true;
@@ -433,6 +435,35 @@ public partial class MainFormResources : Form
         }
     }
 
+    private void OnExosuitCrossInventoryTransferCompleted(object? sender, EventArgs e)
+    {
+        if (_currentSaveData == null)
+            return;
+
+        // Refresh loaded destination panels so transferred items appear immediately.
+        if (_loadedTabIndices.Contains(3)) // Starships
+            _shipPanel.LoadData(_currentSaveData);
+
+        if (_loadedTabIndices.Contains(4)) // Fleet (Freighter is inside)
+            _fleetPanel.LoadData(_currentSaveData);
+
+        if (_loadedTabIndices.Contains(7)) // Bases & Storage (includes Chests)
+            _basePanel.LoadData(_currentSaveData);
+    }
+
+    private void OnStarshipCrossInventoryTransferCompleted(object? sender, EventArgs e)
+    {
+        if (_currentSaveData == null)
+            return;
+
+        // Refresh loaded destination panels so transferred items appear immediately.
+        if (_loadedTabIndices.Contains(4)) // Fleet (Freighter is inside)
+            _fleetPanel.LoadData(_currentSaveData);
+
+        if (_loadedTabIndices.Contains(7)) // Bases & Storage (includes Chests)
+            _basePanel.LoadData(_currentSaveData);
+    }
+
     /// <summary>
     /// Returns the content panel inside a tab page, or null if the page is null/empty.
     /// </summary>
@@ -458,12 +489,14 @@ public partial class MainFormResources : Form
                     _mainStatsPanel.LoadAccountData(_accountPanel.AccountData);
                 break;
             case 1: // Exosuit
+                _exosuitPanel.SetSaveScopeKey(AppConfig.BuildSaveScopeKey(_currentFilePath));
                 _exosuitPanel.LoadData(_currentSaveData);
                 break;
             case 2: // Multi-tool
                 _multitoolPanel.LoadData(_currentSaveData);
                 break;
             case 3: // Starships
+                _shipPanel.SetSaveScopeKey(AppConfig.BuildSaveScopeKey(_currentFilePath));
                 _shipPanel.LoadData(_currentSaveData);
                 break;
             case 4: // Fleet (loads all three sub-panels)

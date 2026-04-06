@@ -93,12 +93,24 @@ partial class ExosuitPanel
     {
         _techGrid.SetIsTechInventory(true);
         _generalGrid.SetIsCargoInventory(true);
+        _generalGrid.SetSortingEnabled(true);
+        _techGrid.SetSortingEnabled(false);
         _techGrid.SetInventoryOwnerType("Suit");
         _generalGrid.SetInventoryOwnerType("Suit");
         _generalGrid.SetInventoryGroup("PersonalCargo");
+        _generalGrid.SetPinSlotFeatureEnabled(true);
         _techGrid.SetInventoryGroup("Personal");
         _generalGrid.DataModified += (s, e) => DataModified?.Invoke(this, e);
         _techGrid.DataModified += (s, e) => DataModified?.Invoke(this, e);
+        _generalGrid.PinnedSlotsChanged += OnPinnedSlotsChanged;
+        _generalGrid.AutoStackToStorageRequested += OnAutoStackToStorageRequested;
+        _generalGrid.AutoStackToStarshipRequested += OnAutoStackToStarshipRequested;
+        _generalGrid.AutoStackToFreighterRequested += OnAutoStackToFreighterRequested;
+        _generalGrid.AutoStackSelectedSlotToStorageRequested += OnAutoStackSelectedSlotToStorageRequested;
+        _generalGrid.AutoStackSelectedSlotToStarshipRequested += OnAutoStackSelectedSlotToStarshipRequested;
+        _generalGrid.AutoStackSelectedSlotToFreighterRequested += OnAutoStackSelectedSlotToFreighterRequested;
+        _generalGrid.RefreshToolbarActions();
+        _techGrid.RefreshToolbarActions();
         var cfg = ExportConfig.Instance;
         _generalGrid.SetExportFileName($"exosuit_cargo_inv{cfg.ExosuitExt}");
         _techGrid.SetExportFileName($"exosuit_tech_inv{cfg.ExosuitExt}");
