@@ -1,4 +1,5 @@
 using NMSE.Core;
+using NMSE.Config;
 using NMSE.Data;
 using NMSE.Models;
 using NMSE.UI.Util;
@@ -10,11 +11,18 @@ public partial class StarshipPanel : UserControl
     /// <summary>Raised when inventory data is modified by the user.</summary>
     public event EventHandler? DataModified;
 
+    /// <summary>
+    /// Raised after auto-stack moves cargo into another inventory so destination
+    /// panels can refresh their grids immediately.
+    /// </summary>
+    public event EventHandler? CrossInventoryTransferCompleted;
+
     private JsonArray? _shipOwnership;
     private JsonObject? _playerState;
     private JsonObject? _saveData;
     private GameItemDatabase? _database;
     private int _primaryShipIndex;
+    private string _saveScopeKey = "unknown";
     private readonly Random _rng = new();
 
     /// <summary>Raw (unclamped) ship stat values read from JSON for the currently selected ship.</summary>
@@ -174,6 +182,12 @@ public partial class StarshipPanel : UserControl
         _techGrid.SetIconManager(iconManager);
     }
 
+    public void SetSaveScopeKey(string saveScopeKey)
+    {
+        _saveScopeKey = string.IsNullOrWhiteSpace(saveScopeKey) ? "unknown" : saveScopeKey;
+        ApplyPinnedSlotsForSelectedShip();
+    }
+
     public void LoadData(JsonObject saveData)
     {
         SuspendLayout();
@@ -315,6 +329,7 @@ public partial class StarshipPanel : UserControl
             }
 
             _inventoryGrid.LoadInventory(data.Inventory);
+            ApplyPinnedSlotsForSelectedShip();
 
             // Set corvette context for tech grid so CV_ items resolve to actual base parts
             bool isCorvette = StarshipLogic.IsCorvette(data.Filename);
@@ -403,6 +418,170 @@ public partial class StarshipPanel : UserControl
         _shipSelector.Items.Insert(idx, item);
         _shipSelector.SelectedIndex = idx;
         _shipSelector.SelectedIndexChanged += OnShipSelected;
+    }
+
+    private string GetCurrentPinnedInventoryKey()
+    {
+        if (_shipSelector.SelectedIndex < 0)
+            return "StarshipCargo:none";
+
+        var item = (StarshipLogic.ShipListItem)_shipSelector.Items[_shipSelector.SelectedIndex]!;
+        return $"StarshipCargo:{item.DataIndex}";
+    }
+
+    private void ApplyPinnedSlotsForSelectedShip()
+    {
+        if (_shipSelector.SelectedIndex < 0)
+        {
+            _inventoryGrid.SetPinnedSlots([]);
+            return;
+        }
+
+        var pinned = AppConfig.Instance.GetPinnedSlots(_saveScopeKey, GetCurrentPinnedInventoryKey());
+        _inventoryGrid.SetPinnedSlots(pinned);
+    }
+
+    private void OnPinnedSlotsChanged(object? sender, EventArgs e)
+    {
+        if (_shipSelector.SelectedIndex < 0)
+            return;
+
+        AppConfig.Instance.SetPinnedSlots(_saveScopeKey, GetCurrentPinnedInventoryKey(), _inventoryGrid.GetPinnedSlots());
+    }
+
+    private void OnAutoStackToStorageRequested(object? sender, EventArgs e)
+    {
+        if (!TryGetSelectedShipCargoInventory(out var cargoInventory, out _))
+            return;
+
+        var pinned = new HashSet<(int x, int y)>(_inventoryGrid.GetPinnedSlots());
+        bool changed = ExosuitAutoStackLogic.AutoStackCargoToChests(cargoInventory, _playerState!, out _, out _, pinned);
+        if (!changed)
+            return;
+
+        _inventoryGrid.LoadInventory(cargoInventory);
+        DataModified?.Invoke(this, EventArgs.Empty);
+        CrossInventoryTransferCompleted?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnAutoStackToFreighterRequested(object? sender, EventArgs e)
+    {
+        if (!TryGetSelectedShipCargoInventory(out var cargoInventory, out _))
+            return;
+
+        if (_playerState?.GetObject("FreighterInventory") is not JsonObject freighterInventory)
+            return;
+
+        var pinned = new HashSet<(int x, int y)>(_inventoryGrid.GetPinnedSlots());
+        bool changed = ExosuitAutoStackLogic.AutoStackFromInventoryToInventory(
+            cargoInventory,
+            freighterInventory,
+            out _,
+            out _,
+            pinned);
+
+        if (!changed)
+            return;
+
+        _inventoryGrid.LoadInventory(cargoInventory);
+        DataModified?.Invoke(this, EventArgs.Empty);
+        CrossInventoryTransferCompleted?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnAutoStackSelectedSlotToStorageRequested(object? sender, InventoryGridPanel.AutoStackSlotRequestEventArgs e)
+    {
+        if (!TryGetContextAutoStackCargo(e, out var cargoInventory, out var pinned, out var sourceSlotFilter, out var sourceItemIdFilter))
+            return;
+
+        bool changed = ExosuitAutoStackLogic.AutoStackCargoToChests(
+            cargoInventory,
+            _playerState!,
+            out _,
+            out _,
+            pinned,
+            sourceSlotFilter,
+            sourceItemIdFilter);
+
+        if (!changed)
+            return;
+
+        _inventoryGrid.LoadInventory(cargoInventory);
+        DataModified?.Invoke(this, EventArgs.Empty);
+        CrossInventoryTransferCompleted?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnAutoStackSelectedSlotToFreighterRequested(object? sender, InventoryGridPanel.AutoStackSlotRequestEventArgs e)
+    {
+        if (!TryGetContextAutoStackCargo(e, out var cargoInventory, out var pinned, out var sourceSlotFilter, out var sourceItemIdFilter))
+            return;
+
+        if (_playerState?.GetObject("FreighterInventory") is not JsonObject freighterInventory)
+            return;
+
+        bool changed = ExosuitAutoStackLogic.AutoStackFromInventoryToInventory(
+            cargoInventory,
+            freighterInventory,
+            out _,
+            out _,
+            pinned,
+            sourceSlotFilter,
+            sourceItemIdFilter);
+
+        if (!changed)
+            return;
+
+        _inventoryGrid.LoadInventory(cargoInventory);
+        DataModified?.Invoke(this, EventArgs.Empty);
+        CrossInventoryTransferCompleted?.Invoke(this, EventArgs.Empty);
+    }
+
+    private bool TryGetSelectedShipCargoInventory(out JsonObject cargoInventory, out int shipIndex)
+    {
+        cargoInventory = null!;
+        shipIndex = -1;
+
+        if (_shipOwnership == null || _shipSelector.SelectedIndex < 0)
+            return false;
+
+        var item = (StarshipLogic.ShipListItem)_shipSelector.Items[_shipSelector.SelectedIndex]!;
+        shipIndex = item.DataIndex;
+        if (shipIndex < 0 || shipIndex >= _shipOwnership.Length)
+            return false;
+
+        var ship = _shipOwnership.GetObject(shipIndex);
+        cargoInventory = _inventoryGrid.GetLoadedInventory() ?? ship?.GetObject("Inventory")!;
+        return cargoInventory != null;
+    }
+
+    private bool TryGetContextAutoStackCargo(
+        InventoryGridPanel.AutoStackSlotRequestEventArgs request,
+        out JsonObject cargoInventory,
+        out HashSet<(int x, int y)> pinned,
+        out (int x, int y) sourceSlotFilter,
+        out string sourceItemIdFilter)
+    {
+        cargoInventory = null!;
+        pinned = null!;
+        sourceSlotFilter = default;
+        sourceItemIdFilter = request.ItemId;
+
+        if (!TryGetSelectedShipCargoInventory(out cargoInventory, out _))
+            return false;
+
+        pinned = new HashSet<(int x, int y)>(_inventoryGrid.GetPinnedSlots());
+        sourceSlotFilter = (request.X, request.Y);
+
+        if (pinned.Contains(sourceSlotFilter))
+        {
+            MessageBox.Show(
+                UiStrings.Get("inventory.auto_stack_pinned_slot_blocked"),
+                UiStrings.Get("dialog.info"),
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+            return false;
+        }
+
+        return true;
     }
 
     /// <summary>Applies BaseStatLimits min/max to a NumericUpDown control.</summary>

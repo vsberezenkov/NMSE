@@ -68,6 +68,8 @@ You can see a set of thorough comparisons between the two most popular editors [
 ### 🗃️ Inventories & More
 - Visual inventory grid editor for every slot type
 - Drag-and-drop item management
+- Auto-stack items from exosuit/starship to freighter/chests/starship
+- Sort inventory
 - Import/export practically everything (cross-editor compatible)
 - ByteBeat music library editor
 - Recipe browser with full crafting trees

@@ -1,4 +1,6 @@
 using NMSE.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace NMSE.Config;
 
@@ -123,6 +125,66 @@ public class AppConfig
     {
         get => int.TryParse(GetProperty("MainFrame.Height"), out int v) ? v : 800;
         set => SetProperty("MainFrame.Height", value.ToString());
+    }
+
+    public static string BuildSaveScopeKey(string? saveFilePath)
+    {
+        if (string.IsNullOrWhiteSpace(saveFilePath))
+            return "unknown";
+
+        string normalized;
+        try
+        {
+            normalized = Path.GetFullPath(saveFilePath).Trim();
+        }
+        catch
+        {
+            normalized = saveFilePath.Trim();
+        }
+
+        if (OperatingSystem.IsWindows())
+            normalized = normalized.ToLowerInvariant();
+
+        byte[] data = Encoding.UTF8.GetBytes(normalized);
+        byte[] hash = SHA256.HashData(data);
+        return Convert.ToHexString(hash[..8]).ToLowerInvariant();
+    }
+
+    private static string BuildPinnedSlotsPropertyKey(string saveScopeKey, string inventoryKey)
+        => $"PinnedSlots.{saveScopeKey}.{inventoryKey}";
+
+    public HashSet<(int x, int y)> GetPinnedSlots(string saveScopeKey, string inventoryKey)
+    {
+        var result = new HashSet<(int x, int y)>();
+        string? raw = GetProperty(BuildPinnedSlotsPropertyKey(saveScopeKey, inventoryKey));
+        if (string.IsNullOrWhiteSpace(raw))
+            return result;
+
+        var entries = raw.Split(';', StringSplitOptions.RemoveEmptyEntries);
+        foreach (var entry in entries)
+        {
+            var parts = entry.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length != 2)
+                continue;
+
+            if (int.TryParse(parts[0], out int x) && int.TryParse(parts[1], out int y))
+                result.Add((x, y));
+        }
+
+        return result;
+    }
+
+    public void SetPinnedSlots(string saveScopeKey, string inventoryKey, IEnumerable<(int x, int y)> pinnedSlots)
+    {
+        string key = BuildPinnedSlotsPropertyKey(saveScopeKey, inventoryKey);
+        string value = string.Join(";",
+            pinnedSlots
+                .Distinct()
+                .OrderBy(p => p.y)
+                .ThenBy(p => p.x)
+                .Select(p => $"{p.x},{p.y}"));
+
+        SetProperty(key, string.IsNullOrEmpty(value) ? null : value);
     }
 
     /// <summary>Creates the config directory and loads settings from disk if available.</summary>

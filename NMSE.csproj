@@ -55,6 +55,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Remove="Build\**" />
+		<Content Remove="Build\**" />
+		<EmbeddedResource Remove="Build\**" />
+		<None Remove="Build\**" />
 		<Compile Remove="NMSE.Tests\**" />
 		<Content Remove="NMSE.Tests\**" />
 		<EmbeddedResource Remove="NMSE.Tests\**" />

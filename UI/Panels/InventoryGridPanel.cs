@@ -15,6 +15,35 @@ namespace NMSE.UI.Panels;
 /// </summary>
 public partial class InventoryGridPanel : UserControl
 {
+    public sealed class AutoStackSlotRequestEventArgs : EventArgs
+    {
+        public AutoStackSlotRequestEventArgs(int x, int y, string itemId)
+        {
+            X = x;
+            Y = y;
+            ItemId = itemId;
+        }
+
+        public int X { get; }
+        public int Y { get; }
+        public string ItemId { get; }
+    }
+
+    private enum InventorySortMode
+    {
+        None,
+        Name,
+        Category,
+    }
+
+    private sealed class SortModeOption
+    {
+        public required InventorySortMode Mode { get; init; }
+        public required string Label { get; init; }
+
+        public override string ToString() => Label;
+    }
+
     // Cells / grid items
     private const int GridColumns = 10;
     private const int CellWidth = 72;
@@ -71,11 +100,64 @@ public partial class InventoryGridPanel : UserControl
         _inventoryGroup = group;
     }
 
+    private bool _pinSlotFeatureEnabled;
+    private readonly HashSet<(int x, int y)> _pinnedSlots = new();
+
+    /// <summary>
+    /// Raised when pinned-slot coordinates change.
+    /// </summary>
+    public event EventHandler? PinnedSlotsChanged;
+
+    public void SetPinSlotFeatureEnabled(bool enabled)
+    {
+        _pinSlotFeatureEnabled = enabled;
+        UpdatePinnedVisuals();
+    }
+
+    public void SetPinnedSlots(IEnumerable<(int x, int y)> pinnedSlots)
+    {
+        _pinnedSlots.Clear();
+        foreach (var pos in pinnedSlots)
+            _pinnedSlots.Add(pos);
+        UpdatePinnedVisuals();
+    }
+
+    public IReadOnlyCollection<(int x, int y)> GetPinnedSlots() => _pinnedSlots.ToArray();
+
+    private bool IsPinnedSlot(int x, int y) => _pinnedSlots.Contains((x, y));
+
+    private void RaisePinnedSlotsChanged() => PinnedSlotsChanged?.Invoke(this, EventArgs.Empty);
+
+    private void UpdatePinnedVisuals()
+    {
+        if (_cells.Count == 0)
+            return;
+
+        foreach (var cell in _cells)
+        {
+            cell.ShowPinToggle = _pinSlotFeatureEnabled && cell.IsActivated;
+            cell.IsPinnedForAutoStack = cell.IsActivated && IsPinnedSlot(cell.GridX, cell.GridY);
+            cell.UpdateDisplay();
+        }
+    }
+
+    private bool _sortingEnabled;
+    private InventorySortMode _currentSortMode;
+    private bool _suppressSortModeEvents;
+    private bool _isApplyingSort;
+
+    public void SetSortingEnabled(bool enabled)
+    {
+        _sortingEnabled = enabled;
+        UpdateToolbarActionVisibility();
+    }
+
     // Identify storages that can't be resized
     private bool _isStorageInventory = false;
     public void SetIsStorageInventory(bool isStorage)
     {
         _isStorageInventory = isStorage;
+        UpdateToolbarActionVisibility();
     }
 
     // Identify chest inventories that can be resized (up to 10x12)
@@ -103,6 +185,7 @@ public partial class InventoryGridPanel : UserControl
     public void SetIsCargoInventory(bool isCargo)
     {
         _isCargoInventory = isCargo;
+        UpdateToolbarActionVisibility();
     }
 
     // Owner type for TechnologyCategory-based item filtering.
@@ -205,6 +288,43 @@ public partial class InventoryGridPanel : UserControl
     /// <summary>Raised when inventory data is modified by the user.</summary>
     public event EventHandler? DataModified;
     private void RaiseDataModified() => DataModified?.Invoke(this, EventArgs.Empty);
+
+    /// <summary>
+    /// Raised when the user requests moving Exosuit cargo items into matching chest stacks.
+    /// The parent panel executes the cross-inventory transfer.
+    /// </summary>
+    public event EventHandler? AutoStackToStorageRequested;
+
+    /// <summary>
+    /// Raised when the user requests moving Exosuit cargo items into the current Starship cargo inventory.
+    /// </summary>
+    public event EventHandler? AutoStackToStarshipRequested;
+
+    /// <summary>
+    /// Raised when the user requests moving Exosuit cargo items into the Freighter cargo inventory.
+    /// </summary>
+    public event EventHandler? AutoStackToFreighterRequested;
+
+    /// <summary>
+    /// Raised when the user requests a context-menu auto-stack operation for the selected slot to chests.
+    /// </summary>
+    public event EventHandler<AutoStackSlotRequestEventArgs>? AutoStackSelectedSlotToStorageRequested;
+
+    /// <summary>
+    /// Raised when the user requests a context-menu auto-stack operation for the selected slot to starship.
+    /// </summary>
+    public event EventHandler<AutoStackSlotRequestEventArgs>? AutoStackSelectedSlotToStarshipRequested;
+
+    /// <summary>
+    /// Raised when the user requests a context-menu auto-stack operation for the selected slot to freighter.
+    /// </summary>
+    public event EventHandler<AutoStackSlotRequestEventArgs>? AutoStackSelectedSlotToFreighterRequested;
+
+    public void RefreshToolbarActions()
+    {
+        UpdateToolbarActionVisibility();
+        UpdateToolbarActionEnabledState();
+    }
 
     /// <summary>
     /// Sets the default filename used when exporting this inventory.
@@ -343,24 +463,25 @@ public partial class InventoryGridPanel : UserControl
             _maxSupportedLabel = new Label
             {
                 Text = text,
-                AutoSize = false,
+                AutoSize = true,
                 ForeColor = Color.Red,
                 TextAlign = ContentAlignment.MiddleLeft,
                 Font = new Font("Segoe UI", 9F, FontStyle.Bold),
-                Margin = new Padding(12, 0, 0, 0),
-                Height = 28,
-                MinimumSize = new Size(160, 28), // adjust width as needed
-                Anchor = AnchorStyles.Left | AnchorStyles.Top
+                Dock = DockStyle.Left,
+                Padding = new Padding(0, 2, 0, 0)
             };
-            var resizePanel = _resizeButton.Parent as FlowLayoutPanel;
-            if (resizePanel != null)
+
+            if (_infoPanel != null)
             {
-                resizePanel.Controls.Add(_maxSupportedLabel);
+                _infoPanel.Controls.Add(_maxSupportedLabel);
+                _infoPanel.Visible = true;
             }
         }
         else
         {
             _maxSupportedLabel.Text = text;
+            if (_infoPanel != null)
+                _infoPanel.Visible = !string.IsNullOrWhiteSpace(text);
         }
     }
 
@@ -368,6 +489,8 @@ public partial class InventoryGridPanel : UserControl
     {
         InitializeComponent();
         SetupLayout();
+        PopulateSortModeOptions();
+        RefreshToolbarActions();
     }
 
     private void DisableControlsOnInit()
@@ -384,6 +507,96 @@ public partial class InventoryGridPanel : UserControl
         _typeFilter.Enabled = false;
         _categoryFilter.Enabled = false;
         _itemPicker.Enabled = false;
+        UpdateToolbarActionEnabledState();
+    }
+
+    private void PopulateSortModeOptions()
+    {
+        _suppressSortModeEvents = true;
+        _sortModeCombo.BeginUpdate();
+        _sortModeCombo.Items.Clear();
+        _sortModeCombo.Items.Add(new SortModeOption { Mode = InventorySortMode.None, Label = UiStrings.Get("inventory.sort_none") });
+        _sortModeCombo.Items.Add(new SortModeOption { Mode = InventorySortMode.Name, Label = UiStrings.Get("inventory.sort_name") });
+        _sortModeCombo.Items.Add(new SortModeOption { Mode = InventorySortMode.Category, Label = UiStrings.Get("inventory.sort_category") });
+        _sortModeCombo.SelectedIndex = (int)_currentSortMode;
+        _sortModeCombo.EndUpdate();
+        _suppressSortModeEvents = false;
+    }
+
+    private void UpdateToolbarActionVisibility()
+    {
+        bool showSortControls = _sortingEnabled;
+        bool showAutoStackControl = _isCargoInventory && !_isStorageInventory
+            && (AutoStackToStorageRequested != null || AutoStackToStarshipRequested != null || AutoStackToFreighterRequested != null);
+
+        _sortModeLabel.Visible = showSortControls;
+        _sortModeCombo.Visible = showSortControls;
+        _autoStackToolStrip.Visible = showAutoStackControl;
+
+        _autoStackToChestsButtonMenuItem.Visible = AutoStackToStorageRequested != null;
+        _autoStackToStarshipButtonMenuItem.Visible = AutoStackToStarshipRequested != null;
+        _autoStackToFreighterButtonMenuItem.Visible = AutoStackToFreighterRequested != null;
+    }
+
+    private void UpdateToolbarActionEnabledState()
+    {
+        bool inventoryLoaded = _currentInventory != null;
+        _sortModeCombo.Enabled = _sortingEnabled && inventoryLoaded;
+        _autoStackToolStrip.Enabled = _isCargoInventory && !_isStorageInventory
+            && (AutoStackToStorageRequested != null || AutoStackToStarshipRequested != null || AutoStackToFreighterRequested != null)
+            && inventoryLoaded;
+
+        _autoStackToChestsButtonMenuItem.Enabled = AutoStackToStorageRequested != null && inventoryLoaded;
+        _autoStackToStarshipButtonMenuItem.Enabled = AutoStackToStarshipRequested != null && inventoryLoaded;
+        _autoStackToFreighterButtonMenuItem.Enabled = AutoStackToFreighterRequested != null && inventoryLoaded;
+    }
+
+    private void SetSortMode(InventorySortMode mode, bool applySort, bool raiseModified)
+    {
+        _currentSortMode = mode;
+
+        if (_sortModeCombo.SelectedIndex != (int)mode)
+        {
+            _suppressSortModeEvents = true;
+            _sortModeCombo.SelectedIndex = (int)mode;
+            _suppressSortModeEvents = false;
+        }
+
+        if (!applySort)
+            return;
+
+        ApplyCurrentSortMode(raiseModified);
+    }
+
+    private void ApplyCurrentSortMode(bool raiseModified)
+    {
+        switch (_currentSortMode)
+        {
+            case InventorySortMode.Name:
+                SortInventory(CompareByName, raiseModified);
+                break;
+            case InventorySortMode.Category:
+                SortInventory(CompareByCategory, raiseModified);
+                break;
+        }
+    }
+
+    private static int CompareByName(SlotSortEntry a, SlotSortEntry b)
+    {
+        int byName = string.Compare(a.SortName, b.SortName, StringComparison.OrdinalIgnoreCase);
+        if (byName != 0) return byName;
+        int byCategory = string.Compare(a.SortCategory, b.SortCategory, StringComparison.OrdinalIgnoreCase);
+        if (byCategory != 0) return byCategory;
+        return string.Compare(a.ItemId, b.ItemId, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static int CompareByCategory(SlotSortEntry a, SlotSortEntry b)
+    {
+        int byCategory = string.Compare(a.SortCategory, b.SortCategory, StringComparison.OrdinalIgnoreCase);
+        if (byCategory != 0) return byCategory;
+        int byName = string.Compare(a.SortName, b.SortName, StringComparison.OrdinalIgnoreCase);
+        if (byName != 0) return byName;
+        return string.Compare(a.ItemId, b.ItemId, StringComparison.OrdinalIgnoreCase);
     }
 
     private static Label CreateLabel(string text) =>
@@ -408,6 +621,11 @@ public partial class InventoryGridPanel : UserControl
     public void SetIconManager(IconManager? iconManager)
     {
         _iconManager = iconManager;
+    }
+
+    public JsonObject? GetLoadedInventory()
+    {
+        return _currentInventory;
     }
 
     private void PopulateTypeFilter()
@@ -662,6 +880,7 @@ public partial class InventoryGridPanel : UserControl
         _typeFilter.Enabled = true;
         _categoryFilter.Enabled = true;
         _itemPicker.Enabled = true;
+        UpdateToolbarActionEnabledState();
     }
 
     public void LoadInventory(JsonObject? inventory)
@@ -685,15 +904,17 @@ public partial class InventoryGridPanel : UserControl
             cell.Dispose();
         }
         _gridContainer.Controls.Clear();
-        EnableControlsAfterInventoryLoad();
         _cells.Clear();
         _selectedCell = null;
         ClearDetailPanel();
         _slots = null;
         _currentInventory = inventory;
 
+        EnableControlsAfterInventoryLoad();
+
         if (inventory == null)
         {
+            UpdateToolbarActionEnabledState();
             _gridContainer.ResumeLayout(false);
             ResumeLayout(true);
             RedrawHelper.Resume(_gridContainer);
@@ -702,6 +923,7 @@ public partial class InventoryGridPanel : UserControl
         _slots = inventory.GetArray("Slots");
         if (_slots == null)
         {
+            UpdateToolbarActionEnabledState();
             _gridContainer.ResumeLayout(false);
             ResumeLayout(true);
             RedrawHelper.Resume(_gridContainer);
@@ -842,6 +1064,7 @@ public partial class InventoryGridPanel : UserControl
                     col * (CellWidth + CellPadding) + CellPadding,
                     r * (CellHeight + CellPadding) + CellPadding
                 );
+                cell.ShowPinToggle = _pinSlotFeatureEnabled;
 
                 if (slotMap.TryGetValue((col, r), out var slotData))
                 {
@@ -855,6 +1078,7 @@ public partial class InventoryGridPanel : UserControl
                     cell.IsValidEmpty = true;
                     cell.IsActivated = true; // In ValidSlotIndices = enabled
                     cell.IsSupercharged = IsSlotSupercharged(col, r);
+                    cell.IsPinnedForAutoStack = IsPinnedSlot(col, r);
                     cell.UpdateDisplay();
                 }
                 else
@@ -862,10 +1086,12 @@ public partial class InventoryGridPanel : UserControl
                     // Not in ValidSlotIndices and no data = disabled slot
                     cell.IsEmpty = true;
                     cell.IsActivated = false;
+                    cell.IsPinnedForAutoStack = false;
                     cell.UpdateDisplay();
                 }
 
                 cell.Click += OnCellClicked;
+                cell.PinToggleClicked += OnCellPinToggleClicked;
                 AttachRightClickHandler(cell);
                 AttachDragHandlers(cell);
                 cellsToAdd[cellIdx++] = cell;
@@ -892,6 +1118,10 @@ public partial class InventoryGridPanel : UserControl
         // then re-enable painting for one flicker-free repaint of the whole grid.
         ResumeLayout(true);
         RedrawHelper.Resume(_gridContainer);
+        UpdateToolbarActionEnabledState();
+
+        if (_sortingEnabled && _currentSortMode != InventorySortMode.None && !_isApplyingSort)
+            ApplyCurrentSortMode(false);
     }
 
     /// <summary>
@@ -936,6 +1166,9 @@ public partial class InventoryGridPanel : UserControl
     /// </summary>
     private static string ExtractItemId(object? rawId)
     {
+        if (rawId is JsonObject idObject)
+            rawId = idObject.Get("Id");
+
         if (rawId is BinaryData binData)
             return BinaryDataToItemId(binData);
         return rawId as string ?? "";
@@ -1073,6 +1306,8 @@ public partial class InventoryGridPanel : UserControl
 
         // Check activation status (whether position is in ValidSlotIndices)
         cell.IsActivated = IsSlotInValidIndices(cell.GridX, cell.GridY);
+        cell.ShowPinToggle = _pinSlotFeatureEnabled && cell.IsActivated;
+        cell.IsPinnedForAutoStack = cell.IsActivated && IsPinnedSlot(cell.GridX, cell.GridY);
 
         // Check supercharged status (SpecialSlots entry with matching X,Y and TechBonus type)
         cell.IsSupercharged = IsSlotSupercharged(cell.GridX, cell.GridY);
@@ -1737,6 +1972,8 @@ public partial class InventoryGridPanel : UserControl
         _enableSlotMenuItem.Visible = !_slotToggleDisabled;
         _enableSlotMenuItem.Text = isActivated ? UiStrings.Get("inventory.ctx_disable_slot") : UiStrings.Get("inventory.ctx_enable_slot");
         _enableAllSlotsMenuItem.Visible = !_slotToggleDisabled && _currentInventory != null;
+        _pinSlotMenuItem.Visible = _pinSlotFeatureEnabled && isActivated;
+        _pinSlotMenuItem.Text = cell.IsPinnedForAutoStack ? UiStrings.Get("inventory.ctx_unpin_slot") : UiStrings.Get("inventory.ctx_pin_slot");
 
         _repairSlotMenuItem.Visible = hasItem;
         _repairAllSlotsMenuItem.Visible = _currentInventory != null;
@@ -1753,6 +1990,13 @@ public partial class InventoryGridPanel : UserControl
         // Show "Refill All Stacks" only in non-tech (cargo) inventories
         _refillAllStacksMenuItem.Visible = !_isTechInventory && _currentInventory != null;
 
+        _sortByNameMenuItem.Visible = false;
+        _sortByCategoryMenuItem.Visible = false;
+        bool canAutoStack = _isCargoInventory && !_isStorageInventory && _currentInventory != null;
+        _autoStackToStorageMenuItem.Visible = canAutoStack && (AutoStackToStorageRequested != null || AutoStackSelectedSlotToStorageRequested != null);
+        _autoStackToStarshipMenuItem.Visible = canAutoStack && (AutoStackToStarshipRequested != null || AutoStackSelectedSlotToStarshipRequested != null);
+        _autoStackToFreighterMenuItem.Visible = canAutoStack && (AutoStackToFreighterRequested != null || AutoStackSelectedSlotToFreighterRequested != null);
+
         _copyItemMenuItem.Visible = cell.SlotData != null && !string.IsNullOrEmpty(cell.ItemId) && !cell.IsValidEmpty;
         _pasteItemMenuItem.Visible = _copiedItemCell != null && (cell.IsValidEmpty || !cell.IsEmpty);
     }
@@ -1764,6 +2008,34 @@ public partial class InventoryGridPanel : UserControl
             e.Cancel = true;
             return;
         }
+    }
+
+    private void OnCellPinToggleClicked(object? sender, EventArgs e)
+    {
+        if (sender is not SlotCell cell)
+            return;
+        TogglePinnedSlot(cell);
+    }
+
+    private void OnTogglePinnedSlot(object? sender, EventArgs e)
+    {
+        if (_contextCell == null)
+            return;
+        TogglePinnedSlot(_contextCell);
+    }
+
+    private void TogglePinnedSlot(SlotCell cell)
+    {
+        if (!_pinSlotFeatureEnabled || !cell.IsActivated)
+            return;
+
+        var pos = (cell.GridX, cell.GridY);
+        if (!_pinnedSlots.Add(pos))
+            _pinnedSlots.Remove(pos);
+
+        cell.IsPinnedForAutoStack = IsPinnedSlot(cell.GridX, cell.GridY);
+        cell.UpdateDisplay();
+        RaisePinnedSlotsChanged();
     }
 
     private void SelectCell(SlotCell cell)
@@ -2251,7 +2523,11 @@ public partial class InventoryGridPanel : UserControl
                     break;
                 }
             }
+            _pinnedSlots.Remove((x, y));
             _contextCell.IsActivated = false;
+            _contextCell.ShowPinToggle = false;
+            _contextCell.IsPinnedForAutoStack = false;
+            RaisePinnedSlotsChanged();
         }
         else
         {
@@ -2263,6 +2539,8 @@ public partial class InventoryGridPanel : UserControl
             _contextCell.IsActivated = true;
             _contextCell.IsEmpty = false;
             _contextCell.IsValidEmpty = true;
+            _contextCell.ShowPinToggle = _pinSlotFeatureEnabled;
+            _contextCell.IsPinnedForAutoStack = IsPinnedSlot(x, y);
         }
         _contextCell.UpdateDisplay();
     }
@@ -2554,6 +2832,238 @@ public partial class InventoryGridPanel : UserControl
         if (refilled > 0) RaiseDataModified();
     }
 
+    private sealed class SlotSortEntry
+    {
+        public required JsonObject Slot { get; init; }
+        public required string ItemId { get; init; }
+        public required string SortName { get; init; }
+        public required string SortCategory { get; init; }
+        public int OriginalX { get; init; }
+        public int OriginalY { get; init; }
+    }
+
+    private void OnSortModeChanged(object? sender, EventArgs e)
+    {
+        if (_suppressSortModeEvents) return;
+        if (_sortModeCombo.SelectedItem is not SortModeOption option) return;
+
+        _currentSortMode = option.Mode;
+        ApplyCurrentSortMode(true);
+    }
+
+    private void OnSortByName(object? sender, EventArgs e)
+    {
+        SetSortMode(InventorySortMode.Name, applySort: true, raiseModified: true);
+    }
+
+    private void OnSortByCategory(object? sender, EventArgs e)
+    {
+        SetSortMode(InventorySortMode.Category, applySort: true, raiseModified: true);
+    }
+
+    private void OnAutoStackToStorage(object? sender, EventArgs e)
+    {
+        if (ReferenceEquals(sender, _autoStackToStorageMenuItem)
+            && AutoStackSelectedSlotToStorageRequested != null
+            && TryBuildAutoStackSlotRequest(out var requestArgs))
+        {
+            AutoStackSelectedSlotToStorageRequested?.Invoke(this, requestArgs);
+            return;
+        }
+
+        AutoStackToStorageRequested?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnAutoStackToStarship(object? sender, EventArgs e)
+    {
+        if (ReferenceEquals(sender, _autoStackToStarshipMenuItem)
+            && AutoStackSelectedSlotToStarshipRequested != null
+            && TryBuildAutoStackSlotRequest(out var requestArgs))
+        {
+            AutoStackSelectedSlotToStarshipRequested?.Invoke(this, requestArgs);
+            return;
+        }
+
+        AutoStackToStarshipRequested?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnAutoStackToFreighter(object? sender, EventArgs e)
+    {
+        if (ReferenceEquals(sender, _autoStackToFreighterMenuItem)
+            && AutoStackSelectedSlotToFreighterRequested != null
+            && TryBuildAutoStackSlotRequest(out var requestArgs))
+        {
+            AutoStackSelectedSlotToFreighterRequested?.Invoke(this, requestArgs);
+            return;
+        }
+
+        AutoStackToFreighterRequested?.Invoke(this, EventArgs.Empty);
+    }
+
+    private bool TryBuildAutoStackSlotRequest(out AutoStackSlotRequestEventArgs requestArgs)
+    {
+        requestArgs = null!;
+
+        if (_contextCell == null || _contextCell.SlotData == null || string.IsNullOrEmpty(_contextCell.ItemId) || _contextCell.IsValidEmpty)
+            return false;
+
+        requestArgs = new AutoStackSlotRequestEventArgs(_contextCell.GridX, _contextCell.GridY, _contextCell.ItemId);
+        return true;
+    }
+
+    private void SortInventory(Comparison<SlotSortEntry> comparison, bool raiseModified)
+    {
+        if (_currentInventory == null || _slots == null) return;
+
+        _isApplyingSort = true;
+        try
+        {
+            var entries = new List<SlotSortEntry>();
+            var unsortedSlots = new List<JsonObject>();
+            for (int i = 0; i < _slots.Length; i++)
+            {
+                JsonObject? slot;
+                try { slot = _slots.GetObject(i); }
+                catch { continue; }
+                if (slot == null) continue;
+
+                string itemId;
+                try { itemId = ExtractItemId(slot.Get("Id")); }
+                catch
+                {
+                    unsortedSlots.Add(slot);
+                    continue;
+                }
+
+                if (string.IsNullOrEmpty(itemId) || itemId == "^" || itemId == "^YOURSLOTITEM")
+                {
+                    unsortedSlots.Add(slot);
+                    continue;
+                }
+
+                int x = 0;
+                int y = 0;
+                try
+                {
+                    var index = slot.GetObject("Index");
+                    if (index != null)
+                    {
+                        x = index.GetInt("X");
+                        y = index.GetInt("Y");
+                    }
+                }
+                catch { }
+
+                string sortName = itemId;
+                string sortCategory = "";
+                if (_database != null)
+                {
+                    var (gameItem, displayName, _, _) = ResolveItemAndDisplayName(itemId);
+                    if (gameItem != null)
+                    {
+                        sortName = string.IsNullOrEmpty(displayName) ? itemId : displayName;
+                        sortCategory = gameItem.Category ?? "";
+                    }
+                }
+
+                entries.Add(new SlotSortEntry
+                {
+                    Slot = slot,
+                    ItemId = itemId,
+                    SortName = sortName,
+                    SortCategory = sortCategory,
+                    OriginalX = x,
+                    OriginalY = y,
+                });
+            }
+
+            if (entries.Count < 2) return;
+
+            var targetPositions = GetSortablePositions(_currentInventory);
+            if (targetPositions.Count == 0) return;
+
+            targetPositions.Sort((a, b) =>
+            {
+                int byY = a.y.CompareTo(b.y);
+                return byY != 0 ? byY : a.x.CompareTo(b.x);
+            });
+
+            entries.Sort((a, b) =>
+            {
+                int byRule = comparison(a, b);
+                if (byRule != 0) return byRule;
+                int byY = a.OriginalY.CompareTo(b.OriginalY);
+                return byY != 0 ? byY : a.OriginalX.CompareTo(b.OriginalX);
+            });
+
+            int assignCount = Math.Min(entries.Count, targetPositions.Count);
+            for (int i = 0; i < assignCount; i++)
+                InventorySlotHelper.UpdateSlotIndex(entries[i].Slot, targetPositions[i].x, targetPositions[i].y);
+
+            var newSlots = new JsonArray();
+            foreach (var entry in entries)
+                newSlots.Add(entry.Slot);
+            foreach (var unsorted in unsortedSlots)
+                newSlots.Add(unsorted);
+
+            _currentInventory.Set("Slots", newSlots);
+            _slots = newSlots;
+            LoadInventory(_currentInventory);
+            if (raiseModified)
+                RaiseDataModified();
+        }
+        finally
+        {
+            _isApplyingSort = false;
+        }
+    }
+
+    private static List<(int x, int y)> GetSortablePositions(JsonObject inventory)
+    {
+        var positions = new List<(int x, int y)>();
+        var seen = new HashSet<(int x, int y)>();
+
+        try
+        {
+            var validSlots = inventory.GetArray("ValidSlotIndices");
+            if (validSlots != null)
+            {
+                for (int i = 0; i < validSlots.Length; i++)
+                {
+                    try
+                    {
+                        var idx = validSlots.GetObject(i);
+                        if (idx == null) continue;
+                        var pos = (idx.GetInt("X"), idx.GetInt("Y"));
+                        if (seen.Add(pos)) positions.Add(pos);
+                    }
+                    catch { }
+                }
+            }
+        }
+        catch { }
+
+        if (positions.Count > 0) return positions;
+
+        int width = GridColumns;
+        int height = 1;
+        try
+        {
+            int invWidth = inventory.GetInt("Width");
+            int invHeight = inventory.GetInt("Height");
+            if (invWidth > 0) width = invWidth;
+            if (invHeight > 0) height = invHeight;
+        }
+        catch { }
+
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+                positions.Add((x, y));
+        }
+        return positions;
+    }
+
     private void OnCopyItem(object? sender, EventArgs e)
     {
         if (_contextCell == null || _contextCell.SlotData == null || string.IsNullOrEmpty(_contextCell.ItemId)) return;
@@ -2820,6 +3330,12 @@ public partial class InventoryGridPanel : UserControl
         _resizeWidthLabel.Text = UiStrings.Get("inventory.width");
         _resizeHeightLabel.Text = UiStrings.Get("inventory.height");
         _resizeButton.Text = UiStrings.Get("inventory.resize");
+        _sortModeLabel.Text = UiStrings.Get("inventory.toolbar_sort");
+        _autoStackDropDownButton.Text = UiStrings.Get("inventory.toolbar_auto_stack");
+        _autoStackToChestsButtonMenuItem.Text = UiStrings.Get("inventory.toolbar_auto_stack_chests");
+        _autoStackToStarshipButtonMenuItem.Text = UiStrings.Get("inventory.toolbar_auto_stack_starship");
+        _autoStackToFreighterButtonMenuItem.Text = UiStrings.Get("inventory.toolbar_auto_stack_freighter");
+        PopulateSortModeOptions();
 
         // Detail panel labels
         _detailAmountLabel.Text = UiStrings.Get("inventory.amount");
@@ -2844,6 +3360,12 @@ public partial class InventoryGridPanel : UserControl
         _refillAllStacksMenuItem.Text = UiStrings.Get("inventory.ctx_refill_all");
         _copyItemMenuItem.Text = UiStrings.Get("inventory.ctx_copy");
         _pasteItemMenuItem.Text = UiStrings.Get("inventory.ctx_paste");
+        _sortByNameMenuItem.Text = UiStrings.Get("inventory.ctx_sort_name");
+        _sortByCategoryMenuItem.Text = UiStrings.Get("inventory.ctx_sort_category");
+        _autoStackToStorageMenuItem.Text = UiStrings.Get("inventory.ctx_auto_stack_chests");
+        _autoStackToStarshipMenuItem.Text = UiStrings.Get("inventory.ctx_auto_stack_starship");
+        _autoStackToFreighterMenuItem.Text = UiStrings.Get("inventory.ctx_auto_stack_freighter");
+        _pinSlotMenuItem.Text = UiStrings.Get("inventory.ctx_pin_slot");
 
         // Import/Export buttons
         _importButton.Text = UiStrings.Get("common.import");
@@ -3080,6 +3602,7 @@ public partial class InventoryGridPanel : UserControl
         private readonly PictureBox _iconBox; // inner PictureBox that we offset upward
         private readonly MarqueeLabel _nameLabel;
         private readonly Label _amountLabel;
+        private readonly Label _pinLabel;
         private readonly ToolTip _toolTip;
         private Image? _compositeImage; // tracks composite bitmaps we create so only they are disposed
 
@@ -3131,6 +3654,14 @@ public partial class InventoryGridPanel : UserControl
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsChargeable { get; set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool ShowPinToggle { get; set; }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool IsPinnedForAutoStack { get; set; }
+
+        public event EventHandler? PinToggleClicked;
 
         /// <summary>Cached corvette-resolved display name. Preserved across drag/drop so
         /// the greedy GuessCorvetteBasePart match is not lost when cells move.</summary>
@@ -3223,12 +3754,31 @@ public partial class InventoryGridPanel : UserControl
                 AutoEllipsis = true
             };
 
+            _pinLabel = new Label
+            {
+                AutoSize = false,
+                Size = new Size(16, 16),
+                Location = new Point(Math.Max(0, Width - 18), 2),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = Color.FromArgb(150, 0, 0, 0),
+                ForeColor = Color.Gainsboro,
+                Font = SharedNameFont,
+                Cursor = Cursors.Hand,
+                Visible = false
+            };
+            _pinLabel.Click += (s, e) => PinToggleClicked?.Invoke(this, EventArgs.Empty);
+            _pinLabel.MouseEnter += (s, e) => _pinLabel.ForeColor = Color.White;
+            _pinLabel.MouseLeave += (s, e) => _pinLabel.ForeColor = IsPinnedForAutoStack ? Color.Gold : Color.Gainsboro;
+            Resize += (s, e) => _pinLabel.Location = new Point(Math.Max(0, Width - 18), 2);
+
             _toolTip = sharedToolTip;
 
             // Add controls in z-order: amount (bottom), icon container (middle), name (top)
             Controls.Add(_amountLabel);
             Controls.Add(_iconContainer);
             Controls.Add(_nameLabel);
+            Controls.Add(_pinLabel);
+            _pinLabel.BringToFront();
 
             // Forward child clicks to this panel for cell selection
             _iconBox.Click += (s, e) => OnClick(e);
@@ -3319,6 +3869,7 @@ public partial class InventoryGridPanel : UserControl
                 string tip = IsActivated ? UiStrings.Format("inventory.tooltip_empty", GridX, GridY) : UiStrings.Format("inventory.tooltip_disabled", GridX, GridY);
                 _toolTip.SetToolTip(this, tip);
                 _toolTip.SetToolTip(_iconBox, tip);
+                UpdatePinIndicator();
                 return;
             }
 
@@ -3347,6 +3898,7 @@ public partial class InventoryGridPanel : UserControl
                 _toolTip.SetToolTip(this, tip);
                 _toolTip.SetToolTip(_iconBox, tip);
                 _toolTip.SetToolTip(_nameLabel, tip);
+                UpdatePinIndicator();
                 return;
             }
 
@@ -3519,6 +4071,22 @@ public partial class InventoryGridPanel : UserControl
             _toolTip.SetToolTip(_iconBox, tip2);
             _toolTip.SetToolTip(_amountLabel, tip2);
             _toolTip.SetToolTip(_nameLabel, tip2);
+            UpdatePinIndicator();
+        }
+
+        private void UpdatePinIndicator()
+        {
+            bool show = ShowPinToggle && IsActivated;
+            _pinLabel.Visible = show;
+            if (!show)
+                return;
+
+            _pinLabel.Text = IsPinnedForAutoStack ? "🔒" : "🔓";
+            _pinLabel.ForeColor = IsPinnedForAutoStack ? Color.Gold : Color.Gainsboro;
+            _toolTip.SetToolTip(_pinLabel,
+                IsPinnedForAutoStack
+                    ? UiStrings.Get("inventory.tooltip_pinned_slot")
+                    : UiStrings.Get("inventory.tooltip_unpinned_slot"));
         }
 
         protected override void Dispose(bool disposing)

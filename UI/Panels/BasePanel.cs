@@ -976,6 +976,7 @@ internal class ChestsSubPanel : UserControl
             _chestGrids[i].SetIsStorageInventory(true);
             _chestGrids[i].SetIsChestInventory(true);
             _chestGrids[i].SetIsCargoInventory(true);
+            _chestGrids[i].SetSortingEnabled(true);
             _chestGrids[i].SetInventoryGroup("Chest");
 
             // Container panel with name row + warning label above the inventory grid
@@ -1206,6 +1207,7 @@ internal class ChestsSubPanel : UserControl
             _chestNameFields[i].PlaceholderText = UiStrings.Get("base.chest_name_placeholder");
             _chestRenameButtons[i].Text = UiStrings.Get("base.chest_rename");
             _chestClearButtons[i].Text = UiStrings.Get("base.chest_clear_name");
+            _chestGrids[i].ApplyUiLocalisation();
         }
     }
 }
@@ -1439,6 +1441,9 @@ internal class StorageSubPanel : UserControl
             _storageTabs.TabPages[7].Text = UiStrings.Get("base.storage_freighter_refund");
             _freighterRefundWarning.Text = UiStrings.Get("base.storage_freighter_refund_warning");
         }
+
+        foreach (var tab in _tabs)
+            tab.Grid.ApplyUiLocalisation();
     }
 }
 

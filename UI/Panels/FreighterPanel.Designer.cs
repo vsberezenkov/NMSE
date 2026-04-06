@@ -641,6 +641,7 @@ partial class FreighterPanel
 
         _techGrid.SetIsTechInventory(true);
         _generalGrid.SetIsCargoInventory(true);
+        _generalGrid.SetSortingEnabled(true);
         _techGrid.SetInventoryOwnerType("Freighter");
         _generalGrid.SetInventoryOwnerType("Freighter");
         _generalGrid.SetInventoryGroup("FreighterCargo");

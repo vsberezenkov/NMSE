@@ -50,8 +50,17 @@ partial class InventoryGridPanel
                 splitContainer.SplitterDistance = splitContainer.Width - 290;
         };
 
+        // Left: info row above toolbar/grid for long inventory guidance text
+        _infoPanel = new Panel
+        {
+            Dock = DockStyle.Top,
+            Height = 26,
+            Padding = new Padding(4, 4, 4, 0),
+            Visible = false
+        };
+
         // Left: resize controls above the grid
-        var resizePanel = new FlowLayoutPanel
+        _toolbarPanel = new FlowLayoutPanel
         {
             Dock = DockStyle.Top,
             Height = 36,
@@ -68,17 +77,42 @@ partial class InventoryGridPanel
         _resizeHeight = new NumericUpDown { Minimum = 1, Maximum = 20, Value = 6, Width = 50, Dock = DockStyle.Left };
         _resizeButton = new Button { Text = "Resize", AutoSize = false, Size = new Size(75, 28), MinimumSize = new Size(75, 28), Margin = new Padding(8, 0, 0, 0) };
         _resizeButton.Click += OnResizeInventory;
+        _sortModeLabel = new Label { Text = "Sort:", AutoSize = true, Dock = DockStyle.Left, Padding = new Padding(12, 4, 2, 0) };
+        _sortModeCombo = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList, Width = 130, Margin = new Padding(0, 0, 0, 0) };
+        _sortModeCombo.SelectedIndexChanged += OnSortModeChanged;
+        _autoStackToolStrip = new ToolStrip
+        {
+            AutoSize = false,
+            Size = new Size(130, 28),
+            MinimumSize = new Size(130, 28),
+            GripStyle = ToolStripGripStyle.Hidden,
+            CanOverflow = false,
+            Padding = Padding.Empty,
+            Margin = new Padding(8, 0, 0, 0),
+            RenderMode = ToolStripRenderMode.System
+        };
+        _autoStackDropDownButton = new ToolStripDropDownButton("Auto-Stack");
+        _autoStackToChestsButtonMenuItem = new ToolStripMenuItem("To Chests", null, OnAutoStackToStorage);
+        _autoStackToStarshipButtonMenuItem = new ToolStripMenuItem("To Starship", null, OnAutoStackToStarship);
+        _autoStackToFreighterButtonMenuItem = new ToolStripMenuItem("To Freighter", null, OnAutoStackToFreighter);
+        _autoStackDropDownButton.DropDownItems.Add(_autoStackToChestsButtonMenuItem);
+        _autoStackDropDownButton.DropDownItems.Add(_autoStackToStarshipButtonMenuItem);
+        _autoStackDropDownButton.DropDownItems.Add(_autoStackToFreighterButtonMenuItem);
+        _autoStackToolStrip.Items.Add(_autoStackDropDownButton);
         _exportButton = new Button { Text = "Export", AutoSize = false, Size = new Size(75, 28), MinimumSize = new Size(75, 28), Margin = new Padding(16, 0, 0, 0) };
         _exportButton.Click += OnExportInventory;
         _importButton = new Button { Text = "Import", AutoSize = false, Size = new Size(75, 28), MinimumSize = new Size(75, 28), Margin = new Padding(4, 0, 0, 0) };
         _importButton.Click += OnImportInventory;
-        resizePanel.Controls.Add(_resizeWidthLabel);
-        resizePanel.Controls.Add(_resizeWidth);
-        resizePanel.Controls.Add(_resizeHeightLabel);
-        resizePanel.Controls.Add(_resizeHeight);
-        resizePanel.Controls.Add(_resizeButton);
-        resizePanel.Controls.Add(_exportButton);
-        resizePanel.Controls.Add(_importButton);
+        _toolbarPanel.Controls.Add(_resizeWidthLabel);
+        _toolbarPanel.Controls.Add(_resizeWidth);
+        _toolbarPanel.Controls.Add(_resizeHeightLabel);
+        _toolbarPanel.Controls.Add(_resizeHeight);
+        _toolbarPanel.Controls.Add(_resizeButton);
+        _toolbarPanel.Controls.Add(_sortModeLabel);
+        _toolbarPanel.Controls.Add(_sortModeCombo);
+        _toolbarPanel.Controls.Add(_autoStackToolStrip);
+        _toolbarPanel.Controls.Add(_exportButton);
+        _toolbarPanel.Controls.Add(_importButton);
         // Note: Dock=Left controls are added in reverse visual order
 
         // Left: grid of slot cells
@@ -89,7 +123,8 @@ partial class InventoryGridPanel
             BackColor = Color.FromArgb(30, 30, 30)
         };
         splitContainer.Panel1.Controls.Add(_gridContainer);
-        splitContainer.Panel1.Controls.Add(resizePanel);
+        splitContainer.Panel1.Controls.Add(_toolbarPanel);
+        splitContainer.Panel1.Controls.Add(_infoPanel);
 
         // Right: detail/editor panel
         _detailPanel = new Panel
@@ -332,6 +367,7 @@ partial class InventoryGridPanel
         _removeItemMenuItem = new ToolStripMenuItem("Remove Item", null, OnRemoveItem);
         _enableSlotMenuItem = new ToolStripMenuItem("Enable/Disable Slot", null, OnEnableSlot);
         _enableAllSlotsMenuItem = new ToolStripMenuItem("Enable All Slots", null, OnEnableAllSlots);
+        _pinSlotMenuItem = new ToolStripMenuItem("Pin Slot", null, OnTogglePinnedSlot);
         _repairSlotMenuItem = new ToolStripMenuItem("Repair Slot", null, OnRepairSlot);
         _repairAllSlotsMenuItem = new ToolStripMenuItem("Repair All Slots", null, OnRepairAllSlots);
         _superchargeSlotMenuItem = new ToolStripMenuItem("Supercharge Slot", null, OnSuperchargeSlot);
@@ -341,11 +377,17 @@ partial class InventoryGridPanel
         _refillAllStacksMenuItem = new ToolStripMenuItem("Refill All Stacks", null, OnRefillAllStacks);
         _copyItemMenuItem = new ToolStripMenuItem("Copy Item", null, OnCopyItem);
         _pasteItemMenuItem = new ToolStripMenuItem("Paste Item", null, OnPasteItem);
+        _sortByNameMenuItem = new ToolStripMenuItem("Sort by Name", null, OnSortByName);
+        _sortByCategoryMenuItem = new ToolStripMenuItem("Sort by Category", null, OnSortByCategory);
+        _autoStackToStorageMenuItem = new ToolStripMenuItem("Auto-Stack to Chests", null, OnAutoStackToStorage);
+        _autoStackToStarshipMenuItem = new ToolStripMenuItem("Auto-Stack to Starship", null, OnAutoStackToStarship);
+        _autoStackToFreighterMenuItem = new ToolStripMenuItem("Auto-Stack to Freighter", null, OnAutoStackToFreighter);
         _cellContextMenu.Items.Add(_addItemMenuItem);
         _cellContextMenu.Items.Add(_removeItemMenuItem);
         _cellContextMenu.Items.Add(new ToolStripSeparator());
         _cellContextMenu.Items.Add(_enableSlotMenuItem);
         _cellContextMenu.Items.Add(_enableAllSlotsMenuItem);
+        _cellContextMenu.Items.Add(_pinSlotMenuItem);
         _cellContextMenu.Items.Add(new ToolStripSeparator());
         _cellContextMenu.Items.Add(_repairSlotMenuItem);
         _cellContextMenu.Items.Add(_repairAllSlotsMenuItem);
@@ -359,6 +401,12 @@ partial class InventoryGridPanel
         _cellContextMenu.Items.Add(new ToolStripSeparator());
         _cellContextMenu.Items.Add(_copyItemMenuItem);
         _cellContextMenu.Items.Add(_pasteItemMenuItem);
+        _cellContextMenu.Items.Add(new ToolStripSeparator());
+        _cellContextMenu.Items.Add(_sortByNameMenuItem);
+        _cellContextMenu.Items.Add(_sortByCategoryMenuItem);
+        _cellContextMenu.Items.Add(_autoStackToStorageMenuItem);
+        _cellContextMenu.Items.Add(_autoStackToStarshipMenuItem);
+        _cellContextMenu.Items.Add(_autoStackToFreighterMenuItem);
         _cellContextMenu.Opening += OnContextMenuOpening;
 
 
@@ -369,6 +417,8 @@ partial class InventoryGridPanel
     }
 
     // Grid area
+    private Panel _infoPanel = null!;
+    private FlowLayoutPanel _toolbarPanel = null!;
     private Panel _gridContainer = null!;
 
     // Detail/editor panel controls
@@ -412,6 +462,13 @@ partial class InventoryGridPanel
     private Label _resizeWidthLabel = null!;
     private Label _resizeHeightLabel = null!;
     private Button _resizeButton = null!;
+    private Label _sortModeLabel = null!;
+    private ComboBox _sortModeCombo = null!;
+    private ToolStrip _autoStackToolStrip = null!;
+    private ToolStripDropDownButton _autoStackDropDownButton = null!;
+    private ToolStripMenuItem _autoStackToChestsButtonMenuItem = null!;
+    private ToolStripMenuItem _autoStackToStarshipButtonMenuItem = null!;
+    private ToolStripMenuItem _autoStackToFreighterButtonMenuItem = null!;
     private Button _importButton = null!;
     private Button _exportButton = null!;
 
@@ -421,6 +478,7 @@ partial class InventoryGridPanel
     private ToolStripMenuItem _removeItemMenuItem = null!;
     private ToolStripMenuItem _enableSlotMenuItem = null!;
     private ToolStripMenuItem _enableAllSlotsMenuItem = null!;
+    private ToolStripMenuItem _pinSlotMenuItem = null!;
     private ToolStripMenuItem _repairSlotMenuItem = null!;
     private ToolStripMenuItem _repairAllSlotsMenuItem = null!;
     private ToolStripMenuItem _superchargeSlotMenuItem = null!;
@@ -430,4 +488,9 @@ partial class InventoryGridPanel
     private ToolStripMenuItem _refillAllStacksMenuItem = null!;
     private ToolStripMenuItem _copyItemMenuItem = null!;
     private ToolStripMenuItem _pasteItemMenuItem = null!;
+    private ToolStripMenuItem _sortByNameMenuItem = null!;
+    private ToolStripMenuItem _sortByCategoryMenuItem = null!;
+    private ToolStripMenuItem _autoStackToStorageMenuItem = null!;
+    private ToolStripMenuItem _autoStackToStarshipMenuItem = null!;
+    private ToolStripMenuItem _autoStackToFreighterMenuItem = null!;
 }
