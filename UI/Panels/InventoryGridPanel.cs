@@ -1891,20 +1891,21 @@ public partial class InventoryGridPanel : UserControl
         {
             if (gameItem != null && gameItem.IsChargeable && gameItem.ChargeValue > 0)
             {
-                if (amount <= 0) amount = gameItem.ChargeValue;
-                if (maxAmount <= 0) maxAmount = gameItem.ChargeValue;
+                if (amount == 0) amount = gameItem.ChargeValue;
+                if (maxAmount == 0) maxAmount = gameItem.ChargeValue;
             }
             else
             {
-                if (amount <= 0) amount = 1;
-                if (maxAmount <= 0) maxAmount = 0;
+                if (amount == 0) amount = 1;
+                if (maxAmount == 0) maxAmount = 0;
             }
         }
         else
         {
-            // For non-technology items, zero amounts mean something went wrong - default to 1.
-            if (amount <= 0 && maxAmount <= 0) { amount = 1; maxAmount = 1; }
-            if (maxAmount <= 0) maxAmount = amount;
+            // For non-technology items, zero amounts are treated as unset - default to 1.
+            // Negative values are intentionally preserved as they are valid game data.
+            if (amount == 0 && maxAmount == 0) { amount = 1; maxAmount = 1; }
+            if (maxAmount == 0) maxAmount = amount;
         }
 
         // If the cell has no existing slot data (valid empty slot), create a new slot
@@ -2093,20 +2094,21 @@ public partial class InventoryGridPanel : UserControl
         {
             if (gameItem != null && gameItem.IsChargeable && gameItem.ChargeValue > 0)
             {
-                if (amount <= 0) amount = gameItem.ChargeValue;
-                if (maxAmount <= 0) maxAmount = gameItem.ChargeValue;
+                if (amount == 0) amount = gameItem.ChargeValue;
+                if (maxAmount == 0) maxAmount = gameItem.ChargeValue;
             }
             else
             {
-                if (amount <= 0) amount = 1;
-                if (maxAmount <= 0) maxAmount = 0;
+                if (amount == 0) amount = 1;
+                if (maxAmount == 0) maxAmount = 0;
             }
         }
         else
         {
-            // For non-technology items, zero amounts mean something went wrong - default to 1.
-            if (amount <= 0 && maxAmount <= 0) { amount = 1; maxAmount = 1; }
-            if (maxAmount <= 0) maxAmount = amount;
+            // For non-technology items, zero amounts are treated as unset - default to 1.
+            // Negative values are intentionally preserved as they are valid game data.
+            if (amount == 0 && maxAmount == 0) { amount = 1; maxAmount = 1; }
+            if (maxAmount == 0) maxAmount = amount;
         }
 
         // Create a new slot JSON object

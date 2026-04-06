@@ -184,7 +184,7 @@ partial class InventoryGridPanel
         row++;
 
         // Amount
-        _detailAmount = new NumericUpDown { Dock = DockStyle.Fill, Minimum = -1, Maximum = int.MaxValue };
+        _detailAmount = new NumericUpDown { Dock = DockStyle.Fill, Minimum = int.MinValue, Maximum = int.MaxValue };
         _detailAmountLabel = CreateLabel("Amount:");
         detailLayout.Controls.Add(_detailAmountLabel, 0, row);
         detailLayout.Controls.Add(_detailAmount, 1, row);
@@ -192,7 +192,7 @@ partial class InventoryGridPanel
         row++;
 
         // Max Amount
-        _detailMaxAmount = new NumericUpDown { Dock = DockStyle.Fill, Minimum = 0, Maximum = int.MaxValue };
+        _detailMaxAmount = new NumericUpDown { Dock = DockStyle.Fill, Minimum = int.MinValue, Maximum = int.MaxValue };
         _detailMaxLabel = CreateLabel("Max:");
         detailLayout.Controls.Add(_detailMaxLabel, 0, row);
         detailLayout.Controls.Add(_detailMaxAmount, 1, row);
