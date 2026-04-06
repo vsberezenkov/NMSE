@@ -18,7 +18,7 @@
 	</PropertyGroup>
 
 	<!-- NativeAOT static linking configuration -->
-	<Import Project="Build\NativeAOT.props"/>
+	<Import Project="Build\NativeAOT.props" />
 
 	<ItemGroup>
 		<Compile Remove="NMSE.Tests\**" />
@@ -125,8 +125,7 @@
 		<ZipDirectory SourceDirectory="$(OutputPath)" DestinationFile="$(MSBuildProjectDirectory)/Build/bin/NMSE-$(NmseVersion)-$(Configuration).zip" Overwrite="true" />
 	</Target>
 
-	<Target Name="CleanupNativeAotPublishOutput" AfterTargets="Publish"
-	        Condition="'$(PublishAot)' == 'true' and '$(RuntimeIdentifier)' == 'win-x64'">
+	<Target Name="CleanupNativeAotPublishOutput" AfterTargets="Publish" Condition="'$(PublishAot)' == 'true' and '$(RuntimeIdentifier)' == 'win-x64'">
 		<ItemGroup>
 			<_PublishArtifactsToDelete Include="$(PublishDir)libSkiaSharp.dll" />
 			<_PublishArtifactsToDelete Include="$(PublishDir)libHarfBuzzSharp.dll" />

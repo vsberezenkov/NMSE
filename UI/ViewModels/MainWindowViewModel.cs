@@ -202,7 +202,7 @@ public partial class MainWindowViewModel : ViewModelBase
             TitleDatabase.LoadFromFile(titlesPath);
 
             FrigateTraitDatabase.LoadFromFile(Path.Combine(jsonPath, "FrigateTraits.json"));
-            SettlementPerkDatabase.LoadFromFile(Path.Combine(jsonPath, "SettlementPerks.json"));
+            SettlementDatabase.LoadFromFile(Path.Combine(jsonPath, "SettlementPerks.json"));
             WikiGuideDatabase.LoadFromFile(Path.Combine(jsonPath, "WikiGuide.json"));
 
             _wordDatabase = new WordDatabase();
@@ -234,7 +234,7 @@ public partial class MainWindowViewModel : ViewModelBase
             _totalDatabaseItems = _database.Items.Count
                 + (_wordDatabase?.Count ?? 0)
                 + FrigateTraitDatabase.Traits.Count
-                + SettlementPerkDatabase.Perks.Count
+                + SettlementDatabase.Perks.Count
                 + RewardDatabase.Count
                 + InventoryStackDatabase.Count
                 + UiStrings.TotalKeyCount;
@@ -277,7 +277,7 @@ public partial class MainWindowViewModel : ViewModelBase
             _recipeDatabase.ApplyLocalisation(_localisationService);
             TitleDatabase.ApplyLocalisation(_localisationService);
             FrigateTraitDatabase.ApplyLocalisation(_localisationService);
-            SettlementPerkDatabase.ApplyLocalisation(_localisationService);
+            SettlementDatabase.ApplyLocalisation(_localisationService);
             WikiGuideDatabase.ApplyLocalisation(_localisationService);
             StatusText = UiStrings.Format("status.language_set", tag);
         }
@@ -892,7 +892,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 _recipeDatabase.ApplyLocalisation(_localisationService);
                 TitleDatabase.ApplyLocalisation(_localisationService);
                 FrigateTraitDatabase.ApplyLocalisation(_localisationService);
-                SettlementPerkDatabase.ApplyLocalisation(_localisationService);
+                SettlementDatabase.ApplyLocalisation(_localisationService);
                 WikiGuideDatabase.ApplyLocalisation(_localisationService);
 
                 foreach (int idx in _loadedTabIndices)

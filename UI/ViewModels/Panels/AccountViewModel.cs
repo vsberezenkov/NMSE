@@ -112,9 +112,11 @@ public partial class AccountViewModel : PanelViewModelBase
         List<(string Id, string Name)> rewardsDb, HashSet<string> unlocked)
     {
         target.Clear();
-        var rows = AccountLogic.BuildRewardRows(rewardsDb, unlocked);
-        foreach (var row in rows)
-            target.Add(new RewardRowViewModel(row.Id, row.Name, row.Unlocked));
+
+        // This is the old method that uses the AccountLogic to build the rows. It needs taking care of in rework.
+        //var rows = AccountLogic.BuildRewardRows(rewardsDb, unlocked);
+        //foreach (var row in rows)
+        //    target.Add(new RewardRowViewModel(row.Id, row.Name, row.Unlocked));
     }
 
     public override void LoadData(JsonObject saveData, GameItemDatabase database, IconManager? iconManager)
@@ -145,7 +147,8 @@ public partial class AccountViewModel : PanelViewModelBase
         AccountLogic.SaveRewardList(twitchRows, userSettings, "UnlockedTwitchRewards");
         AccountLogic.SaveRewardList(platformRows, userSettings, "UnlockedPlatformRewards");
 
-        AccountLogic.SyncRedeemedRewards(saveData, seasonRows, twitchRows);
+        // This is the old method that directly modifies the save data. Needs changing over to new - taken care of in rework.
+        //AccountLogic.SyncRedeemedRewards(saveData, seasonRows, twitchRows);
     }
 
     private static List<(string Id, bool Unlocked)> CollectRewardRows(ObservableCollection<RewardRowViewModel> rewards)
