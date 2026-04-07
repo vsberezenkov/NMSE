@@ -458,6 +458,13 @@ public partial class InventoryGridPanel : UserControl
     /// </summary>
     public void SetMaxSupportedLabel(string text)
     {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            if (_maxSupportedLabel != null)
+                _maxSupportedLabel.Visible = false;
+            return;
+        }
+
         if (_maxSupportedLabel == null)
         {
             _maxSupportedLabel = new Label
@@ -467,21 +474,15 @@ public partial class InventoryGridPanel : UserControl
                 ForeColor = Color.Red,
                 TextAlign = ContentAlignment.MiddleLeft,
                 Font = new Font("Segoe UI", 9F, FontStyle.Bold),
-                Dock = DockStyle.Left,
-                Padding = new Padding(0, 2, 0, 0)
+                Margin = new Padding(8, 8, 0, 0)
             };
 
-            if (_infoPanel != null)
-            {
-                _infoPanel.Controls.Add(_maxSupportedLabel);
-                _infoPanel.Visible = true;
-            }
+            _toolbarPanel?.Controls.Add(_maxSupportedLabel);
         }
         else
         {
             _maxSupportedLabel.Text = text;
-            if (_infoPanel != null)
-                _infoPanel.Visible = !string.IsNullOrWhiteSpace(text);
+            _maxSupportedLabel.Visible = true;
         }
     }
 
@@ -3758,18 +3759,19 @@ public partial class InventoryGridPanel : UserControl
             {
                 AutoSize = false,
                 Size = new Size(16, 16),
-                Location = new Point(Math.Max(0, Width - 18), 2),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = Color.FromArgb(150, 0, 0, 0),
-                ForeColor = Color.Gainsboro,
+                BackColor = Color.FromArgb(128, 0, 0, 0),
+                ForeColor = Color.White,
                 Font = SharedNameFont,
+                Padding = new Padding(0, 0, 0, 0),
                 Cursor = Cursors.Hand,
                 Visible = false
             };
+            _pinLabel.Location = new Point(Math.Max(0, Width - _pinLabel.Width), Math.Max(2, Height - _amountLabel.Height - _pinLabel.Height - 3));
             _pinLabel.Click += (s, e) => PinToggleClicked?.Invoke(this, EventArgs.Empty);
             _pinLabel.MouseEnter += (s, e) => _pinLabel.ForeColor = Color.White;
             _pinLabel.MouseLeave += (s, e) => _pinLabel.ForeColor = IsPinnedForAutoStack ? Color.Gold : Color.Gainsboro;
-            Resize += (s, e) => _pinLabel.Location = new Point(Math.Max(0, Width - 18), 2);
+            Resize += (s, e) => _pinLabel.Location = new Point(Math.Max(0, Width - _pinLabel.Width), Math.Max(2, Height - _amountLabel.Height - _pinLabel.Height - 3));
 
             _toolTip = sharedToolTip;
 

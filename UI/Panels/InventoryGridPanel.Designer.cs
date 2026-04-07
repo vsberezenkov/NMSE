@@ -75,16 +75,15 @@ partial class InventoryGridPanel
         _resizeWidth = new NumericUpDown { Minimum = 1, Maximum = 20, Value = 10, Width = 50, Dock = DockStyle.Left };
         _resizeHeightLabel = new Label { Text = "Height:", AutoSize = true, Dock = DockStyle.Left, Padding = new Padding(8, 4, 2, 0) };
         _resizeHeight = new NumericUpDown { Minimum = 1, Maximum = 20, Value = 6, Width = 50, Dock = DockStyle.Left };
-        _resizeButton = new Button { Text = "Resize", AutoSize = false, Size = new Size(75, 28), MinimumSize = new Size(75, 28), Margin = new Padding(8, 0, 0, 0) };
+        _resizeButton = new Button { Text = "Resize", AutoSize = true, Size = new Size(75, 28), MinimumSize = new Size(75, 28), Margin = new Padding(8, 0, 0, 0) };
         _resizeButton.Click += OnResizeInventory;
-        _sortModeLabel = new Label { Text = "Sort:", AutoSize = true, Dock = DockStyle.Left, Padding = new Padding(12, 4, 2, 0) };
-        _sortModeCombo = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList, Width = 130, Margin = new Padding(0, 0, 0, 0) };
+        _sortModeLabel = new Label { Text = "Sort:", AutoSize = true, Dock = DockStyle.Left, Padding = new Padding(12, 4, 2, 0), Margin = new Padding(0, 2, 0, 0) };
+        _sortModeCombo = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList, Width = 80, Margin = new Padding(0, 2, 0, 0) };
         _sortModeCombo.SelectedIndexChanged += OnSortModeChanged;
         _autoStackToolStrip = new ToolStrip
         {
-            AutoSize = false,
-            Size = new Size(130, 28),
-            MinimumSize = new Size(130, 28),
+            AutoSize = true,
+            MinimumSize = new Size(60, 28),
             GripStyle = ToolStripGripStyle.Hidden,
             CanOverflow = false,
             Padding = Padding.Empty,
@@ -99,9 +98,9 @@ partial class InventoryGridPanel
         _autoStackDropDownButton.DropDownItems.Add(_autoStackToStarshipButtonMenuItem);
         _autoStackDropDownButton.DropDownItems.Add(_autoStackToFreighterButtonMenuItem);
         _autoStackToolStrip.Items.Add(_autoStackDropDownButton);
-        _exportButton = new Button { Text = "Export", AutoSize = false, Size = new Size(75, 28), MinimumSize = new Size(75, 28), Margin = new Padding(16, 0, 0, 0) };
+        _exportButton = new Button { Text = "Export", AutoSize = true, Size = new Size(75, 28), MinimumSize = new Size(75, 28), Margin = new Padding(8, 0, 0, 0) };
         _exportButton.Click += OnExportInventory;
-        _importButton = new Button { Text = "Import", AutoSize = false, Size = new Size(75, 28), MinimumSize = new Size(75, 28), Margin = new Padding(4, 0, 0, 0) };
+        _importButton = new Button { Text = "Import", AutoSize = true, Size = new Size(75, 28), MinimumSize = new Size(75, 28), Margin = new Padding(4, 0, 0, 0) };
         _importButton.Click += OnImportInventory;
         _toolbarPanel.Controls.Add(_resizeWidthLabel);
         _toolbarPanel.Controls.Add(_resizeWidth);
