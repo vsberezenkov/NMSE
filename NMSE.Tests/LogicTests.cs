@@ -210,6 +210,45 @@ public class LogicTests
     }
 
     [Fact]
+    public void StatHelper_WriteBaseStatValue_PreservesRawDoubleWhenUnchanged()
+    {
+        // Parse JSON with a float that has a specific text representation.
+        // "R" format for 77.06786346435547 gives "77.0678634643555" (different text),
+        // so if we wrote the same numeric value back, it would clobber the original text.
+        var json = JsonObject.Parse(@"{
+            ""BaseStatValues"": [
+                { ""BaseStatID"": ""^SHIP_DAMAGE"", ""Value"": 77.06786346435547 }
+            ]
+        }");
+
+        var arr = json.GetArray("BaseStatValues")!;
+        var entry = arr.GetObject(0);
+        var originalValue = entry.GetValue("Value");
+        Assert.IsType<Models.RawDouble>(originalValue);
+
+        // Writing the same value back should preserve the RawDouble
+        double readVal = StatHelper.ReadBaseStatValue(json, "^SHIP_DAMAGE");
+        StatHelper.WriteBaseStatValue(json, "^SHIP_DAMAGE", readVal);
+
+        var afterValue = entry.GetValue("Value");
+        Assert.IsType<Models.RawDouble>(afterValue);
+        Assert.Equal("77.06786346435547", afterValue.ToString());
+    }
+
+    [Fact]
+    public void StatHelper_WriteBaseStatValue_ReplacesRawDoubleWhenChanged()
+    {
+        var json = JsonObject.Parse(@"{
+            ""BaseStatValues"": [
+                { ""BaseStatID"": ""^SHIP_DAMAGE"", ""Value"": 77.06786346435547 }
+            ]
+        }");
+
+        StatHelper.WriteBaseStatValue(json, "^SHIP_DAMAGE", 99.5);
+        Assert.Equal(99.5, StatHelper.ReadBaseStatValue(json, "^SHIP_DAMAGE"));
+    }
+
+    [Fact]
     public void StarshipLogic_BuildShipList_ReturnsSeededShips()
     {
         var json = JsonObject.Parse(@"{

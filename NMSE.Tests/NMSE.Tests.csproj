@@ -84,6 +84,7 @@
     <Compile Include="..\Core\FileNameHelper.cs" Link="Core\FileNameHelper.cs" />
     <Compile Include="..\Core\StatHelper.cs" Link="Core\StatHelper.cs" />
     <Compile Include="..\Core\SeedHelper.cs" Link="Core\SeedHelper.cs" />
+    <Compile Include="..\Core\ProceduralSeedHelper.cs" Link="Core\ProceduralSeedHelper.cs" />
     <Compile Include="..\Core\FrigateLogic.cs" Link="Core\FrigateLogic.cs" />
     <Compile Include="..\Core\CompanionLogic.cs" Link="Core\CompanionLogic.cs" />
     <Compile Include="..\Core\MilestoneLogic.cs" Link="Core\MilestoneLogic.cs" />

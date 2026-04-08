@@ -35,6 +35,7 @@ partial class InventoryGridPanel
     {
         SuspendLayout();
 
+        var desiredRightPanelWidth = 300;
         var splitContainer = new SplitContainer
         {
             Dock = DockStyle.Fill,
@@ -43,11 +44,13 @@ partial class InventoryGridPanel
             SplitterDistance = 280
         };
 
-        // Set SplitterDistance after the control is sized so Panel2 gets a proper initial width
         splitContainer.SizeChanged += (s, e) =>
         {
-            if (splitContainer.Width > 300 && splitContainer.SplitterDistance > splitContainer.Width - 290)
-                splitContainer.SplitterDistance = splitContainer.Width - 290;
+            if (splitContainer.Width <= desiredRightPanelWidth)
+                return;
+
+            splitContainer.Panel2MinSize = desiredRightPanelWidth;
+            splitContainer.SplitterDistance = splitContainer.Width - desiredRightPanelWidth;
         };
 
         // Left: info row above toolbar/grid for long inventory guidance text
@@ -209,11 +212,58 @@ partial class InventoryGridPanel
         detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         row++;
 
-        // Item ID (editable)
-        _detailItemId = new TextBox { Dock = DockStyle.Fill };
+        // Item ID (editable) with inline seed field for procedural items
+        // Layout: "Item ID: [_detailItemId] # [_detailSeedField]"
+        _detailItemId = new TextBox { Width = 120, Anchor = AnchorStyles.Left, Margin = new Padding(0, 4, 0, 0) };
+        _detailSeedLabel = CreateLabel("#");
+        _detailSeedLabel.AutoSize = true;
+        _detailSeedLabel.Font = new Font(_detailSeedLabel.Font.FontFamily, _detailSeedLabel.Font.Size + 2, _detailSeedLabel.Font.Style);
+        _detailSeedLabel.Margin = new Padding(0, 4, 0, 0);
+        _detailSeedLabel.Visible = false;
+        _detailSeedField = new TextBox { Width = 56, MaxLength = 5, Visible = false, Margin = new Padding(0, 4, 0, 0) };
         _detailItemIdLabel = CreateLabel("Item ID:");
+        _detailIdSeedPanel = new FlowLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            AutoSize = true,
+            FlowDirection = FlowDirection.LeftToRight,
+            WrapContents = false,
+            Margin = Padding.Empty,
+            Padding = Padding.Empty
+        };
+        _detailIdSeedPanel.Controls.Add(_detailItemId);
+        _detailIdSeedPanel.Controls.Add(_detailSeedLabel);
+        _detailIdSeedPanel.Controls.Add(_detailSeedField);
+
+        var _detailSeedEntryPanel = new TableLayoutPanel
+        {
+            AutoSize = true,
+            ColumnCount = 1,
+            RowCount = 2,
+            Dock = DockStyle.Left,
+            Margin = Padding.Empty,
+            Padding = Padding.Empty
+        };
+        _detailSeedEntryPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        _detailSeedEntryPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        _detailSeedEntryPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        _detailSeedEntryPanel.Controls.Add(_detailIdSeedPanel, 0, 0);
+
+        _detailGenSeedButton = new Button
+        {
+            Text = "Gen",
+            AutoSize = true,
+            AutoSizeMode = AutoSizeMode.GrowOnly,
+            Visible = false,
+            Anchor = AnchorStyles.Right,
+            Margin = new Padding(0, 4, 0, 0),
+            Padding = new Padding(0, 0, 0, 0)
+        };
+        _detailGenSeedButton.Click += OnGenSeedClick;
+        _detailSeedEntryPanel.Controls.Add(_detailGenSeedButton, 0, 1);
+
         detailLayout.Controls.Add(_detailItemIdLabel, 0, row);
-        detailLayout.Controls.Add(_detailItemId, 1, row);
+        detailLayout.Controls.Add(_detailSeedEntryPanel, 1, row);
         detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         row++;
 
@@ -428,6 +478,10 @@ partial class InventoryGridPanel
     private Label _detailItemType = null!;
     private Label _detailItemCategory = null!;
     private TextBox _detailItemId = null!;
+    private TextBox _detailSeedField = null!;
+    private Label _detailSeedLabel = null!;
+    private FlowLayoutPanel _detailIdSeedPanel = null!;
+    private Button _detailGenSeedButton = null!;
     private NumericUpDown _detailAmount = null!;
     private NumericUpDown _detailMaxAmount = null!;
     private NumericUpDown _detailDamageFactor = null!;

@@ -818,12 +818,15 @@ public partial class InventoryGridPanel : UserControl
         if (_suppressFilterEvents) return;
         if (_itemPicker.SelectedItem is not GameItem selectedItem) return;
 
-        // Populate detail fields with selected item - show ID with ^ prefix for consistency
+        // Populate detail fields with selected item - show base ID without seed
         _detailItemId.Text = EnsureCaretPrefix(selectedItem.Id);
         _detailItemName.Text = selectedItem.Name;
         _detailItemType.Text = selectedItem.ItemType;
         _detailItemCategory.Text = GetLocalisedCategoryName(selectedItem.Category);
         _detailDescription.Text = selectedItem.Description;
+
+        // Show/hide seed field and auto-generate a 5-digit seed for procedural items
+        UpdateSeedFieldVisibility(selectedItem);
 
         // Set icon
         if (_iconManager != null && !string.IsNullOrEmpty(selectedItem.Icon))
@@ -845,7 +848,7 @@ public partial class InventoryGridPanel : UserControl
             // Game behaviour (verified against MXML BuildFullyCharged field):
             //   MaxAmount = ChargeAmount (always, for ALL tech: core, UT_, UP_, HDRIVEBOOST, etc.)
             //   Amount (fresh insert) = BuildFullyCharged ? ChargeAmount : 0
-            // Examples: HYPERDRIVE → 0/120 (BuildFC=false), UT_QUICKWARP → 100/100 (BuildFC=true)
+            // Examples: HYPERDRIVE -> 0/120 (BuildFC=false), UT_QUICKWARP -> 100/100 (BuildFC=true)
             _detailMaxAmount.Value = maxAmount;
             _detailAmount.Value = selectedItem.BuildFullyCharged ? maxAmount : 0;
         }
@@ -1185,6 +1188,19 @@ public partial class InventoryGridPanel : UserControl
     }
 
     /// <summary>
+    /// Generates a 5-digit procedural seed string (00000-99999), matching the format
+    /// used by the game and other save editors. Returns only the numeric portion.
+    /// </summary>
+    internal static string GenerateProceduralSeed() => ProceduralSeedHelper.Generate();
+
+    /// <summary>
+    /// Splits an item ID into its base ID and optional procedural seed.
+    /// Example: "^UP_LAUNX#91934" returns ("^UP_LAUNX", "91934").
+    /// If no seed is present, the seed portion is empty.
+    /// </summary>
+    internal static (string baseId, string seed) StripProceduralSeed(string itemId) => ProceduralSeedHelper.Strip(itemId);
+
+    /// <summary>
     /// Returns true for figurine/bobblehead items that need T_ prefix when installed.
     /// In the save file, installed figurines use "^T_BOBBLE_*" IDs (Technology)
     /// while the product form is "^BOBBLE_*".
@@ -1196,6 +1212,57 @@ public partial class InventoryGridPanel : UserControl
         if (stripped.StartsWith("T_", StringComparison.OrdinalIgnoreCase))
             return false;
         return stripped.StartsWith("BOBBLE_", StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <summary>
+    /// Shows or hides the procedural seed field based on whether the given item is procedural.
+    /// When shown and <paramref name="seed"/> is empty, auto-generates a 5-digit seed.
+    /// </summary>
+    private void UpdateSeedFieldVisibility(GameItem? gameItem, string seed = "")
+    {
+        bool isProcedural = gameItem != null && gameItem.IsProcedural;
+        _detailSeedLabel.Visible = isProcedural;
+        _detailSeedField.Visible = isProcedural;
+        _detailGenSeedButton.Visible = isProcedural;
+        if (isProcedural)
+        {
+            _detailSeedField.Text = string.IsNullOrEmpty(seed)
+                ? GenerateProceduralSeed()
+                : seed;
+        }
+        else
+        {
+            _detailSeedField.Text = "";
+        }
+    }
+
+    /// <summary>
+    /// Generates a new random procedural seed and places it into the seed text field.
+    /// </summary>
+    private void OnGenSeedClick(object? sender, EventArgs e)
+    {
+        _detailSeedField.Text = GenerateProceduralSeed();
+    }
+
+    /// <summary>
+    /// Combines the base item ID with a procedural seed (if applicable) to form the save-file ID.
+    /// Strips any existing seed from <paramref name="baseId"/> first to prevent double-seeding.
+    /// </summary>
+    private string BuildSaveItemId(string baseId, GameItem? gameItem)
+    {
+        // Always strip any seed that may already be in the base ID
+        var (cleanId, _) = StripProceduralSeed(baseId);
+        string result = EnsureCaretPrefix(cleanId);
+
+        if (gameItem != null && gameItem.IsProcedural)
+        {
+            string seedText = _detailSeedField.Text.Trim();
+            if (!ProceduralSeedHelper.IsValidSeed(seedText))
+                seedText = GenerateProceduralSeed();
+            result = $"{result}#{seedText}";
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -2063,11 +2130,22 @@ public partial class InventoryGridPanel : UserControl
             _detailDescription.Text = UiStrings.Get("inventory.right_click_hint");
             _detailIcon.Image = null;
             _applyButton.Enabled = false;
+            UpdateSeedFieldVisibility(null);
             return;
         }
 
-        // Populate detail panel with slot data
-        _detailItemId.Text = cell.ItemId;
+        // Split item ID into base and procedural seed for display in separate fields
+        var (baseId, existingSeed) = StripProceduralSeed(cell.ItemId);
+        _detailItemId.Text = baseId;
+
+        // Resolve game item to determine if procedural, then show/hide seed field
+        GameItem? resolvedForSeed = null;
+        if (_database != null && !string.IsNullOrEmpty(baseId))
+        {
+            var (gi, _, _) = ResolveGameItem(baseId);
+            resolvedForSeed = gi;
+        }
+        UpdateSeedFieldVisibility(resolvedForSeed, existingSeed);
 
         // Update labels based on whether this is a chargeable tech item
         if (cell.IsTechChargeable)
@@ -2132,6 +2210,10 @@ public partial class InventoryGridPanel : UserControl
         int amount = (int)_detailAmount.Value;
         int maxAmount = (int)_detailMaxAmount.Value;
 
+        // Strip any seed the user may have typed directly into the ID field
+        var (cleanBaseId, _) = StripProceduralSeed(newItemId);
+        newItemId = cleanBaseId;
+
         // Determine inventory type early so we can handle tech items correctly.
         string invType = "Product";
         GameItem? gameItem = null;
@@ -2173,6 +2255,9 @@ public partial class InventoryGridPanel : UserControl
             if (maxAmount == 0) maxAmount = amount;
         }
 
+        // Build the final save ID, incorporating seed from the dedicated field for procedural items
+        string finalSaveId = BuildSaveItemId(saveItemId, gameItem);
+
         // If the cell has no existing slot data (valid empty slot), create a new slot
         if (_selectedCell.SlotData == null)
         {
@@ -2181,14 +2266,7 @@ public partial class InventoryGridPanel : UserControl
             typeObj.Add("InventoryType", invType);
             newSlot.Add("Type", typeObj);
 
-            // Procedural items store Id as "itemId#seed"
-            string newSlotId = EnsureCaretPrefix(saveItemId);
-            if (gameItem != null && gameItem.IsProcedural)
-            {
-                int seed = Random.Shared.Next(1, int.MaxValue);
-                newSlotId = $"{newSlotId}#{seed}";
-            }
-            newSlot.Add("Id", newSlotId);
+            newSlot.Add("Id", finalSaveId);
             newSlot.Add("Amount", amount);
             newSlot.Add("MaxAmount", maxAmount);
             newSlot.Add("DamageFactor", (double)_detailDamageFactor.Value);
@@ -2207,29 +2285,8 @@ public partial class InventoryGridPanel : UserControl
         {
             var slot = _selectedCell.SlotData;
 
-            // Update Item ID - "Id" must be a plain string (e.g. "^EYEBALL"), not a nested object.
-            // Procedural items store Id as "itemId#seed".
-            try
-            {
-                string newId = EnsureCaretPrefix(saveItemId);
-                if (gameItem != null && gameItem.IsProcedural)
-                {
-                    string existingId = slot.GetString("Id") ?? "";
-                    int hashIdx = existingId.IndexOf('#');
-                    if (hashIdx >= 0)
-                    {
-                        // Preserve existing procedural seed
-                        newId = $"{newId}{existingId.Substring(hashIdx)}";
-                    }
-                    else
-                    {
-                        int seed = Random.Shared.Next(1, int.MaxValue);
-                        newId = $"{newId}#{seed}";
-                    }
-                }
-                slot.Set("Id", newId);
-            }
-            catch { }
+            // Update Item ID
+            try { slot.Set("Id", finalSaveId); } catch { }
 
             // Update Amount / MaxAmount
             slot.Set("Amount", amount);
@@ -2248,17 +2305,17 @@ public partial class InventoryGridPanel : UserControl
             catch { }
         }
 
-        // Refresh cell display
-        _selectedCell.ItemId = newItemId;
+        // Refresh cell display - store the full save ID (with seed) in the cell for display
+        _selectedCell.ItemId = finalSaveId;
         _selectedCell.Amount = amount;
         _selectedCell.MaxAmount = maxAmount;
         _selectedCell.DamageFactor = (double)_detailDamageFactor.Value;
         _selectedCell.IsValidEmpty = false;
         _selectedCell.IsEmpty = false;
 
-        if (_database != null && !string.IsNullOrEmpty(newItemId))
+        if (_database != null && !string.IsNullOrEmpty(finalSaveId))
         {
-            var (resolvedItem, displayName, techPackIcon, techPackClass) = ResolveItemAndDisplayName(newItemId);
+            var (resolvedItem, displayName, techPackIcon, techPackClass) = ResolveItemAndDisplayName(finalSaveId);
             if (resolvedItem != null)
             {
                 _selectedCell.DisplayName = displayName;
@@ -2296,14 +2353,14 @@ public partial class InventoryGridPanel : UserControl
 
                 // Load class mini icon overlay only for Technology, Technology Module, and Upgrades types
                 if (_iconManager != null && !string.IsNullOrEmpty(_selectedCell.ItemClass) && _selectedCell.ItemClass != "NONE"
-                    && ShouldShowClassMiniIcon(resolvedItem.ItemType, newItemId))
+                    && ShouldShowClassMiniIcon(resolvedItem.ItemType, finalSaveId))
                     _selectedCell.ClassMiniIcon = _iconManager.GetIcon($"CLASSMINI.{_selectedCell.ItemClass}.png");
                 else
                     _selectedCell.ClassMiniIcon = null;
             }
             else
             {
-                _selectedCell.DisplayName = displayNameFromId(newItemId);
+                _selectedCell.DisplayName = displayNameFromId(finalSaveId);
                 _detailItemName.Text = _selectedCell.DisplayName;
                 _detailDescription.Text = "";
             }
@@ -2329,6 +2386,10 @@ public partial class InventoryGridPanel : UserControl
                 UiStrings.Get("inventory.add_item_title"), MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
         }
+
+        // Strip any seed from the item ID (seed comes from the dedicated field)
+        var (cleanId, _) = StripProceduralSeed(itemId);
+        itemId = cleanId;
 
         // Read the numeric values from detail controls - always use user-specified values.
         int amount = (int)_detailAmount.Value;
@@ -2373,20 +2434,15 @@ public partial class InventoryGridPanel : UserControl
             if (maxAmount == 0) maxAmount = amount;
         }
 
+        // Build the final save ID using the seed from the dedicated field
+        string itemIdToWrite = BuildSaveItemId(saveItemId, gameItem);
+
         // Create a new slot JSON object
         var newSlot = new JsonObject();
 
         var typeObj = new JsonObject();
         typeObj.Add("InventoryType", invType);
         newSlot.Add("Type", typeObj);
-
-        // Procedural items store Id as "itemId#seed"
-        string itemIdToWrite = EnsureCaretPrefix(saveItemId);
-        if (gameItem != null && gameItem.IsProcedural)
-        {
-            int seed = Random.Shared.Next(1, int.MaxValue);
-            itemIdToWrite = $"{itemIdToWrite}#{seed}";
-        }
         newSlot.Add("Id", itemIdToWrite);
 
         newSlot.Add("Amount", amount);
@@ -2573,8 +2629,33 @@ public partial class InventoryGridPanel : UserControl
     private void RepairSlotData(SlotCell cell)
     {
         if (cell.SlotData == null || _currentInventory == null) return;
+
+        bool wasDamaged = cell.DamageFactor > 0;
+
         try { cell.SlotData.Set("DamageFactor", 0.0); } catch { }
         cell.DamageFactor = 0;
+
+        try { cell.SlotData.Set("FullyInstalled", true); } catch { }
+
+        // Fix Amount when the slot was in a damaged/unfinished state (Amount == -1).
+        // Damaged tech in game uses Amount = -1 with DamageFactor = 1.0.
+        // A repaired item needs its Amount set to the correct default, matching
+        // what the game and OnApplyChanges use for fully installed tech.
+        if (wasDamaged && cell.Amount < 0 && !string.IsNullOrEmpty(cell.ItemId))
+        {
+            var (gameItem, _, _) = ResolveGameItem(cell.ItemId);
+            if (gameItem != null)
+            {
+                string invType = ResolveInventoryTypeForItem(gameItem);
+                if (invType == "Technology")
+                {
+                    int techMaxAmount = InventoryStackDatabase.GetMaxAmount(gameItem, "Technology", _inventoryGroup);
+                    int repairedAmount = gameItem.BuildFullyCharged ? techMaxAmount : 0;
+                    try { cell.SlotData.Set("Amount", repairedAmount); } catch { }
+                    cell.Amount = repairedAmount;
+                }
+            }
+        }
 
         // Remove BlockedByBrokenTech from SpecialSlots
         try
@@ -3304,6 +3385,7 @@ public partial class InventoryGridPanel : UserControl
         _detailAmount.Enabled = true;
         _detailMaxAmount.Enabled = true;
         _applyButton.Enabled = false;
+        UpdateSeedFieldVisibility(null);
     }
 
     /// <summary>
@@ -3371,6 +3453,7 @@ public partial class InventoryGridPanel : UserControl
         _detailTypeLabel.Text = UiStrings.Get("inventory.label_type");
         _detailCategoryLabel.Text = UiStrings.Get("inventory.label_category");
         _detailItemIdLabel.Text = UiStrings.Get("inventory.label_item_id");
+        _detailGenSeedButton.Text = UiStrings.Get("inventory.button_gen_seed");
         _detailDamageLabel.Text = UiStrings.Get("inventory.label_damage");
 
         // Search/filter labels
