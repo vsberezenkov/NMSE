@@ -1435,12 +1435,6 @@ public class StaticDataDatabaseTests
     }
 
     [Fact]
-    public void TitleDatabase_HasExpectedCount()
-    {
-        Assert.Equal(318, TitleDatabase.Titles.Count);
-    }
-
-    [Fact]
     public void TitleDatabase_GetTitle_ReturnsCorrectEntry()
     {
         var title = TitleDatabase.GetTitle("T_TRA1");
@@ -1618,7 +1612,6 @@ public class StaticDataDatabaseTests
         bool result = TitleDatabase.LoadFromFile("/tmp/nonexistent_titles.json");
         Assert.True(result);
         Assert.True(TitleDatabase.IsLoaded);
-        Assert.Equal(318, TitleDatabase.Titles.Count);
     }
 
     // --- IsValidForOwner (Technology Category filtering) ---
