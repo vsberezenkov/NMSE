@@ -1,8 +1,26 @@
-## NMSE — No Man's Save Editor v1.0.393 (preview)
+## NMSE — No Man's Save Editor v1.0.396 (preview)
 
 > This is a preview build. Please practice safe backup practices and expect some bugs.
 
 ### Changelog
+
+#### Features:
+
+- Inventory item details / picker now has a minimum size to help preserve the UI.
+- Inventory item details / picker has the 5 digit seed value for proc tech in a separate field with a generate button below. (Issue #37)
+- Frigate trait selector now shows the type for the effect and not just the effect value. (FR #39)
+
+#### Bug Fixes:
+
+- Fix for procedural tech items so they now correctly allocate a proper 5 digit seed value and don't mangle them under particular circumstances. (Issue #37)
+- Fix for the repair function in inventory so that it now correctly sets damage, amount and fully installed values so items don't get "stuck" in the tech inventory when repaied but not installed in game. (Issue #38)
+
+<br />
+
+<details>
+<summary>Previous Changelogs</summary>
+
+### Previous Changelog 1.0.393 (preview)
 
 #### Features:
 
@@ -16,9 +34,6 @@
 - Further changes have been made to the way that upgrade/procedural tech installation filters default values based on the MXML defaults to hopefully capture any items that are installing as broken.
 
 <br />
-
-<details>
-<summary>Previous Changelogs</summary>
 
 ### Previous Changelog 1.0.391 (preview)
 
