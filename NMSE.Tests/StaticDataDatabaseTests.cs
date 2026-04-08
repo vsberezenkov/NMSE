@@ -1,5 +1,6 @@
 using NMSE.Data;
 using System.IO;
+using System.Linq;
 
 namespace NMSE.Tests;
 
@@ -79,6 +80,52 @@ public class StaticDataDatabaseTests
     {
         Assert.True(FrigateTraitDatabase.ById.ContainsKey("^FUEL_BAD_1"));
         Assert.False(FrigateTraitDatabase.ById["^FUEL_BAD_1"].Beneficial);
+    }
+
+    [Theory]
+    [InlineData("FuelCapacity", "Expedition Fuel Cost")]
+    [InlineData("FuelBurnRate", "Cost per Warp")]
+    [InlineData("Combat", "Combat")]
+    [InlineData("Mining", "Industry")]
+    [InlineData("Diplomatic", "Trading")]
+    [InlineData("Exploration", "Exploration")]
+    [InlineData("Speed", "Expedition Duration")]
+    [InlineData("Invulnerable", "Damage Reduction")]
+    [InlineData("Stealth", "Stealth")]
+    public void FrigateTraitDatabase_GetTypeDisplayName_MapsCorrectly(string type, string expected)
+    {
+        Assert.Equal(expected, FrigateTraitDatabase.GetTypeDisplayName(type));
+    }
+
+    [Fact]
+    public void FrigateTraitDatabase_GetTypeDisplayName_UnknownType_ReturnsSelf()
+    {
+        Assert.Equal("SomeUnknownType", FrigateTraitDatabase.GetTypeDisplayName("SomeUnknownType"));
+    }
+
+    [Fact]
+    public void FrigateTrait_DisplayName_IncludesTypeAndStrength()
+    {
+        // FuelCapacity trait: "Support Specialist [-15 Expedition Fuel Cost]"
+        var trait = FrigateTraitDatabase.ById["^FUEL_PRI"];
+        Assert.Equal("Support Specialist [-15 Expedition Fuel Cost]", trait.DisplayName);
+    }
+
+    [Fact]
+    public void FrigateTrait_DisplayName_SpeedType_ShowsPercent()
+    {
+        // Speed traits should have % suffix on the strength value
+        var speedTrait = FrigateTraitDatabase.Traits.FirstOrDefault(t => t.Type == "Speed" && t.Strength != 0);
+        Assert.NotNull(speedTrait);
+        Assert.Contains("%", speedTrait.DisplayName);
+        Assert.Contains("Expedition Duration", speedTrait.DisplayName);
+    }
+
+    [Fact]
+    public void FrigateTrait_DisplayName_ZeroStrength_ShowsNameOnly()
+    {
+        var trait = new FrigateTrait { Name = "Test Trait", Type = "Combat", Strength = 0 };
+        Assert.Equal("Test Trait", trait.DisplayName);
     }
 
     // --- InventoryStackDatabase ---

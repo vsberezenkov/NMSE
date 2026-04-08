@@ -21,10 +21,21 @@ public class FrigateTrait
     public string Secondary { get; set; } = "";
 
     /// <summary>
-    /// Display name including strength for use in ComboBox dropdowns.
-    /// Format: "{Name} [+{Strength}]" for positive, "{Name} [{Strength}]" for negative.
+    /// Display name including strength and type for use in ComboBox dropdowns.
+    /// Format: "{Name} [{Strength} {TypeName}]" with Speed type expressed as percentage.
+    /// Examples: "Support Specialist [-15 Expedition Fuel Cost]", "Quick Navigator [+3% Expedition Duration]"
     /// </summary>
-    public string DisplayName => Strength == 0 ? Name : $"{Name} [{Strength:+0;-0}]";
+    public string DisplayName
+    {
+        get
+        {
+            if (Strength == 0) return Name;
+            string typeName = FrigateTraitDatabase.GetTypeDisplayName(Type);
+            bool isPercent = string.Equals(Type, "Speed", StringComparison.OrdinalIgnoreCase);
+            string suffix = isPercent ? "%" : "";
+            return $"{Name} [{Strength:+0;-0}{suffix} {typeName}]";
+        }
+    }
 
     /// <summary>Returns the display name including strength indicator.</summary>
     public override string ToString() => DisplayName;
@@ -39,7 +50,6 @@ public static class FrigateTraitDatabase
     /// </summary>
     public static readonly IReadOnlyList<FrigateTrait> Traits = new List<FrigateTrait>();
 
-    // ── Hardcoded fallback data removed ──
     // Trait data is now loaded from Resources/json/FrigateTraits.json at startup.
     // The JSON file is produced by the extractor's ParseFrigateTraits() method
     // from FRIGATETRAITTABLE.MXML and contains all trait IDs, names, loc keys,
@@ -60,6 +70,36 @@ public static class FrigateTraitDatabase
     public static readonly FrigateTrait None = new() { Id = "^", Name = "(None)", Beneficial = false };
 
     private static readonly Dictionary<string, string> _englishNameBackup = new();
+
+    /// <summary>
+    /// Maps raw trait type strings from game data to their in-game display names.
+    /// Used by <see cref="FrigateTrait.DisplayName"/> to show human-readable stat types.
+    /// </summary>
+    private static readonly Dictionary<string, string> TypeDisplayNames = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["FuelCapacity"]  = "Expedition Fuel Cost",
+        ["FuelBurnRate"]  = "Cost per Warp",
+        ["Combat"]        = "Combat",
+        ["Mining"]        = "Industry",
+        ["Diplomatic"]    = "Trading",
+        ["Exploration"]   = "Exploration",
+        ["Speed"]         = "Expedition Duration",
+        ["Invulnerable"]  = "Damage Reduction",
+        ["Stealth"]       = "Stealth",
+    };
+
+    /// <summary>
+    /// Returns the human-readable display name for a trait stat type.
+    /// Falls back to the localised UI string if available, then the raw type string.
+    /// </summary>
+    public static string GetTypeDisplayName(string type)
+    {
+        if (string.IsNullOrEmpty(type)) return "";
+        string locKey = $"frigate.trait_type_{type.ToLowerInvariant()}";
+        string loc = UiStrings.Get(locKey);
+        if (!string.IsNullOrEmpty(loc) && loc != locKey) return loc;
+        return TypeDisplayNames.TryGetValue(type, out var name) ? name : type;
+    }
 
     /// <summary>Looks up a trait's display name by its ID.</summary>
     /// <param name="id">The trait ID to look up.</param>
