@@ -1125,94 +1125,6 @@
 		"Slug": "technology/PRESSURE_SUIT"
 	},
 	{
-		"Id": "SUIT_REFINER",
-		"Icon": "SUIT_REFINER.png",
-		"IconPath": "textures/ui/frontend/icons/technology/render.personalrefiner.dds",
-		"Name": "Personal Refiner",
-		"Name_LocStr": "UI_SUIT_REFINER_NAME",
-		"NameLower": "Personal Refiner",
-		"NameLower_LocStr": "UI_SUIT_REFINER_NAME_L",
-		"Group": "Self-Mounted Advanced Refiner",
-		"Subtitle_LocStr": "UI_SUIT_REFINER_SUB",
-		"Description": "A compact extension to the Exosuit, installing a small Portable Refiner, accessible directly from the user's Exosuit interface.\n\nUnit requires fuel and is limited to refining one substance at a time.",
-		"Description_LocStr": "UI_SUIT_REFINER_DESC",
-		"HintStart": null,
-		"HintEnd": null,
-		"DamagedDescription": null,
-		"BaseValueUnits": 1,
-		"CurrencyType": "None",
-		"Level": 1,
-		"Value": 10.0,
-		"Colour": "2177C8",
-		"Usages": [
-			"HasChargedBy",
-			"HasDevProperties"
-		],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "Nanites",
-		"BlueprintSource": 0,
-		"RequiredItems": [
-			{
-				"Id": "OXYGEN",
-				"Quantity": 150
-			},
-			{
-				"Id": "STELLAR2",
-				"Quantity": 100
-			}
-		],
-		"StatBonuses": [
-			{
-				"Name": "Refiner",
-				"LocaleKeyTemplate": "enabled",
-				"Image": "refiner",
-				"Value": "1"
-			}
-		],
-		"ConsumableRewardTexts": [],
-		"Category": "Suit",
-		"Category_LocStr": null,
-		"Rarity": "Common",
-		"Teach": "true",
-		"Chargeable": true,
-		"ChargeAmount": 100,
-		"ChargeType": "Fuel",
-		"ChargeBy": [],
-		"ChargeMultiplier": 1.0,
-		"BuildFullyCharged": true,
-		"UsesAmmo": false,
-		"AmmoId": null,
-		"PrimaryItem": "true",
-		"Upgrade": false,
-		"Core": false,
-		"RepairTech": false,
-		"Procedural": false,
-		"BrokenSlotTech": "false",
-		"ParentTechId": null,
-		"RequiredTech": null,
-		"RequiredLevel": 0,
-		"FocusLocator": null,
-		"UpgradeColour": "FFFFFF",
-		"LinkColour": "CC99FF",
-		"RewardGroup": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"RequiredRank": 3,
-		"DispensingRace": "Explorers",
-		"FragmentCost": 360,
-		"TechShopRarity": null,
-		"WikiEnabled": true,
-		"NeverPinnable": false,
-		"IsTemplate": false,
-		"ExclusivePrimaryStat": true,
-		"Slug": "technology/SUIT_REFINER"
-	},
-	{
 		"Id": "SUIT_REFINER2",
 		"Icon": "SUIT_REFINER2.png",
 		"IconPath": "textures/ui/frontend/icons/technology/render.personalrefiner2.dds",
@@ -1221,7 +1133,7 @@
 		"NameLower": "Personal Refiner Mk 2",
 		"NameLower_LocStr": "UI_SUIT_REFINER2_NAME_L",
 		"Group": "Self-Mounted Advanced Refiner",
-		"Subtitle_LocStr": "UI_SUIT_REFINER_SUB",
+		"Subtitle_LocStr": "UI_SUIT_REFINER2_SUB",
 		"Description": "A compact extension to the Exosuit, installing an advanced yet portable Medium Refiner, accessible directly from the user's Exosuit interface.\n\nUnit requires fuel and is able to refine more complex recipes than the standard personal refiner unit.",
 		"Description_LocStr": "UI_SUIT_REFINER2_DESC",
 		"HintStart": null,
@@ -1477,191 +1389,6 @@
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
 		"Slug": "technology/ATLASSUIT"
-	},
-	{
-		"Id": "STARSUIT",
-		"Icon": "STARSUIT.png",
-		"IconPath": "textures/ui/frontend/icons/u4products/product.hexcore.dds",
-		"Name": "Star Seed",
-		"Name_LocStr": "STARBIRTH_ITEM_NAME",
-		"NameLower": "Star Seed",
-		"NameLower_LocStr": "STARBIRTH_ITEM_NAME_L",
-		"Group": "Cosmic Brand",
-		"Subtitle_LocStr": "STARBIRTH_ITEM_SUBTITLE",
-		"Description": "The smallest of sparks, housed within a containment field of unknown origins.\n\nThe seed glows with life, desperate to escape and fulfill its potential.",
-		"Description_LocStr": "STARBIRTH_ITEM_DESC",
-		"HintStart": null,
-		"HintEnd": null,
-		"DamagedDescription": null,
-		"BaseValueUnits": 1,
-		"CurrencyType": "None",
-		"Level": 1,
-		"Value": 120.0,
-		"Colour": "2177C8",
-		"Usages": [
-			"HasDevProperties"
-		],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "Nanites",
-		"BlueprintSource": 0,
-		"RequiredItems": [
-			{
-				"Id": "ASTEROID3",
-				"Quantity": 16
-			},
-			{
-				"Id": "ROCKETSUB",
-				"Quantity": 16
-			},
-			{
-				"Id": "ASTEROID2",
-				"Quantity": 16
-			}
-		],
-		"StatBonuses": [
-			{
-				"Name": "Armour Health",
-				"LocaleKeyTemplate": "enabled",
-				"Image": "health",
-				"Value": "20"
-			}
-		],
-		"ConsumableRewardTexts": [],
-		"Category": "Suit",
-		"Category_LocStr": null,
-		"Rarity": "Impossible",
-		"Teach": "true",
-		"Chargeable": false,
-		"ChargeAmount": 100,
-		"ChargeType": "Catalyst",
-		"ChargeBy": [],
-		"ChargeMultiplier": 1.0,
-		"BuildFullyCharged": true,
-		"UsesAmmo": false,
-		"AmmoId": null,
-		"PrimaryItem": "false",
-		"Upgrade": false,
-		"Core": false,
-		"RepairTech": false,
-		"Procedural": false,
-		"BrokenSlotTech": "false",
-		"ParentTechId": null,
-		"RequiredTech": null,
-		"RequiredLevel": 0,
-		"FocusLocator": null,
-		"UpgradeColour": "FFFFFF",
-		"LinkColour": "CC99FF",
-		"RewardGroup": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"RequiredRank": 3,
-		"DispensingRace": "Explorers",
-		"FragmentCost": 1,
-		"TechShopRarity": null,
-		"WikiEnabled": true,
-		"NeverPinnable": false,
-		"IsTemplate": false,
-		"ExclusivePrimaryStat": false,
-		"Slug": "technology/STARSUIT"
-	},
-	{
-		"Id": "DENYSUIT",
-		"Icon": "DENYSUIT.png",
-		"IconPath": "textures/ui/frontend/icons/u4products/product.hereticcore.dds",
-		"Name": "Mark of the Denier",
-		"Name_LocStr": "DENIER_ITEM_NAME",
-		"NameLower": "Mark of the Denier",
-		"NameLower_LocStr": "DENIER_ITEM_NAME_L",
-		"Group": "Cosmic Brand",
-		"Subtitle_LocStr": "STARBIRTH_ITEM_SUBTITLE",
-		"Description": "A tiny mote of stardust, no more than a speck. On closer examination, its surface is all crystalline shards and distorted crimson geometry.\n\nIt flickers with pent-up energy, demanding to be free.\n\nEmpower the mark as you discover systems, planets and objects across the universe.",
-		"Description_LocStr": "DENIER_ITEM_DESC",
-		"HintStart": null,
-		"HintEnd": null,
-		"DamagedDescription": null,
-		"BaseValueUnits": 1,
-		"CurrencyType": "None",
-		"Level": 1,
-		"Value": 120.0,
-		"Colour": "2177C8",
-		"Usages": [
-			"HasChargedBy",
-			"HasDevProperties"
-		],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "Nanites",
-		"BlueprintSource": 0,
-		"RequiredItems": [
-			{
-				"Id": "ASTEROID3",
-				"Quantity": 16
-			},
-			{
-				"Id": "ROCKETSUB",
-				"Quantity": 16
-			},
-			{
-				"Id": "ASTEROID2",
-				"Quantity": 16
-			}
-		],
-		"StatBonuses": [
-			{
-				"Name": "Denier",
-				"LocaleKeyTemplate": "enabled",
-				"Image": "denier",
-				"Value": "1"
-			}
-		],
-		"ConsumableRewardTexts": [],
-		"Category": "Suit",
-		"Category_LocStr": null,
-		"Rarity": "Impossible",
-		"Teach": "true",
-		"Chargeable": true,
-		"ChargeAmount": 100,
-		"ChargeType": "Earth",
-		"ChargeBy": [
-			"TECHFRAG"
-		],
-		"ChargeMultiplier": 1.0,
-		"BuildFullyCharged": false,
-		"UsesAmmo": false,
-		"AmmoId": null,
-		"PrimaryItem": "true",
-		"Upgrade": false,
-		"Core": false,
-		"RepairTech": false,
-		"Procedural": false,
-		"BrokenSlotTech": "false",
-		"ParentTechId": null,
-		"RequiredTech": null,
-		"RequiredLevel": 0,
-		"FocusLocator": null,
-		"UpgradeColour": "FFFFFF",
-		"LinkColour": "CC99FF",
-		"RewardGroup": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"RequiredRank": 3,
-		"DispensingRace": "Explorers",
-		"FragmentCost": 1,
-		"TechShopRarity": null,
-		"WikiEnabled": true,
-		"NeverPinnable": false,
-		"IsTemplate": false,
-		"ExclusivePrimaryStat": false,
-		"Slug": "technology/DENYSUIT"
 	},
 	{
 		"Id": "OBSOLETE",
@@ -20032,5 +19759,275 @@
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
 		"Slug": "technology/MAINT_ROBO10"
+	},
+	{
+		"Id": "SUIT_REFINER",
+		"Icon": "SUIT_REFINER.png",
+		"IconPath": "textures/ui/frontend/icons/technology/render.personalrefiner.dds",
+		"Name": "Personal Refiner",
+		"Name_LocStr": "UI_SUIT_REFINER_NAME",
+		"NameLower": "Personal Refiner",
+		"NameLower_LocStr": "UI_SUIT_REFINER_NAME_L",
+		"Group": "Self-Mounted Refiner Unit",
+		"Subtitle_LocStr": "UI_SUIT_REFINER_SUB",
+		"Description": "A compact extension to the Exosuit, installing a small Portable Refiner, accessible directly from the user's Exosuit interface.\n\nUnit requires fuel and is limited to refining one substance at a time.",
+		"Description_LocStr": "UI_SUIT_REFINER_DESC",
+		"HintStart": null,
+		"HintEnd": null,
+		"DamagedDescription": null,
+		"BaseValueUnits": 1,
+		"CurrencyType": "None",
+		"Level": 1,
+		"Value": 10.0,
+		"Colour": "2177C8",
+		"Usages": [
+			"HasChargedBy",
+			"HasDevProperties"
+		],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "Nanites",
+		"BlueprintSource": 0,
+		"RequiredItems": [
+			{
+				"Id": "OXYGEN",
+				"Quantity": 150
+			},
+			{
+				"Id": "STELLAR2",
+				"Quantity": 100
+			}
+		],
+		"StatBonuses": [
+			{
+				"Name": "Refiner",
+				"LocaleKeyTemplate": "enabled",
+				"Image": "refiner",
+				"Value": "1"
+			}
+		],
+		"ConsumableRewardTexts": [],
+		"Category": "Suit",
+		"Category_LocStr": null,
+		"Rarity": "Common",
+		"Teach": "true",
+		"Chargeable": true,
+		"ChargeAmount": 100,
+		"ChargeType": "Fuel",
+		"ChargeBy": [],
+		"ChargeMultiplier": 1.0,
+		"BuildFullyCharged": true,
+		"UsesAmmo": false,
+		"AmmoId": null,
+		"PrimaryItem": "true",
+		"Upgrade": false,
+		"Core": false,
+		"RepairTech": false,
+		"Procedural": false,
+		"BrokenSlotTech": "false",
+		"ParentTechId": null,
+		"RequiredTech": null,
+		"RequiredLevel": 0,
+		"FocusLocator": null,
+		"UpgradeColour": "FFFFFF",
+		"LinkColour": "CC99FF",
+		"RewardGroup": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"RequiredRank": 3,
+		"DispensingRace": "Explorers",
+		"FragmentCost": 360,
+		"TechShopRarity": null,
+		"WikiEnabled": true,
+		"NeverPinnable": false,
+		"IsTemplate": false,
+		"ExclusivePrimaryStat": true
+	},
+	{
+		"Id": "STARSUIT",
+		"Icon": "STARSUIT.png",
+		"IconPath": "textures/ui/frontend/icons/u4products/product.hexcore.dds",
+		"Name": "Star Seed",
+		"Name_LocStr": "STARBIRTH_ITEM_NAME",
+		"NameLower": "Star Seed",
+		"NameLower_LocStr": "STARBIRTH_ITEM_NAME_L",
+		"Group": "Priceless Fragment",
+		"Subtitle_LocStr": "STARBIRTH_ITEM_SUBTITLE",
+		"Description": "The smallest of sparks, housed within a containment field of unknown origins.\n\nThe seed glows with life, desperate to escape and fulfill its potential.",
+		"Description_LocStr": "STARBIRTH_ITEM_DESC",
+		"HintStart": null,
+		"HintEnd": null,
+		"DamagedDescription": null,
+		"BaseValueUnits": 1,
+		"CurrencyType": "None",
+		"Level": 1,
+		"Value": 120.0,
+		"Colour": "2177C8",
+		"Usages": [
+			"HasDevProperties"
+		],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "Nanites",
+		"BlueprintSource": 0,
+		"RequiredItems": [
+			{
+				"Id": "ASTEROID3",
+				"Quantity": 16
+			},
+			{
+				"Id": "ROCKETSUB",
+				"Quantity": 16
+			},
+			{
+				"Id": "ASTEROID2",
+				"Quantity": 16
+			}
+		],
+		"StatBonuses": [
+			{
+				"Name": "Armour Health",
+				"LocaleKeyTemplate": "enabled",
+				"Image": "health",
+				"Value": "20"
+			}
+		],
+		"ConsumableRewardTexts": [],
+		"Category": "Suit",
+		"Category_LocStr": null,
+		"Rarity": "Impossible",
+		"Teach": "true",
+		"Chargeable": false,
+		"ChargeAmount": 100,
+		"ChargeType": "Catalyst",
+		"ChargeBy": [],
+		"ChargeMultiplier": 1.0,
+		"BuildFullyCharged": true,
+		"UsesAmmo": false,
+		"AmmoId": null,
+		"PrimaryItem": "false",
+		"Upgrade": false,
+		"Core": false,
+		"RepairTech": false,
+		"Procedural": false,
+		"BrokenSlotTech": "false",
+		"ParentTechId": null,
+		"RequiredTech": null,
+		"RequiredLevel": 0,
+		"FocusLocator": null,
+		"UpgradeColour": "FFFFFF",
+		"LinkColour": "CC99FF",
+		"RewardGroup": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"RequiredRank": 3,
+		"DispensingRace": "Explorers",
+		"FragmentCost": 1,
+		"TechShopRarity": null,
+		"WikiEnabled": true,
+		"NeverPinnable": false,
+		"IsTemplate": false,
+		"ExclusivePrimaryStat": false
+	},
+	{
+		"Id": "DENYSUIT",
+		"Icon": "DENYSUIT.png",
+		"IconPath": "textures/ui/frontend/icons/u4products/product.hereticcore.dds",
+		"Name": "Mark of the Denier",
+		"Name_LocStr": "DENIER_ITEM_NAME",
+		"NameLower": "Mark of the Denier",
+		"NameLower_LocStr": "DENIER_ITEM_NAME_L",
+		"Group": "Priceless Fragment",
+		"Subtitle_LocStr": "STARBIRTH_ITEM_SUBTITLE",
+		"Description": "A tiny mote of stardust, no more than a speck. On closer examination, its surface is all crystalline shards and distorted crimson geometry.\n\nIt flickers with pent-up energy, demanding to be free.\n\nEmpower the mark as you discover systems, planets and objects across the universe.",
+		"Description_LocStr": "DENIER_ITEM_DESC",
+		"HintStart": null,
+		"HintEnd": null,
+		"DamagedDescription": null,
+		"BaseValueUnits": 1,
+		"CurrencyType": "None",
+		"Level": 1,
+		"Value": 120.0,
+		"Colour": "2177C8",
+		"Usages": [
+			"HasChargedBy",
+			"HasDevProperties"
+		],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "Nanites",
+		"BlueprintSource": 0,
+		"RequiredItems": [
+			{
+				"Id": "ASTEROID3",
+				"Quantity": 16
+			},
+			{
+				"Id": "ROCKETSUB",
+				"Quantity": 16
+			},
+			{
+				"Id": "ASTEROID2",
+				"Quantity": 16
+			}
+		],
+		"StatBonuses": [
+			{
+				"Name": "Denier",
+				"LocaleKeyTemplate": "enabled",
+				"Image": "denier",
+				"Value": "1"
+			}
+		],
+		"ConsumableRewardTexts": [],
+		"Category": "Suit",
+		"Category_LocStr": null,
+		"Rarity": "Impossible",
+		"Teach": "true",
+		"Chargeable": true,
+		"ChargeAmount": 100,
+		"ChargeType": "Earth",
+		"ChargeBy": [
+			"TECHFRAG"
+		],
+		"ChargeMultiplier": 1.0,
+		"BuildFullyCharged": false,
+		"UsesAmmo": false,
+		"AmmoId": null,
+		"PrimaryItem": "true",
+		"Upgrade": false,
+		"Core": false,
+		"RepairTech": false,
+		"Procedural": false,
+		"BrokenSlotTech": "false",
+		"ParentTechId": null,
+		"RequiredTech": null,
+		"RequiredLevel": 0,
+		"FocusLocator": null,
+		"UpgradeColour": "FFFFFF",
+		"LinkColour": "CC99FF",
+		"RewardGroup": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"RequiredRank": 3,
+		"DispensingRace": "Explorers",
+		"FragmentCost": 1,
+		"TechShopRarity": null,
+		"WikiEnabled": true,
+		"NeverPinnable": false,
+		"IsTemplate": false,
+		"ExclusivePrimaryStat": false
 	}
 ]

@@ -1094,6 +1094,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_LASER1",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Laser_Mining_Speed",
@@ -1206,6 +1209,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_LASER2",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Laser_Mining_Speed",
@@ -1318,6 +1324,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_LASER3",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Laser_Mining_Speed",
@@ -1430,6 +1439,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_LASER4",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Laser_Mining_Speed",
@@ -1542,6 +1554,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_LASERX",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Laser_Mining_Speed",
@@ -1654,6 +1669,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SCANNER1",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Scan_Radius",
@@ -1766,6 +1784,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SCANNER2",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Scan_Radius",
@@ -1878,6 +1899,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SCANNER3",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Scan_Radius",
@@ -1990,6 +2014,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SCANNER4",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Scan_Radius",
@@ -2102,6 +2129,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SCANNERX",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Scan_Radius",
@@ -2214,6 +2244,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_BOLT1",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -2342,6 +2375,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_BOLT2",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -2470,6 +2506,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_BOLT3",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -2598,6 +2637,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_BOLT4",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -2726,6 +2768,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_BOLTX",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -2854,6 +2899,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_GRENADE1",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Grenade_Damage",
@@ -2966,6 +3014,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_GRENADE2",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Grenade_Damage",
@@ -3078,6 +3129,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_GRENADE3",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Grenade_Damage",
@@ -3190,6 +3244,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_GRENADE4",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Grenade_Damage",
@@ -3302,6 +3359,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_GRENADEX",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Grenade_Damage",
@@ -3414,6 +3474,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_TGRENADE1",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Grenade_Damage",
@@ -3518,6 +3581,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_TGRENADE2",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Grenade_Damage",
@@ -3622,6 +3688,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_TGRENADE3",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Grenade_Damage",
@@ -3726,6 +3795,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_TGRENADE4",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Grenade_Damage",
@@ -3830,6 +3902,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_TGRENADEX",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Grenade_Damage",
@@ -3934,6 +4009,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_RAIL1",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Laser_Damage",
@@ -4030,6 +4108,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_RAIL2",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Laser_Damage",
@@ -4126,6 +4207,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_RAIL3",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Laser_Damage",
@@ -4222,6 +4306,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_RAIL4",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Laser_Damage",
@@ -4318,6 +4405,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_RAILX",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Laser_Damage",
@@ -4414,6 +4504,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHOTGUN1",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -4518,6 +4611,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHOTGUN2",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -4646,6 +4742,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHOTGUN3",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -4774,6 +4873,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHOTGUN4",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -4902,6 +5004,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHOTGUNX",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -5030,6 +5135,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SMG1",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -5134,6 +5242,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SMG2",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -5246,6 +5357,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SMG3",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -5358,6 +5472,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SMG4",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -5470,6 +5587,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SMGX",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -5582,6 +5702,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_CANNON1",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -5694,6 +5817,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_CANNON2",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -5806,6 +5932,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_CANNON3",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -5918,6 +6047,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_CANNON4",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -6030,6 +6162,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_CANNONX",
     "Category": "Weapon",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Weapon_Projectile_Damage",
@@ -6142,6 +6277,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_ENERGY1",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Energy",
@@ -6238,6 +6376,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_ENERGY2",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Energy",
@@ -6334,6 +6475,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_ENERGY3",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Energy",
@@ -6430,6 +6574,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_ENERGYX",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Energy",
@@ -6526,6 +6673,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_HAZARDX",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Protection_HeatDrain",
@@ -6638,6 +6788,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_JETBOOST1",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Jetpack_Tank",
@@ -6758,6 +6911,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_JETBOOST2",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Jetpack_Tank",
@@ -6886,6 +7042,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_JETBOOST3",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Jetpack_Tank",
@@ -7014,6 +7173,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_JETBOOST4",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Jetpack_Tank",
@@ -7142,6 +7304,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_JETBOOSTX",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Jetpack_Tank",
@@ -7270,6 +7435,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIELDBOOST1",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Armour_Shield_Strength",
@@ -7366,6 +7534,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIELDBOOST2",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Armour_Shield_Strength",
@@ -7462,6 +7633,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIELDBOOST3",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Armour_Shield_Strength",
@@ -7558,6 +7732,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIELDBOOST4",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Armour_Shield_Strength",
@@ -7654,6 +7831,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIELDBOOSTX",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Armour_Shield_Strength",
@@ -7750,6 +7930,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_UNW1",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Underwater",
@@ -7838,6 +8021,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_UNW2",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Underwater",
@@ -7926,6 +8112,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_UNW3",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Underwater",
@@ -8014,6 +8203,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_RAD1",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Protection_Radiation",
@@ -8110,6 +8302,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_RAD2",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Protection_Radiation",
@@ -8206,6 +8401,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_RAD3",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Protection_Radiation",
@@ -8302,6 +8500,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_TOX1",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Protection_Toxic",
@@ -8398,6 +8599,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_TOX2",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Protection_Toxic",
@@ -8494,6 +8698,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_TOX3",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Protection_Toxic",
@@ -8590,6 +8797,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_COLDPROT1",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Protection_Cold",
@@ -8686,6 +8896,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_COLDPROT2",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Protection_Cold",
@@ -8782,6 +8995,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_COLDPROT3",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Protection_Cold",
@@ -8878,6 +9094,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_HOTPROT1",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Protection_Heat",
@@ -8974,6 +9193,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_HOTPROT2",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Protection_Heat",
@@ -9070,6 +9292,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_HOTPROT3",
     "Category": "Suit",
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Protection_Heat",
@@ -9166,6 +9391,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_ROBOSUIT",
     "Category": "Suit",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Suit_Armour_Shield_Strength",
@@ -9294,6 +9522,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_PULSE1",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_PulseDrive_MiniJumpFuelSpending",
@@ -9406,6 +9637,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_PULSE2",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_PulseDrive_MiniJumpFuelSpending",
@@ -9518,6 +9752,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_PULSE3",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_PulseDrive_MiniJumpFuelSpending",
@@ -9630,6 +9867,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_PULSE4",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_PulseDrive_MiniJumpFuelSpending",
@@ -9742,6 +9982,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_PULSEX",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_PulseDrive_MiniJumpFuelSpending",
@@ -9854,6 +10097,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_LAUNCH1",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Launcher_TakeOffCost",
@@ -9950,6 +10196,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_LAUNCH2",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Launcher_TakeOffCost",
@@ -10046,6 +10295,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_LAUNCH3",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Launcher_TakeOffCost",
@@ -10142,6 +10394,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_LAUNCH4",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Launcher_TakeOffCost",
@@ -10238,6 +10493,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_LAUNCHX",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Launcher_TakeOffCost",
@@ -10334,6 +10592,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_HYPER1",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Hyperdrive_JumpDistance",
@@ -10422,6 +10683,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_HYPER2",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Hyperdrive_JumpDistance",
@@ -10510,6 +10774,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_HYPER3",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Hyperdrive_JumpDistance",
@@ -10606,6 +10873,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_HYPER4",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Hyperdrive_JumpDistance",
@@ -10702,6 +10972,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_HYPERX",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Hyperdrive_JumpDistance",
@@ -10798,6 +11071,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPSHIELD1",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Armour_Shield_Strength",
@@ -10886,6 +11162,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPSHIELD2",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Armour_Shield_Strength",
@@ -10974,6 +11253,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPSHIELD3",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Armour_Shield_Strength",
@@ -11062,6 +11344,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPSHIELD4",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Armour_Shield_Strength",
@@ -11150,6 +11435,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPSHIELDX",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Armour_Shield_Strength",
@@ -11238,6 +11526,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPGUN1",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -11342,6 +11633,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPGUN2",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -11446,6 +11740,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPGUN3",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -11550,6 +11847,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPGUN4",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -11654,6 +11954,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPGUNX",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -11758,6 +12061,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPLAS1",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Lasers_HeatTime",
@@ -11854,6 +12160,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPLAS2",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Lasers_HeatTime",
@@ -11950,6 +12259,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPLAS3",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Lasers_HeatTime",
@@ -12046,6 +12358,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPLAS4",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Lasers_HeatTime",
@@ -12142,6 +12457,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPLASX",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Lasers_HeatTime",
@@ -12238,6 +12556,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPSHOT1",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -12342,6 +12663,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPSHOT2",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -12446,6 +12770,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPSHOT3",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -12550,6 +12877,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPSHOT4",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -12654,6 +12984,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPSHOTX",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -12758,6 +13091,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPMINI1",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -12862,6 +13198,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPMINI2",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -12966,6 +13305,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPMINI3",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -13070,6 +13412,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPMINI4",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -13174,6 +13519,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPMINIX",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -13278,6 +13626,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPBLOB1",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -13382,6 +13733,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPBLOB2",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -13486,6 +13840,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPBLOB3",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -13590,6 +13947,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPBLOB4",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -13694,6 +14054,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_SHIPBLOBX",
     "Category": "AllShipsExceptAlien",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -13798,6 +14161,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXOGUN1",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -13902,6 +14268,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXOGUN2",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -14006,6 +14375,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXOGUN3",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -14110,6 +14482,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXOGUN4",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -14214,6 +14589,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXOLAS1",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_LaserDamage",
@@ -14310,6 +14688,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXOLAS2",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_LaserDamage",
@@ -14406,6 +14787,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXOLAS3",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_LaserDamage",
@@ -14502,6 +14886,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXOLAS4",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_LaserDamage",
@@ -14598,6 +14985,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXOBOOST1",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_BoostSpeed",
@@ -14694,6 +15084,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXOBOOST2",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_BoostSpeed",
@@ -14790,6 +15183,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXOBOOST3",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_BoostSpeed",
@@ -14886,6 +15282,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXOBOOST4",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_BoostSpeed",
@@ -14982,6 +15381,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXO_ENG1",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_EngineFuelUse",
@@ -15078,6 +15480,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXO_ENG2",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_EngineFuelUse",
@@ -15174,6 +15579,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXO_ENG3",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_EngineFuelUse",
@@ -15270,6 +15678,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXO_ENG4",
     "Category": "Exocraft",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_EngineFuelUse",
@@ -15366,6 +15777,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXO_SUB1",
     "Category": "Submarine",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_EngineFuelUse",
@@ -15470,6 +15884,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXO_SUB2",
     "Category": "Submarine",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_EngineFuelUse",
@@ -15574,6 +15991,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXO_SUB3",
     "Category": "Submarine",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_EngineFuelUse",
@@ -15678,6 +16098,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXO_SUB4",
     "Category": "Submarine",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_EngineFuelUse",
@@ -15782,6 +16205,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXO_SUBGUN1",
     "Category": "Submarine",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -15878,6 +16304,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXO_SUBGUN2",
     "Category": "Submarine",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -15974,6 +16403,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXO_SUBGUN3",
     "Category": "Submarine",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -16070,6 +16502,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_EXO_SUBGUN4",
     "Category": "Submarine",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -16166,6 +16601,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_MECH_ENG2",
     "Category": "Mech",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_EngineFuelUse",
@@ -16262,6 +16700,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_MECH_ENG3",
     "Category": "Mech",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_EngineFuelUse",
@@ -16358,6 +16799,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_MECH_ENG4",
     "Category": "Mech",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_EngineFuelUse",
@@ -16454,6 +16898,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_MECHLAS2",
     "Category": "Mech",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_LaserDamage",
@@ -16550,6 +16997,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_MECHLAS3",
     "Category": "Mech",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_LaserDamage",
@@ -16646,6 +17096,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_MECHLAS4",
     "Category": "Mech",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_LaserDamage",
@@ -16742,6 +17195,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_MECHFLAME2",
     "Category": "Mech",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -16846,6 +17302,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_MECHFLAME3",
     "Category": "Mech",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -16950,6 +17409,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_MECHFLAME4",
     "Category": "Mech",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -17054,6 +17516,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_MECHGUN2",
     "Category": "Mech",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -17158,6 +17623,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_MECHGUN3",
     "Category": "Mech",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -17262,6 +17730,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_MECHGUN4",
     "Category": "Mech",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Vehicle_GunDamage",
@@ -17366,6 +17837,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_PULSE1",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_PulseDrive_MiniJumpFuelSpending",
@@ -17478,6 +17952,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_PULSE2",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_PulseDrive_MiniJumpFuelSpending",
@@ -17590,6 +18067,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_PULSE3",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_PulseDrive_MiniJumpFuelSpending",
@@ -17702,6 +18182,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_PULSE4",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_PulseDrive_MiniJumpFuelSpending",
@@ -17814,6 +18297,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_LAUNCH1",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Launcher_TakeOffCost",
@@ -17902,6 +18388,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_LAUNCH2",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Launcher_TakeOffCost",
@@ -17990,6 +18479,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_LAUNCH3",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Launcher_TakeOffCost",
@@ -18078,6 +18570,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_LAUNCH4",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Launcher_TakeOffCost",
@@ -18174,6 +18669,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_HYPER1",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Hyperdrive_JumpDistance",
@@ -18262,6 +18760,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_HYPER2",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Hyperdrive_JumpDistance",
@@ -18350,6 +18851,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_HYPER3",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Hyperdrive_JumpDistance",
@@ -18446,6 +18950,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_HYPER4",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "StatLevels": [
       {
         "StatType": "Ship_Hyperdrive_JumpDistance",
@@ -18542,6 +19049,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_SHIPSHIELD1",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Armour_Shield_Strength",
@@ -18630,6 +19140,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_SHIPSHIELD2",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Armour_Shield_Strength",
@@ -18718,6 +19231,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_SHIPSHIELD3",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Armour_Shield_Strength",
@@ -18806,6 +19322,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_SHIPSHIELD4",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Armour_Shield_Strength",
@@ -18894,6 +19413,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_SHIPGUN1",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -18998,6 +19520,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_SHIPGUN2",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -19102,6 +19627,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_SHIPGUN3",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -19206,6 +19734,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_SHIPGUN4",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Guns_Damage",
@@ -19310,6 +19841,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_SHIPLAS1",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Lasers_HeatTime",
@@ -19414,6 +19948,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_SHIPLAS2",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Lasers_HeatTime",
@@ -19518,6 +20055,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_SHIPLAS3",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Lasers_HeatTime",
@@ -19622,6 +20162,9 @@
     "Procedural": false,
     "Slug": "upgrades/AP_SHIPLAS4",
     "Category": "AlienShip",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Ship_Weapons_Lasers_HeatTime",
@@ -19726,6 +20269,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_HYP1",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Hyperdrive_JumpDistance",
@@ -19814,6 +20360,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_HYP2",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Hyperdrive_JumpDistance",
@@ -19902,6 +20451,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_HYP3",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Hyperdrive_JumpDistance",
@@ -19998,6 +20550,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_HYP4",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Hyperdrive_JumpDistance",
@@ -20094,6 +20649,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_SPE1",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Speed",
@@ -20182,6 +20740,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_SPE2",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Speed",
@@ -20270,6 +20831,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_SPE3",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Speed",
@@ -20358,6 +20922,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_SPE4",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Speed",
@@ -20446,6 +21013,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_FUEL1",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Fuel",
@@ -20534,6 +21104,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_FUEL2",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Fuel",
@@ -20622,6 +21195,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_FUEL3",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Fuel",
@@ -20710,6 +21286,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_FUEL4",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Fuel",
@@ -20798,6 +21377,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_COM1",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Combat",
@@ -20886,6 +21468,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_COM2",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Combat",
@@ -20974,6 +21559,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_COM3",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Combat",
@@ -21062,6 +21650,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_COM4",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Combat",
@@ -21150,6 +21741,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_TRA1",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Trade",
@@ -21238,6 +21832,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_TRA2",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Trade",
@@ -21326,6 +21923,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_TRA3",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Trade",
@@ -21414,6 +22014,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_TRA4",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Trade",
@@ -21502,6 +22105,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_EXP1",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Explore",
@@ -21590,6 +22196,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_EXP2",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Explore",
@@ -21678,6 +22287,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_EXP3",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Explore",
@@ -21766,6 +22378,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_EXP4",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Explore",
@@ -21854,6 +22469,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_MINE1",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Mine",
@@ -21942,6 +22560,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_MINE2",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Mine",
@@ -22030,6 +22651,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_MINE3",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Mine",
@@ -22118,6 +22742,9 @@
     "Procedural": false,
     "Slug": "upgrades/U_FR_MINE4",
     "Category": "Freighter",
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "StatLevels": [
       {
         "StatType": "Freighter_Fleet_Mine",
@@ -26071,6 +26698,9 @@
     "Quality": "Normal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -26109,10 +26739,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_LASER1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_LASER1"
   },
   {
     "Id": "UP_LASER2",
@@ -26126,6 +26753,9 @@
     "Quality": "Rare",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -26163,10 +26793,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_LASER2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_LASER2"
   },
   {
     "Id": "UP_LASER3",
@@ -26180,6 +26807,9 @@
     "Quality": "Epic",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -26217,10 +26847,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_LASER3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_LASER3"
   },
   {
     "Id": "UP_LASER4",
@@ -26234,6 +26861,9 @@
     "Quality": "Legendary",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 4,
     "NumStatsMax": 4,
     "WeightingCurve": "NoWeighting",
@@ -26271,10 +26901,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_LASER4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_LASER4"
   },
   {
     "Id": "UP_LASERX",
@@ -26288,6 +26915,9 @@
     "Quality": "Illegal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -26325,10 +26955,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_LASERX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_LASERX"
   },
   {
     "Id": "UP_LASER0",
@@ -26342,6 +26969,9 @@
     "Quality": "SeaTrash",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -26379,10 +27009,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_LASER0",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_LASER0"
   },
   {
     "Id": "UP_SCAN1",
@@ -26396,6 +27023,9 @@
     "Quality": "Normal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsSuperRare",
@@ -26434,10 +27064,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_SCAN1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SCAN1"
   },
   {
     "Id": "UP_SCAN2",
@@ -26451,6 +27078,9 @@
     "Quality": "Rare",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsUncommon",
@@ -26488,10 +27118,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SCAN2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SCAN2"
   },
   {
     "Id": "UP_SCAN3",
@@ -26505,6 +27132,9 @@
     "Quality": "Epic",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -26542,10 +27172,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SCAN3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SCAN3"
   },
   {
     "Id": "UP_SCAN4",
@@ -26559,6 +27186,9 @@
     "Quality": "Legendary",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsUncommon",
@@ -26596,10 +27226,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SCAN4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SCAN4"
   },
   {
     "Id": "UP_SCANX",
@@ -26613,6 +27240,9 @@
     "Quality": "Illegal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -26650,10 +27280,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SCANX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SCANX"
   },
   {
     "Id": "UP_SCAN0",
@@ -26667,6 +27294,9 @@
     "Quality": "SeaTrash",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -26704,10 +27334,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SCAN0",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SCAN0"
   },
   {
     "Id": "UP_BOLT1",
@@ -26721,6 +27348,9 @@
     "Quality": "Normal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -26775,10 +27405,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_BOLT1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_BOLT1"
   },
   {
     "Id": "UP_BOLT2",
@@ -26792,6 +27419,9 @@
     "Quality": "Rare",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -26845,10 +27475,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_BOLT2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_BOLT2"
   },
   {
     "Id": "UP_BOLT3",
@@ -26862,6 +27489,9 @@
     "Quality": "Epic",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -26915,10 +27545,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_BOLT3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_BOLT3"
   },
   {
     "Id": "UP_BOLT4",
@@ -26932,6 +27559,9 @@
     "Quality": "Legendary",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 4,
     "NumStatsMax": 4,
     "WeightingCurve": "NoWeighting",
@@ -26985,10 +27615,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_BOLT4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_BOLT4"
   },
   {
     "Id": "UP_BOLTX",
@@ -27002,6 +27629,9 @@
     "Quality": "Illegal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -27055,10 +27685,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_BOLTX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_BOLTX"
   },
   {
     "Id": "UP_BOLT0",
@@ -27072,6 +27699,9 @@
     "Quality": "SeaTrash",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -27125,10 +27755,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_BOLT0",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_BOLT0"
   },
   {
     "Id": "UP_GREN1",
@@ -27142,6 +27769,9 @@
     "Quality": "Normal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -27180,10 +27810,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_GREN1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_GREN1"
   },
   {
     "Id": "UP_GREN2",
@@ -27197,6 +27824,9 @@
     "Quality": "Rare",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -27234,10 +27864,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_GREN2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_GREN2"
   },
   {
     "Id": "UP_GREN3",
@@ -27251,6 +27878,9 @@
     "Quality": "Epic",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsUncommon",
@@ -27288,10 +27918,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_GREN3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_GREN3"
   },
   {
     "Id": "UP_GREN4",
@@ -27305,6 +27932,9 @@
     "Quality": "Legendary",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -27342,10 +27972,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_GREN4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_GREN4"
   },
   {
     "Id": "UP_GRENX",
@@ -27359,6 +27986,9 @@
     "Quality": "Illegal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -27396,10 +28026,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_GRENX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_GRENX"
   },
   {
     "Id": "UP_TGREN1",
@@ -27413,6 +28040,9 @@
     "Quality": "Normal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -27443,10 +28073,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_TGREN1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_TGREN1"
   },
   {
     "Id": "UP_TGREN2",
@@ -27460,6 +28087,9 @@
     "Quality": "Rare",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -27489,10 +28119,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_TGREN2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_TGREN2"
   },
   {
     "Id": "UP_TGREN3",
@@ -27506,6 +28133,9 @@
     "Quality": "Epic",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -27535,10 +28165,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_TGREN3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_TGREN3"
   },
   {
     "Id": "UP_TGREN4",
@@ -27552,6 +28179,9 @@
     "Quality": "Legendary",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -27581,10 +28211,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_TGREN4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_TGREN4"
   },
   {
     "Id": "UP_TGRENX",
@@ -27598,6 +28225,9 @@
     "Quality": "Illegal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -27627,10 +28257,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_TGRENX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_TGRENX"
   },
   {
     "Id": "UP_RAIL1",
@@ -27644,6 +28271,9 @@
     "Quality": "Normal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -27666,10 +28296,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_RAIL1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_RAIL1"
   },
   {
     "Id": "UP_RAIL2",
@@ -27683,6 +28310,9 @@
     "Quality": "Rare",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -27704,10 +28334,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_RAIL2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_RAIL2"
   },
   {
     "Id": "UP_RAIL3",
@@ -27721,6 +28348,9 @@
     "Quality": "Epic",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -27742,10 +28372,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_RAIL3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_RAIL3"
   },
   {
     "Id": "UP_RAIL4",
@@ -27759,6 +28386,9 @@
     "Quality": "Legendary",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -27780,10 +28410,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_RAIL4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_RAIL4"
   },
   {
     "Id": "UP_RAILX",
@@ -27797,6 +28424,9 @@
     "Quality": "Illegal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -27818,10 +28448,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_RAILX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_RAILX"
   },
   {
     "Id": "UP_SHOT1",
@@ -27835,6 +28462,9 @@
     "Quality": "Normal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -27865,10 +28495,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_SHOT1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SHOT1"
   },
   {
     "Id": "UP_SHOT2",
@@ -27882,6 +28509,9 @@
     "Quality": "Rare",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -27935,10 +28565,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SHOT2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SHOT2"
   },
   {
     "Id": "UP_SHOT3",
@@ -27952,6 +28579,9 @@
     "Quality": "Epic",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -28005,10 +28635,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SHOT3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SHOT3"
   },
   {
     "Id": "UP_SHOT4",
@@ -28022,6 +28649,9 @@
     "Quality": "Legendary",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 4,
     "NumStatsMax": 4,
     "WeightingCurve": "NoWeighting",
@@ -28075,10 +28705,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SHOT4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SHOT4"
   },
   {
     "Id": "UP_SHOTX",
@@ -28092,6 +28719,9 @@
     "Quality": "Illegal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -28145,10 +28775,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SHOTX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SHOTX"
   },
   {
     "Id": "UP_SMG1",
@@ -28162,6 +28789,9 @@
     "Quality": "Normal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -28192,10 +28822,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_SMG1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SMG1"
   },
   {
     "Id": "UP_SMG2",
@@ -28209,6 +28836,9 @@
     "Quality": "Rare",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -28246,10 +28876,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SMG2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SMG2"
   },
   {
     "Id": "UP_SMG3",
@@ -28263,6 +28890,9 @@
     "Quality": "Epic",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -28300,10 +28930,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SMG3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SMG3"
   },
   {
     "Id": "UP_SMG4",
@@ -28317,6 +28944,9 @@
     "Quality": "Legendary",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 4,
     "NumStatsMax": 4,
     "WeightingCurve": "NoWeighting",
@@ -28354,10 +28984,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SMG4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SMG4"
   },
   {
     "Id": "UP_SMGX",
@@ -28371,6 +28998,9 @@
     "Quality": "Illegal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -28408,10 +29038,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SMGX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SMGX"
   },
   {
     "Id": "UP_CANN1",
@@ -28425,6 +29052,9 @@
     "Quality": "Normal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -28463,10 +29093,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_CANN1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_CANN1"
   },
   {
     "Id": "UP_CANN2",
@@ -28480,6 +29107,9 @@
     "Quality": "Rare",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -28517,10 +29147,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/UP_CANN2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_CANN2"
   },
   {
     "Id": "UP_CANN3",
@@ -28534,6 +29161,9 @@
     "Quality": "Epic",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -28571,10 +29201,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/UP_CANN3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_CANN3"
   },
   {
     "Id": "UP_CANN4",
@@ -28588,6 +29215,9 @@
     "Quality": "Legendary",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 4,
     "NumStatsMax": 4,
     "WeightingCurve": "NoWeighting",
@@ -28625,10 +29255,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/UP_CANN4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_CANN4"
   },
   {
     "Id": "UP_CANNX",
@@ -28642,6 +29269,9 @@
     "Quality": "Illegal",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -28679,10 +29309,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/UP_CANNX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_CANNX"
   },
   {
     "Id": "UP_SENGUN",
@@ -28696,6 +29323,9 @@
     "Quality": "Sentinel",
     "Category": "Weapon",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -28726,10 +29356,7 @@
       }
     ],
     "Rarity": "Sentinel",
-    "Slug": "upgrades/UP_SENGUN",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SENGUN"
   },
   {
     "Id": "UP_ENGY1",
@@ -28743,6 +29370,9 @@
     "Quality": "Rare",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -28764,10 +29394,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_ENGY1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_ENGY1"
   },
   {
     "Id": "UP_ENGY2",
@@ -28781,6 +29408,9 @@
     "Quality": "Epic",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -28802,10 +29432,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_ENGY2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_ENGY2"
   },
   {
     "Id": "UP_ENGY3",
@@ -28819,6 +29446,9 @@
     "Quality": "Legendary",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -28840,10 +29470,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_ENGY3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_ENGY3"
   },
   {
     "Id": "UP_ENGYX",
@@ -28857,6 +29484,9 @@
     "Quality": "Illegal",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -28878,10 +29508,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_ENGYX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_ENGYX"
   },
   {
     "Id": "UP_ENGY0",
@@ -28895,6 +29522,9 @@
     "Quality": "SeaTrash",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -28916,10 +29546,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_ENGY0",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_ENGY0"
   },
   {
     "Id": "UP_HAZX",
@@ -28933,6 +29560,9 @@
     "Quality": "Illegal",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 4,
     "NumStatsMax": 4,
     "WeightingCurve": "NoWeighting",
@@ -28970,10 +29600,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_HAZX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_HAZX"
   },
   {
     "Id": "UP_HAZ0",
@@ -28987,6 +29614,9 @@
     "Quality": "SeaTrash",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 4,
     "NumStatsMax": 4,
     "WeightingCurve": "NoWeighting",
@@ -29024,10 +29654,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_HAZ0",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_HAZ0"
   },
   {
     "Id": "UP_JET1",
@@ -29041,6 +29668,9 @@
     "Quality": "Normal",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -29087,10 +29717,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_JET1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_JET1"
   },
   {
     "Id": "UP_JET2",
@@ -29104,6 +29731,9 @@
     "Quality": "Rare",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -29157,10 +29787,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_JET2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_JET2"
   },
   {
     "Id": "UP_JET3",
@@ -29174,6 +29801,9 @@
     "Quality": "Epic",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsUncommon",
@@ -29227,10 +29857,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_JET3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_JET3"
   },
   {
     "Id": "UP_JET4",
@@ -29244,6 +29871,9 @@
     "Quality": "Legendary",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 4,
     "NumStatsMax": 4,
     "WeightingCurve": "NoWeighting",
@@ -29297,10 +29927,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_JET4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_JET4"
   },
   {
     "Id": "UP_JETX",
@@ -29314,6 +29941,9 @@
     "Quality": "Illegal",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -29367,10 +29997,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_JETX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_JETX"
   },
   {
     "Id": "UP_JET0",
@@ -29384,6 +30011,9 @@
     "Quality": "SeaTrash",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -29437,10 +30067,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_JET0",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_JET0"
   },
   {
     "Id": "UP_SHLD1",
@@ -29454,6 +30081,9 @@
     "Quality": "Normal",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -29476,10 +30106,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_SHLD1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SHLD1"
   },
   {
     "Id": "UP_SHLD2",
@@ -29493,6 +30120,9 @@
     "Quality": "Rare",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -29514,10 +30144,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SHLD2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SHLD2"
   },
   {
     "Id": "UP_SHLD3",
@@ -29531,6 +30158,9 @@
     "Quality": "Epic",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -29552,10 +30182,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SHLD3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SHLD3"
   },
   {
     "Id": "UP_SHLD4",
@@ -29569,6 +30196,9 @@
     "Quality": "Legendary",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -29590,10 +30220,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SHLD4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SHLD4"
   },
   {
     "Id": "UP_SHLDX",
@@ -29607,6 +30234,9 @@
     "Quality": "Illegal",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -29628,10 +30258,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SHLDX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SHLDX"
   },
   {
     "Id": "UP_SHLD0",
@@ -29645,6 +30272,9 @@
     "Quality": "SeaTrash",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -29666,10 +30296,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SHLD0",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SHLD0"
   },
   {
     "Id": "UP_SNSUIT",
@@ -29683,6 +30310,9 @@
     "Quality": "Sentinel",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -29737,10 +30367,7 @@
       }
     ],
     "Rarity": "Sentinel",
-    "Slug": "upgrades/UP_SNSUIT",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SNSUIT"
   },
   {
     "Id": "UP_RBSUIT",
@@ -29754,6 +30381,9 @@
     "Quality": "Robot",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 4,
     "WeightingCurve": "MaxIsRare",
@@ -29807,10 +30437,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_RBSUIT",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_RBSUIT"
   },
   {
     "Id": "UP_UNW1",
@@ -29824,6 +30451,9 @@
     "Quality": "Rare",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -29837,10 +30467,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_UNW1",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_UNW1"
   },
   {
     "Id": "UP_UNW2",
@@ -29854,6 +30481,9 @@
     "Quality": "Epic",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -29867,10 +30497,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_UNW2",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_UNW2"
   },
   {
     "Id": "UP_UNW3",
@@ -29884,6 +30511,9 @@
     "Quality": "Legendary",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -29897,10 +30527,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_UNW3",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_UNW3"
   },
   {
     "Id": "UP_RAD1",
@@ -29914,6 +30541,9 @@
     "Quality": "Rare",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -29935,10 +30565,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_RAD1",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_RAD1"
   },
   {
     "Id": "UP_RAD2",
@@ -29952,6 +30579,9 @@
     "Quality": "Epic",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -29973,10 +30603,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_RAD2",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_RAD2"
   },
   {
     "Id": "UP_RAD3",
@@ -29990,6 +30617,9 @@
     "Quality": "Legendary",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -30011,10 +30641,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_RAD3",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_RAD3"
   },
   {
     "Id": "UP_TOX1",
@@ -30028,6 +30655,9 @@
     "Quality": "Rare",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -30049,10 +30679,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_TOX1",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_TOX1"
   },
   {
     "Id": "UP_TOX2",
@@ -30066,6 +30693,9 @@
     "Quality": "Epic",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -30087,10 +30717,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_TOX2",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_TOX2"
   },
   {
     "Id": "UP_TOX3",
@@ -30104,6 +30731,9 @@
     "Quality": "Legendary",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -30125,10 +30755,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_TOX3",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_TOX3"
   },
   {
     "Id": "UP_COLD1",
@@ -30142,6 +30769,9 @@
     "Quality": "Rare",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -30163,10 +30793,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_COLD1",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_COLD1"
   },
   {
     "Id": "UP_COLD2",
@@ -30180,6 +30807,9 @@
     "Quality": "Epic",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -30201,10 +30831,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_COLD2",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_COLD2"
   },
   {
     "Id": "UP_COLD3",
@@ -30218,6 +30845,9 @@
     "Quality": "Legendary",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -30239,10 +30869,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_COLD3",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_COLD3"
   },
   {
     "Id": "UP_HOT1",
@@ -30256,6 +30883,9 @@
     "Quality": "Rare",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -30277,10 +30907,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_HOT1",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_HOT1"
   },
   {
     "Id": "UP_HOT2",
@@ -30294,6 +30921,9 @@
     "Quality": "Epic",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -30315,10 +30945,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_HOT2",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_HOT2"
   },
   {
     "Id": "UP_HOT3",
@@ -30332,6 +30959,9 @@
     "Quality": "Legendary",
     "Category": "Suit",
     "Category_LocStr": null,
+    "Chargeable": true,
+    "ChargeAmount": 80,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -30353,10 +30983,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_HOT3",
-    "Chargeable": true,
-    "ChargeAmount": 80,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_HOT3"
   },
   {
     "Id": "UP_PULSE1",
@@ -30370,6 +30997,9 @@
     "Quality": "Normal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -30408,10 +31038,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_PULSE1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_PULSE1"
   },
   {
     "Id": "UP_PULSE2",
@@ -30425,6 +31052,9 @@
     "Quality": "Rare",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -30462,10 +31092,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/UP_PULSE2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_PULSE2"
   },
   {
     "Id": "UP_PULSE3",
@@ -30479,6 +31106,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -30516,10 +31146,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/UP_PULSE3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_PULSE3"
   },
   {
     "Id": "UP_PULSE4",
@@ -30533,6 +31160,9 @@
     "Quality": "Legendary",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -30570,10 +31200,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/UP_PULSE4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_PULSE4"
   },
   {
     "Id": "UP_PULSEX",
@@ -30587,6 +31214,9 @@
     "Quality": "Illegal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -30624,10 +31254,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/UP_PULSEX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_PULSEX"
   },
   {
     "Id": "UP_PULSE0",
@@ -30641,6 +31268,9 @@
     "Quality": "SeaTrash",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -30678,10 +31308,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/UP_PULSE0",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_PULSE0"
   },
   {
     "Id": "CV_PULSE2",
@@ -30695,6 +31322,9 @@
     "Quality": "Rare",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 4,
     "NumStatsMax": 4,
     "WeightingCurve": "NoWeighting",
@@ -30732,10 +31362,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/CV_PULSE2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_PULSE2"
   },
   {
     "Id": "CV_PULSE3",
@@ -30749,6 +31376,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 4,
     "NumStatsMax": 4,
     "WeightingCurve": "NoWeighting",
@@ -30786,10 +31416,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/CV_PULSE3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_PULSE3"
   },
   {
     "Id": "UP_LAUN1",
@@ -30803,6 +31430,9 @@
     "Quality": "Normal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -30825,10 +31455,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_LAUN1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_LAUN1"
   },
   {
     "Id": "UP_LAUN2",
@@ -30842,6 +31469,9 @@
     "Quality": "Rare",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsSuperRare",
@@ -30863,10 +31493,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_LAUN2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_LAUN2"
   },
   {
     "Id": "UP_LAUN3",
@@ -30880,6 +31507,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -30901,10 +31531,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_LAUN3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_LAUN3"
   },
   {
     "Id": "UP_LAUN4",
@@ -30918,6 +31545,9 @@
     "Quality": "Legendary",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -30939,10 +31569,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_LAUN4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_LAUN4"
   },
   {
     "Id": "UP_LAUNX",
@@ -30956,6 +31583,9 @@
     "Quality": "Illegal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -30977,10 +31607,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_LAUNX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_LAUNX"
   },
   {
     "Id": "UP_LAUN0",
@@ -30994,6 +31621,9 @@
     "Quality": "SeaTrash",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -31015,10 +31645,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_LAUN0",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_LAUN0"
   },
   {
     "Id": "CV_LAUN2",
@@ -31032,6 +31659,9 @@
     "Quality": "Rare",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -31053,10 +31683,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_LAUN2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_LAUN2"
   },
   {
     "Id": "CV_LAUN3",
@@ -31070,6 +31697,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -31091,10 +31721,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_LAUN3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_LAUN3"
   },
   {
     "Id": "UP_HYP1",
@@ -31108,6 +31735,9 @@
     "Quality": "Normal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -31122,10 +31752,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_HYP1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_HYP1"
   },
   {
     "Id": "UP_HYP2",
@@ -31139,6 +31766,9 @@
     "Quality": "Rare",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -31152,10 +31782,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_HYP2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_HYP2"
   },
   {
     "Id": "UP_HYP3",
@@ -31169,6 +31796,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -31190,10 +31820,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_HYP3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_HYP3"
   },
   {
     "Id": "UP_HYP4",
@@ -31207,6 +31834,9 @@
     "Quality": "Legendary",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -31228,10 +31858,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_HYP4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_HYP4"
   },
   {
     "Id": "UP_HYPX",
@@ -31245,6 +31872,9 @@
     "Quality": "Illegal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -31266,10 +31896,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_HYPX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_HYPX"
   },
   {
     "Id": "UP_HYP0",
@@ -31283,6 +31910,9 @@
     "Quality": "SeaTrash",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -31296,10 +31926,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_HYP0",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_HYP0"
   },
   {
     "Id": "CV_HYP2",
@@ -31313,6 +31940,9 @@
     "Quality": "Rare",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -31326,10 +31956,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_HYP2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_HYP2"
   },
   {
     "Id": "CV_HYP3",
@@ -31343,6 +31970,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": false,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -31364,10 +31994,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_HYP3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_HYP3"
   },
   {
     "Id": "UP_S_SHL1",
@@ -31381,6 +32008,9 @@
     "Quality": "Normal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -31395,10 +32025,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_S_SHL1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_S_SHL1"
   },
   {
     "Id": "UP_S_SHL2",
@@ -31412,6 +32039,9 @@
     "Quality": "Rare",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -31425,10 +32055,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_S_SHL2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_S_SHL2"
   },
   {
     "Id": "UP_S_SHL3",
@@ -31442,6 +32069,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -31455,10 +32085,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_S_SHL3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_S_SHL3"
   },
   {
     "Id": "UP_S_SHL4",
@@ -31472,6 +32099,9 @@
     "Quality": "Legendary",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -31485,10 +32115,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_S_SHL4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_S_SHL4"
   },
   {
     "Id": "UP_S_SHLX",
@@ -31502,6 +32129,9 @@
     "Quality": "Illegal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "MaxIsRare",
@@ -31515,10 +32145,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_S_SHLX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_S_SHLX"
   },
   {
     "Id": "UP_S_SHL0",
@@ -31532,6 +32159,9 @@
     "Quality": "SeaTrash",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "MaxIsRare",
@@ -31545,10 +32175,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_S_SHL0",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_S_SHL0"
   },
   {
     "Id": "CV_S_SHL2",
@@ -31562,6 +32189,9 @@
     "Quality": "Rare",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -31575,10 +32205,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_S_SHL2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_S_SHL2"
   },
   {
     "Id": "CV_S_SHL3",
@@ -31592,6 +32219,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -31605,10 +32235,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_S_SHL3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_S_SHL3"
   },
   {
     "Id": "UP_SGUN1",
@@ -31622,6 +32249,9 @@
     "Quality": "Normal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -31652,10 +32282,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_SGUN1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SGUN1"
   },
   {
     "Id": "UP_SGUN2",
@@ -31669,6 +32296,9 @@
     "Quality": "Rare",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -31698,10 +32328,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SGUN2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SGUN2"
   },
   {
     "Id": "UP_SGUN3",
@@ -31715,6 +32342,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsUncommon",
@@ -31744,10 +32374,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SGUN3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SGUN3"
   },
   {
     "Id": "UP_SGUN4",
@@ -31761,6 +32388,9 @@
     "Quality": "Legendary",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -31790,10 +32420,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SGUN4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SGUN4"
   },
   {
     "Id": "UP_SGUNX",
@@ -31807,6 +32434,9 @@
     "Quality": "Illegal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -31836,10 +32466,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SGUNX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SGUNX"
   },
   {
     "Id": "UP_SGUN0",
@@ -31853,6 +32480,9 @@
     "Quality": "SeaTrash",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -31882,10 +32512,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SGUN0",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SGUN0"
   },
   {
     "Id": "CV_SGUN3",
@@ -31899,6 +32526,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -31928,10 +32558,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_SGUN3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_SGUN3"
   },
   {
     "Id": "CV_SROC3",
@@ -31945,6 +32572,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -31974,10 +32604,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_SROC3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_SROC3"
   },
   {
     "Id": "UP_SLASR1",
@@ -31991,6 +32618,9 @@
     "Quality": "Normal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -32013,10 +32643,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_SLASR1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SLASR1"
   },
   {
     "Id": "UP_SLASR2",
@@ -32030,6 +32657,9 @@
     "Quality": "Rare",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -32051,10 +32681,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SLASR2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SLASR2"
   },
   {
     "Id": "UP_SLASR3",
@@ -32068,6 +32695,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -32089,10 +32719,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SLASR3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SLASR3"
   },
   {
     "Id": "UP_SLASR4",
@@ -32106,6 +32733,9 @@
     "Quality": "Legendary",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -32127,10 +32757,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SLASR4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SLASR4"
   },
   {
     "Id": "UP_SLASRX",
@@ -32144,6 +32771,9 @@
     "Quality": "Illegal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -32165,10 +32795,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SLASRX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SLASRX"
   },
   {
     "Id": "CV_SLASR3",
@@ -32182,6 +32809,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -32203,10 +32833,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_SLASR3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_SLASR3"
   },
   {
     "Id": "UP_SSHOT1",
@@ -32220,6 +32847,9 @@
     "Quality": "Normal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -32250,10 +32880,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_SSHOT1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SSHOT1"
   },
   {
     "Id": "UP_SSHOT2",
@@ -32267,6 +32894,9 @@
     "Quality": "Rare",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsUncommon",
@@ -32296,10 +32926,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SSHOT2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SSHOT2"
   },
   {
     "Id": "UP_SSHOT3",
@@ -32313,6 +32940,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -32342,10 +32972,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SSHOT3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SSHOT3"
   },
   {
     "Id": "UP_SSHOT4",
@@ -32359,6 +32986,9 @@
     "Quality": "Legendary",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -32388,10 +33018,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SSHOT4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SSHOT4"
   },
   {
     "Id": "UP_SSHOTX",
@@ -32405,6 +33032,9 @@
     "Quality": "Illegal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -32434,10 +33064,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SSHOTX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SSHOTX"
   },
   {
     "Id": "CV_SSHOT3",
@@ -32451,6 +33078,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -32480,10 +33110,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_SSHOT3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_SSHOT3"
   },
   {
     "Id": "UP_SMINI1",
@@ -32497,6 +33124,9 @@
     "Quality": "Normal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -32527,10 +33157,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_SMINI1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SMINI1"
   },
   {
     "Id": "UP_SMINI2",
@@ -32544,6 +33171,9 @@
     "Quality": "Rare",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsUncommon",
@@ -32573,10 +33203,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SMINI2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SMINI2"
   },
   {
     "Id": "UP_SMINI3",
@@ -32590,6 +33217,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -32619,10 +33249,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SMINI3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SMINI3"
   },
   {
     "Id": "UP_SMINI4",
@@ -32636,6 +33263,9 @@
     "Quality": "Legendary",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -32665,10 +33295,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SMINI4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SMINI4"
   },
   {
     "Id": "UP_SMINIX",
@@ -32682,6 +33309,9 @@
     "Quality": "Illegal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -32711,10 +33341,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SMINIX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SMINIX"
   },
   {
     "Id": "CV_SMINI3",
@@ -32728,6 +33355,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -32757,10 +33387,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_SMINI3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_SMINI3"
   },
   {
     "Id": "UP_SBLOB1",
@@ -32774,6 +33401,9 @@
     "Quality": "Normal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -32804,10 +33434,7 @@
       }
     ],
     "Rarity": "Normal",
-    "Slug": "upgrades/UP_SBLOB1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SBLOB1"
   },
   {
     "Id": "UP_SBLOB2",
@@ -32821,6 +33448,9 @@
     "Quality": "Rare",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsUncommon",
@@ -32850,10 +33480,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SBLOB2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SBLOB2"
   },
   {
     "Id": "UP_SBLOB3",
@@ -32867,6 +33494,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -32896,10 +33526,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SBLOB3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SBLOB3"
   },
   {
     "Id": "UP_SBLOB4",
@@ -32913,6 +33540,9 @@
     "Quality": "Legendary",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -32942,10 +33572,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SBLOB4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SBLOB4"
   },
   {
     "Id": "UP_SBLOBX",
@@ -32959,6 +33586,9 @@
     "Quality": "Illegal",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -32988,10 +33618,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SBLOBX",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SBLOBX"
   },
   {
     "Id": "CV_SBLOB3",
@@ -33005,6 +33632,9 @@
     "Quality": "Epic",
     "Category": "AllShipsExceptAlien",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -33034,10 +33664,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_SBLOB3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_SBLOB3"
   },
   {
     "Id": "UP_EXGUN1",
@@ -33051,6 +33678,9 @@
     "Quality": "Normal",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -33080,10 +33710,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXGUN1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXGUN1"
   },
   {
     "Id": "UP_EXGUN2",
@@ -33097,6 +33724,9 @@
     "Quality": "Rare",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsUncommon",
@@ -33126,10 +33756,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXGUN2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXGUN2"
   },
   {
     "Id": "UP_EXGUN3",
@@ -33143,6 +33770,9 @@
     "Quality": "Epic",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -33172,10 +33802,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXGUN3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXGUN3"
   },
   {
     "Id": "UP_EXGUN4",
@@ -33189,6 +33816,9 @@
     "Quality": "Legendary",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -33218,10 +33848,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXGUN4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXGUN4"
   },
   {
     "Id": "UP_EXLAS1",
@@ -33235,6 +33862,9 @@
     "Quality": "Normal",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -33256,10 +33886,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXLAS1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXLAS1"
   },
   {
     "Id": "UP_EXLAS2",
@@ -33273,6 +33900,9 @@
     "Quality": "Rare",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsSuperRare",
@@ -33294,10 +33924,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXLAS2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXLAS2"
   },
   {
     "Id": "UP_EXLAS3",
@@ -33311,6 +33938,9 @@
     "Quality": "Epic",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -33332,10 +33962,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXLAS3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXLAS3"
   },
   {
     "Id": "UP_EXLAS4",
@@ -33349,6 +33976,9 @@
     "Quality": "Legendary",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -33370,10 +34000,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXLAS4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXLAS4"
   },
   {
     "Id": "UP_BOOST1",
@@ -33387,6 +34014,9 @@
     "Quality": "Normal",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -33408,10 +34038,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_BOOST1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_BOOST1"
   },
   {
     "Id": "UP_BOOST2",
@@ -33425,6 +34052,9 @@
     "Quality": "Rare",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsSuperRare",
@@ -33446,10 +34076,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_BOOST2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_BOOST2"
   },
   {
     "Id": "UP_BOOST3",
@@ -33463,6 +34090,9 @@
     "Quality": "Epic",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -33484,10 +34114,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_BOOST3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_BOOST3"
   },
   {
     "Id": "UP_BOOST4",
@@ -33501,6 +34128,9 @@
     "Quality": "Legendary",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -33522,10 +34152,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_BOOST4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_BOOST4"
   },
   {
     "Id": "UP_EXENG1",
@@ -33539,6 +34166,9 @@
     "Quality": "Normal",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -33560,10 +34190,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXENG1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXENG1"
   },
   {
     "Id": "UP_EXENG2",
@@ -33577,6 +34204,9 @@
     "Quality": "Rare",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsSuperRare",
@@ -33598,10 +34228,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXENG2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXENG2"
   },
   {
     "Id": "UP_EXENG3",
@@ -33615,6 +34242,9 @@
     "Quality": "Epic",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -33636,10 +34266,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXENG3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXENG3"
   },
   {
     "Id": "UP_EXENG4",
@@ -33653,6 +34280,9 @@
     "Quality": "Legendary",
     "Category": "Exocraft",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -33674,10 +34304,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXENG4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXENG4"
   },
   {
     "Id": "UP_EXSUB1",
@@ -33691,6 +34318,9 @@
     "Quality": "Normal",
     "Category": "Submarine",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -33720,10 +34350,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXSUB1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXSUB1"
   },
   {
     "Id": "UP_EXSUB2",
@@ -33737,6 +34364,9 @@
     "Quality": "Rare",
     "Category": "Submarine",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsSuperRare",
@@ -33766,10 +34396,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXSUB2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXSUB2"
   },
   {
     "Id": "UP_EXSUB3",
@@ -33783,6 +34410,9 @@
     "Quality": "Epic",
     "Category": "Submarine",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsRare",
@@ -33812,10 +34442,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXSUB3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXSUB3"
   },
   {
     "Id": "UP_EXSUB4",
@@ -33829,6 +34456,9 @@
     "Quality": "Legendary",
     "Category": "Submarine",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -33858,10 +34488,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_EXSUB4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_EXSUB4"
   },
   {
     "Id": "UP_SUGUN1",
@@ -33875,6 +34502,9 @@
     "Quality": "Normal",
     "Category": "Submarine",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -33896,10 +34526,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SUGUN1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SUGUN1"
   },
   {
     "Id": "UP_SUGUN2",
@@ -33913,6 +34540,9 @@
     "Quality": "Rare",
     "Category": "Submarine",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsSuperRare",
@@ -33934,10 +34564,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SUGUN2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SUGUN2"
   },
   {
     "Id": "UP_SUGUN3",
@@ -33951,6 +34578,9 @@
     "Quality": "Epic",
     "Category": "Submarine",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -33972,10 +34602,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SUGUN3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SUGUN3"
   },
   {
     "Id": "UP_SUGUN4",
@@ -33989,6 +34616,9 @@
     "Quality": "Legendary",
     "Category": "Submarine",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -34010,10 +34640,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_SUGUN4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_SUGUN4"
   },
   {
     "Id": "UP_MCLAS2",
@@ -34027,6 +34654,9 @@
     "Quality": "Rare",
     "Category": "Mech",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsSuperRare",
@@ -34048,10 +34678,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_MCLAS2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_MCLAS2"
   },
   {
     "Id": "UP_MCLAS3",
@@ -34065,6 +34692,9 @@
     "Quality": "Epic",
     "Category": "Mech",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -34086,10 +34716,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_MCLAS3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_MCLAS3"
   },
   {
     "Id": "UP_MCLAS4",
@@ -34103,6 +34730,9 @@
     "Quality": "Legendary",
     "Category": "Mech",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -34124,10 +34754,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_MCLAS4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_MCLAS4"
   },
   {
     "Id": "UP_MFIRE2",
@@ -34141,6 +34768,9 @@
     "Quality": "Rare",
     "Category": "Mech",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -34170,10 +34800,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_MFIRE2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_MFIRE2"
   },
   {
     "Id": "UP_MFIRE3",
@@ -34187,6 +34814,9 @@
     "Quality": "Epic",
     "Category": "Mech",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsUncommon",
@@ -34216,10 +34846,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_MFIRE3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_MFIRE3"
   },
   {
     "Id": "UP_MFIRE4",
@@ -34233,6 +34860,9 @@
     "Quality": "Legendary",
     "Category": "Mech",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -34262,10 +34892,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_MFIRE4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_MFIRE4"
   },
   {
     "Id": "UP_MCGUN2",
@@ -34279,6 +34906,9 @@
     "Quality": "Rare",
     "Category": "Mech",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 3,
     "WeightingCurve": "MaxIsUncommon",
@@ -34308,10 +34938,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_MCGUN2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_MCGUN2"
   },
   {
     "Id": "UP_MCGUN3",
@@ -34325,6 +34952,9 @@
     "Quality": "Epic",
     "Category": "Mech",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -34354,10 +34984,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_MCGUN3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_MCGUN3"
   },
   {
     "Id": "UP_MCGUN4",
@@ -34371,6 +34998,9 @@
     "Quality": "Legendary",
     "Category": "Mech",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -34400,10 +35030,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_MCGUN4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_MCGUN4"
   },
   {
     "Id": "UP_MCENG2",
@@ -34417,6 +35044,9 @@
     "Quality": "Rare",
     "Category": "Mech",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "MaxIsSuperRare",
@@ -34438,10 +35068,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_MCENG2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_MCENG2"
   },
   {
     "Id": "UP_MCENG3",
@@ -34455,6 +35082,9 @@
     "Quality": "Epic",
     "Category": "Mech",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsRare",
@@ -34476,10 +35106,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_MCENG3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_MCENG3"
   },
   {
     "Id": "UP_MCENG4",
@@ -34493,6 +35120,9 @@
     "Quality": "Legendary",
     "Category": "Mech",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -34514,10 +35144,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_MCENG4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_MCENG4"
   },
   {
     "Id": "UP_FRHYP1",
@@ -34531,6 +35158,9 @@
     "Quality": "Normal",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "MaxIsRare",
@@ -34544,10 +35174,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRHYP1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRHYP1"
   },
   {
     "Id": "UP_FRHYP2",
@@ -34561,6 +35188,9 @@
     "Quality": "Rare",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 2,
     "WeightingCurve": "MaxIsUncommon",
@@ -34574,10 +35204,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRHYP2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRHYP2"
   },
   {
     "Id": "UP_FRHYP3",
@@ -34591,6 +35218,9 @@
     "Quality": "Epic",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -34612,10 +35242,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRHYP3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRHYP3"
   },
   {
     "Id": "UP_FRHYP4",
@@ -34629,6 +35256,9 @@
     "Quality": "Legendary",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -34650,10 +35280,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRHYP4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRHYP4"
   },
   {
     "Id": "UP_FRSPE1",
@@ -34667,6 +35294,9 @@
     "Quality": "Normal",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -34680,10 +35310,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRSPE1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRSPE1"
   },
   {
     "Id": "UP_FRSPE2",
@@ -34697,6 +35324,9 @@
     "Quality": "Rare",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -34710,10 +35340,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRSPE2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRSPE2"
   },
   {
     "Id": "UP_FRSPE3",
@@ -34727,6 +35354,9 @@
     "Quality": "Epic",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -34740,10 +35370,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRSPE3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRSPE3"
   },
   {
     "Id": "UP_FRSPE4",
@@ -34757,6 +35384,9 @@
     "Quality": "Legendary",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -34770,10 +35400,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRSPE4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRSPE4"
   },
   {
     "Id": "UP_FRFUE1",
@@ -34787,6 +35414,9 @@
     "Quality": "Normal",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -34800,10 +35430,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRFUE1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRFUE1"
   },
   {
     "Id": "UP_FRFUE2",
@@ -34817,6 +35444,9 @@
     "Quality": "Rare",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -34830,10 +35460,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRFUE2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRFUE2"
   },
   {
     "Id": "UP_FRFUE3",
@@ -34847,6 +35474,9 @@
     "Quality": "Epic",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -34860,10 +35490,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRFUE3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRFUE3"
   },
   {
     "Id": "UP_FRFUE4",
@@ -34877,6 +35504,9 @@
     "Quality": "Legendary",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -34890,10 +35520,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRFUE4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRFUE4"
   },
   {
     "Id": "UP_FRCOM1",
@@ -34907,6 +35534,9 @@
     "Quality": "Normal",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -34920,10 +35550,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRCOM1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRCOM1"
   },
   {
     "Id": "UP_FRCOM2",
@@ -34937,6 +35564,9 @@
     "Quality": "Rare",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -34950,10 +35580,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRCOM2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRCOM2"
   },
   {
     "Id": "UP_FRCOM3",
@@ -34967,6 +35594,9 @@
     "Quality": "Epic",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -34980,10 +35610,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRCOM3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRCOM3"
   },
   {
     "Id": "UP_FRCOM4",
@@ -34997,6 +35624,9 @@
     "Quality": "Legendary",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35010,10 +35640,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRCOM4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRCOM4"
   },
   {
     "Id": "UP_FRTRA1",
@@ -35027,6 +35654,9 @@
     "Quality": "Normal",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35040,10 +35670,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRTRA1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRTRA1"
   },
   {
     "Id": "UP_FRTRA2",
@@ -35057,6 +35684,9 @@
     "Quality": "Rare",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35070,10 +35700,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRTRA2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRTRA2"
   },
   {
     "Id": "UP_FRTRA3",
@@ -35087,6 +35714,9 @@
     "Quality": "Epic",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35100,10 +35730,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRTRA3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRTRA3"
   },
   {
     "Id": "UP_FRTRA4",
@@ -35117,6 +35744,9 @@
     "Quality": "Legendary",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35130,10 +35760,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRTRA4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRTRA4"
   },
   {
     "Id": "UP_FREXP1",
@@ -35147,6 +35774,9 @@
     "Quality": "Normal",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35160,10 +35790,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FREXP1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FREXP1"
   },
   {
     "Id": "UP_FREXP2",
@@ -35177,6 +35804,9 @@
     "Quality": "Rare",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35190,10 +35820,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FREXP2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FREXP2"
   },
   {
     "Id": "UP_FREXP3",
@@ -35207,6 +35834,9 @@
     "Quality": "Epic",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35220,10 +35850,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FREXP3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FREXP3"
   },
   {
     "Id": "UP_FREXP4",
@@ -35237,6 +35864,9 @@
     "Quality": "Legendary",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35250,10 +35880,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FREXP4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FREXP4"
   },
   {
     "Id": "UP_FRMIN1",
@@ -35267,6 +35894,9 @@
     "Quality": "Normal",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35280,10 +35910,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRMIN1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRMIN1"
   },
   {
     "Id": "UP_FRMIN2",
@@ -35297,6 +35924,9 @@
     "Quality": "Rare",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35310,10 +35940,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRMIN2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRMIN2"
   },
   {
     "Id": "UP_FRMIN3",
@@ -35327,6 +35954,9 @@
     "Quality": "Epic",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35340,10 +35970,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRMIN3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRMIN3"
   },
   {
     "Id": "UP_FRMIN4",
@@ -35357,6 +35984,9 @@
     "Quality": "Legendary",
     "Category": "Freighter",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35370,10 +36000,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/UP_FRMIN4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/UP_FRMIN4"
   },
   {
     "Id": "CV_FIT1",
@@ -35387,6 +36014,9 @@
     "Quality": "Normal",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -35416,10 +36046,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/CV_FIT1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_FIT1"
   },
   {
     "Id": "CV_FIT2",
@@ -35433,6 +36060,9 @@
     "Quality": "Rare",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -35462,10 +36092,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/CV_FIT2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_FIT2"
   },
   {
     "Id": "CV_FIT3",
@@ -35479,6 +36106,9 @@
     "Quality": "Epic",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -35508,10 +36138,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/CV_FIT3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_FIT3"
   },
   {
     "Id": "CV_FIT4",
@@ -35525,6 +36152,9 @@
     "Quality": "Legendary",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -35554,10 +36184,7 @@
         "AlwaysChoose": true
       }
     ],
-    "Slug": "upgrades/CV_FIT4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_FIT4"
   },
   {
     "Id": "CV_SCI1",
@@ -35571,6 +36198,9 @@
     "Quality": "Normal",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -35600,10 +36230,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_SCI1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_SCI1"
   },
   {
     "Id": "CV_SCI2",
@@ -35617,6 +36244,9 @@
     "Quality": "Rare",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -35646,10 +36276,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_SCI2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_SCI2"
   },
   {
     "Id": "CV_SCI3",
@@ -35663,6 +36290,9 @@
     "Quality": "Epic",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -35692,10 +36322,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_SCI3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_SCI3"
   },
   {
     "Id": "CV_SCI4",
@@ -35709,6 +36336,9 @@
     "Quality": "Legendary",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 3,
     "NumStatsMax": 3,
     "WeightingCurve": "NoWeighting",
@@ -35738,10 +36368,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_SCI4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_SCI4"
   },
   {
     "Id": "CV_TRA1",
@@ -35755,6 +36382,9 @@
     "Quality": "Normal",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35768,10 +36398,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_TRA1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_TRA1"
   },
   {
     "Id": "CV_TRA2",
@@ -35785,6 +36412,9 @@
     "Quality": "Rare",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35798,10 +36428,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_TRA2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_TRA2"
   },
   {
     "Id": "CV_TRA3",
@@ -35815,6 +36442,9 @@
     "Quality": "Epic",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35828,10 +36458,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_TRA3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_TRA3"
   },
   {
     "Id": "CV_TRA4",
@@ -35845,6 +36472,9 @@
     "Quality": "Legendary",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 1,
     "NumStatsMax": 1,
     "WeightingCurve": "NoWeighting",
@@ -35858,10 +36488,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_TRA4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_TRA4"
   },
   {
     "Id": "CV_INV1",
@@ -35875,6 +36502,9 @@
     "Quality": "Normal",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -35888,10 +36518,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_INV1",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_INV1"
   },
   {
     "Id": "CV_INV2",
@@ -35905,6 +36532,9 @@
     "Quality": "Rare",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -35918,10 +36548,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_INV2",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_INV2"
   },
   {
     "Id": "CV_INV3",
@@ -35935,6 +36562,9 @@
     "Quality": "Epic",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -35948,10 +36578,7 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_INV3",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_INV3"
   },
   {
     "Id": "CV_INV4",
@@ -35965,6 +36592,9 @@
     "Quality": "Legendary",
     "Category": "Corvette",
     "Category_LocStr": null,
+    "Chargeable": false,
+    "ChargeAmount": 100,
+    "BuildFullyCharged": true,
     "NumStatsMin": 2,
     "NumStatsMax": 2,
     "WeightingCurve": "NoWeighting",
@@ -35978,9 +36608,6 @@
         "AlwaysChoose": false
       }
     ],
-    "Slug": "upgrades/CV_INV4",
-    "Chargeable": false,
-    "ChargeAmount": 100,
-    "BuildFullyCharged": true
+    "Slug": "upgrades/CV_INV4"
   }
 ]

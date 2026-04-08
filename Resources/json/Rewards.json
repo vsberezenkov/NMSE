@@ -6036,8 +6036,24 @@
 		"ProductId": "SWITCH_GUN01"
 	},
 	{
+		"Id": "^ENT_BOLTCASTER",
+		"Name": "Boltcaster Sm",
+		"Name_LocStr": null,
+		"Subtitle_LocStr": null,
+		"Category": "entitlement",
+		"ProductId": "BOLT_SM"
+	},
+	{
+		"Id": "^ENT_PHOCORE",
+		"Name": "Photonix Core",
+		"Name_LocStr": null,
+		"Subtitle_LocStr": null,
+		"Category": "entitlement",
+		"ProductId": "PHOTONIX_CORE"
+	},
+	{
 		"Id": "^ENT_XO_HELMET",
-		"Name": "X.O. Helmet",
+		"Name": "X.o. Suit",
 		"Name_LocStr": "UI_SPEC_XOHELMET_NAME",
 		"Subtitle_LocStr": "UI_SPEC_XOHELMET_NAME_SUB",
 		"Category": "entitlement",
