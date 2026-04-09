@@ -231,7 +231,7 @@ NMSE is licensed under the **GNU General Public License v3.0** - see the [LICENS
 ### Contributors:
 
 <a href="https://github.com/vectorcmdr/NMSE/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=vectorcmdr/NMSE" />
+  <img src="https://stg.contrib.rocks/image?repo=vectorcmdr/NMSE" />
 </a>
 
 ---
