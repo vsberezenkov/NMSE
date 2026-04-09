@@ -215,7 +215,8 @@ public partial class MainStatsPanel : UserControl
             string galaxyType = GalaxyDatabase.GetGalaxyType(realityIndex);
             _galaxyField.Text = $"{GalaxyDatabase.GetGalaxyDisplayName(realityIndex)} ({galaxyType})";
             _galaxyDotLabel.Text = "\u25CF";
-            _galaxyDotLabel.ForeColor = GalaxyDatabase.GetGalaxyTypeColor(galaxyType);
+            string hexColor = GalaxyDatabase.GetGalaxyCoreColor(realityIndex);
+            _galaxyDotLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml(hexColor);
 
             var galactic = addr.GetObject("GalacticAddress");
             if (galactic == null) return;
@@ -604,7 +605,8 @@ public partial class MainStatsPanel : UserControl
         string galaxyType = GalaxyDatabase.GetGalaxyType(realityIndex);
         _galaxyField.Text = $"{GalaxyDatabase.GetGalaxyDisplayName(realityIndex)} ({galaxyType})";
         _galaxyDotLabel.Text = " \u25CF";
-        _galaxyDotLabel.ForeColor = GalaxyDatabase.GetGalaxyTypeColor(galaxyType);
+        string hexColor = GalaxyDatabase.GetGalaxyCoreColor(realityIndex);
+        _galaxyDotLabel.ForeColor = System.Drawing.ColorTranslator.FromHtml(hexColor);
         _portalCodeField.Text = CoordinateHelper.VoxelToPortalCode(voxelX, voxelY, voxelZ, solarIdx, planetIdx);
         _portalCodeDecField.Text = CoordinateHelper.PortalHexToDec(_portalCodeField.Text);
         CoordinateHelper.UpdateGlyphPanel(_portalGlyphPanel, _portalCodeField.Text);

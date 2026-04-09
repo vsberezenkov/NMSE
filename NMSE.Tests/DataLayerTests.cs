@@ -192,9 +192,9 @@ public class DataLayerTests
     // --- GalaxyDatabase ----------------------------------------------
 
     [Fact]
-    public void GalaxyDatabase_Has257Galaxies()
+    public void GalaxyDatabase_Has256Galaxies()
     {
-        Assert.Equal(257, GalaxyDatabase.Galaxies.Length);
+        Assert.Equal(256, GalaxyDatabase.Galaxies.Length);
     }
 
     [Theory]
@@ -202,7 +202,6 @@ public class DataLayerTests
     [InlineData(1, "Hilbert Dimension")]
     [InlineData(9, "Eissentam")]
     [InlineData(255, "Odyalutai")]
-    [InlineData(256, "Yilsrussimil")]
     public void GalaxyDatabase_GetGalaxyName_ReturnsCorrectName(int index, string expected)
     {
         Assert.Equal(expected, GalaxyDatabase.GetGalaxyName(index));
@@ -234,11 +233,45 @@ public class DataLayerTests
         Assert.Equal("Normal", GalaxyDatabase.GetGalaxyType(257));
     }
 
+    [Fact]
+    public void GalaxyDatabase_GetGalaxyCore_OutOfRange_ReturnsUnknown()
+    {
+        Assert.Equal("Unknown", GalaxyDatabase.GetGalaxyCore(-1));
+        Assert.Equal("Unknown", GalaxyDatabase.GetGalaxyCore(257));
+    }
+
+    [Fact]
+    public void GalaxyDatabase_GetGalaxyCoreColor_OutOfRange_Returns000000()
+    {
+        Assert.Equal("#000000", GalaxyDatabase.GetGalaxyCoreColor(-1));
+        Assert.Equal("#000000", GalaxyDatabase.GetGalaxyCoreColor(257));
+    }
+
+    [Theory]
+    [InlineData(0, "White")]
+    [InlineData(1, "Deep Pink")]
+    [InlineData(9, "Orange")]
+    [InlineData(255, "Magenta")]
+    public void GalaxyDatabase_GetGalaxyCore_ReturnsCorrectColorName(int index, string expected)
+    {
+        Assert.Equal(expected, GalaxyDatabase.GetGalaxyCore(index));
+    }
+
+    /// Should this be case insenstive?
+    [Theory]
+    [InlineData(0, "#ffffff")]
+    [InlineData(1, "#ff1493")]
+    [InlineData(9, "#f97306")]
+    [InlineData(255, "#c20078")]
+    public void GalaxyDatabase_GetGalaxyCoreColor_ReturnsCorrectColorHex(int index, string expected)
+    {
+        Assert.Equal(expected, GalaxyDatabase.GetGalaxyCoreColor(index));
+    }
+
     [Theory]
     [InlineData(0, "Euclid (1)")]
     [InlineData(9, "Eissentam (10)")]
     [InlineData(255, "Odyalutai (256)")]
-    [InlineData(256, "Yilsrussimil (257)")]
     public void GalaxyDatabase_GetGalaxyDisplayName_ReturnsNameWithNumber(int index, string expected)
     {
         Assert.Equal(expected, GalaxyDatabase.GetGalaxyDisplayName(index));
