@@ -96,6 +96,7 @@
     <Compile Include="..\Core\ExosuitLogic.cs" Link="Core\ExosuitLogic.cs" />
     <Compile Include="..\Core\ExosuitAutoStackLogic.cs" Link="Core\ExosuitAutoStackLogic.cs" />
     <Compile Include="..\Core\AccountLogic.cs" Link="Core\AccountLogic.cs" />
+    <Compile Include="..\Core\DisplayStringHelper.cs" Link="Core\DisplayStringHelper.cs" />
     <Compile Include="..\Core\MxmlRewardEditor.cs" Link="Core\MxmlRewardEditor.cs" />
     <Compile Include="..\Core\RawJsonLogic.cs" Link="Core\RawJsonLogic.cs" />
     <Compile Include="..\Core\InventoryImportHelper.cs" Link="Core\InventoryImportHelper.cs" />

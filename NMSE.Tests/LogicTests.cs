@@ -34,9 +34,9 @@ public class LogicTests
             var jsonDir = FindResourceJsonDir();
             if (jsonDir == null) return;
 
-            FrigateTraitDatabase.LoadFromFile(Path.Combine(jsonDir, "FrigateTraits.json"));
-            SettlementDatabase.LoadFromFile(Path.Combine(jsonDir, "SettlementPerks.json"));
-            WikiGuideDatabase.LoadFromFile(Path.Combine(jsonDir, "WikiGuide.json"));
+            FrigateTraitDatabase.LoadFromFile(Path.Combine(jsonDir, "Frigate Traits.json"));
+            SettlementDatabase.LoadFromFile(Path.Combine(jsonDir, "Settlement Perks.json"));
+            WikiGuideDatabase.LoadFromFile(Path.Combine(jsonDir, "Wiki Guide.json"));
             TitleDatabase.LoadFromFile(Path.Combine(jsonDir, "Titles.json"));
 
             // Load UI strings so that logic classes returning localised text work correctly
@@ -3283,7 +3283,8 @@ public class LogicTests
     [Fact]
     public void JsonParser_RoundTrip_DoublePreservesDecimalPointUnderCommaLocale()
     {
-        // Simulate: parse JSON → set a new double value → re-serialize → verify '.' separator
+        // Simulate:
+        // parse JSON from save -> set a new double value -> re-serialize data -> verify '.' separator
         var saved = System.Globalization.CultureInfo.CurrentCulture;
         try
         {
@@ -4707,6 +4708,174 @@ public class LogicTests
     }
 
     [Fact]
+    public void AccountLogic_SyncJsonArrayEntry_AddsToNewArray()
+    {
+        var obj = new JsonObject();
+
+        AccountLogic.SyncJsonArrayEntry(obj, "SeenProducts", "^ITEM_1", true);
+
+        var array = obj.GetArray("SeenProducts");
+        Assert.NotNull(array);
+        Assert.Equal(1, array!.Length);
+        Assert.Equal("^ITEM_1", array.GetString(0));
+    }
+
+    [Fact]
+    public void AccountLogic_SyncJsonArrayEntry_PreventsDuplicates()
+    {
+        var obj = new JsonObject();
+        var existing = new JsonArray();
+        existing.Add("^ITEM_1");
+        obj.Set("SeenProducts", existing);
+
+        AccountLogic.SyncJsonArrayEntry(obj, "SeenProducts", "^ITEM_1", true);
+
+        var array = obj.GetArray("SeenProducts")!;
+        Assert.Equal(1, array.Length);
+    }
+
+    [Fact]
+    public void AccountLogic_SyncJsonArrayEntry_RemovesEntry()
+    {
+        var obj = new JsonObject();
+        var existing = new JsonArray();
+        existing.Add("^ITEM_1");
+        existing.Add("^ITEM_2");
+        obj.Set("SeenProducts", existing);
+
+        AccountLogic.SyncJsonArrayEntry(obj, "SeenProducts", "^ITEM_1", false);
+
+        var array = obj.GetArray("SeenProducts")!;
+        Assert.Equal(1, array.Length);
+        Assert.Equal("^ITEM_2", array.GetString(0));
+    }
+
+    [Fact]
+    public void AccountLogic_SyncJsonArrayEntry_RemoveIsCaseInsensitive()
+    {
+        var obj = new JsonObject();
+        var existing = new JsonArray();
+        existing.Add("^Item_1");
+        obj.Set("SeenProducts", existing);
+
+        AccountLogic.SyncJsonArrayEntry(obj, "SeenProducts", "^ITEM_1", false);
+
+        var array = obj.GetArray("SeenProducts")!;
+        Assert.Equal(0, array.Length);
+    }
+
+    [Fact]
+    public void AccountLogic_SyncAccountSeenArrays_AddsForRedeemed()
+    {
+        var userSettings = new JsonObject();
+
+        var rewards = new List<(string Id, bool Present)>
+        {
+            ("^REWARD_1", true),
+            ("^REWARD_2", false),
+        };
+
+        // No database — defaults to SeenProducts.
+        AccountLogic.SyncAccountSeenArrays(userSettings, rewards);
+
+        var seen = userSettings.GetArray("SeenProducts");
+        Assert.NotNull(seen);
+        Assert.Equal(1, seen!.Length);
+        Assert.Equal("^REWARD_1", seen.GetString(0));
+    }
+
+    [Fact]
+    public void AccountLogic_SyncAccountSeenArrays_RemovesForUnredeemed()
+    {
+        var userSettings = new JsonObject();
+        var existing = new JsonArray();
+        existing.Add("^REWARD_1");
+        existing.Add("^REWARD_2");
+        userSettings.Set("SeenProducts", existing);
+
+        var rewards = new List<(string Id, bool Present)>
+        {
+            ("^REWARD_1", false),
+            ("^REWARD_2", true),
+        };
+
+        AccountLogic.SyncAccountSeenArrays(userSettings, rewards);
+
+        var seen = userSettings.GetArray("SeenProducts")!;
+        Assert.Equal(1, seen.Length);
+        Assert.Equal("^REWARD_2", seen.GetString(0));
+    }
+
+    [Fact]
+    public void AccountLogic_SyncJsonArrayEntry_RemovesFromRealAccountData()
+    {
+        // Walk up from the test assembly to find the repo root (_ref/ directory)
+        string baseDir = AppContext.BaseDirectory;
+        string? repoRoot = baseDir;
+        while (repoRoot != null && !Directory.Exists(Path.Combine(repoRoot, "_ref")))
+            repoRoot = Path.GetDirectoryName(repoRoot);
+        if (repoRoot == null) return; // Skip if can't find repo root
+
+        string accountPath = Path.Combine(repoRoot, "_ref", "account_mangled", "original_accountdata.hg");
+        if (!File.Exists(accountPath))
+            return; // Skip if reference file not available
+
+        // Initialize the name mapper (required for deobfuscation of obfuscated keys).
+        // In the real app, MainForm.LoadDatabase() does this on startup.
+        string mapperPath = Path.Combine(repoRoot, "Resources", "map", "mapping.json");
+        if (File.Exists(mapperPath))
+        {
+            var mapper = new NMSE.Data.JsonNameMapper();
+            mapper.Load(mapperPath);
+            NMSE.Models.JsonParser.SetDefaultMapper(mapper);
+        }
+
+        var accountObj = NMSE.IO.SaveFileManager.LoadSaveFile(accountPath);
+
+        // Verify the root keys are deobfuscated
+        var rawNames = accountObj.GetRawNames();
+        Assert.Contains("UserSettingsData", rawNames);
+
+        var userSettings = accountObj.GetObject("UserSettingsData");
+        Assert.NotNull(userSettings);
+
+        // Verify SeenProducts exists and is deobfuscated
+        var seenProducts = userSettings!.GetArray("SeenProducts");
+        Assert.NotNull(seenProducts);
+
+        // Verify ^VAULT_ARMOUR is in SeenProducts before removal
+        bool found = false;
+        for (int i = 0; i < seenProducts!.Length; i++)
+        {
+            if (string.Equals(seenProducts.GetString(i), "^VAULT_ARMOUR", StringComparison.OrdinalIgnoreCase))
+            {
+                found = true;
+                break;
+            }
+        }
+        Assert.True(found, "^VAULT_ARMOUR should be in SeenProducts before removal");
+
+        int before = seenProducts.Length;
+        AccountLogic.SyncJsonArrayEntry(userSettings, "SeenProducts", "^VAULT_ARMOUR", false);
+
+        var after = userSettings.GetArray("SeenProducts")!.Length;
+        Assert.Equal(before - 1, after);
+
+        // Also verify the entry is actually gone
+        bool stillPresent = false;
+        var updatedArray = userSettings.GetArray("SeenProducts")!;
+        for (int i = 0; i < updatedArray.Length; i++)
+        {
+            if (string.Equals(updatedArray.GetString(i), "^VAULT_ARMOUR", StringComparison.OrdinalIgnoreCase))
+            {
+                stillPresent = true;
+                break;
+            }
+        }
+        Assert.False(stillPresent, "^VAULT_ARMOUR should NOT be in SeenProducts after removal");
+    }
+
+    [Fact]
     public void RewardDatabase_LoadsNewFieldsFromJson()
     {
         // Create a temp Rewards.json with the new fields
@@ -5277,7 +5446,8 @@ public class LogicTests
     [Fact]
     public void RawJsonLogic_StringEdit_RoundTrip()
     {
-        // Simulate editing "^MIRROR" to "B_WNG_R" via FormatValueForEdit → ParseInputValue
+        // Simulate editing "^MIRROR" to "B_WNG_R"
+        // Done via FormatValueForEdit -> ParseInputValue
         string originalValue = "^MIRROR";
         string editDisplayed = RawJsonLogic.FormatValueForEdit(originalValue);
         Assert.Equal("^MIRROR", editDisplayed); // No quotes shown
@@ -5421,7 +5591,7 @@ public class LogicTests
     [Fact]
     public void RawJsonLogic_CollapseContext_NoChanges_ReturnsEmpty()
     {
-        // All context lines with no changes → should collapse to nothing
+        // All context lines with no changes should always collapse to nothing
         var raw = new List<(RawJsonLogic.DiffLineType, string)>
         {
             (RawJsonLogic.DiffLineType.Context, "line1"),
@@ -5485,7 +5655,7 @@ public class LogicTests
         int addedCount = result.Count(dl => dl.Type == RawJsonLogic.DiffLineType.Added);
         int removedCount = result.Count(dl => dl.Type == RawJsonLogic.DiffLineType.Removed);
 
-        // Only the "StatValue": 0 → "StatValue": 1 change
+        // Only the "StatValue": 0 -> "StatValue": 1 change
         Assert.Equal(1, addedCount);
         Assert.Equal(1, removedCount);
         Assert.Contains(result, dl => dl.Type == RawJsonLogic.DiffLineType.Added && dl.Text.Contains("\"StatValue\": 1"));
@@ -8212,7 +8382,7 @@ public class LogicTests
         // This tests the validation logic: non-integer seed text should result in perkId only
         string perkId = "^PROC_TRAIT_BENEFIT";
         string badSeed = "not_an_integer";
-        // The save logic validates: int.TryParse(seedText, ...) → false → saves perkId without seed
+        // The save logic validates: int.TryParse(seedText, ...) -> false -> saves perkId without seed
         Assert.False(int.TryParse(badSeed, System.Globalization.NumberStyles.Integer,
             System.Globalization.CultureInfo.InvariantCulture, out _));
         // Therefore the saved value should be just the perkId, not "perkId#badSeed"

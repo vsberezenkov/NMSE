@@ -555,6 +555,51 @@ public class PlatformIOTests
         }
     }
 
+    // --- Account data must stay uncompressed ---
+
+    [Fact]
+    public void SaveToFile_AccountData_NoCompression()
+    {
+        // accountdata.hg is plain JSON + null terminator.
+        // Saving with compress: false must NOT produce the 0xE5A1EDFE LZ4 header.
+        string tmpDir = Path.Combine(Path.GetTempPath(), $"nmse_test_{Guid.NewGuid():N}");
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            string path = Path.Combine(tmpDir, "accountdata.hg");
+            var data = JsonObject.Parse("{\"F2P\":4098,\"B89\":{\"32m\":false}}");
+
+            SaveFileManager.SaveToFile(path, data, compress: false, writeMeta: false);
+
+            Assert.True(File.Exists(path));
+            byte[] bytes = File.ReadAllBytes(path);
+
+            // Must NOT start with LZ4 NMS streaming magic (0xE5A1EDFE)
+            Assert.False(bytes.Length >= 4 && bytes[0] == 0xE5 && bytes[1] == 0xA1 &&
+                bytes[2] == 0xED && bytes[3] == 0xFE,
+                "accountdata.hg must not be LZ4 compressed - game expects plain JSON");
+
+            // Must start with JSON opening brace
+            Assert.Equal((byte)'{', bytes[0]);
+
+            // Must end with null terminator
+            Assert.Equal(0, bytes[^1]);
+
+            // Must be valid JSON when trimmed of null terminator
+            string json = System.Text.Encoding.Latin1.GetString(bytes, 0, bytes.Length - 1);
+            var parsed = JsonObject.Parse(json);
+            Assert.NotNull(parsed);
+
+            // No meta file should exist
+            string metaPath = Path.Combine(tmpDir, "mf_accountdata.hg");
+            Assert.False(File.Exists(metaPath), "accountdata.hg must not have a meta file");
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, true);
+        }
+    }
+
     // --- Platform token mapping ---
 
     [Theory]
@@ -1248,5 +1293,348 @@ public class PlatformIOTests
         // Xbox account data should have UserSettingsData like accountdata.hg
         var userSettings = obj.GetObject("UserSettingsData");
         Assert.NotNull(userSettings);
+    }
+
+    [Fact]
+    public void SteamMeta_PreFrontiers_WritesHashes()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), $"nmse_test_{Guid.NewGuid():N}");
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            string savePath = Path.Combine(tmpDir, "save.hg");
+            File.WriteAllText(savePath, "dummy");
+
+            byte[] compressedData = new byte[256];
+            new Random(42).NextBytes(compressedData);
+
+            var metaInfo = new SaveMetaInfo
+            {
+                BaseVersion = 4100, // pre-Frontiers -> META_FORMAT_1
+                GameMode = 1,
+                Season = 0,
+                TotalPlayTime = 1000,
+            };
+
+            MetaFileWriter.WriteSteamMeta(savePath, compressedData, 2048, metaInfo, 2);
+
+            string metaPath = MetaFileWriter.GetSteamMetaPath(savePath);
+            byte[] metaBytes = File.ReadAllBytes(metaPath);
+
+            // Decrypt with 8 iterations for META_FORMAT_1
+            uint[] encrypted = MetaFileWriter.BytesToUInts(metaBytes);
+            uint[] decrypted = MetaCrypto.Decrypt(encrypted, 2, 8);
+            Assert.Equal(MetaFileWriter.META_HEADER, decrypted[0]);
+            Assert.Equal(MetaFileWriter.META_FORMAT_1, decrypted[1]);
+
+            // Hash bytes at offset 8..55 (48 bytes) should NOT be all zeros
+            byte[] decryptedBytes = MetaFileWriter.UIntsToBytes(decrypted);
+            byte[] hashRegion = new byte[48];
+            Array.Copy(decryptedBytes, 8, hashRegion, 0, 48);
+            bool allZero = true;
+            for (int i = 0; i < hashRegion.Length; i++)
+            {
+                if (hashRegion[i] != 0) { allZero = false; break; }
+            }
+            Assert.False(allZero, "Pre-Frontiers meta should contain real hashes, not all zeros");
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, true);
+        }
+    }
+
+    [Fact]
+    public void SteamMeta_Frontiers_WritesZeroHashes()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), $"nmse_test_{Guid.NewGuid():N}");
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            string savePath = Path.Combine(tmpDir, "save.hg");
+            File.WriteAllText(savePath, "dummy");
+
+            byte[] compressedData = new byte[256];
+            new Random(42).NextBytes(compressedData);
+
+            var metaInfo = new SaveMetaInfo
+            {
+                BaseVersion = 4115, // Frontiers -> META_FORMAT_2
+                GameMode = 1,
+                Season = 0,
+                TotalPlayTime = 1000,
+            };
+
+            MetaFileWriter.WriteSteamMeta(savePath, compressedData, 2048, metaInfo, 2);
+
+            string metaPath = MetaFileWriter.GetSteamMetaPath(savePath);
+            byte[] metaBytes = File.ReadAllBytes(metaPath);
+
+            // Decrypt with 6 iterations for META_FORMAT_2+
+            uint[] encrypted = MetaFileWriter.BytesToUInts(metaBytes);
+            uint[] decrypted = MetaCrypto.Decrypt(encrypted, 2, 6);
+            Assert.Equal(MetaFileWriter.META_HEADER, decrypted[0]);
+            Assert.Equal(MetaFileWriter.META_FORMAT_2, decrypted[1]);
+
+            // Hash region at offset 8..55 (48 bytes) should be all zeros
+            byte[] decryptedBytes = MetaFileWriter.UIntsToBytes(decrypted);
+            for (int i = 8; i < 56; i++)
+            {
+                Assert.Equal(0, decryptedBytes[i]);
+            }
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, true);
+        }
+    }
+
+    [Fact]
+    public void SwitchMeta_AccountMeta_OnlyWritesSizeAtOffset8()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), $"nmse_test_{Guid.NewGuid():N}");
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            string savePath = Path.Combine(tmpDir, "savedata00.hg");
+            File.WriteAllText(savePath, "dummy");
+
+            // Create a pre-existing manifest00.hg with known data pattern
+            string metaPath = Path.Combine(tmpDir, "manifest00.hg");
+            byte[] existingData = new byte[100];
+            for (int i = 0; i < existingData.Length; i++)
+                existingData[i] = 0xAA;
+            File.WriteAllBytes(metaPath, existingData);
+
+            var metaInfo = new SaveMetaInfo
+            {
+                BaseVersion = 4115,
+                GameMode = 1,
+                Season = 0,
+            };
+
+            MetaFileWriter.WriteSwitchMeta(savePath, 2048, metaInfo, 0);
+
+            byte[] result = File.ReadAllBytes(metaPath);
+
+            // Bytes 0..7 should be preserved (0xAA pattern)
+            for (int i = 0; i < 8; i++)
+                Assert.Equal(0xAA, result[i]);
+
+            // Offset 8..11 should contain the decompressed size (2048 = 0x00000800 LE)
+            uint writtenSize = BitConverter.ToUInt32(result, 8);
+            Assert.Equal(2048u, writtenSize);
+
+            // Bytes 12+ should be preserved (0xAA pattern)
+            for (int i = 12; i < existingData.Length; i++)
+                Assert.Equal(0xAA, result[i]);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, true);
+        }
+    }
+
+    [Fact]
+    public void SwitchMeta_SaveMeta_WritesFullHeader()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), $"nmse_test_{Guid.NewGuid():N}");
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            string savePath = Path.Combine(tmpDir, "savedata01.hg");
+            File.WriteAllText(savePath, "dummy");
+
+            var metaInfo = new SaveMetaInfo
+            {
+                BaseVersion = 4115,
+                GameMode = 2,
+                Season = 3,
+                TotalPlayTime = 5000,
+            };
+
+            MetaFileWriter.WriteSwitchMeta(savePath, 4096, metaInfo, 1);
+
+            string metaPath = Path.Combine(tmpDir, "manifest01.hg");
+            Assert.True(File.Exists(metaPath));
+            byte[] metaBytes = File.ReadAllBytes(metaPath);
+
+            // Switch meta is not encrypted; read fields directly
+            uint header = BitConverter.ToUInt32(metaBytes, 0);
+            Assert.Equal(MetaFileWriter.META_HEADER_SWITCH_PS, header);
+
+            uint format = BitConverter.ToUInt32(metaBytes, 4);
+            Assert.Equal(MetaFileWriter.META_FORMAT_2, format);
+
+            uint decompressedSize = BitConverter.ToUInt32(metaBytes, 8);
+            Assert.Equal(4096u, decompressedSize);
+
+            int metaIndex = BitConverter.ToInt32(metaBytes, 12);
+            Assert.Equal(1, metaIndex);
+
+            // offset 16 is timestamp (skip, varies)
+            int baseVersion = BitConverter.ToInt32(metaBytes, 20);
+            Assert.Equal(4115, baseVersion);
+
+            ushort gameMode = BitConverter.ToUInt16(metaBytes, 24);
+            Assert.Equal(2, (int)gameMode);
+
+            ushort season = BitConverter.ToUInt16(metaBytes, 26);
+            Assert.Equal(3, (int)season);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, true);
+        }
+    }
+
+    [Fact]
+    public void PlaystationStreamingMeta_AccountMeta_WritesCorrectHeader()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), $"nmse_test_{Guid.NewGuid():N}");
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            string savePath = Path.Combine(tmpDir, "savedata00.hg");
+            File.WriteAllText(savePath, "dummy");
+
+            var metaInfo = new SaveMetaInfo
+            {
+                BaseVersion = 4115,
+                GameMode = 1,
+                Season = 0,
+            };
+
+            MetaFileWriter.WritePlaystationStreamingMeta(savePath, 8192, metaInfo, 0);
+
+            string metaPath = Path.Combine(tmpDir, "manifest00.hg");
+            Assert.True(File.Exists(metaPath));
+            byte[] metaBytes = File.ReadAllBytes(metaPath);
+
+            // PS streaming meta is not encrypted
+            uint header = BitConverter.ToUInt32(metaBytes, 0);
+            Assert.Equal(MetaFileWriter.META_HEADER_SWITCH_PS, header);
+
+            uint format = BitConverter.ToUInt32(metaBytes, 4);
+            Assert.Equal(MetaFileWriter.META_FORMAT_2, format);
+
+            uint decompressedSize = BitConverter.ToUInt32(metaBytes, 8);
+            Assert.Equal(8192u, decompressedSize);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, true);
+        }
+    }
+
+    [Fact]
+    public void PlaystationStreamingMeta_AccountMeta_PreservesExistingData()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), $"nmse_test_{Guid.NewGuid():N}");
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            string savePath = Path.Combine(tmpDir, "savedata00.hg");
+            File.WriteAllText(savePath, "dummy");
+
+            // Create a pre-existing manifest00.hg with known 0xBB pattern
+            string metaPath = Path.Combine(tmpDir, "manifest00.hg");
+            byte[] existingData = new byte[356];
+            for (int i = 0; i < existingData.Length; i++)
+                existingData[i] = 0xBB;
+            File.WriteAllBytes(metaPath, existingData);
+
+            var metaInfo = new SaveMetaInfo
+            {
+                BaseVersion = 4115,
+                GameMode = 1,
+                Season = 0,
+            };
+
+            MetaFileWriter.WritePlaystationStreamingMeta(savePath, 4096, metaInfo, 0);
+
+            byte[] result = File.ReadAllBytes(metaPath);
+
+            // First 12 bytes: header (4) + format (4) + decompressedSize (4)
+            uint header = BitConverter.ToUInt32(result, 0);
+            Assert.Equal(MetaFileWriter.META_HEADER_SWITCH_PS, header);
+
+            uint format = BitConverter.ToUInt32(result, 4);
+            Assert.Equal(MetaFileWriter.META_FORMAT_2, format);
+
+            uint decompressedSize = BitConverter.ToUInt32(result, 8);
+            Assert.Equal(4096u, decompressedSize);
+
+            // Bytes at offset 12+ should retain the 0xBB pattern
+            for (int i = 12; i < existingData.Length; i++)
+                Assert.Equal(0xBB, result[i]);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, true);
+        }
+    }
+
+    [Fact]
+    public void SteamMeta_EncryptDecrypt_FullRoundTrip()
+    {
+        string tmpDir = Path.Combine(Path.GetTempPath(), $"nmse_test_{Guid.NewGuid():N}");
+        Directory.CreateDirectory(tmpDir);
+        try
+        {
+            string savePath = Path.Combine(tmpDir, "save.hg");
+            File.WriteAllText(savePath, "dummy");
+
+            byte[] compressedData = new byte[512];
+            new Random(99).NextBytes(compressedData);
+
+            var metaInfo = new SaveMetaInfo
+            {
+                BaseVersion = 4145, // Worlds Part II -> META_FORMAT_4
+                GameMode = 2,
+                Season = 5,
+                TotalPlayTime = 36000,
+                SaveName = "Round Trip Test",
+                SaveSummary = "Testing full round trip",
+                DifficultyPreset = 3,
+            };
+
+            MetaFileWriter.WriteSteamMeta(savePath, compressedData, 16384, metaInfo, 2);
+
+            // Read back via ReadSteamMeta
+            uint[]? decrypted = MetaFileWriter.ReadSteamMeta(savePath, 2);
+            Assert.NotNull(decrypted);
+
+            Assert.Equal(MetaFileWriter.META_HEADER, decrypted[0]);
+            Assert.Equal(MetaFileWriter.META_FORMAT_4, decrypted[1]);
+
+            // Decompressed size at offset 56 = uint index 14
+            Assert.Equal(16384u, decrypted[14]);
+
+            // BaseVersion at offset 68 = uint index 17
+            Assert.Equal(4145u, decrypted[17]);
+
+            // GameMode (ushort) and Season (ushort) packed at offset 72 = uint index 18
+            ushort gameMode = (ushort)(decrypted[18] & 0xFFFF);
+            ushort season = (ushort)(decrypted[18] >> 16);
+            Assert.Equal(2, (int)gameMode);
+            Assert.Equal(5, (int)season);
+
+            // Verify save name at offset 88 (128 bytes)
+            byte[] decryptedBytes = MetaFileWriter.UIntsToBytes(decrypted);
+            string saveName = Encoding.UTF8.GetString(decryptedBytes, 88, 128).TrimEnd('\0');
+            Assert.Equal("Round Trip Test", saveName);
+
+            // Verify save summary at offset 216 (128 bytes)
+            string saveSummary = Encoding.UTF8.GetString(decryptedBytes, 216, 128).TrimEnd('\0');
+            Assert.Equal("Testing full round trip", saveSummary);
+
+            // Verify difficulty preset at offset 344 (4 bytes) = uint index 86
+            Assert.Equal(3u, decrypted[86]);
+        }
+        finally
+        {
+            Directory.Delete(tmpDir, true);
+        }
     }
 }

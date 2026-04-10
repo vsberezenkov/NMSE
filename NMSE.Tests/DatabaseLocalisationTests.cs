@@ -365,7 +365,7 @@ public class DatabaseLocalisationTests
     [Fact]
     public void GameItemDatabase_SkipsNonItemJsonFiles()
     {
-        // The database should skip Words.json, FrigateTraits.json, etc.
+        // The database should skip Words.json, Frigate Traits.json, etc.
         string tmpDir = Path.Combine(Path.GetTempPath(), "nmse_loc_test_" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(tmpDir);
         try
@@ -375,7 +375,7 @@ public class DatabaseLocalisationTests
             [{ "Id": "CARBON", "Name": "Carbon", "Category": "Substance" }]
             """);
             // Non-item files that should be skipped
-            File.WriteAllText(Path.Combine(tmpDir, "FrigateTraits.json"), """
+            File.WriteAllText(Path.Combine(tmpDir, "Frigate Traits.json"), """
             [{ "Id": "^FUEL_PRI", "Name": "Support Specialist", "Type": "Fuel" }]
             """);
             File.WriteAllText(Path.Combine(tmpDir, "Words.json"), """

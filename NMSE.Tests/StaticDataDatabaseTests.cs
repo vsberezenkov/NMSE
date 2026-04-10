@@ -33,9 +33,9 @@ public class StaticDataDatabaseTests
             var jsonDir = FindResourceJsonDir();
             if (jsonDir == null) return;
 
-            FrigateTraitDatabase.LoadFromFile(Path.Combine(jsonDir, "FrigateTraits.json"));
-            SettlementDatabase.LoadFromFile(Path.Combine(jsonDir, "SettlementPerks.json"));
-            WikiGuideDatabase.LoadFromFile(Path.Combine(jsonDir, "WikiGuide.json"));
+            FrigateTraitDatabase.LoadFromFile(Path.Combine(jsonDir, "Frigate Traits.json"));
+            SettlementDatabase.LoadFromFile(Path.Combine(jsonDir, "Settlement Perks.json"));
+            WikiGuideDatabase.LoadFromFile(Path.Combine(jsonDir, "Wiki Guide.json"));
             TitleDatabase.LoadFromFile(Path.Combine(jsonDir, "Titles.json"));
 
             _jsonLoaded = true;
@@ -398,11 +398,23 @@ public class StaticDataDatabaseTests
     }
 
     [Fact]
-    public void CanAddItem_TechOnly_AcceptsTechnologyModules()
+    public void CanAddItem_TechOnly_RejectsTechnologyModules()
     {
-        // Procedural technology module items are Technology type
-        var item = new GameItem { Id = "UA_PULSE1", ItemType = "Technology Module", Category = "", IsProcedural = true };
-        Assert.True(InventoryStackDatabase.CanAddItemToInventory(item, isTechOnly: true, isCargo: false));
+        // Technology Module items (cargo-holdable fragments with DeploysInto, like
+        // U_SHIPSHIELD3) must NOT be placed directly into tech-only inventories.
+        // Even if marked procedural, the "Technology Module" ItemType indicates
+        // a cargo fragment, not an installable upgrade.
+        var item = new GameItem { Id = "U_SHIPSHIELD3", ItemType = "Technology Module", Category = "Ship", IsProcedural = true };
+        Assert.False(InventoryStackDatabase.CanAddItemToInventory(item, isTechOnly: true, isCargo: false));
+    }
+
+    [Fact]
+    public void CanAddItem_Cargo_AcceptsTechnologyModules()
+    {
+        // Technology Module items are cargo-holdable — they resolve as Product
+        // and should be accepted by cargo inventories.
+        var item = new GameItem { Id = "U_SHIPSHIELD3", ItemType = "Technology Module", Category = "Ship" };
+        Assert.True(InventoryStackDatabase.CanAddItemToInventory(item, isTechOnly: false, isCargo: true));
     }
 
     [Fact]
