@@ -24,13 +24,13 @@ public class WikiGuideTopic
 public static class WikiGuideDatabase
 {
     /// <summary>
-    /// All guide topics. Populated at startup from WikiGuide.json
+    /// All guide topics. Populated at startup from Wiki Guide.json
     /// via <see cref="LoadFromFile"/>. Empty until loaded.
     /// </summary>
     public static readonly List<WikiGuideTopic> Topics = new();
 
     // ── Hardcoded fallback data removed ──
-    // Topic data is now loaded from Resources/json/WikiGuide.json at startup.
+    // Topic data is now loaded from Resources/json/Wiki Guide.json at startup.
     // The JSON file is produced by the extractor's ParseWikiGuide() method
     // from WIKI.MXML and contains topic IDs, names, categories, loc keys,
     // and icon keys for all 57 guide topics.
@@ -72,7 +72,7 @@ public static class WikiGuideDatabase
         _byId.TryGetValue(topicId, out var info) ? info.IconKey : "";
 
     /// <summary>
-    /// Loads wiki guide topics from a WikiGuide.json file.
+    /// Loads wiki guide topics from a Wiki Guide.json file.
     /// Falls back to hardcoded data if the file is missing or invalid.
     /// </summary>
     public static bool LoadFromFile(string jsonPath)

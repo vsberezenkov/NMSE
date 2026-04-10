@@ -45,12 +45,12 @@ public class FrigateTrait
 public static class FrigateTraitDatabase
 {
     /// <summary>
-    /// All known frigate traits. Populated at startup from FrigateTraits.json
+    /// All known frigate traits. Populated at startup from Frigate Traits.json
     /// via <see cref="LoadFromFile"/>. Empty until loaded.
     /// </summary>
     public static readonly IReadOnlyList<FrigateTrait> Traits = new List<FrigateTrait>();
 
-    // Trait data is now loaded from Resources/json/FrigateTraits.json at startup.
+    // Trait data is now loaded from Resources/json/Frigate Traits.json at startup.
     // The JSON file is produced by the extractor's ParseFrigateTraits() method
     // from FRIGATETRAITTABLE.MXML and contains all trait IDs, names, loc keys,
     // stat types, strengths, beneficial flags, and primary/secondary assignments.
@@ -111,7 +111,7 @@ public static class FrigateTraitDatabase
     }
 
     /// <summary>
-    /// Loads frigate traits from a FrigateTraits.json file.
+    /// Loads frigate traits from a Frigate Traits.json file.
     /// Falls back to hardcoded data if the file is missing or invalid.
     /// </summary>
     public static bool LoadFromFile(string jsonPath)

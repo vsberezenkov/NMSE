@@ -95,13 +95,13 @@ public static class SettlementDatabase
     };
 
     /// <summary>
-    /// All known settlement perks. Populated at startup from SettlementPerks.json
+    /// All known settlement perks. Populated at startup from Settlement Perks.json
     /// via <see cref="LoadFromFile"/>. Empty until loaded.
     /// </summary>
     public static readonly IReadOnlyList<SettlementPerk> Perks = new List<SettlementPerk>();
 
     // --- Hardcoded fallback data removed ---
-    // Perk data is now loaded from Resources/json/SettlementPerks.json at startup.
+    // Perk data is now loaded from Resources/json/Settlement Perks.json at startup.
     // The JSON file is produced by the extractor's ParseSettlementPerks() method
     // from SETTLEMENTPERKSTABLE.MXML and contains perk IDs, names, descriptions,
     // loc keys, beneficial/starter/procedural flags, and stat changes.
@@ -113,7 +113,7 @@ public static class SettlementDatabase
     private static readonly Dictionary<string, (string Name, string Description)> _englishBackup = new();
 
     /// <summary>
-    /// Loads settlement perks from a SettlementPerks.json file.
+    /// Loads settlement perks from a Settlement Perks.json file.
     /// Falls back to hardcoded data if the file is missing or invalid.
     /// </summary>
     public static bool LoadFromFile(string jsonPath)
