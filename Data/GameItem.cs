@@ -110,6 +110,14 @@ public class GameItem
     public string DeploysInto { get; set; } = "";
 
     /// <summary>
+    /// The NMS game table this item was extracted from: "Product", "Technology", or "Substance".
+    /// Used to determine which account-level Seen* array the item belongs in
+    /// (SeenProducts, SeenTechnologies, or SeenSubstances), matching the game's own
+    /// classification independent of which JSON file the Categorizer placed the item in.
+    /// </summary>
+    public string SourceTable { get; set; } = "";
+
+    /// <summary>
     /// Maps the Quality field (Normal, Rare, Epic, Legendary, Illegal, Sentinel)
     /// to a class letter (C, B, A, S, X, ?). Returns null if no mapping.
     /// </summary>
@@ -140,8 +148,31 @@ public class GameItem
         _ => null
     };
 
-    /// <summary>Returns a string representation in "Name (Id)" format.</summary>
-    public override string ToString() => $"{Name} ({Id})";
+    /// <summary>
+    /// Returns a display string for the item picker.  Includes the resolved class
+    /// label (e.g. "[B Class]") between the name and ID for items that have a
+    /// quality or rarity classification.
+    /// Format: "Name [X Class] (Id)" or "Name (Id)" when no class applies.
+    /// </summary>
+    public override string ToString()
+    {
+        string? cls = QualityToClass() ?? RarityToClass();
+        if (cls != null)
+        {
+            string label = cls switch
+            {
+                "C" => "C Class",
+                "B" => "B Class",
+                "A" => "A Class",
+                "S" => "S Class",
+                "X" => "X Class",
+                "?" => "Sentinel",
+                _ => cls
+            };
+            return $"{Name} [{label}] ({Id})";
+        }
+        return $"{Name} ({Id})";
+    }
 
     // Per inventory:
     //   Suit        -> [Suit]

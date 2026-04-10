@@ -690,6 +690,20 @@ public partial class InventoryGridPanel : UserControl
         var items = GetFilteredItems().OrderBy(i => i.Name).ToArray();
         _itemPicker.Items.AddRange(items);
 
+        // Auto-size the dropdown width to fit the longest item name so that
+        // long names are not cut off by the combobox field width.
+        int maxWidth = _itemPicker.Width;
+        using (var g = _itemPicker.CreateGraphics())
+        {
+            foreach (var obj in _itemPicker.Items)
+            {
+                int w = (int)g.MeasureString(obj.ToString() ?? "", _itemPicker.Font).Width
+                        + SystemInformation.VerticalScrollBarWidth + 4;
+                if (w > maxWidth) maxWidth = w;
+            }
+        }
+        _itemPicker.DropDownWidth = maxWidth;
+
         _itemPicker.SelectedIndex = 0;
         _itemPicker.EndUpdate();
         _suppressFilterEvents = false;

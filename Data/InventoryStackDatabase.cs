@@ -293,6 +293,15 @@ public static class InventoryStackDatabase
 
         if (isTechOnly)
         {
+            // Technology Module items (cargo-holdable fragments that deploy into
+            // tech slots, e.g. U_SHIPSHIELD3) must never be placed directly into
+            // technology inventories — they belong in cargo and unpack via
+            // DeploysInto.  Exclude them before the TechnologyCategory check,
+            // which would otherwise let them pass because they carry a Category
+            // value like "Weapon" or "Ship".
+            if (item.ItemType.Equals("Technology Module", StringComparison.OrdinalIgnoreCase))
+                return false;
+
             // Tech-only inventories accept all Technology items (base tech,
             // upgrades, procedural tech modules).
             if (invType == "Technology")

@@ -57,9 +57,9 @@ public class GameItemDatabase
                     if (itemType.Equals("Rewards", StringComparison.OrdinalIgnoreCase) ||
                         itemType.Equals("Recipes", StringComparison.OrdinalIgnoreCase) ||
                         itemType.Equals("Words", StringComparison.OrdinalIgnoreCase) ||
-                        itemType.Equals("FrigateTraits", StringComparison.OrdinalIgnoreCase) ||
-                        itemType.Equals("SettlementPerks", StringComparison.OrdinalIgnoreCase) ||
-                        itemType.Equals("WikiGuide", StringComparison.OrdinalIgnoreCase) ||
+                        itemType.Equals("Frigate Traits", StringComparison.OrdinalIgnoreCase) ||
+                        itemType.Equals("Settlement Perks", StringComparison.OrdinalIgnoreCase) ||
+                        itemType.Equals("Wiki Guide", StringComparison.OrdinalIgnoreCase) ||
                         itemType.Equals("Titles", StringComparison.OrdinalIgnoreCase) ||
                         itemType.Equals("none", StringComparison.OrdinalIgnoreCase))
                         return;
@@ -177,6 +177,9 @@ public class GameItemDatabase
 
                         if (element.TryGetProperty("DeploysInto", out var deployProp))
                             item.DeploysInto = deployProp.GetString() ?? "";
+
+                        if (element.TryGetProperty("SourceTable", out var srcTableProp))
+                            item.SourceTable = srcTableProp.GetString() ?? "";
 
                         if (element.TryGetProperty("Procedural", out var procProp) && procProp.ValueKind == JsonValueKind.True)
                             item.IsProcedural = true;
