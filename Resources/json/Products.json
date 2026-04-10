@@ -78,6 +78,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/CASING"
 	},
 	{
@@ -161,6 +162,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/NANOTUBES"
 	},
 	{
@@ -242,6 +244,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/CARBON_SEAL"
 	},
 	{
@@ -327,6 +330,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/MICROCHIP"
 	},
 	{
@@ -416,6 +420,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/HYDRALIC"
 	},
 	{
@@ -505,6 +510,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/COMPUTER"
 	},
 	{
@@ -590,6 +596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/MAGNET"
 	},
 	{
@@ -679,6 +686,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/MIRROR"
 	},
 	{
@@ -768,6 +776,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIO"
 	},
 	{
@@ -842,6 +851,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/TECH_COMP"
 	},
 	{
@@ -918,6 +928,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/REPAIRKIT"
 	},
 	{
@@ -1004,6 +1015,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/PRODFUEL2"
 	},
 	{
@@ -1089,6 +1101,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/POWERCELL"
 	},
 	{
@@ -1174,6 +1187,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/SHIPCHARGE"
 	},
 	{
@@ -1256,6 +1270,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/JELLY"
 	},
 	{
@@ -1342,6 +1357,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/LAUNCHFUEL"
 	},
 	{
@@ -1428,6 +1444,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/GRENFUEL1"
 	},
 	{
@@ -1509,6 +1526,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/AMMO"
 	},
 	{
@@ -1594,6 +1612,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/AM_HOUSING"
 	},
 	{
@@ -1680,6 +1699,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/ANTIMATTER"
 	},
 	{
@@ -1765,6 +1785,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/HYPERFUEL1"
 	},
 	{
@@ -1850,6 +1871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/HYPERFUEL2"
 	},
 	{
@@ -1936,6 +1958,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/ALLOY1"
 	},
 	{
@@ -2022,6 +2045,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/ALLOY2"
 	},
 	{
@@ -2108,6 +2132,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/ALLOY3"
 	},
 	{
@@ -2194,6 +2219,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/ALLOY4"
 	},
 	{
@@ -2280,6 +2306,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/ALLOY5"
 	},
 	{
@@ -2366,6 +2393,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/ALLOY6"
 	},
 	{
@@ -2457,6 +2485,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/ALLOY7"
 	},
 	{
@@ -2548,6 +2577,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/ALLOY8"
 	},
 	{
@@ -2622,6 +2652,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/CHART_HIVE"
 	},
 	{
@@ -2707,6 +2738,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/FRIGATE_FUEL_1"
 	},
 	{
@@ -2792,6 +2824,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/FRIGATE_FUEL_2"
 	},
 	{
@@ -2877,6 +2910,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/FRIGATE_FUEL_3"
 	},
 	{
@@ -2963,6 +2997,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/FARMPROD1"
 	},
 	{
@@ -3049,6 +3084,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/FARMPROD2"
 	},
 	{
@@ -3130,6 +3166,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/FARMPROD3"
 	},
 	{
@@ -3215,6 +3252,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/FARMPROD4"
 	},
 	{
@@ -3300,6 +3338,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/FARMPROD5"
 	},
 	{
@@ -3382,6 +3421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/FARMPROD6"
 	},
 	{
@@ -3468,6 +3508,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/FARMPROD7"
 	},
 	{
@@ -3554,6 +3595,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/FARMPROD8"
 	},
 	{
@@ -3640,6 +3682,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/FARMPROD9"
 	},
 	{
@@ -3727,6 +3770,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/REACTION1"
 	},
 	{
@@ -3814,6 +3858,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/REACTION2"
 	},
 	{
@@ -3901,6 +3946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/REACTION3"
 	},
 	{
@@ -3987,6 +4033,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/COMPOUND1"
 	},
 	{
@@ -4074,6 +4121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/COMPOUND2"
 	},
 	{
@@ -4161,6 +4209,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/COMPOUND3"
 	},
 	{
@@ -4248,6 +4297,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/COMPOUND4"
 	},
 	{
@@ -4333,6 +4383,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/COMPOUND5"
 	},
 	{
@@ -4418,6 +4469,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/COMPOUND6"
 	},
 	{
@@ -4507,6 +4559,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/ULTRAPROD1"
 	},
 	{
@@ -4596,6 +4649,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/ULTRAPROD2"
 	},
 	{
@@ -4670,6 +4724,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_STEM1"
 	},
 	{
@@ -4744,6 +4799,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_STEM2"
 	},
 	{
@@ -4818,6 +4874,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_STEM3"
 	},
 	{
@@ -4892,6 +4949,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_STEM4"
 	},
 	{
@@ -4966,6 +5024,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_GROWTH1"
 	},
 	{
@@ -5040,6 +5099,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_GROWTH2"
 	},
 	{
@@ -5114,6 +5174,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_GROWTH3"
 	},
 	{
@@ -5188,6 +5249,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_GROWTH4"
 	},
 	{
@@ -5277,6 +5339,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_COMP1"
 	},
 	{
@@ -5366,6 +5429,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_COMP2"
 	},
 	{
@@ -5455,6 +5519,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_COMP3"
 	},
 	{
@@ -5540,6 +5605,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_COMP4"
 	},
 	{
@@ -5616,6 +5682,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_COMP5"
 	},
 	{
@@ -5692,6 +5759,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_COMP5_0"
 	},
 	{
@@ -5768,6 +5836,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_COMP5_1"
 	},
 	{
@@ -5844,6 +5913,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BIOSHIP_COMP5_2"
 	},
 	{
@@ -5918,6 +5988,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/EXOTIC_BIOPROD"
 	},
 	{
@@ -5992,6 +6063,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/DRONE_BROKEN"
 	},
 	{
@@ -6066,6 +6138,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/DRONE_PART_E2"
 	},
 	{
@@ -6140,6 +6213,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/DRONE_PART_E3"
 	},
 	{
@@ -6214,6 +6288,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/DRONE_PART_P"
 	},
 	{
@@ -6303,6 +6378,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/GAS_BRAIN_LOC"
 	},
 	{
@@ -6377,6 +6453,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/U_TECHBOX_CORE"
 	},
 	{
@@ -6451,6 +6528,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/FUELPROD3"
 	},
 	{
@@ -6525,6 +6603,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/LANDPROD3"
 	},
 	{
@@ -6599,6 +6678,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/CAVEPROD3"
 	},
 	{
@@ -6673,6 +6753,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/WATERPROD3"
 	},
 	{
@@ -6747,6 +6828,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/CATAPROD3"
 	},
 	{
@@ -6821,6 +6903,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/OXYPROD3"
 	},
 	{
@@ -6895,6 +6978,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/OXY_CRAFT"
 	},
 	{
@@ -6969,6 +7053,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/WATER_CRAFT"
 	},
 	{
@@ -7043,6 +7128,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/CAVE_CRAFT"
 	},
 	{
@@ -7117,6 +7203,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/CATA_CRAFT"
 	},
 	{
@@ -7191,6 +7278,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/PRODFUEL1"
 	},
 	{
@@ -7265,6 +7353,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/POWERCELL2"
 	},
 	{
@@ -7350,6 +7439,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/TOXICPLANT"
 	},
 	{
@@ -7435,6 +7525,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/SNOWPLANT"
 	},
 	{
@@ -7520,6 +7611,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/RADIOPLANT"
 	},
 	{
@@ -7605,6 +7697,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/BARRENPLANT"
 	},
 	{
@@ -7690,6 +7783,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/LUSHPLANT"
 	},
 	{
@@ -7775,6 +7869,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/SCORCHEDPLANT"
 	},
 	{
@@ -7856,6 +7951,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/CREATUREPLANT"
 	},
 	{
@@ -7937,6 +8033,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/POOPPLANT"
 	},
 	{
@@ -8026,6 +8123,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/GRAVPLANT"
 	},
 	{
@@ -8111,6 +8209,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/SACVENOMPLANT"
 	},
 	{
@@ -8196,6 +8295,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/PEARLPLANT"
 	},
 	{
@@ -8281,6 +8381,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "products/NIPPLANT"
 	},
 	{
@@ -8332,6 +8433,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_GAS1",
 		"Symbol": "Su",
+		"SourceTable": "Substance",
 		"Slug": "products/GAS1"
 	},
 	{
@@ -8383,6 +8485,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_GAS2",
 		"Symbol": "Rn",
+		"SourceTable": "Substance",
 		"Slug": "products/GAS2"
 	},
 	{
@@ -8434,6 +8537,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_GAS3",
 		"Symbol": "N",
+		"SourceTable": "Substance",
 		"Slug": "products/GAS3"
 	},
 	{
@@ -8485,6 +8589,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_GAS4",
 		"Symbol": "CH4",
+		"SourceTable": "Substance",
 		"Slug": "products/GAS4"
 	}
 ]

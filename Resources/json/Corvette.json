@@ -71,6 +71,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_COK_A",
 		"BuildableShipTechName": "Flight Control Systems C-Class Upgrade",
 		"BuildableShipTechGroup": "C-Class Upgrade",
@@ -148,6 +149,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_COK_B",
 		"BuildableShipTechName": "Flight Control Systems C-Class Upgrade",
 		"BuildableShipTechGroup": "C-Class Upgrade",
@@ -225,6 +227,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_COK_D",
 		"BuildableShipTechName": "Flight Control Systems C-Class Upgrade",
 		"BuildableShipTechGroup": "C-Class Upgrade",
@@ -302,6 +305,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_HAB_A",
 		"BuildableShipTechName": "Cargo Systems B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -379,6 +383,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_HAB_B",
 		"BuildableShipTechName": "Cargo Systems B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -456,6 +461,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_HAB_C",
 		"BuildableShipTechName": "Cargo Systems B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -533,6 +539,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_HAB1_A",
 		"BuildableShipTechName": "Cargo Systems C-Class Upgrade",
 		"BuildableShipTechGroup": "C-Class Upgrade",
@@ -610,6 +617,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_HAB1_B",
 		"BuildableShipTechName": "Cargo Systems C-Class Upgrade",
 		"BuildableShipTechGroup": "C-Class Upgrade",
@@ -687,6 +695,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_HAB1_C",
 		"BuildableShipTechName": "Cargo Systems C-Class Upgrade",
 		"BuildableShipTechGroup": "C-Class Upgrade",
@@ -764,6 +773,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_LND_A",
 		"BuildableShipTechName": "Launch Systems B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -841,6 +851,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_LND_B",
 		"BuildableShipTechName": "Launch Systems B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -918,6 +929,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_LND_C",
 		"BuildableShipTechName": "Launch Systems B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -995,6 +1007,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_LAN_B",
 		"BuildableShipTechName": "Launch Systems B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -1072,6 +1085,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_A",
 		"BuildableShipTechName": "Main Engines A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -1149,6 +1163,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_A_R",
 		"BuildableShipTechName": "Main Engines A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -1226,6 +1241,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_B",
 		"BuildableShipTechName": "Launch Systems B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -1303,6 +1319,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_B_R",
 		"BuildableShipTechName": "Launch Systems B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -1380,6 +1397,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_C",
 		"BuildableShipTechName": "Main Engines A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -1457,6 +1475,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_C_R",
 		"BuildableShipTechName": "Main Engines A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -1534,6 +1553,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_D",
 		"BuildableShipTechName": "Main Engines A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -1611,6 +1631,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_D_R",
 		"BuildableShipTechName": "Main Engines A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -1688,6 +1709,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_E"
 	},
 	{
@@ -1762,6 +1784,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_E_R"
 	},
 	{
@@ -1836,6 +1859,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_F",
 		"BuildableShipTechName": "Main Engines B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -1913,6 +1937,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_F_R",
 		"BuildableShipTechName": "Main Engines B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -1990,6 +2015,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_G"
 	},
 	{
@@ -2064,6 +2090,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_G_R"
 	},
 	{
@@ -2138,6 +2165,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_H",
 		"BuildableShipTechName": "Main Engines B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -2215,6 +2243,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_H_R",
 		"BuildableShipTechName": "Main Engines B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -2292,6 +2321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_I"
 	},
 	{
@@ -2366,6 +2396,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_I_R"
 	},
 	{
@@ -2440,6 +2471,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_J"
 	},
 	{
@@ -2514,6 +2546,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_J_R"
 	},
 	{
@@ -2588,6 +2621,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_K"
 	},
 	{
@@ -2662,6 +2696,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_K_R"
 	},
 	{
@@ -2736,6 +2771,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_L",
 		"BuildableShipTechName": "Main Engines B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -2813,6 +2849,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_L_R",
 		"BuildableShipTechName": "Main Engines B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -2890,6 +2927,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_M"
 	},
 	{
@@ -2964,6 +3002,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_M_R"
 	},
 	{
@@ -3038,6 +3077,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_N",
 		"BuildableShipTechName": "Main Engines A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -3115,6 +3155,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_N_R",
 		"BuildableShipTechName": "Main Engines A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -3192,6 +3233,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_O_0"
 	},
 	{
@@ -3266,6 +3308,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_O_0_R"
 	},
 	{
@@ -3340,6 +3383,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_O_1"
 	},
 	{
@@ -3414,6 +3458,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_O_1_R"
 	},
 	{
@@ -3488,6 +3533,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_O_2"
 	},
 	{
@@ -3562,6 +3608,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_O_2_R"
 	},
 	{
@@ -3651,6 +3698,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_P",
 		"BuildableShipTechName": "Main Engines A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -3743,6 +3791,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_P_R",
 		"BuildableShipTechName": "Main Engines A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -3835,6 +3884,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_P_T",
 		"BuildableShipTechName": "Main Engines A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -3927,6 +3977,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_P_B",
 		"BuildableShipTechName": "Main Engines A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -4019,6 +4070,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_Q"
 	},
 	{
@@ -4108,6 +4160,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_Q_R"
 	},
 	{
@@ -4197,6 +4250,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_R"
 	},
 	{
@@ -4286,6 +4340,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_R_R"
 	},
 	{
@@ -4375,6 +4430,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_R_T"
 	},
 	{
@@ -4464,6 +4520,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WNG_R_B"
 	},
 	{
@@ -4538,6 +4595,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TUR_A",
 		"BuildableShipTechName": "Photon Cannon array A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -4630,6 +4688,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TUR_B",
 		"BuildableShipTechName": "Positron Ejector array A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -4707,6 +4766,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TUR_C",
 		"BuildableShipTechName": "Laser Defence Array A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -4784,6 +4844,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TUR_D",
 		"BuildableShipTechName": "Cyclotron defence array A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -4861,6 +4922,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TUR_E",
 		"BuildableShipTechName": "Infra-Knife Accelerator array A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -4938,6 +5000,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TUR_F",
 		"BuildableShipTechName": "Infra-Knife Accelerator array A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -5015,6 +5078,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_SHL_A",
 		"BuildableShipTechName": "Shielding System B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -5092,6 +5156,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_SHL_B",
 		"BuildableShipTechName": "Shielding System B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -5169,6 +5234,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_SHL_C",
 		"BuildableShipTechName": "Shielding System B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -5246,6 +5312,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_SHL_D",
 		"BuildableShipTechName": "Shielding System B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -5338,6 +5405,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_SHL_E",
 		"BuildableShipTechName": "Shielding System B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -5415,6 +5483,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TRU_A",
 		"BuildableShipTechName": "Main Engines B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -5492,6 +5561,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TRU_B",
 		"BuildableShipTechName": "Main Engines B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -5569,6 +5639,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TRU_C",
 		"BuildableShipTechName": "Main Engines A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -5646,6 +5717,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TRU_D",
 		"BuildableShipTechName": "Main Engines B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -5723,6 +5795,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TRU_E",
 		"BuildableShipTechName": "Main Engines B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -5800,6 +5873,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TRU_F",
 		"BuildableShipTechName": "Main Engines B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -5877,6 +5951,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TRU_G",
 		"BuildableShipTechName": "Main Engines B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -5954,6 +6029,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_TRU_H",
 		"BuildableShipTechName": "Main Engines B-Class Upgrade",
 		"BuildableShipTechGroup": "B-Class Upgrade",
@@ -6031,6 +6107,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_ALK_A"
 	},
 	{
@@ -6105,6 +6182,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_ALK_Z_A"
 	},
 	{
@@ -6179,6 +6257,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_ALK_B"
 	},
 	{
@@ -6253,6 +6332,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_ALK_Z_B"
 	},
 	{
@@ -6327,6 +6407,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_ALK_C"
 	},
 	{
@@ -6401,6 +6482,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_ALK_Z_C"
 	},
 	{
@@ -6475,6 +6557,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_ALK_D"
 	},
 	{
@@ -6549,6 +6632,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_ALK_Z_D"
 	},
 	{
@@ -6634,6 +6718,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_TOIL0"
 	},
 	{
@@ -6723,6 +6808,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_KITC0"
 	},
 	{
@@ -6804,6 +6890,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_BUNK0"
 	},
 	{
@@ -6889,6 +6976,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_CARG0"
 	},
 	{
@@ -6974,6 +7062,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_CARG1"
 	},
 	{
@@ -7059,6 +7148,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_CARG2"
 	},
 	{
@@ -7144,6 +7234,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_CARG3"
 	},
 	{
@@ -7229,6 +7320,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_CARG4"
 	},
 	{
@@ -7314,6 +7406,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_CARG5"
 	},
 	{
@@ -7399,6 +7492,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_CARG6"
 	},
 	{
@@ -7484,6 +7578,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_CARG7"
 	},
 	{
@@ -7569,6 +7664,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_CARG8"
 	},
 	{
@@ -7654,6 +7750,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_CARG9"
 	},
 	{
@@ -7743,6 +7840,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_MED0"
 	},
 	{
@@ -7828,6 +7926,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_TECH0"
 	},
 	{
@@ -7917,6 +8016,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_TECH1"
 	},
 	{
@@ -8002,6 +8102,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_WIND0"
 	},
 	{
@@ -8087,6 +8188,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_WIND1"
 	},
 	{
@@ -8172,6 +8274,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_WIND2"
 	},
 	{
@@ -8261,6 +8364,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_WALL_PLAN0"
 	},
 	{
@@ -8342,6 +8446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DOOR0"
 	},
 	{
@@ -8416,6 +8521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_NE"
 	},
 	{
@@ -8490,6 +8596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_NE1"
 	},
 	{
@@ -8564,6 +8671,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_NE2"
 	},
 	{
@@ -8638,6 +8746,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_NE3"
 	},
 	{
@@ -8712,6 +8821,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_Y_NE"
 	},
 	{
@@ -8786,6 +8896,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_Y_NE1"
 	},
 	{
@@ -8860,6 +8971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_Y_NE2"
 	},
 	{
@@ -8934,6 +9046,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_Y_NE3"
 	},
 	{
@@ -9008,6 +9121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_NW"
 	},
 	{
@@ -9082,6 +9196,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_NW1"
 	},
 	{
@@ -9156,6 +9271,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_NW2"
 	},
 	{
@@ -9230,6 +9346,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_NW3"
 	},
 	{
@@ -9304,6 +9421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_Y_NW"
 	},
 	{
@@ -9378,6 +9496,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_Y_NW1"
 	},
 	{
@@ -9452,6 +9571,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_Y_NW2"
 	},
 	{
@@ -9526,6 +9646,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_Y_NW3"
 	},
 	{
@@ -9600,6 +9721,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_N"
 	},
 	{
@@ -9674,6 +9796,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_E"
 	},
 	{
@@ -9748,6 +9871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_S"
 	},
 	{
@@ -9822,6 +9946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_W"
 	},
 	{
@@ -9896,6 +10021,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_Y_N"
 	},
 	{
@@ -9970,6 +10096,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_Y_E"
 	},
 	{
@@ -10044,6 +10171,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_Y_S"
 	},
 	{
@@ -10118,6 +10246,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_A_Y_W"
 	},
 	{
@@ -10192,6 +10321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_NE"
 	},
 	{
@@ -10266,6 +10396,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_NE1"
 	},
 	{
@@ -10340,6 +10471,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_NE2"
 	},
 	{
@@ -10414,6 +10546,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_NE3"
 	},
 	{
@@ -10488,6 +10621,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_Y_NE"
 	},
 	{
@@ -10562,6 +10696,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_Y_NE1"
 	},
 	{
@@ -10636,6 +10771,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_Y_NE2"
 	},
 	{
@@ -10710,6 +10846,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_Y_NE3"
 	},
 	{
@@ -10784,6 +10921,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_NW"
 	},
 	{
@@ -10858,6 +10996,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_NW1"
 	},
 	{
@@ -10932,6 +11071,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_NW2"
 	},
 	{
@@ -11006,6 +11146,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_NW3"
 	},
 	{
@@ -11080,6 +11221,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_Y_NW"
 	},
 	{
@@ -11154,6 +11296,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_Y_NW1"
 	},
 	{
@@ -11228,6 +11371,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_Y_NW2"
 	},
 	{
@@ -11302,6 +11446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_Y_NW3"
 	},
 	{
@@ -11376,6 +11521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_N"
 	},
 	{
@@ -11450,6 +11596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_E"
 	},
 	{
@@ -11524,6 +11671,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_S"
 	},
 	{
@@ -11598,6 +11746,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_W"
 	},
 	{
@@ -11672,6 +11821,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_Y_N"
 	},
 	{
@@ -11746,6 +11896,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_Y_E"
 	},
 	{
@@ -11820,6 +11971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_Y_S"
 	},
 	{
@@ -11894,6 +12046,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_B_Y_W"
 	},
 	{
@@ -11968,6 +12121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_NE"
 	},
 	{
@@ -12042,6 +12196,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_NE1"
 	},
 	{
@@ -12116,6 +12271,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_NE2"
 	},
 	{
@@ -12190,6 +12346,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_NE3"
 	},
 	{
@@ -12264,6 +12421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_Y_NE"
 	},
 	{
@@ -12338,6 +12496,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_Y_NE1"
 	},
 	{
@@ -12412,6 +12571,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_Y_NE2"
 	},
 	{
@@ -12486,6 +12646,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_Y_NE3"
 	},
 	{
@@ -12560,6 +12721,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_NW"
 	},
 	{
@@ -12634,6 +12796,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_NW1"
 	},
 	{
@@ -12708,6 +12871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_NW2"
 	},
 	{
@@ -12782,6 +12946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_NW3"
 	},
 	{
@@ -12856,6 +13021,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_Y_NW"
 	},
 	{
@@ -12930,6 +13096,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_Y_NW1"
 	},
 	{
@@ -13004,6 +13171,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_Y_NW2"
 	},
 	{
@@ -13078,6 +13246,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_Y_NW3"
 	},
 	{
@@ -13152,6 +13321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_N"
 	},
 	{
@@ -13226,6 +13396,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_E"
 	},
 	{
@@ -13300,6 +13471,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_S"
 	},
 	{
@@ -13374,6 +13546,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_W"
 	},
 	{
@@ -13448,6 +13621,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_Y_N"
 	},
 	{
@@ -13522,6 +13696,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_Y_E"
 	},
 	{
@@ -13596,6 +13771,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_Y_S"
 	},
 	{
@@ -13670,6 +13846,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_C_Y_W"
 	},
 	{
@@ -13744,6 +13921,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_NE"
 	},
 	{
@@ -13818,6 +13996,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_NE1"
 	},
 	{
@@ -13892,6 +14071,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_NE2"
 	},
 	{
@@ -13966,6 +14146,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_NE3"
 	},
 	{
@@ -14040,6 +14221,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_Y_NE"
 	},
 	{
@@ -14114,6 +14296,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_Y_NE1"
 	},
 	{
@@ -14188,6 +14371,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_Y_NE2"
 	},
 	{
@@ -14262,6 +14446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_Y_NE3"
 	},
 	{
@@ -14336,6 +14521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_NW"
 	},
 	{
@@ -14410,6 +14596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_NW1"
 	},
 	{
@@ -14484,6 +14671,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_NW2"
 	},
 	{
@@ -14558,6 +14746,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_NW3"
 	},
 	{
@@ -14632,6 +14821,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_Y_NW"
 	},
 	{
@@ -14706,6 +14896,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_Y_NW1"
 	},
 	{
@@ -14780,6 +14971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_Y_NW2"
 	},
 	{
@@ -14854,6 +15046,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_Y_NW3"
 	},
 	{
@@ -14928,6 +15121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_N"
 	},
 	{
@@ -15002,6 +15196,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_E"
 	},
 	{
@@ -15076,6 +15271,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_S"
 	},
 	{
@@ -15150,6 +15346,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_W"
 	},
 	{
@@ -15224,6 +15421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_Y_N"
 	},
 	{
@@ -15298,6 +15496,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_Y_E"
 	},
 	{
@@ -15372,6 +15571,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_Y_S"
 	},
 	{
@@ -15446,6 +15646,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_D_Y_W"
 	},
 	{
@@ -15520,6 +15721,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_NE"
 	},
 	{
@@ -15594,6 +15796,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_NE1"
 	},
 	{
@@ -15668,6 +15871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_NE2"
 	},
 	{
@@ -15742,6 +15946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_NE3"
 	},
 	{
@@ -15816,6 +16021,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_Y_NE"
 	},
 	{
@@ -15890,6 +16096,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_Y_NE1"
 	},
 	{
@@ -15964,6 +16171,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_Y_NE2"
 	},
 	{
@@ -16038,6 +16246,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_Y_NE3"
 	},
 	{
@@ -16112,6 +16321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_NW"
 	},
 	{
@@ -16186,6 +16396,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_NW1"
 	},
 	{
@@ -16260,6 +16471,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_NW2"
 	},
 	{
@@ -16334,6 +16546,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_NW3"
 	},
 	{
@@ -16408,6 +16621,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_Y_NW"
 	},
 	{
@@ -16482,6 +16696,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_Y_NW1"
 	},
 	{
@@ -16556,6 +16771,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_Y_NW2"
 	},
 	{
@@ -16630,6 +16846,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_Y_NW3"
 	},
 	{
@@ -16704,6 +16921,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_N"
 	},
 	{
@@ -16778,6 +16996,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_E"
 	},
 	{
@@ -16852,6 +17071,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_S"
 	},
 	{
@@ -16926,6 +17146,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_W"
 	},
 	{
@@ -17000,6 +17221,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_Y_N"
 	},
 	{
@@ -17074,6 +17296,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_Y_E"
 	},
 	{
@@ -17148,6 +17371,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_Y_S"
 	},
 	{
@@ -17222,6 +17446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_E_Y_W"
 	},
 	{
@@ -17296,6 +17521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_NE"
 	},
 	{
@@ -17370,6 +17596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_NE1"
 	},
 	{
@@ -17444,6 +17671,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_NE2"
 	},
 	{
@@ -17518,6 +17746,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_NE3"
 	},
 	{
@@ -17592,6 +17821,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_Y_NE"
 	},
 	{
@@ -17666,6 +17896,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_Y_NE1"
 	},
 	{
@@ -17740,6 +17971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_Y_NE2"
 	},
 	{
@@ -17814,6 +18046,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_Y_NE3"
 	},
 	{
@@ -17888,6 +18121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_NW"
 	},
 	{
@@ -17962,6 +18196,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_NW1"
 	},
 	{
@@ -18036,6 +18271,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_NW2"
 	},
 	{
@@ -18110,6 +18346,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_NW3"
 	},
 	{
@@ -18184,6 +18421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_Y_NW"
 	},
 	{
@@ -18258,6 +18496,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_Y_NW1"
 	},
 	{
@@ -18332,6 +18571,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_Y_NW2"
 	},
 	{
@@ -18406,6 +18646,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_Y_NW3"
 	},
 	{
@@ -18480,6 +18721,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_N"
 	},
 	{
@@ -18554,6 +18796,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_E"
 	},
 	{
@@ -18628,6 +18871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_S"
 	},
 	{
@@ -18702,6 +18946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_W"
 	},
 	{
@@ -18776,6 +19021,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_Y_N"
 	},
 	{
@@ -18850,6 +19096,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_Y_E"
 	},
 	{
@@ -18924,6 +19171,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_Y_S"
 	},
 	{
@@ -18998,6 +19246,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_F_Y_W"
 	},
 	{
@@ -19072,6 +19321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_NE"
 	},
 	{
@@ -19146,6 +19396,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_NE1"
 	},
 	{
@@ -19220,6 +19471,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_NE2"
 	},
 	{
@@ -19294,6 +19546,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_NE3"
 	},
 	{
@@ -19368,6 +19621,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_Y_NE"
 	},
 	{
@@ -19442,6 +19696,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_Y_NE1"
 	},
 	{
@@ -19516,6 +19771,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_Y_NE2"
 	},
 	{
@@ -19590,6 +19846,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_Y_NE3"
 	},
 	{
@@ -19664,6 +19921,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_NW"
 	},
 	{
@@ -19738,6 +19996,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_NW1"
 	},
 	{
@@ -19812,6 +20071,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_NW2"
 	},
 	{
@@ -19886,6 +20146,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_NW3"
 	},
 	{
@@ -19960,6 +20221,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_Y_NW"
 	},
 	{
@@ -20034,6 +20296,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_Y_NW1"
 	},
 	{
@@ -20108,6 +20371,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_Y_NW2"
 	},
 	{
@@ -20182,6 +20446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_Y_NW3"
 	},
 	{
@@ -20256,6 +20521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_N"
 	},
 	{
@@ -20330,6 +20596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_E"
 	},
 	{
@@ -20404,6 +20671,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_S"
 	},
 	{
@@ -20478,6 +20746,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_W"
 	},
 	{
@@ -20552,6 +20821,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_Y_N"
 	},
 	{
@@ -20626,6 +20896,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_Y_E"
 	},
 	{
@@ -20700,6 +20971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_Y_S"
 	},
 	{
@@ -20774,6 +21046,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_G_Y_W"
 	},
 	{
@@ -20848,6 +21121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_NE"
 	},
 	{
@@ -20922,6 +21196,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_NE1"
 	},
 	{
@@ -20996,6 +21271,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_NE2"
 	},
 	{
@@ -21070,6 +21346,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_NE3"
 	},
 	{
@@ -21144,6 +21421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_Y_NE"
 	},
 	{
@@ -21218,6 +21496,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_Y_NE1"
 	},
 	{
@@ -21292,6 +21571,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_Y_NE2"
 	},
 	{
@@ -21366,6 +21646,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_Y_NE3"
 	},
 	{
@@ -21440,6 +21721,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_NW"
 	},
 	{
@@ -21514,6 +21796,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_NW1"
 	},
 	{
@@ -21588,6 +21871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_NW2"
 	},
 	{
@@ -21662,6 +21946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_NW3"
 	},
 	{
@@ -21736,6 +22021,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_Y_NW"
 	},
 	{
@@ -21810,6 +22096,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_Y_NW1"
 	},
 	{
@@ -21884,6 +22171,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_Y_NW2"
 	},
 	{
@@ -21958,6 +22246,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_Y_NW3"
 	},
 	{
@@ -22032,6 +22321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_N"
 	},
 	{
@@ -22106,6 +22396,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_E"
 	},
 	{
@@ -22180,6 +22471,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_S"
 	},
 	{
@@ -22254,6 +22546,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_W"
 	},
 	{
@@ -22328,6 +22621,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_Y_N"
 	},
 	{
@@ -22402,6 +22696,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_Y_E"
 	},
 	{
@@ -22476,6 +22771,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_Y_S"
 	},
 	{
@@ -22550,6 +22846,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_H_Y_W"
 	},
 	{
@@ -22624,6 +22921,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_NE"
 	},
 	{
@@ -22698,6 +22996,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_NE1"
 	},
 	{
@@ -22772,6 +23071,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_NE2"
 	},
 	{
@@ -22846,6 +23146,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_NE3"
 	},
 	{
@@ -22920,6 +23221,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_Y_NE"
 	},
 	{
@@ -22994,6 +23296,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_Y_NE1"
 	},
 	{
@@ -23068,6 +23371,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_Y_NE2"
 	},
 	{
@@ -23142,6 +23446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_Y_NE3"
 	},
 	{
@@ -23216,6 +23521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_NW"
 	},
 	{
@@ -23290,6 +23596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_NW1"
 	},
 	{
@@ -23364,6 +23671,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_NW2"
 	},
 	{
@@ -23438,6 +23746,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_NW3"
 	},
 	{
@@ -23512,6 +23821,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_Y_NW"
 	},
 	{
@@ -23586,6 +23896,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_Y_NW1"
 	},
 	{
@@ -23660,6 +23971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_Y_NW2"
 	},
 	{
@@ -23734,6 +24046,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_Y_NW3"
 	},
 	{
@@ -23808,6 +24121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_N"
 	},
 	{
@@ -23882,6 +24196,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_E"
 	},
 	{
@@ -23956,6 +24271,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_S"
 	},
 	{
@@ -24030,6 +24346,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_W"
 	},
 	{
@@ -24104,6 +24421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_Y_N"
 	},
 	{
@@ -24178,6 +24496,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_Y_E"
 	},
 	{
@@ -24252,6 +24571,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_Y_S"
 	},
 	{
@@ -24326,6 +24646,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_I_Y_W"
 	},
 	{
@@ -24400,6 +24721,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_NE"
 	},
 	{
@@ -24474,6 +24796,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_NE1"
 	},
 	{
@@ -24548,6 +24871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_NE2"
 	},
 	{
@@ -24622,6 +24946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_NE3"
 	},
 	{
@@ -24696,6 +25021,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_Y_NE"
 	},
 	{
@@ -24770,6 +25096,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_Y_NE1"
 	},
 	{
@@ -24844,6 +25171,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_Y_NE2"
 	},
 	{
@@ -24918,6 +25246,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_Y_NE3"
 	},
 	{
@@ -24992,6 +25321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_NW"
 	},
 	{
@@ -25066,6 +25396,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_NW1"
 	},
 	{
@@ -25140,6 +25471,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_NW2"
 	},
 	{
@@ -25214,6 +25546,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_NW3"
 	},
 	{
@@ -25288,6 +25621,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_Y_NW"
 	},
 	{
@@ -25362,6 +25696,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_Y_NW1"
 	},
 	{
@@ -25436,6 +25771,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_Y_NW2"
 	},
 	{
@@ -25510,6 +25846,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_Y_NW3"
 	},
 	{
@@ -25584,6 +25921,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_N"
 	},
 	{
@@ -25658,6 +25996,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_E"
 	},
 	{
@@ -25732,6 +26071,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_S"
 	},
 	{
@@ -25806,6 +26146,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_W"
 	},
 	{
@@ -25880,6 +26221,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_Y_N"
 	},
 	{
@@ -25954,6 +26296,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_Y_E"
 	},
 	{
@@ -26028,6 +26371,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_Y_S"
 	},
 	{
@@ -26102,6 +26446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_J_Y_W"
 	},
 	{
@@ -26176,6 +26521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_NE"
 	},
 	{
@@ -26250,6 +26596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_NE1"
 	},
 	{
@@ -26324,6 +26671,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_NE2"
 	},
 	{
@@ -26398,6 +26746,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_NE3"
 	},
 	{
@@ -26472,6 +26821,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_Y_NE"
 	},
 	{
@@ -26546,6 +26896,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_Y_NE1"
 	},
 	{
@@ -26620,6 +26971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_Y_NE2"
 	},
 	{
@@ -26694,6 +27046,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_Y_NE3"
 	},
 	{
@@ -26768,6 +27121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_NW"
 	},
 	{
@@ -26842,6 +27196,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_NW1"
 	},
 	{
@@ -26916,6 +27271,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_NW2"
 	},
 	{
@@ -26990,6 +27346,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_NW3"
 	},
 	{
@@ -27064,6 +27421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_Y_NW"
 	},
 	{
@@ -27138,6 +27496,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_Y_NW1"
 	},
 	{
@@ -27212,6 +27571,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_Y_NW2"
 	},
 	{
@@ -27286,6 +27646,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_Y_NW3"
 	},
 	{
@@ -27360,6 +27721,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_N"
 	},
 	{
@@ -27434,6 +27796,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_E"
 	},
 	{
@@ -27508,6 +27871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_S"
 	},
 	{
@@ -27582,6 +27946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_W"
 	},
 	{
@@ -27656,6 +28021,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_Y_N"
 	},
 	{
@@ -27730,6 +28096,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_Y_E"
 	},
 	{
@@ -27804,6 +28171,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_Y_S"
 	},
 	{
@@ -27878,6 +28246,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_K_Y_W"
 	},
 	{
@@ -27952,6 +28321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_NE"
 	},
 	{
@@ -28026,6 +28396,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_NE1"
 	},
 	{
@@ -28100,6 +28471,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_NE2"
 	},
 	{
@@ -28174,6 +28546,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_NE3"
 	},
 	{
@@ -28248,6 +28621,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_Y_NE"
 	},
 	{
@@ -28322,6 +28696,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_Y_NE1"
 	},
 	{
@@ -28396,6 +28771,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_Y_NE2"
 	},
 	{
@@ -28470,6 +28846,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_Y_NE3"
 	},
 	{
@@ -28544,6 +28921,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_NW"
 	},
 	{
@@ -28618,6 +28996,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_NW1"
 	},
 	{
@@ -28692,6 +29071,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_NW2"
 	},
 	{
@@ -28766,6 +29146,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_NW3"
 	},
 	{
@@ -28840,6 +29221,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_Y_NW"
 	},
 	{
@@ -28914,6 +29296,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_Y_NW1"
 	},
 	{
@@ -28988,6 +29371,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_Y_NW2"
 	},
 	{
@@ -29062,6 +29446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_Y_NW3"
 	},
 	{
@@ -29136,6 +29521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_N"
 	},
 	{
@@ -29210,6 +29596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_E"
 	},
 	{
@@ -29284,6 +29671,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_S"
 	},
 	{
@@ -29358,6 +29746,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_W"
 	},
 	{
@@ -29432,6 +29821,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_Y_N"
 	},
 	{
@@ -29506,6 +29896,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_Y_E"
 	},
 	{
@@ -29580,6 +29971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_Y_S"
 	},
 	{
@@ -29654,6 +30046,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_L_Y_W"
 	},
 	{
@@ -29728,6 +30121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_NE"
 	},
 	{
@@ -29802,6 +30196,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_NE1"
 	},
 	{
@@ -29876,6 +30271,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_NE2"
 	},
 	{
@@ -29950,6 +30346,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_NE3"
 	},
 	{
@@ -30024,6 +30421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_Y_NE"
 	},
 	{
@@ -30098,6 +30496,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_Y_NE1"
 	},
 	{
@@ -30172,6 +30571,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_Y_NE2"
 	},
 	{
@@ -30246,6 +30646,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_Y_NE3"
 	},
 	{
@@ -30320,6 +30721,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_NW"
 	},
 	{
@@ -30394,6 +30796,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_NW1"
 	},
 	{
@@ -30468,6 +30871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_NW2"
 	},
 	{
@@ -30542,6 +30946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_NW3"
 	},
 	{
@@ -30616,6 +31021,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_Y_NW"
 	},
 	{
@@ -30690,6 +31096,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_Y_NW1"
 	},
 	{
@@ -30764,6 +31171,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_Y_NW2"
 	},
 	{
@@ -30838,6 +31246,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_Y_NW3"
 	},
 	{
@@ -30912,6 +31321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_N"
 	},
 	{
@@ -30986,6 +31396,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_E"
 	},
 	{
@@ -31060,6 +31471,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_S"
 	},
 	{
@@ -31134,6 +31546,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_W"
 	},
 	{
@@ -31208,6 +31621,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_Y_N"
 	},
 	{
@@ -31282,6 +31696,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_Y_E"
 	},
 	{
@@ -31356,6 +31771,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_Y_S"
 	},
 	{
@@ -31430,6 +31846,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_M_Y_W"
 	},
 	{
@@ -31504,6 +31921,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_NE"
 	},
 	{
@@ -31578,6 +31996,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_NE1"
 	},
 	{
@@ -31652,6 +32071,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_NE2"
 	},
 	{
@@ -31726,6 +32146,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_NE3"
 	},
 	{
@@ -31800,6 +32221,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_Y_NE"
 	},
 	{
@@ -31874,6 +32296,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_Y_NE1"
 	},
 	{
@@ -31948,6 +32371,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_Y_NE2"
 	},
 	{
@@ -32022,6 +32446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_Y_NE3"
 	},
 	{
@@ -32096,6 +32521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_NW"
 	},
 	{
@@ -32170,6 +32596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_NW1"
 	},
 	{
@@ -32244,6 +32671,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_NW2"
 	},
 	{
@@ -32318,6 +32746,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_NW3"
 	},
 	{
@@ -32392,6 +32821,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_Y_NW"
 	},
 	{
@@ -32466,6 +32896,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_Y_NW1"
 	},
 	{
@@ -32540,6 +32971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_Y_NW2"
 	},
 	{
@@ -32614,6 +33046,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_Y_NW3"
 	},
 	{
@@ -32688,6 +33121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_N"
 	},
 	{
@@ -32762,6 +33196,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_E"
 	},
 	{
@@ -32836,6 +33271,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_S"
 	},
 	{
@@ -32910,6 +33346,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_W"
 	},
 	{
@@ -32984,6 +33421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_Y_N"
 	},
 	{
@@ -33058,6 +33496,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_Y_E"
 	},
 	{
@@ -33132,6 +33571,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_Y_S"
 	},
 	{
@@ -33206,6 +33646,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_N_Y_W"
 	},
 	{
@@ -33280,6 +33721,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_O_N"
 	},
 	{
@@ -33354,6 +33796,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_O_E"
 	},
 	{
@@ -33428,6 +33871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_O_S"
 	},
 	{
@@ -33502,6 +33946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_O_W"
 	},
 	{
@@ -33576,6 +34021,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_O_Y_N"
 	},
 	{
@@ -33650,6 +34096,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_O_Y_E"
 	},
 	{
@@ -33724,6 +34171,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_O_Y_S"
 	},
 	{
@@ -33798,6 +34246,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_O_Y_W"
 	},
 	{
@@ -33872,6 +34321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_P_N"
 	},
 	{
@@ -33946,6 +34396,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_P_E"
 	},
 	{
@@ -34020,6 +34471,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_P_S"
 	},
 	{
@@ -34094,6 +34546,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_P_W"
 	},
 	{
@@ -34168,6 +34621,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_P_Y_N"
 	},
 	{
@@ -34242,6 +34696,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_P_Y_E"
 	},
 	{
@@ -34316,6 +34771,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_P_Y_S"
 	},
 	{
@@ -34390,6 +34846,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_P_Y_W"
 	},
 	{
@@ -34464,6 +34921,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Q_N"
 	},
 	{
@@ -34538,6 +34996,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Q_E"
 	},
 	{
@@ -34612,6 +35071,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Q_S"
 	},
 	{
@@ -34686,6 +35146,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Q_W"
 	},
 	{
@@ -34760,6 +35221,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Q_Y_N"
 	},
 	{
@@ -34834,6 +35296,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Q_Y_E"
 	},
 	{
@@ -34908,6 +35371,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Q_Y_S"
 	},
 	{
@@ -34982,6 +35446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Q_Y_W"
 	},
 	{
@@ -35056,6 +35521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_R_N"
 	},
 	{
@@ -35130,6 +35596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_R_E"
 	},
 	{
@@ -35204,6 +35671,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_R_S"
 	},
 	{
@@ -35278,6 +35746,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_R_W"
 	},
 	{
@@ -35352,6 +35821,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_R_Y_N"
 	},
 	{
@@ -35426,6 +35896,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_R_Y_E"
 	},
 	{
@@ -35500,6 +35971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_R_Y_S"
 	},
 	{
@@ -35574,6 +36046,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_R_Y_W"
 	},
 	{
@@ -35648,6 +36121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_S_N"
 	},
 	{
@@ -35722,6 +36196,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_S_E"
 	},
 	{
@@ -35796,6 +36271,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_S_S"
 	},
 	{
@@ -35870,6 +36346,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_S_W"
 	},
 	{
@@ -35944,6 +36421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_S_Y_N"
 	},
 	{
@@ -36018,6 +36496,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_S_Y_E"
 	},
 	{
@@ -36092,6 +36571,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_S_Y_S"
 	},
 	{
@@ -36166,6 +36646,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_S_Y_W"
 	},
 	{
@@ -36240,6 +36721,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_T_NETB"
 	},
 	{
@@ -36314,6 +36796,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_T_NETB1"
 	},
 	{
@@ -36388,6 +36871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_T_NETB2"
 	},
 	{
@@ -36462,6 +36946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_T_NETB3"
 	},
 	{
@@ -36536,6 +37021,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_T_NWTB"
 	},
 	{
@@ -36610,6 +37096,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_T_NWTB1"
 	},
 	{
@@ -36684,6 +37171,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_T_NWTB2"
 	},
 	{
@@ -36758,6 +37246,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_T_NWTB3"
 	},
 	{
@@ -36832,6 +37321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_U_NETB"
 	},
 	{
@@ -36906,6 +37396,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_U_NETB1"
 	},
 	{
@@ -36980,6 +37471,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_U_NETB2"
 	},
 	{
@@ -37054,6 +37546,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_U_NETB3"
 	},
 	{
@@ -37128,6 +37621,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_U_NWTB"
 	},
 	{
@@ -37202,6 +37696,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_U_NWTB1"
 	},
 	{
@@ -37276,6 +37771,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_U_NWTB2"
 	},
 	{
@@ -37350,6 +37846,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_U_NWTB3"
 	},
 	{
@@ -37424,6 +37921,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_V_NETB"
 	},
 	{
@@ -37498,6 +37996,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_V_NETB1"
 	},
 	{
@@ -37572,6 +38071,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_V_NETB2"
 	},
 	{
@@ -37646,6 +38146,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_V_NETB3"
 	},
 	{
@@ -37720,6 +38221,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_V_NWTB"
 	},
 	{
@@ -37794,6 +38296,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_V_NWTB1"
 	},
 	{
@@ -37868,6 +38371,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_V_NWTB2"
 	},
 	{
@@ -37942,6 +38446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_V_NWTB3"
 	},
 	{
@@ -38016,6 +38521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_W_NETB"
 	},
 	{
@@ -38090,6 +38596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_W_NETB1"
 	},
 	{
@@ -38164,6 +38671,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_W_NETB2"
 	},
 	{
@@ -38238,6 +38746,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_W_NETB3"
 	},
 	{
@@ -38312,6 +38821,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_W_NWTB"
 	},
 	{
@@ -38386,6 +38896,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_W_NWTB1"
 	},
 	{
@@ -38460,6 +38971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_W_NWTB2"
 	},
 	{
@@ -38534,6 +39046,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_W_NWTB3"
 	},
 	{
@@ -38608,6 +39121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_X_NETB"
 	},
 	{
@@ -38682,6 +39196,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_X_NETB1"
 	},
 	{
@@ -38756,6 +39271,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_X_NETB2"
 	},
 	{
@@ -38830,6 +39346,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_X_NETB3"
 	},
 	{
@@ -38904,6 +39421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_X_NWTB"
 	},
 	{
@@ -38978,6 +39496,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_X_NWTB1"
 	},
 	{
@@ -39052,6 +39571,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_X_NWTB2"
 	},
 	{
@@ -39126,6 +39646,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_X_NWTB3"
 	},
 	{
@@ -39200,6 +39721,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Y_NETB"
 	},
 	{
@@ -39274,6 +39796,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Y_NETB1"
 	},
 	{
@@ -39348,6 +39871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Y_NETB2"
 	},
 	{
@@ -39422,6 +39946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Y_NETB3"
 	},
 	{
@@ -39496,6 +40021,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Y_NWTB"
 	},
 	{
@@ -39570,6 +40096,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Y_NWTB1"
 	},
 	{
@@ -39644,6 +40171,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Y_NWTB2"
 	},
 	{
@@ -39718,6 +40246,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Y_NWTB3"
 	},
 	{
@@ -39792,6 +40321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Z_NETB"
 	},
 	{
@@ -39866,6 +40396,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Z_NETB1"
 	},
 	{
@@ -39940,6 +40471,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Z_NETB2"
 	},
 	{
@@ -40014,6 +40546,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Z_NETB3"
 	},
 	{
@@ -40088,6 +40621,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Z_NWTB"
 	},
 	{
@@ -40162,6 +40696,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Z_NWTB1"
 	},
 	{
@@ -40236,6 +40771,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Z_NWTB2"
 	},
 	{
@@ -40310,6 +40846,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_Z_NWTB3"
 	},
 	{
@@ -40395,6 +40932,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_N"
 	},
 	{
@@ -40480,6 +41018,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_E"
 	},
 	{
@@ -40565,6 +41104,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_S"
 	},
 	{
@@ -40650,6 +41190,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_W"
 	},
 	{
@@ -40735,6 +41276,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_Y_N"
 	},
 	{
@@ -40820,6 +41362,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_Y_E"
 	},
 	{
@@ -40905,6 +41448,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_Y_S"
 	},
 	{
@@ -40990,6 +41534,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_Y_W"
 	},
 	{
@@ -41064,6 +41609,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_NE"
 	},
 	{
@@ -41138,6 +41684,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_NE1"
 	},
 	{
@@ -41212,6 +41759,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_NE2"
 	},
 	{
@@ -41286,6 +41834,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_NE3"
 	},
 	{
@@ -41360,6 +41909,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_Y_NE"
 	},
 	{
@@ -41434,6 +41984,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_Y_NE1"
 	},
 	{
@@ -41508,6 +42059,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_Y_NE2"
 	},
 	{
@@ -41582,6 +42134,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_Y_NE3"
 	},
 	{
@@ -41656,6 +42209,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_NW"
 	},
 	{
@@ -41730,6 +42284,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_NW1"
 	},
 	{
@@ -41804,6 +42359,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_NW2"
 	},
 	{
@@ -41878,6 +42434,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_NW3"
 	},
 	{
@@ -41952,6 +42509,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_Y_NW"
 	},
 	{
@@ -42026,6 +42584,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_Y_NW1"
 	},
 	{
@@ -42100,6 +42659,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_Y_NW2"
 	},
 	{
@@ -42174,6 +42734,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AA_Y_NW3"
 	},
 	{
@@ -42248,6 +42809,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_N"
 	},
 	{
@@ -42322,6 +42884,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_E"
 	},
 	{
@@ -42396,6 +42959,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_S"
 	},
 	{
@@ -42470,6 +43034,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_W"
 	},
 	{
@@ -42544,6 +43109,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_Y_N"
 	},
 	{
@@ -42618,6 +43184,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_Y_E"
 	},
 	{
@@ -42692,6 +43259,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_Y_S"
 	},
 	{
@@ -42766,6 +43334,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_Y_W"
 	},
 	{
@@ -42840,6 +43409,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_NE"
 	},
 	{
@@ -42914,6 +43484,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_NE1"
 	},
 	{
@@ -42988,6 +43559,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_NE2"
 	},
 	{
@@ -43062,6 +43634,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_NE3"
 	},
 	{
@@ -43136,6 +43709,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_Y_NE"
 	},
 	{
@@ -43210,6 +43784,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_Y_NE1"
 	},
 	{
@@ -43284,6 +43859,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_Y_NE2"
 	},
 	{
@@ -43358,6 +43934,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_Y_NE3"
 	},
 	{
@@ -43432,6 +44009,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_NW"
 	},
 	{
@@ -43506,6 +44084,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_NW1"
 	},
 	{
@@ -43580,6 +44159,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_NW2"
 	},
 	{
@@ -43654,6 +44234,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_NW3"
 	},
 	{
@@ -43728,6 +44309,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_Y_NW"
 	},
 	{
@@ -43802,6 +44384,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_Y_NW1"
 	},
 	{
@@ -43876,6 +44459,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_Y_NW2"
 	},
 	{
@@ -43950,6 +44534,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STR_AB_Y_NW3"
 	},
 	{
@@ -44031,6 +44616,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_STAIRS0"
 	},
 	{
@@ -44105,6 +44691,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_GEN_0",
 		"BuildableShipTechName": "Warp Core A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -44182,6 +44769,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_GEN_1",
 		"BuildableShipTechName": "Flight Control Systems A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -44259,6 +44847,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_GEN_2",
 		"BuildableShipTechName": "Navigation Systems A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -44336,6 +44925,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_GEN_3",
 		"BuildableShipTechName": "Defensive Systems A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -44413,6 +45003,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_GEN_4"
 	},
 	{
@@ -44487,6 +45078,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_GEN_5"
 	},
 	{
@@ -44561,6 +45153,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_L_0"
 	},
 	{
@@ -44635,6 +45228,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_R_0"
 	},
 	{
@@ -44709,6 +45303,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_L_1"
 	},
 	{
@@ -44783,6 +45378,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_R_1"
 	},
 	{
@@ -44857,6 +45453,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_L_2"
 	},
 	{
@@ -44931,6 +45528,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_R_2"
 	},
 	{
@@ -45005,6 +45603,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_L_3"
 	},
 	{
@@ -45079,6 +45678,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_R_3"
 	},
 	{
@@ -45153,6 +45753,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_4"
 	},
 	{
@@ -45227,6 +45828,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_5"
 	},
 	{
@@ -45301,6 +45903,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_6"
 	},
 	{
@@ -45375,6 +45978,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_7"
 	},
 	{
@@ -45449,6 +46053,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_8"
 	},
 	{
@@ -45523,6 +46128,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_9"
 	},
 	{
@@ -45597,6 +46203,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_10"
 	},
 	{
@@ -45671,6 +46278,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_11"
 	},
 	{
@@ -45745,6 +46353,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_12"
 	},
 	{
@@ -45819,6 +46428,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_13"
 	},
 	{
@@ -45893,6 +46503,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_14"
 	},
 	{
@@ -45967,6 +46578,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON_15"
 	},
 	{
@@ -46041,6 +46653,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON2_0"
 	},
 	{
@@ -46115,6 +46728,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON2_1"
 	},
 	{
@@ -46189,6 +46803,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON2_2"
 	},
 	{
@@ -46263,6 +46878,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_CON2_3"
 	},
 	{
@@ -46337,6 +46953,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_A"
 	},
 	{
@@ -46411,6 +47028,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_B"
 	},
 	{
@@ -46485,6 +47103,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_C"
 	},
 	{
@@ -46559,6 +47178,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_D",
 		"BuildableShipTechName": "Cargo Systems C-Class Upgrade",
 		"BuildableShipTechGroup": "C-Class Upgrade",
@@ -46636,6 +47256,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_E",
 		"BuildableShipTechName": "Cargo Systems C-Class Upgrade",
 		"BuildableShipTechGroup": "C-Class Upgrade",
@@ -46713,6 +47334,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_F",
 		"BuildableShipTechName": "Cargo Systems C-Class Upgrade",
 		"BuildableShipTechGroup": "C-Class Upgrade",
@@ -46790,6 +47412,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_G",
 		"BuildableShipTechName": "Cargo Systems C-Class Upgrade",
 		"BuildableShipTechGroup": "C-Class Upgrade",
@@ -46867,6 +47490,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_H"
 	},
 	{
@@ -46941,6 +47565,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_I",
 		"BuildableShipTechName": "Rocket Batteries A-Class Upgrade",
 		"BuildableShipTechGroup": "A-Class Upgrade",
@@ -47018,6 +47643,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_J"
 	},
 	{
@@ -47092,6 +47718,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_K"
 	},
 	{
@@ -47166,6 +47793,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_L"
 	},
 	{
@@ -47240,6 +47868,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_M"
 	},
 	{
@@ -47314,6 +47943,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_N_0"
 	},
 	{
@@ -47388,6 +48018,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_N_1"
 	},
 	{
@@ -47462,6 +48093,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_O"
 	},
 	{
@@ -47536,6 +48168,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_P"
 	},
 	{
@@ -47625,6 +48258,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_Q_0"
 	},
 	{
@@ -47714,6 +48348,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_Q_1"
 	},
 	{
@@ -47799,6 +48434,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_R"
 	},
 	{
@@ -47888,6 +48524,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_S"
 	},
 	{
@@ -47973,6 +48610,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "corvette/B_DECO_T"
 	}
 ]

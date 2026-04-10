@@ -71,6 +71,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STARCHART_A"
 	},
 	{
@@ -145,6 +146,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STARCHART_B"
 	},
 	{
@@ -219,6 +221,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STARCHART_C"
 	},
 	{
@@ -293,6 +296,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STARCHART_D"
 	},
 	{
@@ -367,6 +371,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/CHART_EMPTY"
 	},
 	{
@@ -441,6 +446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/A1S6_STARMAP"
 	},
 	{
@@ -515,6 +521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TUT_STARMAP"
 	},
 	{
@@ -589,7 +596,233 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/CHART_TREASURE"
+	},
+	{
+		"Id": "CHART_PB_CHALL",
+		"Icon": "CHART_PB_CHALL.png",
+		"IconPath": "textures/ui/frontend/icons/u4products/product.starchart.pbchallenger.dds",
+		"Name": "Challenger's Invitation",
+		"Name_LocStr": "UI_CHART_PB_CHALL_NAME",
+		"Group": "Arena League Invitation",
+		"Subtitle_LocStr": "UI_CHART_PB_CHALL_SUB",
+		"Description": "A battle invitation from a local Arena League member. The location of their Holo-Arena has been marked.\n\nSelect the invitation and use Plot Route (FE_ALT1) to pin the Holo-Arena in your Exosuit display.\n\nNew invitations can be received by battling with Arena League members.",
+		"Description_LocStr": "UI_CHART_PB_CHALL_DESC",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 1499,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 0,
+		"MaxStackSize": 4,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "1A2733",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [],
+		"BlueprintCost": 1499,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 0.00827852823,
+		"NormalisedValueOffWorld": 0.00827852823,
+		"EconomyInfluenceMultiplier": 0.0,
+		"Rarity": "Rare",
+		"Legality": "Legal",
+		"TradeCategory": "None",
+		"ProductCategory": "Curiosity",
+		"SubstanceCategory": "Special",
+		"WikiCategory": "Curio",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": true,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": false,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": "UI_FIND_OBJ",
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": null,
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": false,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/CHART_PB_CHALL"
+	},
+	{
+		"Id": "CHART_PB_CHALNX",
+		"Icon": "CHART_PB_CHALNX.png",
+		"IconPath": "textures/ui/frontend/icons/u4products/product.starchart.pbchallenger.dds",
+		"Name": "Challenger's Invitation",
+		"Name_LocStr": "UI_CHART_PB_CHALL_NAME",
+		"Group": "Arena League Invitation",
+		"Subtitle_LocStr": "UI_CHART_PB_CHALL_SUB",
+		"Description": "A battle invitation from a local Arena League member. The location of their Holo-Arena has been marked.\n\nSelect the invitation and use Plot Route (FE_ALT1) to pin the Holo-Arena in your Exosuit display.\n\nNew invitations can be received by battling with Arena League members.",
+		"Description_LocStr": "UI_CHART_PB_CHALL_DESC",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 1499,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 0,
+		"MaxStackSize": 4,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "1A2733",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [],
+		"BlueprintCost": 1499,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 0.00827852823,
+		"NormalisedValueOffWorld": 0.00827852823,
+		"EconomyInfluenceMultiplier": 0.0,
+		"Rarity": "Rare",
+		"Legality": "Legal",
+		"TradeCategory": "None",
+		"ProductCategory": "Curiosity",
+		"SubstanceCategory": "Special",
+		"WikiCategory": "Curio",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": true,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": false,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": "UI_FIND_OBJ",
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": null,
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": false,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/CHART_PB_CHALNX"
+	},
+	{
+		"Id": "CHART_PB_CHAMP",
+		"Icon": "CHART_PB_CHAMP.png",
+		"IconPath": "textures/ui/frontend/icons/u4products/product.starchart.pbchampion.dds",
+		"Name": "Champion's Invitation",
+		"Name_LocStr": "UI_CHART_PB_CHAMP_NAME",
+		"Group": "Arena League Invitation",
+		"Subtitle_LocStr": "UI_CHART_PB_CHAMP_SUB",
+		"Description": "A battle invitation from this system's Arena League Champion. The location of their Holo-Arena has been marked.\n\nSelect the invitation and use Plot Route (FE_ALT1) to pin the Holo-Arena in your Exosuit display.\n\nNew invitations can be received by battling with Arena League members.",
+		"Description_LocStr": "UI_CHART_PB_CHAMP_DESC",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 1499,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 0,
+		"MaxStackSize": 4,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "1A2733",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [],
+		"BlueprintCost": 1499,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 0.00827852823,
+		"NormalisedValueOffWorld": 0.00827852823,
+		"EconomyInfluenceMultiplier": 0.0,
+		"Rarity": "Rare",
+		"Legality": "Legal",
+		"TradeCategory": "None",
+		"ProductCategory": "Curiosity",
+		"SubstanceCategory": "Special",
+		"WikiCategory": "Curio",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": true,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": false,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": "UI_FIND_OBJ",
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": null,
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": false,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/CHART_PB_CHAMP"
 	},
 	{
 		"Id": "INVBOX",
@@ -663,7 +896,86 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/INVBOX"
+	},
+	{
+		"Id": "TREAT_FREELEVEL",
+		"Icon": "TREAT_FREELEVEL.png",
+		"IconPath": "textures/ui/frontend/icons/products/product.petbattle.retropellet.dds",
+		"Name": "Retroviral Pellet",
+		"Name_LocStr": "UI_PET_FREELEVEL_NAME",
+		"Group": "Genetic Mutator",
+		"Subtitle_LocStr": "UI_PET_FREELEVEL_SUB",
+		"Description": "A specialised treat laced with gene-manipulating retroviruses, capable of evolving the battle abilities of a companion.\n\nFeeding this to your tamed creatures will instantly unlock part of their genetic potential.",
+		"Description_LocStr": "UI_PET_FREELEVEL_DESC",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 900,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 0,
+		"MaxStackSize": 1,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "1A2733",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [
+			"HasUsedToCraft",
+			"IsEggIngredient"
+		],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 3.51923081e-05,
+		"NormalisedValueOffWorld": 3.51923081e-05,
+		"EconomyInfluenceMultiplier": 0.0,
+		"Rarity": "Rare",
+		"Legality": "Legal",
+		"TradeCategory": "None",
+		"ProductCategory": "Curiosity",
+		"SubstanceCategory": "Special",
+		"WikiCategory": "Curio",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": false,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": true,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": "UI_FIND_OBJ",
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": null,
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": true,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/TREAT_FREELEVEL"
 	},
 	{
 		"Id": "WORMSCROLL1",
@@ -737,6 +1049,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/WORMSCROLL1"
 	},
 	{
@@ -811,6 +1124,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/WORMSCROLL2"
 	},
 	{
@@ -885,6 +1199,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/WORMSCROLL3"
 	},
 	{
@@ -959,6 +1274,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/WORMSCROLL4"
 	},
 	{
@@ -1033,6 +1349,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/WORMSCROLL5"
 	},
 	{
@@ -1114,6 +1431,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/PIRATE_MAPPROD0"
 	},
 	{
@@ -1195,6 +1513,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/PIRATE_MAPPROD1"
 	},
 	{
@@ -1276,6 +1595,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/PIRATE_MAPPROD2"
 	},
 	{
@@ -1352,6 +1672,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/PIRATE_BEACON"
 	},
 	{
@@ -1428,6 +1749,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/PIRATE_INVITE"
 	},
 	{
@@ -1502,6 +1824,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECHMT1"
 	},
 	{
@@ -1576,6 +1899,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECHMT2"
 	},
 	{
@@ -1650,6 +1974,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECHMT3"
 	},
 	{
@@ -1724,6 +2049,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECHMT4"
 	},
 	{
@@ -1800,6 +2126,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECHMT5"
 	},
 	{
@@ -1874,6 +2201,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECH1"
 	},
 	{
@@ -1948,6 +2276,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECH2"
 	},
 	{
@@ -2022,6 +2351,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECH3"
 	},
 	{
@@ -2096,6 +2426,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECH4"
 	},
 	{
@@ -2172,6 +2503,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECH5"
 	},
 	{
@@ -2246,6 +2578,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECH6"
 	},
 	{
@@ -2320,6 +2653,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECH7"
 	},
 	{
@@ -2394,6 +2728,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECH8"
 	},
 	{
@@ -2468,6 +2803,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECH9"
 	},
 	{
@@ -2542,6 +2878,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SALVAGE_TECH10"
 	},
 	{
@@ -2618,6 +2955,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SHIPBRAIN_CLEAN"
 	},
 	{
@@ -2692,6 +3030,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TITLE_UNLOCK"
 	},
 	{
@@ -2766,6 +3105,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/PET_XP"
 	},
 	{
@@ -2840,6 +3180,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/PET_LEVEL"
 	},
 	{
@@ -2914,6 +3255,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG1"
 	},
 	{
@@ -2988,6 +3330,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG2"
 	},
 	{
@@ -3062,6 +3405,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG3"
 	},
 	{
@@ -3136,6 +3480,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG4"
 	},
 	{
@@ -3210,6 +3555,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG5"
 	},
 	{
@@ -3284,6 +3630,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG6"
 	},
 	{
@@ -3358,6 +3705,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG7"
 	},
 	{
@@ -3432,6 +3780,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG8"
 	},
 	{
@@ -3506,6 +3855,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG9"
 	},
 	{
@@ -3580,6 +3930,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG10"
 	},
 	{
@@ -3654,6 +4005,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG11"
 	},
 	{
@@ -3728,6 +4080,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG12"
 	},
 	{
@@ -3802,6 +4155,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG13"
 	},
 	{
@@ -3876,6 +4230,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG14"
 	},
 	{
@@ -3950,6 +4305,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG15"
 	},
 	{
@@ -4024,6 +4380,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG16"
 	},
 	{
@@ -4098,6 +4455,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG17"
 	},
 	{
@@ -4172,6 +4530,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EGG18"
 	},
 	{
@@ -4246,6 +4605,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_TECHBOX"
 	},
 	{
@@ -4320,6 +4680,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_INVBOX"
 	},
 	{
@@ -4394,6 +4755,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_CLASSBOX"
 	},
 	{
@@ -4468,6 +4830,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_GUNBOX"
 	},
 	{
@@ -4542,6 +4905,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_SGUNBOX"
 	},
 	{
@@ -4616,6 +4980,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_SMARTBOX"
 	},
 	{
@@ -4690,6 +5055,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_HAZBOX"
 	},
 	{
@@ -4764,6 +5130,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_STARTBOX"
 	},
 	{
@@ -4853,6 +5220,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_BEACON"
 	},
 	{
@@ -4942,6 +5310,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_FINDER"
 	},
 	{
@@ -5016,6 +5385,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_KEY"
 	},
 	{
@@ -5105,6 +5475,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_CRAFTBOX"
 	},
 	{
@@ -5179,6 +5550,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_G_STONE1"
 	},
 	{
@@ -5253,6 +5625,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_G_STONE2"
 	},
 	{
@@ -5327,6 +5700,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_G_STONE3"
 	},
 	{
@@ -5401,6 +5775,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_G_STONE4"
 	},
 	{
@@ -5475,6 +5850,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ROGUE_G_STONE5"
 	},
 	{
@@ -5564,6 +5940,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_ROBO_HEAD"
 	},
 	{
@@ -5653,6 +6030,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_ROBO_BODY"
 	},
 	{
@@ -5742,6 +6120,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_ROBO_ARMS"
 	},
 	{
@@ -5831,6 +6210,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_ROBO_LEGS"
 	},
 	{
@@ -5921,6 +6301,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_ROBO_CORE"
 	},
 	{
@@ -6002,6 +6383,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_ATLAS_SEED1"
 	},
 	{
@@ -6087,6 +6469,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_ATLAS_SEED2"
 	},
 	{
@@ -6172,6 +6555,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_ATLAS_SEED3"
 	},
 	{
@@ -6257,6 +6641,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_ATLAS_SEED4"
 	},
 	{
@@ -6342,6 +6727,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_ATLAS_SEED5"
 	},
 	{
@@ -6418,6 +6804,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_SOUL"
 	},
 	{
@@ -6494,6 +6881,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_FRAGMENT"
 	},
 	{
@@ -6583,6 +6971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_PART_A"
 	},
 	{
@@ -6672,6 +7061,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_PART_B"
 	},
 	{
@@ -6757,6 +7147,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_PART_C"
 	},
 	{
@@ -6846,6 +7237,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S12_POI_SEED1"
 	},
 	{
@@ -6935,6 +7327,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S12_POI_SEED2"
 	},
 	{
@@ -7024,6 +7417,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S12_POI_SEED3"
 	},
 	{
@@ -7113,6 +7507,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S12_POI_SEED4"
 	},
 	{
@@ -7202,6 +7597,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SIGNALCHARGE"
 	},
 	{
@@ -7278,6 +7674,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S15_MESSAGE0"
 	},
 	{
@@ -7354,6 +7751,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S15_MESSAGE1"
 	},
 	{
@@ -7430,6 +7828,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S15_MESSAGE2"
 	},
 	{
@@ -7506,6 +7905,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S15_MESSAGE3"
 	},
 	{
@@ -7582,6 +7982,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S15_MESSAGE4"
 	},
 	{
@@ -7659,6 +8060,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ANY_BONE"
 	},
 	{
@@ -7736,6 +8138,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ANY_FISH"
 	},
 	{
@@ -7813,6 +8216,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ANY_FISH_RAW"
 	},
 	{
@@ -7890,6 +8294,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ANY_FISH_COOKED"
 	},
 	{
@@ -7975,6 +8380,7 @@
 		"CanSendToOtherPlayers": false,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPOOK_JUICE"
 	},
 	{
@@ -8064,6 +8470,7 @@
 		"CanSendToOtherPlayers": false,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/PORTAL_JUICE"
 	},
 	{
@@ -8153,6 +8560,7 @@
 		"CanSendToOtherPlayers": false,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/MESSAGE_JUICE"
 	},
 	{
@@ -8234,6 +8642,7 @@
 		"CanSendToOtherPlayers": false,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BOSS_JUICE"
 	},
 	{
@@ -8323,6 +8732,7 @@
 		"CanSendToOtherPlayers": false,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/MESSAGE_JUICE1"
 	},
 	{
@@ -8412,6 +8822,7 @@
 		"CanSendToOtherPlayers": false,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/MESSAGE_JUICE2"
 	},
 	{
@@ -8501,6 +8912,7 @@
 		"CanSendToOtherPlayers": false,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/MESSAGE_JUICE3"
 	},
 	{
@@ -8590,6 +9002,7 @@
 		"CanSendToOtherPlayers": false,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/MESSAGE_JUICE4"
 	},
 	{
@@ -8675,6 +9088,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/PURPM_PACKET"
 	},
 	{
@@ -8760,6 +9174,7 @@
 		"CanSendToOtherPlayers": false,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/PURPM_GAS_KEY"
 	},
 	{
@@ -8845,6 +9260,7 @@
 		"CanSendToOtherPlayers": false,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/PURPM_WATER_KEY"
 	},
 	{
@@ -8930,6 +9346,7 @@
 		"CanSendToOtherPlayers": false,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/PURPM_LUSH_KEY"
 	},
 	{
@@ -9015,6 +9432,7 @@
 		"CanSendToOtherPlayers": false,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/PURPM_MIRROR"
 	},
 	{
@@ -9096,7 +9514,393 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S19_TP"
+	},
+	{
+		"Id": "S20_LOG1",
+		"Icon": "S20_LOG1.png",
+		"IconPath": "textures/ui/frontend/icons/u4products/product.logkey.dds",
+		"Name": "Log of the Fireship Arcadia",
+		"Name_LocStr": "UI_S20_BIGGS_LOG_NAME",
+		"Group": ":: Datestamp 22516.01 ::",
+		"Subtitle_LocStr": "UI_S20_BIGGS_LOG_SUB1",
+		"Description": "SLASHLOG CORRUPT CLOCK RECOVERING DAMAGED SECTORSSLASH\n\n\"captain found a ::: on the last walk out\nsays it'll bring us luck\nwe'll need it, cruise has been a ::: waste so far\nall the asteroids just dust and ice\n::: nonsense but better than nothing\"",
+		"Description_LocStr": "UI_S20_BIGGS_LOG_DESC1",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 1600,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 0,
+		"MaxStackSize": 0,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "4D2957",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [
+			"HasUsedToCraft"
+		],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.5,
+			"LowPriceMod": -0.1,
+			"HighPriceMod": 0.1,
+			"BuyBaseMarkup": 0.2,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 0.000102500009,
+		"NormalisedValueOffWorld": 0.000153782064,
+		"EconomyInfluenceMultiplier": 0.25,
+		"Rarity": "Rare",
+		"Legality": "Legal",
+		"TradeCategory": "None",
+		"ProductCategory": "Curiosity",
+		"SubstanceCategory": "Special",
+		"WikiCategory": "NotEnabled",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": false,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": false,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": "UI_CRAFT_OBJ",
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": null,
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": true,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/S20_LOG1"
+	},
+	{
+		"Id": "S20_LOG2",
+		"Icon": "S20_LOG2.png",
+		"IconPath": "textures/ui/frontend/icons/u4products/product.logkey.dds",
+		"Name": "Log of the Fireship Arcadia",
+		"Name_LocStr": "UI_S20_BIGGS_LOG_NAME",
+		"Group": ":: Datestamp 22518.24 ::",
+		"Subtitle_LocStr": "UI_S20_BIGGS_LOG_SUB2",
+		"Description": "SLASHLOG CORRUPT CLOCK RECOVERING DAMAGED SECTORSSLASH\n\n\"going from bad to worse\ncan't wait to get home\nnavigation ::: distorted ::: nothing but static\nwarping but ::: just empty systems\n::: lost in some abandoned sector?\"",
+		"Description_LocStr": "UI_S20_BIGGS_LOG_DESC2",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 1600,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 0,
+		"MaxStackSize": 0,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "4D2957",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [
+			"HasUsedToCraft"
+		],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.5,
+			"LowPriceMod": -0.1,
+			"HighPriceMod": 0.1,
+			"BuyBaseMarkup": 0.2,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 0.000102500009,
+		"NormalisedValueOffWorld": 0.000153782064,
+		"EconomyInfluenceMultiplier": 0.25,
+		"Rarity": "Rare",
+		"Legality": "Legal",
+		"TradeCategory": "None",
+		"ProductCategory": "Curiosity",
+		"SubstanceCategory": "Special",
+		"WikiCategory": "NotEnabled",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": false,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": false,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": "UI_CRAFT_OBJ",
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": null,
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": true,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/S20_LOG2"
+	},
+	{
+		"Id": "S20_LOG3",
+		"Icon": "S20_LOG3.png",
+		"IconPath": "textures/ui/frontend/icons/u4products/product.logkey.dds",
+		"Name": "Log of the Fireship Arcadia",
+		"Name_LocStr": "UI_S20_BIGGS_LOG_NAME",
+		"Group": ":: Datestamp 22522.31 ::",
+		"Subtitle_LocStr": "UI_S20_BIGGS_LOG_SUB3",
+		"Description": "SLASHLOG CORRUPT CLOCK RECOVERING DAMAGED SECTORSSLASH\n\n\"the captain ::: gone\ntried to wake them for their watch\nno sign of them ::: nothing on the cameras\ndoor logs are normal, no kit missing\nwhere are they?\nwhere are we\"",
+		"Description_LocStr": "UI_S20_BIGGS_LOG_DESC3",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 1600,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 0,
+		"MaxStackSize": 0,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "4D2957",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [
+			"HasUsedToCraft"
+		],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.5,
+			"LowPriceMod": -0.1,
+			"HighPriceMod": 0.1,
+			"BuyBaseMarkup": 0.2,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 0.000102500009,
+		"NormalisedValueOffWorld": 0.000153782064,
+		"EconomyInfluenceMultiplier": 0.25,
+		"Rarity": "Rare",
+		"Legality": "Legal",
+		"TradeCategory": "None",
+		"ProductCategory": "Curiosity",
+		"SubstanceCategory": "Special",
+		"WikiCategory": "NotEnabled",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": false,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": false,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": "UI_CRAFT_OBJ",
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": null,
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": true,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/S20_LOG3"
+	},
+	{
+		"Id": "S20_LOG4",
+		"Icon": "S20_LOG4.png",
+		"IconPath": "textures/ui/frontend/icons/u4products/product.logkey.dds",
+		"Name": "Log of the Fireship Arcadia",
+		"Name_LocStr": "UI_S20_BIGGS_LOG_NAME",
+		"Group": ":: Datestamp 22594.16 ::",
+		"Subtitle_LocStr": "UI_S20_BIGGS_LOG_SUB4",
+		"Description": "SLASHLOG CORRUPT CLOCK RECOVERING DAMAGED SECTORSSLASH\n\n\"we saw them\nthey ::: out the airlock\njust ::: floating there\ncould hear them ::: singing\n...\nget us home ::: please\"",
+		"Description_LocStr": "UI_S20_BIGGS_LOG_DESC4",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 1600,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 0,
+		"MaxStackSize": 0,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "4D2957",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [
+			"HasUsedToCraft"
+		],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.5,
+			"LowPriceMod": -0.1,
+			"HighPriceMod": 0.1,
+			"BuyBaseMarkup": 0.2,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 0.000102500009,
+		"NormalisedValueOffWorld": 0.000153782064,
+		"EconomyInfluenceMultiplier": 0.25,
+		"Rarity": "Rare",
+		"Legality": "Legal",
+		"TradeCategory": "None",
+		"ProductCategory": "Curiosity",
+		"SubstanceCategory": "Special",
+		"WikiCategory": "NotEnabled",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": false,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": false,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": "UI_CRAFT_OBJ",
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": null,
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": true,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/S20_LOG4"
+	},
+	{
+		"Id": "S20_LOG5",
+		"Icon": "S20_LOG5.png",
+		"IconPath": "textures/ui/frontend/icons/u4products/product.logkey.dds",
+		"Name": "Log of the Fireship Arcadia",
+		"Name_LocStr": "UI_S20_BIGGS_LOG_NAME",
+		"Group": ":: Datestamp 22512.64 ::",
+		"Subtitle_LocStr": "UI_S20_BIGGS_LOG_SUB5",
+		"Description": "SLASHLOG CORRUPT CLOCK RECOVERING DAMAGED SECTORSSLASH\n\n\"they all followed ::: the music\none by one ::: the lights called them\nalone now\ni hear the song now too, even when i ::: sleep\ni'm so lonely ::: when will ::: when\nhelp\"",
+		"Description_LocStr": "UI_S20_BIGGS_LOG_DESC5",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 1600,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 0,
+		"MaxStackSize": 0,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "4D2957",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [
+			"HasUsedToCraft"
+		],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.5,
+			"LowPriceMod": -0.1,
+			"HighPriceMod": 0.1,
+			"BuyBaseMarkup": 0.2,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 0.000102500009,
+		"NormalisedValueOffWorld": 0.000153782064,
+		"EconomyInfluenceMultiplier": 0.25,
+		"Rarity": "Rare",
+		"Legality": "Legal",
+		"TradeCategory": "None",
+		"ProductCategory": "Curiosity",
+		"SubstanceCategory": "Special",
+		"WikiCategory": "NotEnabled",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": false,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": false,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": "UI_CRAFT_OBJ",
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": null,
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": true,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/S20_LOG5"
 	},
 	{
 		"Id": "BUI_HEAD_1",
@@ -9170,6 +9974,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_1"
 	},
 	{
@@ -9244,6 +10049,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_2"
 	},
 	{
@@ -9318,6 +10124,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_3"
 	},
 	{
@@ -9392,6 +10199,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_4"
 	},
 	{
@@ -9466,6 +10274,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_5"
 	},
 	{
@@ -9540,6 +10349,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_6"
 	},
 	{
@@ -9614,6 +10424,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_7"
 	},
 	{
@@ -9688,6 +10499,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_8"
 	},
 	{
@@ -9762,6 +10574,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_9"
 	},
 	{
@@ -9836,6 +10649,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_10"
 	},
 	{
@@ -9910,6 +10724,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_11"
 	},
 	{
@@ -9984,6 +10799,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_12"
 	},
 	{
@@ -10058,6 +10874,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_13"
 	},
 	{
@@ -10132,6 +10949,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_14"
 	},
 	{
@@ -10206,6 +11024,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_HEAD_15"
 	},
 	{
@@ -10280,6 +11099,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_ARMOUR_1"
 	},
 	{
@@ -10354,6 +11174,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_ARMOUR_2"
 	},
 	{
@@ -10428,6 +11249,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_ARMOUR_3"
 	},
 	{
@@ -10502,6 +11324,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_ARMOUR_4"
 	},
 	{
@@ -10576,6 +11399,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_CLOTH_1"
 	},
 	{
@@ -10650,6 +11474,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_CLOTH_2"
 	},
 	{
@@ -10724,6 +11549,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUI_CLOTH_3"
 	},
 	{
@@ -10798,6 +11624,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_CORE1"
 	},
 	{
@@ -10872,6 +11699,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_CORE2"
 	},
 	{
@@ -10946,6 +11774,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_CORE3"
 	},
 	{
@@ -11020,6 +11849,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_CORE4"
 	},
 	{
@@ -11094,6 +11924,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_CORE5"
 	},
 	{
@@ -11168,6 +11999,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_CORE6"
 	},
 	{
@@ -11242,6 +12074,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_HEAD1"
 	},
 	{
@@ -11316,6 +12149,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_HEAD2"
 	},
 	{
@@ -11390,6 +12224,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_HEAD3"
 	},
 	{
@@ -11464,6 +12299,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_HEAD4A"
 	},
 	{
@@ -11538,6 +12374,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_HEAD4B"
 	},
 	{
@@ -11612,6 +12449,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_HEAD5"
 	},
 	{
@@ -11686,6 +12524,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_HEAD6"
 	},
 	{
@@ -11760,6 +12599,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_POLE1"
 	},
 	{
@@ -11834,6 +12674,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_POLE2"
 	},
 	{
@@ -11908,6 +12749,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_POLE3"
 	},
 	{
@@ -11982,6 +12824,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_POLE4"
 	},
 	{
@@ -12056,6 +12899,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_POLE5"
 	},
 	{
@@ -12130,7 +12974,83 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STAFF_POLE6"
+	},
+	{
+		"Id": "SPEC_XOHELMET",
+		"Icon": "SPEC_XOHELMET.png",
+		"IconPath": "textures/ui/frontend/icons/specialshop/special.blob_b.dds",
+		"Name": "X.o. Suit",
+		"Name_LocStr": "UI_SPEC_XOHELMET_NAME",
+		"Group": "Specialist Exosuit Visuals",
+		"Subtitle_LocStr": "UI_SPEC_XOHELMET_NAME_SUB",
+		"Description": "An exclusive Exosuit Appearance Override.\n\nTransform the appearance of your Exosuit at an Appearance Modifier.",
+		"Description_LocStr": "UI_SPEC_XOHELMET_NAME_DESC",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 1000,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 1,
+		"MaxStackSize": 1,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "262626",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": "textures/ui/frontend/icons/specialshop/hero.blob_b.dds",
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 0.0,
+		"NormalisedValueOffWorld": 0.0,
+		"EconomyInfluenceMultiplier": 1.0,
+		"Rarity": "Common",
+		"Legality": "Legal",
+		"TradeCategory": "SpecialShop",
+		"ProductCategory": "CustomisationPart",
+		"SubstanceCategory": "Exotic",
+		"WikiCategory": "NotEnabled",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": false,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": false,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": null,
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": null,
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": false,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/SPEC_XOHELMET"
 	},
 	{
 		"Id": "SPEC_DIVEHELMET",
@@ -12204,6 +13124,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_DIVEHELMET"
 	},
 	{
@@ -12278,6 +13199,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_BUG_HAT1"
 	},
 	{
@@ -12352,6 +13274,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_BUG_HAT2"
 	},
 	{
@@ -12426,6 +13349,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_BUG_HAT3"
 	},
 	{
@@ -12500,6 +13424,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_BUG_HAT4"
 	},
 	{
@@ -12574,6 +13499,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_FISH_HAT1"
 	},
 	{
@@ -12648,6 +13574,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_FISH_HAT2"
 	},
 	{
@@ -12722,6 +13649,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_FISH_HAT3"
 	},
 	{
@@ -12796,6 +13724,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_FISH_HAT4"
 	},
 	{
@@ -12870,6 +13799,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_FISH_HAT5"
 	},
 	{
@@ -12944,6 +13874,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_FISH_HAT6"
 	},
 	{
@@ -13018,6 +13949,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_FISH_BOB1"
 	},
 	{
@@ -13092,6 +14024,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_FISH_BOB2"
 	},
 	{
@@ -13166,6 +14099,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_FISH_BOB3"
 	},
 	{
@@ -13240,6 +14174,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_FISH_BOB4"
 	},
 	{
@@ -13314,6 +14249,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_FISH_BOB5"
 	},
 	{
@@ -13388,6 +14324,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_FISH_BOB6"
 	},
 	{
@@ -13462,6 +14399,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_SENTPACK"
 	},
 	{
@@ -13536,7 +14474,233 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_HOOD01"
+	},
+	{
+		"Id": "SPEC_PB_EGG01",
+		"Icon": "SPEC_PB_EGG01.png",
+		"IconPath": "textures/ui/frontend/icons/products/product.creatureegg.dds",
+		"Name": "Aeron Crab Egg",
+		"Name_LocStr": "UI_SPEC_PB_EGG01_NAME",
+		"Group": "Shellseeker Companion",
+		"Subtitle_LocStr": "UI_SPEC_PB_EGG01_SUB",
+		"Description": "A living, fertile egg, ready to hatch!\n\nLaid by a soft-skinned crustacean, this species has evolved a synergistic relationship with Travellers, occupying the discarded shells of slain Sentinel Quadrupeds.\n\nScans indicate the being within has the genetic potential to be shy and migratory.",
+		"Description_LocStr": "UI_SPEC_PB_EGG01_DESC",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 800,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 0,
+		"MaxStackSize": 1,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "4D2987",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": "textures/ui/frontend/icons/specialshop/hero.title.dds",
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 0.00020506412,
+		"NormalisedValueOffWorld": 0.00020506412,
+		"EconomyInfluenceMultiplier": 0.25,
+		"Rarity": "Common",
+		"Legality": "Legal",
+		"TradeCategory": "SpecialShop",
+		"ProductCategory": "Curiosity",
+		"SubstanceCategory": "Exotic",
+		"WikiCategory": "NotEnabled",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": false,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": false,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": null,
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": "R_PB_MEDAL_EGG1",
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": false,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/SPEC_PB_EGG01"
+	},
+	{
+		"Id": "SPEC_PB_EGG02",
+		"Icon": "SPEC_PB_EGG02.png",
+		"IconPath": "textures/ui/frontend/icons/products/product.creaturerobotegg.dds",
+		"Name": "Wandering Shrimp Tank Egg",
+		"Name_LocStr": "UI_SPEC_PB_EGG02_NAME",
+		"Group": "Liquid-Suspended Consciousness",
+		"Subtitle_LocStr": "UI_SPEC_PB_EGG02_SUB",
+		"Description": "A metal 'egg' capsule, ready to hatch!\n\nPart robotic, part organic, part liquid. The primitive anatomy of this creature's conscious organ belies a deep, calculating intelligence.\n\nScans indicate the being within has the genetic potential to be focused and strategic.",
+		"Description_LocStr": "UI_SPEC_PB_EGG02_DESC",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 800,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 0,
+		"MaxStackSize": 1,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "4D2988",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": "textures/ui/frontend/icons/specialshop/hero.title.dds",
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 0.00020506412,
+		"NormalisedValueOffWorld": 0.00020506412,
+		"EconomyInfluenceMultiplier": 0.25,
+		"Rarity": "Common",
+		"Legality": "Legal",
+		"TradeCategory": "SpecialShop",
+		"ProductCategory": "Curiosity",
+		"SubstanceCategory": "Exotic",
+		"WikiCategory": "NotEnabled",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": false,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": false,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": null,
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": "R_PB_MEDAL_EGG2",
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": false,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/SPEC_PB_EGG02"
+	},
+	{
+		"Id": "SPEC_PB_EGG03",
+		"Icon": "SPEC_PB_EGG03.png",
+		"IconPath": "textures/ui/frontend/icons/products/product.creatureegg.dds",
+		"Name": "Boundary Horror Egg",
+		"Name_LocStr": "UI_SPEC_PB_EGG03_NAME",
+		"Group": "Spectral Anomaly",
+		"Subtitle_LocStr": "UI_SPEC_PB_EGG03_SUB",
+		"Description": "A living, fertile egg, ready to hatch!\n\nIt wails, sleepless.\n\nScans indicate the being within has the genetic potential to be haunting and adrift.",
+		"Description_LocStr": "UI_SPEC_PB_EGG03_DESC",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 800,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 0,
+		"MaxStackSize": 1,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "4D2989",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": "textures/ui/frontend/icons/specialshop/hero.title.dds",
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 0.00020506412,
+		"NormalisedValueOffWorld": 0.00020506412,
+		"EconomyInfluenceMultiplier": 0.25,
+		"Rarity": "Common",
+		"Legality": "Legal",
+		"TradeCategory": "SpecialShop",
+		"ProductCategory": "Curiosity",
+		"SubstanceCategory": "Exotic",
+		"WikiCategory": "NotEnabled",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": false,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": false,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": null,
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": "R_PB_MEDAL_EGG3",
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": false,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/SPEC_PB_EGG03"
 	},
 	{
 		"Id": "SPEC_PB_EGG04",
@@ -13610,7 +14774,83 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_PB_EGG04"
+	},
+	{
+		"Id": "SPEC_PB_EGG05",
+		"Icon": "SPEC_PB_EGG05.png",
+		"IconPath": "textures/ui/frontend/icons/products/product.creatureegg.dds",
+		"Name": "Geno-prawn Egg",
+		"Name_LocStr": "UI_SPEC_PB_EGG05_NAME",
+		"Group": "Abyssal Horror",
+		"Subtitle_LocStr": "UI_SPEC_PB_EGG05_SUB",
+		"Description": "A living, fertile egg, ready to hatch!\n\nThe serpentine foetus stares directly through the membrane of its egg. It watches. It waits.\n\nScans indicate the being within has the genetic potential to be unblinking and slithering.",
+		"Description_LocStr": "UI_SPEC_PB_EGG05_DESC",
+		"AltDescription": null,
+		"Hint": null,
+		"BaseValueUnits": 800,
+		"CurrencyType": "Credits",
+		"Level": 0,
+		"ChargeValue": 0,
+		"MaxStackSize": 1,
+		"DefaultCraftAmount": 1,
+		"CraftAmountStepSize": 1,
+		"CraftAmountMultiplier": 1,
+		"Colour": "4D2991",
+		"WorldColour": null,
+		"CdnUrl": "",
+		"Usages": [],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "None",
+		"BlueprintSource": 0,
+		"RequiredItems": [],
+		"StatBonuses": [],
+		"ConsumableRewardTexts": [],
+		"HeroIconPath": "textures/ui/frontend/icons/specialshop/hero.title.dds",
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"SpecificChargeOnly": false,
+		"NormalisedValueOnWorld": 0.00020506412,
+		"NormalisedValueOffWorld": 0.00020506412,
+		"EconomyInfluenceMultiplier": 0.25,
+		"Rarity": "Common",
+		"Legality": "Legal",
+		"TradeCategory": "SpecialShop",
+		"ProductCategory": "Curiosity",
+		"SubstanceCategory": "Exotic",
+		"WikiCategory": "NotEnabled",
+		"WikiEnabled": false,
+		"FossilCategory": "GcFossilCategory",
+		"CorvettePartCategory": "None",
+		"CorvetteRewardFrequency": 0.0,
+		"Consumable": false,
+		"CookingIngredient": false,
+		"GoodForSelling": false,
+		"EggModifierIngredient": false,
+		"DeploysInto": null,
+		"BuildableShipTechID": null,
+		"GroupID": null,
+		"PinObjective": null,
+		"PinObjectiveTip": null,
+		"PinObjectiveMessage": null,
+		"PinObjectiveScannableType": "None",
+		"PinObjectiveEasyToRefine": false,
+		"NeverPinnable": false,
+		"GiveRewardOnSpecialPurchase": "R_PB_MEDAL_EGG5",
+		"FoodBonusStat": null,
+		"FoodBonusStatAmount": 0.0,
+		"IsTechbox": false,
+		"CanSendToOtherPlayers": true,
+		"IsCraftable": false,
+		"Procedural": false,
+		"SourceTable": "Product",
+		"Slug": "other/SPEC_PB_EGG05"
 	},
 	{
 		"Id": "SWITCH_GUN01",
@@ -13684,6 +14924,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SWITCH_GUN01"
 	},
 	{
@@ -13758,6 +14999,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BACKPACK01"
 	},
 	{
@@ -13832,6 +15074,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_HELMET01"
 	},
 	{
@@ -13906,6 +15149,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE01"
 	},
 	{
@@ -13980,6 +15224,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER01"
 	},
 	{
@@ -14054,6 +15299,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_FIREPACK01"
 	},
 	{
@@ -14128,6 +15374,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_FIREPACK04"
 	},
 	{
@@ -14202,6 +15449,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_SPEC02"
 	},
 	{
@@ -14276,6 +15524,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE02A"
 	},
 	{
@@ -14350,6 +15599,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE02B"
 	},
 	{
@@ -14424,6 +15674,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER02"
 	},
 	{
@@ -14498,6 +15749,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE03"
 	},
 	{
@@ -14572,6 +15824,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER03"
 	},
 	{
@@ -14646,6 +15899,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE04"
 	},
 	{
@@ -14720,6 +15974,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER04"
 	},
 	{
@@ -14794,6 +16049,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_BUBBLE"
 	},
 	{
@@ -14868,6 +16124,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_WORM"
 	},
 	{
@@ -14942,6 +16199,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_EGG_03"
 	},
 	{
@@ -15016,6 +16274,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_EGG_04"
 	},
 	{
@@ -15090,6 +16349,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_WORMHAT"
 	},
 	{
@@ -15164,6 +16424,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_SENT"
 	},
 	{
@@ -15238,6 +16499,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_PETCUST05"
 	},
 	{
@@ -15312,6 +16574,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BACKPACK05"
 	},
 	{
@@ -15386,6 +16649,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE05"
 	},
 	{
@@ -15460,6 +16724,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER05"
 	},
 	{
@@ -15534,6 +16799,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_EGG_05"
 	},
 	{
@@ -15608,6 +16874,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SHIP_PIRATE"
 	},
 	{
@@ -15682,6 +16949,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE06"
 	},
 	{
@@ -15756,6 +17024,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER06"
 	},
 	{
@@ -15830,6 +17099,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_CAPE06"
 	},
 	{
@@ -15904,6 +17174,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SHIP_ROGUE"
 	},
 	{
@@ -15978,6 +17249,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_CAPE07"
 	},
 	{
@@ -16052,6 +17324,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE07"
 	},
 	{
@@ -16126,6 +17399,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER07"
 	},
 	{
@@ -16200,6 +17474,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/FREI_TRAIL_GRAV"
 	},
 	{
@@ -16274,6 +17549,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_CAPE08"
 	},
 	{
@@ -16348,6 +17624,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE08"
 	},
 	{
@@ -16422,6 +17699,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER08"
 	},
 	{
@@ -16496,6 +17774,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_EGG_08"
 	},
 	{
@@ -16570,6 +17849,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_BUCKETHELM"
 	},
 	{
@@ -16644,6 +17924,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE09"
 	},
 	{
@@ -16718,6 +17999,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER09"
 	},
 	{
@@ -16792,6 +18074,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_EGG_09"
 	},
 	{
@@ -16866,6 +18149,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_ROCKETHAT"
 	},
 	{
@@ -16940,6 +18224,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE10"
 	},
 	{
@@ -17014,6 +18299,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER10"
 	},
 	{
@@ -17088,6 +18374,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/FREI_TRAIL_RED"
 	},
 	{
@@ -17162,6 +18449,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_CORRUPT"
 	},
 	{
@@ -17236,6 +18524,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE11"
 	},
 	{
@@ -17310,6 +18599,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER11"
 	},
 	{
@@ -17384,6 +18674,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_ELECTRIC"
 	},
 	{
@@ -17458,6 +18749,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_EGG_11"
 	},
 	{
@@ -17532,6 +18824,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_PETCUST11"
 	},
 	{
@@ -17606,6 +18899,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_PART1A"
 	},
 	{
@@ -17680,6 +18974,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_PART1B"
 	},
 	{
@@ -17754,6 +19049,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_PART2"
 	},
 	{
@@ -17828,6 +19124,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_PART3"
 	},
 	{
@@ -17902,6 +19199,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_PART4"
 	},
 	{
@@ -17976,6 +19274,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/S10_PART5"
 	},
 	{
@@ -18050,6 +19349,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_ATLASHELM"
 	},
 	{
@@ -18124,6 +19424,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_ATLASSTAFF"
 	},
 	{
@@ -18198,6 +19499,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_ATLASPACK"
 	},
 	{
@@ -18272,6 +19574,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE12"
 	},
 	{
@@ -18346,6 +19649,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER12"
 	},
 	{
@@ -18420,6 +19724,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE13"
 	},
 	{
@@ -18494,6 +19799,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER13"
 	},
 	{
@@ -18568,6 +19874,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_EGG_13"
 	},
 	{
@@ -18642,6 +19949,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_GHOSTFRIG"
 	},
 	{
@@ -18716,6 +20024,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPED_BUG_ARMOR"
 	},
 	{
@@ -18790,6 +20099,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPED_BUG_GLOVE"
 	},
 	{
@@ -18864,6 +20174,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPED_BUG_BOOTS"
 	},
 	{
@@ -18938,6 +20249,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPED_BUG_HAT"
 	},
 	{
@@ -19012,6 +20324,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPED_BUG_PACK"
 	},
 	{
@@ -19086,6 +20399,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_EGG_14"
 	},
 	{
@@ -19162,6 +20476,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUGMECH_ARML"
 	},
 	{
@@ -19238,6 +20553,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUGMECH_ARMR"
 	},
 	{
@@ -19314,6 +20630,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUGMECH_LEGS"
 	},
 	{
@@ -19390,6 +20707,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BUGMECH_HEAD"
 	},
 	{
@@ -19464,6 +20782,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE14"
 	},
 	{
@@ -19538,6 +20857,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER14"
 	},
 	{
@@ -19612,6 +20932,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_FISH_PACK"
 	},
 	{
@@ -19686,6 +21007,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_S15_ARMOUR"
 	},
 	{
@@ -19760,6 +21082,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_S15_HAT"
 	},
 	{
@@ -19834,6 +21157,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_S15_LEGS"
 	},
 	{
@@ -19908,6 +21232,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_S15_BOOTS"
 	},
 	{
@@ -19982,6 +21307,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE15"
 	},
 	{
@@ -20056,6 +21382,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER15"
 	},
 	{
@@ -20130,6 +21457,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BOBBLE_OCTO"
 	},
 	{
@@ -20204,6 +21532,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_SQUID"
 	},
 	{
@@ -20278,6 +21607,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_S16_HAT"
 	},
 	{
@@ -20352,6 +21682,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_EGG_16"
 	},
 	{
@@ -20426,6 +21757,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE16"
 	},
 	{
@@ -20500,6 +21832,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER16"
 	},
 	{
@@ -20574,6 +21907,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE17"
 	},
 	{
@@ -20648,6 +21982,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER17"
 	},
 	{
@@ -20722,6 +22057,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_CAPE17"
 	},
 	{
@@ -20796,6 +22132,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_STAFF_17"
 	},
 	{
@@ -20870,6 +22207,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE18"
 	},
 	{
@@ -20944,6 +22282,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER18"
 	},
 	{
@@ -21018,6 +22357,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_EGG_18"
 	},
 	{
@@ -21092,6 +22432,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_STAFF_18"
 	},
 	{
@@ -21166,6 +22507,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_STONE_PACK"
 	},
 	{
@@ -21240,6 +22582,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STONE_HAT"
 	},
 	{
@@ -21314,6 +22657,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STONE_ARMOUR"
 	},
 	{
@@ -21388,6 +22732,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STONE_TORSO"
 	},
 	{
@@ -21462,6 +22807,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STONE_GLOVES"
 	},
 	{
@@ -21536,6 +22882,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STONE_LEGS"
 	},
 	{
@@ -21610,6 +22957,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/STONE_BOOTS"
 	},
 	{
@@ -21684,6 +23032,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_RUIN"
 	},
 	{
@@ -21758,6 +23107,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SHIP_PLASMA"
 	},
 	{
@@ -21832,6 +23182,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_EGG_19"
 	},
 	{
@@ -21906,6 +23257,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE19"
 	},
 	{
@@ -21980,6 +23332,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER19"
 	},
 	{
@@ -22054,6 +23407,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SHIP_ATLAS"
 	},
 	{
@@ -22128,6 +23482,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE20"
 	},
 	{
@@ -22202,6 +23557,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER20"
 	},
 	{
@@ -22276,6 +23632,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_TITLE21"
 	},
 	{
@@ -22350,6 +23707,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_BANNER21"
 	},
 	{
@@ -22424,6 +23782,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/VAULT_ARMOUR"
 	},
 	{
@@ -22498,6 +23857,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/VAULT_TORSO"
 	},
 	{
@@ -22572,6 +23932,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/VAULT_GLOVES"
 	},
 	{
@@ -22646,6 +24007,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/VAULT_LEGS"
 	},
 	{
@@ -22720,6 +24082,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/VAULT_BOOTS"
 	},
 	{
@@ -22794,6 +24157,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET01"
 	},
 	{
@@ -22868,6 +24232,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET02"
 	},
 	{
@@ -22942,6 +24307,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET03"
 	},
 	{
@@ -23016,6 +24382,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET04"
 	},
 	{
@@ -23090,6 +24457,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET05"
 	},
 	{
@@ -23164,6 +24532,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET06"
 	},
 	{
@@ -23238,6 +24607,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET07"
 	},
 	{
@@ -23312,6 +24682,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET08"
 	},
 	{
@@ -23386,6 +24757,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET09"
 	},
 	{
@@ -23460,6 +24832,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET10"
 	},
 	{
@@ -23534,6 +24907,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET11"
 	},
 	{
@@ -23608,6 +24982,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET12"
 	},
 	{
@@ -23682,6 +25057,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET13"
 	},
 	{
@@ -23756,6 +25132,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET14"
 	},
 	{
@@ -23830,6 +25207,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET15"
 	},
 	{
@@ -23904,6 +25282,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET16"
 	},
 	{
@@ -23978,6 +25357,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET17"
 	},
 	{
@@ -24052,6 +25432,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET18"
 	},
 	{
@@ -24126,6 +25507,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET19"
 	},
 	{
@@ -24200,6 +25582,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET20"
 	},
 	{
@@ -24274,6 +25657,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET21"
 	},
 	{
@@ -24348,6 +25732,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET22"
 	},
 	{
@@ -24422,6 +25807,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET23"
 	},
 	{
@@ -24496,6 +25882,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET24"
 	},
 	{
@@ -24570,6 +25957,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_PET25"
 	},
 	{
@@ -24644,6 +26032,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN01"
 	},
 	{
@@ -24718,6 +26107,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN02"
 	},
 	{
@@ -24792,6 +26182,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN03"
 	},
 	{
@@ -24866,6 +26257,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN04"
 	},
 	{
@@ -24940,6 +26332,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN05"
 	},
 	{
@@ -25014,6 +26407,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN06"
 	},
 	{
@@ -25088,6 +26482,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN07"
 	},
 	{
@@ -25162,6 +26557,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN08"
 	},
 	{
@@ -25236,6 +26632,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN09"
 	},
 	{
@@ -25310,6 +26707,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN10"
 	},
 	{
@@ -25384,6 +26782,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN11"
 	},
 	{
@@ -25458,6 +26857,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN12"
 	},
 	{
@@ -25532,6 +26932,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN13"
 	},
 	{
@@ -25606,6 +27007,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN14"
 	},
 	{
@@ -25680,6 +27082,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN15"
 	},
 	{
@@ -25754,6 +27157,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN16"
 	},
 	{
@@ -25828,6 +27232,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN17"
 	},
 	{
@@ -25902,6 +27307,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN18"
 	},
 	{
@@ -25976,6 +27382,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN19"
 	},
 	{
@@ -26050,6 +27457,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN20"
 	},
 	{
@@ -26124,6 +27532,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN21"
 	},
 	{
@@ -26198,6 +27607,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN22"
 	},
 	{
@@ -26272,6 +27682,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN23"
 	},
 	{
@@ -26346,6 +27757,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN24"
 	},
 	{
@@ -26420,6 +27832,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN25"
 	},
 	{
@@ -26494,6 +27907,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN26"
 	},
 	{
@@ -26568,6 +27982,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN27"
 	},
 	{
@@ -26642,6 +28057,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN28"
 	},
 	{
@@ -26716,6 +28132,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN29"
 	},
 	{
@@ -26790,6 +28207,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_GUN30"
 	},
 	{
@@ -26864,6 +28282,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW01A"
 	},
 	{
@@ -26938,6 +28357,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW01B"
 	},
 	{
@@ -27012,6 +28432,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW01C"
 	},
 	{
@@ -27086,6 +28507,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW01D"
 	},
 	{
@@ -27160,6 +28582,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW01E"
 	},
 	{
@@ -27234,6 +28657,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW02A"
 	},
 	{
@@ -27308,6 +28732,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW02B"
 	},
 	{
@@ -27382,6 +28807,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW02C"
 	},
 	{
@@ -27456,6 +28882,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW02D"
 	},
 	{
@@ -27530,6 +28957,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW02E"
 	},
 	{
@@ -27604,6 +29032,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW03A"
 	},
 	{
@@ -27678,6 +29107,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW03B"
 	},
 	{
@@ -27752,6 +29182,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW03C"
 	},
 	{
@@ -27826,6 +29257,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW03D"
 	},
 	{
@@ -27900,6 +29332,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW03E"
 	},
 	{
@@ -27974,6 +29407,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW04A"
 	},
 	{
@@ -28048,6 +29482,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW04B"
 	},
 	{
@@ -28122,6 +29557,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW04C"
 	},
 	{
@@ -28196,6 +29632,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW04D"
 	},
 	{
@@ -28270,6 +29707,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW04E"
 	},
 	{
@@ -28344,6 +29782,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW05A"
 	},
 	{
@@ -28418,6 +29857,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW05B"
 	},
 	{
@@ -28492,6 +29932,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW05C"
 	},
 	{
@@ -28566,6 +30007,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW05D"
 	},
 	{
@@ -28640,6 +30082,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW05E"
 	},
 	{
@@ -28714,6 +30157,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW06A"
 	},
 	{
@@ -28788,6 +30232,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW06B"
 	},
 	{
@@ -28862,6 +30307,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW06C"
 	},
 	{
@@ -28936,6 +30382,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW06D"
 	},
 	{
@@ -29010,6 +30457,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW06E"
 	},
 	{
@@ -29084,6 +30532,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW07A"
 	},
 	{
@@ -29158,6 +30607,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW07B"
 	},
 	{
@@ -29232,6 +30682,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW07C"
 	},
 	{
@@ -29306,6 +30757,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW07D"
 	},
 	{
@@ -29380,6 +30832,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW07E"
 	},
 	{
@@ -29454,6 +30907,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW08A"
 	},
 	{
@@ -29528,6 +30982,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW08B"
 	},
 	{
@@ -29602,6 +31057,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW08C"
 	},
 	{
@@ -29676,6 +31132,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW08D"
 	},
 	{
@@ -29750,6 +31207,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW08E"
 	},
 	{
@@ -29824,6 +31282,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW09A"
 	},
 	{
@@ -29898,6 +31357,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW09B"
 	},
 	{
@@ -29972,6 +31432,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW09C"
 	},
 	{
@@ -30046,6 +31507,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW09D"
 	},
 	{
@@ -30120,6 +31582,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW09E"
 	},
 	{
@@ -30194,6 +31657,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW10A"
 	},
 	{
@@ -30268,6 +31732,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW10B"
 	},
 	{
@@ -30342,6 +31807,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW10C"
 	},
 	{
@@ -30416,6 +31882,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW10D"
 	},
 	{
@@ -30490,6 +31957,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW10E"
 	},
 	{
@@ -30564,6 +32032,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW11A"
 	},
 	{
@@ -30638,6 +32107,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW11B"
 	},
 	{
@@ -30712,6 +32182,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW11C"
 	},
 	{
@@ -30786,6 +32257,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW11D"
 	},
 	{
@@ -30860,6 +32332,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW11E"
 	},
 	{
@@ -30934,6 +32407,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW12A"
 	},
 	{
@@ -31008,6 +32482,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW12B"
 	},
 	{
@@ -31082,6 +32557,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW12C"
 	},
 	{
@@ -31156,6 +32632,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW12D"
 	},
 	{
@@ -31230,6 +32707,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TWITCH_FIREW12E"
 	},
 	{
@@ -31304,6 +32782,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE01"
 	},
 	{
@@ -31378,6 +32857,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE02"
 	},
 	{
@@ -31452,6 +32932,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE03"
 	},
 	{
@@ -31526,6 +33007,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE04"
 	},
 	{
@@ -31600,6 +33082,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE05"
 	},
 	{
@@ -31674,6 +33157,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE08"
 	},
 	{
@@ -31748,6 +33232,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE09"
 	},
 	{
@@ -31822,6 +33307,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE10"
 	},
 	{
@@ -31896,6 +33382,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE11"
 	},
 	{
@@ -31970,6 +33457,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE12"
 	},
 	{
@@ -32044,6 +33532,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE13"
 	},
 	{
@@ -32118,6 +33607,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE14"
 	},
 	{
@@ -32192,6 +33682,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE15"
 	},
 	{
@@ -32266,6 +33757,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EMOTE16"
 	},
 	{
@@ -32340,6 +33832,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_HELMET01"
 	},
 	{
@@ -32414,6 +33907,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_HELMET02"
 	},
 	{
@@ -32488,6 +33982,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_HELMET03"
 	},
 	{
@@ -32562,6 +34057,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_HELMET05"
 	},
 	{
@@ -32636,6 +34132,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_VYK_ARMOUR"
 	},
 	{
@@ -32710,6 +34207,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_VYK_TORSO"
 	},
 	{
@@ -32784,6 +34282,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_VYK_GLOVES"
 	},
 	{
@@ -32858,6 +34357,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_VYK_LEGS"
 	},
 	{
@@ -32932,6 +34432,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_VYK_BOOTS"
 	},
 	{
@@ -33006,6 +34507,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EXOTIC1"
 	},
 	{
@@ -33080,6 +34582,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EXOTIC2"
 	},
 	{
@@ -33154,6 +34657,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EXOTIC3"
 	},
 	{
@@ -33228,6 +34732,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EXOTIC4"
 	},
 	{
@@ -33302,6 +34807,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EXOTIC5"
 	},
 	{
@@ -33376,6 +34882,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EXOTIC6"
 	},
 	{
@@ -33450,6 +34957,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EXOTIC7"
 	},
 	{
@@ -33524,6 +35032,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EXOTIC8"
 	},
 	{
@@ -33598,6 +35107,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EXOTIC9"
 	},
 	{
@@ -33672,6 +35182,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EXOTIC10"
 	},
 	{
@@ -33746,6 +35257,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EXOTIC11"
 	},
 	{
@@ -33820,6 +35332,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_EXOTIC12"
 	},
 	{
@@ -33894,6 +35407,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_SPOOKYHEAD"
 	},
 	{
@@ -33968,6 +35482,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/NEW_BACKPACK"
 	},
 	{
@@ -34042,6 +35557,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BOBBLE_APOLLO"
 	},
 	{
@@ -34116,6 +35632,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BOBBLE_ART"
 	},
 	{
@@ -34190,6 +35707,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BOBBLE_ATLAS"
 	},
 	{
@@ -34264,6 +35782,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BOBBLE_NADA"
 	},
 	{
@@ -34338,6 +35857,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BOBBLE_NULL"
 	},
 	{
@@ -34412,6 +35932,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BOBBLE_POLO"
 	},
 	{
@@ -34486,6 +36007,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_RAINBOW"
 	},
 	{
@@ -34560,6 +36082,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_DARK"
 	},
 	{
@@ -34634,6 +36157,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_RED"
 	},
 	{
@@ -34708,6 +36232,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_GREEN"
 	},
 	{
@@ -34782,6 +36307,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_BLUE"
 	},
 	{
@@ -34856,6 +36382,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SHIP_RAINBOW"
 	},
 	{
@@ -34930,6 +36457,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SHIP_DARK"
 	},
 	{
@@ -35004,6 +36532,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SHIP_RED"
 	},
 	{
@@ -35078,6 +36607,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SHIP_GREEN"
 	},
 	{
@@ -35152,6 +36682,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SHIP_GOLD"
 	},
 	{
@@ -35226,6 +36757,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_CHU"
 	},
 	{
@@ -35300,6 +36832,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_BLOB"
 	},
 	{
@@ -35374,6 +36907,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_POLO"
 	},
 	{
@@ -35448,6 +36982,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_NADA"
 	},
 	{
@@ -35522,6 +37057,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_HUB"
 	},
 	{
@@ -35596,6 +37132,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_CHEF"
 	},
 	{
@@ -35670,6 +37207,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_SPOOKY"
 	},
 	{
@@ -35744,6 +37282,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_SLIMY"
 	},
 	{
@@ -35818,6 +37357,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_PEEP"
 	},
 	{
@@ -35892,6 +37432,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_TRA"
 	},
 	{
@@ -35966,6 +37507,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_WAR"
 	},
 	{
@@ -36040,6 +37582,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_EXP"
 	},
 	{
@@ -36114,6 +37657,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_AGT"
 	},
 	{
@@ -36188,6 +37732,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_AMINO"
 	},
 	{
@@ -36262,6 +37807,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_CAFE"
 	},
 	{
@@ -36336,6 +37882,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_UFT"
 	},
 	{
@@ -36410,6 +37957,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_QIT"
 	},
 	{
@@ -36484,6 +38032,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_NMS_FR"
 	},
 	{
@@ -36558,6 +38107,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_NMSCORD"
 	},
 	{
@@ -36632,6 +38182,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_UN42"
 	},
 	{
@@ -36706,6 +38257,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/BANNER_AF"
 	},
 	{
@@ -36780,6 +38332,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/ODD_EGG"
 	},
 	{
@@ -36854,6 +38407,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/EXPD_ODD_EGG"
 	},
 	{
@@ -36928,6 +38482,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE1"
 	},
 	{
@@ -37002,6 +38557,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE2"
 	},
 	{
@@ -37076,6 +38632,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE3"
 	},
 	{
@@ -37150,6 +38707,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE4"
 	},
 	{
@@ -37224,6 +38782,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE5"
 	},
 	{
@@ -37298,6 +38857,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE6"
 	},
 	{
@@ -37372,6 +38932,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE7"
 	},
 	{
@@ -37446,6 +39007,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE8"
 	},
 	{
@@ -37520,6 +39082,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE9"
 	},
 	{
@@ -37594,6 +39157,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE10"
 	},
 	{
@@ -37668,6 +39232,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE11"
 	},
 	{
@@ -37742,6 +39307,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE12"
 	},
 	{
@@ -37816,6 +39382,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE13"
 	},
 	{
@@ -37890,6 +39457,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE14"
 	},
 	{
@@ -37964,6 +39532,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE15"
 	},
 	{
@@ -38038,6 +39607,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE16"
 	},
 	{
@@ -38112,6 +39682,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE17"
 	},
 	{
@@ -38186,6 +39757,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE18"
 	},
 	{
@@ -38260,6 +39832,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE19"
 	},
 	{
@@ -38334,6 +39907,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE20"
 	},
 	{
@@ -38408,6 +39982,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE21"
 	},
 	{
@@ -38482,6 +40057,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE22"
 	},
 	{
@@ -38556,6 +40132,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE23"
 	},
 	{
@@ -38630,6 +40207,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE24"
 	},
 	{
@@ -38704,6 +40282,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE25"
 	},
 	{
@@ -38778,6 +40357,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE26"
 	},
 	{
@@ -38852,6 +40432,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE27"
 	},
 	{
@@ -38926,6 +40507,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE28"
 	},
 	{
@@ -39000,6 +40582,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE29"
 	},
 	{
@@ -39074,6 +40657,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_TITLE30"
 	},
 	{
@@ -39148,6 +40732,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TITLE_SPOOKY1"
 	},
 	{
@@ -39222,6 +40807,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/TITLE_SPOOKY2"
 	},
 	{
@@ -39296,6 +40882,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_PETCUST1"
 	},
 	{
@@ -39370,6 +40957,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_PETCUST2"
 	},
 	{
@@ -39444,6 +41032,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SPEC_PETCUST3"
 	},
 	{
@@ -39518,6 +41107,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/FREI_TRAIL_GRE"
 	},
 	{
@@ -39592,6 +41182,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/FREI_TRAIL_YEL"
 	},
 	{
@@ -39666,6 +41257,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/FREI_TRAIL_PUR"
 	},
 	{
@@ -39740,6 +41332,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/FREI_TRAIL_TUR"
 	},
 	{
@@ -39814,6 +41407,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/CAPE_JELLY"
 	},
 	{
@@ -39888,6 +41482,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/CAPE_BIOFRIG"
 	},
 	{
@@ -39962,6 +41557,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/CAPE_WORM"
 	},
 	{
@@ -40036,6 +41632,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/CAPE_SEED"
 	},
 	{
@@ -40110,6 +41707,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/HOOD_GEK"
 	},
 	{
@@ -40184,6 +41782,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_FIRE"
 	},
 	{
@@ -40258,6 +41857,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_CONFETTI"
 	},
 	{
@@ -40332,6 +41932,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_FIREWORK"
 	},
 	{
@@ -40406,6 +42007,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_PLASMA"
 	},
 	{
@@ -40480,6 +42082,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/JETS_FUSION"
 	},
 	{
@@ -40556,6 +42159,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPSLOT_DMG1"
 	},
 	{
@@ -40636,6 +42240,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPSLOT_DMG2"
 	},
 	{
@@ -40712,6 +42317,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPSLOT_DMG3"
 	},
 	{
@@ -40792,6 +42398,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPSLOT_DMG4"
 	},
 	{
@@ -40876,6 +42483,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPSLOT_DMG5"
 	},
 	{
@@ -40956,6 +42564,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPSLOT_DMG6"
 	},
 	{
@@ -41036,6 +42645,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPSLOT_DMG7"
 	},
 	{
@@ -41116,6 +42726,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPSLOT_DMG8"
 	},
 	{
@@ -41192,6 +42803,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPSLOT_DMG9"
 	},
 	{
@@ -41272,6 +42884,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPSLOT_DMG10"
 	},
 	{
@@ -41356,6 +42969,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPSLOT_DMG11"
 	},
 	{
@@ -41440,6 +43054,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPSLOT_DMG12"
 	},
 	{
@@ -41516,6 +43131,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPEASY_DMG1"
 	},
 	{
@@ -41592,6 +43208,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPEASY_DMG2"
 	},
 	{
@@ -41668,6 +43285,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPEASY_DMG3"
 	},
 	{
@@ -41744,6 +43362,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/SHIPEASY_DMG4"
 	},
 	{
@@ -41827,6 +43446,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/T_SHIP_RAINBOW"
 	},
 	{
@@ -41910,6 +43530,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/T_SHIP_DARK"
 	},
 	{
@@ -41993,6 +43614,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/T_SHIP_RED"
 	},
 	{
@@ -42076,6 +43698,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/T_SHIP_GREEN"
 	},
 	{
@@ -42159,6 +43782,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/T_SHIP_GOLD"
 	},
 	{
@@ -42242,6 +43866,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/T_SHIP_PIRATE"
 	},
 	{
@@ -42325,6 +43950,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/T_SHIP_ROGUE"
 	},
 	{
@@ -42408,6 +44034,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/T_SHIP_PLASMA"
 	},
 	{
@@ -42491,6 +44118,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/T_SHIP_ATLAS"
 	},
 	{
@@ -42606,6 +44234,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/MECH_SENT_L_ARM"
 	},
 	{
@@ -42710,6 +44339,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/MECH_SENT_R_ARM"
 	},
 	{
@@ -42803,6 +44433,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/MECH_SENT_LEGS"
 	},
 	{
@@ -42903,6 +44534,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/MECH_ARMY_L_ARM"
 	},
 	{
@@ -43025,6 +44657,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/MECH_ARMY_R_ARM"
 	},
 	{
@@ -43118,6 +44751,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/MECH_ARMY_LEGS"
 	},
 	{
@@ -43209,6 +44843,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "other/MECH_ARMY_HEAD"
 	},
 	{
@@ -43290,6 +44925,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "other/SHIPSUMMON"
 	},
 	{
@@ -43339,6 +44975,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "∞",
+		"SourceTable": "Substance",
 		"Slug": "other/TECHFRAG"
 	},
 	{
@@ -43388,6 +45025,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "∞",
+		"SourceTable": "Substance",
 		"Slug": "other/TECHFRAG_R"
 	},
 	{
@@ -43437,6 +45075,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/QUICKSILVER"
 	},
 	{
@@ -43486,6 +45125,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/UNITS"
 	},
 	{
@@ -43535,6 +45175,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/TRA_STANDING_UP"
 	},
 	{
@@ -43584,6 +45225,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/TRA_STANDING_DN"
 	},
 	{
@@ -43633,6 +45275,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/EXP_STANDING_UP"
 	},
 	{
@@ -43682,6 +45325,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/EXP_STANDING_DN"
 	},
 	{
@@ -43731,6 +45375,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/WAR_STANDING_UP"
 	},
 	{
@@ -43780,6 +45425,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/WAR_STANDING_DN"
 	},
 	{
@@ -43829,6 +45475,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/BUI_STANDING_UP"
 	},
 	{
@@ -43878,6 +45525,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/BUI_STANDING_DN"
 	},
 	{
@@ -43927,6 +45575,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/TGUILD_STAND_UP"
 	},
 	{
@@ -43976,6 +45625,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/TGUILD_STAND_DN"
 	},
 	{
@@ -44025,6 +45675,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/EGUILD_STAND_UP"
 	},
 	{
@@ -44074,6 +45725,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/EGUILD_STAND_DN"
 	},
 	{
@@ -44123,6 +45775,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/WGUILD_STAND_UP"
 	},
 	{
@@ -44172,6 +45825,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/WGUILD_STAND_DN"
 	},
 	{
@@ -44221,6 +45875,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/PIR_STAND_UP"
 	},
 	{
@@ -44270,6 +45925,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/PIR_STAND_DN"
 	},
 	{
@@ -44319,6 +45975,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/NEW_PERK"
 	},
 	{
@@ -44368,6 +46025,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SET_POP_POS"
 	},
 	{
@@ -44417,6 +46075,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SET_POP_NEG"
 	},
 	{
@@ -44466,6 +46125,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SET_PROD_POS"
 	},
 	{
@@ -44515,6 +46175,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SET_PROD_NEG"
 	},
 	{
@@ -44564,6 +46225,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SET_MOOD_POS"
 	},
 	{
@@ -44613,6 +46275,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SET_MOOD_NEG"
 	},
 	{
@@ -44662,6 +46325,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SET_COST_POS"
 	},
 	{
@@ -44711,6 +46375,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SET_COST_NEG"
 	},
 	{
@@ -44760,6 +46425,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SET_SENT_POS"
 	},
 	{
@@ -44809,6 +46475,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SET_SENT_NEG"
 	},
 	{
@@ -44858,6 +46525,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SET_DEBT_POS"
 	},
 	{
@@ -44907,6 +46575,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SET_DEBT_NEG"
 	},
 	{
@@ -44956,6 +46625,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SCRAP_RAD"
 	},
 	{
@@ -45005,6 +46675,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SCRAP_TOX"
 	},
 	{
@@ -45054,1109 +46725,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "-",
+		"SourceTable": "Substance",
 		"Slug": "other/SCRAP_EXP"
-	},
-	{
-		"Id": "CHART_PB_CHALL",
-		"Icon": "CHART_PB_CHALL.png",
-		"IconPath": "textures/ui/frontend/icons/u4products/product.starchart.pbchallenger.dds",
-		"Name": "Challenger's Invitation",
-		"Name_LocStr": "UI_CHART_PB_CHALL_NAME",
-		"Group": "Arena League Invitation",
-		"Subtitle_LocStr": "UI_CHART_PB_CHALL_SUB",
-		"Description": "A battle invitation from a local Arena League member. The location of their Holo-Arena has been marked.\n\nSelect the invitation and use Plot Route (FE_ALT1) to pin the Holo-Arena in your Exosuit display.\n\nNew invitations can be received by battling with Arena League members.",
-		"Description_LocStr": "UI_CHART_PB_CHALL_DESC",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 1499,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 4,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "1A2733",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [],
-		"BlueprintCost": 1499,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 0.00827852823,
-		"NormalisedValueOffWorld": 0.00827852823,
-		"EconomyInfluenceMultiplier": 0.0,
-		"Rarity": "Rare",
-		"Legality": "Legal",
-		"TradeCategory": "None",
-		"ProductCategory": "Curiosity",
-		"SubstanceCategory": "Special",
-		"WikiCategory": "Curio",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": true,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": "UI_FIND_OBJ",
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": null,
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": false,
-		"Procedural": false
-	},
-	{
-		"Id": "CHART_PB_CHALNX",
-		"Icon": "CHART_PB_CHALNX.png",
-		"IconPath": "textures/ui/frontend/icons/u4products/product.starchart.pbchallenger.dds",
-		"Name": "Challenger's Invitation",
-		"Name_LocStr": "UI_CHART_PB_CHALL_NAME",
-		"Group": "Arena League Invitation",
-		"Subtitle_LocStr": "UI_CHART_PB_CHALL_SUB",
-		"Description": "A battle invitation from a local Arena League member. The location of their Holo-Arena has been marked.\n\nSelect the invitation and use Plot Route (FE_ALT1) to pin the Holo-Arena in your Exosuit display.\n\nNew invitations can be received by battling with Arena League members.",
-		"Description_LocStr": "UI_CHART_PB_CHALL_DESC",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 1499,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 4,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "1A2733",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [],
-		"BlueprintCost": 1499,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 0.00827852823,
-		"NormalisedValueOffWorld": 0.00827852823,
-		"EconomyInfluenceMultiplier": 0.0,
-		"Rarity": "Rare",
-		"Legality": "Legal",
-		"TradeCategory": "None",
-		"ProductCategory": "Curiosity",
-		"SubstanceCategory": "Special",
-		"WikiCategory": "Curio",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": true,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": "UI_FIND_OBJ",
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": null,
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": false,
-		"Procedural": false
-	},
-	{
-		"Id": "CHART_PB_CHAMP",
-		"Icon": "CHART_PB_CHAMP.png",
-		"IconPath": "textures/ui/frontend/icons/u4products/product.starchart.pbchampion.dds",
-		"Name": "Champion's Invitation",
-		"Name_LocStr": "UI_CHART_PB_CHAMP_NAME",
-		"Group": "Arena League Invitation",
-		"Subtitle_LocStr": "UI_CHART_PB_CHAMP_SUB",
-		"Description": "A battle invitation from this system's Arena League Champion. The location of their Holo-Arena has been marked.\n\nSelect the invitation and use Plot Route (FE_ALT1) to pin the Holo-Arena in your Exosuit display.\n\nNew invitations can be received by battling with Arena League members.",
-		"Description_LocStr": "UI_CHART_PB_CHAMP_DESC",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 1499,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 4,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "1A2733",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [],
-		"BlueprintCost": 1499,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 0.00827852823,
-		"NormalisedValueOffWorld": 0.00827852823,
-		"EconomyInfluenceMultiplier": 0.0,
-		"Rarity": "Rare",
-		"Legality": "Legal",
-		"TradeCategory": "None",
-		"ProductCategory": "Curiosity",
-		"SubstanceCategory": "Special",
-		"WikiCategory": "Curio",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": true,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": "UI_FIND_OBJ",
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": null,
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": false,
-		"Procedural": false
-	},
-	{
-		"Id": "TREAT_FREELEVEL",
-		"Icon": "TREAT_FREELEVEL.png",
-		"IconPath": "textures/ui/frontend/icons/products/product.petbattle.retropellet.dds",
-		"Name": "Retroviral Pellet",
-		"Name_LocStr": "UI_PET_FREELEVEL_NAME",
-		"Group": "Genetic Mutator",
-		"Subtitle_LocStr": "UI_PET_FREELEVEL_SUB",
-		"Description": "A specialised treat laced with gene-manipulating retroviruses, capable of evolving the battle abilities of a companion.\n\nFeeding this to your tamed creatures will instantly unlock part of their genetic potential.",
-		"Description_LocStr": "UI_PET_FREELEVEL_DESC",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 900,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 1,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "1A2733",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [
-			"HasUsedToCraft",
-			"IsEggIngredient"
-		],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 3.51923081e-05,
-		"NormalisedValueOffWorld": 3.51923081e-05,
-		"EconomyInfluenceMultiplier": 0.0,
-		"Rarity": "Rare",
-		"Legality": "Legal",
-		"TradeCategory": "None",
-		"ProductCategory": "Curiosity",
-		"SubstanceCategory": "Special",
-		"WikiCategory": "Curio",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": false,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": true,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": "UI_FIND_OBJ",
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": null,
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": true,
-		"Procedural": false
-	},
-	{
-		"Id": "S20_LOG1",
-		"Icon": "S20_LOG1.png",
-		"IconPath": "textures/ui/frontend/icons/u4products/product.logkey.dds",
-		"Name": "Log of the Fireship Arcadia",
-		"Name_LocStr": "UI_S20_BIGGS_LOG_NAME",
-		"Group": ":: Datestamp 22516.01 ::",
-		"Subtitle_LocStr": "UI_S20_BIGGS_LOG_SUB1",
-		"Description": "SLASHLOG CORRUPT CLOCK RECOVERING DAMAGED SECTORSSLASH\n\n\"captain found a ::: on the last walk out\nsays it'll bring us luck\nwe'll need it, cruise has been a ::: waste so far\nall the asteroids just dust and ice\n::: nonsense but better than nothing\"",
-		"Description_LocStr": "UI_S20_BIGGS_LOG_DESC1",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 1600,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 0,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "4D2957",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [
-			"HasUsedToCraft"
-		],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.5,
-			"LowPriceMod": -0.1,
-			"HighPriceMod": 0.1,
-			"BuyBaseMarkup": 0.2,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 0.000102500009,
-		"NormalisedValueOffWorld": 0.000153782064,
-		"EconomyInfluenceMultiplier": 0.25,
-		"Rarity": "Rare",
-		"Legality": "Legal",
-		"TradeCategory": "None",
-		"ProductCategory": "Curiosity",
-		"SubstanceCategory": "Special",
-		"WikiCategory": "NotEnabled",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": false,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": "UI_CRAFT_OBJ",
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": null,
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": true,
-		"Procedural": false
-	},
-	{
-		"Id": "S20_LOG2",
-		"Icon": "S20_LOG2.png",
-		"IconPath": "textures/ui/frontend/icons/u4products/product.logkey.dds",
-		"Name": "Log of the Fireship Arcadia",
-		"Name_LocStr": "UI_S20_BIGGS_LOG_NAME",
-		"Group": ":: Datestamp 22518.24 ::",
-		"Subtitle_LocStr": "UI_S20_BIGGS_LOG_SUB2",
-		"Description": "SLASHLOG CORRUPT CLOCK RECOVERING DAMAGED SECTORSSLASH\n\n\"going from bad to worse\ncan't wait to get home\nnavigation ::: distorted ::: nothing but static\nwarping but ::: just empty systems\n::: lost in some abandoned sector?\"",
-		"Description_LocStr": "UI_S20_BIGGS_LOG_DESC2",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 1600,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 0,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "4D2957",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [
-			"HasUsedToCraft"
-		],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.5,
-			"LowPriceMod": -0.1,
-			"HighPriceMod": 0.1,
-			"BuyBaseMarkup": 0.2,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 0.000102500009,
-		"NormalisedValueOffWorld": 0.000153782064,
-		"EconomyInfluenceMultiplier": 0.25,
-		"Rarity": "Rare",
-		"Legality": "Legal",
-		"TradeCategory": "None",
-		"ProductCategory": "Curiosity",
-		"SubstanceCategory": "Special",
-		"WikiCategory": "NotEnabled",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": false,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": "UI_CRAFT_OBJ",
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": null,
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": true,
-		"Procedural": false
-	},
-	{
-		"Id": "S20_LOG3",
-		"Icon": "S20_LOG3.png",
-		"IconPath": "textures/ui/frontend/icons/u4products/product.logkey.dds",
-		"Name": "Log of the Fireship Arcadia",
-		"Name_LocStr": "UI_S20_BIGGS_LOG_NAME",
-		"Group": ":: Datestamp 22522.31 ::",
-		"Subtitle_LocStr": "UI_S20_BIGGS_LOG_SUB3",
-		"Description": "SLASHLOG CORRUPT CLOCK RECOVERING DAMAGED SECTORSSLASH\n\n\"the captain ::: gone\ntried to wake them for their watch\nno sign of them ::: nothing on the cameras\ndoor logs are normal, no kit missing\nwhere are they?\nwhere are we\"",
-		"Description_LocStr": "UI_S20_BIGGS_LOG_DESC3",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 1600,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 0,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "4D2957",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [
-			"HasUsedToCraft"
-		],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.5,
-			"LowPriceMod": -0.1,
-			"HighPriceMod": 0.1,
-			"BuyBaseMarkup": 0.2,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 0.000102500009,
-		"NormalisedValueOffWorld": 0.000153782064,
-		"EconomyInfluenceMultiplier": 0.25,
-		"Rarity": "Rare",
-		"Legality": "Legal",
-		"TradeCategory": "None",
-		"ProductCategory": "Curiosity",
-		"SubstanceCategory": "Special",
-		"WikiCategory": "NotEnabled",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": false,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": "UI_CRAFT_OBJ",
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": null,
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": true,
-		"Procedural": false
-	},
-	{
-		"Id": "S20_LOG4",
-		"Icon": "S20_LOG4.png",
-		"IconPath": "textures/ui/frontend/icons/u4products/product.logkey.dds",
-		"Name": "Log of the Fireship Arcadia",
-		"Name_LocStr": "UI_S20_BIGGS_LOG_NAME",
-		"Group": ":: Datestamp 22594.16 ::",
-		"Subtitle_LocStr": "UI_S20_BIGGS_LOG_SUB4",
-		"Description": "SLASHLOG CORRUPT CLOCK RECOVERING DAMAGED SECTORSSLASH\n\n\"we saw them\nthey ::: out the airlock\njust ::: floating there\ncould hear them ::: singing\n...\nget us home ::: please\"",
-		"Description_LocStr": "UI_S20_BIGGS_LOG_DESC4",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 1600,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 0,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "4D2957",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [
-			"HasUsedToCraft"
-		],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.5,
-			"LowPriceMod": -0.1,
-			"HighPriceMod": 0.1,
-			"BuyBaseMarkup": 0.2,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 0.000102500009,
-		"NormalisedValueOffWorld": 0.000153782064,
-		"EconomyInfluenceMultiplier": 0.25,
-		"Rarity": "Rare",
-		"Legality": "Legal",
-		"TradeCategory": "None",
-		"ProductCategory": "Curiosity",
-		"SubstanceCategory": "Special",
-		"WikiCategory": "NotEnabled",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": false,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": "UI_CRAFT_OBJ",
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": null,
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": true,
-		"Procedural": false
-	},
-	{
-		"Id": "S20_LOG5",
-		"Icon": "S20_LOG5.png",
-		"IconPath": "textures/ui/frontend/icons/u4products/product.logkey.dds",
-		"Name": "Log of the Fireship Arcadia",
-		"Name_LocStr": "UI_S20_BIGGS_LOG_NAME",
-		"Group": ":: Datestamp 22512.64 ::",
-		"Subtitle_LocStr": "UI_S20_BIGGS_LOG_SUB5",
-		"Description": "SLASHLOG CORRUPT CLOCK RECOVERING DAMAGED SECTORSSLASH\n\n\"they all followed ::: the music\none by one ::: the lights called them\nalone now\ni hear the song now too, even when i ::: sleep\ni'm so lonely ::: when will ::: when\nhelp\"",
-		"Description_LocStr": "UI_S20_BIGGS_LOG_DESC5",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 1600,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 0,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "4D2957",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [
-			"HasUsedToCraft"
-		],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.5,
-			"LowPriceMod": -0.1,
-			"HighPriceMod": 0.1,
-			"BuyBaseMarkup": 0.2,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 0.000102500009,
-		"NormalisedValueOffWorld": 0.000153782064,
-		"EconomyInfluenceMultiplier": 0.25,
-		"Rarity": "Rare",
-		"Legality": "Legal",
-		"TradeCategory": "None",
-		"ProductCategory": "Curiosity",
-		"SubstanceCategory": "Special",
-		"WikiCategory": "NotEnabled",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": false,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": "UI_CRAFT_OBJ",
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": null,
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": true,
-		"Procedural": false
-	},
-	{
-		"Id": "SPEC_PB_EGG01",
-		"Icon": "SPEC_PB_EGG01.png",
-		"IconPath": "textures/ui/frontend/icons/products/product.creatureegg.dds",
-		"Name": "Aeron Crab Egg",
-		"Name_LocStr": "UI_SPEC_PB_EGG01_NAME",
-		"Group": "Shellseeker Companion",
-		"Subtitle_LocStr": "UI_SPEC_PB_EGG01_SUB",
-		"Description": "A living, fertile egg, ready to hatch!\n\nLaid by a soft-skinned crustacean, this species has evolved a synergistic relationship with Travellers, occupying the discarded shells of slain Sentinel Quadrupeds.\n\nScans indicate the being within has the genetic potential to be shy and migratory.",
-		"Description_LocStr": "UI_SPEC_PB_EGG01_DESC",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 800,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 1,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "4D2987",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": "textures/ui/frontend/icons/specialshop/hero.title.dds",
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 0.00020506412,
-		"NormalisedValueOffWorld": 0.00020506412,
-		"EconomyInfluenceMultiplier": 0.25,
-		"Rarity": "Common",
-		"Legality": "Legal",
-		"TradeCategory": "SpecialShop",
-		"ProductCategory": "Curiosity",
-		"SubstanceCategory": "Exotic",
-		"WikiCategory": "NotEnabled",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": false,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": null,
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": "R_PB_MEDAL_EGG1",
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": false,
-		"Procedural": false
-	},
-	{
-		"Id": "SPEC_PB_EGG02",
-		"Icon": "SPEC_PB_EGG02.png",
-		"IconPath": "textures/ui/frontend/icons/products/product.creaturerobotegg.dds",
-		"Name": "Wandering Shrimp Tank Egg",
-		"Name_LocStr": "UI_SPEC_PB_EGG02_NAME",
-		"Group": "Liquid-Suspended Consciousness",
-		"Subtitle_LocStr": "UI_SPEC_PB_EGG02_SUB",
-		"Description": "A metal 'egg' capsule, ready to hatch!\n\nPart robotic, part organic, part liquid. The primitive anatomy of this creature's conscious organ belies a deep, calculating intelligence.\n\nScans indicate the being within has the genetic potential to be focused and strategic.",
-		"Description_LocStr": "UI_SPEC_PB_EGG02_DESC",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 800,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 1,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "4D2988",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": "textures/ui/frontend/icons/specialshop/hero.title.dds",
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 0.00020506412,
-		"NormalisedValueOffWorld": 0.00020506412,
-		"EconomyInfluenceMultiplier": 0.25,
-		"Rarity": "Common",
-		"Legality": "Legal",
-		"TradeCategory": "SpecialShop",
-		"ProductCategory": "Curiosity",
-		"SubstanceCategory": "Exotic",
-		"WikiCategory": "NotEnabled",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": false,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": null,
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": "R_PB_MEDAL_EGG2",
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": false,
-		"Procedural": false
-	},
-	{
-		"Id": "SPEC_PB_EGG03",
-		"Icon": "SPEC_PB_EGG03.png",
-		"IconPath": "textures/ui/frontend/icons/products/product.creatureegg.dds",
-		"Name": "Boundary Horror Egg",
-		"Name_LocStr": "UI_SPEC_PB_EGG03_NAME",
-		"Group": "Spectral Anomaly",
-		"Subtitle_LocStr": "UI_SPEC_PB_EGG03_SUB",
-		"Description": "A living, fertile egg, ready to hatch!\n\nIt wails, sleepless.\n\nScans indicate the being within has the genetic potential to be haunting and adrift.",
-		"Description_LocStr": "UI_SPEC_PB_EGG03_DESC",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 800,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 1,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "4D2989",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": "textures/ui/frontend/icons/specialshop/hero.title.dds",
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 0.00020506412,
-		"NormalisedValueOffWorld": 0.00020506412,
-		"EconomyInfluenceMultiplier": 0.25,
-		"Rarity": "Common",
-		"Legality": "Legal",
-		"TradeCategory": "SpecialShop",
-		"ProductCategory": "Curiosity",
-		"SubstanceCategory": "Exotic",
-		"WikiCategory": "NotEnabled",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": false,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": null,
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": "R_PB_MEDAL_EGG3",
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": false,
-		"Procedural": false
-	},
-	{
-		"Id": "SPEC_PB_EGG05",
-		"Icon": "SPEC_PB_EGG05.png",
-		"IconPath": "textures/ui/frontend/icons/products/product.creatureegg.dds",
-		"Name": "Geno-prawn Egg",
-		"Name_LocStr": "UI_SPEC_PB_EGG05_NAME",
-		"Group": "Abyssal Horror",
-		"Subtitle_LocStr": "UI_SPEC_PB_EGG05_SUB",
-		"Description": "A living, fertile egg, ready to hatch!\n\nThe serpentine foetus stares directly through the membrane of its egg. It watches. It waits.\n\nScans indicate the being within has the genetic potential to be unblinking and slithering.",
-		"Description_LocStr": "UI_SPEC_PB_EGG05_DESC",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 800,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 1,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "4D2991",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": "textures/ui/frontend/icons/specialshop/hero.title.dds",
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 0.00020506412,
-		"NormalisedValueOffWorld": 0.00020506412,
-		"EconomyInfluenceMultiplier": 0.25,
-		"Rarity": "Common",
-		"Legality": "Legal",
-		"TradeCategory": "SpecialShop",
-		"ProductCategory": "Curiosity",
-		"SubstanceCategory": "Exotic",
-		"WikiCategory": "NotEnabled",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": false,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": null,
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": "R_PB_MEDAL_EGG5",
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": false,
-		"Procedural": false
-	},
-	{
-		"Id": "U_TECHBOX_ALIEN",
-		"Icon": "U_TECHBOX_ALIEN.png",
-		"IconPath": "textures/ui/frontend/icons/technology/bio/product.stem3.dds",
-		"Name": "%name% Implant",
-		"Name_LocStr": "UP_TECH_BOX_ALIEN_NAME",
-		"Group": "Potent Nodule",
-		"Subtitle_LocStr": "UP_TECH_BOX_ALIEN_SUB",
-		"Description": "A pre-grown bionic implant, designed to facilitate the fusion of bio-technology to sentient starships. Use FE_ALT1 to begin the installation process.\n\n%TECH_DESC%",
-		"Description_LocStr": "UP_TECH_BOX_ALIEN_DESC",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 480,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 1,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "1A2733",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 3.07051305e-05,
-		"NormalisedValueOffWorld": 3.07051305e-05,
-		"EconomyInfluenceMultiplier": 0.25,
-		"Rarity": "Rare",
-		"Legality": "Legal",
-		"TradeCategory": "None",
-		"ProductCategory": "Consumable",
-		"SubstanceCategory": "Special",
-		"WikiCategory": "NotEnabled",
-		"WikiEnabled": false,
-		"FossilCategory": "GcFossilCategory",
-		"CorvettePartCategory": "None",
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": true,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": "STRONGLASER",
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": "UI_BUY_OBJ",
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": "None",
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": null,
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"IsCraftable": false,
-		"Procedural": false
-	},
-	{
-		"Id": "SPEC_XOHELMET",
-		"Icon": "SPEC_XOHELMET.png",
-		"IconPath": "textures/ui/frontend/icons/specialshop/special.blob_b.dds",
-		"Name": "X.o. Suit",
-		"Name_LocStr": "UI_SPEC_XOHELMET_NAME",
-		"Group": "Specialist Exosuit Visuals",
-		"Subtitle_LocStr": "UI_SPEC_XOHELMET_SUB",
-		"Description": "An exclusive Exosuit Appearance Override.\n\nTransform the appearance of your Exosuit at an Appearance Modifier.",
-		"Description_LocStr": "UI_SPEC_XOHELMET_DESC",
-		"AltDescription": null,
-		"Hint": null,
-		"BaseValueUnits": 1000,
-		"CurrencyType": "Credits",
-		"Level": 0,
-		"ChargeValue": 0,
-		"MaxStackSize": 1,
-		"DefaultCraftAmount": 1,
-		"CraftAmountStepSize": 1,
-		"CraftAmountMultiplier": 1,
-		"Colour": "262626FF",
-		"WorldColour": null,
-		"CdnUrl": "",
-		"Usages": [],
-		"BlueprintCost": 0,
-		"BlueprintCostType": "None",
-		"BlueprintSource": 0,
-		"RequiredItems": [],
-		"StatBonuses": [],
-		"ConsumableRewardTexts": [],
-		"HeroIconPath": "textures/ui/frontend/icons/specialshop/hero.blob_b.dds",
-		"PriceModifiers": null,
-		"SpecificChargeOnly": false,
-		"NormalisedValueOnWorld": 0.0,
-		"NormalisedValueOffWorld": 0.0,
-		"EconomyInfluenceMultiplier": 0.0,
-		"Rarity": "Common",
-		"Legality": "Legal",
-		"TradeCategory": "None",
-		"ProductCategory": "Exotic",
-		"SubstanceCategory": null,
-		"IsCraftable": false,
-		"Procedural": false,
-		"WikiCategory": null,
-		"WikiEnabled": false,
-		"FossilCategory": null,
-		"CorvettePartCategory": null,
-		"CorvetteRewardFrequency": 0.0,
-		"Consumable": false,
-		"CookingIngredient": false,
-		"GoodForSelling": false,
-		"EggModifierIngredient": false,
-		"DeploysInto": null,
-		"BuildableShipTechID": null,
-		"GroupID": null,
-		"PinObjective": null,
-		"PinObjectiveTip": null,
-		"PinObjectiveMessage": null,
-		"PinObjectiveScannableType": null,
-		"PinObjectiveEasyToRefine": false,
-		"NeverPinnable": false,
-		"GiveRewardOnSpecialPurchase": null,
-		"FoodBonusStat": null,
-		"FoodBonusStatAmount": 0.0,
-		"IsTechbox": false,
-		"CanSendToOtherPlayers": true,
-		"Slug": "others/SPEC_XOHELMET"
 	}
 ]

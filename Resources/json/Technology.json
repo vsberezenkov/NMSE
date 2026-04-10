@@ -86,6 +86,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": true,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "technology/BIGGS_POI_LOC"
 	},
 	{
@@ -160,6 +161,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "technology/EXPD_S15_LASER"
 	},
 	{
@@ -284,6 +286,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/PROTECT"
 	},
 	{
@@ -378,6 +381,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/ENERGY"
 	},
 	{
@@ -485,6 +489,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/JET1"
 	},
 	{
@@ -576,6 +581,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_MIDAIR"
 	},
 	{
@@ -667,6 +673,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_HOT"
 	},
 	{
@@ -758,6 +765,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_COLD"
 	},
 	{
@@ -849,6 +857,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_TOX"
 	},
 	{
@@ -940,6 +949,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_RAD"
 	},
 	{
@@ -1031,6 +1041,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_WATER"
 	},
 	{
@@ -1122,7 +1133,97 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/PRESSURE_SUIT"
+	},
+	{
+		"Id": "SUIT_REFINER",
+		"Icon": "SUIT_REFINER.png",
+		"IconPath": "textures/ui/frontend/icons/technology/render.personalrefiner.dds",
+		"Name": "Personal Refiner",
+		"Name_LocStr": "UI_SUIT_REFINER_NAME",
+		"NameLower": "Personal Refiner",
+		"NameLower_LocStr": "UI_SUIT_REFINER_NAME_L",
+		"Group": "Self-Mounted Refiner Unit",
+		"Subtitle_LocStr": "UI_SUIT_REFINER_SUB",
+		"Description": "A compact extension to the Exosuit, installing a small Portable Refiner, accessible directly from the user's Exosuit interface.\n\nUnit requires fuel and is limited to refining one substance at a time.",
+		"Description_LocStr": "UI_SUIT_REFINER_DESC",
+		"HintStart": null,
+		"HintEnd": null,
+		"DamagedDescription": null,
+		"BaseValueUnits": 1,
+		"CurrencyType": "None",
+		"Level": 1,
+		"Value": 10.0,
+		"Colour": "2177C8",
+		"Usages": [
+			"HasChargedBy",
+			"HasDevProperties"
+		],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "Nanites",
+		"BlueprintSource": 0,
+		"RequiredItems": [
+			{
+				"Id": "OXYGEN",
+				"Quantity": 150
+			},
+			{
+				"Id": "STELLAR2",
+				"Quantity": 100
+			}
+		],
+		"StatBonuses": [
+			{
+				"Name": "Refiner",
+				"LocaleKeyTemplate": "enabled",
+				"Image": "refiner",
+				"Value": "1"
+			}
+		],
+		"ConsumableRewardTexts": [],
+		"Category": "Suit",
+		"Category_LocStr": null,
+		"Rarity": "Common",
+		"Teach": "true",
+		"Chargeable": true,
+		"ChargeAmount": 100,
+		"ChargeType": "Fuel",
+		"ChargeBy": [],
+		"ChargeMultiplier": 1.0,
+		"BuildFullyCharged": true,
+		"UsesAmmo": false,
+		"AmmoId": null,
+		"PrimaryItem": "true",
+		"Upgrade": false,
+		"Core": false,
+		"RepairTech": false,
+		"Procedural": false,
+		"BrokenSlotTech": "false",
+		"ParentTechId": null,
+		"RequiredTech": null,
+		"RequiredLevel": 0,
+		"FocusLocator": null,
+		"UpgradeColour": "FFFFFF",
+		"LinkColour": "CC99FF",
+		"RewardGroup": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"RequiredRank": 3,
+		"DispensingRace": "Explorers",
+		"FragmentCost": 360,
+		"TechShopRarity": null,
+		"WikiEnabled": true,
+		"NeverPinnable": false,
+		"IsTemplate": false,
+		"ExclusivePrimaryStat": true,
+		"SourceTable": "Technology",
+		"Slug": "technology/SUIT_REFINER"
 	},
 	{
 		"Id": "SUIT_REFINER2",
@@ -1214,6 +1315,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": true,
+		"SourceTable": "Technology",
 		"Slug": "technology/SUIT_REFINER2"
 	},
 	{
@@ -1301,6 +1403,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/POWERGLOVE"
 	},
 	{
@@ -1388,7 +1491,195 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/ATLASSUIT"
+	},
+	{
+		"Id": "STARSUIT",
+		"Icon": "STARSUIT.png",
+		"IconPath": "textures/ui/frontend/icons/u4products/product.hexcore.dds",
+		"Name": "Star Seed",
+		"Name_LocStr": "STARBIRTH_ITEM_NAME",
+		"NameLower": "Star Seed",
+		"NameLower_LocStr": "STARBIRTH_ITEM_NAME_L",
+		"Group": "Priceless Fragment",
+		"Subtitle_LocStr": "STARBIRTH_ITEM_SUBTITLE",
+		"Description": "The smallest of sparks, housed within a containment field of unknown origins.\n\nThe seed glows with life, desperate to escape and fulfill its potential.",
+		"Description_LocStr": "STARBIRTH_ITEM_DESC",
+		"HintStart": null,
+		"HintEnd": null,
+		"DamagedDescription": null,
+		"BaseValueUnits": 1,
+		"CurrencyType": "None",
+		"Level": 1,
+		"Value": 120.0,
+		"Colour": "2177C8",
+		"Usages": [
+			"HasDevProperties"
+		],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "Nanites",
+		"BlueprintSource": 0,
+		"RequiredItems": [
+			{
+				"Id": "ASTEROID3",
+				"Quantity": 16
+			},
+			{
+				"Id": "ROCKETSUB",
+				"Quantity": 16
+			},
+			{
+				"Id": "ASTEROID2",
+				"Quantity": 16
+			}
+		],
+		"StatBonuses": [
+			{
+				"Name": "Armour Health",
+				"LocaleKeyTemplate": "enabled",
+				"Image": "health",
+				"Value": "20"
+			}
+		],
+		"ConsumableRewardTexts": [],
+		"Category": "Suit",
+		"Category_LocStr": null,
+		"Rarity": "Impossible",
+		"Teach": "true",
+		"Chargeable": false,
+		"ChargeAmount": 100,
+		"ChargeType": "Catalyst",
+		"ChargeBy": [],
+		"ChargeMultiplier": 1.0,
+		"BuildFullyCharged": true,
+		"UsesAmmo": false,
+		"AmmoId": null,
+		"PrimaryItem": "false",
+		"Upgrade": false,
+		"Core": false,
+		"RepairTech": false,
+		"Procedural": false,
+		"BrokenSlotTech": "false",
+		"ParentTechId": null,
+		"RequiredTech": null,
+		"RequiredLevel": 0,
+		"FocusLocator": null,
+		"UpgradeColour": "FFFFFF",
+		"LinkColour": "CC99FF",
+		"RewardGroup": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"RequiredRank": 3,
+		"DispensingRace": "Explorers",
+		"FragmentCost": 1,
+		"TechShopRarity": null,
+		"WikiEnabled": true,
+		"NeverPinnable": false,
+		"IsTemplate": false,
+		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
+		"Slug": "technology/STARSUIT"
+	},
+	{
+		"Id": "DENYSUIT",
+		"Icon": "DENYSUIT.png",
+		"IconPath": "textures/ui/frontend/icons/u4products/product.hereticcore.dds",
+		"Name": "Mark of the Denier",
+		"Name_LocStr": "DENIER_ITEM_NAME",
+		"NameLower": "Mark of the Denier",
+		"NameLower_LocStr": "DENIER_ITEM_NAME_L",
+		"Group": "Priceless Fragment",
+		"Subtitle_LocStr": "STARBIRTH_ITEM_SUBTITLE",
+		"Description": "A tiny mote of stardust, no more than a speck. On closer examination, its surface is all crystalline shards and distorted crimson geometry.\n\nIt flickers with pent-up energy, demanding to be free.\n\nEmpower the mark as you discover systems, planets and objects across the universe.",
+		"Description_LocStr": "DENIER_ITEM_DESC",
+		"HintStart": null,
+		"HintEnd": null,
+		"DamagedDescription": null,
+		"BaseValueUnits": 1,
+		"CurrencyType": "None",
+		"Level": 1,
+		"Value": 120.0,
+		"Colour": "2177C8",
+		"Usages": [
+			"HasChargedBy",
+			"HasDevProperties"
+		],
+		"BlueprintCost": 1,
+		"BlueprintCostType": "Nanites",
+		"BlueprintSource": 0,
+		"RequiredItems": [
+			{
+				"Id": "ASTEROID3",
+				"Quantity": 16
+			},
+			{
+				"Id": "ROCKETSUB",
+				"Quantity": 16
+			},
+			{
+				"Id": "ASTEROID2",
+				"Quantity": 16
+			}
+		],
+		"StatBonuses": [
+			{
+				"Name": "Denier",
+				"LocaleKeyTemplate": "enabled",
+				"Image": "denier",
+				"Value": "1"
+			}
+		],
+		"ConsumableRewardTexts": [],
+		"Category": "Suit",
+		"Category_LocStr": null,
+		"Rarity": "Impossible",
+		"Teach": "true",
+		"Chargeable": true,
+		"ChargeAmount": 100,
+		"ChargeType": "Earth",
+		"ChargeBy": [
+			"TECHFRAG"
+		],
+		"ChargeMultiplier": 1.0,
+		"BuildFullyCharged": false,
+		"UsesAmmo": false,
+		"AmmoId": null,
+		"PrimaryItem": "true",
+		"Upgrade": false,
+		"Core": false,
+		"RepairTech": false,
+		"Procedural": false,
+		"BrokenSlotTech": "false",
+		"ParentTechId": null,
+		"RequiredTech": null,
+		"RequiredLevel": 0,
+		"FocusLocator": null,
+		"UpgradeColour": "FFFFFF",
+		"LinkColour": "CC99FF",
+		"RewardGroup": null,
+		"PriceModifiers": {
+			"SpaceStationMarkup": 0.0,
+			"LowPriceMod": 0.0,
+			"HighPriceMod": 0.0,
+			"BuyBaseMarkup": 0.0,
+			"BuyMarkupMod": 0.0
+		},
+		"RequiredRank": 3,
+		"DispensingRace": "Explorers",
+		"FragmentCost": 1,
+		"TechShopRarity": null,
+		"WikiEnabled": true,
+		"NeverPinnable": false,
+		"IsTemplate": false,
+		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
+		"Slug": "technology/DENYSUIT"
 	},
 	{
 		"Id": "OBSOLETE",
@@ -1475,6 +1766,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/OBSOLETE"
 	},
 	{
@@ -1566,6 +1858,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_WATERENERGY"
 	},
 	{
@@ -1649,6 +1942,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_TRANSLATE1"
 	},
 	{
@@ -1740,6 +2034,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_TRANSLATE2"
 	},
 	{
@@ -1831,6 +2126,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_TRANSLATE3"
 	},
 	{
@@ -1918,6 +2214,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/STORY_TRANSLATE"
 	},
 	{
@@ -2009,6 +2306,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WORMTECH"
 	},
 	{
@@ -2100,6 +2398,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WORMREADER"
 	},
 	{
@@ -2194,6 +2493,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SUIT_ROCKET"
 	},
 	{
@@ -2285,6 +2585,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/FISH_SKIFF"
 	},
 	{
@@ -2376,6 +2677,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/FOOD_UNIT"
 	},
 	{
@@ -2492,6 +2794,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SPOOK_PACK"
 	},
 	{
@@ -2613,6 +2916,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPJUMP1"
 	},
 	{
@@ -2704,6 +3008,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_PULSEFUEL"
 	},
 	{
@@ -2795,6 +3100,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_PULSESPEED"
 	},
 	{
@@ -2898,6 +3204,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_SHIPDRIFT"
 	},
 	{
@@ -3003,6 +3310,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/PHOTONIX_CORE"
 	},
 	{
@@ -3100,6 +3408,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/LAUNCHER"
 	},
 	{
@@ -3191,6 +3500,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WATER_LANDER"
 	},
 	{
@@ -3278,6 +3588,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIP_TELEPORT"
 	},
 	{
@@ -3381,6 +3692,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/HYPERDRIVE"
 	},
 	{
@@ -3472,6 +3784,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_QUICKWARP"
 	},
 	{
@@ -3563,6 +3876,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/CARGOSHIELD"
 	},
 	{
@@ -3661,6 +3975,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPSHIELD"
 	},
 	{
@@ -3796,6 +4111,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPROCKETS"
 	},
 	{
@@ -3931,6 +4247,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPGUN1"
 	},
 	{
@@ -4018,6 +4335,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPSCAN_ECON"
 	},
 	{
@@ -4105,6 +4423,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPSCAN_COMBAT"
 	},
 	{
@@ -4210,6 +4529,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPLAS1"
 	},
 	{
@@ -4345,6 +4665,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPSHOTGUN"
 	},
 	{
@@ -4480,6 +4801,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPMINIGUN"
 	},
 	{
@@ -4615,6 +4937,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPPLASMA"
 	},
 	{
@@ -4728,6 +5051,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/F_HYPERDRIVE"
 	},
 	{
@@ -4819,6 +5143,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/F_HDRIVEBOOST1"
 	},
 	{
@@ -4910,6 +5235,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/F_HDRIVEBOOST2"
 	},
 	{
@@ -5001,6 +5327,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/F_HDRIVEBOOST3"
 	},
 	{
@@ -5092,6 +5419,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/F_TELEPORT"
 	},
 	{
@@ -5189,6 +5517,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/F_SCANNER"
 	},
 	{
@@ -5281,6 +5610,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/F_MEGAWARP"
 	},
 	{
@@ -5372,6 +5702,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/F_LIFESUPP"
 	},
 	{
@@ -5488,6 +5819,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPJUMP_ALIEN"
 	},
 	{
@@ -5586,6 +5918,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/LAUNCHER_ALIEN"
 	},
 	{
@@ -5690,6 +6023,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WARP_ALIEN"
 	},
 	{
@@ -5788,6 +6122,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIELD_ALIEN"
 	},
 	{
@@ -5923,6 +6258,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPGUN_ALIEN"
 	},
 	{
@@ -6028,6 +6364,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPLAS_ALIEN"
 	},
 	{
@@ -6115,6 +6452,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/CARGO_S_ALIEN"
 	},
 	{
@@ -6202,6 +6540,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/CHARGER_ALIEN"
 	},
 	{
@@ -6295,6 +6634,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPSCAN_ALIEN"
 	},
 	{
@@ -6382,6 +6722,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WATERLAND_ALIEN"
 	},
 	{
@@ -6469,6 +6810,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/TELEPORT_ALIEN"
 	},
 	{
@@ -6566,6 +6908,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/LAUNCHER_SPEC"
 	},
 	{
@@ -6693,6 +7036,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPJUMP_SPEC"
 	},
 	{
@@ -6800,6 +7144,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/HYPERDRIVE_SPEC"
 	},
 	{
@@ -6891,6 +7236,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIP_LIFESUP"
 	},
 	{
@@ -6996,6 +7342,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SOLAR_SAIL"
 	},
 	{
@@ -7067,6 +7414,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/DUMMY_SCAN"
 	},
 	{
@@ -7174,6 +7522,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/LAUNCHER_ROBO"
 	},
 	{
@@ -7299,6 +7648,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPJUMP_ROBO"
 	},
 	{
@@ -7403,6 +7753,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/HYPERDRIVE_ROBO"
 	},
 	{
@@ -7501,6 +7852,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPSHIELD_ROBO"
 	},
 	{
@@ -7636,6 +7988,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHIPGUN_ROBO"
 	},
 	{
@@ -7727,6 +8080,7 @@
 		"NeverPinnable": true,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/LIFESUP_ROBO"
 	},
 	{
@@ -7828,6 +8182,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SCANBINOC1"
 	},
 	{
@@ -7947,6 +8302,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SCAN1"
 	},
 	{
@@ -8047,6 +8403,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_BUI_SCAN2"
 	},
 	{
@@ -8144,6 +8501,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_S10_SCAN"
 	},
 	{
@@ -8232,6 +8590,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/TERRAINEDITOR"
 	},
 	{
@@ -8319,6 +8678,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/GROUND_SHIELD"
 	},
 	{
@@ -8410,6 +8770,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/STEALTH"
 	},
 	{
@@ -8497,6 +8858,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SCOPE"
 	},
 	{
@@ -8615,6 +8977,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/LASER"
 	},
 	{
@@ -8712,6 +9075,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/STRONGLASER"
 	},
 	{
@@ -8803,6 +9167,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_MINER"
 	},
 	{
@@ -8894,6 +9259,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": true,
+		"SourceTable": "Technology",
 		"Slug": "technology/FISHLASER"
 	},
 	{
@@ -8985,6 +9351,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": true,
+		"SourceTable": "Technology",
 		"Slug": "technology/S15_FISHLASER"
 	},
 	{
@@ -9077,6 +9444,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/GRAVITYGUN"
 	},
 	{
@@ -9228,6 +9596,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/BOLT"
 	},
 	{
@@ -9323,6 +9692,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/BOLT_SM"
 	},
 	{
@@ -9447,6 +9817,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/GRENADE"
 	},
 	{
@@ -9543,6 +9914,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/TERRAIN_GREN"
 	},
 	{
@@ -9655,6 +10027,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/STUN_GREN"
 	},
 	{
@@ -9780,6 +10153,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/RAILGUN"
 	},
 	{
@@ -9931,6 +10305,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SHOTGUN"
 	},
 	{
@@ -10082,6 +10457,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SMG"
 	},
 	{
@@ -10233,6 +10609,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/FLAME"
 	},
 	{
@@ -10388,6 +10765,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/CANNON"
 	},
 	{
@@ -10479,6 +10857,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/UT_STUNDMG"
 	},
 	{
@@ -10555,6 +10934,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSLOT_DMG1"
 	},
 	{
@@ -10631,6 +11011,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSLOT_DMG2"
 	},
 	{
@@ -10715,6 +11096,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSLOT_DMG3"
 	},
 	{
@@ -10791,6 +11173,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSLOT_DMG4"
 	},
 	{
@@ -10875,6 +11258,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSLOT_DMG5"
 	},
 	{
@@ -10959,6 +11343,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSLOT_DMG6"
 	},
 	{
@@ -11039,6 +11424,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSLOT_DMG7"
 	},
 	{
@@ -11123,6 +11509,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSLOT_DMG8"
 	},
 	{
@@ -11203,6 +11590,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSLOT_DMG9"
 	},
 	{
@@ -11283,6 +11671,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSLOT_DMG10"
 	},
 	{
@@ -11367,6 +11756,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSLOT_DMG11"
 	},
 	{
@@ -11451,6 +11841,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSLOT_DMG12"
 	},
 	{
@@ -11527,6 +11918,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSENT_DMG1"
 	},
 	{
@@ -11603,6 +11995,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSENT_DMG2"
 	},
 	{
@@ -11683,6 +12076,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSENT_DMG3"
 	},
 	{
@@ -11759,6 +12153,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPSENT_DMG4"
 	},
 	{
@@ -11835,6 +12230,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPEASY_DMG1"
 	},
 	{
@@ -11911,6 +12307,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPEASY_DMG2"
 	},
 	{
@@ -11987,6 +12384,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPEASY_DMG3"
 	},
 	{
@@ -12063,6 +12461,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/WEAPEASY_DMG4"
 	},
 	{
@@ -12151,6 +12550,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SUN_LASER"
 	},
 	{
@@ -12272,6 +12672,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SOUL_LASER"
 	},
 	{
@@ -12390,6 +12791,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/SENT_LASER"
 	},
 	{
@@ -12514,6 +12916,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/ATLAS_LASER"
 	},
 	{
@@ -12605,6 +13008,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/EXO_RECHARGE"
 	},
 	{
@@ -12696,6 +13100,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/EXO_REFINER"
 	},
 	{
@@ -12812,6 +13217,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MECH_ENGINE"
 	},
 	{
@@ -12903,6 +13309,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MECH_SCAN"
 	},
 	{
@@ -13006,6 +13413,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MECH_BOOST"
 	},
 	{
@@ -13104,6 +13512,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MECH_LASER"
 	},
 	{
@@ -13197,6 +13606,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MECH_LASER1"
 	},
 	{
@@ -13301,6 +13711,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MECH_GUN"
 	},
 	{
@@ -13393,6 +13804,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MECH_MINER"
 	},
 	{
@@ -13484,6 +13896,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MECH_PILOT"
 	},
 	{
@@ -13575,6 +13988,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MECH_SENT_HEAD"
 	},
 	{
@@ -13650,6 +14064,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FUEL1"
 	},
 	{
@@ -13722,6 +14137,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FUEL2"
 	},
 	{
@@ -13794,6 +14210,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FUEL3"
 	},
 	{
@@ -13869,6 +14286,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FUEL4"
 	},
 	{
@@ -13941,6 +14359,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FUEL5"
 	},
 	{
@@ -14017,6 +14436,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH1"
 	},
 	{
@@ -14093,6 +14513,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH2"
 	},
 	{
@@ -14169,6 +14590,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH3"
 	},
 	{
@@ -14249,6 +14671,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH4"
 	},
 	{
@@ -14325,6 +14748,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH5"
 	},
 	{
@@ -14401,6 +14825,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH6"
 	},
 	{
@@ -14481,6 +14906,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH7"
 	},
 	{
@@ -14557,6 +14983,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH8"
 	},
 	{
@@ -14633,6 +15060,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH9"
 	},
 	{
@@ -14709,6 +15137,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH10"
 	},
 	{
@@ -14785,6 +15214,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH11"
 	},
 	{
@@ -14861,6 +15291,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH12"
 	},
 	{
@@ -14941,6 +15372,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH13"
 	},
 	{
@@ -15021,6 +15453,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH14"
 	},
 	{
@@ -15097,6 +15530,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH15"
 	},
 	{
@@ -15173,6 +15607,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH16"
 	},
 	{
@@ -15253,6 +15688,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH17"
 	},
 	{
@@ -15329,6 +15765,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH18"
 	},
 	{
@@ -15409,6 +15846,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH19"
 	},
 	{
@@ -15485,6 +15923,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH20"
 	},
 	{
@@ -15565,6 +16004,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH21"
 	},
 	{
@@ -15645,6 +16085,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH22"
 	},
 	{
@@ -15725,6 +16166,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH23"
 	},
 	{
@@ -15809,6 +16251,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH24"
 	},
 	{
@@ -15889,6 +16332,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_TECH25"
 	},
 	{
@@ -15961,6 +16405,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL1"
 	},
 	{
@@ -16033,6 +16478,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL2"
 	},
 	{
@@ -16105,6 +16551,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL3"
 	},
 	{
@@ -16177,6 +16624,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL4"
 	},
 	{
@@ -16249,6 +16697,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL5"
 	},
 	{
@@ -16321,6 +16770,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL6"
 	},
 	{
@@ -16393,6 +16843,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL7"
 	},
 	{
@@ -16465,6 +16916,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL8"
 	},
 	{
@@ -16537,6 +16989,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL9"
 	},
 	{
@@ -16609,6 +17062,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL10"
 	},
 	{
@@ -16681,6 +17135,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL11"
 	},
 	{
@@ -16753,6 +17208,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL12"
 	},
 	{
@@ -16825,6 +17281,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL13"
 	},
 	{
@@ -16897,6 +17354,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL14"
 	},
 	{
@@ -16969,6 +17427,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL15"
 	},
 	{
@@ -17041,6 +17500,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_PORTAL16"
 	},
 	{
@@ -17117,6 +17577,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_S13"
 	},
 	{
@@ -17188,6 +17649,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_HOOVER"
 	},
 	{
@@ -17259,6 +17721,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_BAIT"
 	},
 	{
@@ -17330,6 +17793,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FOOD"
 	},
 	{
@@ -17401,6 +17865,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_REFINER"
 	},
 	{
@@ -17472,6 +17937,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_COOKER"
 	},
 	{
@@ -17544,6 +18010,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_BURNER"
 	},
 	{
@@ -17620,6 +18087,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_ARTIFACT"
 	},
 	{
@@ -17696,6 +18164,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_SEALOCK1"
 	},
 	{
@@ -17772,6 +18241,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_SEALOCK2"
 	},
 	{
@@ -17848,6 +18318,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FRIG1"
 	},
 	{
@@ -17928,6 +18399,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FRIG2"
 	},
 	{
@@ -18004,6 +18476,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FRIG3"
 	},
 	{
@@ -18080,6 +18553,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FRIG4"
 	},
 	{
@@ -18160,6 +18634,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FRIG5"
 	},
 	{
@@ -18236,6 +18711,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FRIG6"
 	},
 	{
@@ -18312,6 +18788,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FRIG7"
 	},
 	{
@@ -18392,6 +18869,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FRIG8"
 	},
 	{
@@ -18472,6 +18950,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FRIG9"
 	},
 	{
@@ -18548,6 +19027,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_FRIG10"
 	},
 	{
@@ -18624,6 +19104,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/EXOPOD_TECH1"
 	},
 	{
@@ -18700,6 +19181,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/EXOPOD_TECH2"
 	},
 	{
@@ -18776,6 +19258,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/EXOPOD_TECH3"
 	},
 	{
@@ -18850,6 +19333,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_MONONUB1"
 	},
 	{
@@ -18924,6 +19408,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_MONONUB2"
 	},
 	{
@@ -18998,6 +19483,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_MONONUB3"
 	},
 	{
@@ -19074,6 +19560,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_ROBO1"
 	},
 	{
@@ -19150,6 +19637,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_ROBO2"
 	},
 	{
@@ -19226,6 +19714,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_ROBO3"
 	},
 	{
@@ -19302,6 +19791,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_ROBO4"
 	},
 	{
@@ -19378,6 +19868,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_ROBO5"
 	},
 	{
@@ -19454,6 +19945,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_ROBO6"
 	},
 	{
@@ -19530,6 +20022,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_ROBO7"
 	},
 	{
@@ -19606,6 +20099,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_ROBO8"
 	},
 	{
@@ -19682,6 +20176,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_ROBO9"
 	},
 	{
@@ -19758,276 +20253,7 @@
 		"NeverPinnable": false,
 		"IsTemplate": false,
 		"ExclusivePrimaryStat": false,
+		"SourceTable": "Technology",
 		"Slug": "technology/MAINT_ROBO10"
-	},
-	{
-		"Id": "SUIT_REFINER",
-		"Icon": "SUIT_REFINER.png",
-		"IconPath": "textures/ui/frontend/icons/technology/render.personalrefiner.dds",
-		"Name": "Personal Refiner",
-		"Name_LocStr": "UI_SUIT_REFINER_NAME",
-		"NameLower": "Personal Refiner",
-		"NameLower_LocStr": "UI_SUIT_REFINER_NAME_L",
-		"Group": "Self-Mounted Refiner Unit",
-		"Subtitle_LocStr": "UI_SUIT_REFINER_SUB",
-		"Description": "A compact extension to the Exosuit, installing a small Portable Refiner, accessible directly from the user's Exosuit interface.\n\nUnit requires fuel and is limited to refining one substance at a time.",
-		"Description_LocStr": "UI_SUIT_REFINER_DESC",
-		"HintStart": null,
-		"HintEnd": null,
-		"DamagedDescription": null,
-		"BaseValueUnits": 1,
-		"CurrencyType": "None",
-		"Level": 1,
-		"Value": 10.0,
-		"Colour": "2177C8",
-		"Usages": [
-			"HasChargedBy",
-			"HasDevProperties"
-		],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "Nanites",
-		"BlueprintSource": 0,
-		"RequiredItems": [
-			{
-				"Id": "OXYGEN",
-				"Quantity": 150
-			},
-			{
-				"Id": "STELLAR2",
-				"Quantity": 100
-			}
-		],
-		"StatBonuses": [
-			{
-				"Name": "Refiner",
-				"LocaleKeyTemplate": "enabled",
-				"Image": "refiner",
-				"Value": "1"
-			}
-		],
-		"ConsumableRewardTexts": [],
-		"Category": "Suit",
-		"Category_LocStr": null,
-		"Rarity": "Common",
-		"Teach": "true",
-		"Chargeable": true,
-		"ChargeAmount": 100,
-		"ChargeType": "Fuel",
-		"ChargeBy": [],
-		"ChargeMultiplier": 1.0,
-		"BuildFullyCharged": true,
-		"UsesAmmo": false,
-		"AmmoId": null,
-		"PrimaryItem": "true",
-		"Upgrade": false,
-		"Core": false,
-		"RepairTech": false,
-		"Procedural": false,
-		"BrokenSlotTech": "false",
-		"ParentTechId": null,
-		"RequiredTech": null,
-		"RequiredLevel": 0,
-		"FocusLocator": null,
-		"UpgradeColour": "FFFFFF",
-		"LinkColour": "CC99FF",
-		"RewardGroup": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"RequiredRank": 3,
-		"DispensingRace": "Explorers",
-		"FragmentCost": 360,
-		"TechShopRarity": null,
-		"WikiEnabled": true,
-		"NeverPinnable": false,
-		"IsTemplate": false,
-		"ExclusivePrimaryStat": true
-	},
-	{
-		"Id": "STARSUIT",
-		"Icon": "STARSUIT.png",
-		"IconPath": "textures/ui/frontend/icons/u4products/product.hexcore.dds",
-		"Name": "Star Seed",
-		"Name_LocStr": "STARBIRTH_ITEM_NAME",
-		"NameLower": "Star Seed",
-		"NameLower_LocStr": "STARBIRTH_ITEM_NAME_L",
-		"Group": "Priceless Fragment",
-		"Subtitle_LocStr": "STARBIRTH_ITEM_SUBTITLE",
-		"Description": "The smallest of sparks, housed within a containment field of unknown origins.\n\nThe seed glows with life, desperate to escape and fulfill its potential.",
-		"Description_LocStr": "STARBIRTH_ITEM_DESC",
-		"HintStart": null,
-		"HintEnd": null,
-		"DamagedDescription": null,
-		"BaseValueUnits": 1,
-		"CurrencyType": "None",
-		"Level": 1,
-		"Value": 120.0,
-		"Colour": "2177C8",
-		"Usages": [
-			"HasDevProperties"
-		],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "Nanites",
-		"BlueprintSource": 0,
-		"RequiredItems": [
-			{
-				"Id": "ASTEROID3",
-				"Quantity": 16
-			},
-			{
-				"Id": "ROCKETSUB",
-				"Quantity": 16
-			},
-			{
-				"Id": "ASTEROID2",
-				"Quantity": 16
-			}
-		],
-		"StatBonuses": [
-			{
-				"Name": "Armour Health",
-				"LocaleKeyTemplate": "enabled",
-				"Image": "health",
-				"Value": "20"
-			}
-		],
-		"ConsumableRewardTexts": [],
-		"Category": "Suit",
-		"Category_LocStr": null,
-		"Rarity": "Impossible",
-		"Teach": "true",
-		"Chargeable": false,
-		"ChargeAmount": 100,
-		"ChargeType": "Catalyst",
-		"ChargeBy": [],
-		"ChargeMultiplier": 1.0,
-		"BuildFullyCharged": true,
-		"UsesAmmo": false,
-		"AmmoId": null,
-		"PrimaryItem": "false",
-		"Upgrade": false,
-		"Core": false,
-		"RepairTech": false,
-		"Procedural": false,
-		"BrokenSlotTech": "false",
-		"ParentTechId": null,
-		"RequiredTech": null,
-		"RequiredLevel": 0,
-		"FocusLocator": null,
-		"UpgradeColour": "FFFFFF",
-		"LinkColour": "CC99FF",
-		"RewardGroup": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"RequiredRank": 3,
-		"DispensingRace": "Explorers",
-		"FragmentCost": 1,
-		"TechShopRarity": null,
-		"WikiEnabled": true,
-		"NeverPinnable": false,
-		"IsTemplate": false,
-		"ExclusivePrimaryStat": false
-	},
-	{
-		"Id": "DENYSUIT",
-		"Icon": "DENYSUIT.png",
-		"IconPath": "textures/ui/frontend/icons/u4products/product.hereticcore.dds",
-		"Name": "Mark of the Denier",
-		"Name_LocStr": "DENIER_ITEM_NAME",
-		"NameLower": "Mark of the Denier",
-		"NameLower_LocStr": "DENIER_ITEM_NAME_L",
-		"Group": "Priceless Fragment",
-		"Subtitle_LocStr": "STARBIRTH_ITEM_SUBTITLE",
-		"Description": "A tiny mote of stardust, no more than a speck. On closer examination, its surface is all crystalline shards and distorted crimson geometry.\n\nIt flickers with pent-up energy, demanding to be free.\n\nEmpower the mark as you discover systems, planets and objects across the universe.",
-		"Description_LocStr": "DENIER_ITEM_DESC",
-		"HintStart": null,
-		"HintEnd": null,
-		"DamagedDescription": null,
-		"BaseValueUnits": 1,
-		"CurrencyType": "None",
-		"Level": 1,
-		"Value": 120.0,
-		"Colour": "2177C8",
-		"Usages": [
-			"HasChargedBy",
-			"HasDevProperties"
-		],
-		"BlueprintCost": 1,
-		"BlueprintCostType": "Nanites",
-		"BlueprintSource": 0,
-		"RequiredItems": [
-			{
-				"Id": "ASTEROID3",
-				"Quantity": 16
-			},
-			{
-				"Id": "ROCKETSUB",
-				"Quantity": 16
-			},
-			{
-				"Id": "ASTEROID2",
-				"Quantity": 16
-			}
-		],
-		"StatBonuses": [
-			{
-				"Name": "Denier",
-				"LocaleKeyTemplate": "enabled",
-				"Image": "denier",
-				"Value": "1"
-			}
-		],
-		"ConsumableRewardTexts": [],
-		"Category": "Suit",
-		"Category_LocStr": null,
-		"Rarity": "Impossible",
-		"Teach": "true",
-		"Chargeable": true,
-		"ChargeAmount": 100,
-		"ChargeType": "Earth",
-		"ChargeBy": [
-			"TECHFRAG"
-		],
-		"ChargeMultiplier": 1.0,
-		"BuildFullyCharged": false,
-		"UsesAmmo": false,
-		"AmmoId": null,
-		"PrimaryItem": "true",
-		"Upgrade": false,
-		"Core": false,
-		"RepairTech": false,
-		"Procedural": false,
-		"BrokenSlotTech": "false",
-		"ParentTechId": null,
-		"RequiredTech": null,
-		"RequiredLevel": 0,
-		"FocusLocator": null,
-		"UpgradeColour": "FFFFFF",
-		"LinkColour": "CC99FF",
-		"RewardGroup": null,
-		"PriceModifiers": {
-			"SpaceStationMarkup": 0.0,
-			"LowPriceMod": 0.0,
-			"HighPriceMod": 0.0,
-			"BuyBaseMarkup": 0.0,
-			"BuyMarkupMod": 0.0
-		},
-		"RequiredRank": 3,
-		"DispensingRace": "Explorers",
-		"FragmentCost": 1,
-		"TechShopRarity": null,
-		"WikiEnabled": true,
-		"NeverPinnable": false,
-		"IsTemplate": false,
-		"ExclusivePrimaryStat": false
 	}
 ]

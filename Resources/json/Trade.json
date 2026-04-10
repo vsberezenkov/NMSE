@@ -73,6 +73,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_ALLOY1"
 	},
 	{
@@ -150,6 +151,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_ALLOY2"
 	},
 	{
@@ -227,6 +229,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_ALLOY3"
 	},
 	{
@@ -303,6 +306,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_ALLOY4"
 	},
 	{
@@ -379,6 +383,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_ALLOY5"
 	},
 	{
@@ -455,6 +460,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_COMMODITY1"
 	},
 	{
@@ -531,6 +537,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_COMMODITY2"
 	},
 	{
@@ -608,6 +615,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_COMMODITY3"
 	},
 	{
@@ -684,6 +692,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_COMMODITY4"
 	},
 	{
@@ -760,6 +769,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_COMMODITY5"
 	},
 	{
@@ -836,6 +846,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_COMPONENT1"
 	},
 	{
@@ -912,6 +923,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_COMPONENT2"
 	},
 	{
@@ -988,6 +1000,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_COMPONENT3"
 	},
 	{
@@ -1064,6 +1077,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_COMPONENT4"
 	},
 	{
@@ -1140,6 +1154,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_COMPONENT5"
 	},
 	{
@@ -1216,6 +1231,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_ENERGY1"
 	},
 	{
@@ -1292,6 +1308,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_ENERGY2"
 	},
 	{
@@ -1369,6 +1386,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_ENERGY3"
 	},
 	{
@@ -1446,6 +1464,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_ENERGY4"
 	},
 	{
@@ -1522,6 +1541,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_ENERGY5"
 	},
 	{
@@ -1598,6 +1618,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_EXOTICS1"
 	},
 	{
@@ -1674,6 +1695,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_EXOTICS2"
 	},
 	{
@@ -1750,6 +1772,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_EXOTICS3"
 	},
 	{
@@ -1826,6 +1849,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_EXOTICS4"
 	},
 	{
@@ -1902,6 +1926,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_EXOTICS5"
 	},
 	{
@@ -1979,6 +2004,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_MINERALS1"
 	},
 	{
@@ -2056,6 +2082,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_MINERALS2"
 	},
 	{
@@ -2133,6 +2160,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_MINERALS3"
 	},
 	{
@@ -2210,6 +2238,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_MINERALS4"
 	},
 	{
@@ -2287,6 +2316,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_MINERALS5"
 	},
 	{
@@ -2363,6 +2393,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_TECH1"
 	},
 	{
@@ -2440,6 +2471,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_TECH2"
 	},
 	{
@@ -2516,6 +2548,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_TECH3"
 	},
 	{
@@ -2592,6 +2625,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_TECH4"
 	},
 	{
@@ -2668,6 +2702,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/TRA_TECH5"
 	},
 	{
@@ -2744,6 +2779,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/ILLEGAL_PROD1"
 	},
 	{
@@ -2821,6 +2857,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/ILLEGAL_PROD2"
 	},
 	{
@@ -2897,6 +2934,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/ILLEGAL_PROD3"
 	},
 	{
@@ -2973,6 +3011,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/ILLEGAL_PROD4"
 	},
 	{
@@ -3049,6 +3088,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/ILLEGAL_PROD5"
 	},
 	{
@@ -3125,6 +3165,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/ILLEGAL_PROD6"
 	},
 	{
@@ -3201,6 +3242,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/ILLEGAL_PROD7"
 	},
 	{
@@ -3277,6 +3319,7 @@
 		"FoodBonusStatAmount": 0.0,
 		"IsTechbox": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "other/ILLEGAL_PROD8"
 	}
 ]

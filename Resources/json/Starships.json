@@ -71,6 +71,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TGA_SHIP01"
 	},
 	{
@@ -145,6 +146,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/SWITCH_SHIP01"
 	},
 	{
@@ -219,6 +221,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/EXPD_SHIP01"
 	},
 	{
@@ -293,6 +296,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/EXPD_SHIP09"
 	},
 	{
@@ -367,6 +371,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/EXPD_SHIP12"
 	},
 	{
@@ -441,6 +446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/EXPD_SHIPMAT13"
 	},
 	{
@@ -515,6 +521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/EXPD_SHIP_METAL"
 	},
 	{
@@ -589,6 +596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/EXPD_SHIP13"
 	},
 	{
@@ -663,6 +671,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/EXPD_SHIP16"
 	},
 	{
@@ -737,6 +746,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/EXPD_SHIP17"
 	},
 	{
@@ -811,6 +821,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/EXPD_SHIPMAT17"
 	},
 	{
@@ -885,6 +896,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP01"
 	},
 	{
@@ -959,6 +971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP02"
 	},
 	{
@@ -1033,6 +1046,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP03"
 	},
 	{
@@ -1107,6 +1121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP04"
 	},
 	{
@@ -1181,6 +1196,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP05"
 	},
 	{
@@ -1255,6 +1271,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP06"
 	},
 	{
@@ -1329,6 +1346,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP07"
 	},
 	{
@@ -1403,6 +1421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP08B"
 	},
 	{
@@ -1477,6 +1496,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP09"
 	},
 	{
@@ -1551,6 +1571,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP10"
 	},
 	{
@@ -1625,6 +1646,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP11"
 	},
 	{
@@ -1699,6 +1721,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP12"
 	},
 	{
@@ -1773,6 +1796,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP13"
 	},
 	{
@@ -1847,6 +1871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP14"
 	},
 	{
@@ -1921,6 +1946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP15"
 	},
 	{
@@ -1995,6 +2021,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP16"
 	},
 	{
@@ -2069,6 +2096,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP17"
 	},
 	{
@@ -2143,6 +2171,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP18"
 	},
 	{
@@ -2217,6 +2246,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP19"
 	},
 	{
@@ -2291,6 +2321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP20"
 	},
 	{
@@ -2365,6 +2396,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP21"
 	},
 	{
@@ -2439,6 +2471,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP22"
 	},
 	{
@@ -2513,6 +2546,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP23"
 	},
 	{
@@ -2587,6 +2621,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP24"
 	},
 	{
@@ -2661,6 +2696,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP25"
 	},
 	{
@@ -2735,6 +2771,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP26"
 	},
 	{
@@ -2809,6 +2846,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP27"
 	},
 	{
@@ -2883,6 +2921,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP28"
 	},
 	{
@@ -2957,6 +2996,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP29"
 	},
 	{
@@ -3031,6 +3071,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP30"
 	},
 	{
@@ -3105,6 +3146,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP31"
 	},
 	{
@@ -3179,6 +3221,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP32"
 	},
 	{
@@ -3253,6 +3296,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP33"
 	},
 	{
@@ -3327,6 +3371,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP34"
 	},
 	{
@@ -3401,6 +3446,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP35"
 	},
 	{
@@ -3475,6 +3521,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP36"
 	},
 	{
@@ -3549,6 +3596,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP37"
 	},
 	{
@@ -3623,6 +3671,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP38"
 	},
 	{
@@ -3697,6 +3746,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP39"
 	},
 	{
@@ -3771,6 +3821,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP40"
 	},
 	{
@@ -3845,6 +3896,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP41"
 	},
 	{
@@ -3919,6 +3971,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP42"
 	},
 	{
@@ -3993,6 +4046,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP43"
 	},
 	{
@@ -4067,6 +4121,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP44"
 	},
 	{
@@ -4141,6 +4196,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP45"
 	},
 	{
@@ -4215,6 +4271,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP46"
 	},
 	{
@@ -4289,6 +4346,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP47"
 	},
 	{
@@ -4363,6 +4421,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP48"
 	},
 	{
@@ -4437,6 +4496,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP49"
 	},
 	{
@@ -4511,6 +4571,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP50"
 	},
 	{
@@ -4585,6 +4646,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP51"
 	},
 	{
@@ -4659,6 +4721,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP52"
 	},
 	{
@@ -4733,6 +4796,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP53"
 	},
 	{
@@ -4807,6 +4871,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP54"
 	},
 	{
@@ -4881,6 +4946,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP55"
 	},
 	{
@@ -4955,6 +5021,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP56"
 	},
 	{
@@ -5029,6 +5096,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP57"
 	},
 	{
@@ -5103,6 +5171,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP58"
 	},
 	{
@@ -5177,6 +5246,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP59"
 	},
 	{
@@ -5251,6 +5321,7 @@
 		"CanSendToOtherPlayers": true,
 		"IsCraftable": false,
 		"Procedural": false,
+		"SourceTable": "Product",
 		"Slug": "starships/TWITCH_SHIP60"
 	},
 	{
@@ -5294,6 +5365,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_COCKAA"
 	},
 	{
@@ -5337,6 +5409,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_COCKAB"
 	},
 	{
@@ -5380,6 +5453,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_COCKAC"
 	},
 	{
@@ -5423,6 +5497,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_COCKAD"
 	},
 	{
@@ -5466,6 +5541,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_COCKAE"
 	},
 	{
@@ -5509,6 +5585,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_COCKB"
 	},
 	{
@@ -5552,6 +5629,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_COCKD"
 	},
 	{
@@ -5595,6 +5673,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_COCKE"
 	},
 	{
@@ -5638,6 +5717,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_COCKF"
 	},
 	{
@@ -5681,6 +5761,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGA"
 	},
 	{
@@ -5724,6 +5805,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGA_FI"
 	},
 	{
@@ -5767,6 +5849,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGB"
 	},
 	{
@@ -5810,6 +5893,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGB_FI"
 	},
 	{
@@ -5853,6 +5937,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGBA"
 	},
 	{
@@ -5896,6 +5981,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGBA_FI"
 	},
 	{
@@ -5939,6 +6025,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGBB"
 	},
 	{
@@ -5982,6 +6069,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGBB_FI"
 	},
 	{
@@ -6025,6 +6113,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGBC"
 	},
 	{
@@ -6068,6 +6157,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGBC_FI"
 	},
 	{
@@ -6111,6 +6201,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGBD"
 	},
 	{
@@ -6154,6 +6245,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGBD_FI"
 	},
 	{
@@ -6197,6 +6289,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGD"
 	},
 	{
@@ -6240,6 +6333,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGEA"
 	},
 	{
@@ -6283,6 +6377,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGEA_FI"
 	},
 	{
@@ -6326,6 +6421,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGEB"
 	},
 	{
@@ -6369,6 +6465,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGEB_FI"
 	},
 	{
@@ -6412,6 +6509,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGEC"
 	},
 	{
@@ -6455,6 +6553,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGEC_FI"
 	},
 	{
@@ -6498,6 +6597,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGED"
 	},
 	{
@@ -6541,6 +6641,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGED_FI"
 	},
 	{
@@ -6584,6 +6685,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGEE"
 	},
 	{
@@ -6627,6 +6729,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGEE_FI"
 	},
 	{
@@ -6670,6 +6773,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGEF"
 	},
 	{
@@ -6713,6 +6817,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGEF_FI"
 	},
 	{
@@ -6756,6 +6861,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGFC"
 	},
 	{
@@ -6799,6 +6905,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGFC_FI"
 	},
 	{
@@ -6842,6 +6949,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGFD"
 	},
 	{
@@ -6885,6 +6993,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGFD_FI"
 	},
 	{
@@ -6928,6 +7037,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGFE"
 	},
 	{
@@ -6971,6 +7081,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGFE_FI"
 	},
 	{
@@ -7014,6 +7125,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGG"
 	},
 	{
@@ -7057,6 +7169,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGG_FI"
 	},
 	{
@@ -7100,6 +7213,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGH"
 	},
 	{
@@ -7143,6 +7257,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGH_FI"
 	},
 	{
@@ -7186,6 +7301,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGHA"
 	},
 	{
@@ -7229,6 +7345,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGHA_FI"
 	},
 	{
@@ -7272,6 +7389,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGHB"
 	},
 	{
@@ -7315,6 +7433,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGHB_FI"
 	},
 	{
@@ -7358,6 +7477,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGHC"
 	},
 	{
@@ -7401,6 +7521,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGHC_FI"
 	},
 	{
@@ -7444,6 +7565,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGHD"
 	},
 	{
@@ -7487,6 +7609,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGHD_FI"
 	},
 	{
@@ -7530,6 +7653,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGI"
 	},
 	{
@@ -7573,6 +7697,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGI_FI"
 	},
 	{
@@ -7616,6 +7741,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGJLOW"
 	},
 	{
@@ -7659,6 +7785,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGJMID"
 	},
 	{
@@ -7702,6 +7829,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGJFULL"
 	},
 	{
@@ -7745,6 +7873,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGKA"
 	},
 	{
@@ -7788,6 +7917,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGKAA"
 	},
 	{
@@ -7831,6 +7961,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGKBA"
 	},
 	{
@@ -7874,6 +8005,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGKBB"
 	},
 	{
@@ -7917,6 +8049,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_WINGKBC"
 	},
 	{
@@ -7960,6 +8093,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_ENGIB"
 	},
 	{
@@ -8003,6 +8137,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_ENGIC"
 	},
 	{
@@ -8046,6 +8181,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/FIGHT_ENGID"
 	},
 	{
@@ -8089,6 +8225,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_COCKA"
 	},
 	{
@@ -8132,6 +8269,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_COCKB"
 	},
 	{
@@ -8175,6 +8313,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_COCKC"
 	},
 	{
@@ -8218,6 +8357,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_COCKD"
 	},
 	{
@@ -8261,6 +8401,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_COCKE"
 	},
 	{
@@ -8304,6 +8445,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_COCKF"
 	},
 	{
@@ -8347,6 +8489,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_COCKG"
 	},
 	{
@@ -8390,6 +8533,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_COCKH"
 	},
 	{
@@ -8433,6 +8577,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_COCKS13"
 	},
 	{
@@ -8476,6 +8621,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_ENGIA"
 	},
 	{
@@ -8519,6 +8665,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_ENGIAA"
 	},
 	{
@@ -8562,6 +8709,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_ENGIAB"
 	},
 	{
@@ -8605,6 +8753,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_ENGIB"
 	},
 	{
@@ -8648,6 +8797,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_ENGIBA"
 	},
 	{
@@ -8691,6 +8841,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_ENGIBB"
 	},
 	{
@@ -8734,6 +8885,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_ENGIC"
 	},
 	{
@@ -8777,6 +8929,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_ENGIS13"
 	},
 	{
@@ -8820,6 +8973,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGEMP"
 	},
 	{
@@ -8863,6 +9017,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGAA"
 	},
 	{
@@ -8906,6 +9061,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGAAA"
 	},
 	{
@@ -8949,6 +9105,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGAAB"
 	},
 	{
@@ -8992,6 +9149,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGAAC"
 	},
 	{
@@ -9035,6 +9193,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGAAD"
 	},
 	{
@@ -9078,6 +9237,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGAAE"
 	},
 	{
@@ -9121,6 +9281,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGAAF"
 	},
 	{
@@ -9164,6 +9325,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGAAG"
 	},
 	{
@@ -9207,6 +9369,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGAAH"
 	},
 	{
@@ -9250,6 +9413,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGAAI"
 	},
 	{
@@ -9293,6 +9457,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGAB"
 	},
 	{
@@ -9336,6 +9501,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGABA"
 	},
 	{
@@ -9379,6 +9545,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGABB"
 	},
 	{
@@ -9422,6 +9589,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGABC"
 	},
 	{
@@ -9465,6 +9633,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGABD"
 	},
 	{
@@ -9508,6 +9677,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGABE"
 	},
 	{
@@ -9551,6 +9721,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGABF"
 	},
 	{
@@ -9594,6 +9765,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGABG"
 	},
 	{
@@ -9637,6 +9809,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGABH"
 	},
 	{
@@ -9680,6 +9853,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGABI"
 	},
 	{
@@ -9723,6 +9897,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGAC"
 	},
 	{
@@ -9766,6 +9941,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGACA"
 	},
 	{
@@ -9809,6 +9985,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGACB"
 	},
 	{
@@ -9852,6 +10029,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGACC"
 	},
 	{
@@ -9895,6 +10073,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGACD"
 	},
 	{
@@ -9938,6 +10117,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGACE"
 	},
 	{
@@ -9981,6 +10161,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGACF"
 	},
 	{
@@ -10024,6 +10205,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGACG"
 	},
 	{
@@ -10067,6 +10249,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGACH"
 	},
 	{
@@ -10110,6 +10293,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGACI"
 	},
 	{
@@ -10153,6 +10337,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBA"
 	},
 	{
@@ -10196,6 +10381,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBAA"
 	},
 	{
@@ -10239,6 +10425,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBAB"
 	},
 	{
@@ -10282,6 +10469,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBAC"
 	},
 	{
@@ -10325,6 +10513,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBAD"
 	},
 	{
@@ -10368,6 +10557,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBAE"
 	},
 	{
@@ -10411,6 +10601,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBAF"
 	},
 	{
@@ -10454,6 +10645,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBAG"
 	},
 	{
@@ -10497,6 +10689,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBAH"
 	},
 	{
@@ -10540,6 +10733,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBAI"
 	},
 	{
@@ -10583,6 +10777,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBB"
 	},
 	{
@@ -10626,6 +10821,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBBA"
 	},
 	{
@@ -10669,6 +10865,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBBB"
 	},
 	{
@@ -10712,6 +10909,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBBC"
 	},
 	{
@@ -10755,6 +10953,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBBD"
 	},
 	{
@@ -10798,6 +10997,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBBE"
 	},
 	{
@@ -10841,6 +11041,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBBF"
 	},
 	{
@@ -10884,6 +11085,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBBG"
 	},
 	{
@@ -10927,6 +11129,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBBH"
 	},
 	{
@@ -10970,6 +11173,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBBI"
 	},
 	{
@@ -11013,6 +11217,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBC"
 	},
 	{
@@ -11056,6 +11261,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBCA"
 	},
 	{
@@ -11099,6 +11305,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBCB"
 	},
 	{
@@ -11142,6 +11349,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBCC"
 	},
 	{
@@ -11185,6 +11393,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBCD"
 	},
 	{
@@ -11228,6 +11437,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBCE"
 	},
 	{
@@ -11271,6 +11481,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBCF"
 	},
 	{
@@ -11314,6 +11525,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBCG"
 	},
 	{
@@ -11357,6 +11569,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBCH"
 	},
 	{
@@ -11400,6 +11613,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGBCI"
 	},
 	{
@@ -11443,6 +11657,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCA"
 	},
 	{
@@ -11486,6 +11701,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCAA"
 	},
 	{
@@ -11529,6 +11745,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCAB"
 	},
 	{
@@ -11572,6 +11789,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCAC"
 	},
 	{
@@ -11615,6 +11833,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCAD"
 	},
 	{
@@ -11658,6 +11877,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCAE"
 	},
 	{
@@ -11701,6 +11921,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCAF"
 	},
 	{
@@ -11744,6 +11965,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCAG"
 	},
 	{
@@ -11787,6 +12009,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCAH"
 	},
 	{
@@ -11830,6 +12053,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCAI"
 	},
 	{
@@ -11873,6 +12097,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCB"
 	},
 	{
@@ -11916,6 +12141,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCBA"
 	},
 	{
@@ -11959,6 +12185,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCBB"
 	},
 	{
@@ -12002,6 +12229,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCBC"
 	},
 	{
@@ -12045,6 +12273,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCBD"
 	},
 	{
@@ -12088,6 +12317,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCBE"
 	},
 	{
@@ -12131,6 +12361,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCBF"
 	},
 	{
@@ -12174,6 +12405,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCBG"
 	},
 	{
@@ -12217,6 +12449,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCBH"
 	},
 	{
@@ -12260,6 +12493,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCBI"
 	},
 	{
@@ -12303,6 +12537,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCC"
 	},
 	{
@@ -12346,6 +12581,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCCA"
 	},
 	{
@@ -12389,6 +12625,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCCB"
 	},
 	{
@@ -12432,6 +12669,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCCC"
 	},
 	{
@@ -12475,6 +12713,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCCD"
 	},
 	{
@@ -12518,6 +12757,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCCE"
 	},
 	{
@@ -12561,6 +12801,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCCF"
 	},
 	{
@@ -12604,6 +12845,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCCG"
 	},
 	{
@@ -12647,6 +12889,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCCH"
 	},
 	{
@@ -12690,6 +12933,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCCI"
 	},
 	{
@@ -12733,6 +12977,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCD"
 	},
 	{
@@ -12776,6 +13021,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCDA"
 	},
 	{
@@ -12819,6 +13065,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCDB"
 	},
 	{
@@ -12862,6 +13109,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCDE"
 	},
 	{
@@ -12905,6 +13153,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCDF"
 	},
 	{
@@ -12948,6 +13197,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCDG"
 	},
 	{
@@ -12991,6 +13241,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCDH"
 	},
 	{
@@ -13034,6 +13285,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGCDI"
 	},
 	{
@@ -13077,6 +13329,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDA"
 	},
 	{
@@ -13120,6 +13373,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDAX"
 	},
 	{
@@ -13163,6 +13417,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDAA"
 	},
 	{
@@ -13206,6 +13461,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDAB"
 	},
 	{
@@ -13249,6 +13505,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDAH"
 	},
 	{
@@ -13292,6 +13549,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDAI"
 	},
 	{
@@ -13335,6 +13593,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDB"
 	},
 	{
@@ -13378,6 +13637,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDBA"
 	},
 	{
@@ -13421,6 +13681,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDBB"
 	},
 	{
@@ -13464,6 +13725,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDBH"
 	},
 	{
@@ -13507,6 +13769,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDBI"
 	},
 	{
@@ -13550,6 +13813,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDBX"
 	},
 	{
@@ -13593,6 +13857,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDBAX"
 	},
 	{
@@ -13636,6 +13901,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDBBX"
 	},
 	{
@@ -13679,6 +13945,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDBHX"
 	},
 	{
@@ -13722,6 +13989,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGDBIX"
 	},
 	{
@@ -13765,6 +14033,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WINGS13"
 	},
 	{
@@ -13808,6 +14077,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WING1"
 	},
 	{
@@ -13851,6 +14121,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/DROPS_WING2"
 	},
 	{
@@ -13894,6 +14165,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_COCKAA"
 	},
 	{
@@ -13937,6 +14209,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_COCKAAA"
 	},
 	{
@@ -13980,6 +14253,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_COCKABA"
 	},
 	{
@@ -14023,6 +14297,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_COCKACA"
 	},
 	{
@@ -14066,6 +14341,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_COCKAB"
 	},
 	{
@@ -14109,6 +14385,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_COCKAAB"
 	},
 	{
@@ -14152,6 +14429,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_COCKABB"
 	},
 	{
@@ -14195,6 +14473,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_COCKACB"
 	},
 	{
@@ -14238,6 +14517,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_COCKDA"
 	},
 	{
@@ -14281,6 +14561,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_COCKDB"
 	},
 	{
@@ -14324,6 +14605,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGEMP"
 	},
 	{
@@ -14367,6 +14649,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGA"
 	},
 	{
@@ -14410,6 +14693,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGBA"
 	},
 	{
@@ -14453,6 +14737,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGBB"
 	},
 	{
@@ -14496,6 +14781,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGBC"
 	},
 	{
@@ -14539,6 +14825,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGBD"
 	},
 	{
@@ -14582,6 +14869,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGC"
 	},
 	{
@@ -14625,6 +14913,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGDA"
 	},
 	{
@@ -14668,6 +14957,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGDB"
 	},
 	{
@@ -14711,6 +15001,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGDC"
 	},
 	{
@@ -14754,6 +15045,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGDD"
 	},
 	{
@@ -14797,6 +15089,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGE"
 	},
 	{
@@ -14840,6 +15133,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGF"
 	},
 	{
@@ -14883,6 +15177,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGFA"
 	},
 	{
@@ -14926,6 +15221,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGG"
 	},
 	{
@@ -14969,6 +15265,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGGA"
 	},
 	{
@@ -15012,6 +15309,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGHA"
 	},
 	{
@@ -15055,6 +15353,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGHB"
 	},
 	{
@@ -15098,6 +15397,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGHC"
 	},
 	{
@@ -15141,6 +15441,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGHD"
 	},
 	{
@@ -15184,6 +15485,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGI"
 	},
 	{
@@ -15227,6 +15529,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGKA"
 	},
 	{
@@ -15270,6 +15573,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGKB"
 	},
 	{
@@ -15313,6 +15617,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGKC"
 	},
 	{
@@ -15356,6 +15661,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGKD"
 	},
 	{
@@ -15399,6 +15705,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGL"
 	},
 	{
@@ -15442,6 +15749,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGT_A"
 	},
 	{
@@ -15485,6 +15793,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGT_C"
 	},
 	{
@@ -15528,6 +15837,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGT_F"
 	},
 	{
@@ -15571,6 +15881,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGT_G"
 	},
 	{
@@ -15614,6 +15925,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SCIEN_WINGT_I"
 	},
 	{
@@ -15657,6 +15969,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_BODYA"
 	},
 	{
@@ -15700,6 +16013,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_BODYB"
 	},
 	{
@@ -15743,6 +16057,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_BODYC"
 	},
 	{
@@ -15786,6 +16101,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_BODYD"
 	},
 	{
@@ -15829,6 +16145,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_BODYE"
 	},
 	{
@@ -15872,6 +16189,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_BODYF"
 	},
 	{
@@ -15915,6 +16233,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGAA"
 	},
 	{
@@ -15958,6 +16277,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGAB"
 	},
 	{
@@ -16001,6 +16321,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGAC"
 	},
 	{
@@ -16044,6 +16365,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGAD"
 	},
 	{
@@ -16087,6 +16409,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGAE"
 	},
 	{
@@ -16130,6 +16453,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGBA"
 	},
 	{
@@ -16173,6 +16497,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGBB"
 	},
 	{
@@ -16216,6 +16541,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGBC"
 	},
 	{
@@ -16259,6 +16585,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGBD"
 	},
 	{
@@ -16302,6 +16629,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGBE"
 	},
 	{
@@ -16345,6 +16673,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGCA"
 	},
 	{
@@ -16388,6 +16717,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGCB"
 	},
 	{
@@ -16431,6 +16761,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGCC"
 	},
 	{
@@ -16474,6 +16805,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGCD"
 	},
 	{
@@ -16517,6 +16849,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGCE"
 	},
 	{
@@ -16560,6 +16893,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGDA"
 	},
 	{
@@ -16603,6 +16937,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGDB"
 	},
 	{
@@ -16646,6 +16981,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGDC"
 	},
 	{
@@ -16689,6 +17025,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGDD"
 	},
 	{
@@ -16732,6 +17069,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGDE"
 	},
 	{
@@ -16775,6 +17113,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGEA"
 	},
 	{
@@ -16818,6 +17157,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGEB"
 	},
 	{
@@ -16861,6 +17201,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGEC"
 	},
 	{
@@ -16904,6 +17245,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGED"
 	},
 	{
@@ -16947,6 +17289,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGEE"
 	},
 	{
@@ -16990,6 +17333,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGFA"
 	},
 	{
@@ -17033,6 +17377,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGFB"
 	},
 	{
@@ -17076,6 +17421,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGFC"
 	},
 	{
@@ -17119,6 +17465,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGFD"
 	},
 	{
@@ -17162,6 +17509,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_WINGFE"
 	},
 	{
@@ -17205,6 +17553,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_SAILA"
 	},
 	{
@@ -17248,6 +17597,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_SAILB"
 	},
 	{
@@ -17291,6 +17641,7 @@
 		"PinObjectiveEasyToRefine": false,
 		"NeverPinnable": false,
 		"CanSendToOtherPlayers": true,
+		"SourceTable": "Product",
 		"Slug": "starships/SAIL_SAILC"
 	}
 ]

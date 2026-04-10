@@ -49,6 +49,7 @@
 		"PinObjectiveScannableType": "Carbon",
 		"WikiMissionID": "WIKI_FUEL1",
 		"Symbol": "C",
+		"SourceTable": "Substance",
 		"Slug": "raw/FUEL1"
 	},
 	{
@@ -102,6 +103,7 @@
 		"PinObjectiveScannableType": "Carbon",
 		"WikiMissionID": "WIKI_FUEL2",
 		"Symbol": "C+",
+		"SourceTable": "Substance",
 		"Slug": "raw/FUEL2"
 	},
 	{
@@ -153,6 +155,7 @@
 		"PinObjectiveScannableType": "Oxygen",
 		"WikiMissionID": "WIKI_OXYGEN",
 		"Symbol": "O2",
+		"SourceTable": "Substance",
 		"Slug": "raw/OXYGEN"
 	},
 	{
@@ -204,6 +207,7 @@
 		"PinObjectiveScannableType": "LaunchCrystals",
 		"WikiMissionID": "WIKI_LAUNCHSUB",
 		"Symbol": "H",
+		"SourceTable": "Substance",
 		"Slug": "raw/LAUNCHSUB"
 	},
 	{
@@ -255,6 +259,7 @@
 		"PinObjectiveScannableType": "LaunchCrystals",
 		"WikiMissionID": "WIKI_LAUNCHSUB2",
 		"Symbol": "D",
+		"SourceTable": "Substance",
 		"Slug": "raw/LAUNCHSUB2"
 	},
 	{
@@ -306,6 +311,7 @@
 		"PinObjectiveScannableType": "FuelAsteroid",
 		"WikiMissionID": "WIKI_ROCKETSUB",
 		"Symbol": "H3",
+		"SourceTable": "Substance",
 		"Slug": "raw/ROCKETSUB"
 	},
 	{
@@ -357,6 +363,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_LAND1",
 		"Symbol": "Fe",
+		"SourceTable": "Substance",
 		"Slug": "raw/LAND1"
 	},
 	{
@@ -409,6 +416,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_LAND2",
 		"Symbol": "Fe+",
+		"SourceTable": "Substance",
 		"Slug": "raw/LAND2"
 	},
 	{
@@ -461,6 +469,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_LAND3",
 		"Symbol": "Fe++",
+		"SourceTable": "Substance",
 		"Slug": "raw/LAND3"
 	},
 	{
@@ -512,6 +521,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "Si",
+		"SourceTable": "Substance",
 		"Slug": "raw/SAND1"
 	},
 	{
@@ -563,6 +573,7 @@
 		"PinObjectiveScannableType": "Sodium",
 		"WikiMissionID": "WIKI_CATALYST1",
 		"Symbol": "Na",
+		"SourceTable": "Substance",
 		"Slug": "raw/CATALYST1"
 	},
 	{
@@ -615,6 +626,7 @@
 		"PinObjectiveScannableType": "SodiumPlus",
 		"WikiMissionID": "WIKI_CATALYST2",
 		"Symbol": "Na+",
+		"SourceTable": "Substance",
 		"Slug": "raw/CATALYST2"
 	},
 	{
@@ -666,6 +678,7 @@
 		"PinObjectiveScannableType": "CaveSubstance",
 		"WikiMissionID": "WIKI_CAVE1",
 		"Symbol": "Co",
+		"SourceTable": "Substance",
 		"Slug": "raw/CAVE1"
 	},
 	{
@@ -718,6 +731,7 @@
 		"PinObjectiveScannableType": "CaveSubstance",
 		"WikiMissionID": "WIKI_CAVE2",
 		"Symbol": "Co+",
+		"SourceTable": "Substance",
 		"Slug": "raw/CAVE2"
 	},
 	{
@@ -770,6 +784,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_WATER1",
 		"Symbol": "NaCl",
+		"SourceTable": "Substance",
 		"Slug": "raw/WATER1"
 	},
 	{
@@ -822,6 +837,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_WATER2",
 		"Symbol": "Cl",
+		"SourceTable": "Substance",
 		"Slug": "raw/WATER2"
 	},
 	{
@@ -873,6 +889,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_WATERPLANT",
 		"Symbol": "Cy",
+		"SourceTable": "Substance",
 		"Slug": "raw/WATERPLANT"
 	},
 	{
@@ -924,6 +941,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_YELLOW2",
 		"Symbol": "Cu",
+		"SourceTable": "Substance",
 		"Slug": "raw/YELLOW2"
 	},
 	{
@@ -976,6 +994,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_RED2",
 		"Symbol": "Cd",
+		"SourceTable": "Substance",
 		"Slug": "raw/RED2"
 	},
 	{
@@ -1028,6 +1047,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_GREEN2",
 		"Symbol": "Em",
+		"SourceTable": "Substance",
 		"Slug": "raw/GREEN2"
 	},
 	{
@@ -1080,6 +1100,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_BLUE2",
 		"Symbol": "In",
+		"SourceTable": "Substance",
 		"Slug": "raw/BLUE2"
 	},
 	{
@@ -1132,6 +1153,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_PURPLE2",
 		"Symbol": "Qu",
+		"SourceTable": "Substance",
 		"Slug": "raw/PURPLE2"
 	},
 	{
@@ -1185,6 +1207,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_STELLAR2",
 		"Symbol": "Ch",
+		"SourceTable": "Substance",
 		"Slug": "raw/STELLAR2"
 	},
 	{
@@ -1236,6 +1259,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_LUSH1",
 		"Symbol": "Pf",
+		"SourceTable": "Substance",
 		"Slug": "raw/LUSH1"
 	},
 	{
@@ -1287,6 +1311,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_DUSTY1",
 		"Symbol": "Py",
+		"SourceTable": "Substance",
 		"Slug": "raw/DUSTY1"
 	},
 	{
@@ -1338,6 +1363,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_TOXIC1",
 		"Symbol": "NH3",
+		"SourceTable": "Substance",
 		"Slug": "raw/TOXIC1"
 	},
 	{
@@ -1389,6 +1415,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_RADIO1",
 		"Symbol": "U",
+		"SourceTable": "Substance",
 		"Slug": "raw/RADIO1"
 	},
 	{
@@ -1440,6 +1467,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_COLD1",
 		"Symbol": "CO2",
+		"SourceTable": "Substance",
 		"Slug": "raw/COLD1"
 	},
 	{
@@ -1491,6 +1519,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_HOT1",
 		"Symbol": "P",
+		"SourceTable": "Substance",
 		"Slug": "raw/HOT1"
 	},
 	{
@@ -1542,6 +1571,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_LAVA1",
 		"Symbol": "B",
+		"SourceTable": "Substance",
 		"Slug": "raw/LAVA1"
 	},
 	{
@@ -1593,6 +1623,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": null,
 		"Symbol": "R",
+		"SourceTable": "Substance",
 		"Slug": "raw/RUINSUB"
 	},
 	{
@@ -1644,6 +1675,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_WWORLD1",
 		"Symbol": "Li",
+		"SourceTable": "Substance",
 		"Slug": "raw/WATERWORLD1"
 	},
 	{
@@ -1695,6 +1727,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_GASGIANT1",
 		"Symbol": "He",
+		"SourceTable": "Substance",
 		"Slug": "raw/GASGIANT1"
 	},
 	{
@@ -1747,6 +1780,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_CREATURE1",
 		"Symbol": "Mo",
+		"SourceTable": "Substance",
 		"Slug": "raw/CREATURE1"
 	},
 	{
@@ -1798,6 +1832,7 @@
 		"PinObjectiveScannableType": "CorruptedCrystal",
 		"WikiMissionID": "WIKI_ROBOT2",
 		"Symbol": "∞",
+		"SourceTable": "Substance",
 		"Slug": "raw/ROBOT2"
 	},
 	{
@@ -1850,6 +1885,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_ASTEROID1",
 		"Symbol": "Ag",
+		"SourceTable": "Substance",
 		"Slug": "raw/ASTEROID1"
 	},
 	{
@@ -1902,6 +1938,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_ASTEROID2",
 		"Symbol": "Au",
+		"SourceTable": "Substance",
 		"Slug": "raw/ASTEROID2"
 	},
 	{
@@ -1954,6 +1991,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_ASTEROID3",
 		"Symbol": "Pt",
+		"SourceTable": "Substance",
 		"Slug": "raw/ASTEROID3"
 	},
 	{
@@ -2006,6 +2044,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_EX_YELLOW",
 		"Symbol": "Cu",
+		"SourceTable": "Substance",
 		"Slug": "raw/EX_YELLOW"
 	},
 	{
@@ -2058,6 +2097,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_EX_RED",
 		"Symbol": "Cd",
+		"SourceTable": "Substance",
 		"Slug": "raw/EX_RED"
 	},
 	{
@@ -2110,6 +2150,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_EX_GREEN",
 		"Symbol": "Em",
+		"SourceTable": "Substance",
 		"Slug": "raw/EX_GREEN"
 	},
 	{
@@ -2162,6 +2203,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_EX_BLUE",
 		"Symbol": "In",
+		"SourceTable": "Substance",
 		"Slug": "raw/EX_BLUE"
 	},
 	{
@@ -2214,6 +2256,7 @@
 		"PinObjectiveScannableType": "Terrain",
 		"WikiMissionID": "WIKI_EX_PURPLE",
 		"Symbol": "Qu",
+		"SourceTable": "Substance",
 		"Slug": "raw/EX_PURPLE"
 	},
 	{
@@ -2266,6 +2309,7 @@
 		"PinObjectiveScannableType": "HarvestPlant",
 		"WikiMissionID": "WIKI_PLANT_TOX",
 		"Symbol": "Ml",
+		"SourceTable": "Substance",
 		"Slug": "raw/PLANT_TOXIC"
 	},
 	{
@@ -2318,6 +2362,7 @@
 		"PinObjectiveScannableType": "HarvestPlant",
 		"WikiMissionID": "WIKI_PLANT_COLD",
 		"Symbol": "Fc",
+		"SourceTable": "Substance",
 		"Slug": "raw/PLANT_SNOW"
 	},
 	{
@@ -2370,6 +2415,7 @@
 		"PinObjectiveScannableType": "HarvestPlant",
 		"WikiMissionID": "WIKI_PLANT_RAD",
 		"Symbol": "Gr",
+		"SourceTable": "Substance",
 		"Slug": "raw/PLANT_RADIO"
 	},
 	{
@@ -2422,6 +2468,7 @@
 		"PinObjectiveScannableType": "HarvestPlant",
 		"WikiMissionID": "WIKI_PLANT_DUST",
 		"Symbol": "Cc",
+		"SourceTable": "Substance",
 		"Slug": "raw/PLANT_DUST"
 	},
 	{
@@ -2474,6 +2521,7 @@
 		"PinObjectiveScannableType": "HarvestPlant",
 		"WikiMissionID": "WIKI_PLANT_HOT",
 		"Symbol": "So",
+		"SourceTable": "Substance",
 		"Slug": "raw/PLANT_HOT"
 	},
 	{
@@ -2526,6 +2574,7 @@
 		"PinObjectiveScannableType": "HarvestPlant",
 		"WikiMissionID": "WIKI_PLANT_LUSH",
 		"Symbol": "Sb",
+		"SourceTable": "Substance",
 		"Slug": "raw/PLANT_LUSH"
 	},
 	{
@@ -2578,6 +2627,7 @@
 		"PinObjectiveScannableType": "HarvestPlant",
 		"WikiMissionID": "WIKI_PLANT_CAVE",
 		"Symbol": "Bu",
+		"SourceTable": "Substance",
 		"Slug": "raw/PLANT_CAVE"
 	},
 	{
@@ -2630,6 +2680,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": "WIKI_PLANT_WET",
 		"Symbol": "Ke",
+		"SourceTable": "Substance",
 		"Slug": "raw/PLANT_WATER"
 	},
 	{
@@ -2682,6 +2733,7 @@
 		"PinObjectiveScannableType": "CreaturePoop",
 		"WikiMissionID": "WIKI_PLANT_POOP",
 		"Symbol": "Fa",
+		"SourceTable": "Substance",
 		"Slug": "raw/PLANT_POOP"
 	},
 	{
@@ -2733,6 +2785,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "Jn",
+		"SourceTable": "Substance",
 		"Slug": "raw/SPACEGUNK1"
 	},
 	{
@@ -2784,6 +2837,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "Jn",
+		"SourceTable": "Substance",
 		"Slug": "raw/SPACEGUNK2"
 	},
 	{
@@ -2835,6 +2889,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "Jn",
+		"SourceTable": "Substance",
 		"Slug": "raw/SPACEGUNK3"
 	},
 	{
@@ -2886,6 +2941,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "Jn",
+		"SourceTable": "Substance",
 		"Slug": "raw/SPACEGUNK4"
 	},
 	{
@@ -2937,6 +2993,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "Jn",
+		"SourceTable": "Substance",
 		"Slug": "raw/SPACEGUNK5"
 	},
 	{
@@ -2986,6 +3043,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "Un",
+		"SourceTable": "Substance",
 		"Slug": "raw/AF_METAL"
 	},
 	{
@@ -3035,6 +3093,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "V",
+		"SourceTable": "Substance",
 		"Slug": "raw/BUI_SCRAP"
 	},
 	{
@@ -3086,6 +3145,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "X",
+		"SourceTable": "Substance",
 		"Slug": "raw/SPECIAL_POOP"
 	},
 	{
@@ -3135,6 +3195,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "?",
+		"SourceTable": "Substance",
 		"Slug": "raw/SUNGOLD"
 	},
 	{
@@ -3184,6 +3245,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "?",
+		"SourceTable": "Substance",
 		"Slug": "raw/SOULFRAG"
 	},
 	{
@@ -3233,6 +3295,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "?",
+		"SourceTable": "Substance",
 		"Slug": "raw/SQUIDFRAG"
 	},
 	{
@@ -3282,6 +3345,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "?",
+		"SourceTable": "Substance",
 		"Slug": "raw/WORMDUST"
 	},
 	{
@@ -3331,6 +3395,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "?",
+		"SourceTable": "Substance",
 		"Slug": "raw/TIMEDUST"
 	},
 	{
@@ -3380,6 +3445,7 @@
 		"PinObjectiveScannableType": "None",
 		"WikiMissionID": null,
 		"Symbol": "?",
+		"SourceTable": "Substance",
 		"Slug": "raw/TIMEMILK"
 	}
 ]
