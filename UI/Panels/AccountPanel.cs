@@ -2,11 +2,16 @@ using NMSE.Data;
 using NMSE.Models;
 using NMSE.Core;
 using NMSE.IO;
+using NMSE.UI.Dialogs;
 
 namespace NMSE.UI.Panels;
 
 public partial class AccountPanel : UserControl
 {
+    /// <summary>Raised when reward data is modified by the user (save/sync).
+    /// Other panels (e.g. CataloguePanel) can subscribe to refresh their state.</summary>
+    public event EventHandler? DataModified;
+
     private JsonObject? _accountData;
     private string? _accountFilePath;
     private string? _mxmlFilePath;
@@ -374,8 +379,10 @@ public partial class AccountPanel : UserControl
     /// <summary>
     /// Syncs the current grid state to the in-memory account data object.
     /// Saves redeemed rewards to the game save data independently of account unlock state.
+    /// Additionally synchronises Known* arrays for redeemed rewards and cleans stale
+    /// entries for rewards that are unlocked but not redeemed.
     /// Additionally writes platform rewards to the MXML file if configured.
-    /// Does NOT write to disk for account data - that happens in MainForm.OnSave().
+    /// Does NOT write to disk for account data; that happens in MainForm.OnSave().
     /// </summary>
     public void SaveData(JsonObject saveData)
     {
@@ -399,16 +406,41 @@ public partial class AccountPanel : UserControl
             platformRows.Select(r => (r.Id, r.Unlocked)).ToList(),
             userSettings, "UnlockedPlatformRewards");
 
-        // Save per-save redeemed state (independently of account unlock)
+        // Sync account-level Seen* arrays (SeenProducts, SeenTechnologies) to match
+        // REDEEMED state (not unlock state). The Seen* arrays track items the player
+        // has redeemed/claimed. Unlock checkboxes only affect Unlocked* arrays;
+        // redeem checkboxes affect Seen* arrays. The two are mutually exclusive.
+        // IMPORTANT: Seen* arrays store the actual PRODUCT ID (e.g. ^EXPD_POSTER11A),
+        // not the reward identifier (e.g. ^TWITCH_376). For season rewards these
+        // happen to be the same, but for twitch/platform rewards they differ.
+        AccountLogic.SyncAccountSeenArrays(userSettings,
+            ResolveProductIdsForSeen(seasonRows), _database);
+        AccountLogic.SyncAccountSeenArrays(userSettings,
+            ResolveProductIdsForSeen(twitchRows), _database);
+        AccountLogic.SyncAccountSeenArrays(userSettings,
+            ResolveProductIdsForSeen(platformRows), _database);
+
+        // Save per-save redeemed state and synchronise Known* arrays.
+        // The database is passed so SaveRedeemedRewards can determine which
+        // Known* arrays each reward should appear in (KnownSpecials, KnownTech).
         AccountLogic.SaveRedeemedRewards(saveData,
             seasonRows.Select(r => (r.Id, r.Redeemed)).ToList(),
-            twitchRows.Select(r => (r.Id, r.Redeemed)).ToList());
+            twitchRows.Select(r => (r.Id, r.Redeemed)).ToList(),
+            _database);
+
+        // Clean stale Known* entries for rewards that are unlocked on account
+        // but not redeemed in this save. Prevents the game from treating
+        // unlocked-only items as already claimed due to leftover Known* entries.
+        AccountLogic.CleanStaleKnownEntries(saveData, seasonRows, twitchRows, _database);
 
         // Additionally write platform rewards to MXML file (PC platforms only).
         // Console platforms (Xbox, PS4, Switch) do not use MXML files.
         if (UsesMxml)
             MxmlRewardEditor.SyncPlatformRewards(_mxmlFilePath,
                 platformRows.Select(r => (r.Id, r.Unlocked)).ToList());
+
+        // Raise the DataModified event so other panels can react to reward changes.
+        DataModified?.Invoke(this, EventArgs.Empty);
     }
 
     private static List<(string Id, bool Unlocked, bool Redeemed)> CollectRewardRows(DataGridView grid)
@@ -422,6 +454,29 @@ public partial class AccountPanel : UserControl
             result.Add((rewardId, unlocked, redeemed));
         }
         return result;
+    }
+
+    /// <summary>
+    /// Maps reward rows to (ProductId, Redeemed) tuples for Seen* array sync.
+    /// The Seen* arrays in account data store the actual product IDs (e.g.
+    /// <c>^EXPD_POSTER11A</c>), not the reward identifiers (e.g. <c>^TWITCH_376</c>).
+    /// For season rewards these happen to be the same, but for twitch and platform
+    /// rewards they differ. This method resolves each reward to its product ID
+    /// via <see cref="_productIdMap"/>, falling back to the reward ID when no
+    /// separate ProductId is defined.
+    /// Uses <c>Redeemed</c> state (not Unlocked) because Seen* arrays track
+    /// redeemed/claimed items, not just unlocked ones.
+    /// </summary>
+    private List<(string Id, bool Present)> ResolveProductIdsForSeen(
+        List<(string Id, bool Unlocked, bool Redeemed)> rows)
+    {
+        return rows.Select(r =>
+        {
+            string productId = r.Id;
+            if (_productIdMap.TryGetValue(r.Id, out var pid) && !string.IsNullOrEmpty(pid))
+                productId = CatalogueLogic.EnsureCaretPrefix(pid);
+            return (productId, r.Redeemed);
+        }).ToList();
     }
 
     /// <summary>
@@ -524,5 +579,38 @@ public partial class AccountPanel : UserControl
         _platformRewardNameColumn.HeaderText = UiStrings.Get("account.col_name");
         _platformUnlockedColumn.HeaderText = UiStrings.Get("account.col_unlocked");
         _platformRedeemedColumn.HeaderText = UiStrings.Get("account.col_redeemed");
+
+        // Consistency check button
+        _consistencyCheckBtn.Text = UiStrings.Get("account.consistency_check");
+    }
+
+    /// <summary>
+    /// Runs a consistency check between Redeemed* and Known* arrays in the save data.
+    /// Shows a scrollable dialog with per-item and bulk fix actions.
+    /// </summary>
+    private void OnConsistencyCheck(object? sender, EventArgs e)
+    {
+        if (_currentSaveData == null)
+        {
+            MessageBox.Show(UiStrings.Get("account.consistency_no_save"),
+                UiStrings.Get("account.consistency_check"),
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
+
+        var issues = AccountLogic.CheckConsistencyStructured(_currentSaveData, _database);
+        if (issues.Count == 0)
+        {
+            MessageBox.Show(UiStrings.Get("account.consistency_ok"),
+                UiStrings.Get("account.consistency_check"),
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        else
+        {
+            using var dialog = new ConsistencyDialog(issues, _currentSaveData, _database, _iconManager);
+            dialog.ShowDialog(this);
+            // Mark save as modified since the user may have resolved issues.
+            DataModified?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

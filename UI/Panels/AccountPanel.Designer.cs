@@ -22,6 +22,7 @@ partial class AccountPanel
         this._mainLayout = new System.Windows.Forms.TableLayoutPanel();
         this._statusLabel = new System.Windows.Forms.Label();
         this._warningLabel = new ColorEmojiLabel();
+        this._consistencyCheckBtn = new System.Windows.Forms.Button();
         this._tabControl = new NMSE.UI.Panels.DoubleBufferedTabControl();
         this._seasonPage = new System.Windows.Forms.TabPage();
         this._seasonTabLayout = new System.Windows.Forms.TableLayoutPanel();
@@ -94,13 +95,15 @@ partial class AccountPanel
         //
         this._mainLayout.Dock = System.Windows.Forms.DockStyle.Fill;
         this._mainLayout.ColumnCount = 1;
-        this._mainLayout.RowCount = 3;
+        this._mainLayout.RowCount = 4;
+        this._mainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
         this._mainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
         this._mainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
         this._mainLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
         this._mainLayout.Controls.Add(this._statusLabel, 0, 0);
         this._mainLayout.Controls.Add(this._warningLabel, 0, 1);
-        this._mainLayout.Controls.Add(this._tabControl, 0, 2);
+        this._mainLayout.Controls.Add(this._consistencyCheckBtn, 0, 2);
+        this._mainLayout.Controls.Add(this._tabControl, 0, 3);
         //
         // _statusLabel
         //
@@ -117,6 +120,12 @@ partial class AccountPanel
         this._warningLabel.Dock = System.Windows.Forms.DockStyle.Fill;
         this._warningLabel.ForeColor = System.Drawing.Color.DarkOrange;
         this._warningLabel.Font = new System.Drawing.Font("Segoe UI Emoji", 9F, System.Drawing.FontStyle.Bold);
+        //
+        // _consistencyCheckBtn
+        //
+        this._consistencyCheckBtn.Text = "Check Consistency";
+        this._consistencyCheckBtn.AutoSize = true;
+        this._consistencyCheckBtn.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
         //
         // _tabControl
         //
@@ -533,6 +542,8 @@ partial class AccountPanel
         _platformFilterBox.TextChanged += (_, _) => ApplyFilter(_platformGrid, _platformFilterBox.Text);
         _platformMxmlBrowseBtn.Click += OnBrowseMxml;
 
+        _consistencyCheckBtn.Click += OnConsistencyCheck;
+
         // Commit checkbox edits immediately so that CollectRewardRows() reads the
         // current value. Without this, a checkbox click enters edit mode but the
         // cell Value stays stale until the user moves to another row.
@@ -550,6 +561,7 @@ partial class AccountPanel
     private System.Windows.Forms.TableLayoutPanel _mainLayout;
     private System.Windows.Forms.Label _statusLabel;
     private ColorEmojiLabel _warningLabel;
+    private System.Windows.Forms.Button _consistencyCheckBtn;
     private NMSE.UI.Panels.DoubleBufferedTabControl _tabControl;
     private System.Windows.Forms.TabPage _seasonPage;
     private System.Windows.Forms.TableLayoutPanel _seasonTabLayout;

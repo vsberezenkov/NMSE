@@ -138,7 +138,60 @@ partial class CataloguePanel
         productTab.Controls.Add(productLayout);
         _tabControl.TabPages.Add(productTab);
 
-        // --- Tab 3: Known Words ---
+        // --- Tab 3: Known Specials (Quicksilver/SpecialShop items) ---
+        var specialsTab = new TabPage(UiStrings.Get("discovery.tab_specials"));
+        _specialsTabPage = specialsTab;
+        var specialsLayout = new TableLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            ColumnCount = 1,
+            RowCount = 3,
+        };
+        specialsLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        specialsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+        specialsLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+        var specialsFilterPanel = new FlowLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            AutoSize = true,
+            FlowDirection = FlowDirection.LeftToRight,
+        };
+        _specialsFilterBox = new TextBox { Width = 200, PlaceholderText = UiStrings.Get("discovery.filter_placeholder") };
+        _specialsFilterBox.TextChanged += (s, e) => ApplyFilter(_specialsGrid!, _specialsFilterBox.Text);
+        _specialsFilterClearButton = new Button { Text = "X", Width = 28, Height = 23 };
+        _specialsFilterClearButton.Click += (s, e) => { _specialsFilterBox.Text = ""; };
+        specialsFilterPanel.Controls.Add(_specialsFilterBox);
+        specialsFilterPanel.Controls.Add(_specialsFilterClearButton);
+        specialsLayout.Controls.Add(specialsFilterPanel, 0, 0);
+
+        _specialsGrid = CreateItemGrid();
+        specialsLayout.Controls.Add(_specialsGrid, 0, 1);
+
+        var specialsButtonPanel = new FlowLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            AutoSize = true,
+            FlowDirection = FlowDirection.LeftToRight,
+        };
+        _addSpecialsButton = new Button { Text = UiStrings.Get("discovery.add_special"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
+        _removeSpecialsButton = new Button { Text = UiStrings.Get("common.remove_selected"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
+        _addSpecialsButton.Click += AddSpecials_Click;
+        _removeSpecialsButton.Click += RemoveSpecials_Click;
+        _exportSpecialsBtn = new Button { Text = UiStrings.Get("common.export"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
+        _exportSpecialsBtn.Click += (s, e) => ExportDiscoveryList(UiStrings.Get("discovery.tab_specials"), _specialsGrid, "ID");
+        _importSpecialsBtn = new Button { Text = UiStrings.Get("common.import"), AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
+        _importSpecialsBtn.Click += (s, e) => ImportItemList(_specialsGrid, "KnownSpecials");
+        specialsButtonPanel.Controls.Add(_addSpecialsButton);
+        specialsButtonPanel.Controls.Add(_removeSpecialsButton);
+        specialsButtonPanel.Controls.Add(_exportSpecialsBtn);
+        specialsButtonPanel.Controls.Add(_importSpecialsBtn);
+        specialsLayout.Controls.Add(specialsButtonPanel, 0, 2);
+
+        specialsTab.Controls.Add(specialsLayout);
+        _tabControl.TabPages.Add(specialsTab);
+
+        // --- Tab 4: Known Words ---
         var wordTab = new TabPage("Known Words");
         var wordLayout = new TableLayoutPanel
         {
@@ -536,7 +589,17 @@ partial class CataloguePanel
     private TextBox _productFilterBox = null!;
     private Button _productFilterClearButton = null!;
 
-    // Tab 3: Known Words
+    // Tab 3: Known Specials (Quicksilver/SpecialShop)
+    private TabPage _specialsTabPage = null!;
+    private DataGridView _specialsGrid = null!;
+    private Button _addSpecialsButton = null!;
+    private Button _removeSpecialsButton = null!;
+    private TextBox _specialsFilterBox = null!;
+    private Button _specialsFilterClearButton = null!;
+    private Button _exportSpecialsBtn = null!;
+    private Button _importSpecialsBtn = null!;
+
+    // Tab 4: Known Words
     private DataGridView _wordGrid = null!;
     private Button _learnAllWordsButton = null!;
     private Button _unlearnAllWordsButton = null!;

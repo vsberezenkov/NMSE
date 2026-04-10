@@ -150,6 +150,7 @@ public partial class CataloguePanel : UserControl
 
         LoadKnownItems(playerState, "KnownTech", _techGrid);
         LoadKnownItems(playerState, "KnownProducts", _productGrid);
+        LoadKnownItems(playerState, "KnownSpecials", _specialsGrid);
         LoadKnownWords(playerState);
         LoadKnownGlyphs(playerState);
         LoadKnownLocations(playerState);
@@ -168,6 +169,7 @@ public partial class CataloguePanel : UserControl
 
         SaveKnownItems(playerState, "KnownTech", _techGrid);
         SaveKnownItems(playerState, "KnownProducts", _productGrid);
+        SaveKnownItems(playerState, "KnownSpecials", _specialsGrid);
         SaveKnownWords(playerState);
         SaveKnownGlyphs(playerState);
         SaveKnownFish(playerState);
@@ -394,7 +396,61 @@ public partial class CataloguePanel : UserControl
     }
     private void RemoveProduct_Click(object? sender, EventArgs e) { RemoveSelectedFromGrid(_productGrid); RaiseDataModified(); }
 
-    // --- Tab 3: Known Words ---
+    // --- Tab 3: Known Specials (Quicksilver/SpecialShop) events ---
+
+    private void AddSpecials_Click(object? sender, EventArgs e)
+    {
+        if (_database == null) return;
+
+        List<(Image? icon, string name, string id, string category)>? unknownSpecials = null;
+
+        using var loadingDialog = CreateLoadingDialog(UiStrings.Get("discovery.loading_specials"));
+        loadingDialog.Shown += (s, ev) =>
+        {
+            var knownIds = new HashSet<string>(
+                _specialsGrid.Rows.Cast<DataGridViewRow>().Select(r => r.Cells["ID"].Value as string ?? ""),
+                StringComparer.OrdinalIgnoreCase);
+
+            // SpecialShop items are products with TradeCategory == "SpecialShop"
+            var items = _database.Items.Values
+                .Where(item => string.Equals(item.TradeCategory, "SpecialShop", StringComparison.OrdinalIgnoreCase)
+                            && !knownIds.Contains(item.Id)
+                            && !GameItemDatabase.IsPickerExcluded(item.Id))
+                .OrderBy(item => item.Name)
+                .ToList();
+
+            unknownSpecials = new List<(Image? icon, string name, string id, string category)>(items.Count);
+            for (int i = 0; i < items.Count; i++)
+            {
+                var item = items[i];
+                unknownSpecials.Add((GetScaledIcon(item.Id) ?? (Image)PlaceholderIcon, item.Name, item.Id, item.ItemType));
+                if (i % 50 == 0) Application.DoEvents();
+            }
+
+            loadingDialog.Close();
+        };
+        loadingDialog.ShowDialog(this);
+
+        if (unknownSpecials == null || unknownSpecials.Count == 0) return;
+
+        using var picker = new ItemPickerDialog(UiStrings.Get("discovery.add_special"), unknownSpecials);
+        if (picker.ShowDialog(this) == DialogResult.OK && picker.SelectedIds.Count > 0)
+        {
+            foreach (var selectedId in picker.SelectedIds)
+            {
+                var item = _database.GetItem(selectedId);
+                if (item != null)
+                {
+                    _specialsGrid.Rows.Add(GetScaledIcon(item.Id) ?? (object)PlaceholderIcon, item.Name, item.Subtitle, item.Id);
+                }
+            }
+            RaiseDataModified();
+        }
+    }
+
+    private void RemoveSpecials_Click(object? sender, EventArgs e) { RemoveSelectedFromGrid(_specialsGrid); RaiseDataModified(); }
+
+    // --- Tab 4: Known Words ---
 
     private bool IsWordKnown(string groupName, int raceOrdinal)
     {
@@ -1573,14 +1629,15 @@ public partial class CataloguePanel : UserControl
     public void ApplyUiLocalisation()
     {
         // Tab pages
-        if (_tabControl.TabPages.Count >= 6)
+        if (_tabControl.TabPages.Count >= 7)
         {
             _tabControl.TabPages[0].Text = UiStrings.Get("discovery.tab_tech");
             _tabControl.TabPages[1].Text = UiStrings.Get("discovery.tab_products");
-            _tabControl.TabPages[2].Text = UiStrings.Get("discovery.tab_words");
-            _tabControl.TabPages[3].Text = UiStrings.Get("discovery.tab_glyphs");
-            _tabControl.TabPages[4].Text = UiStrings.Get("discovery.tab_locations");
-            _tabControl.TabPages[5].Text = UiStrings.Get("discovery.tab_fish");
+            _tabControl.TabPages[2].Text = UiStrings.Get("discovery.tab_specials");
+            _tabControl.TabPages[3].Text = UiStrings.Get("discovery.tab_words");
+            _tabControl.TabPages[4].Text = UiStrings.Get("discovery.tab_glyphs");
+            _tabControl.TabPages[5].Text = UiStrings.Get("discovery.tab_locations");
+            _tabControl.TabPages[6].Text = UiStrings.Get("discovery.tab_fish");
         }
 
         // Buttons
@@ -1588,6 +1645,8 @@ public partial class CataloguePanel : UserControl
         _removeTechButton.Text = UiStrings.Get("discovery.remove_selected");
         _addProductButton.Text = UiStrings.Get("discovery.add_product");
         _removeProductButton.Text = UiStrings.Get("discovery.remove_selected");
+        _addSpecialsButton.Text = UiStrings.Get("discovery.add_special");
+        _removeSpecialsButton.Text = UiStrings.Get("discovery.remove_selected");
         _learnAllWordsButton.Text = UiStrings.Get("discovery.learn_all");
         _unlearnAllWordsButton.Text = UiStrings.Get("discovery.unlearn_all");
         _learnSelectedWordsButton.Text = UiStrings.Get("discovery.learn_selected");
@@ -1607,6 +1666,7 @@ public partial class CataloguePanel : UserControl
         // Filter placeholders
         _techFilterBox.PlaceholderText = UiStrings.Get("discovery.filter_items");
         _productFilterBox.PlaceholderText = UiStrings.Get("discovery.filter_items");
+        _specialsFilterBox.PlaceholderText = UiStrings.Get("discovery.filter_items");
         _wordFilterBox.PlaceholderText = UiStrings.Get("discovery.filter_words");
         _locFilterBox.PlaceholderText = UiStrings.Get("discovery.filter_locations");
         _fishFilterBox.PlaceholderText = UiStrings.Get("discovery.filter_fish");
@@ -1624,6 +1684,11 @@ public partial class CataloguePanel : UserControl
         if (_productGrid.Columns["Name"] is DataGridViewColumn pName) pName.HeaderText = UiStrings.Get("discovery.col_name");
         if (_productGrid.Columns["Category"] is DataGridViewColumn pCat) pCat.HeaderText = UiStrings.Get("discovery.col_category");
         if (_productGrid.Columns["ID"] is DataGridViewColumn pId) pId.HeaderText = UiStrings.Get("discovery.col_id");
+
+        // Specials grid columns
+        if (_specialsGrid.Columns["Name"] is DataGridViewColumn sName) sName.HeaderText = UiStrings.Get("discovery.col_name");
+        if (_specialsGrid.Columns["Category"] is DataGridViewColumn sCat) sCat.HeaderText = UiStrings.Get("discovery.col_category");
+        if (_specialsGrid.Columns["ID"] is DataGridViewColumn sId) sId.HeaderText = UiStrings.Get("discovery.col_id");
 
         // Word grid columns
         if (_wordGrid.Columns["Word"] is DataGridViewColumn wCol) wCol.HeaderText = UiStrings.Get("discovery.col_word");
@@ -1649,6 +1714,8 @@ public partial class CataloguePanel : UserControl
         _importTechBtn.Text = UiStrings.Get("common.import");
         _exportProductBtn.Text = UiStrings.Get("common.export");
         _importProductBtn.Text = UiStrings.Get("common.import");
+        _exportSpecialsBtn.Text = UiStrings.Get("common.export");
+        _importSpecialsBtn.Text = UiStrings.Get("common.import");
         _exportWordsBtn.Text = UiStrings.Get("common.export");
         _importWordsBtn.Text = UiStrings.Get("common.import");
         _exportGlyphsBtn.Text = UiStrings.Get("common.export");
