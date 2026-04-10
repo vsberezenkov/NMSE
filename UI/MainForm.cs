@@ -146,6 +146,7 @@ public partial class MainFormResources : Form
         _freighterPanel.DataModified += (s, e) => _hasUnsavedChanges = true;
         _vehiclePanel.DataModified += (s, e) => _hasUnsavedChanges = true;
         _cataloguePanel.DataModified += (s, e) => _hasUnsavedChanges = true;
+        _accountPanel.DataModified += (s, e) => _hasUnsavedChanges = true;
 
         // Wire up Save Utilities reload event
         _mainStatsPanel.ReloadRequested += (s, e) =>
@@ -673,9 +674,13 @@ public partial class MainFormResources : Form
             TitleDatabase.LoadFromFile(titlesPath);
 
             // Load optional JSON databases (fall back to hardcoded if files don't exist)
-            FrigateTraitDatabase.LoadFromFile(Path.Combine(jsonPath, "FrigateTraits.json"));
-            SettlementDatabase.LoadFromFile(Path.Combine(jsonPath, "SettlementPerks.json"));
-            WikiGuideDatabase.LoadFromFile(Path.Combine(jsonPath, "WikiGuide.json"));
+            FrigateTraitDatabase.LoadFromFile(Path.Combine(jsonPath, "Frigate Traits.json"));
+            SettlementDatabase.LoadFromFile(Path.Combine(jsonPath, "Settlement Perks.json"));
+            WikiGuideDatabase.LoadFromFile(Path.Combine(jsonPath, "Wiki Guide.json"));
+            CompanionAccessoryDatabase.LoadFromFile(Path.Combine(jsonPath, "Companion Accessories.json"));
+            PetBattleMoveDatabase.LoadFromFile(Path.Combine(jsonPath, "Pet Battle Moves.json"));
+            PetBattleMovesetDatabase.LoadFromFile(Path.Combine(jsonPath, "Pet Battle Movesets.json"));
+            PetBiomeAffinityMap.LoadFromFile(Path.Combine(jsonPath, "Game Table Globals.json"));
 
             // Load word database for Known Words feature (from Words.json)
             _wordDatabase = new WordDatabase();
@@ -1591,10 +1596,13 @@ public partial class MainFormResources : Form
             SaveFileManager.SaveToFile(_currentFilePath, _currentSaveData,
                 compress: true, writeMeta: true, platform: _detectedPlatform, slotIndex: metaSlotIdx);
 
-            // Write account data file to disk (if loaded)
+            // Write account data file to disk (if loaded).
+            // accountdata.hg is always plain JSON with a null terminator — no LZ4
+            // compression and no meta file. (Xbox account data is handled separately
+            // via SaveXboxAccountData which uses raw LZ4 block compression.)
             if (_accountPanel.AccountData != null && _accountPanel.AccountFilePath != null)
                 SaveFileManager.SaveToFile(_accountPanel.AccountFilePath, _accountPanel.AccountData,
-                    compress: true, writeMeta: true, platform: _detectedPlatform);
+                    compress: false, writeMeta: false);
 
             _statusLabel.Text = UiStrings.Format("status.save_written", Path.GetFileName(_currentFilePath));
             _hasUnsavedChanges = false;
@@ -1894,6 +1902,7 @@ public partial class MainFormResources : Form
             FrigateTraitDatabase.ApplyLocalisation(_localisationService);
             SettlementDatabase.ApplyLocalisation(_localisationService);
             WikiGuideDatabase.ApplyLocalisation(_localisationService);
+            CompanionAccessoryDatabase.ApplyLocalisation(_localisationService);
             _accountPanel.RefreshRewardNames();
             _frigatePanel.RefreshTraitCombos();
             _settlementPanel.RefreshPerkCombos();
@@ -1985,6 +1994,7 @@ public partial class MainFormResources : Form
                         FrigateTraitDatabase.ApplyLocalisation(_localisationService);
                         SettlementDatabase.ApplyLocalisation(_localisationService);
                         WikiGuideDatabase.ApplyLocalisation(_localisationService);
+                        CompanionAccessoryDatabase.ApplyLocalisation(_localisationService);
                     }
                 });
             }
