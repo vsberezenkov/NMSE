@@ -12,6 +12,9 @@ public partial class FrigatePanel : UserControl
     private bool _loading;
     private readonly Random _rng = new();
 
+    /// <summary>Raw (unclamped) stat values for the currently-selected frigate, keyed by stat index (0-10).</summary>
+    private readonly Dictionary<int, int> _rawStatValues = new();
+
     // Max 30 frigates per fleet (game engine limit)
     private const int MaxFrigates = 30;
 
@@ -176,12 +179,14 @@ public partial class FrigatePanel : UserControl
             try { dmg = frigate.GetInt("DamageTaken"); } catch { }
             _damageLabel.Text = dmg > 0 ? UiStrings.Format("frigate.damage_format", dmg) : UiStrings.Get("frigate.no_damage");
 
-            // Stats
+            // Stats – store raw values for preservation, clamp for display
+            _rawStatValues.Clear();
             var stats = frigate.GetArray("Stats");
             for (int i = 0; i < 11; i++)
             {
                 int val = 0;
                 try { if (stats != null && i < stats.Length) val = stats.GetInt(i); } catch { }
+                _rawStatValues[i] = val;
                 _statFields[i].Value = Math.Min(999, Math.Max(0, val));
             }
 

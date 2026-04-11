@@ -558,6 +558,16 @@ partial class FrigatePanel
                 if (_loading) return;
                 var frigate = SelectedFrigate();
                 if (frigate == null) return;
+
+                // Skip write if the user hasn't changed the value from its clamped display
+                // (preserves raw JSON values outside the NUD range)
+                if (_rawStatValues.TryGetValue(statIdx, out int raw))
+                {
+                    int clamped = Math.Min(999, Math.Max(0, raw));
+                    if ((int)nud.Value == clamped)
+                        return;
+                }
+
                 try
                 {
                     var stats = frigate.GetArray("Stats");
