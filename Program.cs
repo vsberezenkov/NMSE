@@ -27,6 +27,7 @@ static class Program
 
         var mainForm = new MainFormResources();
         mainForm.SetSplash(splash);
+        mainForm.PerformStartup();
 
         Application.Run(mainForm);
     }

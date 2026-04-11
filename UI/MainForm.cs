@@ -98,7 +98,8 @@ public partial class MainFormResources : Form
     /// <summary>Startup splash screen to close once the main form is visible.</summary>
     private SplashForm? _splashForm;
 
-    /// <summary>Set the startup splash screen that will be closed once the main form is ready.</summary>
+    /// <summary>Set the startup splash screen that will be closed once the main form is ready.
+    /// Prefer passing the splash to the constructor so it is available during LoadDatabase().</summary>
     internal void SetSplash(SplashForm splash) => _splashForm = splash;
 
     public MainFormResources()
@@ -171,10 +172,22 @@ public partial class MainFormResources : Form
 
         ResumeLayout(false);
         PerformLayout();
+    }
 
+    /// <summary>
+    /// Performs heavy startup work (database loading, config, etc.).
+    /// Must be called after the constructor and after SetSplash() so that
+    /// the splash form receives progress updates.
+    /// </summary>
+    internal void PerformStartup()
+    {
         LoadConfig();
         LoadDatabase();
+
+        _splashForm?.SetProgress(93, "Applying language...");
         ApplyStartupLanguage();
+
+        _splashForm?.SetProgress(96, "Detecting save slots...");
         PopulateSaveSlots();
 
         // Reveal the fully-rendered form once icon preloading finishes.
@@ -184,12 +197,17 @@ public partial class MainFormResources : Form
         {
             if (_iconPreloadTask != null)
             {
+                _splashForm?.SetProgress(98, "Loading icons...");
                 try { await _iconPreloadTask; }
                 catch (Exception ex)
                 {
                     Debug.WriteLine($"Icon preload failed: {ex.Message}");
                 }
             }
+
+            // Mark fully ready just before the main window becomes visible.
+            _splashForm?.SetProgress(100, "Ready");
+
             Opacity = 1;
 
             // Re-apply the icon AFTER the opacity change hack.
@@ -671,15 +689,18 @@ public partial class MainFormResources : Form
 
             // Load items from JSON
             string jsonPath = Path.Combine(basePath, "Resources", "json");
+            _splashForm?.SetProgress(5, "Loading item database...");
             _database.LoadItemsFromJsonDirectory(jsonPath);
 
             // Populate corvette part category lookup for the optimizer
+            _splashForm?.SetProgress(15, "Loading starship data...");
             StarshipDatabase.LoadFromDatabase(_database);
 
             // Register extractor-generated techpacks
             TechPacks.RegisterGeneratedPacks();
 
             // Load recipe database for Recipe panel
+            _splashForm?.SetProgress(20, "Loading recipes...");
             string recipesPath = Path.Combine(jsonPath, "Recipes.json");
             _recipeDatabase.LoadFromFile(recipesPath);
 
@@ -688,6 +709,7 @@ public partial class MainFormResources : Form
             TitleDatabase.LoadFromFile(titlesPath);
 
             // Load optional JSON databases (fall back to hardcoded if files don't exist)
+            _splashForm?.SetProgress(30, "Loading supplementary databases...");
             FrigateTraitDatabase.LoadFromFile(Path.Combine(jsonPath, "Frigate Traits.json"));
             SettlementDatabase.LoadFromFile(Path.Combine(jsonPath, "Settlement Perks.json"));
             WikiGuideDatabase.LoadFromFile(Path.Combine(jsonPath, "Wiki Guide.json"));
@@ -697,12 +719,14 @@ public partial class MainFormResources : Form
             PetBiomeAffinityMap.LoadFromFile(Path.Combine(jsonPath, "Game Table Globals.json"));
 
             // Load word database for Known Words feature (from Words.json)
+            _splashForm?.SetProgress(45, "Loading word database...");
             _wordDatabase = new WordDatabase();
             string wordsPath = Path.Combine(jsonPath, "Words.json");
             _wordDatabase.LoadFromFile(wordsPath);
             _cataloguePanel.SetWordDatabase(_wordDatabase);
 
             // Initialize localisation service with lang/ directory
+            _splashForm?.SetProgress(55, "Loading localisation...");
             string langDir = Path.Combine(jsonPath, "lang");
             _localisationService.SetLangDirectory(langDir);
 
@@ -711,6 +735,7 @@ public partial class MainFormResources : Form
             UiStrings.SetDirectory(uiLangDir);
 
             // Load icon images from Resources/images
+            _splashForm?.SetProgress(65, "Loading icons...");
             string iconsPath = Path.Combine(basePath, "Resources", "images");
             if (Directory.Exists(iconsPath))
             {
@@ -734,6 +759,7 @@ public partial class MainFormResources : Form
             }
 
             // Pass item database and icons to inventory panels
+            _splashForm?.SetProgress(75, "Initialising panels...");
             _exosuitPanel.SetDatabase(_database);
             _shipPanel.SetDatabase(_database);
             _multitoolPanel.SetDatabase(_database);
@@ -758,6 +784,7 @@ public partial class MainFormResources : Form
             _mainStatsPanel.SetIconManager(_iconManager);
 
             // Load rewards database for Account panel (from Rewards.json, falls back to inline static data)
+            _splashForm?.SetProgress(85, "Loading rewards data...");
             _accountPanel.LoadRewardsDatabase(jsonPath);
 
             // Wire up Recipe panel with databases
@@ -771,6 +798,7 @@ public partial class MainFormResources : Form
             _settlementPanel.RefreshPerkCombos();
 
             // Load export configuration (custom extensions and naming templates)
+            _splashForm?.SetProgress(90, "Loading configuration...");
             string exportConfigPath = Path.Combine(basePath, "export_config.json");
             ExportConfig.LoadFromFile(exportConfigPath);
             _exportConfigPanel.ConfigFilePath = exportConfigPath;
@@ -800,6 +828,7 @@ public partial class MainFormResources : Form
             }
 
             _itemCountLabel.Text = UiStrings.Format("status.total_db_items", _totalDatabaseItems);
+            _splashForm?.SetProgress(92, "Finalising...");
         }
         catch (Exception ex)
         {
