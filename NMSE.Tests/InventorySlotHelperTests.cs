@@ -255,4 +255,22 @@ public class InventorySlotHelperTests
         Assert.Equal(-1, dup.GetInt("Amount"));
         Assert.Equal(1, dup.GetInt("MaxAmount"));
     }
+
+    // -- IsDamageSlotItem tests --
+
+    [Theory]
+    [InlineData("^SHIPSLOT_DMG1", true)]
+    [InlineData("^SHIPSLOT_DMG12", true)]
+    [InlineData("SHIPSLOT_DMG5", true)]
+    [InlineData("^shipslot_dmg3", true)]  // case-insensitive
+    [InlineData("^HYPERDRIVE", false)]
+    [InlineData("^PHOTONIX_CORE", false)]
+    [InlineData("", false)]
+    [InlineData(null, false)]
+    [InlineData("^", false)]
+    [InlineData("SHIPSLOT_DMG", true)]    // base without number still matches prefix
+    public void IsDamageSlotItem_MatchesExpectedPatterns(string? itemId, bool expected)
+    {
+        Assert.Equal(expected, InventorySlotHelper.IsDamageSlotItem(itemId));
+    }
 }

@@ -80,4 +80,17 @@ internal static class InventorySlotHelper
 
         return newSlot;
     }
+
+    /// <summary>
+    /// Returns true if the item ID represents a ship damage slot placeholder
+    /// Matches any ID starting with SHIPSLOT_DMG (e.g. ^SHIPSLOT_DMG1 through ^SHIPSLOT_DMG12).
+    /// </summary>
+    internal static bool IsDamageSlotItem(string? itemId)
+    {
+        if (string.IsNullOrEmpty(itemId)) return false;
+        ReadOnlySpan<char> id = itemId.AsSpan();
+        if (id.Length > 0 && id[0] == '^')
+            id = id.Slice(1);
+        return id.StartsWith("SHIPSLOT_DMG", StringComparison.OrdinalIgnoreCase);
+    }
 }

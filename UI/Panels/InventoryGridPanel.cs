@@ -2504,37 +2504,7 @@ public partial class InventoryGridPanel : UserControl
 
         if (result != DialogResult.Yes) return;
 
-        // Remove the slot entry from the Slots array entirely and reindex
-        int removedIndex = _contextCell.SlotIndex;
-        if (removedIndex >= 0 && removedIndex < _slots.Length)
-        {
-            _slots.RemoveAt(removedIndex);
-
-            // Reindex cells whose SlotIndex shifted down after the removal
-            foreach (var c in _cells)
-            {
-                if (c.SlotIndex > removedIndex)
-                    c.SlotIndex--;
-            }
-        }
-
-        // Clear the removed cell's slot reference
-        _contextCell.SlotData = null;
-        _contextCell.SlotIndex = -1;
-
-        // Update cell display
-        _contextCell.ItemId = "";
-        _contextCell.DisplayName = "";
-        _contextCell.ItemType = "";
-        _contextCell.Category = "";
-        _contextCell.Amount = 0;
-        _contextCell.MaxAmount = 0;
-        _contextCell.DamageFactor = 0;
-        _contextCell.IconImage = null;
-        _contextCell.ClassMiniIcon = null;
-        _contextCell.ShowAdjacencyBorder = false;
-        _contextCell.AdjacencyBorderColor = Color.Transparent;
-        _contextCell.IsValidEmpty = true;
+        RemoveSlotEntry(_contextCell);
         _contextCell.UpdateDisplay();
 
         // Recompute adjacency for the entire grid since neighbors may have changed
@@ -2640,9 +2610,18 @@ public partial class InventoryGridPanel : UserControl
         }
     }
 
-    private void RepairSlotData(SlotCell cell)
+    /// <summary>
+    /// Repairs a single slot: clears damage state, fixes Amount, removes
+    /// BlockedByBrokenTech markers. Returns true if the slot contains a
+    /// damage placeholder item that should be removed from the inventory.
+    /// </summary>
+    private bool RepairSlotData(SlotCell cell)
     {
-        if (cell.SlotData == null || _currentInventory == null) return;
+        if (cell.SlotData == null || _currentInventory == null) return false;
+
+        // Detect damage placeholder items before clearing state so callers
+        // can remove them after this method returns.
+        bool isDamagePlaceholder = InventorySlotHelper.IsDamageSlotItem(cell.ItemId);
 
         bool wasDamaged = cell.DamageFactor > 0;
 
@@ -2693,22 +2672,106 @@ public partial class InventoryGridPanel : UserControl
             }
         }
         catch { }
+
+        return isDamagePlaceholder;
+    }
+
+    /// <summary>
+    /// Removes a slot entry from the Slots JSON array and clears the cell.
+    /// Does not recompute adjacency — callers should do that once after all removals.
+    /// </summary>
+    private void RemoveSlotEntry(SlotCell cell)
+    {
+        if (_slots == null) return;
+
+        int removedIndex = cell.SlotIndex;
+        if (removedIndex >= 0 && removedIndex < _slots.Length)
+        {
+            _slots.RemoveAt(removedIndex);
+
+            foreach (var c in _cells)
+            {
+                if (c.SlotIndex > removedIndex)
+                    c.SlotIndex--;
+            }
+        }
+
+        cell.SlotData = null;
+        cell.SlotIndex = -1;
+        cell.ItemId = "";
+        cell.DisplayName = "";
+        cell.ItemType = "";
+        cell.Category = "";
+        cell.Amount = 0;
+        cell.MaxAmount = 0;
+        cell.DamageFactor = 0;
+        cell.IconImage = null;
+        cell.ClassMiniIcon = null;
+        cell.ShowAdjacencyBorder = false;
+        cell.AdjacencyBorderColor = Color.Transparent;
+        cell.IsValidEmpty = true;
     }
 
     private void OnRepairSlot(object? sender, EventArgs e)
     {
         if (_contextCell == null) return;
-        RepairSlotData(_contextCell);
-        _contextCell.UpdateDisplay();
+        bool wasDamagePlaceholder = RepairSlotData(_contextCell);
+
+        if (wasDamagePlaceholder && _slots != null)
+        {
+            RemoveSlotEntry(_contextCell);
+
+            // Recompute adjacency since a slot was cleared
+            int maxY = 0;
+            foreach (var c in _cells)
+                if (c.GridY > maxY) maxY = c.GridY;
+            ComputeAdjacency(GridColumns, maxY + 1);
+            foreach (var c in _cells)
+                c.UpdateDisplay();
+
+            if (_selectedCell == _contextCell)
+                ClearDetailPanel();
+        }
+        else
+        {
+            _contextCell.UpdateDisplay();
+        }
+
+        RaiseDataModified();
     }
 
     private void OnRepairAllSlots(object? sender, EventArgs e)
     {
+        // Repair all slots first, collecting damage placeholders to remove
+        var toRemove = new List<SlotCell>();
         foreach (var cell in _cells)
         {
-            RepairSlotData(cell);
-            cell.UpdateDisplay();
+            bool wasDamagePlaceholder = RepairSlotData(cell);
+            if (wasDamagePlaceholder)
+                toRemove.Add(cell);
         }
+
+        // Remove damage placeholder items from highest SlotIndex first
+        // so earlier removals don't shift indices of later ones.
+        if (toRemove.Count > 0 && _slots != null)
+        {
+            toRemove.Sort((a, b) => b.SlotIndex.CompareTo(a.SlotIndex));
+            foreach (var cell in toRemove)
+                RemoveSlotEntry(cell);
+        }
+
+        // Recompute adjacency and refresh all cells
+        int maxY = 0;
+        foreach (var c in _cells)
+            if (c.GridY > maxY) maxY = c.GridY;
+        ComputeAdjacency(GridColumns, maxY + 1);
+        foreach (var c in _cells)
+            c.UpdateDisplay();
+
+        if (_selectedCell != null && toRemove.Contains(_selectedCell))
+            ClearDetailPanel();
+
+        RaiseDataModified();
     }
 
     /// <summary>
