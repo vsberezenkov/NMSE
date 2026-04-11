@@ -82,7 +82,7 @@ internal static class InventorySlotHelper
     }
 
     /// <summary>
-    /// Returns true if the item ID represents a ship damage slot placeholder
+    /// Returns true if the item ID represents a ship damage slot placeholder.
     /// Matches any ID starting with SHIPSLOT_DMG (e.g. ^SHIPSLOT_DMG1 through ^SHIPSLOT_DMG12).
     /// </summary>
     internal static bool IsDamageSlotItem(string? itemId)

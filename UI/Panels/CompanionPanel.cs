@@ -874,9 +874,10 @@ public partial class CompanionPanel : UserControl
         }
     }
 
-    // ──────────────────────────────────────────────────────────────────
-    //  Accessory Customisation
-    // ──────────────────────────────────────────────────────────────────
+    // Accessory Customisation
+    // Management for pet accessory customisation, based on initial loose testing in game
+    // Colours probably need to be set to the actual in game palette entries rather than arbitrary RGBA values,
+    // but I think these work like ship customisation where it works for the player (mostly)
 
     /// <summary>Gets the PetAccessoryCustomisation entry for a given pet index, or null.</summary>
     private JsonObject? GetPetAccessoryCustomisationEntry(int petIndex)
@@ -1201,9 +1202,9 @@ public partial class CompanionPanel : UserControl
             arr.RemoveAt(i);
     }
 
-    // ──────────────────────────────────────────────────────────────────
-    //  Battle Data
-    // ──────────────────────────────────────────────────────────────────
+    // Pet Battle (Xeno Arena) Companion Data
+    // Might expand later to include all "game table" content once the dice game and other potential
+    // features are added and datamined/reversed if they are even companion/pet related.
 
     /// <summary>Class letter to integer value mapping.</summary>
     private static int ClassToInt(string cls) => cls switch
@@ -1354,7 +1355,7 @@ public partial class CompanionPanel : UserControl
             _moveSlotCooldowns[i].Minimum = cdMin;
             _moveSlotCooldowns[i].Maximum = cdMax;
             _moveSlotCooldowns[i].Value = Math.Clamp(cooldown, cdMin, cdMax);
-            _moveSlotScoreBoosts[i].Text = scoreBoost.ToString("F6", CultureInfo.InvariantCulture);
+            _moveSlotScoreBoosts[i].Value = Math.Clamp((decimal)scoreBoost, 0, 10);
 
             // Moveset label and detail
             UpdateMoveSlotInfo(i, moveId);
@@ -1405,42 +1406,73 @@ public partial class CompanionPanel : UserControl
         // Move detail panel
         if (PetBattleMoveDatabase.ById.TryGetValue(moveId, out var move))
         {
-            _moveSlotDetailPanels[slotIndex].SuspendLayout();
-            _moveSlotDetailPanels[slotIndex].Controls.Clear();
+            var panel = _moveSlotDetailPanels[slotIndex];
+            panel.SuspendLayout();
+            panel.Controls.Clear();
+            panel.RowStyles.Clear();
 
-            void AddDetailLine(string label, string value)
-            {
-                var row = new FlowLayoutPanel { AutoSize = true, FlowDirection = FlowDirection.LeftToRight, WrapContents = false };
-                row.Controls.Add(new Label { Text = label, AutoSize = true, Font = new Font(Font, FontStyle.Bold), Padding = new Padding(0, 0, 5, 0) });
-                row.Controls.Add(new Label { Text = value, AutoSize = true });
-                _moveSlotDetailPanels[slotIndex].Controls.Add(row);
-            }
-
-            AddDetailLine(UiStrings.GetOrNull("companion.battle_move_detail_type") ?? "Type:", $"{move.IconEmoji} {move.IconStyleDisplay}");
-            AddDetailLine(UiStrings.GetOrNull("companion.battle_move_detail_target") ?? "Target:", move.TargetDisplay);
-            AddDetailLine(UiStrings.GetOrNull("companion.battle_move_detail_multiturn") ?? "Multi-Turn:",
-                move.MultiTurnMove ? (UiStrings.GetOrNull("companion.battle_move_detail_yes") ?? "Yes") : (UiStrings.GetOrNull("companion.battle_move_detail_no") ?? "No"));
-            AddDetailLine(UiStrings.GetOrNull("companion.battle_move_detail_basic") ?? "Basic Move:",
-                move.BasicMove ? (UiStrings.GetOrNull("companion.battle_move_detail_yes") ?? "Yes") : (UiStrings.GetOrNull("companion.battle_move_detail_no") ?? "No"));
+            // Left column: base fields (Type, Target, Multi-Turn, Basic Move, Stat Affected, Strength, Effect)
+            var leftEntries = new List<(string Label, string Value)>();
+            leftEntries.Add((UiStrings.GetOrNull("companion.battle_move_detail_type") ?? "Type:", $"{move.IconEmoji} {move.IconStyleDisplay}"));
+            leftEntries.Add((UiStrings.GetOrNull("companion.battle_move_detail_target") ?? "Target:", move.TargetDisplay));
+            leftEntries.Add((UiStrings.GetOrNull("companion.battle_move_detail_multiturn") ?? "Multi-Turn:",
+                move.MultiTurnMove ? (UiStrings.GetOrNull("companion.battle_move_detail_yes") ?? "Yes") : (UiStrings.GetOrNull("companion.battle_move_detail_no") ?? "No")));
+            leftEntries.Add((UiStrings.GetOrNull("companion.battle_move_detail_basic") ?? "Basic Move:",
+                move.BasicMove ? (UiStrings.GetOrNull("companion.battle_move_detail_yes") ?? "Yes") : (UiStrings.GetOrNull("companion.battle_move_detail_no") ?? "No")));
 
             if (!string.IsNullOrEmpty(move.LocIDToDescribeStat))
             {
-                // Display the stat key in normalised form (no runtime loc service in panel)
                 string statDesc = DisplayStringHelper.NormalizeDisplayString(
                     move.LocIDToDescribeStat.Replace("UI_PB_STAT_", ""));
-                AddDetailLine(UiStrings.GetOrNull("companion.battle_move_detail_stat") ?? "Stat Affected:", statDesc);
+                leftEntries.Add((UiStrings.GetOrNull("companion.battle_move_detail_stat") ?? "Stat Affected:", statDesc));
             }
 
-            for (int p = 0; p < move.Phases.Count; p++)
+            // Single-phase moves: Strength/Effect go in left column, no phase prefix
+            // Multi-phase moves: all phase entries go in right column with phase prefix
+            var rightEntries = new List<(string Label, string Value)>();
+            if (move.Phases.Count == 1)
             {
-                var phase = move.Phases[p];
-                string prefix = move.Phases.Count > 1 ? UiStrings.Format("companion.battle_move_detail_phase", p + 1) + " " : "";
-                AddDetailLine($"{prefix}{UiStrings.GetOrNull("companion.battle_move_detail_strength") ?? "Strength:"}", phase.StrengthDisplay);
-                AddDetailLine($"{prefix}{UiStrings.GetOrNull("companion.battle_move_detail_effect") ?? "Effect:"}", phase.EffectDisplay);
+                var phase = move.Phases[0];
+                leftEntries.Add((UiStrings.GetOrNull("companion.battle_move_detail_strength") ?? "Strength:", phase.StrengthDisplay));
+                leftEntries.Add((UiStrings.GetOrNull("companion.battle_move_detail_effect") ?? "Effect:", phase.EffectDisplay));
+            }
+            else
+            {
+                for (int p = 0; p < move.Phases.Count; p++)
+                {
+                    var phase = move.Phases[p];
+                    string prefix = UiStrings.Format("companion.battle_move_detail_phase", p + 1) + " ";
+                    rightEntries.Add(($"{prefix}{UiStrings.GetOrNull("companion.battle_move_detail_strength") ?? "Strength:"}", phase.StrengthDisplay));
+                    rightEntries.Add(($"{prefix}{UiStrings.GetOrNull("companion.battle_move_detail_effect") ?? "Effect:"}", phase.EffectDisplay));
+                }
             }
 
-            _moveSlotDetailPanels[slotIndex].ResumeLayout(true);
-            _moveSlotDetailPanels[slotIndex].Visible = true;
+            int totalRows = Math.Max(leftEntries.Count, rightEntries.Count);
+
+            for (int r = 0; r < totalRows; r++)
+            {
+                panel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+                // Left column pair
+                if (r < leftEntries.Count)
+                {
+                    var leftEntry = leftEntries[r];
+                    panel.Controls.Add(new Label { Text = leftEntry.Label, AutoSize = true, Font = new Font(Font, FontStyle.Bold), Padding = new Padding(0, 1, 5, 1) }, 0, r);
+                    panel.Controls.Add(new Label { Text = leftEntry.Value, AutoSize = true, Padding = new Padding(0, 1, 0, 1) }, 1, r);
+                }
+
+                // Right column pair (phase fields)
+                if (r < rightEntries.Count)
+                {
+                    var rightEntry = rightEntries[r];
+                    panel.Controls.Add(new Label { Text = rightEntry.Label, AutoSize = true, Font = new Font(Font, FontStyle.Bold), Padding = new Padding(0, 1, 5, 1) }, 3, r);
+                    panel.Controls.Add(new Label { Text = rightEntry.Value, AutoSize = true, Padding = new Padding(0, 1, 0, 1) }, 4, r);
+                }
+            }
+
+            panel.RowCount = totalRows;
+            panel.ResumeLayout(true);
+            panel.Visible = true;
         }
         else
         {
@@ -1484,7 +1516,7 @@ public partial class CompanionPanel : UserControl
                             _moveSlotCooldowns[slotIndex].Minimum = cdMin;
                             _moveSlotCooldowns[slotIndex].Maximum = cdMax;
                             _moveSlotCooldowns[slotIndex].Value = defaultCd;
-                            _moveSlotScoreBoosts[slotIndex].Text = defaultWeight.ToString("F6", CultureInfo.InvariantCulture);
+                            _moveSlotScoreBoosts[slotIndex].Value = Math.Clamp((decimal)defaultWeight, 0, 10);
                         }
                         finally { _loading = false; }
                     }
@@ -1499,7 +1531,7 @@ public partial class CompanionPanel : UserControl
                             _moveSlotCooldowns[slotIndex].Minimum = 0;
                             _moveSlotCooldowns[slotIndex].Maximum = 20;
                             _moveSlotCooldowns[slotIndex].Value = 0;
-                            _moveSlotScoreBoosts[slotIndex].Text = "0.000000";
+                            _moveSlotScoreBoosts[slotIndex].Value = 0;
                         }
                         finally { _loading = false; }
                     }
@@ -1546,27 +1578,35 @@ public partial class CompanionPanel : UserControl
         catch { }
     }
 
-    /// <summary>Handles score boost value change for a move slot.</summary>
+    /// <summary>Handles score boost value change for a move slot.
+    /// Snaps the value to the nearest 0.1 increment so that e.g. 1.660000
+    /// with an up-arrow press results in 1.700000 rather than 1.760000.</summary>
     private void OnMoveSlotScoreBoostChanged(int slotIndex)
     {
         if (_loading) return;
         var comp = SelectedCompanion;
         if (comp == null) return;
 
-        if (double.TryParse(_moveSlotScoreBoosts[slotIndex].Text, NumberStyles.Float, CultureInfo.InvariantCulture, out double val))
+        var nud = _moveSlotScoreBoosts[slotIndex];
+        decimal rounded = Math.Round(nud.Value, 1, MidpointRounding.AwayFromZero);
+        if (nud.Value != rounded)
         {
-            val = Math.Clamp(val, 0, 9.999999);
-            try
-            {
-                var moveList = comp.GetArray("PetBattlerMoveList");
-                if (moveList != null && slotIndex < moveList.Length)
-                {
-                    var moveObj = moveList.GetObject(slotIndex);
-                    moveObj?.Set("ScoreBoost", val);
-                }
-            }
-            catch { }
+            _loading = true;
+            try { nud.Value = rounded; }
+            finally { _loading = false; }
         }
+
+        double val = Math.Clamp((double)rounded, 0, 9.999999);
+        try
+        {
+            var moveList = comp.GetArray("PetBattlerMoveList");
+            if (moveList != null && slotIndex < moveList.Length)
+            {
+                var moveObj = moveList.GetObject(slotIndex);
+                moveObj?.Set("ScoreBoost", val);
+            }
+        }
+        catch { }
     }
 
     /// <summary>Handles the Override Pet Classes checkbox.</summary>

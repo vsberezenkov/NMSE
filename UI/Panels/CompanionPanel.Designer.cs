@@ -42,7 +42,7 @@ partial class CompanionPanel
             RowCount = 1,
             Padding = new Padding(10)
         };
-        mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 220));
+        mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200));
         mainLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
         mainLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
 
@@ -608,7 +608,7 @@ partial class CompanionPanel
     /// Layout from top to bottom:
     ///   Row 0: [Stat Class Overrides (left) | Mutation Progress (right)]
     ///   Row 1: Affinity
-    ///   Row 2+: Move Slots (single column, two-column per slot)
+    ///   Row 2+: Move Slots (single column, per-slot two-column: left=controls, right=detail panel)
     /// </summary>
     private void BuildBattleTab()
     {
@@ -629,13 +629,13 @@ partial class CompanionPanel
 
         // == Row 0: Two-column top section ==
         battleLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        var topRow = new TableLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, ColumnCount = 2, RowCount = 1 };
-        topRow.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
-        topRow.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
+        var topRow = new TableLayoutPanel { Dock = DockStyle.Left, AutoSize = true, ColumnCount = 2, RowCount = 1 };
+        topRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        topRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
         topRow.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
         // == Left column: Stat Class Overrides ==
-        var statClassPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, ColumnCount = 2, Padding = new Padding(0, 0, 8, 0) };
+        var statClassPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, MinimumSize = new Size(330, 0), ColumnCount = 2, Padding = new Padding(0, 0, 8, 0) };
         statClassPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
         statClassPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
 
@@ -649,11 +649,11 @@ partial class CompanionPanel
 
         // Override checkbox + average class on the same row
         statClassPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        var overrideRow = new FlowLayoutPanel { AutoSize = true, FlowDirection = FlowDirection.LeftToRight, WrapContents = false };
-        _battleOverrideCheck = new CheckBox { Text = "Override Pet Classes", AutoSize = true };
+        var overrideRow = new FlowLayoutPanel { AutoSize = true, FlowDirection = FlowDirection.LeftToRight, WrapContents = false, Padding = new Padding(0, 3, 0, 0) };
+        _battleOverrideCheck = new CheckBox { Text = "Override Pet Classes", AutoSize = true, Margin = new Padding(0, 3, 0, 0) };
         _battleOverrideCheck.CheckedChanged += (s, e) => { if (!_loading) OnBattleOverrideChanged(); };
-        _battleAverageClassLabel = new Label { Text = "Average Class:", AutoSize = true, Anchor = AnchorStyles.Left, Padding = new Padding(15, 5, 5, 0) };
-        _battleAverageClassValue = new Label { Text = "-", AutoSize = true, Padding = new Padding(0, 5, 0, 0) };
+        _battleAverageClassLabel = new Label { Text = "Average Class:", AutoSize = true, Anchor = AnchorStyles.Left, Margin = new Padding(15, 3, 5, 0) };
+        _battleAverageClassValue = new Label { Text = "-", AutoSize = true, Margin = new Padding(0, 3, 0, 0) };
         overrideRow.Controls.Add(_battleOverrideCheck);
         overrideRow.Controls.Add(_battleAverageClassLabel);
         overrideRow.Controls.Add(_battleAverageClassValue);
@@ -704,7 +704,7 @@ partial class CompanionPanel
         topRow.Controls.Add(statClassPanel, 0, 0);
 
         // == Right column: Mutation Progress ==
-        var mutationPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, ColumnCount = 2, Padding = new Padding(8, 0, 0, 0) };
+        var mutationPanel = new TableLayoutPanel { Dock = DockStyle.Fill, AutoSize = true, ColumnCount = 2, Padding = new Padding(0, 0, 0, 0), Margin = new Padding(12, 0, 0, 0) };
         mutationPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
         mutationPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
 
@@ -773,7 +773,7 @@ partial class CompanionPanel
 
         // == Affinity row ==
         battleLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        var affinityRow = new FlowLayoutPanel { AutoSize = true, FlowDirection = FlowDirection.LeftToRight, Dock = DockStyle.Fill, Padding = new Padding(0, 5, 0, 5) };
+        var affinityRow = new FlowLayoutPanel { AutoSize = true, FlowDirection = FlowDirection.LeftToRight, Dock = DockStyle.Fill, Padding = new Padding(0, 1, 0, 1) };
         _battleAffinityLabel = new Label { Text = "Affinity:", AutoSize = true, Padding = new Padding(0, 5, 10, 0) };
         FontManager.ApplyHeadingFont(_battleAffinityLabel, 10);
         _battleAffinityValue = new Label { Text = "", AutoSize = true, Padding = new Padding(0, 5, 0, 0) };
@@ -781,8 +781,11 @@ partial class CompanionPanel
         affinityRow.Controls.Add(_battleAffinityValue);
         battleLayout.Controls.Add(affinityRow, 0, bRow++);
 
-        // == Move Slots (single column, each slot is a wide two-column layout) ==
-        // No "Move List" heading label (removed per request)
+        // == Move Slots list ==
+        // (two-column grid, left to right order)
+        // Move slot controls on the left, per-slot detail panels on the right
+        // Details split by type (phase on right)
+        // Removed header per tester feedback
         _battleMoveListLabel = new Label { Text = "", AutoSize = true, Visible = false };
 
         _moveSlotPanels = new Panel[5];
@@ -791,53 +794,55 @@ partial class CompanionPanel
         _moveSlotMovesetLabels = new Label[5];
         _moveSlotCooldowns = new NumericUpDown[5];
         _moveSlotCooldownLabels = new Label[5];
-        _moveSlotScoreBoosts = new TextBox[5];
+        _moveSlotScoreBoosts = new NumericUpDown[5];
         _moveSlotScoreBoostLabels = new Label[5];
-        _moveSlotDetailPanels = new FlowLayoutPanel[5];
+        _moveSlotDetailPanels = new TableLayoutPanel[5];
 
+        // Single-column container for all move slots (top to bottom)
         for (int i = 0; i < 5; i++)
         {
             int slotIdx = i;
             battleLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
 
             // Move slot heading
-            _moveSlotLabels[i] = new Label { Text = $"Move Slot {i + 1}:", AutoSize = true, Padding = new Padding(0, 3, 5, 0) };
+            _moveSlotLabels[i] = new Label { Text = $"Move Slot {i + 1}:", AutoSize = true, Padding = new Padding(0, 2, 5, 0) };
             FontManager.ApplyHeadingFont(_moveSlotLabels[i], 9);
-
-            // Two-column layout per slot: [left: combo + cooldown/scoreboost + moveset] | [right: detail info]
-            var slotLayout = new TableLayoutPanel
-            {
-                AutoSize = true,
-                ColumnCount = 2,
-                Dock = DockStyle.Fill,
-                Padding = new Padding(0, 0, 0, 8),
-            };
-            slotLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
-            slotLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
-
-            // Left column: combo, cooldown/scoreboost, moveset label
-            var leftCol = new FlowLayoutPanel
-            {
-                AutoSize = true,
-                FlowDirection = FlowDirection.TopDown,
-                WrapContents = false,
-                Dock = DockStyle.Fill,
-            };
 
             _moveSlotCombos[i] = new ComboBox
             {
                 DropDownStyle = ComboBoxStyle.DropDownList,
-                Width = 310,
+                Width = 320,
             };
             _moveSlotCombos[i].SelectedIndexChanged += (s, e) => { if (!_loading) OnMoveSlotChanged(slotIdx); };
+            // Auto-size dropdown width to fit longest item
+            _moveSlotCombos[i].DropDown += (s, e) =>
+            {
+                var combo = (ComboBox)s!;
+                int maxWidth = combo.Width;
+                using var g = combo.CreateGraphics();
+                foreach (var item in combo.Items)
+                {
+                    int w = (int)g.MeasureString(item.ToString() ?? "", combo.Font).Width + SystemInformation.VerticalScrollBarWidth;
+                    if (w > maxWidth) maxWidth = w;
+                }
+                combo.DropDownWidth = maxWidth;
+            };
 
             var controlRow = new FlowLayoutPanel { AutoSize = true, FlowDirection = FlowDirection.LeftToRight, WrapContents = false };
             _moveSlotCooldownLabels[i] = new Label { Text = "Cooldown:", AutoSize = true, Padding = new Padding(0, 5, 3, 0) };
             _moveSlotCooldowns[i] = new NumericUpDown { Minimum = 0, Maximum = 20, Width = 50 };
             _moveSlotCooldowns[i].ValueChanged += (s, e) => { if (!_loading) OnMoveSlotCooldownChanged(slotIdx); };
             _moveSlotScoreBoostLabels[i] = new Label { Text = "Score Boost:", AutoSize = true, Padding = new Padding(8, 5, 3, 0) };
-            _moveSlotScoreBoosts[i] = new TextBox { Width = 70, Text = "0.000000" };
-            _moveSlotScoreBoosts[i].Leave += (s, e) => OnMoveSlotScoreBoostChanged(slotIdx);
+            _moveSlotScoreBoosts[i] = new NumericUpDown
+            {
+                Minimum = 0,
+                Maximum = 10,
+                DecimalPlaces = 6,
+                Increment = 0.1m,
+                Width = 90,
+                Value = 0,
+            };
+            _moveSlotScoreBoosts[i].ValueChanged += (s, e) => { if (!_loading) OnMoveSlotScoreBoostChanged(slotIdx); };
             controlRow.Controls.Add(_moveSlotCooldownLabels[i]);
             controlRow.Controls.Add(_moveSlotCooldowns[i]);
             controlRow.Controls.Add(_moveSlotScoreBoostLabels[i]);
@@ -851,21 +856,43 @@ partial class CompanionPanel
                 ForeColor = SystemColors.GrayText,
             };
 
-            leftCol.Controls.Add(_moveSlotCombos[i]);
-            leftCol.Controls.Add(controlRow);
-            leftCol.Controls.Add(_moveSlotMovesetLabels[i]);
-
-            // Right column: detail panel (read-only move info)
-            _moveSlotDetailPanels[i] = new FlowLayoutPanel
+            // Detail panel: two-column label-value grid (populated at runtime)
+            _moveSlotDetailPanels[i] = new TableLayoutPanel
             {
                 AutoSize = true,
-                FlowDirection = FlowDirection.TopDown,
-                WrapContents = false,
+                ColumnCount = 5,
                 Visible = false,
                 Dock = DockStyle.Fill,
                 Padding = new Padding(5, 0, 0, 2),
             };
+            _moveSlotDetailPanels[i].ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // left label
+            _moveSlotDetailPanels[i].ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // left value
+            _moveSlotDetailPanels[i].ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20)); // spacer
+            _moveSlotDetailPanels[i].ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // right label
+            _moveSlotDetailPanels[i].ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // right value
 
+            // Left column: combo, cooldown/scoreboost, moveset label
+            var leftCol = new FlowLayoutPanel
+            {
+                AutoSize = true,
+                FlowDirection = FlowDirection.TopDown,
+                WrapContents = false,
+                Dock = DockStyle.Fill,
+            };
+            leftCol.Controls.Add(_moveSlotCombos[i]);
+            leftCol.Controls.Add(controlRow);
+            leftCol.Controls.Add(_moveSlotMovesetLabels[i]);
+
+            // Per-slot two-column layout: left = controls, right = detail panel
+            var slotLayout = new TableLayoutPanel
+            {
+                AutoSize = true,
+                ColumnCount = 2,
+                Dock = DockStyle.Fill,
+                Padding = new Padding(0, 0, 4, 4),
+            };
+            slotLayout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            slotLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             slotLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
             slotLayout.Controls.Add(leftCol, 0, 0);
             slotLayout.Controls.Add(_moveSlotDetailPanels[i], 1, 0);
@@ -877,7 +904,7 @@ partial class CompanionPanel
                 FlowDirection = FlowDirection.TopDown,
                 WrapContents = false,
                 Dock = DockStyle.Fill,
-                Padding = new Padding(0, 2, 0, 0),
+                Padding = new Padding(0, 1, 0, 0),
             };
             slotContainer.Controls.Add(_moveSlotLabels[i]);
             slotContainer.Controls.Add(slotLayout);
@@ -1028,7 +1055,7 @@ partial class CompanionPanel
     private Label[] _moveSlotMovesetLabels = null!;
     private NumericUpDown[] _moveSlotCooldowns = null!;
     private Label[] _moveSlotCooldownLabels = null!;
-    private TextBox[] _moveSlotScoreBoosts = null!;
+    private NumericUpDown[] _moveSlotScoreBoosts = null!;
     private Label[] _moveSlotScoreBoostLabels = null!;
-    private FlowLayoutPanel[] _moveSlotDetailPanels = null!;
+    private TableLayoutPanel[] _moveSlotDetailPanels = null!;
 }
