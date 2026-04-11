@@ -315,4 +315,117 @@ public class UiStringsTests : IDisposable
         string value = UiStrings.Get("settlement.delete_warning");
         Assert.Contains("Teleport Destinations", value);
     }
+
+    // --- Battle tab string tests using real locale data ---
+
+    [Fact]
+    public void UiStrings_BattleMoveSlot_IsAbilitySlotInEnGB()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        UiStrings.SetDirectory(langDir);
+        UiStrings.Load("en-GB");
+
+        Assert.Equal("Ability Slot {0}:", UiStrings.Get("companion.battle_move_slot"));
+        Assert.Equal("Ability Slot 1:", UiStrings.Format("companion.battle_move_slot", 1));
+        Assert.Equal("Ability Slot 5:", UiStrings.Format("companion.battle_move_slot", 5));
+    }
+
+    [Fact]
+    public void UiStrings_BattleGenesLevel_IsGenesImprovedInEnGB()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        UiStrings.SetDirectory(langDir);
+        UiStrings.Load("en-GB");
+
+        Assert.Equal("Genes Improved:", UiStrings.Get("companion.battle_genes_level"));
+    }
+
+    [Fact]
+    public void UiStrings_BattleMutationHeading_IsGeneticProfileInEnGB()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        UiStrings.SetDirectory(langDir);
+        UiStrings.Load("en-GB");
+
+        Assert.Equal("Genetic Profile", UiStrings.Get("companion.battle_mutation_heading"));
+    }
+
+    private static readonly string[] AllLanguages =
+    [
+        "en-GB", "en-US", "de-DE", "fr-FR", "es-ES", "es-419",
+        "it-IT", "pt-PT", "pt-BR", "nl-NL", "pl-PL", "ru-RU",
+        "ja-JP", "ko-KR", "zh-CN", "zh-TW"
+    ];
+
+    [Fact]
+    public void UiStrings_BattleKeys_ExistInAllLanguages()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        string[] requiredKeys =
+        [
+            "companion.battle_move_slot",
+            "companion.battle_genes_level",
+            "companion.battle_mutation_heading"
+        ];
+
+        foreach (var lang in AllLanguages)
+        {
+            UiStrings.SetDirectory(langDir);
+            UiStrings.Load(lang);
+
+            foreach (var key in requiredKeys)
+            {
+                string value = UiStrings.Get(key);
+                Assert.NotEqual(key, value); // Should resolve to a real string, not fall back to raw key
+            }
+        }
+    }
+
+    [Fact]
+    public void UiStrings_BattleMoveSlot_NoLongerContainsMoveInEnGB()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        UiStrings.SetDirectory(langDir);
+        UiStrings.Load("en-GB");
+
+        string value = UiStrings.Get("companion.battle_move_slot");
+        Assert.DoesNotContain("Move Slot", value);
+        Assert.Contains("Ability Slot", value);
+    }
+
+    [Fact]
+    public void UiStrings_BattleGenesLevel_NoLongerContainsLevelInEnGB()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        UiStrings.SetDirectory(langDir);
+        UiStrings.Load("en-GB");
+
+        string value = UiStrings.Get("companion.battle_genes_level");
+        Assert.DoesNotContain("/ Level", value);
+    }
+
+    [Fact]
+    public void UiStrings_BattleMutationHeading_NoLongerContainsMutationProgressInEnGB()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        UiStrings.SetDirectory(langDir);
+        UiStrings.Load("en-GB");
+
+        string value = UiStrings.Get("companion.battle_mutation_heading");
+        Assert.DoesNotContain("Mutation Progress", value);
+    }
 }
