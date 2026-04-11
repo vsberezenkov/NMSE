@@ -33,6 +33,9 @@ public partial class SettlementPanel : UserControl
     /// <summary>Whether the current settlement has a top-level Population key (NMS 5.70+ saves).</summary>
     private bool _hasPopulationKey;
 
+    /// <summary>Raw (unclamped) production amounts read from JSON, keyed by row index.</summary>
+    private readonly Dictionary<int, int> _rawProductionAmounts = new();
+
     private int[]? _rawBuildingStates;
     private bool _hasBuildingStates;
     private bool _editorUpdating;
@@ -384,7 +387,7 @@ public partial class SettlementPanel : UserControl
             while (perksArr.Length > 0 && (perksArr.GetString(perksArr.Length - 1) ?? "") == "^")
                 perksArr.RemoveAt(perksArr.Length - 1);
 
-            // Save production state
+            // Save production state – preserve raw values outside 0..ProductionMaxAmount when unchanged
             var prodArr = settlement.GetArray("ProductionState");
             if (prodArr != null)
             {
@@ -398,6 +401,13 @@ public partial class SettlementPanel : UserControl
                             System.Globalization.NumberStyles.Integer,
                             System.Globalization.CultureInfo.InvariantCulture, out int amount))
                     {
+                        // If the displayed value still matches what we loaded from JSON,
+                        // preserve the original raw value (which may be outside 0..ProductionMaxAmount)
+                        if (_rawProductionAmounts.TryGetValue(i, out int raw) && amount == raw)
+                        {
+                            prodObj.Set("Amount", raw);
+                            continue;
+                        }
                         amount = Math.Clamp(amount, 0, ProductionMaxAmount);
                         prodObj.Set("Amount", amount);
                     }
@@ -503,8 +513,9 @@ public partial class SettlementPanel : UserControl
             for (int i = perksLoaded; i < PerkSlotCount; i++)
                 _perkCombos[i].SelectedIndex = 0;
 
-            // Production state
+            // Production state – store raw amounts for preservation
             _productionGrid.Rows.Clear();
+            _rawProductionAmounts.Clear();
             var prodArr = settlement.GetArray("ProductionState");
             if (prodArr != null)
             {
@@ -521,6 +532,7 @@ public partial class SettlementPanel : UserControl
                         Image? icon = GetProductionIcon(lookupId);
                         int amount = 0;
                         try { amount = prodObj.GetInt("Amount"); } catch { }
+                        _rawProductionAmounts[i] = amount;
                         _productionGrid.Rows.Add(icon ?? (object)_placeholderIcon, itemName, elementId,
                             amount.ToString(System.Globalization.CultureInfo.InvariantCulture));
                     }
@@ -568,6 +580,7 @@ public partial class SettlementPanel : UserControl
             _perkSeedPanels[i].Visible = false;
         }
         _productionGrid.Rows.Clear();
+        _rawProductionAmounts.Clear();
 
         // New fields
         _raceField.SelectedIndex = -1;
