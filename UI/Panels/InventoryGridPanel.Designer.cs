@@ -162,6 +162,7 @@ partial class InventoryGridPanel
         detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         row++;
 
+        // Icon with slot position, info tooltip hint, and class icon beside it
         _detailIcon = new PictureBox
         {
             Size = new Size(72, 72),
@@ -169,8 +170,76 @@ partial class InventoryGridPanel
             BackColor = Color.FromArgb(40, 40, 40),
             BorderStyle = BorderStyle.FixedSingle
         };
-        detailLayout.Controls.Add(_detailIcon, 0, row);
-        detailLayout.SetColumnSpan(_detailIcon, 2);
+        _detailSlotPosition = new Label { Text = "", AutoSize = true, Margin = new Padding(0, 1, 0, 0) };
+        _detailPositionLabel = CreateLabel("Slot:");
+        _detailPositionLabel.Padding = new Padding(0, 0, 2, 0);
+        _detailPositionLabel.Margin = new Padding(0, 1, 0, 0);
+        _detailInfoButton = new PictureBox
+        {
+            Size = new Size(16, 16),
+            SizeMode = PictureBoxSizeMode.Zoom,
+            Image = CreateInfoIconBitmap(16, Color.SteelBlue),
+            Cursor = Cursors.Hand,
+            Margin = new Padding(4, 4, 4, 0)
+        };
+        _detailInfoHintLabel = new Label
+        {
+            Text = "Hover for info.",
+            AutoSize = true,
+            ForeColor = Color.Gray,
+            Margin = new Padding(0, 4, 0, 0)
+        };
+        _detailDescription = new Label { Text = "", Visible = false };
+        _detailClassIcon = new PictureBox
+        {
+            Size = new Size(24, 24),
+            SizeMode = PictureBoxSizeMode.Zoom,
+            BackColor = Color.Transparent,
+            Margin = new Padding(0, 2, 0, 0)
+        };
+        var detailSlotRow = new FlowLayoutPanel
+        {
+            AutoSize = true,
+            FlowDirection = FlowDirection.LeftToRight,
+            WrapContents = false,
+            Margin = Padding.Empty,
+            Padding = Padding.Empty
+        };
+        detailSlotRow.Controls.Add(_detailPositionLabel);
+        detailSlotRow.Controls.Add(_detailSlotPosition);
+        var detailInfoRow = new FlowLayoutPanel
+        {
+            AutoSize = true,
+            FlowDirection = FlowDirection.LeftToRight,
+            WrapContents = false,
+            Margin = new Padding(0, 3, 0, 0),
+            Padding = Padding.Empty
+        };
+        detailInfoRow.Controls.Add(_detailInfoButton);
+        detailInfoRow.Controls.Add(_detailInfoHintLabel);
+        var iconSidePanel = new FlowLayoutPanel
+        {
+            AutoSize = true,
+            FlowDirection = FlowDirection.TopDown,
+            WrapContents = false,
+            Margin = new Padding(4, 0, 0, 0),
+            Padding = Padding.Empty
+        };
+        iconSidePanel.Controls.Add(detailSlotRow);
+        iconSidePanel.Controls.Add(detailInfoRow);
+        iconSidePanel.Controls.Add(_detailClassIcon);
+        var iconRow = new FlowLayoutPanel
+        {
+            AutoSize = true,
+            FlowDirection = FlowDirection.LeftToRight,
+            WrapContents = false,
+            Margin = Padding.Empty,
+            Padding = Padding.Empty
+        };
+        iconRow.Controls.Add(_detailIcon);
+        iconRow.Controls.Add(iconSidePanel);
+        detailLayout.Controls.Add(iconRow, 0, row);
+        detailLayout.SetColumnSpan(iconRow, 2);
         detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         row++;
 
@@ -179,7 +248,9 @@ partial class InventoryGridPanel
         {
             Text = "(no slot selected)",
             AutoSize = true,
-            ForeColor = Color.DarkBlue
+            ForeColor = Color.DarkBlue,
+            Anchor = AnchorStyles.Left,
+            Margin = new Padding(0, 6, 0, 0)
         };
         FontManager.ApplyHeadingFont(_detailItemName, 11);
         _detailNameLabel = CreateLabel("Name:");
@@ -188,16 +259,8 @@ partial class InventoryGridPanel
         detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         row++;
 
-        // Slot Position
-        _detailSlotPosition = new Label { Text = "", AutoSize = true };
-        _detailPositionLabel = CreateLabel("Position:");
-        detailLayout.Controls.Add(_detailPositionLabel, 0, row);
-        detailLayout.Controls.Add(_detailSlotPosition, 1, row);
-        detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        row++;
-
         // Item Type
-        _detailItemType = new Label { Text = "", AutoSize = true };
+        _detailItemType = new Label { Text = "", AutoSize = true, Anchor = AnchorStyles.Left, Margin = new Padding(0, 6, 0, 0) };
         _detailTypeLabel = CreateLabel("Type:");
         detailLayout.Controls.Add(_detailTypeLabel, 0, row);
         detailLayout.Controls.Add(_detailItemType, 1, row);
@@ -205,7 +268,7 @@ partial class InventoryGridPanel
         row++;
 
         // Item Category
-        _detailItemCategory = new Label { Text = "", AutoSize = true };
+        _detailItemCategory = new Label { Text = "", AutoSize = true, Anchor = AnchorStyles.Left, Margin = new Padding(0, 6, 0, 0) };
         _detailCategoryLabel = CreateLabel("Category:");
         detailLayout.Controls.Add(_detailCategoryLabel, 0, row);
         detailLayout.Controls.Add(_detailItemCategory, 1, row);
@@ -213,7 +276,6 @@ partial class InventoryGridPanel
         row++;
 
         // Item ID (editable) with inline seed field for procedural items
-        // Layout: "Item ID: [_detailItemId] # [_detailSeedField]"
         _detailItemId = new TextBox { Width = 120, Anchor = AnchorStyles.Left, Margin = new Padding(0, 4, 0, 0) };
         _detailSeedLabel = CreateLabel("#");
         _detailSeedLabel.AutoSize = true;
@@ -222,9 +284,11 @@ partial class InventoryGridPanel
         _detailSeedLabel.Visible = false;
         _detailSeedField = new TextBox { Width = 56, MaxLength = 5, Visible = false, Margin = new Padding(0, 4, 0, 0) };
         _detailItemIdLabel = CreateLabel("Item ID:");
+        _detailItemIdLabel.Anchor = AnchorStyles.Left | AnchorStyles.Top;
+        _detailItemIdLabel.Margin = new Padding(0, 4, 0, 0);
+
         _detailIdSeedPanel = new FlowLayoutPanel
         {
-            Dock = DockStyle.Fill,
             AutoSize = true,
             FlowDirection = FlowDirection.LeftToRight,
             WrapContents = false,
@@ -232,35 +296,50 @@ partial class InventoryGridPanel
             Padding = Padding.Empty
         };
         _detailIdSeedPanel.Controls.Add(_detailItemId);
-        _detailIdSeedPanel.Controls.Add(_detailSeedLabel);
-        _detailIdSeedPanel.Controls.Add(_detailSeedField);
 
-        var _detailSeedEntryPanel = new TableLayoutPanel
+        var _detailSeedFieldPanel = new TableLayoutPanel
         {
             AutoSize = true,
-            ColumnCount = 1,
+            ColumnCount = 2,
             RowCount = 2,
-            Dock = DockStyle.Left,
             Margin = Padding.Empty,
             Padding = Padding.Empty
         };
-        _detailSeedEntryPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
-        _detailSeedEntryPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        _detailSeedEntryPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        _detailSeedEntryPanel.Controls.Add(_detailIdSeedPanel, 0, 0);
+        _detailSeedFieldPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        _detailSeedFieldPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        _detailSeedFieldPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        _detailSeedFieldPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        _detailSeedFieldPanel.Controls.Add(_detailSeedLabel, 0, 0);
+        _detailSeedFieldPanel.Controls.Add(_detailSeedField, 1, 0);
 
         _detailGenSeedButton = new Button
         {
             Text = "Gen",
-            AutoSize = true,
-            AutoSizeMode = AutoSizeMode.GrowOnly,
+            AutoSize = false,
+            Size = new Size(44, 24),
+            MinimumSize = new Size(44, 24),
             Visible = false,
-            Anchor = AnchorStyles.Right,
+            Anchor = AnchorStyles.Left,
             Margin = new Padding(0, 4, 0, 0),
             Padding = new Padding(0, 0, 0, 0)
         };
         _detailGenSeedButton.Click += OnGenSeedClick;
-        _detailSeedEntryPanel.Controls.Add(_detailGenSeedButton, 0, 1);
+        _detailSeedFieldPanel.Controls.Add(_detailGenSeedButton, 1, 1);
+
+        var _detailSeedEntryPanel = new TableLayoutPanel
+        {
+            AutoSize = true,
+            ColumnCount = 2,
+            RowCount = 1,
+            Dock = DockStyle.Fill,
+            Margin = Padding.Empty,
+            Padding = Padding.Empty
+        };
+        _detailSeedEntryPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        _detailSeedEntryPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        _detailSeedEntryPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        _detailSeedEntryPanel.Controls.Add(_detailIdSeedPanel, 0, 0);
+        _detailSeedEntryPanel.Controls.Add(_detailSeedFieldPanel, 1, 0);
 
         detailLayout.Controls.Add(_detailItemIdLabel, 0, row);
         detailLayout.Controls.Add(_detailSeedEntryPanel, 1, row);
@@ -312,20 +391,6 @@ partial class InventoryGridPanel
         detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         row++;
 
-        // Description
-        _detailDescription = new Label
-        {
-            Text = "",
-            AutoSize = true,
-            MaximumSize = new Size(250, 0),
-            ForeColor = Color.Gray,
-            Padding = new Padding(0, 4, 0, 0)
-        };
-        detailLayout.Controls.Add(_detailDescription, 0, row);
-        detailLayout.SetColumnSpan(_detailDescription, 2);
-        detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        row++;
-
         // === ITEM PICKER SECTION ===
         var separator = new Label
         {
@@ -350,6 +415,219 @@ partial class InventoryGridPanel
         FontManager.ApplyHeadingFont(_itemPickerHeader, 10);
         detailLayout.Controls.Add(_itemPickerHeader, 0, row);
         detailLayout.SetColumnSpan(_itemPickerHeader, 2);
+        detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        row++;
+
+        // === PICKER ITEM DETAILS SECTION (above the search/filter controls) ===
+        // Icon with info tooltip hint and class icon beside it
+        _pickerIcon = new PictureBox
+        {
+            Size = new Size(72, 72),
+            SizeMode = PictureBoxSizeMode.Zoom,
+            BackColor = Color.FromArgb(40, 40, 40),
+            BorderStyle = BorderStyle.FixedSingle
+        };
+        _pickerInfoButton = new PictureBox
+        {
+            Size = new Size(16, 16),
+            SizeMode = PictureBoxSizeMode.Zoom,
+            Image = CreateInfoIconBitmap(16, Color.SteelBlue),
+            Cursor = Cursors.Hand,
+            Margin = new Padding(4, 4, 4, 0)
+        };
+        _pickerInfoHintLabel = new Label
+        {
+            Text = "Hover for info.",
+            AutoSize = true,
+            ForeColor = Color.Gray,
+            Margin = new Padding(0, 5, 0, 0)
+        };
+        _pickerDescription = new Label { Text = "", Visible = false };
+        _pickerClassIcon = new PictureBox
+        {
+            Size = new Size(24, 24),
+            SizeMode = PictureBoxSizeMode.Zoom,
+            BackColor = Color.Transparent,
+            Margin = new Padding(0, 2, 0, 0)
+        };
+        var pickerInfoRow = new FlowLayoutPanel
+        {
+            AutoSize = true,
+            FlowDirection = FlowDirection.LeftToRight,
+            WrapContents = false,
+            Margin = Padding.Empty,
+            Padding = Padding.Empty
+        };
+        pickerInfoRow.Controls.Add(_pickerInfoButton);
+        pickerInfoRow.Controls.Add(_pickerInfoHintLabel);
+        var pickerIconSidePanel = new FlowLayoutPanel
+        {
+            AutoSize = true,
+            FlowDirection = FlowDirection.TopDown,
+            WrapContents = false,
+            Margin = new Padding(4, 0, 0, 0),
+            Padding = Padding.Empty
+        };
+        pickerIconSidePanel.Controls.Add(pickerInfoRow);
+        pickerIconSidePanel.Controls.Add(_pickerClassIcon);
+        var pickerIconRow = new FlowLayoutPanel
+        {
+            AutoSize = true,
+            FlowDirection = FlowDirection.LeftToRight,
+            WrapContents = false,
+            Margin = Padding.Empty,
+            Padding = Padding.Empty
+        };
+        pickerIconRow.Controls.Add(_pickerIcon);
+        pickerIconRow.Controls.Add(pickerIconSidePanel);
+        detailLayout.Controls.Add(pickerIconRow, 0, row);
+        detailLayout.SetColumnSpan(pickerIconRow, 2);
+        detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        row++;
+
+        // Picker Item Name
+        _pickerItemName = new Label
+        {
+            Text = "(no item selected)",
+            AutoSize = true,
+            ForeColor = Color.DarkBlue,
+            Anchor = AnchorStyles.Left,
+            Margin = new Padding(0, 6, 0, 0)
+        };
+        FontManager.ApplyHeadingFont(_pickerItemName, 11);
+        _pickerNameLabel = CreateLabel("Name:");
+        detailLayout.Controls.Add(_pickerNameLabel, 0, row);
+        detailLayout.Controls.Add(_pickerItemName, 1, row);
+        detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        row++;
+
+        // Picker Item ID with seed fields
+        _pickerItemId = new TextBox { Width = 120, Anchor = AnchorStyles.Left, Margin = new Padding(0, 4, 0, 0) };
+        _pickerSeedLabel = CreateLabel("#");
+        _pickerSeedLabel.AutoSize = true;
+        _pickerSeedLabel.Font = new Font(_pickerSeedLabel.Font.FontFamily, _pickerSeedLabel.Font.Size + 2, _pickerSeedLabel.Font.Style);
+        _pickerSeedLabel.Margin = new Padding(0, 4, 0, 0);
+        _pickerSeedLabel.Visible = false;
+        _pickerSeedField = new TextBox { Width = 56, MaxLength = 5, Visible = false, Margin = new Padding(0, 4, 0, 0) };
+        _pickerItemIdLabel = CreateLabel("Item ID:");
+        _pickerItemIdLabel.Anchor = AnchorStyles.Left | AnchorStyles.Top;
+        _pickerItemIdLabel.Margin = new Padding(0, 4, 0, 0);
+        _pickerIdSeedPanel = new FlowLayoutPanel
+        {
+            AutoSize = true,
+            FlowDirection = FlowDirection.LeftToRight,
+            WrapContents = false,
+            Margin = Padding.Empty,
+            Padding = Padding.Empty
+        };
+        _pickerIdSeedPanel.Controls.Add(_pickerItemId);
+
+        var _pickerSeedFieldPanel = new TableLayoutPanel
+        {
+            AutoSize = true,
+            ColumnCount = 2,
+            RowCount = 2,
+            Margin = Padding.Empty,
+            Padding = Padding.Empty
+        };
+        _pickerSeedFieldPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        _pickerSeedFieldPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        _pickerSeedFieldPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        _pickerSeedFieldPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        _pickerSeedFieldPanel.Controls.Add(_pickerSeedLabel, 0, 0);
+        _pickerSeedFieldPanel.Controls.Add(_pickerSeedField, 1, 0);
+
+        _pickerGenSeedButton = new Button
+        {
+            Text = "Gen",
+            AutoSize = false,
+            Size = new Size(44, 24),
+            MinimumSize = new Size(44, 24),
+            Visible = false,
+            Anchor = AnchorStyles.Left,
+            Margin = new Padding(0, 4, 0, 0),
+            Padding = new Padding(0, 0, 0, 0)
+        };
+        _pickerGenSeedButton.Click += OnPickerGenSeedClick;
+        _pickerSeedFieldPanel.Controls.Add(_pickerGenSeedButton, 1, 1);
+
+        var _pickerSeedEntryPanel = new TableLayoutPanel
+        {
+            AutoSize = true,
+            ColumnCount = 2,
+            RowCount = 1,
+            Dock = DockStyle.Fill,
+            Margin = Padding.Empty,
+            Padding = Padding.Empty
+        };
+        _pickerSeedEntryPanel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        _pickerSeedEntryPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        _pickerSeedEntryPanel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        _pickerSeedEntryPanel.Controls.Add(_pickerIdSeedPanel, 0, 0);
+        _pickerSeedEntryPanel.Controls.Add(_pickerSeedFieldPanel, 1, 0);
+
+        detailLayout.Controls.Add(_pickerItemIdLabel, 0, row);
+        detailLayout.Controls.Add(_pickerSeedEntryPanel, 1, row);
+        detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        row++;
+
+        // Picker Amount
+        _pickerAmount = new NumericUpDown { Dock = DockStyle.Fill, Minimum = int.MinValue, Maximum = int.MaxValue };
+        _pickerAmountLabel = CreateLabel("Amount:");
+        detailLayout.Controls.Add(_pickerAmountLabel, 0, row);
+        detailLayout.Controls.Add(_pickerAmount, 1, row);
+        detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        row++;
+
+        // Picker Max Amount
+        _pickerMaxAmount = new NumericUpDown { Dock = DockStyle.Fill, Minimum = int.MinValue, Maximum = int.MaxValue };
+        _pickerMaxLabel = CreateLabel("Max:");
+        detailLayout.Controls.Add(_pickerMaxLabel, 0, row);
+        detailLayout.Controls.Add(_pickerMaxAmount, 1, row);
+        detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        row++;
+
+        // Picker Damage Factor
+        _pickerDamageFactor = new NumericUpDown
+        {
+            Dock = DockStyle.Fill,
+            Minimum = 0,
+            Maximum = 1,
+            DecimalPlaces = 4,
+            Increment = 0.01m
+        };
+        _pickerDamageLabel = CreateLabel("Damage:");
+        detailLayout.Controls.Add(_pickerDamageLabel, 0, row);
+        detailLayout.Controls.Add(_pickerDamageFactor, 1, row);
+        detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        row++;
+
+        // Picker Add/Replace Item button
+        _pickerApplyButton = new Button
+        {
+            Text = "Add Item",
+            Dock = DockStyle.Fill,
+            Height = 30,
+            Enabled = false
+        };
+        _pickerApplyButton.Click += OnPickerApplyItem;
+        detailLayout.Controls.Add(_pickerApplyButton, 0, row);
+        detailLayout.SetColumnSpan(_pickerApplyButton, 2);
+        detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        row++;
+
+        // Picker separator before search/filter controls
+        var pickerSeparator2 = new Label
+        {
+            Text = "",
+            BorderStyle = BorderStyle.Fixed3D,
+            AutoSize = false,
+            Height = 2,
+            Dock = DockStyle.Fill,
+            Margin = new Padding(0, 6, 0, 6)
+        };
+        detailLayout.Controls.Add(pickerSeparator2, 0, row);
+        detailLayout.SetColumnSpan(pickerSeparator2, 2);
         detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         row++;
 
@@ -393,7 +671,7 @@ partial class InventoryGridPanel
         detailLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         row++;
 
-        // Item picker
+        // Item picker combobox
         _itemPicker = new ComboBox
         {
             Dock = DockStyle.Fill,
@@ -465,12 +743,39 @@ partial class InventoryGridPanel
         PerformLayout();
     }
 
+    private const float InfoIconFontSizeRatio = 0.55f;
+
+    /// <summary>
+    /// Creates a crisp GDI+ drawn info icon (circle with 'i') at the specified size.
+    /// Avoids unicode/font rendering issues in WinForms.
+    /// </summary>
+    private static Bitmap CreateInfoIconBitmap(int size, Color color)
+    {
+        var bmp = new Bitmap(size, size);
+        using var g = Graphics.FromImage(bmp);
+        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+        g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+        g.Clear(Color.Transparent);
+
+        // Draw filled circle
+        using var brush = new SolidBrush(color);
+        g.FillEllipse(brush, 0, 0, size - 1, size - 1);
+
+        // Draw 'i' letter centered in white
+        using var textBrush = new SolidBrush(Color.White);
+        using var font = new Font("Segoe UI", size * InfoIconFontSizeRatio, FontStyle.Bold, GraphicsUnit.Pixel);
+        using var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
+        g.DrawString("i", font, textBrush, new RectangleF(0, 0, size, size), sf);
+
+        return bmp;
+    }
+
     // Grid area
     private Panel _infoPanel = null!;
     private FlowLayoutPanel _toolbarPanel = null!;
     private Panel _gridContainer = null!;
 
-    // Detail/editor panel controls
+    // Detail/editor panel controls (Slot Details section)
     private Panel _detailPanel = null!;
     private PictureBox _detailIcon = null!;
     private Label _detailItemName = null!;
@@ -482,11 +787,14 @@ partial class InventoryGridPanel
     private Label _detailSeedLabel = null!;
     private FlowLayoutPanel _detailIdSeedPanel = null!;
     private Button _detailGenSeedButton = null!;
+    private PictureBox _detailInfoButton = null!;
+    private Label _detailInfoHintLabel = null!;
+    private Label _detailDescription = null!;
+    private PictureBox _detailClassIcon = null!;
     private NumericUpDown _detailAmount = null!;
     private NumericUpDown _detailMaxAmount = null!;
     private NumericUpDown _detailDamageFactor = null!;
     private Button _applyButton = null!;
-    private Label _detailDescription = null!;
     private Label _detailAmountLabel = null!;
     private Label _detailMaxLabel = null!;
     private Label _detailNameLabel = null!;
@@ -497,6 +805,28 @@ partial class InventoryGridPanel
     private Label _detailDamageLabel = null!;
     private Label _slotDetailHeader = null!;
     private Label _itemPickerHeader = null!;
+
+    // Picker detail controls (Item Picker detail section)
+    private PictureBox _pickerIcon = null!;
+    private Label _pickerItemName = null!;
+    private TextBox _pickerItemId = null!;
+    private TextBox _pickerSeedField = null!;
+    private Label _pickerSeedLabel = null!;
+    private FlowLayoutPanel _pickerIdSeedPanel = null!;
+    private Button _pickerGenSeedButton = null!;
+    private PictureBox _pickerInfoButton = null!;
+    private Label _pickerInfoHintLabel = null!;
+    private Label _pickerDescription = null!;
+    private PictureBox _pickerClassIcon = null!;
+    private NumericUpDown _pickerAmount = null!;
+    private NumericUpDown _pickerMaxAmount = null!;
+    private NumericUpDown _pickerDamageFactor = null!;
+    private Button _pickerApplyButton = null!;
+    private Label _pickerAmountLabel = null!;
+    private Label _pickerMaxLabel = null!;
+    private Label _pickerNameLabel = null!;
+    private Label _pickerItemIdLabel = null!;
+    private Label _pickerDamageLabel = null!;
 
     // Item picker controls
     private ComboBox _typeFilter = null!;

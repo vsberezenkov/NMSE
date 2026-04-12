@@ -529,4 +529,109 @@ public class UiStringsTests : IDisposable
             }
         }
     }
+
+    // --- Inventory panel picker detail and slot label locale tests ---
+
+    [Fact]
+    public void UiStrings_InventoryPickerKeys_ExistInEnGB()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        UiStrings.SetDirectory(langDir);
+        UiStrings.Load("en-GB");
+
+        Assert.Equal("Slot:", UiStrings.Get("inventory.label_slot"));
+        Assert.Equal("N/A", UiStrings.Get("inventory.category_na"));
+        Assert.Equal("Add Item", UiStrings.Get("inventory.picker_add_item"));
+        Assert.Equal("Replace Item", UiStrings.Get("inventory.picker_replace_item"));
+        Assert.Equal("(no item selected)", UiStrings.Get("inventory.picker_no_item"));
+        Assert.Equal("Select an item from the picker or enter an Item ID.", UiStrings.Get("inventory.picker_enter_id"));
+    }
+
+    [Fact]
+    public void UiStrings_InventoryPickerKeys_ExistInAllLanguages()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        string[] requiredKeys =
+        [
+            "inventory.add_item",
+            "inventory.category_na",
+            "inventory.label_slot",
+            "inventory.picker_add_item",
+            "inventory.picker_enter_id",
+            "inventory.picker_no_item",
+            "inventory.picker_replace_item"
+        ];
+
+        foreach (var lang in AllLanguages)
+        {
+            UiStrings.SetDirectory(langDir);
+            UiStrings.Load(lang);
+
+            foreach (var key in requiredKeys)
+            {
+                string value = UiStrings.Get(key);
+                Assert.NotEqual(key, value);
+            }
+        }
+    }
+
+    [Fact]
+    public void UiStrings_InventoryLabelSlot_ReplacedLabelPosition()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        UiStrings.SetDirectory(langDir);
+        UiStrings.Load("en-GB");
+
+        // The label_slot key should exist and return "Slot:" (not "Position:")
+        string slot = UiStrings.Get("inventory.label_slot");
+        Assert.Equal("Slot:", slot);
+
+        // The old label_position key should still exist for backward compatibility
+        string position = UiStrings.Get("inventory.label_position");
+        Assert.NotEqual("inventory.label_position", position);
+    }
+
+    [Fact]
+    public void UiStrings_InventoryHoverInfoAndClassKeys_ExistInEnGB()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        UiStrings.SetDirectory(langDir);
+        UiStrings.Load("en-GB");
+
+        Assert.Equal("Hover for info.", UiStrings.Get("inventory.hover_info"));
+        Assert.Equal("Class:", UiStrings.Get("inventory.label_class"));
+    }
+
+    [Fact]
+    public void UiStrings_InventoryHoverInfoAndClassKeys_ExistInAllLanguages()
+    {
+        var langDir = FindRealLangDir();
+        if (langDir == null) return;
+
+        string[] requiredKeys =
+        [
+            "inventory.hover_info",
+            "inventory.label_class"
+        ];
+
+        foreach (var lang in AllLanguages)
+        {
+            UiStrings.SetDirectory(langDir);
+            UiStrings.Load(lang);
+
+            foreach (var key in requiredKeys)
+            {
+                string value = UiStrings.Get(key);
+                Assert.NotEqual(key, value);
+            }
+        }
+    }
 }

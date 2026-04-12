@@ -492,6 +492,56 @@ public partial class InventoryGridPanel : UserControl
         SetupLayout();
         PopulateSortModeOptions();
         RefreshToolbarActions();
+        WireInfoTooltips();
+    }
+
+    /// <summary>
+    /// Wires the info button hover tooltips for the slot detail and picker detail sections.
+    /// The tooltip text is taken from the hidden description label which is populated
+    /// when an item is selected. The tooltip is set to a narrow width so that long
+    /// descriptions wrap into a portrait-shaped popup.
+    /// </summary>
+    private void WireInfoTooltips()
+    {
+        _sharedToolTip.AutoPopDelay = 15000;
+
+        _detailInfoButton.MouseEnter += (s, e) =>
+        {
+            string desc = _detailDescription.Text;
+            if (!string.IsNullOrEmpty(desc))
+                _sharedToolTip.Show(desc, _detailInfoButton, 0, _detailInfoButton.Height + 2);
+        };
+        _detailInfoButton.MouseLeave += (s, e) => _sharedToolTip.Hide(_detailInfoButton);
+
+        _pickerInfoButton.MouseEnter += (s, e) =>
+        {
+            string desc = _pickerDescription.Text;
+            if (!string.IsNullOrEmpty(desc))
+                _sharedToolTip.Show(desc, _pickerInfoButton, 0, _pickerInfoButton.Height + 2);
+        };
+        _pickerInfoButton.MouseLeave += (s, e) => _sharedToolTip.Hide(_pickerInfoButton);
+
+        // Attach Draw handler to word-wrap the tooltip at a narrower width
+        _sharedToolTip.OwnerDraw = true;
+        _sharedToolTip.Popup += (s, e) =>
+        {
+            // Make width constrained to get reasonable word-wrapping for long descriptions
+            const int maxWidth = 180;
+            using var g = Graphics.FromHwnd(IntPtr.Zero);
+            var measured = g.MeasureString(
+                ((ToolTip)s!).GetToolTip(e.AssociatedControl!),
+                SystemFonts.StatusFont!,
+                maxWidth);
+            e.ToolTipSize = new Size((int)Math.Ceiling(measured.Width) + 8, (int)Math.Ceiling(measured.Height) + 6);
+        };
+        _sharedToolTip.Draw += (s, e) =>
+        {
+            e.DrawBackground();
+            e.DrawBorder();
+            using var brush = new SolidBrush(SystemColors.InfoText);
+            var rect = new RectangleF(4, 3, e.Bounds.Width - 8, e.Bounds.Height - 6);
+            e.Graphics.DrawString(e.ToolTipText, SystemFonts.StatusFont!, brush, rect);
+        };
     }
 
     private void DisableControlsOnInit()
@@ -508,6 +558,10 @@ public partial class InventoryGridPanel : UserControl
         _typeFilter.Enabled = false;
         _categoryFilter.Enabled = false;
         _itemPicker.Enabled = false;
+        _pickerAmount.Enabled = false;
+        _pickerMaxAmount.Enabled = false;
+        _pickerDamageFactor.Enabled = false;
+        _pickerApplyButton.Enabled = false;
         UpdateToolbarActionEnabledState();
     }
 
@@ -601,7 +655,7 @@ public partial class InventoryGridPanel : UserControl
     }
 
     private static Label CreateLabel(string text) =>
-        new Label { Text = text, AutoSize = true, Padding = new Padding(0, 4, 6, 0) };
+        new Label { Text = text, AutoSize = true, Anchor = AnchorStyles.Left, Padding = new Padding(0, 6, 6, 0) };
 
     public void SetDatabase(GameItemDatabase? database)
     {
@@ -830,21 +884,26 @@ public partial class InventoryGridPanel : UserControl
     private void OnItemPickerChanged(object? sender, EventArgs e)
     {
         if (_suppressFilterEvents) return;
-        if (_itemPicker.SelectedItem is not GameItem selectedItem) return;
+        if (_itemPicker.SelectedItem is not GameItem selectedItem)
+        {
+            ClearPickerDetailPanel();
+            return;
+        }
 
-        // Populate detail fields with selected item - show base ID without seed
-        _detailItemId.Text = EnsureCaretPrefix(selectedItem.Id);
-        _detailItemName.Text = selectedItem.Name;
-        _detailItemType.Text = selectedItem.ItemType;
-        _detailItemCategory.Text = GetLocalisedCategoryName(selectedItem.Category);
-        _detailDescription.Text = selectedItem.Description;
+        // Populate picker detail fields with the selected item (independent of slot details)
+        _pickerItemId.Text = EnsureCaretPrefix(selectedItem.Id);
+        _pickerItemName.Text = selectedItem.Name;
+        _pickerDescription.Text = selectedItem.Description;
 
         // Show/hide seed field and auto-generate a 5-digit seed for procedural items
-        UpdateSeedFieldVisibility(selectedItem);
+        UpdatePickerSeedFieldVisibility(selectedItem);
 
         // Set icon
         if (_iconManager != null && !string.IsNullOrEmpty(selectedItem.Icon))
-            _detailIcon.Image = _iconManager.GetIcon(selectedItem.Icon);
+            _pickerIcon.Image = _iconManager.GetIcon(selectedItem.Icon);
+
+        // Set class mini icon from item quality/rarity
+        UpdatePickerClassIcon(selectedItem);
 
         // Calculate per-item max amount using the inventory-group-aware formula:
         // Substance -> 9999, Technology -> ChargeAmount always, Product -> multiplier x MaxStackSize
@@ -854,8 +913,8 @@ public partial class InventoryGridPanel : UserControl
         int maxAmount = InventoryStackDatabase.GetMaxAmount(selectedItem, invTypeForDefaults, _inventoryGroup);
         if (invTypeForDefaults == "Substance")
         {
-            _detailAmount.Value = maxAmount;
-            _detailMaxAmount.Value = maxAmount;
+            _pickerAmount.Value = maxAmount;
+            _pickerMaxAmount.Value = maxAmount;
         }
         else if (invTypeForDefaults == "Technology")
         {
@@ -863,19 +922,19 @@ public partial class InventoryGridPanel : UserControl
             //   MaxAmount = ChargeAmount (always, for ALL tech: core, UT_, UP_, HDRIVEBOOST, etc.)
             //   Amount (fresh insert) = BuildFullyCharged ? ChargeAmount : 0
             // Examples: HYPERDRIVE -> 0/120 (BuildFC=false), UT_QUICKWARP -> 100/100 (BuildFC=true)
-            _detailMaxAmount.Value = maxAmount;
-            _detailAmount.Value = selectedItem.BuildFullyCharged ? maxAmount : 0;
+            _pickerMaxAmount.Value = maxAmount;
+            _pickerAmount.Value = selectedItem.BuildFullyCharged ? maxAmount : 0;
         }
         else
         {
             // Products: default to full stack
-            _detailAmount.Value = maxAmount;
-            _detailMaxAmount.Value = maxAmount;
+            _pickerAmount.Value = maxAmount;
+            _pickerMaxAmount.Value = maxAmount;
         }
-        _detailAmount.Enabled = true;
-        _detailMaxAmount.Enabled = true;
+        _pickerAmount.Enabled = true;
+        _pickerMaxAmount.Enabled = true;
 
-        _applyButton.Enabled = _selectedCell != null;
+        UpdatePickerApplyButtonText();
     }
 
     private void EnableControlsAfterInventoryLoad()
@@ -893,6 +952,10 @@ public partial class InventoryGridPanel : UserControl
         _typeFilter.Enabled = true;
         _categoryFilter.Enabled = true;
         _itemPicker.Enabled = true;
+        _pickerAmount.Enabled = true;
+        _pickerMaxAmount.Enabled = true;
+        _pickerDamageFactor.Enabled = true;
+        _pickerApplyButton.Enabled = false;
         UpdateToolbarActionEnabledState();
     }
 
@@ -1261,6 +1324,61 @@ public partial class InventoryGridPanel : UserControl
     }
 
     /// <summary>
+    /// Shows or hides the picker procedural seed field based on whether the given item is procedural.
+    /// When shown and seed is empty, auto-generates a 5-digit seed.
+    /// </summary>
+    private void UpdatePickerSeedFieldVisibility(GameItem? gameItem, string seed = "")
+    {
+        bool isProcedural = gameItem != null && gameItem.IsProcedural;
+        _pickerSeedLabel.Visible = isProcedural;
+        _pickerSeedField.Visible = isProcedural;
+        _pickerGenSeedButton.Visible = isProcedural;
+        if (isProcedural)
+        {
+            _pickerSeedField.Text = string.IsNullOrEmpty(seed)
+                ? GenerateProceduralSeed()
+                : seed;
+        }
+        else
+        {
+            _pickerSeedField.Text = "";
+        }
+    }
+
+    /// <summary>
+    /// Generates a new random procedural seed for the picker seed text field.
+    /// </summary>
+    private void OnPickerGenSeedClick(object? sender, EventArgs e)
+    {
+        _pickerSeedField.Text = GenerateProceduralSeed();
+    }
+
+    /// <summary>
+    /// Resolves the class mini icon for a game item and displays it in the picker class icon control.
+    /// Uses the same Quality/Rarity logic that drives the grid cell class overlay.
+    /// </summary>
+    private void UpdatePickerClassIcon(GameItem selectedItem)
+    {
+        if (_iconManager == null)
+        {
+            _pickerClassIcon.Image = null;
+            return;
+        }
+
+        string? itemClass = selectedItem.QualityToClass() ?? selectedItem.RarityToClass();
+        if (!string.IsNullOrEmpty(itemClass) && itemClass != "NONE"
+            && ShouldShowClassMiniIcon(selectedItem.ItemType, selectedItem.Id))
+        {
+            if (itemClass == "?") itemClass = "Sentinel";
+            _pickerClassIcon.Image = _iconManager.GetIcon($"CLASSMINI.{itemClass}.png");
+        }
+        else
+        {
+            _pickerClassIcon.Image = null;
+        }
+    }
+
+    /// <summary>
     /// Combines the base item ID with a procedural seed (if applicable) to form the save-file ID.
     /// Strips any existing seed from <paramref name="baseId"/> first to prevent double-seeding.
     /// </summary>
@@ -1273,6 +1391,25 @@ public partial class InventoryGridPanel : UserControl
         if (gameItem != null && gameItem.IsProcedural)
         {
             string seedText = _detailSeedField.Text.Trim();
+            if (!ProceduralSeedHelper.IsValidSeed(seedText))
+                seedText = GenerateProceduralSeed();
+            result = $"{result}#{seedText}";
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Builds a save item ID using the picker seed field instead of the detail seed field.
+    /// </summary>
+    private string BuildPickerSaveItemId(string baseId, GameItem? gameItem)
+    {
+        var (cleanId, _) = StripProceduralSeed(baseId);
+        string result = EnsureCaretPrefix(cleanId);
+
+        if (gameItem != null && gameItem.IsProcedural)
+        {
+            string seedText = _pickerSeedField.Text.Trim();
             if (!ProceduralSeedHelper.IsValidSeed(seedText))
                 seedText = GenerateProceduralSeed();
             result = $"{result}#{seedText}";
@@ -2129,6 +2266,7 @@ public partial class InventoryGridPanel : UserControl
         if (cell.IsEmpty)
         {
             ClearDetailPanel();
+            UpdatePickerApplyButtonText();
             return;
         }
 
@@ -2143,10 +2281,12 @@ public partial class InventoryGridPanel : UserControl
             _detailAmount.Value = 0;
             _detailMaxAmount.Value = 0;
             _detailDamageFactor.Value = 0;
-            _detailDescription.Text = UiStrings.Get("inventory.right_click_hint");
+            _detailDescription.Text = "";
             _detailIcon.Image = null;
+            _detailClassIcon.Image = null;
             _applyButton.Enabled = false;
             UpdateSeedFieldVisibility(null);
+            UpdatePickerApplyButtonText();
             return;
         }
 
@@ -2198,7 +2338,10 @@ public partial class InventoryGridPanel : UserControl
         // Show icon in detail panel
         _detailIcon.Image = cell.IconImage;
 
-        // Show description from database (use base item when variant present)
+        // Show class mini icon from the cell (same data that drives grid icon overlays)
+        _detailClassIcon.Image = cell.ClassMiniIcon;
+
+        // Store description for tooltip (shown via info button hover)
         if (_database != null && !string.IsNullOrEmpty(cell.ItemId))
         {
             var (item, _, _, _) = ResolveItemAndDisplayName(cell.ItemId);
@@ -2208,6 +2351,9 @@ public partial class InventoryGridPanel : UserControl
         {
             _detailDescription.Text = "";
         }
+
+        // Update picker button text since slot occupancy may have changed
+        UpdatePickerApplyButtonText();
     }
 
     private void OnApplyChanges(object? sender, EventArgs e)
@@ -2383,6 +2529,178 @@ public partial class InventoryGridPanel : UserControl
         }
 
         _selectedCell.UpdateDisplay();
+        RaiseDataModified();
+    }
+
+    /// <summary>
+    /// Applies the item from the picker detail section into the currently selected slot.
+    /// Reads values from the picker controls (not the slot detail controls).
+    /// </summary>
+    private void OnPickerApplyItem(object? sender, EventArgs e)
+    {
+        if (_selectedCell == null || _slots == null) return;
+
+        string newItemId = _pickerItemId.Text.Trim();
+        if (string.IsNullOrEmpty(newItemId))
+        {
+            MessageBox.Show(this, UiStrings.Get("inventory.picker_enter_id"), UiStrings.Get("inventory.add_item_title"),
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
+
+        // Read values from picker controls
+        int amount = (int)_pickerAmount.Value;
+        int maxAmount = (int)_pickerMaxAmount.Value;
+
+        // Strip any seed the user may have typed directly into the ID field
+        var (cleanBaseId, _) = StripProceduralSeed(newItemId);
+        newItemId = cleanBaseId;
+
+        // Determine inventory type early so we can handle tech items correctly.
+        string invType = "Product";
+        GameItem? gameItem = null;
+        if (_database != null)
+        {
+            (gameItem, _, _) = ResolveGameItem(newItemId);
+            if (gameItem != null)
+                invType = ResolveInventoryTypeForItem(gameItem);
+        }
+
+        // Figurines (BOBBLE_*) installed in tech slots need the T_ prefix.
+        string saveItemId = newItemId;
+        if (gameItem != null && IsFigurineItem(gameItem.Id) && _isTechInventory)
+        {
+            saveItemId = "T_" + gameItem.Id;
+            invType = "Technology";
+        }
+
+        // Technology: MaxAmount = ChargeAmount (always). Amount defaults using BuildFullyCharged.
+        if (invType == "Technology")
+        {
+            int techMaxAmount = gameItem != null
+                ? InventoryStackDatabase.GetMaxAmount(gameItem, "Technology", _inventoryGroup)
+                : 100;
+            if (maxAmount == 0) maxAmount = techMaxAmount;
+            if (amount == 0)
+                amount = (gameItem != null && gameItem.BuildFullyCharged)
+                    ? techMaxAmount
+                    : 0;
+        }
+        else
+        {
+            // For non-technology items, zero amounts are treated as unset - default to 1.
+            // Negative values are intentionally preserved as they are valid game data.
+            if (amount == 0 && maxAmount == 0) { amount = 1; maxAmount = 1; }
+            if (maxAmount == 0) maxAmount = amount;
+        }
+
+        // Build the final save ID using the picker seed field
+        string finalSaveId = BuildPickerSaveItemId(saveItemId, gameItem);
+
+        // If the cell has no existing slot data (valid empty slot), create a new slot
+        if (_selectedCell.SlotData == null)
+        {
+            var newSlot = new JsonObject();
+            var typeObj = new JsonObject();
+            typeObj.Add("InventoryType", invType);
+            newSlot.Add("Type", typeObj);
+
+            newSlot.Add("Id", finalSaveId);
+            newSlot.Add("Amount", amount);
+            newSlot.Add("MaxAmount", maxAmount);
+            newSlot.Add("DamageFactor", (double)_pickerDamageFactor.Value);
+            newSlot.Add("FullyInstalled", true);
+            newSlot.Add("AddedAutomatically", false);
+            var indexObj = new JsonObject();
+            indexObj.Add("X", _selectedCell.GridX);
+            indexObj.Add("Y", _selectedCell.GridY);
+            newSlot.Add("Index", indexObj);
+
+            _slots.Add(newSlot);
+            _selectedCell.SlotIndex = _slots.Length - 1;
+            _selectedCell.SlotData = newSlot;
+        }
+        else
+        {
+            var slot = _selectedCell.SlotData;
+
+            // Update Item ID
+            try { slot.Set("Id", finalSaveId); } catch { }
+
+            // Update Amount / MaxAmount
+            slot.Set("Amount", amount);
+            slot.Set("MaxAmount", maxAmount);
+
+            // Update DamageFactor
+            try { slot.Set("DamageFactor", (double)_pickerDamageFactor.Value); } catch { }
+
+            // Update inventory type based on item
+            try
+            {
+                var typeObj = slot.GetObject("Type");
+                if (typeObj != null)
+                    typeObj.Set("InventoryType", invType);
+            }
+            catch { }
+        }
+
+        // Refresh cell display
+        _selectedCell.ItemId = finalSaveId;
+        _selectedCell.Amount = amount;
+        _selectedCell.MaxAmount = maxAmount;
+        _selectedCell.DamageFactor = (double)_pickerDamageFactor.Value;
+        _selectedCell.IsValidEmpty = false;
+        _selectedCell.IsEmpty = false;
+
+        if (_database != null && !string.IsNullOrEmpty(finalSaveId))
+        {
+            var (resolvedItem, displayName, techPackIcon, techPackClass) = ResolveItemAndDisplayName(finalSaveId);
+            if (resolvedItem != null)
+            {
+                _selectedCell.DisplayName = displayName;
+                _selectedCell.ItemType = resolvedItem.ItemType;
+                _selectedCell.Category = resolvedItem.Category;
+
+                if (!string.IsNullOrEmpty(techPackClass))
+                    _selectedCell.ItemClass = techPackClass;
+                else if (!string.IsNullOrEmpty(resolvedItem.Quality))
+                {
+                    var qClass = resolvedItem.QualityToClass();
+                    if (!string.IsNullOrEmpty(qClass))
+                        _selectedCell.ItemClass = qClass;
+                }
+
+                if (string.IsNullOrEmpty(_selectedCell.ItemClass) && !string.IsNullOrEmpty(resolvedItem.Rarity))
+                {
+                    var rClass = resolvedItem.RarityToClass();
+                    if (!string.IsNullOrEmpty(rClass))
+                        _selectedCell.ItemClass = rClass;
+                }
+
+                string iconName = techPackIcon ?? resolvedItem.Icon;
+                if (_iconManager != null && !string.IsNullOrEmpty(iconName))
+                    _selectedCell.IconImage = _iconManager.GetIcon(iconName);
+
+                if (_iconManager != null && !string.IsNullOrEmpty(_selectedCell.ItemClass) && _selectedCell.ItemClass != "NONE"
+                    && ShouldShowClassMiniIcon(resolvedItem.ItemType, finalSaveId))
+                    _selectedCell.ClassMiniIcon = _iconManager.GetIcon($"CLASSMINI.{_selectedCell.ItemClass}.png");
+                else
+                    _selectedCell.ClassMiniIcon = null;
+            }
+            else
+            {
+                _selectedCell.DisplayName = displayNameFromId(finalSaveId);
+            }
+        }
+
+        _selectedCell.UpdateDisplay();
+
+        // Also refresh the slot detail panel to show the new item
+        SelectCell(_selectedCell);
+
+        // Update the picker button text since the slot now has an item
+        UpdatePickerApplyButtonText();
+
         RaiseDataModified();
     }
 
@@ -3461,10 +3779,41 @@ public partial class InventoryGridPanel : UserControl
         _detailDamageFactor.Value = 0;
         _detailDescription.Text = "";
         _detailIcon.Image = null;
+        _detailClassIcon.Image = null;
         _detailAmount.Enabled = true;
         _detailMaxAmount.Enabled = true;
         _applyButton.Enabled = false;
         UpdateSeedFieldVisibility(null);
+    }
+
+    private void ClearPickerDetailPanel()
+    {
+        _pickerItemName.Text = UiStrings.Get("inventory.picker_no_item");
+        _pickerItemId.Text = "";
+        _pickerAmount.Value = 0;
+        _pickerMaxAmount.Value = 0;
+        _pickerDamageFactor.Value = 0;
+        _pickerDescription.Text = "";
+        _pickerIcon.Image = null;
+        _pickerClassIcon.Image = null;
+        _pickerAmount.Enabled = true;
+        _pickerMaxAmount.Enabled = true;
+        _pickerApplyButton.Enabled = false;
+        UpdatePickerSeedFieldVisibility(null);
+    }
+
+    /// <summary>
+    /// Updates the picker Add/Replace button text based on whether the
+    /// currently selected slot contains an item.
+    /// </summary>
+    private void UpdatePickerApplyButtonText()
+    {
+        bool slotHasItem = _selectedCell != null && !_selectedCell.IsEmpty
+            && !(_selectedCell.IsValidEmpty && string.IsNullOrEmpty(_selectedCell.ItemId));
+        _pickerApplyButton.Text = slotHasItem
+            ? UiStrings.Get("inventory.picker_replace_item")
+            : UiStrings.Get("inventory.picker_add_item");
+        _pickerApplyButton.Enabled = _selectedCell != null && _itemPicker.SelectedItem is GameItem;
     }
 
     /// <summary>
@@ -3488,7 +3837,7 @@ public partial class InventoryGridPanel : UserControl
         _autoStackToFreighterButtonMenuItem.Text = UiStrings.Get("inventory.toolbar_auto_stack_freighter");
         PopulateSortModeOptions();
 
-        // Detail panel labels
+        // Slot detail panel labels
         _detailAmountLabel.Text = UiStrings.Get("inventory.amount");
         _detailMaxLabel.Text = UiStrings.Get("inventory.max");
         _applyButton.Text = UiStrings.Get("inventory.apply_changes_title");
@@ -3526,14 +3875,25 @@ public partial class InventoryGridPanel : UserControl
         _slotDetailHeader.Text = UiStrings.Get("inventory.slot_details");
         _itemPickerHeader.Text = UiStrings.Get("inventory.item_picker");
 
-        // Detail panel labels
+        // Slot detail panel labels
         _detailNameLabel.Text = UiStrings.Get("inventory.label_name");
-        _detailPositionLabel.Text = UiStrings.Get("inventory.label_position");
+        _detailPositionLabel.Text = UiStrings.Get("inventory.label_slot");
         _detailTypeLabel.Text = UiStrings.Get("inventory.label_type");
         _detailCategoryLabel.Text = UiStrings.Get("inventory.label_category");
         _detailItemIdLabel.Text = UiStrings.Get("inventory.label_item_id");
         _detailGenSeedButton.Text = UiStrings.Get("inventory.button_gen_seed");
         _detailDamageLabel.Text = UiStrings.Get("inventory.label_damage");
+        _detailInfoHintLabel.Text = UiStrings.Get("inventory.hover_info");
+
+        // Picker detail panel labels
+        _pickerNameLabel.Text = UiStrings.Get("inventory.label_name");
+        _pickerItemIdLabel.Text = UiStrings.Get("inventory.label_item_id");
+        _pickerGenSeedButton.Text = UiStrings.Get("inventory.button_gen_seed");
+        _pickerDamageLabel.Text = UiStrings.Get("inventory.label_damage");
+        _pickerAmountLabel.Text = UiStrings.Get("inventory.amount");
+        _pickerMaxLabel.Text = UiStrings.Get("inventory.max");
+        _pickerInfoHintLabel.Text = UiStrings.Get("inventory.hover_info");
+        UpdatePickerApplyButtonText();
 
         // Search/filter labels
         _searchLabel.Text = UiStrings.Get("inventory.label_search");
@@ -3726,7 +4086,7 @@ public partial class InventoryGridPanel : UserControl
     /// </summary>
     private static string GetLocalisedCategoryName(string raw)
     {
-        if (string.IsNullOrEmpty(raw)) return raw;
+        if (string.IsNullOrEmpty(raw)) return UiStrings.Get("inventory.category_na");
 
         string locKey = "item_category." + CategoryDisplayItem.NormalizeCategoryDisplay(raw)
             .ToLowerInvariant()
