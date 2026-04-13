@@ -4141,9 +4141,9 @@ public class LogicTests
     }
 
     [Fact]
-    public void GalaxyDatabase_Has256Galaxies()
+    public void GalaxyDatabase_Has257Galaxies()
     {
-        Assert.Equal(256, GalaxyDatabase.Galaxies.Length);
+        Assert.Equal(257, GalaxyDatabase.Galaxies.Length);
     }
 
     [Fact]

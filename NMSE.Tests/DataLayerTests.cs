@@ -193,9 +193,9 @@ public class DataLayerTests
     // --- GalaxyDatabase ----------------------------------------------
 
     [Fact]
-    public void GalaxyDatabase_Has256Galaxies()
+    public void GalaxyDatabase_Has257Galaxies()
     {
-        Assert.Equal(256, GalaxyDatabase.Galaxies.Length);
+        Assert.Equal(257, GalaxyDatabase.Galaxies.Length);
     }
 
     [Theory]
@@ -267,6 +267,44 @@ public class DataLayerTests
     public void GalaxyDatabase_GetGalaxyCoreColor_ReturnsCorrectColorHex(int index, string expected)
     {
         Assert.Equal(expected, GalaxyDatabase.GetGalaxyCoreColor(index));
+    }
+
+    [Theory]
+    [InlineData("#ff0000", 255, 0, 0)]
+    [InlineData("#00ff00", 0, 255, 0)]
+    [InlineData("#0000ff", 0, 0, 255)]
+    public void GalaxyDatabase_ParseHexColor_ReturnsExpectedColor(string hex, int expectedR, int expectedG, int expectedB)
+    {
+        var actual = GalaxyDatabase.ParseHexColor(hex);
+        Assert.Equal(System.Drawing.Color.FromArgb(expectedR, expectedG, expectedB), actual);
+    }
+
+    [Fact]
+    public void GalaxyDatabase_GetGalaxyCoreColorValue_ReturnsBlackForOutOfRangeIndex()
+    {
+        Assert.Equal(System.Drawing.Color.Black.ToArgb(), GalaxyDatabase.GetGalaxyCoreColorValue(-1).ToArgb());
+        Assert.Equal(System.Drawing.Color.Black.ToArgb(), GalaxyDatabase.GetGalaxyCoreColorValue(257).ToArgb());
+    }
+
+    [Fact]
+    public void GalaxyDatabase_TryGetGalaxyHex_ReturnsFalseForSpecialGalaxyIndex()
+    {
+        Assert.False(GalaxyDatabase.TryGetGalaxyHex(256, out var hex));
+        Assert.Equal(string.Empty, hex);
+    }
+
+    [Fact]
+    public void GalaxyDatabase_GetGalaxyHex_ReturnsRealHexForRealGalaxy()
+    {
+        Assert.Equal("00", GalaxyDatabase.GetGalaxyHex(0));
+        Assert.Equal("0A", GalaxyDatabase.GetGalaxyHex(10));
+    }
+
+    [Fact]
+    public void GalaxyDatabase_GetGalaxyHex_ReturnsNullForSpecialAndOutOfRangeGalaxyIndices()
+    {
+        Assert.Null(GalaxyDatabase.GetGalaxyHex(256));
+        Assert.Null(GalaxyDatabase.GetGalaxyHex(257));
     }
 
     [Theory]
