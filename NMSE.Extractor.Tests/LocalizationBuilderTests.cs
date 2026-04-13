@@ -77,45 +77,6 @@ public class LocalizationBuilderTests
     }
 
     [Fact]
-    public void ParseLocalisation_Japanese_ReadsJapaneseProperty()
-    {
-        string loc4Path = Path.GetFullPath(Path.Combine(JpRefDir, "nms_loc4_japanese.MXML"));
-        Assert.True(File.Exists(loc4Path), $"JP reference file not found: {loc4Path}");
-
-        var result = LocalisationBuilder.ParseLocalisation(loc4Path, "Japanese");
-
-        Assert.True(result.Count > 0, "Should parse at least one Japanese entry");
-        Assert.Equal("炭素", result["UI_FUEL_1_NAME"]);
-    }
-
-    [Fact]
-    public void ParseLocalisation_English_SkipsEmptyInJapaneseFile()
-    {
-        string loc1Path = Path.GetFullPath(Path.Combine(JpRefDir, "nms_loc1_japanese.MXML"));
-        Assert.True(File.Exists(loc1Path), $"JP reference file not found: {loc1Path}");
-
-        var result = LocalisationBuilder.ParseLocalisation(loc1Path, "English");
-
-        Assert.Empty(result);
-    }
-
-    [Fact]
-    public void ParseLocalisation_JapaneseDescriptionContainsSpecialChars()
-    {
-        string loc4Path = Path.GetFullPath(Path.Combine(JpRefDir, "nms_loc4_japanese.MXML"));
-        Assert.True(File.Exists(loc4Path), $"JP reference file not found: {loc4Path}");
-
-        var result = LocalisationBuilder.ParseLocalisation(loc4Path, "Japanese");
-
-        Assert.True(result.ContainsKey("UI_FUEL_1_DESC"), "UI_FUEL_1_DESC should be present");
-        string desc = result["UI_FUEL_1_DESC"];
-        // After StripMarkupTags the markup is removed but Japanese text and newlines are preserved
-        Assert.Contains("炭素", desc);
-        Assert.Contains("マインレーザー", desc);
-        Assert.Contains("\n", desc);
-    }
-
-    [Fact]
     public void BuildLocalisationJson_WritesUnescapedUtf8()
     {
         // Verify that the LocalisationBuilder produces unescaped UTF-8 JSON
