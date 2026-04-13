@@ -902,7 +902,8 @@ public partial class CataloguePanel : UserControl
         int realityIndex = _locationsGrid.Rows[rowIdx].Cells["Galaxy"].Tag is int ri ? ri : 0;
         string galaxyType = GalaxyDatabase.GetGalaxyType(realityIndex);
         _locGalaxyDot.Text = string.IsNullOrEmpty(galaxy) ? "" : " \u25CF";
-        _locGalaxyDot.ForeColor = GalaxyDatabase.GetGalaxyTypeColor(galaxyType);
+        string hexColor = GalaxyDatabase.GetGalaxyCoreColor(realityIndex);
+        _locGalaxyDot.ForeColor = System.Drawing.ColorTranslator.FromHtml(hexColor);
     }
 
     /// <summary>
@@ -920,7 +921,8 @@ public partial class CataloguePanel : UserControl
         {
             int realityIndex = _locationsGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag is int ri ? ri : 0;
             string galaxyType = GalaxyDatabase.GetGalaxyType(realityIndex);
-            Color dotColor = GalaxyDatabase.GetGalaxyTypeColor(galaxyType);
+            string hexColor = GalaxyDatabase.GetGalaxyCoreColor(realityIndex);
+            Color dotColor = System.Drawing.ColorTranslator.FromHtml(hexColor);
 
             var font = e.CellStyle?.Font ?? _locationsGrid.DefaultCellStyle.Font ?? _locationsGrid.Font;
             var textColor = e.State.HasFlag(DataGridViewElementStates.Selected)
