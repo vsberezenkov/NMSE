@@ -1700,13 +1700,25 @@ public partial class CompanionPanel : UserControl
         UpdateAverageClass();
     }
 
-    /// <summary>Enables/disables the class combo boxes based on override checkbox.</summary>
+    /// <summary>Enables/disables the battle class comboboxes and placeholder labels.</summary>
     private void UpdateClassOverrideEnabled()
     {
-        bool enabled = _battleOverrideCheck.Checked;
-        _battleHealthClass.Enabled = enabled;
-        _battleAgilityClass.Enabled = enabled;
-        _battleCombatClass.Enabled = enabled;
+        bool sectionEnabled = _battleOverrideCheck.Enabled;
+        bool overrideChecked = _battleOverrideCheck.Checked;
+        bool showCombos = sectionEnabled && overrideChecked;
+        bool showPlaceholders = sectionEnabled && !overrideChecked;
+
+        _battleHealthClass.Enabled = showCombos;
+        _battleAgilityClass.Enabled = showCombos;
+        _battleCombatClass.Enabled = showCombos;
+
+        _battleHealthClass.Visible = showCombos;
+        _battleAgilityClass.Visible = showCombos;
+        _battleCombatClass.Visible = showCombos;
+
+        _battleHealthClassPlaceholder.Visible = showPlaceholders;
+        _battleAgilityClassPlaceholder.Visible = showPlaceholders;
+        _battleCombatClassPlaceholder.Visible = showPlaceholders;
     }
 
     /// <summary>Handles stat class combo change.</summary>
@@ -1747,7 +1759,7 @@ public partial class CompanionPanel : UserControl
     {
         if (!_battleOverrideCheck.Checked)
         {
-            _battleAverageClassValue.Text = "-";
+            _battleAverageClassValue.Text = UiStrings.GetOrNull("common.procedural") ?? "Procedural";
             return;
         }
 
@@ -1836,9 +1848,11 @@ public partial class CompanionPanel : UserControl
     private void SetBattleControlsEnabled(bool enabled)
     {
         _battleOverrideCheck.Enabled = enabled;
-        _battleHealthClass.Enabled = enabled && _battleOverrideCheck.Checked;
-        _battleAgilityClass.Enabled = enabled && _battleOverrideCheck.Checked;
-        _battleCombatClass.Enabled = enabled && _battleOverrideCheck.Checked;
+        _battleHealthClassLabel.Visible = enabled;
+        _battleAgilityClassLabel.Visible = enabled;
+        _battleCombatClassLabel.Visible = enabled;
+        UpdateClassOverrideEnabled();
+
         _battleTreatHealth.Enabled = enabled;
         _battleTreatAgility.Enabled = enabled;
         _battleTreatCombat.Enabled = enabled;
@@ -2516,6 +2530,9 @@ public partial class CompanionPanel : UserControl
         _battleHealthClassLabel.Text = UiStrings.GetOrNull("companion.battle_health") ?? "Health:";
         _battleAgilityClassLabel.Text = UiStrings.GetOrNull("companion.battle_agility") ?? "Agility:";
         _battleCombatClassLabel.Text = UiStrings.GetOrNull("companion.battle_combat_effectiveness") ?? "Combat Effectiveness:";
+        _battleHealthClassPlaceholder.Text = UiStrings.GetOrNull("common.na") ?? "N/A";
+        _battleAgilityClassPlaceholder.Text = UiStrings.GetOrNull("common.na") ?? "N/A";
+        _battleCombatClassPlaceholder.Text = UiStrings.GetOrNull("common.na") ?? "N/A";
         _battleAverageClassLabel.Text = UiStrings.GetOrNull("companion.battle_average_class") ?? "Average Class:";
         _battleTreatsHeadingLabel.Text = UiStrings.GetOrNull("companion.battle_treats_heading") ?? "Gene Edits";
         _battleTreatHealthLabel.Text = UiStrings.GetOrNull("companion.battle_treats_health") ?? "Health:";

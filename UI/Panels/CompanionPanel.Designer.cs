@@ -687,7 +687,7 @@ partial class CompanionPanel
         _battleOverrideCheck = new CheckBox { Text = "Override Pet Classes", AutoSize = true, Margin = new Padding(0, 3, 0, 0) };
         _battleOverrideCheck.CheckedChanged += (s, e) => { if (!_loading) OnBattleOverrideChanged(); };
         _battleAverageClassLabel = new Label { Text = "Average Class:", AutoSize = true, Anchor = AnchorStyles.Left, Margin = new Padding(15, 3, 5, 0) };
-        _battleAverageClassValue = new Label { Text = "-", AutoSize = true, Margin = new Padding(0, 3, 0, 0) };
+        _battleAverageClassValue = new Label { Text = "-", AutoSize = true, Anchor = AnchorStyles.Left, Margin = new Padding(0, 3, 0, 0) };
         overrideRow.Controls.Add(_battleOverrideCheck);
         overrideRow.Controls.Add(_battleAverageClassLabel);
         overrideRow.Controls.Add(_battleAverageClassValue);
@@ -703,8 +703,10 @@ partial class CompanionPanel
         _battleHealthClass = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList, Width = 50 };
         _battleHealthClass.Items.AddRange(classItems);
         _battleHealthClass.SelectedIndexChanged += (s, e) => { if (!_loading) OnBattleClassChanged(); };
+        _battleHealthClassPlaceholder = new Label { Text = "N/A", AutoSize = true, Anchor = AnchorStyles.Left, Padding = new Padding(0, 5, 0, 0), Visible = false };
         statClassPanel.Controls.Add(_battleHealthClassLabel, 0, scRow);
         statClassPanel.Controls.Add(_battleHealthClass, 1, scRow);
+        statClassPanel.Controls.Add(_battleHealthClassPlaceholder, 1, scRow);
         scRow++;
 
         // Agility class
@@ -713,8 +715,10 @@ partial class CompanionPanel
         _battleAgilityClass = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList, Width = 50 };
         _battleAgilityClass.Items.AddRange(classItems);
         _battleAgilityClass.SelectedIndexChanged += (s, e) => { if (!_loading) OnBattleClassChanged(); };
+        _battleAgilityClassPlaceholder = new Label { Text = "N/A", AutoSize = true, Anchor = AnchorStyles.Left, Padding = new Padding(0, 5, 0, 0), Visible = false };
         statClassPanel.Controls.Add(_battleAgilityClassLabel, 0, scRow);
         statClassPanel.Controls.Add(_battleAgilityClass, 1, scRow);
+        statClassPanel.Controls.Add(_battleAgilityClassPlaceholder, 1, scRow);
         scRow++;
 
         // Combat class
@@ -723,8 +727,10 @@ partial class CompanionPanel
         _battleCombatClass = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList, Width = 50 };
         _battleCombatClass.Items.AddRange(classItems);
         _battleCombatClass.SelectedIndexChanged += (s, e) => { if (!_loading) OnBattleClassChanged(); };
+        _battleCombatClassPlaceholder = new Label { Text = "N/A", AutoSize = true, Anchor = AnchorStyles.Left, Padding = new Padding(0, 5, 0, 0), Visible = false };
         statClassPanel.Controls.Add(_battleCombatClassLabel, 0, scRow);
         statClassPanel.Controls.Add(_battleCombatClass, 1, scRow);
+        statClassPanel.Controls.Add(_battleCombatClassPlaceholder, 1, scRow);
         scRow++;
 
         // Holo-Arena Victories (moved to bottom of Stat Class Overrides)
@@ -1091,10 +1097,13 @@ partial class CompanionPanel
     private CheckBox _battleOverrideCheck = null!;
     private Label _battleHealthClassLabel = null!;
     private ComboBox _battleHealthClass = null!;
+    private Label _battleHealthClassPlaceholder = null!;
     private Label _battleAgilityClassLabel = null!;
     private ComboBox _battleAgilityClass = null!;
+    private Label _battleAgilityClassPlaceholder = null!;
     private Label _battleCombatClassLabel = null!;
     private ComboBox _battleCombatClass = null!;
+    private Label _battleCombatClassPlaceholder = null!;
     private Label _battleAverageClassLabel = null!;
     private Label _battleAverageClassValue = null!;
     private Label _battleTreatsHeadingLabel = null!;
