@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using NMSE.Core;
+using NMSE.Core.Utilities;
 
 namespace NMSE.Tests;
 

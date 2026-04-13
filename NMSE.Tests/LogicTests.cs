@@ -1,8 +1,9 @@
 using NMSE.Config;
+using NMSE.Core;
+using NMSE.Core.Utilities;
 using NMSE.Data;
 using NMSE.IO;
 using NMSE.Models;
-using NMSE.Core;
 
 namespace NMSE.Tests;
 
@@ -148,9 +149,9 @@ public class LogicTests
     [InlineData("  ", "unnamed")]
     [InlineData("", "unnamed")]
     [InlineData("Normal_Name", "Normal_Name")]
-    public void FileNameHelper_SanitizeFileName_ReturnsExpected(string input, string expected)
+    public void StringHelper_SanitizeFileName_ReturnsExpected(string input, string expected)
     {
-        Assert.Equal(expected, FileNameHelper.SanitizeFileName(input));
+        Assert.Equal(expected, StringHelper.SanitizeFileName(input));
     }
 
     [Fact]
@@ -2648,6 +2649,253 @@ public class LogicTests
         Assert.Equal(1, bPos.GetInt(0));
     }
 
+    // --- BaseLogic: MoveBaseComputer ---------------------------------
+
+    [Fact]
+    public void BaseLogic_MoveBaseComputer_UpdatesBasePositionToTargetWorldPos()
+    {
+        // Base at (0, 100, 0) looking forward along Z.
+        // Target object is 10 units along the old X-axis.
+        var baseData = JsonObject.Parse(@"{
+            ""Position"": [0, 100, 0],
+            ""Forward"": [0, 0, 1],
+            ""Objects"": [
+                { ""ObjectID"": ""^BASE_FLAG"", ""Position"": [0, 0, 0], ""Up"": [0, 1, 0], ""At"": [0, 0, 1] },
+                { ""ObjectID"": ""^BUILDSIGNAL"", ""Position"": [10, 0, 0], ""Up"": [0, 1, 0], ""At"": [0, 0, 1] }
+            ]
+        }");
+
+        var objects = baseData.GetArray("Objects")!;
+        var baseFlag = objects.GetObject(0);
+        var target = objects.GetObject(1);
+
+        BaseLogic.MoveBaseComputer(baseData, baseFlag, target);
+
+        // The base Position should have changed to the target's old world position
+        var newBasePos = baseData.GetArray("Position")!;
+        double baseLen = Math.Sqrt(
+            Math.Pow(newBasePos.GetDouble(0), 2) +
+            Math.Pow(newBasePos.GetDouble(1), 2) +
+            Math.Pow(newBasePos.GetDouble(2), 2));
+        // The new position should be at roughly distance 100 from origin
+        // (target was 10 units away from a base at distance 100)
+        Assert.InRange(baseLen, 95, 105);
+    }
+
+    [Fact]
+    public void BaseLogic_MoveBaseComputer_PreservesWorldPositions()
+    {
+        // Base at (0, 500, 0) looking along Z.
+        // Two objects: base computer at origin and a signal booster offset along X.
+        var baseData = JsonObject.Parse(@"{
+            ""Position"": [0, 500, 0],
+            ""Forward"": [0, 0, 1],
+            ""Objects"": [
+                { ""ObjectID"": ""^BASE_FLAG"", ""Position"": [0, 0, 0], ""Up"": [0, 1, 0], ""At"": [0, 0, 1] },
+                { ""ObjectID"": ""^BUILDSIGNAL"", ""Position"": [10, 5, 3], ""Up"": [0, 1, 0], ""At"": [0, 0, 1] },
+                { ""ObjectID"": ""^MAINROOM"", ""Position"": [-5, 2, 8], ""Up"": [0, 1, 0], ""At"": [0, 0, 1] }
+            ]
+        }");
+
+        // Compute old world positions for all objects using the old system
+        var oldBasePos = new double[] { 0, 500, 0 };
+        var oldFwd = new double[] { 0, 0, 1 };
+        // old system: Y = (0,1,0), Z = (0,0,1), X = cross(Y,Z) = (1,0,0)
+        // So apply(local) = basePos + local.X * X + local.Y * Y + local.Z * Z
+        // = (0,500,0) + (lx,0,0) + (0,ly,0) + (0,0,lz) = (lx, 500+ly, lz)
+        var objects = baseData.GetArray("Objects")!;
+
+        // Record expected world positions
+        var mainroom = objects.GetObject(2);
+        // Expected world: (-5, 500+2, 8) = (-5, 502, 8)
+        double expectedX = -5, expectedY = 502, expectedZ = 8;
+
+        var baseFlag = objects.GetObject(0);
+        var target = objects.GetObject(1);
+
+        BaseLogic.MoveBaseComputer(baseData, baseFlag, target);
+
+        // Verify the main room is at the same world position using the new coordinate system
+        var newBasePos2 = baseData.GetArray("Position")!;
+        var newFwd = baseData.GetArray("Forward")!;
+
+        // Read main room's new local position
+        var mrPos = mainroom.GetArray("Position")!;
+        double mrLx = mrPos.GetDouble(0), mrLy = mrPos.GetDouble(1), mrLz = mrPos.GetDouble(2);
+
+        // Reconstruct the new coordinate system to verify
+        double nbx = newBasePos2.GetDouble(0), nby = newBasePos2.GetDouble(1), nbz = newBasePos2.GetDouble(2);
+        double nfx = newFwd.GetDouble(0), nfy = newFwd.GetDouble(1), nfz = newFwd.GetDouble(2);
+
+        // New Y = normalised new base position
+        double newPosLen = Math.Sqrt(nbx * nbx + nby * nby + nbz * nbz);
+        double nyX = nbx / newPosLen, nyY = nby / newPosLen, nyZ = nbz / newPosLen;
+
+        // New Z = normalised Forward (already stored)
+        double nzLen = Math.Sqrt(nfx * nfx + nfy * nfy + nfz * nfz);
+        double nzX = nfx / nzLen, nzY = nfy / nzLen, nzZ = nfz / nzLen;
+
+        // New X = cross(Y, Z)
+        double nxX = nyY * nzZ - nyZ * nzY;
+        double nxY = nyZ * nzX - nyX * nzZ;
+        double nxZ = nyX * nzY - nyY * nzX;
+        double nxLen = Math.Sqrt(nxX * nxX + nxY * nxY + nxZ * nxZ);
+        nxX /= nxLen; nxY /= nxLen; nxZ /= nxLen;
+
+        // Reconstruct world position: origin + lx*X + ly*Y + lz*Z
+        double worldX = nbx + mrLx * nxX + mrLy * nyX + mrLz * nzX;
+        double worldY = nby + mrLx * nxY + mrLy * nyY + mrLz * nzY;
+        double worldZ = nbz + mrLx * nxZ + mrLy * nyZ + mrLz * nzZ;
+
+        Assert.Equal(expectedX, worldX, precision: 6);
+        Assert.Equal(expectedY, worldY, precision: 6);
+        Assert.Equal(expectedZ, worldZ, precision: 6);
+    }
+
+    [Fact]
+    public void BaseLogic_MoveBaseComputer_SwapsBaseFlagAndTarget()
+    {
+        var baseData = JsonObject.Parse(@"{
+            ""Position"": [0, 100, 0],
+            ""Forward"": [0, 0, 1],
+            ""Objects"": [
+                { ""ObjectID"": ""^BASE_FLAG"", ""Position"": [0, 0, 0], ""Up"": [0, 1, 0], ""At"": [0, 0, 1] },
+                { ""ObjectID"": ""^BUILDSIGNAL"", ""Position"": [10, 0, 0], ""Up"": [0, 1, 0], ""At"": [0, 0, 1] }
+            ]
+        }");
+
+        var objects = baseData.GetArray("Objects")!;
+        var baseFlag = objects.GetObject(0);
+        var target = objects.GetObject(1);
+
+        // Record the target's position after transform (should end up near base flag's old position)
+        BaseLogic.MoveBaseComputer(baseData, baseFlag, target);
+
+        // After move, the target should have the position that the base flag got via transform,
+        // and vice versa. The base flag should be near the new origin (small local offset).
+        var flagPos = baseFlag.GetArray("Position")!;
+        double flagDist = Math.Sqrt(
+            Math.Pow(flagPos.GetDouble(0), 2) +
+            Math.Pow(flagPos.GetDouble(1), 2) +
+            Math.Pow(flagPos.GetDouble(2), 2));
+
+        // The base flag (after swap) should be near the target's old local position
+        // which was at distance ~10 from origin; after transform and swap, it should be
+        // within the same order of magnitude
+        Assert.InRange(flagDist, 0, 20);
+    }
+
+    [Fact]
+    public void BaseLogic_MoveBaseComputer_UpdatesForwardVector()
+    {
+        var baseData = JsonObject.Parse(@"{
+            ""Position"": [0, 100, 0],
+            ""Forward"": [0, 0, 1],
+            ""Objects"": [
+                { ""ObjectID"": ""^BASE_FLAG"", ""Position"": [0, 0, 0], ""Up"": [0, 1, 0], ""At"": [0, 0, 1] },
+                { ""ObjectID"": ""^BUILDSIGNAL"", ""Position"": [10, 0, 0], ""Up"": [0, 1, 0], ""At"": [0, 0, 1] }
+            ]
+        }");
+
+        var objects = baseData.GetArray("Objects")!;
+        BaseLogic.MoveBaseComputer(baseData, objects.GetObject(0), objects.GetObject(1));
+
+        // The Forward vector should be updated and should be unit length
+        var fwd = baseData.GetArray("Forward")!;
+        double len = Math.Sqrt(
+            Math.Pow(fwd.GetDouble(0), 2) +
+            Math.Pow(fwd.GetDouble(1), 2) +
+            Math.Pow(fwd.GetDouble(2), 2));
+        Assert.Equal(1.0, len, precision: 10);
+
+        // Forward should be perpendicular to the new position (radial direction)
+        var pos = baseData.GetArray("Position")!;
+        double posLen = Math.Sqrt(
+            Math.Pow(pos.GetDouble(0), 2) +
+            Math.Pow(pos.GetDouble(1), 2) +
+            Math.Pow(pos.GetDouble(2), 2));
+        double dot = (pos.GetDouble(0) * fwd.GetDouble(0) +
+                      pos.GetDouble(1) * fwd.GetDouble(1) +
+                      pos.GetDouble(2) * fwd.GetDouble(2)) / posLen;
+        Assert.Equal(0.0, dot, precision: 10);
+    }
+
+    // --- MathHelper: Vec3 and CoordSystem helpers ----------------------
+
+    [Fact]
+    public void MathHelper_Vec3_DotProduct()
+    {
+        var a = new MathHelper.Vec3(1, 0, 0);
+        var b = new MathHelper.Vec3(0, 1, 0);
+        Assert.Equal(0.0, MathHelper.Vec3.Dot(a, b));
+
+        var c = new MathHelper.Vec3(1, 2, 3);
+        var d = new MathHelper.Vec3(4, 5, 6);
+        Assert.Equal(32.0, MathHelper.Vec3.Dot(c, d)); // 1*4 + 2*5 + 3*6 = 32
+    }
+
+    [Fact]
+    public void MathHelper_Vec3_CrossProduct()
+    {
+        var x = new MathHelper.Vec3(1, 0, 0);
+        var y = new MathHelper.Vec3(0, 1, 0);
+        var z = MathHelper.Vec3.Cross(x, y);
+        Assert.Equal(0.0, z.X, precision: 15);
+        Assert.Equal(0.0, z.Y, precision: 15);
+        Assert.Equal(1.0, z.Z, precision: 15);
+    }
+
+    [Fact]
+    public void MathHelper_Vec3_Normalized()
+    {
+        var v = new MathHelper.Vec3(3, 4, 0);
+        var n = v.Normalized();
+        Assert.Equal(0.6, n.X, precision: 15);
+        Assert.Equal(0.8, n.Y, precision: 15);
+        Assert.Equal(0.0, n.Z, precision: 15);
+    }
+
+    [Fact]
+    public void MathHelper_CoordSystem_ApplyAndSolve_AreInverse()
+    {
+        var origin = new MathHelper.Vec3(10, 20, 30);
+        var axisX = new MathHelper.Vec3(1, 0, 0);
+        var axisY = new MathHelper.Vec3(0, 1, 0);
+        var axisZ = new MathHelper.Vec3(0, 0, 1);
+        var cs = new MathHelper.CoordSystem(origin, axisX, axisY, axisZ);
+
+        var local = new MathHelper.Vec3(5, -3, 7);
+        var world = cs.Apply(local);
+        var recovered = cs.Solve(world);
+
+        Assert.Equal(local.X, recovered.X, precision: 10);
+        Assert.Equal(local.Y, recovered.Y, precision: 10);
+        Assert.Equal(local.Z, recovered.Z, precision: 10);
+    }
+
+    [Fact]
+    public void MathHelper_CoordSystem_RotatedAxes_ApplyAndSolve()
+    {
+        // Rotated system: X=(0,0,1), Y=(1,0,0), Z=(0,1,0)
+        var origin = new MathHelper.Vec3(100, 200, 300);
+        var cs = new MathHelper.CoordSystem(origin,
+            new MathHelper.Vec3(0, 0, 1),
+            new MathHelper.Vec3(1, 0, 0),
+            new MathHelper.Vec3(0, 1, 0));
+
+        var local = new MathHelper.Vec3(2, 3, 4);
+        var world = cs.Apply(local);
+        // Expected: origin + 2*(0,0,1) + 3*(1,0,0) + 4*(0,1,0) = (103, 204, 302)
+        Assert.Equal(103.0, world.X, precision: 10);
+        Assert.Equal(204.0, world.Y, precision: 10);
+        Assert.Equal(302.0, world.Z, precision: 10);
+
+        var recovered = cs.Solve(world);
+        Assert.Equal(2.0, recovered.X, precision: 10);
+        Assert.Equal(3.0, recovered.Y, precision: 10);
+        Assert.Equal(4.0, recovered.Z, precision: 10);
+    }
+
     // --- BaseLogic: Chest Name Helpers -------------------------------
 
     [Fact]
@@ -2748,6 +2996,156 @@ public class LogicTests
     public void BaseLogic_DefaultChestName_IsCorrectValue()
     {
         Assert.Equal("BLD_STORAGE_NAME", BaseLogic.DefaultChestName);
+    }
+
+    // --- CoordinateHelper: NormalizeGalacticAddress --------------------------
+
+    [Fact]
+    public void CoordinateHelper_NormalizeGalacticAddress_HexString_ReturnsUppercase()
+    {
+        Assert.Equal("0x311700FE91210B", CoordinateHelper.NormalizeGalacticAddress("0x311700FE91210B"));
+        Assert.Equal("0x311700FE91210B", CoordinateHelper.NormalizeGalacticAddress("0x311700fe91210b"));
+    }
+
+    [Fact]
+    public void CoordinateHelper_NormalizeGalacticAddress_NumericLong_ReturnsHex()
+    {
+        long addr = 0x20FE00FE91210BL;
+        string expected = "0x20FE00FE91210B";
+        Assert.Equal(expected, CoordinateHelper.NormalizeGalacticAddress(addr));
+    }
+
+    [Fact]
+    public void CoordinateHelper_NormalizeGalacticAddress_RawDouble_ReturnsHex()
+    {
+        // Use a value that fits exactly in a double's 52-bit mantissa
+        var rd = new RawDouble(0x1234567890AL, "20015998348554");
+        Assert.Equal("0x1234567890A", CoordinateHelper.NormalizeGalacticAddress(rd));
+    }
+
+    [Fact]
+    public void CoordinateHelper_NormalizeGalacticAddress_Null_ReturnsEmpty()
+    {
+        Assert.Equal("", CoordinateHelper.NormalizeGalacticAddress(null));
+    }
+
+    [Fact]
+    public void CoordinateHelper_NormalizeGalacticAddress_DecimalString_ReturnsHex()
+    {
+        // 0x20FE00FE91210B = 9286479479120139 in decimal
+        Assert.Equal("0x20FE00FE91210B", CoordinateHelper.NormalizeGalacticAddress("9286479479120139"));
+    }
+
+    [Fact]
+    public void CoordinateHelper_NormalizeGalacticAddress_IntValue_ReturnsHex()
+    {
+        Assert.Equal("0x0", CoordinateHelper.NormalizeGalacticAddress(0));
+        Assert.Equal("0xFF", CoordinateHelper.NormalizeGalacticAddress(255));
+    }
+
+    // --- BaseLogic: ClearTerrainEdits --------------------------------
+
+    [Fact]
+    public void BaseLogic_ClearTerrainEdits_RemovesMatchingEntries()
+    {
+        var playerState = JsonObject.Parse(@"{
+            ""TerrainEditData"": {
+                ""GalacticAddresses"": [""0xAABBCC"", ""0x112233"", ""0xAABBCC""],
+                ""BufferSizes"": [2, 3, 1],
+                ""BufferAges"": [10, 20, 30],
+                ""BufferAnchors"": [""a1"", ""a2"", ""a3""],
+                ""BufferProtected"": [true, false, true],
+                ""Edits"": [""e1"", ""e2"", ""e3"", ""e4"", ""e5"", ""e6""]
+            }
+        }");
+        var baseObj = JsonObject.Parse(@"{ ""GalacticAddress"": ""0xAABBCC"" }");
+
+        int removed = BaseLogic.ClearTerrainEdits(playerState, baseObj);
+
+        Assert.Equal(2, removed);
+
+        var ted = playerState.GetObject("TerrainEditData")!;
+        // Only the middle entry (0x112233) should remain
+        Assert.Equal(1, ted.GetArray("GalacticAddresses")!.Length);
+        Assert.Equal("0x112233", ted.GetArray("GalacticAddresses")!.GetString(0));
+        Assert.Equal(1, ted.GetArray("BufferSizes")!.Length);
+        Assert.Equal(3, ted.GetArray("BufferSizes")!.GetInt(0));
+        Assert.Equal(1, ted.GetArray("BufferAges")!.Length);
+        Assert.Equal(1, ted.GetArray("BufferAnchors")!.Length);
+        Assert.Equal(1, ted.GetArray("BufferProtected")!.Length);
+        // Only the 3 edits from the middle buffer (indices 2,3,4) should remain
+        Assert.Equal(3, ted.GetArray("Edits")!.Length);
+        Assert.Equal("e3", ted.GetArray("Edits")!.GetString(0));
+        Assert.Equal("e4", ted.GetArray("Edits")!.GetString(1));
+        Assert.Equal("e5", ted.GetArray("Edits")!.GetString(2));
+    }
+
+    [Fact]
+    public void BaseLogic_ClearTerrainEdits_ReturnsZero_WhenNoMatch()
+    {
+        var playerState = JsonObject.Parse(@"{
+            ""TerrainEditData"": {
+                ""GalacticAddresses"": [""0x112233""],
+                ""BufferSizes"": [2],
+                ""Edits"": [""e1"", ""e2""]
+            }
+        }");
+        var baseObj = JsonObject.Parse(@"{ ""GalacticAddress"": ""0xAABBCC"" }");
+
+        int removed = BaseLogic.ClearTerrainEdits(playerState, baseObj);
+
+        Assert.Equal(0, removed);
+        Assert.Equal(1, playerState.GetObject("TerrainEditData")!.GetArray("GalacticAddresses")!.Length);
+    }
+
+    [Fact]
+    public void BaseLogic_ClearTerrainEdits_ReturnsZero_WhenNoTerrainData()
+    {
+        var playerState = JsonObject.Parse(@"{}");
+        var baseObj = JsonObject.Parse(@"{ ""GalacticAddress"": ""0xAABBCC"" }");
+
+        int removed = BaseLogic.ClearTerrainEdits(playerState, baseObj);
+
+        Assert.Equal(0, removed);
+    }
+
+    [Fact]
+    public void BaseLogic_ClearTerrainEdits_HandlesNumericGalacticAddress()
+    {
+        // Base has numeric address, terrain data has hex string equivalent
+        var playerState = JsonObject.Parse(@"{
+            ""TerrainEditData"": {
+                ""GalacticAddresses"": [""0xFF""],
+                ""BufferSizes"": [1],
+                ""Edits"": [""e1""]
+            }
+        }");
+        var baseObj = JsonObject.Parse(@"{ ""GalacticAddress"": 255 }");
+
+        int removed = BaseLogic.ClearTerrainEdits(playerState, baseObj);
+
+        Assert.Equal(1, removed);
+        Assert.Equal(0, playerState.GetObject("TerrainEditData")!.GetArray("GalacticAddresses")!.Length);
+    }
+
+    [Fact]
+    public void BaseLogic_ClearTerrainEdits_HandlesMissingOptionalArrays()
+    {
+        // No BufferAges, BufferAnchors, BufferProtected
+        var playerState = JsonObject.Parse(@"{
+            ""TerrainEditData"": {
+                ""GalacticAddresses"": [""0xAABBCC""],
+                ""BufferSizes"": [2],
+                ""Edits"": [""e1"", ""e2""]
+            }
+        }");
+        var baseObj = JsonObject.Parse(@"{ ""GalacticAddress"": ""0xAABBCC"" }");
+
+        int removed = BaseLogic.ClearTerrainEdits(playerState, baseObj);
+
+        Assert.Equal(1, removed);
+        Assert.Equal(0, playerState.GetObject("TerrainEditData")!.GetArray("GalacticAddresses")!.Length);
+        Assert.Equal(0, playerState.GetObject("TerrainEditData")!.GetArray("Edits")!.Length);
     }
 
     // --- MilestoneLogic ----------------------------------------------

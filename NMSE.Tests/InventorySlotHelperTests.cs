@@ -1,4 +1,5 @@
 using NMSE.Core;
+using NMSE.Core.Utilities;
 using NMSE.Models;
 
 namespace NMSE.Tests;

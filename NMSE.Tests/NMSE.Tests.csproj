@@ -34,7 +34,7 @@
     <Compile Include="..\Data\TechAdjacencyDatabase.cs" Link="Data\TechAdjacencyDatabase.cs" />
     <Compile Include="..\Data\JsonNameMapper.cs" Link="Data\JsonNameMapper.cs" />
     <Compile Include="..\Data\GalaxyDatabase.cs" Link="Data\GalaxyDatabase.cs" />
-    <Compile Include="..\Data\CoordinateHelper.cs" Link="Data\CoordinateHelper.cs" />
+    <Compile Include="..\Core\Utilities\CoordinateHelper.cs" Link="Core\Utilities\CoordinateHelper.cs" />
     <Compile Include="..\Data\WikiGuideDatabase.cs" Link="Data\WikiGuideDatabase.cs" />
     <Compile Include="..\Data\BaseStatLimits.cs" Link="Data\BaseStatLimits.cs" />
     <Compile Include="..\Data\TitleDatabase.cs" Link="Data\TitleDatabase.cs" />
@@ -81,10 +81,10 @@
     <Compile Include="..\Core\ExportConfig.cs" Link="Core\ExportConfig.cs" />
     <Compile Include="..\Core\MultitoolLogic.cs" Link="Core\MultitoolLogic.cs" />
     <Compile Include="..\Core\FreighterLogic.cs" Link="Core\FreighterLogic.cs" />
-    <Compile Include="..\Core\FileNameHelper.cs" Link="Core\FileNameHelper.cs" />
-    <Compile Include="..\Core\StatHelper.cs" Link="Core\StatHelper.cs" />
-    <Compile Include="..\Core\SeedHelper.cs" Link="Core\SeedHelper.cs" />
-    <Compile Include="..\Core\ProceduralSeedHelper.cs" Link="Core\ProceduralSeedHelper.cs" />
+    <Compile Include="..\Core\Utilities\StatHelper.cs" Link="Core\Utilities\StatHelper.cs" />
+    <Compile Include="..\Core\Utilities\SeedHelper.cs" Link="Core\Utilities\SeedHelper.cs" />
+    <Compile Include="..\Core\Utilities\ProceduralSeedHelper.cs" Link="Core\Utilities\ProceduralSeedHelper.cs" />
+    <Compile Include="..\Core\Utilities\MathHelper.cs" Link="Core\Utilities\MathHelper.cs" />
     <Compile Include="..\Core\FrigateLogic.cs" Link="Core\FrigateLogic.cs" />
     <Compile Include="..\Core\CompanionLogic.cs" Link="Core\CompanionLogic.cs" />
     <Compile Include="..\Core\MilestoneLogic.cs" Link="Core\MilestoneLogic.cs" />
@@ -96,11 +96,11 @@
     <Compile Include="..\Core\ExosuitLogic.cs" Link="Core\ExosuitLogic.cs" />
     <Compile Include="..\Core\ExosuitAutoStackLogic.cs" Link="Core\ExosuitAutoStackLogic.cs" />
     <Compile Include="..\Core\AccountLogic.cs" Link="Core\AccountLogic.cs" />
-    <Compile Include="..\Core\DisplayStringHelper.cs" Link="Core\DisplayStringHelper.cs" />
+    <Compile Include="..\Core\Utilities\StringHelper.cs" Link="Core\Utilities\StringHelper.cs" />
     <Compile Include="..\Core\MxmlRewardEditor.cs" Link="Core\MxmlRewardEditor.cs" />
     <Compile Include="..\Core\RawJsonLogic.cs" Link="Core\RawJsonLogic.cs" />
-    <Compile Include="..\Core\InventoryImportHelper.cs" Link="Core\InventoryImportHelper.cs" />
-    <Compile Include="..\Core\InventorySlotHelper.cs" Link="Core\InventorySlotHelper.cs" />
+    <Compile Include="..\Core\Utilities\InventoryImportHelper.cs" Link="Core\Utilities\InventoryImportHelper.cs" />
+    <Compile Include="..\Core\Utilities\InventorySlotHelper.cs" Link="Core\Utilities\InventorySlotHelper.cs" />
     <Compile Include="..\Core\UpdateService.cs" Link="Core\UpdateService.cs" />
     <Compile Include="..\Core\AppJsonContext.cs" Link="Core\AppJsonContext.cs" />
   </ItemGroup>
