@@ -4,8 +4,8 @@ using System.Runtime.InteropServices;
 namespace NMSE.UI.Util;
 
 /// <summary>
-/// Manages the embedded NMS GeoSans font for use in the application.
-/// Loads the TTF from embedded resources via PrivateFontCollection and
+/// Manages the embedded NMS fonts for use in the application.
+/// Loads the TTFs from embedded resources via PrivateFontCollection and
 /// exposes helper methods to create Font instances at various sizes.
 /// </summary>
 public static class FontManager
@@ -89,79 +89,70 @@ public static class FontManager
         label.UseCompatibleTextRendering = true;
     }
 
+    /// <summary>
+    /// Ensures the embedded NMS GeoSans font is loaded once.
+    /// </summary>
     private static void EnsureInitialized()
     {
         if (_initialized) return;
         _initialized = true;
 
-        try
-        {
-            var assembly = typeof(FontManager).Assembly;
-            using var stream = assembly.GetManifestResourceStream(FontResourceName);
-            if (stream == null)
-            {
-                System.Diagnostics.Debug.WriteLine($"FontManager: embedded resource '{FontResourceName}' not found.");
-                return;
-            }
-
-            byte[] fontData = new byte[stream.Length];
-            stream.ReadExactly(fontData);
-
-            _fontCollection = new PrivateFontCollection();
-            var handle = GCHandle.Alloc(fontData, GCHandleType.Pinned);
-            try
-            {
-                _fontCollection.AddMemoryFont(handle.AddrOfPinnedObject(), fontData.Length);
-            }
-            finally
-            {
-                handle.Free();
-            }
-
-            if (_fontCollection.Families.Length > 0)
-                _nmsFont = _fontCollection.Families[0];
-        }
-        catch (Exception ex)
-        {
-            System.Diagnostics.Debug.WriteLine($"FontManager: failed to load font: {ex.Message}");
-        }
+        _nmsFont = LoadEmbeddedFont(FontResourceName, out _fontCollection, "font");
     }
 
-        private static void EnsureGlyphInitialized()
+    /// <summary>
+    /// Ensures the embedded glyph font is loaded once.
+    /// </summary>
+    private static void EnsureGlyphInitialized()
     {
         if (_glyphInitialized) return;
         _glyphInitialized = true;
 
+        _glyphFont = LoadEmbeddedFont(GlyphFontResourceName, out _glyphFontCollection, "glyph font");
+    }
+
+    /// <summary>
+    /// Loads an embedded TrueType font from assembly resources into a private font collection.
+    /// </summary>
+    /// <param name="resourceName">The embedded resource name for the font file.</param>
+    /// <param name="collection">The created <see cref="PrivateFontCollection"/>, or null on failure.</param>
+    /// <param name="debugName">A descriptive name used for debug logging.</param>
+    /// <returns>The loaded <see cref="FontFamily"/>, or null if loading failed.</returns>
+    private static FontFamily? LoadEmbeddedFont(string resourceName, out PrivateFontCollection? collection, string debugName)
+    {
+        collection = null;
         try
         {
             var assembly = typeof(FontManager).Assembly;
-            using var stream = assembly.GetManifestResourceStream(GlyphFontResourceName);
+            using var stream = assembly.GetManifestResourceStream(resourceName);
             if (stream == null)
             {
-                System.Diagnostics.Debug.WriteLine($"FontManager: embedded resource '{GlyphFontResourceName}' not found.");
-                return;
+                System.Diagnostics.Debug.WriteLine($"FontManager: embedded resource '{resourceName}' not found.");
+                return null;
             }
 
             byte[] fontData = new byte[stream.Length];
             stream.ReadExactly(fontData);
 
-            _glyphFontCollection = new PrivateFontCollection();
+            collection = new PrivateFontCollection();
             var handle = GCHandle.Alloc(fontData, GCHandleType.Pinned);
             try
             {
-                _glyphFontCollection.AddMemoryFont(handle.AddrOfPinnedObject(), fontData.Length);
+                collection.AddMemoryFont(handle.AddrOfPinnedObject(), fontData.Length);
             }
             finally
             {
                 handle.Free();
             }
 
-            if (_glyphFontCollection.Families.Length > 0)
-                _glyphFont = _glyphFontCollection.Families[0];
+            return collection.Families.Length > 0 ? collection.Families[0] : null;
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"FontManager: failed to load glyph font: {ex.Message}");
+            System.Diagnostics.Debug.WriteLine($"FontManager: failed to load {debugName}: {ex.Message}");
+            collection = null;
+            return null;
         }
     }
 }
+
