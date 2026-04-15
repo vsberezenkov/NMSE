@@ -1,0 +1,91 @@
+name: Feature request
+description: Suggest an improvement or new feature for NMSE.
+title: "[Feature Request]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please fill in every required field below. If you leave required fields blank or keep the title as just the prefix, the issue may be closed as incomplete.
+  - type: input
+    id: summary
+    attributes:
+      label: "Feature summary"
+      description: "Complete the title prefix with a concise summary of the requested feature. This is required."
+      placeholder: "Add support for XYZ"
+      required: true
+  - type: checkboxes
+    id: confirm_latest_release
+    attributes:
+      label: "Confirm the following statements"
+      options:
+        - label: "I have checked that this feature is not included in the latest release of NMSE."
+          value: "latest-release"
+      required: true
+  - type: checkboxes
+    id: confirm_searched_issues
+    attributes:
+      options:
+        - label: "I have searched the issue tracker and found no duplicate feature request."
+          value: "searched-issues"
+      required: true
+  - type: checkboxes
+    id: confirm_searched_docs
+    attributes:
+      options:
+        - label: "I have searched the documentation and found nothing matching this feature."
+          value: "searched-docs"
+      required: true
+  - type: checkboxes
+    id: confirm_one_feature
+    attributes:
+      options:
+        - label: "This issue contains only one feature request."
+          value: "one-feature"
+      required: true
+  - type: checkboxes
+    id: confirm_code_of_conduct
+    attributes:
+      options:
+        - label: "I have read and agree to follow the code of conduct."
+          value: "code-of-conduct"
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "Feature description"
+      description: "Describe the feature in detail and explain what it should do."
+      placeholder: "Describe the feature you want to see."
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: "Goal"
+      description: "Explain the problem this feature solves and why it is useful."
+      placeholder: "What problem does this solve? How would it improve NMSE?"
+      required: true
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: "Proposed solution"
+      description: "If you have implementation ideas or API suggestions, describe them here."
+      placeholder: "Describe a possible implementation or UX details."
+      required: true
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: "Acceptance criteria"
+      description: "List what must be true for this feature request to be considered complete."
+      placeholder: "- [ ] Criteria one\n- [ ] Criteria two"
+      required: true
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: "Additional information"
+      description: "Add any extra context or notes that may help evaluate the feature request."
+      placeholder: "Any additional details, links, or constraints."
+      required: true
+  - type: markdown
+    attributes:
+      value: "❤️ Thanks for helping to make NMSE better!"
