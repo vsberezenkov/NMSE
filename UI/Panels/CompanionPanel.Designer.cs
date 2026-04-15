@@ -145,7 +145,13 @@ partial class CompanionPanel
 
         // -- Create all field controls --
 
-        _typeField = new ComboBox { Dock = DockStyle.Fill, DropDownStyle = ComboBoxStyle.DropDownList };
+        _typeField = new ComboBox
+        {
+            Dock = DockStyle.Fill,
+            DropDownStyle = ComboBoxStyle.DropDownList,
+            DrawMode = DrawMode.OwnerDrawFixed,
+        };
+        _typeField.DrawItem += TypeField_DrawItem;
         foreach (var entry in CompanionDatabase.Entries)
             _typeField.Items.Add(entry);
         _typeField.SelectedIndexChanged += (s, e) => { if (!_loading) { WriteType(); ReloadDescriptorsForCurrentCompanion(); } };
@@ -274,6 +280,11 @@ partial class CompanionPanel
 
         _uaField = new TextBox { Dock = DockStyle.Fill };
         _uaField.Leave += (s, e) => WriteUA();
+        _uaHexCheck = new CheckBox { Text = "Hex", AutoSize = true, Dock = DockStyle.Right };
+        _uaHexCheck.CheckedChanged += (s, e) => { if (!_loading) OnUAHexCheckChanged(); };
+        _uaFieldPanel = new Panel { Dock = DockStyle.Fill, Height = _uaField.Height };
+        _uaFieldPanel.Controls.Add(_uaField);
+        _uaFieldPanel.Controls.Add(_uaHexCheck);
 
         _lastTrustIncreaseTimePicker = new DateTimePicker
         {
@@ -365,7 +376,7 @@ partial class CompanionPanel
         _leftColumn.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         _allowRerollLabel = AddRow(_leftColumn, "Allow Reroll:", _allowUnmodifiedRerollField, lRow++);
         _leftColumn.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-        _uaLabel = AddRow(_leftColumn, "UA:", _uaField, lRow++);
+        _uaLabel = AddRow(_leftColumn, "UA:", _uaFieldPanel, lRow++);
 
         // "Induce Egg" button row (only visible for pets) - extra top margin for spacing
         _induceEggBtn = new Button { Text = "Induce Egg", AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, Visible = false, Margin = new Padding(3, 10, 3, 3) };
@@ -661,7 +672,54 @@ partial class CompanionPanel
 
         int bRow = 0;
 
-        // == Row 0: Two-column top section ==
+        // == Pet Battle Team section ==
+        battleLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        _battleTeamLabel = new Label { Text = UiStrings.Get("companion.battle_team"), AutoSize = true, Padding = new Padding(0, 0, 0, 3) };
+        FontManager.ApplyHeadingFont(_battleTeamLabel, 10);
+        battleLayout.Controls.Add(_battleTeamLabel, 0, bRow++);
+
+        var teamRow = new TableLayoutPanel
+        {
+            Dock = DockStyle.Top,
+            AutoSize = true,
+            ColumnCount = 6,
+            RowCount = 1,
+            Padding = new Padding(0, 0, 0, 8),
+        };
+        for (int t = 0; t < 3; t++)
+        {
+            teamRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            teamRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+        }
+        teamRow.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+
+        _battleTeamSlotLabels = new Label[3];
+        _battleTeamSlots = new ComboBox[3];
+        for (int t = 0; t < 3; t++)
+        {
+            int slot = t;
+            _battleTeamSlotLabels[t] = new Label
+            {
+                Text = UiStrings.Format("companion.battle_team_slot", t + 1),
+                AutoSize = true,
+                Anchor = AnchorStyles.Left,
+                Padding = new Padding(t > 0 ? 12 : 0, 5, 4, 0),
+            };
+            teamRow.Controls.Add(_battleTeamSlotLabels[t], t * 2, 0);
+
+            _battleTeamSlots[t] = new ComboBox
+            {
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Width = 180,
+            };
+            _battleTeamSlots[t].SelectedIndexChanged += (s, e) => { if (!_loading) WriteBattleTeamSlot(slot); };
+            teamRow.Controls.Add(_battleTeamSlots[t], t * 2 + 1, 0);
+        }
+
+        battleLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        battleLayout.Controls.Add(teamRow, 0, bRow++);
+
+        // == Two-column top section ==
         battleLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
         var topRow = new TableLayoutPanel { Dock = DockStyle.Left, AutoSize = true, ColumnCount = 2, RowCount = 1 };
         topRow.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
@@ -1022,6 +1080,8 @@ partial class CompanionPanel
     private CheckBox _hasBeenSummonedField = null!;
     private CheckBox _allowUnmodifiedRerollField = null!;
     private TextBox _uaField = null!;
+    private CheckBox _uaHexCheck = null!;
+    private Panel _uaFieldPanel = null!;
     private DateTimePicker _lastTrustIncreaseTimePicker = null!;
     private DateTimePicker _lastTrustDecreaseTimePicker = null!;
     private FlowLayoutPanel _descriptorPanel = null!;
@@ -1134,4 +1194,9 @@ partial class CompanionPanel
     private NumericUpDown[] _moveSlotScoreBoosts = null!;
     private Label[] _moveSlotScoreBoostLabels = null!;
     private TableLayoutPanel[] _moveSlotDetailPanels = null!;
+
+    // Pet Battle Team controls
+    private Label _battleTeamLabel = null!;
+    private Label[] _battleTeamSlotLabels = null!;
+    private ComboBox[] _battleTeamSlots = null!;
 }

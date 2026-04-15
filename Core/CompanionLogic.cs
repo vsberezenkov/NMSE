@@ -329,7 +329,11 @@ internal static class CompanionLogic
                         comp.Set(name, imported.Get(name));
                     }
 
-                    // If the imported data has PetAccessoryCustomisation and we have the target array
+                    // If the imported data has PetAccessoryCustomisation and we have the target array.
+                    // The save stores PAC as an array of objects: PAC[i] = { Data: [slot0, slot1, slot2] }.
+                    // The exported .nmspet file stores only the inner array [slot0, slot1, slot2].
+                    // We must wrap the imported array inside the existing PAC entry's "Data" key,
+                    // rather than replacing the whole entry which would corrupt the save structure.
                     if (petAccessoryCustomisationArray != null)
                     {
                         try
@@ -340,7 +344,19 @@ internal static class CompanionLogic
 
                             if (importedAcc != null && i < petAccessoryCustomisationArray.Length)
                             {
-                                petAccessoryCustomisationArray.Set(i, importedAcc);
+                                var existingEntry = petAccessoryCustomisationArray.GetObject(i);
+                                if (existingEntry != null)
+                                {
+                                    // Update the Data key inside the existing PAC entry object
+                                    existingEntry.Set("Data", importedAcc);
+                                }
+                                else
+                                {
+                                    // No existing entry — create wrapper object { Data: importedAcc }
+                                    var wrapper = new JsonObject();
+                                    wrapper.Set("Data", importedAcc);
+                                    petAccessoryCustomisationArray.Set(i, wrapper);
+                                }
                             }
                         }
                         catch { }

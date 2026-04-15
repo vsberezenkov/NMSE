@@ -14,6 +14,13 @@ public partial class CompanionPanel : UserControl
     private readonly List<(JsonObject Companion, string Label, string Source, int OriginalIndex, bool IsEmpty)> _entries = new();
     private bool _loading;
 
+    /// <summary>
+    /// Temporary entry added to the species combobox when the save contains a creature ID
+    /// that is not in our canonical database. Shown in red to indicate it is unrecognised.
+    /// Null when no unrecognised entry is present.
+    /// </summary>
+    private CompanionEntry? _unrecognisedTypeEntry;
+
     /// <summary>Raised when the companion panel modifies the exosuit cargo inventory (e.g. placing an egg).</summary>
     public event EventHandler? ExosuitCargoModified;
 
@@ -108,6 +115,19 @@ public partial class CompanionPanel : UserControl
         return lbl;
     }
 
+    /// <summary>
+    /// Repopulates the species/type combo box from the current CompanionDatabase entries.
+    /// Must be called after CompanionDatabase.LoadFromFile has been invoked so the
+    /// entries are available (the panel constructor runs before data loading).
+    /// </summary>
+    public void RefreshSpeciesList()
+    {
+        ClearUnrecognisedTypeEntry();
+        _typeField.Items.Clear();
+        foreach (var entry in CompanionDatabase.Entries)
+            _typeField.Items.Add(entry);
+    }
+
     public void LoadData(JsonObject saveData)
     {
         _loading = true;
@@ -130,6 +150,8 @@ public partial class CompanionPanel : UserControl
                 LoadAllSlots(playerState.GetArray("Eggs"), "Egg");
 
                 _countLabel.Text = UiStrings.Format("companion.total_slots", _entries.Count);
+
+                LoadBattleTeam();
 
                 if (_entries.Count > 0 && _companionList.Items.Count > 0)
                     _companionList.SelectedIndex = 0;
@@ -253,12 +275,18 @@ public partial class CompanionPanel : UserControl
 
             // Type
             string creatureId = comp.GetString("CreatureID") ?? "";
+            ClearUnrecognisedTypeEntry();
             int typeIdx = -1;
             for (int i = 0; i < _typeField.Items.Count; i++)
             {
                 var ce = _typeField.Items[i] as CompanionEntry;
                 if (ce != null && string.Equals(ce.Id, creatureId, StringComparison.OrdinalIgnoreCase))
                 { typeIdx = i; break; }
+            }
+            if (typeIdx < 0 && !string.IsNullOrEmpty(creatureId) && creatureId != "^")
+            {
+                // Save has an ID we do not recognise; insert it as a temporary entry
+                typeIdx = InsertUnrecognisedTypeEntry(creatureId);
             }
             _typeField.SelectedIndex = typeIdx;
 
@@ -394,8 +422,29 @@ public partial class CompanionPanel : UserControl
             // AllowUnmodifiedReroll
             try { _allowUnmodifiedRerollField.Checked = comp.GetBool("AllowUnmodifiedReroll"); } catch { _allowUnmodifiedRerollField.Checked = false; }
 
-            // UA
-            try { _uaField.Text = comp.GetLong("UA").ToString(System.Globalization.CultureInfo.InvariantCulture); } catch { _uaField.Text = "0"; }
+            // UA - may be stored as a hex string (e.g. "0x2258AA9DBD189F") or a numeric value
+            try
+            {
+                var rawUA = comp.GetValue("UA");
+                if (rawUA is string sUA && sUA.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
+                {
+                    // Stored as hex string in the save file
+                    _uaHexCheck.Checked = true;
+                    _uaField.Text = sUA;
+                }
+                else
+                {
+                    // Stored as a number — read via GetLong
+                    long uaVal = comp.GetLong("UA");
+                    _uaHexCheck.Checked = false;
+                    _uaField.Text = uaVal.ToString(CultureInfo.InvariantCulture);
+                }
+            }
+            catch
+            {
+                _uaHexCheck.Checked = false;
+                _uaField.Text = "0";
+            }
 
             // LastTrustIncreaseTime
             try
@@ -489,9 +538,58 @@ public partial class CompanionPanel : UserControl
         {
             comp.Set("CreatureID", entry.Id);
 
+            // If the user picked a recognised entry, remove any leftover unrecognised item
+            if (_unrecognisedTypeEntry != null && entry != _unrecognisedTypeEntry)
+                ClearUnrecognisedTypeEntry();
+
             // Mark the slot as occupied so the game recognises it
             ActivateSlotIfEmpty(comp);
         }
+    }
+
+    /// <summary>
+    /// Removes the temporary unrecognised entry from the species combobox (if present).
+    /// </summary>
+    private void ClearUnrecognisedTypeEntry()
+    {
+        if (_unrecognisedTypeEntry == null) return;
+        _typeField.Items.Remove(_unrecognisedTypeEntry);
+        _unrecognisedTypeEntry = null;
+    }
+
+    /// <summary>
+    /// Inserts a temporary unrecognised creature entry at position 0 in the species combobox
+    /// and returns its index. The entry is displayed in red by the owner-draw handler.
+    /// </summary>
+    private int InsertUnrecognisedTypeEntry(string creatureId)
+    {
+        string stripped = creatureId.TrimStart('^');
+        string display = UiStrings.Format("companion.unrecognised_species", stripped);
+        _unrecognisedTypeEntry = new CompanionEntry { Id = creatureId, Species = display };
+        _typeField.Items.Insert(0, _unrecognisedTypeEntry);
+        return 0;
+    }
+
+    /// <summary>
+    /// Owner-draw handler for the species combobox. Draws unrecognised entries in red.
+    /// </summary>
+    private void TypeField_DrawItem(object? sender, DrawItemEventArgs e)
+    {
+        if (e.Index < 0) return;
+
+        e.DrawBackground();
+
+        var item = _typeField.Items[e.Index];
+        string text = item?.ToString() ?? "";
+
+        Color textColour = (item == _unrecognisedTypeEntry)
+            ? Color.Red
+            : e.ForeColor;
+
+        using var brush = new SolidBrush(textColour);
+        e.Graphics.DrawString(text, e.Font!, brush, e.Bounds, StringFormat.GenericDefault);
+
+        e.DrawFocusRectangle();
     }
 
     /// <summary>
@@ -553,7 +651,7 @@ public partial class CompanionPanel : UserControl
     {
         var comp = SelectedCompanion;
         if (comp == null) return;
-        var normalized = SeedHelper.NormalizeSeed(_speciesSeedField.Text);
+        var normalized = SeedHelper.NormalizeSeedOrInteger(_speciesSeedField.Text);
         if (normalized != null)
             comp.Set("SpeciesSeed", normalized);
     }
@@ -562,7 +660,7 @@ public partial class CompanionPanel : UserControl
     {
         var comp = SelectedCompanion;
         if (comp == null) return;
-        var normalized = SeedHelper.NormalizeSeed(_genusSeedField.Text);
+        var normalized = SeedHelper.NormalizeSeedOrInteger(_genusSeedField.Text);
         if (normalized != null)
             comp.Set("GenusSeed", normalized);
     }
@@ -701,9 +799,43 @@ public partial class CompanionPanel : UserControl
     {
         var comp = SelectedCompanion;
         if (comp == null) return;
-        if (long.TryParse(_uaField.Text, System.Globalization.NumberStyles.Integer,
-                System.Globalization.CultureInfo.InvariantCulture, out long val))
-            comp.Set("UA", val);
+
+        string text = _uaField.Text.Trim();
+        if (_uaHexCheck.Checked)
+        {
+            // Hex mode: validate hex digits, write back as hex string preserving format
+            string hexPart = text.StartsWith("0x", StringComparison.OrdinalIgnoreCase)
+                ? text[2..] : text;
+            if (long.TryParse(hexPart, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out _))
+                comp.Set("UA", "0x" + hexPart.ToUpperInvariant());
+        }
+        else
+        {
+            // Decimal mode: write back as a long
+            if (long.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out long val))
+                comp.Set("UA", val);
+        }
+    }
+
+    /// <summary>Called when the hex checkbox changes - converts the displayed value.</summary>
+    private void OnUAHexCheckChanged()
+    {
+        string text = _uaField.Text.Trim();
+        if (_uaHexCheck.Checked)
+        {
+            // Switching to hex: parse current decimal and convert
+            if (long.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out long val))
+                _uaField.Text = "0x" + val.ToString("X");
+        }
+        else
+        {
+            // Switching to decimal: parse current hex and convert
+            string hexPart = text.StartsWith("0x", StringComparison.OrdinalIgnoreCase)
+                ? text[2..] : text;
+            if (long.TryParse(hexPart, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out long val))
+                _uaField.Text = val.ToString(CultureInfo.InvariantCulture);
+        }
+        WriteUA();
     }
 
     /// <summary>
@@ -1368,6 +1500,123 @@ public partial class CompanionPanel : UserControl
 
         // Move list
         LoadMoveSlots(comp);
+    }
+
+    /// <summary>
+    /// Loads the PetBattleTeam data from PlayerStateData and populates the 3 team slot combo boxes.
+    /// </summary>
+    private void LoadBattleTeam()
+    {
+        if (_playerState == null || _battleTeamSlots == null) return;
+
+        var available = new List<(int PetIndex, string Label)>();
+        var petsArray = _playerState.GetArray("Pets");
+        var unlockedSlots = _playerState.GetArray("UnlockedPetSlots");
+
+        if (petsArray != null)
+        {
+            for (int i = 0; i < petsArray.Length; i++)
+            {
+                var pet = petsArray.GetObject(i);
+                if (pet == null) continue;
+                bool occupied = IsSlotOccupied(pet);
+                if (!occupied) continue;
+                bool locked = unlockedSlots == null || i >= unlockedSlots.Length || !unlockedSlots.GetBool(i);
+                if (locked) continue;
+
+                string name = pet.GetString("CustomName") ?? "";
+                string label = string.IsNullOrEmpty(name) || name == "^"
+                    ? $"Pet {i}"
+                    : $"Pet {i} - {name}";
+                available.Add((i, label));
+            }
+        }
+
+        int[] currentIndices = [-1, -1, -1];
+        var battleTeam = _playerState.GetObject("PetBattleTeam");
+        if (battleTeam != null)
+        {
+            var members = battleTeam.GetArray("TeamMembers");
+            if (members != null)
+            {
+                for (int i = 0; i < Math.Min(3, members.Length); i++)
+                {
+                    var member = members.GetObject(i);
+                    if (member != null)
+                        currentIndices[i] = member.GetInt("PetIndex");
+                }
+            }
+        }
+
+        string noneText = UiStrings.GetOrNull("companion.battle_team_none") ?? "None";
+        for (int t = 0; t < 3; t++)
+        {
+            _battleTeamSlots[t].BeginUpdate();
+            _battleTeamSlots[t].Items.Clear();
+            _battleTeamSlots[t].Items.Add(new BattleTeamItem(-1, noneText));
+
+            foreach (var (petIdx, lbl) in available)
+                _battleTeamSlots[t].Items.Add(new BattleTeamItem(petIdx, lbl));
+
+            int selected = 0;
+            for (int j = 0; j < _battleTeamSlots[t].Items.Count; j++)
+            {
+                if (_battleTeamSlots[t].Items[j] is BattleTeamItem item && item.PetIndex == currentIndices[t])
+                {
+                    selected = j;
+                    break;
+                }
+            }
+            _battleTeamSlots[t].SelectedIndex = selected;
+            _battleTeamSlots[t].EndUpdate();
+        }
+    }
+
+    /// <summary>
+    /// Writes the selected pet index for a battle team slot to the save data.
+    /// Enforces uniqueness by clearing any other slot that has the same pet.
+    /// </summary>
+    private void WriteBattleTeamSlot(int slotIndex)
+    {
+        if (_playerState == null || _battleTeamSlots == null) return;
+
+        var battleTeam = _playerState.GetObject("PetBattleTeam");
+        if (battleTeam == null) return;
+        var members = battleTeam.GetArray("TeamMembers");
+        if (members == null || members.Length < 3) return;
+
+        int selectedPetIndex = -1;
+        if (_battleTeamSlots[slotIndex].SelectedItem is BattleTeamItem item)
+            selectedPetIndex = item.PetIndex;
+
+        // Enforce uniqueness: if another slot has this pet, clear it
+        if (selectedPetIndex >= 0)
+        {
+            _loading = true;
+            try
+            {
+                for (int t = 0; t < 3; t++)
+                {
+                    if (t == slotIndex) continue;
+                    if (_battleTeamSlots[t].SelectedItem is BattleTeamItem other && other.PetIndex == selectedPetIndex)
+                    {
+                        _battleTeamSlots[t].SelectedIndex = 0;
+                        var otherMember = members.GetObject(t);
+                        otherMember?.Set("PetIndex", -1);
+                    }
+                }
+            }
+            finally { _loading = false; }
+        }
+
+        var member = members.GetObject(slotIndex);
+        member?.Set("PetIndex", selectedPetIndex);
+    }
+
+    /// <summary>Item for PetBattleTeam combo boxes holding the pet index and display label.</summary>
+    private sealed record BattleTeamItem(int PetIndex, string Label)
+    {
+        public override string ToString() => Label;
     }
 
     /// <summary>Loads move slot data from the companion's PetBattlerMoveList.</summary>
@@ -2522,6 +2771,9 @@ public partial class CompanionPanel : UserControl
         }
 
         // Battle tab labels
+        _battleTeamLabel.Text = UiStrings.GetOrNull("companion.battle_team") ?? "Pet Battle Team";
+        for (int i = 0; i < 3; i++)
+            _battleTeamSlotLabels[i].Text = UiStrings.Format("companion.battle_team_slot", i + 1);
         _battleAffinityLabel.Text = UiStrings.GetOrNull("companion.battle_affinity") ?? "Affinity:";
         _battleWeakLabel.Text = UiStrings.GetOrNull("companion.battle_weak") ?? "Weak:";
         _battleStrongLabel.Text = UiStrings.GetOrNull("companion.battle_strong") ?? "Strong:";
