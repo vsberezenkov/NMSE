@@ -1,0 +1,107 @@
+name: Issue report
+description: Report a bug or request a new feature for NMSE.
+title: "$issue_type $summary"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to report a bug or request a feature. Select the issue type first, then complete every required field.
+  - type: dropdown
+    id: issue_type
+    attributes:
+      label: "Issue type"
+      description: "Choose whether this is a bug report or a feature request."
+      options:
+        - label: "Bug"
+          value: "[Bug]"
+        - label: "Feature Request"
+          value: "[Feature Request]"
+      required: true
+  - type: input
+    id: summary
+    attributes:
+      label: "Summary"
+      description: "Complete the title with a concise summary of the bug or feature."
+      placeholder: "I would like ABC feature, or XYZ isn't working for 123"
+      required: true
+  - type: checkboxes
+    id: confirm_latest_release
+    attributes:
+      label: "Confirm the following statements"
+      options:
+        - label: "I have checked that this issue is relevant to the latest release of NMSE."
+          value: "latest-release"
+      required: true
+  - type: checkboxes
+    id: confirm_searched_issues
+    attributes:
+      options:
+        - label: "I have searched the issue tracker and found no duplicate."
+          value: "searched-issues"
+      required: true
+  - type: checkboxes
+    id: confirm_searched_docs
+    attributes:
+      options:
+        - label: "I have searched the documentation and found nothing matching this issue."
+          value: "searched-docs"
+      required: true
+  - type: checkboxes
+    id: confirm_one_issue
+    attributes:
+      options:
+        - label: "This issue contains only one bug report or feature request."
+          value: "one-issue"
+      required: true
+  - type: checkboxes
+    id: confirm_code_of_conduct
+    attributes:
+      options:
+        - label: "I have read and agree to follow the code of conduct."
+          value: "code-of-conduct"
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Describe the bug or feature in detail. Include what is happening now and what should happen instead."
+      placeholder: "A clear and concise description of the problem or requested improvement."
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: "Impact / expected behavior"
+      description: "If this is a bug, describe the failure and the expected behavior. If this is a feature request, describe the desired outcome and why it's useful."
+      placeholder: "If this is a bug, explain how the behavior differs from expected. If this is a feature request, describe the goal."
+      required: true
+  - type: textarea
+    id: steps_or_use_case
+    attributes:
+      label: "Steps to reproduce / use case"
+      description: "For bugs, list the exact steps to reproduce. For features, describe the use case and how it should work."
+      placeholder: "1. Step one\n2. Step two\n3. Step three"
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: "Environment"
+      description: "Provide OS, NMSE version, branch/commit, and any other environment details."
+      placeholder: "OS: Windows 11\nVersion: v1.2.3\nBranch/Commit: main / abc123"
+      required: true
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: "Acceptance criteria"
+      description: "List what must be true for this issue to be considered complete."
+      placeholder: "- [ ] Criteria one\n- [ ] Criteria two"
+      required: true
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: "Additional information"
+      description: "Add any extra logs, attachments, or context that may help reproduce, diagnose, or prioritize this issue."
+      placeholder: "Any relevant logs, screenshots, or other context."
+      required: true
+  - type: markdown
+    attributes:
+      value: "❤️ Thanks for helping to make NMSE better!"
