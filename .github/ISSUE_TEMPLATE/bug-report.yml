@@ -1,0 +1,83 @@
+name: Bug report
+description: Report a bug in NMSE.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to report a bug. Complete every required field.
+  - type: input
+    id: summary
+    attributes:
+      label: "Summary"
+      description: "A concise summary of the bug."
+      placeholder: "XYZ isn't working when I do 123"
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: "Confirm the following statements"
+      options:
+        - label: "I have checked that this issue is relevant to the latest release of NMSE."
+          required: true
+        - label: "I have searched the issue tracker and found no duplicate."
+          required: true
+        - label: "I have searched the documentation and found nothing matching this issue."
+          required: true
+        - label: "This issue contains only one bug report."
+          required: true
+        - label: "I have read and agree to follow the code of conduct."
+          required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Describe the bug in detail. Include what is happening now and what should happen instead."
+      placeholder: "A clear and concise description of the problem."
+    validations:
+      required: true
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: "Expected behavior"
+      description: "Describe what you expected to happen."
+      placeholder: "I expected the application to do X, but instead it did Y."
+    validations:
+      required: true
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: "Steps to reproduce"
+      description: "List the exact steps to reproduce the bug."
+      placeholder: "1. Step one\n2. Step two\n3. Step three"
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: "Environment"
+      description: "Provide OS, NMSE version, branch/commit, and any other environment details."
+      placeholder: "OS: Windows 11\nVersion: v1.2.3\nBranch/Commit: main / abc123"
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: "Acceptance criteria"
+      description: "List what must be true for this bug to be considered fixed."
+      placeholder: "- [ ] Criteria one\n- [ ] Criteria two"
+    validations:
+      required: true
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: "Additional information"
+      description: "Add any extra logs, screenshots, or context that may help reproduce or diagnose this bug."
+      placeholder: "Any relevant logs, screenshots, or other context."
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: "❤️ Thanks for helping to make NMSE better!"

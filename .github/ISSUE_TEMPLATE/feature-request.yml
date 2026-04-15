@@ -1,0 +1,75 @@
+name: Feature request
+description: Request a new feature for NMSE.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to request a feature. Complete every required field.
+  - type: input
+    id: summary
+    attributes:
+      label: "Summary"
+      description: "A concise summary of the feature you are requesting."
+      placeholder: "I would like ABC feature to do XYZ"
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: "Confirm the following statements"
+      options:
+        - label: "I have checked that this feature is not already available in the latest release of NMSE."
+          required: true
+        - label: "I have searched the issue tracker and found no duplicate."
+          required: true
+        - label: "I have searched the documentation and found nothing matching this request."
+          required: true
+        - label: "This issue contains only one feature request."
+          required: true
+        - label: "I have read and agree to follow the code of conduct."
+          required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Describe the feature in detail. What should it do and why is it useful?"
+      placeholder: "A clear and concise description of the requested improvement."
+    validations:
+      required: true
+  - type: textarea
+    id: use_case
+    attributes:
+      label: "Use case"
+      description: "Describe the use case and how the feature should work."
+      placeholder: "As a user, I want to ... so that ..."
+    validations:
+      required: true
+  - type: textarea
+    id: desired_outcome
+    attributes:
+      label: "Desired outcome"
+      description: "Describe the desired outcome and why it's useful."
+      placeholder: "The feature should allow users to ..."
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: "Acceptance criteria"
+      description: "List what must be true for this feature to be considered complete."
+      placeholder: "- [ ] Criteria one\n- [ ] Criteria two"
+    validations:
+      required: true
+  - type: textarea
+    id: additional_info
+    attributes:
+      label: "Additional information"
+      description: "Add any extra context, mockups, or references that may help prioritize or implement this feature."
+      placeholder: "Any relevant context, examples, or references."
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: "❤️ Thanks for helping to make NMSE better!"
