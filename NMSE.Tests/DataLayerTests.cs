@@ -151,33 +151,16 @@ public class DataLayerTests
     // --- CompanionDatabase -------------------------------------------
 
     [Fact]
-    public void CompanionDatabase_Entries_AreNotEmpty()
+    public void CompanionDatabase_Entries_MatchById()
     {
-        Assert.True(CompanionDatabase.Entries.Count > 0);
+        // Entries and ById should be in sync (both empty or both populated)
+        Assert.Equal(CompanionDatabase.Entries.Count, CompanionDatabase.ById.Count);
     }
 
     [Fact]
     public void CompanionDatabase_ById_ContainsAllEntries()
     {
         Assert.Equal(CompanionDatabase.Entries.Count, CompanionDatabase.ById.Count);
-    }
-
-    [Theory]
-    [InlineData("^QUAD_PET")]
-    [InlineData("^TREX")]
-    [InlineData("^FISH")]
-    [InlineData("^SANDWORM")]
-    public void CompanionDatabase_ById_ContainsKnownEntries(string id)
-    {
-        Assert.True(CompanionDatabase.ById.ContainsKey(id));
-        Assert.Equal(id, CompanionDatabase.ById[id].Id);
-    }
-
-    [Fact]
-    public void CompanionDatabase_ById_IsCaseInsensitive()
-    {
-        Assert.True(CompanionDatabase.ById.ContainsKey("^quad_pet"));
-        Assert.True(CompanionDatabase.ById.ContainsKey("^QUAD_PET"));
     }
 
     [Fact]

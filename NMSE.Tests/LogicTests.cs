@@ -39,6 +39,8 @@ public class LogicTests
             SettlementDatabase.LoadFromFile(Path.Combine(jsonDir, "Settlement Perks.json"));
             WikiGuideDatabase.LoadFromFile(Path.Combine(jsonDir, "Wiki Guide.json"));
             TitleDatabase.LoadFromFile(Path.Combine(jsonDir, "Titles.json"));
+            CompanionDatabase.LoadFromFile(Path.Combine(jsonDir, "Creature Species.json"));
+            CreaturePartDatabase.LoadFromFile(Path.Combine(jsonDir, "Creature Descriptors.json"));
 
             // Load UI strings so that logic classes returning localised text work correctly
             var langDir = FindResourceLangDir();
@@ -1810,9 +1812,9 @@ public class LogicTests
     [Fact]
     public void CompanionLogic_LookupSpeciesName_KnownEntry_FoundInDatabase()
     {
-        // ^QUAD_PET exists in CompanionDatabase (Species field may be empty)
-        Assert.True(CompanionDatabase.ById.ContainsKey("^QUAD_PET"));
-        string name = CompanionLogic.LookupSpeciesName("^QUAD_PET");
+        // ^CAT exists in CompanionDatabase
+        Assert.True(CompanionDatabase.ById.ContainsKey("^CAT"));
+        string name = CompanionLogic.LookupSpeciesName("^CAT");
         // Returns whatever the database has (could be empty string)
         Assert.NotNull(name);
     }
@@ -2090,18 +2092,18 @@ public class LogicTests
         // Verify that CreatureID (species) and CreatureType.CreatureType (behaviour) are distinct JSON paths
         // This confirms they cannot be combined into a single combobox
         var comp = JsonObject.Parse(@"{
-            ""CreatureID"": ""^QUAD_PET"",
+            ""CreatureID"": ""^TREX"",
             ""CreatureType"": { ""CreatureType"": ""Prey"" }
         }");
 
         // CreatureID is the species identifier
-        Assert.Equal("^QUAD_PET", comp.GetString("CreatureID"));
+        Assert.Equal("^TREX", comp.GetString("CreatureID"));
 
         // CreatureType.CreatureType is the behavioural classification
         Assert.Equal("Prey", comp.GetObject("CreatureType")!.GetString("CreatureType"));
 
         // They use different value domains
-        Assert.True(CompanionDatabase.ById.ContainsKey("^QUAD_PET")); // species from database
+        Assert.True(CompanionDatabase.ById.ContainsKey("^TREX")); // species from database
         Assert.Contains("Prey", CompanionDatabase.CreatureTypes);        // behaviour from CreatureTypes list
 
         // Changing one does not affect the other
@@ -2279,6 +2281,275 @@ public class LogicTests
     public void CompanionLogic_MaxPetSlots_Is30()
     {
         Assert.Equal(30, CompanionLogic.MaxPetSlots);
+    }
+
+    [Fact]
+    public void CompanionLogic_ImportCompanion_InsertsIntoFirstEmptySlot()
+    {
+        // Build a minimal companion array with 3 slots: occupied, empty, occupied
+        var companions = JsonArray.Parse(@"[
+            { ""CreatureID"": ""^CAT"", ""CreatureSeed"": [true, ""0xAA""] },
+            { ""CreatureID"": ""^"", ""CreatureSeed"": [false, ""0x0""], ""SpeciesSeed"": 0, ""GenusSeed"": 0 },
+            { ""CreatureID"": ""^DOG"", ""CreatureSeed"": [true, ""0xBB""] }
+        ]");
+
+        // Create a minimal pet file to import
+        var tmpFile = Path.Combine(Path.GetTempPath(), "test_import_companion.nmspet");
+        try
+        {
+            File.WriteAllText(tmpFile, @"{
+                ""Scale"": 1.5,
+                ""CreatureID"": ""^PURPLE_WEIRD"",
+                ""CreatureSeed"": [true, ""0xA5128111574D8588""],
+                ""SpeciesSeed"": ""0xA630F9645CAD757D"",
+                ""GenusSeed"": ""0x95E330F5F8B059C7"",
+                ""Biome"": { ""Biome"": ""Frozen"" },
+                ""CreatureType"": { ""CreatureType"": ""ProtoFlyer"" }
+            }");
+
+            int idx = CompanionLogic.ImportCompanion(companions, tmpFile);
+
+            Assert.Equal(1, idx); // Should import into the empty slot at index 1
+            var imported = companions.GetObject(1);
+            Assert.Equal("^PURPLE_WEIRD", imported.GetString("CreatureID"));
+            Assert.True(imported.GetArray("CreatureSeed")!.GetBool(0));
+            Assert.Equal("0xA5128111574D8588", imported.GetArray("CreatureSeed")!.GetString(1));
+            Assert.Equal("Frozen", imported.GetObject("Biome")!.GetString("Biome"));
+        }
+        finally
+        {
+            if (File.Exists(tmpFile)) File.Delete(tmpFile);
+        }
+    }
+
+    [Fact]
+    public void CompanionLogic_ImportCompanion_PACWrappedCorrectly()
+    {
+        // Build a companion array with one empty slot
+        var companions = JsonArray.Parse(@"[
+            { ""CreatureID"": ""^"", ""CreatureSeed"": [false, ""0x0""], ""SpeciesSeed"": 0, ""GenusSeed"": 0 }
+        ]");
+
+        // Build a PAC array matching the save structure: each entry is { Data: [...] }
+        var pacArray = JsonArray.Parse(@"[
+            { ""Data"": [
+                { ""SelectedPreset"": ""^DEFAULT_PET"", ""CustomData"": {} },
+                { ""SelectedPreset"": ""^DEFAULT_PET"", ""CustomData"": {} },
+                { ""SelectedPreset"": ""^DEFAULT_PET"", ""CustomData"": {} }
+            ] }
+        ]");
+
+        // Create an import file that includes PetAccessoryCustomisation (as exported)
+        var tmpFile = Path.Combine(Path.GetTempPath(), "test_pac_import.nmspet");
+        try
+        {
+            File.WriteAllText(tmpFile, @"{
+                ""CreatureID"": ""^PURPLE_WEIRD"",
+                ""CreatureSeed"": [true, ""0xA5128111574D8588""],
+                ""SpeciesSeed"": ""0xA630F9645CAD757D"",
+                ""GenusSeed"": ""0x95E330F5F8B059C7"",
+                ""PetAccessoryCustomisation"": [
+                    { ""SelectedPreset"": ""^HAT_PET"", ""CustomData"": { ""Scale"": 2.0 } },
+                    { ""SelectedPreset"": ""^WINGS_PET"", ""CustomData"": { ""Scale"": 1.5 } },
+                    { ""SelectedPreset"": ""^DEFAULT_PET"", ""CustomData"": {} }
+                ]
+            }");
+
+            int idx = CompanionLogic.ImportCompanion(companions, tmpFile, pacArray);
+
+            Assert.Equal(0, idx);
+
+            // Verify PAC entry is an object with Data key (not a raw array)
+            var pacEntry = pacArray.GetObject(0);
+            Assert.NotNull(pacEntry);
+            Assert.NotNull(pacEntry!.GetArray("Data"));
+
+            // Verify the Data was updated with imported values
+            var data = pacEntry.GetArray("Data")!;
+            Assert.Equal(3, data.Length);
+            Assert.Equal("^HAT_PET", data.GetObject(0)!.GetString("SelectedPreset"));
+            Assert.Equal("^WINGS_PET", data.GetObject(1)!.GetString("SelectedPreset"));
+            Assert.Equal("^DEFAULT_PET", data.GetObject(2)!.GetString("SelectedPreset"));
+        }
+        finally
+        {
+            if (File.Exists(tmpFile)) File.Delete(tmpFile);
+        }
+    }
+
+    [Fact]
+    public void CompanionLogic_ImportCompanion_PACNotCorrupted_SaveRoundtrips()
+    {
+        // This test verifies the specific corruption bug: the PAC entry must remain
+        // an object { Data: [...] }, not be replaced by a raw array.
+        var companions = JsonArray.Parse(@"[
+            { ""CreatureID"": ""^"", ""CreatureSeed"": [false, ""0x0""] }
+        ]");
+
+        var pacArray = JsonArray.Parse(@"[
+            { ""Data"": [
+                { ""SelectedPreset"": ""^DEFAULT_PET"" },
+                { ""SelectedPreset"": ""^DEFAULT_PET"" },
+                { ""SelectedPreset"": ""^DEFAULT_PET"" }
+            ] }
+        ]");
+
+        var tmpFile = Path.Combine(Path.GetTempPath(), "test_pac_roundtrip.nmspet");
+        try
+        {
+            File.WriteAllText(tmpFile, @"{
+                ""CreatureID"": ""^BLOB"",
+                ""CreatureSeed"": [true, ""0x1234""],
+                ""PetAccessoryCustomisation"": [
+                    { ""SelectedPreset"": ""^ACC1"" },
+                    { ""SelectedPreset"": ""^ACC2"" },
+                    { ""SelectedPreset"": ""^ACC3"" }
+                ]
+            }");
+
+            CompanionLogic.ImportCompanion(companions, tmpFile, pacArray);
+
+            // Serialize the PAC array and verify it's valid JSON that re-parses correctly
+            var pacJson = pacArray.ToString();
+            var reparsed = JsonArray.Parse(pacJson);
+
+            // The entry at index 0 must still be an object, not an array
+            var entry = reparsed.GetObject(0);
+            Assert.NotNull(entry);
+
+            // The Data key must exist and be an array
+            var data = entry!.GetArray("Data");
+            Assert.NotNull(data);
+            Assert.Equal(3, data!.Length);
+        }
+        finally
+        {
+            if (File.Exists(tmpFile)) File.Delete(tmpFile);
+        }
+    }
+
+    [Fact]
+    public void CompanionLogic_ImportCompanion_AllSlotsFull_Throws()
+    {
+        var companions = JsonArray.Parse(@"[
+            { ""CreatureID"": ""^CAT"", ""CreatureSeed"": [true, ""0xAA""] },
+            { ""CreatureID"": ""^DOG"", ""CreatureSeed"": [true, ""0xBB""] }
+        ]");
+
+        var tmpFile = Path.Combine(Path.GetTempPath(), "test_full_import.nmspet");
+        try
+        {
+            File.WriteAllText(tmpFile, @"{
+                ""CreatureID"": ""^BLOB"",
+                ""CreatureSeed"": [true, ""0x1234""]
+            }");
+
+            Assert.Throws<InvalidOperationException>(() =>
+                CompanionLogic.ImportCompanion(companions, tmpFile));
+        }
+        finally
+        {
+            if (File.Exists(tmpFile)) File.Delete(tmpFile);
+        }
+    }
+
+    [Fact]
+    public void CompanionLogic_ExportImportRoundtrip_PreservesData()
+    {
+        // Create a companion with known data
+        var comp = JsonObject.Parse(@"{
+            ""Scale"": 1.5,
+            ""CreatureID"": ""^PURPLE_WEIRD"",
+            ""CreatureSeed"": [true, ""0xA5128111574D8588""],
+            ""SpeciesSeed"": ""0xA630F9645CAD757D"",
+            ""GenusSeed"": ""0x95E330F5F8B059C7"",
+            ""CustomName"": ""TestPet"",
+            ""Biome"": { ""Biome"": ""Frozen"" },
+            ""CreatureType"": { ""CreatureType"": ""ProtoFlyer"" },
+            ""Trust"": 0.6
+        }");
+
+        // Create PAC slots (what export receives from pacEntry.GetArray("Data"))
+        var pacSlots = JsonArray.Parse(@"[
+            { ""SelectedPreset"": ""^HAT"", ""CustomData"": {} },
+            { ""SelectedPreset"": ""^DEFAULT_PET"", ""CustomData"": {} },
+            { ""SelectedPreset"": ""^DEFAULT_PET"", ""CustomData"": {} }
+        ]");
+
+        var exportFile = Path.Combine(Path.GetTempPath(), "test_roundtrip.nmspet");
+        try
+        {
+            // Export
+            CompanionLogic.ExportCompanion(comp, exportFile, pacSlots);
+            Assert.True(File.Exists(exportFile));
+
+            // Create target array with one empty slot and PAC
+            var targetCompanions = JsonArray.Parse(@"[
+                { ""CreatureID"": ""^"", ""CreatureSeed"": [false, ""0x0""], ""SpeciesSeed"": 0, ""GenusSeed"": 0 }
+            ]");
+            var targetPac = JsonArray.Parse(@"[
+                { ""Data"": [
+                    { ""SelectedPreset"": ""^DEFAULT_PET"", ""CustomData"": {} },
+                    { ""SelectedPreset"": ""^DEFAULT_PET"", ""CustomData"": {} },
+                    { ""SelectedPreset"": ""^DEFAULT_PET"", ""CustomData"": {} }
+                ] }
+            ]");
+
+            // Import
+            int idx = CompanionLogic.ImportCompanion(targetCompanions, exportFile, targetPac);
+
+            Assert.Equal(0, idx);
+            var reimported = targetCompanions.GetObject(0);
+            Assert.Equal("^PURPLE_WEIRD", reimported.GetString("CreatureID"));
+            Assert.Equal("TestPet", reimported.GetString("CustomName"));
+            Assert.Equal("Frozen", reimported.GetObject("Biome")!.GetString("Biome"));
+
+            // PAC should be properly wrapped
+            var pacEntry = targetPac.GetObject(0);
+            Assert.NotNull(pacEntry);
+            var data = pacEntry!.GetArray("Data")!;
+            Assert.Equal("^HAT", data.GetObject(0)!.GetString("SelectedPreset"));
+        }
+        finally
+        {
+            if (File.Exists(exportFile)) File.Delete(exportFile);
+        }
+    }
+
+    [Fact]
+    public void CompanionDatabase_ContainsPurpleWeird()
+    {
+        Assert.True(CompanionDatabase.ById.ContainsKey("^PURPLE_WEIRD"));
+        Assert.Equal("Purple Weird", CompanionDatabase.ById["^PURPLE_WEIRD"].Species);
+    }
+
+    [Fact]
+    public void CompanionDatabase_ContainsHermitCrab()
+    {
+        Assert.True(CompanionDatabase.ById.ContainsKey("^HERMITCRAB"));
+        Assert.Equal("Hermitcrab", CompanionDatabase.ById["^HERMITCRAB"].Species);
+    }
+
+    [Fact]
+    public void CompanionDatabase_ContainsCanonicalGameEntries()
+    {
+        // Verify key canonical game IDs from creaturedatatable are present
+        // (replaces the old Creature Builder IDs)
+        var expectedIds = new[]
+        {
+            "^SWIMCOW", "^FIENDFISHBIG",
+            "^PROTOFLYER", "^SCUTTLER",
+            "^SWIMRODENT",
+            "^SIXLEGCOW", "^FISH", "^FLOATSPIDER",
+            "^PROTODIGGER", "^WEIRDFLOAT",
+            "^TWOLEGANTELOPE", "^MOLE", "^JELLYFISH",
+        };
+
+        foreach (var id in expectedIds)
+        {
+            Assert.True(CompanionDatabase.ById.ContainsKey(id),
+                $"CompanionDatabase should contain canonical game ID {id}");
+        }
     }
 
     // --- CatalogueLogic ----------------------------------------------
