@@ -37,7 +37,7 @@ This guide walks you through every feature of the application so you can confide
 
 ### What You Need
 
-- **Windows 10 or 11** (64-bit) _... or Linux (Wine, Bottles) and macOS (Whisky, CrossOver)_
+- **Windows 10 or 11** (64-bit) _... or Linux (Wine, Bottles) and macOS (Gcenx Wine Builds, CrossOver)_
 - A *No Man's Sky* save file from any supported platform
 
 ### Installing NMSE
@@ -49,7 +49,7 @@ This guide walks you through every feature of the application so you can confide
 > 💡 No installation is required - NMSE is fully portable. You can run it from a USB drive or any folder.
 
 
-While NMSE is a native Windows application, it runs on **Linux** and **macOS** via Wine compatibility layers. Guides are available for [Wine][guide-wine], [Bottles][guide-bottles], [Whisky][guide-whisky], and [CrossOver][guide-crossover]. A native cross-platform version [is planned][cross-platform-plan].
+While NMSE is a native Windows application, it runs on **Linux** and **macOS** via Wine compatibility layers. Guides are available for [Wine][guide-wine], [Bottles][guide-bottles], [Gcenx Wine Builds][guide-gcenx-wine], and [CrossOver][guide-crossover]. A native cross-platform version [is planned][cross-platform-plan].
 
 ### Supported Platforms
 
@@ -902,7 +902,7 @@ Made with ❤️ by [**vectorcmdr**][github-owner]
 <!-- Other Guides -->
 [guide-wine]: ../dev/wine-linux-guide.md
 [guide-bottles]: ../dev/bottles-linux-guide.md
-[guide-whisky]: ../dev/whisky-macos-guide.md
+[guide-gcenx-wine]: ../dev/gcenx-macos-guide.md
 [guide-crossover]: ../dev/crossover-macos-guide.md
 [cross-platform-plan]: ../dev/cross-platform-workplan.md
 

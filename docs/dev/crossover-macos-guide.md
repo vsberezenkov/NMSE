@@ -15,7 +15,7 @@ A step-by-step guide to running NMSE (No Man's Save Editor) on macOS using [Cros
 5. [Setting Up NMSE](#setting-up-nmse)
 6. [Finding Your NMS Save Files](#finding-your-nms-save-files)
 7. [Troubleshooting](#troubleshooting)
-8. [Comparison: CrossOver vs Whisky](#comparison-crossover-vs-whisky)
+8. [Comparison: CrossOver vs Gcenx Wine Builds](#comparison-crossover-vs-gcenx-wine-builds)
 
 ---
 
@@ -27,7 +27,7 @@ A step-by-step guide to running NMSE (No Man's Save Editor) on macOS using [Cros
 
 ## Why CrossOver?
 
-| Feature | CrossOver | Whisky (Free Alternative) |
+| Feature | CrossOver | Gcenx Wine Builds (Free Alternative) |
 |---------|-----------|--------------------------|
 | **Cost** | $74/year | Free |
 | **Apple Silicon** | Excellent (dedicated optimisation) | Good (Rosetta 2) |
@@ -42,7 +42,7 @@ A step-by-step guide to running NMSE (No Man's Save Editor) on macOS using [Cros
 - You value commercial support
 - You run other Windows applications on macOS
 
-**Choose Whisky if:**
+**Choose Gcenx Wine Builds if:**
 - You prefer a free solution
 - You're comfortable with minor configuration
 - You only need it for NMSE
@@ -183,9 +183,9 @@ On Apple Silicon Macs, first-launch performance may be slower due to Rosetta 2 t
 
 ---
 
-## Comparison: CrossOver vs Whisky
+## Comparison: CrossOver vs Gcenx Wine Builds
 
-| Aspect | CrossOver | Whisky |
+| Aspect | CrossOver | Gcenx Wine Builds |
 |--------|-----------|--------|
 | **Cost** | $74/year or $494 lifetime | Free (GPL-3.0) |
 | **Ease of setup** | Easiest (guided) | Easy (manual bottle creation) |
@@ -195,7 +195,7 @@ On Apple Silicon Macs, first-launch performance may be slower due to Rosetta 2 t
 | **macOS integration** | Better (shortcuts, Dock) | Basic |
 | **Auto-updates** | Yes | Yes |
 
-For most users, **Whisky** (free) provides a perfectly adequate experience. CrossOver is worth considering if you want the most polished experience or use other Windows applications on your Mac.
+For most users, **Gcenx Wine Builds** (free) provides a perfectly adequate experience. CrossOver is worth considering if you want the most polished experience or use other Windows applications on your Mac.
 
 ---
 

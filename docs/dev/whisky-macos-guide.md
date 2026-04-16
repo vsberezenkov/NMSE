@@ -1,6 +1,6 @@
-# Running NMSE on macOS with Whisky
+# Running NMSE on macOS with Gcenx Wine Builds
 
-A step-by-step guide to running NMSE (No Man's Save Editor) on macOS using [Whisky](https://getwhisky.app), a free and open-source Wine wrapper.
+A step-by-step guide to running NMSE (No Man's Save Editor) on macOS using Gcenx Wine Builds from [Gcenx/macOS_Wine_builds](https://github.com/Gcenx/macOS_Wine_builds).
 
 > **Note:** This is an interim solution. A native cross-platform version using Eto.Forms is planned - see the [Cross-Platform Work Plan](cross-platform-workplan.md) for details.
 
@@ -11,7 +11,7 @@ A step-by-step guide to running NMSE (No Man's Save Editor) on macOS using [Whis
 1. [Overview](#overview)
 2. [System Requirements](#system-requirements)
 3. [Installation](#installation)
-4. [Setting Up NMSE in Whisky](#setting-up-nmse-in-whisky)
+4. [Setting Up NMSE with Gcenx Wine Builds](#setting-up-nmse-with-gcenx-wine-builds)
 5. [Finding Your NMS Save Files](#finding-your-nms-save-files)
 6. [Homebrew Cask Installation (Advanced)](#homebrew-cask-installation-advanced)
 7. [Troubleshooting](#troubleshooting)
@@ -21,9 +21,9 @@ A step-by-step guide to running NMSE (No Man's Save Editor) on macOS using [Whis
 
 ## Overview
 
-[Whisky](https://getwhisky.app) is a free, open-source Wine wrapper for macOS with a native SwiftUI interface. It manages Wine "bottles" (isolated environments) and provides a clean macOS-native experience for running Windows applications.
+Gcenx Wine Builds are community-built Wine packages for macOS. They provide Wine app bundles that can run Windows applications and manage Wine prefixes on macOS.
 
-**Why Whisky?**
+**Why Gcenx Wine Builds?**
 - **Free and open-source** (GPL-3.0)
 - **Apple Silicon support** via Rosetta 2 (M1/M2/M3/M4 Macs)
 - **Intel Mac support** (native Wine)
@@ -39,25 +39,25 @@ A step-by-step guide to running NMSE (No Man's Save Editor) on macOS using [Whis
 |------------|--------|
 | **macOS version** | macOS 13 Ventura or later |
 | **Chip** | Apple Silicon (M1/M2/M3/M4) or Intel |
-| **Rosetta 2** | Required on Apple Silicon (Whisky prompts to install if missing) |
-| **Disk space** | ~1 GB (Whisky + Wine + NMSE) |
-| **Homebrew** | Recommended for installation (optional - Whisky also has a direct download) |
+| **Rosetta 2** | Required on Apple Silicon (Gcenx Wine Builds prompts to install if missing) |
+| **Disk space** | ~1 GB (Gcenx Wine Builds + Wine + NMSE) |
+| **Homebrew** | Recommended for installation (optional - Gcenx Wine Builds also has a direct download) |
 
 ---
 
 ## Installation
 
-### Step 1: Install Whisky
+### Step 1: Install Gcenx Wine Builds
 
 **Via Homebrew (recommended):**
 ```bash
-brew install --cask whisky
+# Download and install a Gcenx Wine package from GitHub releases
 ```
 
 **Via direct download:**
-1. Visit https://getwhisky.app
-2. Click "Download"
-3. Open the `.dmg` and drag Whisky to Applications
+1. Visit https://github.com/Gcenx/macOS_Wine_builds
+2. Download the desired package
+3. Install the app bundle on macOS
 
 ### Step 2: Download NMSE
 
@@ -80,11 +80,11 @@ rm NMSE-latest.zip
 
 ---
 
-## Setting Up NMSE in Whisky
+## Setting Up NMSE with Gcenx Wine Builds
 
 ### Step 3: Create a Bottle
 
-1. Open **Whisky** from Applications
+1. Open the Gcenx Wine app bundle from Applications
 2. Click the **+** button (or "Create Bottle")
 3. Configure the bottle:
    - **Name:** `NMSE`
@@ -92,7 +92,7 @@ rm NMSE-latest.zip
    - **Path:** Leave as default (or choose a location)
 4. Click **Create**
 
-<!-- Screenshot placeholder: Whisky create bottle dialog -->
+<!-- Screenshot placeholder: Gcenx Wine Builds create bottle dialog -->
 
 ### Step 4: Add NMSE to the Bottle
 
@@ -101,7 +101,7 @@ rm NMSE-latest.zip
 3. Navigate to where you extracted NMSE and select `NMSE.exe`
 4. Click **Open**
 
-<!-- Screenshot placeholder: Whisky add program dialog -->
+<!-- Screenshot placeholder: Gcenx Wine Builds add program dialog -->
 
 ### Step 5: Launch NMSE
 
@@ -109,7 +109,7 @@ rm NMSE-latest.zip
 2. Click **Run** (▶)
 3. NMSE will launch - first launch may take 20–30 seconds as Wine initialises
 
-<!-- Screenshot placeholder: NMSE running in Whisky on macOS -->
+<!-- Screenshot placeholder: NMSE running with Gcenx Wine Builds on macOS -->
 
 ### Optional: Bottle Configuration
 
@@ -145,12 +145,12 @@ When NMSE opens its directory browser, the macOS filesystem appears under Wine's
 Z:\Users\<username>\Library\Application Support\HelloGames\NMS\
 ```
 
-Alternatively, you can use the Whisky bottle's `drive_c` to place a shortcut:
-1. In Whisky, click **Open C: Drive** on your NMSE bottle
+Alternatively, you can use the Gcenx Wine prefix's `drive_c` to place a shortcut:
+1. In the Gcenx Wine app bundle, click **Open C: Drive** on your NMSE prefix
 2. Navigate to `users/<username>/Desktop/`
 3. Create a symbolic link to your NMS saves:
    ```bash
-   ln -s ~/Library/Application\ Support/HelloGames/NMS ~/Library/Containers/com.whisky.app/.../drive_c/users/$(whoami)/Desktop/NMS-Saves
+   ln -s ~/Library/Application\ Support/HelloGames/NMS ~/Library/Containers/com.gcenx.app/.../drive_c/users/$(whoami)/Desktop/NMS-Saves
    ```
 
 ---
@@ -174,7 +174,7 @@ After installation:
 ~/Applications/NMSE/nmse-launch.sh
 ```
 
-The launch script automatically finds Whisky's bundled Wine and uses it.
+The launch script automatically finds Gcenx Wine Builds' bundled Wine and uses it.
 
 ---
 
@@ -189,21 +189,21 @@ softwareupdate --install-rosetta --agree-to-license
 
 ### Wine Crashes on Launch
 
-1. In Whisky, delete the NMSE bottle
+1. In Gcenx Wine Builds, delete the NMSE bottle
 2. Create a new bottle with Windows 10 selected
 3. Re-add NMSE.exe
 
 ### Font Issues
 
 If fonts look wrong in NMSE:
-1. In Whisky, select the NMSE bottle
+1. In Gcenx Wine Builds, select the NMSE bottle
 2. Click **Open Terminal**
 3. Run: `winetricks corefonts`
 
 ### DPI / Retina Display Issues
 
 On Retina displays, NMSE may look very small:
-1. In Whisky, select the NMSE bottle -> **Settings**
+1. In Gcenx Wine Builds, select the NMSE bottle -> **Settings**
 2. Adjust **DPI** to 144 (for standard Retina) or 192 (for scaled Retina)
 3. Restart NMSE
 
@@ -214,7 +214,7 @@ The first time you launch NMSE in a new bottle, Wine needs to initialise the pre
 ### Application Window Doesn't Appear
 
 Wait 10–15 seconds - on Apple Silicon, Rosetta 2 translation adds initial overhead. If still nothing:
-1. Check Whisky's console output (click **Show Log** in the bottle)
+1. Check the Gcenx Wine Build's console output (click **Show Log** in the bottle)
 2. Ensure NMSE.exe is a valid Windows executable (should be ~5–10 MB for the main exe)
 
 ### Save Files Not Found
@@ -232,7 +232,7 @@ Wait 10–15 seconds - on Apple Silicon, Rosetta 2 translation adds initial over
 3. **Performance** - Slightly slower than native due to Wine + Rosetta 2 translation (on Apple Silicon)
 4. **Retina displays** - May need manual DPI configuration for crisp rendering
 5. **macOS integration** - No Dock icon, menu bar integration, or native keyboard shortcuts (Cmd key)
-6. **Bundle size** - Whisky + Wine + NMSE uses ~1 GB of disk space
+6. **Bundle size** - Gcenx Wine Builds + Wine + NMSE uses ~1 GB of disk space
 
 ---
 

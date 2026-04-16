@@ -123,7 +123,7 @@ compatibility layers. A native cross-platform version using Eto.Forms is planned
 - [Bottles Linux Guide](bottles-linux-guide.md) - run NMSE via Bottles (GUI Wine manager)
 
 **macOS:**
-- [Whisky macOS Guide](whisky-macos-guide.md) - run NMSE via Whisky (free, Apple Silicon supported)
+- [Gcenx Wine Builds Guide](gcenx-macos-guide.md) - run NMSE via Gcenx Wine Builds (free, Apple Silicon supported)
 - [CrossOver macOS Guide](crossover-macos-guide.md) - run NMSE via CrossOver (paid, best Apple Silicon)
 
 **Packaging scripts:** `scripts/linux/` (launch script, AppImage builder, Bottles config), `scripts/macos/` (Homebrew Cask formula)

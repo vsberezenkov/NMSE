@@ -30,7 +30,7 @@
 |----------|--------|-----------|
 | **UI Framework** | **Avalonia UI** | Best-in-class cross-platform .NET UI framework. Skia-based rendering gives pixel-perfect consistency across Windows, Linux, and macOS. Built-in theming (dark/light), rich styling, and a large, active community (26k+ GitHub stars). |
 | **Migration strategy** | **In-place conversion** | Convert the single NMSE project directly from WinForms to Avalonia on the `avalonia` branch. No intermediate library extraction step. |
-| **Interim cross-platform** | **Wine bundle + setup guides** | Ship a Wine-bundled Linux version and CrossOver/Whisky guides for macOS immediately, zero code changes. |
+| **Interim cross-platform** | **Wine bundle + setup guides** | Ship a Wine-bundled Linux version and CrossOver/Gcenx Wine Builds guides for macOS immediately, zero code changes. |
 | **Branch strategy** | `main` -> branch `avalonia` -> UI implementation -> merge into `experimental` -> merge into `main` when ready |
 | **Navigation model** | **Collapsible sidebar** | Replace top-level tabs with a left-hand sidebar panel. Icons + names when expanded, icons-only when collapsed. Toggle button at the top of the sidebar. |
 | **Default theme** | **Dark** | Dark theme by default with a user-accessible toggle to switch to light. Leverages Avalonia's built-in `FluentTheme` with `Dark` / `Light` variants. |
@@ -137,9 +137,9 @@ NMSE.slnx
 
 | Item | Detail |
 |------|--------|
-| **Work** | Write setup guides for CrossOver (paid, Apple Silicon), Whisky (free), and Bottles (Linux GUI). Test where possible. |
-| **Deliverables** | `docs/crossover-macos-guide.md`, `docs/whisky-macos-guide.md`, `docs/bottles-linux-guide.md` |
-| **Additional Deliverables** | `scripts/macos/nmse-whisky.rb` (Homebrew Cask formula for Whisky), `scripts/macos/README.md` (macOS packaging documentation) |
+| **Work** | Write setup guides for CrossOver (paid, Apple Silicon), Gcenx Wine Builds (free), and Bottles (Linux GUI). Test where possible. |
+| **Deliverables** | `docs/crossover-macos-guide.md`, `docs/gcenx-macos-guide.md`, `docs/bottles-linux-guide.md` |
+| **Additional Deliverables** | `scripts/macos/nmse-whisky.rb` (Homebrew Cask formula for Gcenx Wine Builds), `scripts/macos/README.md` (macOS packaging documentation) |
 | **Effort** | ~1-2 hours |
 | **User Testing** | Review guides for accuracy, test on macOS if available |
 | **Acceptance** | Guides are clear, step-by-step, and include screenshot placeholders |
