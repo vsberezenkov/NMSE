@@ -89,7 +89,7 @@ NMSE is localised in **16 languages**: English (UK), English (US), French, Itali
 While NMSE is a native Windows application, it runs on **Linux** and **macOS** via Wine compatibility layers. <br>
 An AppImage is available for Linux users from the releases page.
 
-Guides are available for [Wine][guide-wine], [Bottles][guide-bottles], [Whisky][guide-whisky], and [CrossOver][guide-crossover]. A native cross-platform version [is planned][cross-platfom-plan].
+Guides are available for [Wine][guide-wine], [Bottles][guide-bottles], [Gcenx Wine Builds][guide-gcenx-wine], and [CrossOver][guide-crossover]. A native cross-platform version [is planned][cross-platfom-plan].
 
 ---
 
@@ -147,7 +147,7 @@ See the cross-platform guides for running NMSE via Wine:
 
 - 🍷 [Wine on Linux][guide-wine]
 - 🧴 [Bottles on Linux][guide-bottles]
-- 🥃 [Whisky on macOS][guide-whisky]
+- 🥃 [Gcenx Wine Builds on macOS][guide-gcenx-wine]
 - ✖️[CrossOver on macOS][guide-crossover]
 
 ---
@@ -214,6 +214,12 @@ If NMSE has been useful to you, consider supporting its development:
 Your support helps cover hosting, tooling, and the many hours of development and testing that go into each release.<br>
 Every contribution - big or small - is greatly appreciated. ❤️
 
+### Sponsors:
+
+Thanks to these users for their generous support:
+
+![sponsors badge](https://readme-contribs.as93.net/sponsors/vectorcmdr?shape=circle&fontSize=10)
+
 ---
 
 ## 📄 License
@@ -230,9 +236,9 @@ NMSE is licensed under the **GNU Affero General Public License** - see the [LICE
 
 ### Contributors:
 
-<a href="https://github.com/vectorcmdr/NMSE/graphs/contributors">
-  <img src="https://stg.contrib.rocks/image?repo=vectorcmdr/NMSE" />
-</a>
+![contributors badge](https://readme-contribs.as93.net/contributors/vectorcmdr/NMSE?shape=circle&fontSize=10)
+
+
 
 ---
 
@@ -279,7 +285,7 @@ Made with ❤️ by [**vectorcmdr**][github-owner]
 <!-- Cross-Platform Guides -->
 [guide-wine]: docs/dev/wine-linux-guide.md
 [guide-bottles]: docs/dev/bottles-linux-guide.md
-[guide-whisky]: docs/dev/whisky-macos-guide.md
+[guide-gcenx-wine]: docs/dev/gcenx-macos-guide.md
 [guide-crossover]: docs/dev/crossover-macos-guide.md
 
 <!-- External -->
