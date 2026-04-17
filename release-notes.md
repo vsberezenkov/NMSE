@@ -1,8 +1,25 @@
-## NMSE — No Man's Save Editor v1.1.28 (preview)
+## NMSE — No Man's Save Editor v1.1.29 (preview)
 
 > This is a preview build. Please practice safe backup practices and expect some bugs.
 
 ### Changelog
+
+#### Features:
+
+- Companion pet battle affinity details are now loaded from the DB (derived from game MXML ForceAffinity rules).
+
+#### Bug Fixes:
+
+- Added localisation for ability/move list. (per Issue #59)
+- Fixed mechanical and anomalous pet battle affinities via feature change. (per Issue #58)
+- Added additional raw double guard method and changes to calls for all string based high precision numbers to further mitigate erroneous precision loss on ~billionths decimal values. (per Issue #56)
+
+<br />
+
+<details>
+<summary>Previous Changelogs</summary>
+
+### Previous Changelog 1.1.28 (preview)
 
 #### Features:
 
@@ -19,9 +36,6 @@
 - NMS FloatValue fields changed to be cast to double always to avoid non-integral / non-integer precision issues. (Per Issue #56)
 
 <br />
-
-<details>
-<summary>Previous Changelogs</summary>
 
 ### Previous Changelog 1.1.20 (preview)
 
