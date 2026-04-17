@@ -89,6 +89,7 @@ public static class ExtractorConfig
         "*SIMULATION/GAMETABLES/PETBATTLER/PETBATTLERMOVESTABLE.mbin",
         "*SIMULATION/GAMETABLES/PETBATTLER/PETBATTLERMOVESETSTABLE.mbin",
         "*SIMULATION/ECOSYSTEM/creaturedatatable.mbin",
+        "*SIMULATION/ECOSYSTEM/robotdatatable.mbin",
         "*SIMULATION/ECOSYSTEM/creaturefilenametable.mbin",
     ];
 
@@ -197,6 +198,7 @@ public static class ExtractorConfig
         "PETBATTLERMOVESTABLE.MXML",
         "PETBATTLERMOVESETSTABLE.MXML",
         "creaturedatatable.MXML",
+        "robotdatatable.MXML",
         "creaturefilenametable.MXML",
         "GCGAMETABLEGLOBALS.MXML",
         "GCCREATUREGLOBALS.MXML",

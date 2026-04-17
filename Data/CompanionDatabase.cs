@@ -29,6 +29,12 @@ public class CompanionEntry
     public string Species { get; init; } = "";
 
     /// <summary>
+    /// Forced pet battler affinity from game data (e.g. "Mech", "Weird", "Toxic").
+    /// Null or empty when the creature uses biome-based affinity ("Normal" in game data).
+    /// </summary>
+    public string? ForcedAffinity { get; init; }
+
+    /// <summary>
     /// Per-body-variant accessory configurations. Null when the creature has no pet data
     /// or has empty accessory slots (no accessories are supported at all).
     /// </summary>
@@ -162,10 +168,22 @@ public static class CompanionDatabase
                         variants = null;
                 }
 
+                // Parse forced affinity (null or "Normal" means biome-based)
+                string? forcedAffinity = null;
+                if (elem.TryGetProperty("PetBattlerForcedAffinity", out var affP) &&
+                    affP.ValueKind == JsonValueKind.String)
+                {
+                    string affVal = affP.GetString() ?? "";
+                    if (!string.IsNullOrEmpty(affVal) &&
+                        !affVal.Equals("Normal", StringComparison.OrdinalIgnoreCase))
+                        forcedAffinity = affVal;
+                }
+
                 loaded.Add(new CompanionEntry
                 {
                     Id = $"^{id}",
                     Species = species,
+                    ForcedAffinity = forcedAffinity,
                     AccessoryVariants = variants,
                 });
             }
@@ -867,13 +885,28 @@ public class PetBattleMoveEntry
         _ => "❓",
     };
 
-    /// <summary>ComboBox display: "ID - Description".</summary>
+    /// <summary>
+    /// Localised description for the move. Looks up "companion.battle_move_{ID}" first,
+    /// falling back to the English DebugDescription if no loc key exists.
+    /// </summary>
+    public string LocalisedDescription
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(Id)) return DebugDescription;
+            string key = "companion.battle_move_" + Id;
+            return UiStrings.GetOrNull(key) ?? DebugDescription;
+        }
+    }
+
+    /// <summary>ComboBox display: "ID - LocalisedDescription".</summary>
     public override string ToString()
     {
-        if (string.IsNullOrEmpty(DebugDescription))
+        string desc = LocalisedDescription;
+        if (string.IsNullOrEmpty(desc))
             return Id;
         // Capitalise first letter of description
-        string desc = char.ToUpperInvariant(DebugDescription[0]) + DebugDescription[1..];
+        desc = char.ToUpperInvariant(desc[0]) + desc[1..];
         return $"{Id} - {desc}";
     }
 }
@@ -1168,6 +1201,32 @@ public static class PetBiomeAffinityMap
     {
         if (string.IsNullOrEmpty(biome)) return "";
         return _biomeToAffinity.TryGetValue(biome, out var aff) ? aff : "";
+    }
+
+    /// <summary>
+    /// Resolves the effective pet battler affinity for a companion, using the species'
+    /// forced affinity from game data when available, and falling back to biome-based
+    /// affinity otherwise.
+    /// </summary>
+    /// <param name="speciesId">The creature species ID from the save (e.g. "^LAND_JELLYFISH").</param>
+    /// <param name="biome">The biome string from the companion's Biome property.</param>
+    /// <returns>The resolved affinity (e.g. "Mech", "Weird", "Fire"), or empty string if unknown.</returns>
+    public static string ResolveAffinity(string speciesId, string biome)
+    {
+        // Check if this species has a forced affinity from game data
+        if (!string.IsNullOrEmpty(speciesId))
+        {
+            // Try with caret prefix first, then without
+            if (CompanionDatabase.ById.TryGetValue(speciesId, out var entry) ||
+                CompanionDatabase.ById.TryGetValue("^" + speciesId, out entry))
+            {
+                if (!string.IsNullOrEmpty(entry.ForcedAffinity))
+                    return entry.ForcedAffinity;
+            }
+        }
+
+        // Fall back to biome-based affinity
+        return BiomeToAffinity(biome);
     }
 
     /// <summary>

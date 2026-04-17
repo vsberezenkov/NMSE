@@ -259,6 +259,7 @@ public class Program
             ("PetBattleMovesets", "PETBATTLERMOVESETSTABLE.MXML", Parsers.ParsePetBattleMovesets),
             ("GameTableGlobals", "GCGAMETABLEGLOBALS.MXML", Parsers.ParseGameTableGlobals),
             ("CreatureSpecies", "creaturedatatable.MXML", Parsers.ParseCreatureSpecies),
+            ("RobotSpecies", "robotdatatable.MXML", Parsers.ParseRobotSpecies),
             ("CreatureDescriptors", "creaturefilenametable.MXML",
                 p => Parsers.ParseCreatureDescriptors(p, mbinDir)),
         };
@@ -343,7 +344,24 @@ public class Program
         if (baseData.ContainsKey("GameTableGlobals"))
             finalFiles["Game Table Globals.json"] = baseData["GameTableGlobals"];
         if (baseData.ContainsKey("CreatureSpecies"))
-            finalFiles["Creature Species.json"] = baseData["CreatureSpecies"];
+        {
+            var speciesList = baseData["CreatureSpecies"];
+            // Merge robot species into creature species (robot table contains additional entries like QUAD_PET)
+            if (baseData.ContainsKey("RobotSpecies"))
+            {
+                var robotList = (List<Dictionary<string, object?>>)baseData["RobotSpecies"];
+                var existingIds = new HashSet<string>(
+                    ((List<Dictionary<string, object?>>)speciesList).Select(d => d["Id"]?.ToString() ?? ""),
+                    StringComparer.OrdinalIgnoreCase);
+                foreach (var entry in robotList)
+                {
+                    string id = entry["Id"]?.ToString() ?? "";
+                    if (!string.IsNullOrEmpty(id) && !existingIds.Contains(id))
+                        ((List<Dictionary<string, object?>>)speciesList).Add(entry);
+                }
+            }
+            finalFiles["Creature Species.json"] = speciesList;
+        }
         if (baseData.ContainsKey("CreatureDescriptors"))
             finalFiles["Creature Descriptors.json"] = baseData["CreatureDescriptors"];
 

@@ -698,18 +698,30 @@ public partial class CompanionPanel : UserControl
 
     private void WriteScale()
     {
+        if (_loading) return;
         var comp = SelectedCompanion;
         if (comp == null) return;
         if (_scaleField.NumericValue is double val)
-            comp.Set("Scale", val);
+        {
+            // Preserve RawDouble if the numeric value hasn't changed
+            var existing = comp.Get("Scale");
+            if (!(existing is RawDouble rd && rd.Value == val))
+                comp.Set("Scale", val);
+        }
     }
 
     private void WriteTrust()
     {
+        if (_loading) return;
         var comp = SelectedCompanion;
         if (comp == null) return;
         if (_trustField.NumericValue is double val)
-            comp.Set("Trust", val);
+        {
+            // Preserve RawDouble if the numeric value hasn't changed
+            var existing = comp.Get("Trust");
+            if (!(existing is RawDouble rd && rd.Value == val))
+                comp.Set("Trust", val);
+        }
     }
 
     private void WriteBoneScaleSeed()
@@ -1523,9 +1535,10 @@ public partial class CompanionPanel : UserControl
         string currentGameAffinity = "";
         try
         {
+            string creatureId = comp.GetString("CreatureID") ?? "";
             var biomeObj = comp.GetObject("Biome");
             string biome = biomeObj?.GetString("Biome") ?? "";
-            string affinity = PetBiomeAffinityMap.BiomeToAffinity(biome);
+            string affinity = PetBiomeAffinityMap.ResolveAffinity(creatureId, biome);
             string display = !string.IsNullOrEmpty(affinity)
                 ? PetBiomeAffinityMap.GetAffinityDisplayName(affinity)
                 : "";
@@ -2068,7 +2081,10 @@ public partial class CompanionPanel : UserControl
             return;
 
         double val = Math.Clamp((double)rounded, 0, 1.0);
-        comp.Set("PetBattleProgressToTreat", val);
+        // Preserve RawDouble if the numeric value hasn't changed
+        var existing = comp.Get("PetBattleProgressToTreat");
+        if (!(existing is RawDouble rd && rd.Value == val))
+            comp.Set("PetBattleProgressToTreat", val);
     }
 
     /// <summary>Writes the victories value.</summary>

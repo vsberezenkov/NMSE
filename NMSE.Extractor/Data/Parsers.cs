@@ -2746,21 +2746,11 @@ public static class Parsers
                     }
                 }
 
-                // Pet battler data
-                bool canBattle = false;
-                string battleAffinity = "";
-                var petBattleData = dataSection?.Descendants("Property")
-                    .FirstOrDefault(e => e.Attribute("value")?.Value == "GcCreaturePetBattleData");
-                if (petBattleData != null)
-                {
-                    var battleInner = petBattleData.Elements("Property")
-                        .FirstOrDefault(e => e.Attribute("name")?.Value == "GcCreaturePetBattleData")
-                        ?? petBattleData;
-                    canBattle = MxmlParser.ParseValue(
-                        MxmlParser.GetPropertyValue(battleInner, "CanBeUsedInPetBattler", "false")) is true;
-                    battleAffinity = MxmlParser.GetNestedEnum(
-                        battleInner, "ForcedAffinity", "PetBattleAffinity") ?? "";
-                }
+                // Pet battler data - these fields are direct children of GcCreatureData
+                bool canBattle = MxmlParser.ParseValue(
+                    MxmlParser.GetPropertyValue(elem, "CanBeUsedInPetBattler", "false")) is true;
+                string battleAffinity = MxmlParser.GetNestedEnum(
+                    elem, "PetBattlerForcedAffinity", "PetBattlerAffinity") ?? "";
 
                 species.Add(new()
                 {
@@ -2788,6 +2778,25 @@ public static class Parsers
         }
 
         Console.WriteLine($"[OK] Parsed {species.Count} creature species");
+        return species;
+    }
+
+    /// <summary>
+    /// Parses companion-legal robot creature species from robotdatatable.MXML.
+    /// Robot tables include combat-only robots as well as pet variants; only *_PET IDs
+    /// should flow into Creature Species.json.
+    /// </summary>
+    public static List<Dictionary<string, object?>> ParseRobotSpecies(string mxmlPath)
+    {
+        var species = ParseCreatureSpecies(mxmlPath)
+            .Where(entry =>
+            {
+                string id = entry["Id"]?.ToString() ?? "";
+                return id.EndsWith("_PET", StringComparison.OrdinalIgnoreCase);
+            })
+            .ToList();
+
+        Console.WriteLine($"[OK] Filtered {species.Count} companion-legal robot species");
         return species;
     }
 

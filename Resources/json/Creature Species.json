@@ -12,7 +12,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -29,7 +29,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -46,7 +46,7 @@
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -63,7 +63,7 @@
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -80,7 +80,7 @@
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -96,8 +96,8 @@
 		"MaxScale": 2.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -114,7 +114,7 @@
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -131,7 +131,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -148,7 +148,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -164,8 +164,8 @@
 		"MaxScale": 4.0,
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Barren",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -181,8 +181,8 @@
 		"MaxScale": 4.5,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -199,7 +199,7 @@
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -216,7 +216,7 @@
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -233,7 +233,7 @@
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -249,8 +249,8 @@
 		"MaxScale": 3.0,
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -266,8 +266,8 @@
 		"MaxScale": 7.0,
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -283,8 +283,8 @@
 		"MaxScale": 3.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_BODY_DEER",
@@ -322,8 +322,8 @@
 		"MaxScale": 3.0,
 		"Rarity": "Common",
 		"EggType": "ROBO",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Mech",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_BODY_1",
@@ -346,8 +346,8 @@
 		"MaxScale": 12.0,
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_BODY_DIPLO",
@@ -399,8 +399,8 @@
 		"MaxScale": 2.5,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_BODY_SLOTH",
@@ -439,7 +439,7 @@
 		"Rarity": "SuperRare",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -455,8 +455,8 @@
 		"MaxScale": 3.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_BODY_ROCK",
@@ -487,8 +487,8 @@
 		"MaxScale": 4.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_MESH_CAT",
@@ -533,8 +533,8 @@
 		"MaxScale": 4.0,
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Lush",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_SHAPE_XRARE",
@@ -558,8 +558,8 @@
 		"MaxScale": 4.0,
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Lush",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_BODY_CURVESPIKE",
@@ -590,8 +590,8 @@
 		"MaxScale": 12.0,
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_HEAD_FLATHEAD",
@@ -656,8 +656,8 @@
 		"MaxScale": 5.0,
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_HEAD_01",
@@ -695,8 +695,8 @@
 		"MaxScale": 5.0,
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_TREX_3XRARE",
@@ -751,8 +751,8 @@
 		"MaxScale": 3.6,
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_HEAD_GDANE",
@@ -793,8 +793,8 @@
 		"MaxScale": 3.0,
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_BODY_6LEGCOW1",
@@ -825,8 +825,8 @@
 		"MaxScale": 4.0,
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_BODY_SIXLEGCAT",
@@ -864,8 +864,8 @@
 		"MaxScale": 12.0,
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_MESH_GRUNT",
@@ -910,8 +910,8 @@
 		"MaxScale": 12.0,
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_BODY_EYEBALLPLANT",
@@ -976,8 +976,8 @@
 		"MaxScale": 12.0,
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_BODY_1XRARE",
@@ -1050,8 +1050,8 @@
 		"MaxScale": 12.0,
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1067,8 +1067,8 @@
 		"MaxScale": 12.0,
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Mech",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1084,8 +1084,8 @@
 		"MaxScale": 12.0,
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_BODY_1XRARE",
@@ -1116,8 +1116,8 @@
 		"MaxScale": 5.0,
 		"Rarity": "SuperRare",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1133,8 +1133,8 @@
 		"MaxScale": 3.0,
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1151,7 +1151,7 @@
 		"Rarity": "SuperRare",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1168,7 +1168,7 @@
 		"Rarity": "SuperRare",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1185,7 +1185,7 @@
 		"Rarity": "SuperRare",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1201,8 +1201,8 @@
 		"MaxScale": 5.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1218,8 +1218,8 @@
 		"MaxScale": 3.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1235,8 +1235,8 @@
 		"MaxScale": 3.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1253,7 +1253,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1269,8 +1269,8 @@
 		"MaxScale": 1.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Toxic",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1286,8 +1286,8 @@
 		"MaxScale": 1.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Toxic",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1304,7 +1304,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1321,7 +1321,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1337,8 +1337,8 @@
 		"MaxScale": 1.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Toxic",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1355,7 +1355,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1372,7 +1372,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1389,7 +1389,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1406,7 +1406,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1423,7 +1423,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1440,7 +1440,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1457,7 +1457,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1474,7 +1474,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1491,7 +1491,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1507,8 +1507,8 @@
 		"MaxScale": 1.0,
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Weird",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1525,7 +1525,7 @@
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1542,7 +1542,7 @@
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1558,8 +1558,8 @@
 		"MaxScale": 1.0,
 		"Rarity": "Rare",
 		"EggType": "ROBO",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Mech",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1575,8 +1575,8 @@
 		"MaxScale": 0.25,
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Mech",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1593,7 +1593,7 @@
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1609,8 +1609,8 @@
 		"MaxScale": 6.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Weird",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1627,7 +1627,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1644,7 +1644,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1661,7 +1661,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1678,7 +1678,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1695,7 +1695,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1712,7 +1712,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1729,7 +1729,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1746,7 +1746,7 @@
 		"Rarity": "Uncommon",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1762,8 +1762,8 @@
 		"MaxScale": 2.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1780,7 +1780,7 @@
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Normal",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1796,8 +1796,8 @@
 		"MaxScale": 3.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Lush",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "_BONEANTELOPE_A",
@@ -1821,8 +1821,8 @@
 		"MaxScale": 2.5,
 		"Rarity": "Rare",
 		"EggType": "ROBO",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Mech",
 		"PetAccessorySlots": [
 			{
 				"RequiredDescriptor": "",
@@ -1846,8 +1846,8 @@
 		"MaxScale": 1.0,
 		"Rarity": "Common",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Mech",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1863,8 +1863,8 @@
 		"MaxScale": 2.0,
 		"Rarity": "Common",
 		"EggType": "ROBO",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Mech",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1880,8 +1880,8 @@
 		"MaxScale": 1.0,
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Weird",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1897,8 +1897,8 @@
 		"MaxScale": 1.0,
 		"Rarity": "Common",
 		"EggType": "ROBO",
-		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Mech",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	},
@@ -1914,8 +1914,25 @@
 		"MaxScale": 0.5,
 		"Rarity": "Rare",
 		"EggType": "DEFAULT",
+		"CanBeUsedInPetBattler": true,
+		"PetBattlerForcedAffinity": "Toxic",
+		"PetAccessorySlots": null,
+		"RidingPartModifiers": null
+	},
+	{
+		"Id": "QUAD_PET",
+		"ForceType": "Quad",
+		"RealType": "None",
+		"MoveArea": "Ground",
+		"EcoSystemCreature": false,
+		"CanBeFemale": true,
+		"OnlySpawnWhenIdIsForced": false,
+		"MinScale": 1.1,
+		"MaxScale": 1.1,
+		"Rarity": "Common",
+		"EggType": "ROBO",
 		"CanBeUsedInPetBattler": false,
-		"PetBattlerForcedAffinity": null,
+		"PetBattlerForcedAffinity": "Mech",
 		"PetAccessorySlots": null,
 		"RidingPartModifiers": null
 	}

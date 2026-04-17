@@ -10,6 +10,8 @@ public class ExtractorConfigTests
     {
         Assert.Contains(ExtractorConfig.MbinFilters,
             f => f.Contains("nms_reality_gcproducttable.mbin"));
+        Assert.Contains(ExtractorConfig.MbinFilters,
+            f => f.Contains("robotdatatable.mbin"));
         // Locale MBIN filters use wildcards to capture all languages (e.g. nms_loc1_*.mbin)
         Assert.Contains(ExtractorConfig.MbinFilters,
             f => f.Contains("nms_loc1_"));
@@ -50,6 +52,8 @@ public class ExtractorConfigTests
             f => f.Contains("PETBATTLERMOVESTABLE.MXML"));
         Assert.Contains(ExtractorConfig.ExpectedMxmlFiles,
             f => f.Contains("PETBATTLERMOVESETSTABLE.MXML"));
+        Assert.Contains(ExtractorConfig.ExpectedMxmlFiles,
+            f => f.Contains("robotdatatable.MXML"));
         Assert.Contains(ExtractorConfig.ExpectedMxmlFiles,
             f => f.Contains("CHARACTERCUSTOMISATIONDESCRIPTORGROUPSDATA.MXML"));
         Assert.Contains(ExtractorConfig.ExpectedMxmlFiles,

@@ -932,6 +932,22 @@ public class StaticDataDatabaseTests
         Assert.True(CompanionDatabase.ById.ContainsKey("^TREX") || CompanionDatabase.Entries.Count > 0);
     }
 
+    [Fact]
+    public void CompanionDatabase_LoadFromFile_IncludesQuadPetRobotSpecies()
+    {
+        string jsonPath = Path.Combine("Resources", "json", "Creature Species.json");
+        if (!File.Exists(jsonPath)) return; // skip if resource not available
+
+        Assert.True(CompanionDatabase.LoadFromFile(jsonPath));
+        Assert.True(CompanionDatabase.ById.ContainsKey("^QUAD_PET"));
+        Assert.Equal("Mech", CompanionDatabase.ById["^QUAD_PET"].ForcedAffinity);
+        Assert.False(CompanionDatabase.ById.ContainsKey("^DRONE"));
+        Assert.False(CompanionDatabase.ById.ContainsKey("^SPIDERQUAD_M"));
+        Assert.False(CompanionDatabase.ById.ContainsKey("^SPIDERQUAD"));
+        Assert.False(CompanionDatabase.ById.ContainsKey("^QUAD"));
+        Assert.False(CompanionDatabase.ById.ContainsKey("^WALKER"));
+    }
+
     // --- ProceduralStubs ---
 
     [Fact]

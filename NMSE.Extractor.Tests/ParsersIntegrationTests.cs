@@ -1124,4 +1124,76 @@ public class ParsersIntegrationTests
             try { Directory.Delete(tmpDir, true); } catch { }
         }
     }
+
+    [Fact]
+    public void ParseRobotSpecies_FiltersOutNonPetRobots()
+    {
+        string tmpDir = CreateTempDir();
+        try
+        {
+            string xml = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Data template=""cGcCreatureDataTable"">
+  <Property name=""Table"">
+    <Property name=""Table"" value=""GcCreatureData"" _id=""WALKER"">
+      <Property name=""Id"" value=""WALKER"" />
+      <Property name=""OnlySpawnWhenIdIsForced"" value=""false"" />
+      <Property name=""ForceType"" value=""GcCreatureTypes""><Property name=""CreatureType"" value=""Walker"" /></Property>
+      <Property name=""RealType"" value=""GcCreatureTypes""><Property name=""CreatureType"" value=""None"" /></Property>
+      <Property name=""EcoSystemCreature"" value=""false"" />
+      <Property name=""CanBeFemale"" value=""true"" />
+      <Property name=""Tags"" />
+      <Property name=""MoveArea"" value=""Ground"" />
+      <Property name=""MinScale"" value=""1.0"" />
+      <Property name=""MaxScale"" value=""1.0"" />
+      <Property name=""FurChance"" value=""0.0"" />
+      <Property name=""Rarity"" value=""GcCreatureRarity""><Property name=""CreatureRarity"" value=""Common"" /></Property>
+      <Property name=""PredatorProbabilityModifier"" value=""GcCreatureRoleFrequencyModifier""><Property name=""CreatureRoleFrequencyModifier"" value=""Normal"" /></Property>
+      <Property name=""HerbivoreProbabilityModifier"" value=""GcCreatureRoleFrequencyModifier""><Property name=""CreatureRoleFrequencyModifier"" value=""Normal"" /></Property>
+      <Property name=""KillStatID"" value="""" />
+      <Property name=""KillingBlowMessageID"" value="""" />
+      <Property name=""EggType"" value=""ROBO"" />
+      <Property name=""Data"" />
+      <Property name=""CanBeUsedInPetBattler"" value=""false"" />
+      <Property name=""PetBattlerForcedAffinity"" value=""GcPetBattlerAffinity""><Property name=""PetBattlerAffinity"" value=""Normal"" /></Property>
+    </Property>
+    <Property name=""Table"" value=""GcCreatureData"" _id=""QUAD_PET"">
+      <Property name=""Id"" value=""QUAD_PET"" />
+      <Property name=""OnlySpawnWhenIdIsForced"" value=""false"" />
+      <Property name=""ForceType"" value=""GcCreatureTypes""><Property name=""CreatureType"" value=""Quad"" /></Property>
+      <Property name=""RealType"" value=""GcCreatureTypes""><Property name=""CreatureType"" value=""None"" /></Property>
+      <Property name=""EcoSystemCreature"" value=""false"" />
+      <Property name=""CanBeFemale"" value=""true"" />
+      <Property name=""Tags"" />
+      <Property name=""MoveArea"" value=""Ground"" />
+      <Property name=""MinScale"" value=""1.1"" />
+      <Property name=""MaxScale"" value=""1.1"" />
+      <Property name=""FurChance"" value=""0.0"" />
+      <Property name=""Rarity"" value=""GcCreatureRarity""><Property name=""CreatureRarity"" value=""Common"" /></Property>
+      <Property name=""PredatorProbabilityModifier"" value=""GcCreatureRoleFrequencyModifier""><Property name=""CreatureRoleFrequencyModifier"" value=""Normal"" /></Property>
+      <Property name=""HerbivoreProbabilityModifier"" value=""GcCreatureRoleFrequencyModifier""><Property name=""CreatureRoleFrequencyModifier"" value=""Normal"" /></Property>
+      <Property name=""KillStatID"" value="""" />
+      <Property name=""KillingBlowMessageID"" value="""" />
+      <Property name=""EggType"" value=""ROBO"" />
+      <Property name=""Data"" />
+      <Property name=""CanBeUsedInPetBattler"" value=""false"" />
+      <Property name=""PetBattlerForcedAffinity"" value=""GcPetBattlerAffinity""><Property name=""PetBattlerAffinity"" value=""Mech"" /></Property>
+    </Property>
+  </Property>
+</Data>";
+
+            string file = Path.Combine(tmpDir, "METADATA_ROBOTDATATABLE.MXML");
+            File.WriteAllText(file, xml);
+            MxmlParser.ClearXmlCache();
+
+            var results = Parsers.ParseRobotSpecies(file);
+
+            Assert.Single(results);
+            Assert.Equal("QUAD_PET", results[0]["Id"]);
+            Assert.Equal("Mech", results[0]["PetBattlerForcedAffinity"]);
+        }
+        finally
+        {
+            try { Directory.Delete(tmpDir, true); } catch { }
+        }
+    }
 }
