@@ -2809,6 +2809,26 @@ public partial class CompanionPanel : UserControl
             _moveSlotScoreBoostLabels[i].Text = UiStrings.GetOrNull("companion.battle_score_boost") ?? "Score Boost:";
         }
 
+        // Refresh the battle move combo contents so the selected item text and drop-down
+        // entries are re-rendered against the active UI language without requiring a reload.
+        if (_moveSlotDataInitialised && _detailPanel.Visible)
+        {
+            var comp = SelectedCompanion;
+            if (comp != null)
+            {
+                bool wasLoading = _loading;
+                _loading = true;
+                try
+                {
+                    LoadMoveSlots(comp);
+                }
+                finally
+                {
+                    _loading = wasLoading;
+                }
+            }
+        }
+
         // Stats tab warning and action buttons
         _statsWarningLabel.Text = UiStrings.GetOrNull("companion.stats_warning") ?? "Note: Changing certain values can change the procedurally generated name for the companion.";
         _induceEggBtn.Text = UiStrings.GetOrNull("companion.induce_egg") ?? "Induce Egg";
