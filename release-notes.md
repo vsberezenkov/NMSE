@@ -54,7 +54,7 @@
     - Forced item reselection is reduced with this new workflow.
 - Updated the base moving functionality in the Bases tab to use a vector coordinate transforming algorithm (using Gram-Schmidt process).
 - Added terrain edit clearing for bases (per FR #12).
-- Added updated galactic core colour system for galaxy display (via PR#43 - thanks @maniro-x)
+- Added updated galactic core colour system for galaxy display (via PR#43 - thanks maniro-x)
 - Improved display of galaxy information in the Teleport Destinations tab.
 - Added additional milestones to the milestone list (more to come).
 
